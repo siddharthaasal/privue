@@ -1,7 +1,27 @@
+/* open-sans font */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+
+  --font-open-sans: "Open Sans", sans-serif;
+
+  --color-privue-100: #edf2ff;
+  --color-privue-200: #dbe4ff;
+  --color-privue-300: #bac8ff;
+  --color-privue-400: #91a7ff;
+  --color-privue-500: #748ffc;
+  --color-privue-600: #5c7cfa;
+  --color-privue-700: #4c6ef5;
+  --color-privue-800: #4263eb;
+  --color-privue-900: #3b5bdb;
+  --color-privue-950: #364fc7;
+}
+
+/* below is the auto-generated code via shadcn */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -114,6 +134,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

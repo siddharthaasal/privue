@@ -6,71 +6,81 @@ import dataReport from "/articlesFeatureImages/undraw_report_k55w.svg";
 import setupAnalytics from "/articlesFeatureImages/undraw_setup-analytics_ttg5.svg";
 import personalInfo from "/articlesFeatureImages/undraw_personal-information_h7kf.svg";
 import annotation from "/articlesFeatureImages/undraw_annotation_rz2w.svg";
+import { ExternalLink } from 'lucide-react';
 
 
 export default function ArticleGrid() {
     return (
-        <div className="h-auto w-full max-w-screen-xl py-8 px-24 grid grid-cols-4 grid-rows-2 gap-4">
-            {/* Row 1 */}
-            <div className="col-span-2 row-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={setupAnalytics}
-                    variant="lg"
-                />
-            </div>
-            <div className="col-span-1 row-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={scm}
-                />
-            </div>
-            <div className="col-span-1 row-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={im1}
-                />
-            </div>
+        <div className="mx-auto max-w-max">
+            <div className="h-auto w-full mx-auto max-w-screen-2xl py-8 px-24 grid grid-cols-4 grid-rows-2 gap-4">
+                {/* Row 1 */}
+                <div className="col-span-2 row-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={setupAnalytics}
+                        variant="lg"
+                    />
+                </div>
+                <div className="col-span-1 row-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={scm}
+                    />
+                </div>
+                <div className="col-span-1 row-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={im1}
+                    />
+                </div>
 
-            {/* Row 2 */}
-            <div className="col-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={dataReport}
-                />
+                {/* Row 2 */}
+                <div className="col-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={dataReport}
+                    />
+                </div>
+                <div className="col-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={dataAnalysis}
+                    />
+                </div>
+                <div className="col-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={personalInfo}
+                    />
+                </div>
+                <div className="col-span-1">
+                    <FeaturedCard
+                        title="Credit Risk Assessment"
+                        description="Explore how Privue helps you with the Credit Risk Assessment"
+                        url="/test"
+                        coverImage={annotation}
+                    />
+                </div>
             </div>
-            <div className="col-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={dataAnalysis}
-                />
-            </div>
-            <div className="col-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={personalInfo}
-                />
-            </div>
-            <div className="col-span-1">
-                <FeaturedCard
-                    title="Credit Risk Assessment"
-                    description="Explore how Privue helps you with the Credit Risk Assessment"
-                    url="/test"
-                    coverImage={annotation}
-                />
-            </div>
+            <a
+                href="/articles"
+                className="font-open-sans mx-auto group flex cursor-pointer justify-end items-center gap-2 px-24 text-xl sm:text-lg text-foreground-lighter col-span-full pb-32"
+            >
+                <span className="text-[#707070] hover:text-[#525252]">Explore all Articles</span>
+                <ExternalLink className="text-[#707070] hover:text[#525252] text-lg" size={18} />
+            </a>
         </div>
     );
 }

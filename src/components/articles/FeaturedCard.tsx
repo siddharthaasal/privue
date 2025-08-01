@@ -10,7 +10,7 @@ export default function FeaturedCard({ title, description, url, coverImage, vari
     const isLarge = variant === "lg";
 
     return (
-        <a href={url} target="_blank" rel="noopener noreferrer" className="relative group block w-full max-w-[600px]">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="relative group block w-full ">
 
             <div
                 className="font-open-sans w-full h-[350px] cursor-pointer bg-white rounded-xl shadow-xs border border-gray-200 p-6 text-left relative overflow-hidden hover:border-gray-300 hover:shadow-md transition-shadow"

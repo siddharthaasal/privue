@@ -21,7 +21,7 @@ export default function InfoCard({
     publishedDate,
 }: InfoCardProps) {
     return (
-        <a href={url} target="_blank" rel="noopener noreferrer" className="relative group block w-full max-w-[600px]">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="relative group block w-full ">
             <div className="font-open-sans w-full p-4 gap-3 flex flex-col justify-center border border-gray-200 rounded-[11px] shadow-sm bg-white hover:border-gray-300 hover:shadow-md transition-all">
 
                 {/* Hover Overlay Icon */}

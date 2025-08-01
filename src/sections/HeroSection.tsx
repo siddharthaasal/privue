@@ -13,9 +13,9 @@ import {
 
 export default function HeroSection() {
     return (
-        <section className="-mt-32 relative flex min-h-screen items-center justify-center rounded-lg bg-white p-6 md:p-20">
+        <section className="-mt-32 relative flex min-h-screen items-center justify-center rounded-lg p-6 md:p-20">
             {/* grid backgorund */}
-            <GridPattern
+            {/* <GridPattern
                 width={180}
                 height={180}
                 x={-1}
@@ -29,10 +29,10 @@ export default function HeroSection() {
                 className={cn(
                     "absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
                 )}
-            />
+            /> */}
 
             {/* content -> (anouncement, heading+subtext, cta) */}
-            <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 h-full">
+            <div className="relative flex flex-col items-center justify-center text-center gap-4 h-full">
                 {/* Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}

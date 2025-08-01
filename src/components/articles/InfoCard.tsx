@@ -50,14 +50,14 @@ export default function InfoCard({
                     </div>
 
                     {/* Footer */}
-                    <div className="flex justify-between text-xs pt-2 text-[#707070]">
+                    <div className="flex justify-between text-xs pt-2">
                         <div className="flex items-center gap-1">
-                            <User size={13} />
+                            <User size={12} color="#707070" />
                             <p><span className="font-normal text-[#525252]">{author}</span></p>
                         </div>
                         <div className="flex items-center gap-1">
-                            <CalendarDays size={13} />
-                            <p>{publishedDate}</p>
+                            <CalendarDays size={12} color="#707070" />
+                            <p><span className="font-normal text-[#525252]">{publishedDate}</span></p>
                         </div>
                     </div>
                 </div>

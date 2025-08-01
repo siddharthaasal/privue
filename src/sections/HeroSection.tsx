@@ -1,7 +1,7 @@
 // grid background, announcement, heading, subtext, cta button
 
-import { cn } from "../lib/utils";
-import { GridPattern } from "@/components/magicui/grid-pattern";
+// import { cn } from "../lib/utils";
+// import { GridPattern } from "@/components/magicui/grid-pattern";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 

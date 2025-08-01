@@ -22,7 +22,7 @@ export default function InfoCard({
 }: InfoCardProps) {
     return (
         <a href={url} target="_blank" rel="noopener noreferrer" className="relative group block w-full ">
-            <div className="font-open-sans w-full p-4 gap-3 flex flex-col justify-center border border-gray-200 rounded-[11px] shadow-sm bg-white hover:border-gray-300 hover:shadow-md transition-all">
+            <div className="font-open-sans w-full p-4 gap-3 flex flex-col justify-center border border-gray-200 rounded-[11px] shadow-xs bg-white hover:border-gray-300 hover:shadow-md transition-shadow">
 
                 {/* Hover Overlay Icon */}
                 <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity z-10">

@@ -44,7 +44,7 @@ export default function ArticleListing() {
 
 
                 {/* Articles Grid */}
-                <div className="h-auto w-full max-w-screen-2xl mx-auto pt-6 pb-32 px-24 grid grid-cols-2 gap-6">
+                <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24 grid grid-cols-2 gap-6">
                     {filteredArticles.map((article, index) => (
                         <InfoCard
                             key={index}

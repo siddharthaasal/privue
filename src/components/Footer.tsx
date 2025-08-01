@@ -74,7 +74,7 @@ export default function Footer({
     bottomLinks = [{ text: "query@privue.ai", url: "#" }],
 }: FooterProps) {
     return (
-        <section className=" -z-10 w-full bottom-0 mx-auto px-4 sm:px-6 lg:px-36 py-8 text-sm font-open-sans bg-white/50 text-muted-foreground">
+        <section className="relative w-full mx-auto px-4 sm:px-6 lg:px-36 py-8 text-sm font-open-sans bg-white/50 text-muted-foreground">
             <footer className="flex flex-col gap-16 lg:flex-row lg:justify-between">
                 {/* Left Section */}
                 <div className="flex-1 max-w-md">

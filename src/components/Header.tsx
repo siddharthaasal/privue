@@ -62,7 +62,7 @@ export default function Header() {
                                 className="h-14 w-auto"
                                 loading="eager"
                             />
-                            <span className="text-xl font-semibold text-gray-800 ">
+                            <span className="text-[24px] -mt-1 font-semibold text-gray-800 ">
                                 privue
                             </span>
                         </a>
@@ -121,7 +121,7 @@ export default function Header() {
 
                     {/* Desktop links */}
                     <div className="hidden lg:flex lg:items-center lg:gap-x-2 justify-center items-center">
-                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-md text-gray-800">
+                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-[14px] text-gray-800">
                             <a href={link.href} target="_blank" rel="noopener noreferrer">
                                 {link.name}
                             </a>
@@ -131,8 +131,8 @@ export default function Header() {
 
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
-                        <Button variant="outline" size="sm"> <a href="/login">Demo</a></Button>
-                        <Button variant="default" size="sm"> <a href="/signup">Book a Call</a></Button>
+                        <Button variant="outline" size="sm" className="text-[13px]"> <a href="/login">Demo</a></Button>
+                        <Button variant="default" size="sm" className="text-[13px]"> <a href="/signup">Book a Call</a></Button>
                     </div>
 
                 </nav>

@@ -89,7 +89,7 @@ export default function HeroSection() {
                         <a href="/signup" className="font-open-sans">Get Started</a>
                     </Button>
                     <Button variant="outline" size="default">
-                        <a href="/case-studies" className="font-open-sans shadow-text-md">Case Studies</a>
+                        <a href="/articles" className="font-open-sans shadow-text-md">Case Studies</a>
                     </Button>
                 </motion.div>
             </div>

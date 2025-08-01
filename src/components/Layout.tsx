@@ -1,7 +1,7 @@
 // holds header
 import React from "react";
-import { cn } from "../lib/utils";
-import { GridPattern } from "@/components/magicui/grid-pattern";
+// import { cn } from "../lib/utils";
+// import { GridPattern } from "@/components/magicui/grid-pattern";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div className="relative">
             {/* grid backgorund */}
-            <GridPattern
+            {/* <GridPattern
                 width={180}
                 height={180}
                 x={-1}
@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     "fixed inset-0 -z-10 opacity-60 pointer-events-none",
                     "[mask-image:linear-gradient(to_bottom_left,white,transparent)]"
                 )}
-            />
+            /> */}
             <div className="">
                 <Header />
                 <main className="mt-32">

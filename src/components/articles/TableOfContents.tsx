@@ -52,23 +52,23 @@ export default function TableOfContents({
     }, []);
 
     return (
-        <aside className="hidden md:block w-64 sticky top-25 h-[calc(100vh-5rem)] overflow-y-auto bg-white dark:bg-zinc-900 dark:border-zinc-800">
+        <aside className="hidden md:block w-64 sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto bg-white dark:bg-zinc-900 dark:border-zinc-800">
             <div className=''>
-                <div className=" font-open-sans flex items-center gap-2 mb-4 text-sm p-0 text-gray-600 dark:text-gray-400 font-semibold  tracking-wide">
+                <div className=" font-open-sans flex items-center gap-2 mb-4 text-[16px] p-0 text-[#171717] tracking-wide">
                     {/* <TbListSearch size={16} /> */}
-                    Table of Contents
+                    On this page
                 </div>
                 <div className={`border-${borderPlacement} border-gray-200`}>
-                    <ul className="font-open-sans text-sm space-y-1">
+                    <ul className="font-open-sans text-sm space-y-1 list-outside">
                         {headings.map((item) => (
                             <li key={item.id}>
                                 <a
                                     href={`#${item.id}`}
-                                    className={`block text-[13px] px-2 py-1 rounded-r-md border-l-[1.5px] transition-colors ${activeId === item.id
-                                        ? 'font-medium text-privue-800 bg-privue-100/80  border-privue-600'
-                                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100/80  border-transparent'
+                                    className={`block text-[13px] px-0 py-1  transition-colors ${activeId === item.id
+                                        ? 'font-normal text-privue-800 border-privue-600'
+                                        : 'text-gray-700 border-transparent'
                                         }`}
-                                    style={{ paddingLeft: `${item.level * 12}px` }}
+                                // style={{ paddingLeft: `${item.level * 12}px` }}
                                 >
                                     {item.text}
                                 </a>

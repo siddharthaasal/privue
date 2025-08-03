@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import TableOfContents from "@/components/articles/TableOfContents";
-import { ChevronLeft, Link } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import ArticleHeader from "@/components/articles/ArticleHeader";

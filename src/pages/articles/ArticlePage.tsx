@@ -54,10 +54,10 @@ export default function ArticlePage() {
                                 <div className="hidden relative col-span-12 space-y-8 lg:block lg:col-span-5 xl:col-span-3 xl:col-start-9">
                                     {/* tags */}
                                     <div className="space-y-4">
-                                        <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-privue-700 border border-privue-700 border-strong px-2.5 py-0.5 text-[11px] gap-1">
+                                        {/* <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-privue-700 border border-privue-700 border-strong px-2.5 py-0.5 text-[11px] gap-1">
                                             Solution
                                             <Link size={10} color="#5c7cfa" />
-                                        </div>
+                                        </div> */}
 
                                         <div className="flex flex-wrap gap-2 select-none">
 

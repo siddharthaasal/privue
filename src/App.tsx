@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import ArticleListing from "./pages/articles/ArticleListing";
 import TestBlogPlage from "./pages/TestBlogPage";
 import ArticlePage from "./pages/articles/ArticlePage";
+import OldArticleListing from "./pages/articles/OldArticleListing";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/articles" element={<ArticleListing />} />
         <Route path="/test" element={<TestBlogPlage />} />
         <Route path="/article" element={<ArticlePage />} />
+        <Route path="/articles-0" element={<OldArticleListing />} />
       </Routes >
     </>
   )

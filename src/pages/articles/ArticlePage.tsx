@@ -30,7 +30,7 @@ export default function ArticlePage() {
                         {/* Main Content Area */}
                         <div className="col-span-12 xl:col-span-10">
                             {/* Header */}
-                            <div className="mb-8 max-w-5xl space-y-4">
+                            <div className="mt-0 pt-0 mb-8 max-w-5xl space-y-4">
                                 <ArticleHeader
                                     title="Storage: 10x Larger Uploads, 3x Cheaper Cached Egress, and 2x Egress Quota"
                                     date="Aug 05, 2024"

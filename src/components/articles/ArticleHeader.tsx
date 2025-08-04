@@ -10,13 +10,13 @@ import { User, CalendarDays, Timer, Link } from 'lucide-react';
 export default function ArticleHeader({ title, author, date, articleType }: ArticleHeaderProps) {
     return (
         <>
-            <div className="w-full font-open-sans space-y-3">
+            <div className="w-full font-open-sans">
                 {/* articke type, title */}
-                <div className=''>
-                    <a href="/article" className="text-[15px] text-privue-900">{articleType}</a >
+                <div className='p-0 m-0 text-sm'>
+                    <a href="/article" className="p-0 m-0 text-privue-900">{articleType}</a >
                 </div >
                 <div>
-                    <h1 className="text-4xl text-[#171717] font-[400]">
+                    <h1 className="text-[34px] text-[#171717] font-[400]">
                         {title}
                     </h1>
                 </div>

@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
-import InfoCard from "@/components/articles/InfoCard";
+import { BlogCard } from "@/components/articles/ArticleCard";
 import { useState } from "react";
-import { articles } from "@/data/articles";
+// import { articles } from "@/data/articles";
 
 const filters = ["Case Study", "Blog", "Client Story"];
 
@@ -9,9 +9,9 @@ export default function ArticleListing() {
 
     const [selectedFilter, setSelectedFilter] = useState("Case Study");
 
-    const filteredArticles = articles.filter(
-        (article) => article.articleType === selectedFilter
-    );
+    // const filteredArticles = articles.filter(
+    //     (article) => article.articleType === selectedFilter
+    // );
 
     return (
         <Layout>
@@ -31,10 +31,11 @@ export default function ArticleListing() {
                         <button
                             key={filter}
                             onClick={() => setSelectedFilter(filter)}
-                            className={`font-open-sans rounded-full bg-gray-100/40 px-6 py-2 text-sm cursor-pointer font-medium transition border 
+                            className={`font-open-sans rounded-3xl px-4 py-2 text-sm cursor-pointer font-normal transition border 
               ${selectedFilter === filter
-                                    ? "border-privue-500 border-[1px] text-privue-700 bg-privue-100/10 shadow-sm"
-                                    : "border-[#DFDFDF] text-[#707070] hover:text-[#1a1a1a] hover:border-[#1a1a1a]"
+                                    ? "border-privue-900 bg-privue-100/75 text-[#171717] shadow-sm"
+                                    : "border-gray-200 hover:bg-gray-100 text-[#505050]"
+                                // : "border-[#DFDFDF] text-[#707070] hover:text-[#1a1a1a] hover:border-[#1a1a1a]"
                                 }`}
                         >
                             {filter}
@@ -44,8 +45,9 @@ export default function ArticleListing() {
 
 
                 {/* Articles Grid */}
-                <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24 grid grid-cols-2 gap-6">
-                    {filteredArticles.map((article, index) => (
+                <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24  gap-6">
+                    {/* <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24 grid grid-cols-2 gap-6"> */}
+                    {/* {filteredArticles.map((article, index) => (
                         <InfoCard
                             key={index}
                             title={article.title}
@@ -58,7 +60,62 @@ export default function ArticleListing() {
                             author={article.author}
                             publishedDate={article.publishedDate}
                         />
-                    ))}
+                    ))} */}
+                    <div className="flex w-full gap-4 m-6">
+                        <BlogCard
+                            href="/article"
+                            title="Persistent Storage and 97% Faster Cold Starts for Edge Functions"
+                            description="Bring lightning-fast search to your Supabase apps,  with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                        />
+                        <BlogCard
+                            href="/article"
+                            title="Algolia Connector for Supabase"
+                            description="Bring lightning-fast search to your Supabase apps, with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="/testBlogImage.png"
+                        />
+                        <BlogCard
+                            href="/article"
+                            title="Algolia Connector for Supabase"
+                            description="Bring lightning-fast search to your Supabase apps, with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                        />
+
+                    </div>
+                    <div className="flex w-full gap-4 m-6">
+                        <BlogCard
+                            href="/article"
+                            title="Persistent Storage and 97% Faster Cold Starts for Edge Functions"
+                            description="Bring lightning-fast search to your Supabase apps, with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                        />
+                        <BlogCard
+                            href="/article"
+                            title="Algolia Connector for Supabase"
+                            description="Bring lightning-fast search to your Supabase apps, with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                        />
+                        <BlogCard
+                            href="/article"
+                            title="Algolia Connector for Supabase"
+                            description="Bring lightning-fast search to your Supabase apps, with no code required."
+                            date="Jul 17, 2025"
+                            readTime="5 minute"
+                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                        />
+
+                    </div>
+
                 </div>
             </>
         </Layout>

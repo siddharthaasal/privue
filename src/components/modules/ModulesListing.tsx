@@ -61,7 +61,7 @@ export default function ModulesListing() {
     return (
         <div className="mx-auto max-w-screen-xl py-12 px-6 md:px-20 font-open-sans">
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
                 {/* Left: Module List */}
                 <div className="space-y-3">
                     {modules.map((mod) => (
@@ -70,12 +70,12 @@ export default function ModulesListing() {
                             onClick={() => setActiveModule(mod)}
                             className={`w-full cursor-pointer flex items-center gap-3 p-4 rounded-lg border transition
                 ${activeModule.id === mod.id
-                                    ? 'border-privue-900 bg-privue-100/75'
-                                    : 'border-gray-200 hover:bg-gray-100'
+                                    ? 'border-privue-900 bg-privue-100/75 text-[#171717]'
+                                    : 'border-gray-200 hover:bg-gray-100 text-[#505050]'
                                 }`}
                         >
                             <span className="text-privue-900">{mod.icon}</span>
-                            <span className="text-left text-[14px] font-normal text-[#171717]">
+                            <span className="text-left text-[14px] font-normal">
                                 {mod.label}
                             </span>
                         </button>
@@ -83,7 +83,7 @@ export default function ModulesListing() {
                 </div>
 
                 {/* Right: Module Description */}
-                <div className="md:col-span-2 p-6 border border-gray-100 rounded-lg bg-white shadow-sm">
+                <div className="md:col-span-3 p-6 border border-gray-100 rounded-lg bg-white shadow-sm">
                     <div className="flex items-center gap-3 mb-4 text-privue-900">
                         {activeModule.icon}
                         <h3 className="text-xl font-semibold text-gray-900">{activeModule.label}</h3>

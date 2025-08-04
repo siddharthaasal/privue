@@ -42,7 +42,7 @@ export default function Header() {
 
 
     return (
-        <header className="font-open-sans fixed top-0 inset-x-0 z-50">
+        <header className="fixed top-0 inset-x-0 z-50">
             <div className="relative w-100% py-1">
                 {/* Blur layer */}
                 <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b backdrop-blur-md transition-all duration-300  bg-white/20 border-white/30 shadow-md" : "backdrop-blur-sm border border-b-[0.5]"
@@ -131,8 +131,8 @@ export default function Header() {
 
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
-                        <Button variant="outline" size="sm" className="text-[13px]"> <a href="/login">Demo</a></Button>
-                        <Button variant="default" size="sm" className="text-[13px]"> <a href="/signup">Book a Call</a></Button>
+                        <Button variant="outline" size="sm" className="text-[14px]"> <a href="/login">Demo</a></Button>
+                        <Button variant="default" size="sm" className="text-[14px]"> <a href="/signup">Book a Call</a></Button>
                     </div>
 
                 </nav>

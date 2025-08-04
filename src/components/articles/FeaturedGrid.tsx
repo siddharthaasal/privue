@@ -76,11 +76,17 @@ export default function ArticleGrid() {
             </div>
             <a
                 href="/articles"
-                className="font-open-sans mx-auto group flex cursor-pointer justify-end items-center gap-2 px-24 text-xl sm:text-lg text-foreground-lighter col-span-full pb-32"
+                className="font-open-sans mx-auto group flex cursor-pointer justify-end items-center gap-2 px-26 text-foreground-lighter col-span-full pb-32"
             >
-                <span className="text-[#707070] hover:text-[#525252]">Explore all Articles</span>
-                <ExternalLink className="text-[#707070] hover:text[#525252] text-lg" size={18} />
+                <span className="text-sm text-[#707070] group-hover:text-[#171717] transition-colors duration-200">
+                    Explore all Articles
+                </span>
+                <ExternalLink
+                    className="text-[#707070] group-hover:text-[#171717] text-lg transition-colors duration-200"
+                    size={14}
+                />
             </a>
+
         </div>
     );
 }

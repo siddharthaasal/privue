@@ -4,17 +4,23 @@ import React from "react";
 // import { GridPattern } from "@/components/magicui/grid-pattern";
 import Header from "./Header";
 import Footer from "./Footer";
+// import DarkHeader from "./DarkHeader";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+    children,
+    headerVariant = 'light',
+}: {
+    children: React.ReactNode;
+    headerVariant?: 'light' | 'dark';
+}) {
     return (
         <div className="relative">
-            <div className="">
+            <div className={headerVariant === 'dark' ? 'dark' : ''}>
                 <Header />
-                <main className="mt-20">
-                    {children}
-                </main>
-                <Footer />
             </div>
+
+            <main className="relative mt-36 mb-96 bg-background z-1">{children}</main>
+            <Footer />
         </div>
-    )
+    );
 }

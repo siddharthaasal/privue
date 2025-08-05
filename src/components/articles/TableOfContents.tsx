@@ -52,7 +52,7 @@ export default function TableOfContents({
     }, []);
 
     return (
-        <aside className="hidden md:block w-64 sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto bg-white dark:bg-zinc-900 dark:border-zinc-800">
+        <aside className="hidden md:block w-64 sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto bg-background dark:bg-zinc-900 dark:border-zinc-800">
             <div className=''>
                 <div className=" font-open-sans flex items-center gap-2 mb-4 text-[16px] p-0 text-[#171717] tracking-wide">
                     {/* <TbListSearch size={16} /> */}

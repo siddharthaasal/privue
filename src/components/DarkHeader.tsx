@@ -8,7 +8,7 @@ type linkType = {
     variant: "link" | "outline" | "default" | "ghost";
 };
 
-export default function Header() {
+export default function DarkHeader() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -42,15 +42,15 @@ export default function Header() {
 
 
     return (
-        <header className="fixed top-0 inset-x-0 z-50 ">
+        <header className="fixed top-0 inset-x-0 z-50 h-4 bg-background">
             <div className="relative w-100% py-1">
                 {/* Blur layer */}
-                <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b backdrop-blur-md bg-background transition-all duration-300 shadow-md" : "backdrop-blur-sm border border-b-[0.5] bg-transparent "
+                <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b backdrop-blur-md transition-all duration-300  bg-black/50 border-white/30 shadow-md" : "backdrop-blur-sm border border-b-[0.5] dark:bg-background-dark dark:border-b-white/30"
                     // <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b backdrop-blur-xl transition-all duration-300  bg-white/20 border-white/30 shadow-md" : "backdrop-blur-sm  bg-white/10 "
                     }`} />
 
                 {/* Actual navbar content */}
-                <nav className="relative mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-36 2xl:px-6 py-0 max-w-[1536px] "
+                <nav className="relative mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-36 py-0"
                     aria-label="Global"
                 >
                     {/* Logo */}
@@ -62,7 +62,7 @@ export default function Header() {
                                 className="h-14 w-auto"
                                 loading="eager"
                             />
-                            <span className="text-[24px] -mt-1 font-semibold text-foreground">
+                            <span className="text-[24px] -mt-1 font-semibold text-gray-800 dark:text-white">
                                 privue
                             </span>
                         </a>
@@ -72,7 +72,7 @@ export default function Header() {
                     <div className="flex lg:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="inline-flex items-center justify-center p-2 rounded-md text-privue-700 hover:bg-privue-100 focus:outline-none"                    >
+                            className="inline-flex items-center justify-center p-2 rounded-md text-privue-700 hover:bg-privue-100 focus:outline-none">
                             <span className="sr-only">Toggle menu</span>
                             {isMenuOpen ? (
                                 <svg
@@ -121,7 +121,7 @@ export default function Header() {
 
                     {/* Desktop links */}
                     <div className="hidden lg:flex lg:items-center lg:gap-x-2 justify-center items-center">
-                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-[14px] text-foreground">
+                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-[14px] text-gray-800 dark:text-foreground">
                             <a href={link.href} target="_blank" rel="noopener noreferrer">
                                 {link.name}
                             </a>
@@ -131,8 +131,8 @@ export default function Header() {
 
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
-                        <Button variant="outline" size="sm" className="text-[14px] text-foreground"> <a href="/login">Demo</a></Button>
-                        <Button variant="default" size="sm" className="text-[14px] text-white"> <a href="/signup">Book a Call</a></Button>
+                        <Button variant="outline" size="sm" className="text-[14px] dark:text-foreground"> <a href="/login">Demo</a></Button>
+                        <Button variant="default" size="sm" className="text-[14px]"> <a href="/signup">Book a Call</a></Button>
                     </div>
 
                 </nav>

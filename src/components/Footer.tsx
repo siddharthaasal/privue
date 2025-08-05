@@ -1,6 +1,7 @@
 import privueLogo from "/privue-logo.png";
 import { FaLinkedin } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { useEffect, useRef } from "react";
 
 interface MenuItem {
     title: string;
@@ -73,8 +74,32 @@ export default function Footer({
     copyright = "© Nexvue Technologies Private Limited 2025 All rights reserved",
     bottomLinks = [{ text: "query@privue.ai", url: "#" }],
 }: FooterProps) {
+
+    const footerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const viewportHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const remaining = documentHeight - (scrollTop + viewportHeight);
+
+
+            if (footerRef.current) {
+                const translateY = remaining > 0 ? remaining / 2 : 0;
+                // const translateY = remaining > 30 ? remaining / 2 : 0;
+                footerRef.current.style.transform = `translateY(${translateY}px)`;
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <section className="relative w-full mx-auto px-4 sm:px-6 lg:px-36 py-8 text-sm font-open-sans bg-white/50 text-muted-foreground">
+        <section
+            ref={footerRef}
+            className="fixed bottom-0 left-0 right-0 z-0 border-t border-gray-200 w-full mx-auto px-4 sm:px-6 lg:px-36 py-8 text-sm font-open-sans bg-background text-muted-foreground max-w-[1536px]">
             <footer className="flex flex-col gap-16 lg:flex-row lg:justify-between">
                 {/* Left Section */}
                 <div className="flex-1 max-w-md">
@@ -84,7 +109,7 @@ export default function Footer({
                     </a>
                     <p className="mb-3 text-gray-800">{tagline}</p>
                     {address.map((line, idx) => (
-                        <p key={idx} className="text-xs text-gray-600">{line}</p>
+                        <p key={idx} className="text-sm text-foreground-lighter">{line}</p>
                     ))}
 
                     <div className="mt-4 flex gap-2 items-center">
@@ -103,7 +128,7 @@ export default function Footer({
                                     <li key={linkIdx}>
                                         <a
                                             href={link.url}
-                                            className="text-gray-500 hover:text-primary text-xs font-medium transition-colors"
+                                            className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors"
                                         >
                                             {link.text}
                                         </a>

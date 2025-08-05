@@ -13,7 +13,7 @@ import {
 
 export default function HeroSection() {
     return (
-        <section className="-mt-32 relative flex min-h-screen items-center justify-center rounded-lg p-6 md:p-20 dark:bg-black">
+        <section className="-mt-32 relative flex min-h-screen items-center justify-center rounded-lg p-6 md:p-20 dark:bg-[#121212]">
             {/* grid backgorund */}
             <GridPattern
                 width={180}
@@ -57,7 +57,7 @@ export default function HeroSection() {
                 >
                     <div className="text-center">
                         {/* <h1 className="text-[72px] font-bold leading-24 tracking-tight font-open-sans text-privue-900"> */}
-                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight font-open-sans text-black dark:text-white">
+                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight font-open-sans text-black dark:text-test">
                             <span className="block">Empowering businesses</span>
                             {/* <span className="block text-privue-900">through</span> */}
                             <span className="block text-privue-900">through Intelligent Data</span>
@@ -71,7 +71,7 @@ export default function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                     // className="text-[24px] text-privue-600 font-medium font-open-sans max-w-2xl"
-                    className="text-lg text-neutral-700 font-medium font-open-sans max-w-2xl dark:text-white"
+                    className="text-lg text-neutral-700 font-medium font-open-sans max-w-2xl dark:text-foreground-lighter"
                 >
                     Discover data-backed signals for smarter decisions.
                     Mitigate risk and unlock high-value relationships.

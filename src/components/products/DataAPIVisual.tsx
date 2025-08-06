@@ -7,7 +7,7 @@ export default function DataAPIVisual() {
     return (
         <a
             href="#"
-            className="relative select-none block p-6 rounded-xl shadow-xs overflow-hidden border-[#2e2e2e] border-[0.5px] hover:shadow-md hover:border-[#494949] transition-shadow bg-background group aspect-[330/390]"
+            className="relative select-none block p-6 rounded-xl shadow-xs overflow-hidden border-[#2e2e2e] border-[0.5px] hover:shadow-md hover:border-[#494949] transition-shadow bg-background group h-[316px] w-[267.7px]"
         >
             {/* tags */}
             <div className="absolute  w-full text-center left-0 right-0 bottom-[9%] z-10 grid grid-cols-2 gap-14 gap-x-0 text-sm text-foreground-lighter">
@@ -42,7 +42,7 @@ export default function DataAPIVisual() {
             </div>
             {/* Animated dots background */}
             <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-                <div className="absolute bottom-0 left-0 right-0 flex will-change-transform scale-150 opacity-10 group-hover:opacity-20 transition-opacity group-hover:animate-marquee-reverse">
+                <div className="absolute bottom-0 left-0 right-0 flex will-change-transform scale-150 opacity-30 group-hover:opacity-80 transition-opacity group-hover:animate-marquee-reverse">
                     {/* Light Mode */}
                     <div className="flex dark:hidden">
                         <img

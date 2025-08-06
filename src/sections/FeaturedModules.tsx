@@ -7,7 +7,8 @@ export default function FeaturedModules() {
 
                 <div className="font-open-sans mx-auto mb-12 text-center mt-24 max-w-xl">
                     <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
-                        Our <span className="text-privue-900">Modules</span>
+                        {/* Our <span className="text-privue-900">Modules</span> */}
+                        Our <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-medium">Modules</span>
                     </h1>
                     <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
                         Designed to deliver value. Plug in what you need, when you need it.

@@ -10,10 +10,18 @@ export default function LandingPage() {
         <>
             <Layout>
                 <>
-                    <HeroSection />
-                    <Products />
-                    <FeaturedModules />
-                    <FeaturedArticles />
+                    <section id="hero" data-theme="light">
+                        <HeroSection />
+                    </section>
+                    <section id="products" data-theme="dark">
+                        <Products />
+                    </section>
+                    <section id="modules" data-theme="light">
+                        <FeaturedModules />
+                    </section>
+                    <section id="articles" data-theme="light">
+                        <FeaturedArticles />
+                    </section>
                 </>
             </Layout>
         </>

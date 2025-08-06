@@ -6,11 +6,12 @@ export default function Products() {
         <section className="dark bg-background font-open-sans relative flex flex-col items-center min-h-screen max-w-8xl px-6 md:px-12 lg:px-20 pt-12 pb-24">
 
             <div className="font-open-sans mx-auto mb-8 text-center mt-12">
-                <h1 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-                    Featured <span className="text-privue-900 dark:text-privue-950">Products</span>
+                <h1 className="text-3xl md:text-4xl font-normal text-foreground mb-4">
+                    Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-medium">Solutions</span>
                 </h1>
                 <p className="text-foreground-lighter text-base md:text-lg mt-2 mb-4">
-                    Top picks to elevate your workflow
+                    {/* Top picks to elevate your workflow */}
+                    Designed to deliver value. Plug in what you need, when you need it.
                 </p>
             </div>
             {/* Products Grid */}

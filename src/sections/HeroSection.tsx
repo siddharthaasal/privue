@@ -1,5 +1,5 @@
 // grid background, announcement, heading, subtext, cta button
-
+// import { useEffect } from "react";
 import { cn } from "../lib/utils";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { motion } from "framer-motion";
@@ -12,8 +12,43 @@ import {
 } from '@/components/ui/shadcn-io/announcement';
 
 export default function HeroSection() {
+
+    // const [squares, setSquares] = useState<[number, number][]>([]);
+
+
+    // useEffect(() => {
+    //     const updateSquares = () => {
+    //         const vw = window.innerWidth;
+    //         const vh = window.innerHeight;
+
+    //         const gridWidth = 180;
+    //         const gridHeight = 180;
+
+    //         const cols = Math.floor(vw / gridWidth);
+    //         const rows = Math.floor(vh / gridHeight);
+
+    //         const result: [number, number][] = [];
+
+    //         for (let i = 0; i < cols; i++) {
+    //             for (let j = 0; j < rows; j++) {
+    //                 // Just pick some to highlight, or randomize
+    //                 if (Math.random() < 0.06) result.push([i, j]);
+    //                 // const n = perlin2(i * noiseScale, j * noiseScale);
+    //                 // if (n > threshold) result.push([i, j]);
+    //             }
+    //         }
+
+    //         setSquares(result);
+    //     };
+
+    //     updateSquares();
+    //     window.addEventListener("resize", updateSquares);
+
+    //     return () => window.removeEventListener("resize", updateSquares);
+    // }, []);
+
     return (
-        <section className="-mt-32 relative flex min-h-screen items-center justify-center rounded-lg p-6 md:p-20 dark:bg-[#121212]">
+        <section className="relative -mt-16 flex min-h-screen items-center justify-center bg-background my-auto">
             {/* grid backgorund */}
             <GridPattern
                 width={180}
@@ -26,10 +61,12 @@ export default function HeroSection() {
                     [7, 1],
                     [8, 2],
                 ]}
+                // squares={squares}
                 className={cn(
                     "absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
                 )}
             />
+
 
             {/* content -> (anouncement, heading+subtext, cta) */}
             <div className="relative flex flex-col items-center justify-center text-center gap-4 h-full">
@@ -42,7 +79,7 @@ export default function HeroSection() {
                 >
                     <Announcement>
                         <AnnouncementTag>New to Privue?</AnnouncementTag>
-                        <AnnouncementTitle className="text-gray-700">
+                        <AnnouncementTitle className="text-foreground-lighter">
                             Start building clarity with your data →
                         </AnnouncementTitle>
                     </Announcement>
@@ -56,11 +93,9 @@ export default function HeroSection() {
                     className="flex justify-center px-4 w-full sm:w-[768px] md:w-[1152px]"
                 >
                     <div className="text-center">
-                        {/* <h1 className="text-[72px] font-bold leading-24 tracking-tight font-open-sans text-privue-900"> */}
-                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight font-open-sans text-black dark:text-test">
+                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground">
                             <span className="block">Empowering businesses</span>
-                            {/* <span className="block text-privue-900">through</span> */}
-                            <span className="block text-privue-900">through Intelligent Data</span>
+                            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-950 via-privue-800">through Intelligent Data</span>
                         </h1>
                     </div>
                 </motion.div>
@@ -70,12 +105,10 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    // className="text-[24px] text-privue-600 font-medium font-open-sans max-w-2xl"
-                    className="text-lg text-neutral-700 font-medium font-open-sans max-w-2xl dark:text-foreground-lighter"
+                    className="text-lg text-foreground font-medium max-w-2xl"
                 >
                     Discover data-backed signals for smarter decisions.
                     Mitigate risk and unlock high-value relationships.
-                    {/* Access unparalleled business data and insights to identify new opportunities, mitigate risks, and build trusted relationships that drive your success. */}
                 </motion.p>
 
                 {/* CTA Button */}
@@ -85,12 +118,17 @@ export default function HeroSection() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
                 >
-                    <Button size="default">
-                        <a href="/signup" className="font-open-sans">Get Started</a>
-                    </Button>
-                    <Button variant="outline" size="default">
-                        <a href="/articles" className="font-open-sans shadow-text-md">Case Studies</a>
-                    </Button>
+                    <a href="/signup">
+                        <Button size="default" className="cursor-pointer">
+                            <p className="text-white">Get Started</p>
+                        </Button>
+                    </a>
+                    <a href="/articles">
+                        <Button variant="outline" size="default" className="cursor-pointer">
+                            <p className="text-foreground">Case Studies</p>
+                        </Button>
+                    </a>
+
                 </motion.div>
             </div>
 

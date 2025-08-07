@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Header />
             </div>
 
-            <main className="relative mt-36 mb-96 bg-background z-1">{children}</main>
+            <main className="relative mt-16 mb-96 bg-background z-1">{children}</main>
             <Footer />
         </div>
     )

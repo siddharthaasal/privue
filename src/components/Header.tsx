@@ -46,7 +46,7 @@ export default function Header() {
             <div className="relative w-100% py-1">
                 {/* Blur layer */}
                 {/* <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b border-[#2e2e2e] backdrop-blur-md bg-[#3d3c3c] transition-all duration-300 shadow-md" : "backdrop-blur-sm border border-b-[0.5] border-[#2e2e2e] bg-[#3d3c3c] " */}
-                <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b backdrop-blur-md bg-background transition-all duration-300 shadow-md" : "backdrop-blur-sm border border-b-[0.5] bg-transparent "
+                <div className={`absolute inset-0 pointer-events-none border border-l-0 border-r-0 border-b-[0.5] ${isScrolled ? "backdrop-blur-md bg-background transition-all duration-300 shadow-md" : "backdrop-blur-sm bg-background "
                     }`} />
 
                 {/* Actual navbar content */}

@@ -10,15 +10,20 @@ export default function LandingPage() {
         <>
             <Layout>
                 <>
-                    <section id="hero" data-theme="light">
-                        <HeroSection />
+                    <section id="hero" data-theme="dark">
+                        <div className="dark">
+                            <HeroSection />
+                        </div>
                     </section>
-                    <section id="products" data-theme="dark">
-                        <Products />
-                    </section>
+
                     <section id="modules" data-theme="light">
                         <FeaturedModules />
                     </section>
+
+                    <section id="products" data-theme="dark">
+                        <Products />
+                    </section>
+
                     <section id="articles" data-theme="light">
                         <FeaturedArticles />
                     </section>

@@ -1,6 +1,7 @@
 import privueLogo from "/privue-logo.png";
+import { Mail } from 'lucide-react';
 import { FaLinkedin } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
+// import { IoIosMail } from "react-icons/io";
 import { useEffect, useRef } from "react";
 
 interface MenuItem {
@@ -113,8 +114,8 @@ export default function Footer({
                     ))}
 
                     <div className="mt-4 flex gap-2 items-center">
-                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><FaLinkedin className="text-gray-500 text-lg hover:text-gray-700" /></a>
-                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><IoIosMail className="text-gray-500 text-2xl hover:text-gray-700" /></a>
+                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" /></a>
+                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><Mail size="20" className="text-[#707070] hover:text-[#525252]" /></a>
                     </div>
                 </div>
 

@@ -106,16 +106,18 @@ export default function Footer({
                 <div className="flex-1 max-w-md">
                     <a href={logo.url} className="flex items-center mb-2">
                         <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10" />
-                        <span className="text-lg font-medium text-gray-900">{logo.title}</span>
+                        <span className="text-lg font-medium text-foreground">{logo.title}</span>
                     </a>
-                    <p className="mb-3 text-gray-800">{tagline}</p>
-                    {address.map((line, idx) => (
-                        <p key={idx} className="text-sm text-foreground-lighter">{line}</p>
-                    ))}
+                    {/* <p className="mb-3 text-base text-foreground">{tagline}</p> */}
+                    <div className="pl-1">
+                        {address.map((line, idx) => (
+                            <p key={idx} className="text-sm text-foreground-lighter">{line}</p>
+                        ))}
 
-                    <div className="mt-4 flex gap-2 items-center">
-                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" /></a>
-                        <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><Mail size="20" className="text-[#707070] hover:text-[#525252]" /></a>
+                        <div className="mt-3 flex gap-2 items-center">
+                            <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" /></a>
+                            <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><Mail size="20" className="text-[#707070] hover:text-[#525252]" /></a>
+                        </div>
                     </div>
                 </div>
 
@@ -123,7 +125,7 @@ export default function Footer({
                 <div className="flex-[2] grid grid-cols-2 md:grid-cols-[repeat(3,minmax(0,1fr))] gap-8 max-w-max">
                     {menuItems.map((section, idx) => (
                         <div key={idx} className="">
-                            <h4 className="mb-2 text-gray-800 font-semibold text-sm">{section.title}</h4>
+                            <h4 className="mb-2 text-foreground font-medium text-sm">{section.title}</h4>
                             <ul className="space-y-2 max-w-max">
                                 {section.links.map((link, linkIdx) => (
                                     <li key={linkIdx}>

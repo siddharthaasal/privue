@@ -132,7 +132,7 @@ export default function Header() {
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
                         <a href="/login">
-                            <Button variant="outline" size="sm" className="text-sm cursor-pointer text-[#FAFAFA]">
+                            <Button variant="outline" size="sm" className="text-sm cursor-pointer dark:text-[#FAFAFA] text-[#121212]">
                                 <p>Demo</p>
                             </Button>
                         </a>

@@ -63,7 +63,7 @@ export default function HeroSection() {
                 ]}
                 // squares={squares}
                 className={cn(
-                    "absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
+                    "absolute inset-0 opacity-50 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
                 )}
             />
 
@@ -93,9 +93,9 @@ export default function HeroSection() {
                     className="flex justify-center px-4 w-full sm:w-[768px] md:w-[1152px]"
                 >
                     <div className="text-center">
-                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground">
+                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground leading-tight">
                             <span className="block">Empowering businesses</span>
-                            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-950 via-privue-800">through Intelligent Data</span>
+                            <span className="block bg-clip-text text-transparent bg-gradient-to-b from-privue-900 to-privue-900 via-privue-700">through Intelligent Data</span>
                         </h1>
                     </div>
                 </motion.div>
@@ -118,14 +118,15 @@ export default function HeroSection() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
                 >
-                    <a href="/signup">
-                        <Button size="default" className="cursor-pointer">
-                            <p className="text-white">Get Started</p>
+
+                    <a href="/#">
+                        <Button variant="default" size="default" className="cursor-pointer text-sm text-[#FAFAFA]">
+                            <p>Get Started</p>
                         </Button>
                     </a>
                     <a href="/articles">
-                        <Button variant="outline" size="default" className="cursor-pointer">
-                            <p className="text-foreground">Case Studies</p>
+                        <Button variant="outline" size="default" className="cursor-pointer text-[#FAFAFA]">
+                            <p>Case Studies</p>
                         </Button>
                     </a>
 

@@ -15,15 +15,15 @@ export const Announcement = ({
   <Badge
     variant={variant}
     className={cn(
-      'group max-w-full gap-2 rounded-full px-4 py-1 font-medium font-open-sans shadow-sm transition-all',
+      'group max-w-full gap-2 rounded-full px-4 py-1 font-normal shadow-sm transition-all',
       'hover:shadow-md',
       'bg-background text-foreground border-border ',
       themed
         ? // Themed background and border
-        'bg-privue-100/50 text-privue-900 border border-privue-200 dark:bg-privue-900 dark:text-white dark:border-privue-700'
+        'bg-privue-950/75 border-privue-950 hover:bg-privue-950/50 hover:border-privue-950/75 text-shadow-2xs'
         :
-        'bg-background text-foreground border border-border',
-      className
+        // 'bg-privue-950/75 border-privue-950 hover:bg-privue-950/50 hover:border-privue-950/75 text-shadow-2xs',
+        className
     )}
     {...props}
   />
@@ -37,7 +37,7 @@ export const AnnouncementTag = ({
 }: AnnouncementTagProps) => (
   <div
     className={cn(
-      '-ml-2.5 shrink-0 truncate rounded-full px-2.5 py-1 text-xs font-medium font-open-sans',
+      '-ml-2.5 shrink-0 truncate rounded-full px-2.5 py-0.5 text-xs font-medium font-open-sans',
       'bg-privue-100 text-privue-800 border-privue-300',
       'dark:bg-gradient-to-br from-privue-950 to-privue-950 via-privue-800 dark:text-foreground dark:border-privue-600',
       className

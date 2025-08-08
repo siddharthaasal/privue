@@ -7,7 +7,7 @@ export default function DataAPIVisual() {
     return (
         <a
             href="#"
-            className="relative select-none block p-6 rounded-xl shadow-xs overflow-hidden border-[#2e2e2e] border-[0.5px] hover:shadow-md hover:border-[#494949] transition-shadow bg-background group h-[316px] w-[267.7px]"
+            className="relative select-none block p-6 rounded-xl bg-background-lighter shadow-xs overflow-hidden border border-[#2e2e2e]  hover:shadow-md hover:border-[#494949] transition-shadow group h-[316px] w-[267.7px]"
         >
             {/* tags */}
             <div className="absolute  w-full text-center left-0 right-0 bottom-[9%] z-10 grid grid-cols-2 gap-14 gap-x-0 text-sm text-foreground-lighter">

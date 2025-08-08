@@ -15,7 +15,6 @@ export default function LandingPage() {
                             <HeroSection />
                         </div>
                     </section>
-
                     <section id="modules" data-theme="light">
                         <FeaturedModules />
                     </section>

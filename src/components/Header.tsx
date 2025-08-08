@@ -121,7 +121,7 @@ export default function Header() {
 
                     {/* Desktop links */}
                     <div className="hidden lg:flex lg:items-center lg:gap-x-2 justify-center items-center">
-                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-[14px] text-foreground">
+                        {desktopLinks.map((link, idx) => (<Button asChild key={idx} variant={link.variant} className="font-medium text-sm text-foreground hover:text-privue-600">
                             <a href={link.href} target="_blank" rel="noopener noreferrer">
                                 {link.name}
                             </a>
@@ -131,8 +131,15 @@ export default function Header() {
 
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
-                        <Button variant="outline" size="sm" className="text-[14px] text-foreground"> <a href="/login">Demo</a></Button>
-                        <Button variant="default" size="sm" className="text-[14px] text-white"> <a href="/signup">Book a Call</a></Button>
+                        <a href="/login">
+                            <Button variant="outline" size="sm" className="text-sm cursor-pointer text-[#FAFAFA]">
+                                <p>Demo</p>
+                            </Button>
+                        </a>
+                        <a href="/book">
+                            <Button variant="default" size="sm" className="text-sm cursor-pointer text-[#FAFAFA]"> <p>Book a Call</p>
+                            </Button>
+                        </a>
                     </div>
 
                 </nav>

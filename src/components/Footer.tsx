@@ -36,7 +36,7 @@ export default function Footer({
         title: "privue",
         url: "https://www.privue.ai",
     },
-    tagline = "Empowering Businesses via Intelligent Data",
+    // tagline = "Empowering Businesses via Intelligent Data",
     address = ["WeWork Blue One Square,", "Sector 18, Gurugram - 122016, Haryana"],
     menuItems = [
         {

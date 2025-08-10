@@ -18,7 +18,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={setupAnalytics}
                         variant="lg"
                     />
@@ -27,7 +27,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={scm}
                     />
                 </div>
@@ -35,7 +35,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={im1}
                     />
                 </div>
@@ -45,7 +45,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={dataReport}
                     />
                 </div>
@@ -53,7 +53,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={dataAnalysis}
                     />
                 </div>
@@ -61,7 +61,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={personalInfo}
                     />
                 </div>
@@ -69,7 +69,7 @@ export default function ArticleGrid() {
                     <FeaturedCard
                         title="Credit Risk Assessment"
                         description="Explore how Privue helps you with the Credit Risk Assessment"
-                        url="/test"
+                        url="/article"
                         coverImage={annotation}
                     />
                 </div>

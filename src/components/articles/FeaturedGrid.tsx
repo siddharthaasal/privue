@@ -11,8 +11,8 @@ import { ExternalLink } from 'lucide-react';
 
 export default function ArticleGrid() {
     return (
-        <div className="mx-auto max-w-max">
-            <div className="h-auto w-full mx-auto max-w-screen-2xl py-8 px-24 grid grid-cols-4 grid-rows-2 gap-4">
+        <div className="mx-auto px-2">
+            <div className="h-auto w-full mx-auto py-8 grid grid-cols-4 grid-rows-2 gap-4">
                 {/* Row 1 */}
                 <div className="col-span-2 row-span-1">
                     <FeaturedCard
@@ -76,7 +76,7 @@ export default function ArticleGrid() {
             </div>
             <a
                 href="/articles"
-                className="font-open-sans mx-auto group flex cursor-pointer justify-end items-center gap-2 px-26 text-foreground-lighter col-span-full pb-32"
+                className="font-open-sans mx-auto group flex cursor-pointer justify-end items-center gap-2 text-foreground-lighter col-span-full pb-32"
             >
                 <span className="text-sm text-[#707070] group-hover:text-[#171717] transition-colors duration-200">
                     Explore all Articles

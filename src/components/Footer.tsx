@@ -100,7 +100,7 @@ export default function Footer({
     return (
         <section
             ref={footerRef}
-            className="fixed bottom-0 left-0 right-0 z-0 border-t border-gray-200 w-full mx-auto px-4 sm:px-6 lg:px-36 2xl:px-6 py-8 text-sm  bg-background text-muted-foreground max-w-[1536px]">
+            className="fixed bottom-0 left-0 right-0 z-0 border-t border-gray-200 w-full mx-auto  px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px] py-8 text-sm  bg-background text-muted-foreground">
             <footer className="flex flex-col gap-16 lg:flex-row lg:justify-between">
                 {/* Left Section */}
                 <div className="flex-1 max-w-md">

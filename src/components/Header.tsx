@@ -50,7 +50,7 @@ export default function Header() {
                     }`} />
 
                 {/* Actual navbar content */}
-                <nav className="relative mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-36 2xl:px-6 py-0 max-w-[1536px] "
+                <nav className="relative mx-auto flex items-center justify-between py-0  px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]"
                     aria-label="Global"
                 >
                     {/* Logo */}

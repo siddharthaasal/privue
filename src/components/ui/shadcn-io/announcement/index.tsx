@@ -15,7 +15,7 @@ export const Announcement = ({
   <Badge
     variant={variant}
     className={cn(
-      'group max-w-full gap-2 rounded-full px-4 py-1 font-normal shadow-xs transition-all',
+      'group max-w-full gap-2 rounded-full px-4 py-1 font-medium shadow-xs transition-all',
       'hover:shadow-sm',
       'bg-background text-foreground border-border ',
       themed

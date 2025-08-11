@@ -59,10 +59,10 @@ export default function Header() {
                             <img
                                 src={privueLogo}
                                 alt="Privue Logo"
-                                className="h-14 w-auto"
+                                className="h-12 w-auto"
                                 loading="eager"
                             />
-                            <span className="text-[24px] -mt-1 font-semibold text-foreground">
+                            <span className="text-[20px] -mt-1 font-semibold text-foreground">
                                 privue
                             </span>
                         </a>
@@ -132,12 +132,12 @@ export default function Header() {
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
                         <a href="/login">
-                            <Button variant="outline" size="sm" className="text-sm cursor-pointer dark:text-[#FAFAFA] text-[#121212]">
+                            <Button variant="outline" size="sm" className="cursor-pointer dark:text-[#FAFAFA] text-[#121212]">
                                 <p>Demo</p>
                             </Button>
                         </a>
                         <a href="/book">
-                            <Button variant="default" size="sm" className="text-sm cursor-pointer text-[#FAFAFA]"> <p>Book a Call</p>
+                            <Button variant="default" size="sm" className="cursor-pointer text-[#FAFAFA]"> <p>Book a Call</p>
                             </Button>
                         </a>
                     </div>

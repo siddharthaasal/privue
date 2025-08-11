@@ -3,7 +3,7 @@ import ModulesListing from "@/components/modules/ModulesListing"
 export default function FeaturedModules() {
     return (
         <>
-            <section className="font-open-sans relative min-h-screen max-w-8xl px-6 py-0 md:px-12 lg:px-20">
+            <section className="font-open-sans relative min-h-screen max-w-8xl px-6 py-0 md:px-12 lg:px-20  max-w-screen-2xl mx-auto">
 
                 <div className="font-open-sans mx-auto mb-12 text-center mt-24 max-w-xl">
                     <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">

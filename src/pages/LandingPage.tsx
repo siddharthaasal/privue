@@ -10,8 +10,8 @@ export default function LandingPage() {
         <>
             <Layout>
                 <>
-                    <section id="hero" data-theme="dark">
-                        <div className="dark">
+                    <section id="hero" data-theme="light">
+                        <div>
                             <HeroSection />
                         </div>
                     </section>

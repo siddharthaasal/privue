@@ -59,7 +59,7 @@ export default function ModulesListing() {
     const [activeModule, setActiveModule] = useState(modules[0]);
 
     return (
-        <div className="mx-auto max-w-screen-xl py-12 px-6 md:px-20 font-open-sans">
+        <div className="mx-auto max-w-screen-2xl py-12 px-6 md:px-12 lg:px-20">
 
             <div className="grid md:grid-cols-4 gap-4">
                 {/* Left: Module List */}

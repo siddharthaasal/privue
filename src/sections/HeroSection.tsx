@@ -1,5 +1,6 @@
 // grid background, announcement, heading, subtext, cta button
 // import { useEffect } from "react";
+import { useState, useRef } from "react";
 import { cn } from "../lib/utils";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { motion } from "framer-motion";
@@ -47,8 +48,26 @@ export default function HeroSection() {
     //     return () => window.removeEventListener("resize", updateSquares);
     // }, []);
 
+    const demos = [
+        { label: "Systems", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
+        { label: "AI", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
+        { label: "Security", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" }
+    ];
+
+    const [activeDemo, setActiveDemo] = useState(demos[0]);
+
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    const handlePlay = () => {
+        setIsPlaying(true);
+        setTimeout(() => {
+            videoRef.current?.play();
+        }, 100); // slight delay to ensure render
+    };
+
     return (
-        <section className="relative -mt-16 flex min-h-screen items-center justify-center bg-background my-auto">
+        <section className="relative flex mx-auto items-center min-h-screen justify-center bg-background my-auto">
             {/* grid backgorund */}
             <GridPattern
                 width={180}
@@ -69,7 +88,7 @@ export default function HeroSection() {
 
 
             {/* content -> (anouncement, heading+subtext, cta) */}
-            <div className="relative flex flex-col items-center justify-center text-center gap-4 h-full">
+            <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full mt-32 mb-32 2xl:mt-44 2xl:mb-44">
                 {/* Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -77,12 +96,14 @@ export default function HeroSection() {
                     transition={{ duration: 0.4, delay: 0.1 }}
                     className="flex items-center justify-center gap-4 mb-2"
                 >
-                    <Announcement>
-                        <AnnouncementTag>New to Privue?</AnnouncementTag>
-                        <AnnouncementTitle className="text-foreground-lighter">
-                            Start building clarity with your data →
-                        </AnnouncementTitle>
-                    </Announcement>
+                    <a href="#">
+                        <Announcement>
+                            <AnnouncementTag>New to Privue?</AnnouncementTag>
+                            <AnnouncementTitle className="text-foreground-lighter">
+                                Start building clarity with your data →
+                            </AnnouncementTitle>
+                        </Announcement>
+                    </a>
                 </motion.div>
 
                 {/* Heading */}
@@ -125,12 +146,91 @@ export default function HeroSection() {
                         </Button>
                     </a>
                     <a href="/articles">
-                        <Button variant="outline" size="default" className="cursor-pointer text-[#FAFAFA]">
+                        <Button variant="outline" size="default" className="cursor-pointer">
                             <p>Case Studies</p>
                         </Button>
                     </a>
 
                 </motion.div>
+
+                {/* Demo Video */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-20 w-full max-w-[1000px] px-4 "
+                >
+                    <div className="w-full max-w-[1000px] mx-auto px-4">
+                        {/* Tabs */}
+                        <div className="flex justify-center gap-8">
+                            {demos.map(demo => (
+                                <button
+                                    key={demo.label}
+                                    onClick={() => setActiveDemo(demo)}
+                                    className={`pb-2 text-sm 2xl:text-base cursor-pointer transition-colors font-semibold ${activeDemo.label === demo.label
+                                        ? "text-foreground underline underline-offset-2"
+                                        : "text-foreground-lighter hover:text-foreground"
+                                        }`}
+                                >
+                                    {demo.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Gradient + Video */}
+                        <div className="relative mt-4 h-full">
+                            <div className="absolute -inset-4 rounded-sm bg-gradient-to-r from-privue-500/50 via-privue-700/40 to-privue-500/50 blur-2xl opacity-80" />
+
+                            <div className="relative overflow-hidden rounded-xl bg-background border border-black/10 shadow-lg h-full">
+                                <video
+                                    ref={videoRef}
+                                    key={activeDemo.video}
+                                    controls
+                                    poster={activeDemo.poster}
+                                    className="w-full h-full object-cover"
+                                >
+                                    <source src={activeDemo.video} type="video/mp4" />
+                                </video>
+
+                                {!isPlaying && (
+                                    <button
+                                        onClick={handlePlay}
+                                        className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="white"
+                                            viewBox="0 0 24 24"
+                                            className="w-16 h-16"
+                                        >
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* <div className="relative mt-4 h-auto">
+                            <div className="absolute -inset-4 rounded-sm bg-gradient-to-r from-privue-500/40 via-privue-700/30 to-privue-500/40 blur-2xl opacity-80" />
+                            <div className="relative overflow-hidden bg-background border border-black/10 shadow-lg h-full">
+                                <video
+                                    key={activeDemo.video}
+                                    controls
+                                    autoPlay
+                                    muted
+                                    loop
+                                    poster={activeDemo.poster}
+                                    className="w-full aspect-video object-cover"
+                                >
+                                    <source src={activeDemo.video} type="video/mp4" />
+                                </video>
+                            </div>
+                        </div> */}
+                    </div>
+                </motion.div>
+
+
+
             </div>
 
         </section >

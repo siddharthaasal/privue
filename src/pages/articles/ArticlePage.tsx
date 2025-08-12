@@ -17,7 +17,7 @@ export default function ArticlePage() {
     return (
         <Layout>
             <main className="relative min-h-screen">
-                <div className="container mx-auto px-4 py-4 md:py-8 xl:py-10 sm:px-16 xl:px-20">
+                <div className="container mx-auto py-4 md:py-8 xl:py-10 px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
                     <div className="grid grid-cols-12 gap-4">
                         {/* Left Sidebar (Back link) - visible only on xl+ */}
                         <div className="hidden xl:block xl:col-span-2">

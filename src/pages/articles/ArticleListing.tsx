@@ -15,7 +15,7 @@ export default function ArticleListing() {
 
     return (
         <Layout>
-            <>
+            <div className="mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
                 <div className="font-open-sans mx-auto mb-12 text-center mt-24">
                     <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
                         Explore <span className="text-privue-900">Articles</span>
@@ -45,7 +45,7 @@ export default function ArticleListing() {
 
 
                 {/* Articles Grid */}
-                <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24  gap-6">
+                <div className="h-auto w-full mx-auto pt-6 pb-32  gap-6">
                     {/* <div className="h-auto w-full max-w-screen-xl 2xl:max-w-screen-2xl mx-auto pt-6 pb-32 px-24 grid grid-cols-2 gap-6"> */}
                     {/* {filteredArticles.map((article, index) => (
                         <InfoCard
@@ -117,7 +117,7 @@ export default function ArticleListing() {
                     </div>
 
                 </div>
-            </>
+            </div>
         </Layout>
     )
 }

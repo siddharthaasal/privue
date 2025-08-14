@@ -6,6 +6,7 @@ import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
 import DarkHeroSection from "./sections/DarkHeroSection";
 import TestStyles from "./pages/TestStyles";
+import SolutionPage from "./pages/solutions/SolutionPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/articles-0" element={<OldArticleListing />} />
         <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />
+        <Route path="/solution" element={<SolutionPage />} />
       </Routes >
     </>
   )

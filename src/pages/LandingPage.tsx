@@ -15,14 +15,12 @@ export default function LandingPage() {
                             <HeroSection />
                         </div>
                     </section>
-                    <section id="modules" data-theme="light">
-                        <FeaturedModules />
-                    </section>
-
                     <section id="products" data-theme="dark">
                         <Products />
                     </section>
-
+                    <section id="modules" data-theme="light">
+                        <FeaturedModules />
+                    </section>
                     <section id="articles" data-theme="light">
                         <FeaturedArticles />
                     </section>

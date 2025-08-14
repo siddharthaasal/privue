@@ -7,7 +7,7 @@ import hqDots from "/data-apis-lines-light.svg";
 export default function DataAPIVisual() {
     return (
         <a
-            href="#"
+            href="/solution"
             className="relative select-none block p-6 rounded-xl bg-background-lighter shadow-xs overflow-hidden border border-[#2e2e2e]  hover:shadow-md hover:border-[#494949] transition-shadow group h-[316px] w-[267.7px]"
         >
             {/* tags */}

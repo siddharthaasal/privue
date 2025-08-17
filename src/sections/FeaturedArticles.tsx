@@ -1,8 +1,9 @@
-import ArticleGrid from "@/components/articles/FeaturedGrid";
+// import ArticleGrid from "@/components/articles/FeaturedGrid";
+import { Gallery } from "@/components/Gallery";
 
 export default function FeaturedArticles() {
     return (
-        <section className="font-open-sans relative min-h-screen py-0 mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
+        <section className="font-open-sans relative pb-32 mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
 
             <div className="font-open-sans mx-auto mb-12 text-center mt-24">
                 <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
@@ -12,7 +13,7 @@ export default function FeaturedArticles() {
                     Insights, guides, and stories curated for you.
                 </p>
             </div>
-            <ArticleGrid />
+            <Gallery />
         </section>
     );
 }

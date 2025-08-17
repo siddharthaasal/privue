@@ -12,10 +12,10 @@ export default function SolutionPage() {
             <main className="relative mx-auto pt-12">
                 <div>
                     <div className="text-center max-w-2/3 mx-auto">
-                        <h1 className="text-4xl 2xl:text-5xl font-semibold text-privue-800">
+                        <h1 className="text-4xl 2xl:text-5xl font-semibold text-gray-800">
                             Workforce Attribution
                         </h1>
-                        <p className="text-[16px] 2xl:text-lg font-medium py-4 max-w-2/3 mx-auto">
+                        <p className="text-[16px] 2xl:text-lg font-medium py-4 max-w-2/3 mx-auto text-gray-600">
                             Map every Non-Human Identity to its associated human users for complete accountability and governance.
                         </p>
                     </div>
@@ -41,11 +41,24 @@ export default function SolutionPage() {
                         />
                     </div>
                 </div>
+                {/* solution line */}
+                <div className="border-t border-gray-200 py-20">
+                    <div className="max-w-2xl mx-auto text-center px-6">
+                        <h4 className="text-xl  tracking-normal font-semibold text-privue-800">
+                            Privue's Solution
+                        </h4>
+                        <h2 className="mt-4 text-2xl md:text-3xl font-medium leading-snug text-gray-900">
+                            Provides complete workforce attribution showing
+                            who created, stored, revealed, and accessed
+                            every NHI in your environment.
+                        </h2>
+                    </div>
+                </div>
 
                 {/* capabilities section */}
                 <div className="border-t-[1px] border-gray-200">
                     {/* <h2 className="text-center text-4xl font-semibold mb-4">How Privue Solves It</h2> */}
-                    <h3 className="text-center text-4xl font-semibold py-12">Solving <span className="text-privue-800">Capabilities</span></h3>
+                    <h3 className="text-center text-4xl font-semibold py-12">Core <span className="text-privue-800">Capabilities</span></h3>
 
                     <div className="flex">
                         <CapabilitiesCard
@@ -80,7 +93,7 @@ export default function SolutionPage() {
 
                 {/* case studies */}
                 <div>
-                    <h2 className="text-center text-4xl font-semibold my-12">Related Articles</h2>
+                    <h2 className="text-center text-4xl font-semibold my-12">Related <span className="text-privue-800">Articles</span></h2>
                     <div className="p-12">
                         <div className="flex px-6 gap-10">
                             <div>

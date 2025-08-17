@@ -14,7 +14,7 @@ export default function Header() {
 
     const desktopLinks: linkType[] = [
         { name: "Modules", href: "/modules", variant: "link" },
-        { name: "Solutions", href: "/solutions", variant: "link" },
+        { name: "Solutions", href: "/solution", variant: "link" },
         { name: "API", href: "/api", variant: "link" },
         { name: "Integrations", href: "/integrations", variant: "link" }
     ];
@@ -42,7 +42,7 @@ export default function Header() {
 
 
     return (
-        <header className="fixed top-0 inset-x-0 z-50 ">
+        <header className="font-open-sans fixed top-0 inset-x-0 z-50 ">
             <div className="relative w-100% py-1">
                 {/* Blur layer */}
                 {/* <div className={`absolute inset-0 pointer-events-none ${isScrolled ? "border-b border-[#2e2e2e] backdrop-blur-md bg-[#3d3c3c] transition-all duration-300 shadow-md" : "backdrop-blur-sm border border-b-[0.5] border-[#2e2e2e] bg-[#3d3c3c] " */}
@@ -50,7 +50,7 @@ export default function Header() {
                     }`} />
 
                 {/* Actual navbar content */}
-                <nav className="relative mx-auto flex items-center justify-between py-0  px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]"
+                <nav className="relative mx-auto flex items-center justify-between py-0 px-4 max-w-[1200px]"
                     aria-label="Global"
                 >
                     {/* Logo */}

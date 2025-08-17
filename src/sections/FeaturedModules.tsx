@@ -1,9 +1,10 @@
-import ModulesListing from "@/components/modules/ModulesListing"
+// import ModulesListing from "@/components/modules/ModulesListing"
+import ModuleListing2 from "@/components/modules/ModuleListing2"
 
 export default function FeaturedModules() {
     return (
         <>
-            <section className="font-open-sans relative min-h-screen mx-auto py-0  px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
+            <section className="font-open-sans relative mx-auto">
 
                 <div className="font-open-sans mx-auto mb-12 text-center mt-24">
                     <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
@@ -14,7 +15,8 @@ export default function FeaturedModules() {
                         Designed to deliver value. Plug in what you need, when you need it.
                     </p>
                 </div>
-                <ModulesListing />
+                {/* <ModulesListing /> */}
+                <ModuleListing2 />
             </section>
         </>
     )

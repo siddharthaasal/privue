@@ -1,145 +1,143 @@
 import Layout from "@/components/Layout"
-import { ChevronLeft, HatGlasses, ChartSpline, Cog } from 'lucide-react';
-import ModulesListing from "@/components/modules/ModulesListing";
+// import { ChevronLeft, HatGlasses, ChartSpline, Cog } from 'lucide-react';
+import ModuleListing2 from "@/components/modules/ModuleListing2";
 import ArticleReferenceCard from "@/components/solutions/ArticleReferenceCard";
+import ProblemCard from "@/components/solutions/ProblemCard";
+import CapabilitiesCard from "@/components/solutions/CapabilitiesCard";
+
 
 export default function SolutionPage() {
     return (
         <Layout>
-            <main className="relative min-h-screen mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px] mt-36">
-                {/* top section */}
+            <main className="relative mx-auto pt-12">
                 <div>
-                    <a href="/" className="flex items-center cursor-pointer text-sm text-[#707070] hover:text-[#171717] mb-4">
-                        <ChevronLeft size={18} className="p-0" />
-                        <p className="">Back to Solutions</p>
-                    </a>
-                </div>
-                <div className="flex">
-                    {/* left heading */}
-                    <div className="w-1/3">
-                        <h1 className="text-3xl 2xl:text-4xl font-medium text-privue-800">
-                            Private Credit
+                    <div className="text-center max-w-2/3 mx-auto">
+                        <h1 className="text-4xl 2xl:text-5xl font-semibold text-privue-800">
+                            Workforce Attribution
                         </h1>
-                    </div>
-                    {/* right heading */}
-                    <div className="w-2/3">
-                        <p className="text-base 2xl:text-lg font-medium">
-                            Private credit’s rapid growth is altering global capital markets at an unprecedented pace, leading to more competition and new partnerships between banks, insurers and asset management companies.
-                            <br />
-                            For more than 100 years, Moody’s has played a critically important role in the public credit ecosystem with ratings, data, and research that are the market standard in understanding credit risk. We have brought this expertise to private credit, helping market participants decode risks and unlock opportunities.
+                        <p className="text-[16px] 2xl:text-lg font-medium py-4 max-w-2/3 mx-auto">
+                            Map every Non-Human Identity to its associated human users for complete accountability and governance.
                         </p>
                     </div>
                 </div>
-                <div className="my-12 border-[0.5] border-b border-privue-300"></div>
-                {/* capabilities section */}
-                <div className="">
-                    <p className="text-sm font-medium mb-4 text-foreground-lighter">PRIVATE CREDIT CAPABILITIES</p>
-                    <p className="text-3xl">
-                        Unlock opportunities with greater confidence and transparency
-                    </p>
-                    <p className="mt-4 font-medium text-base 2xl:text-lg">
-                        With Moody’s delivering independent, in-depth and transparent opinions on credit risk, our private credit capabilities provide you with unparalleled insights and assessments for non-bank lending.
-                    </p>
 
-                    {/* capability icons */}
-                    <div className="flex gap-8 my-12 justify-between px-8">
-                        <div className="flex flex-col items-center">
-                            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-privue-100 text-privue-800">
-                                <HatGlasses className="w-8 h-8" />
-                            </div>
-                            <p className="mt-2 text-sm font-medium text-center">Corporate Finance</p>
-                        </div>
+                <div className="border-t-[1px] border-gray-200 mt-12">
+                    {/* Heading */}
+                    <h3 className="text-center text-4xl font-semibold py-12">The <span className="text-privue-800">Problem</span></h3>
 
-                        <div className="flex flex-col items-center">
-                            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-privue-100 text-privue-800">
-                                <ChartSpline className="w-8 h-8" />
-                            </div>
-                            <p className="mt-2 text-sm font-medium text-center">Fund finance and BDCs</p>
-                        </div>
-
-                        <div className="flex flex-col items-center">
-                            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-privue-100 text-privue-800">
-                                <Cog className="w-8 h-8" />
-                            </div>
-                            <p className="mt-2 text-sm font-medium text-center">Asset-based lending</p>
-                        </div>
-
-                        <div className="flex flex-col items-center">
-                            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-privue-100 text-privue-800">
-                                <HatGlasses className="w-8 h-8" />
-                            </div>
-                            <p className="mt-2 text-sm font-medium text-center">Project and infrastructure finance</p>
-                        </div>
+                    {/* Grid */}
+                    <div className=" flex">
+                        <ProblemCard
+                            icon="/solutions/action.svg"
+                            text="No visibility into who created, owns, or can access critical NHIs"
+                        />
+                        <ProblemCard
+                            icon="/solutions/consumers.svg"
+                            text="Impossible to assign accountability when security incidents occur"
+                        />
+                        <ProblemCard
+                            icon="/solutions/hide.svg"
+                            text="Former employees may still be tied to active NHIs"
+                        />
                     </div>
-
                 </div>
 
-                <div className="my-12 border-[0.5] border-b border-privue-300"></div>
+                {/* capabilities section */}
+                <div className="border-t-[1px] border-gray-200">
+                    {/* <h2 className="text-center text-4xl font-semibold mb-4">How Privue Solves It</h2> */}
+                    <h3 className="text-center text-4xl font-semibold py-12">Solving <span className="text-privue-800">Capabilities</span></h3>
 
-                <div className="px-8">
-                    <ModulesListing />
+                    <div className="flex">
+                        <CapabilitiesCard
+                            icon="/solutions/hide.svg"
+                            heading="Customer Relationship Mapping"
+                            subheading="Tracks Creator, Owner, Modifier, User Relationships"
+                        />
+                        <CapabilitiesCard
+                            icon="/solutions/action.svg"
+                            heading="Storage Attribution"
+                            subheading="Tracks Creator, Owner, Modifier, User Relationships"
+                        />
+                        <CapabilitiesCard
+                            icon="/solutions/consumers.svg"
+                            heading="Access Attribution"
+                            subheading="Tracks Creator, Owner, Modifier, User Relationships"
+                        />
+                        <CapabilitiesCard
+                            icon="/solutions/hide.svg"
+                            heading="Lifecycle Tracking"
+                            subheading="Tracks Creator, Owner, Modifier, User Relationships"
+                        />
+                    </div>
                 </div>
 
-                <div className="my-12 border-[0.5] border-b border-privue-300"></div>
+                <div className="border-t-[1px] border-gray-200 py-10">
+                    <h3 className="text-center text-4xl font-semibold mt-8">Our <span className="text-privue-800">Modules</span></h3>
+                    <div className="py-8 flex">
+                        <ModuleListing2 />
+                    </div>
+                </div>
 
                 {/* case studies */}
-                <div className="pb-32">
+                <div>
+                    <h2 className="text-center text-4xl font-semibold my-12">Related Articles</h2>
+                    <div className="p-12">
+                        <div className="flex px-6 gap-10">
+                            <div>
+                                <ArticleReferenceCard
+                                    href="/article"
+                                    title="Private credit growth adds liquidity but heightens risk in CRE market"
+                                    date="July 25, 2025"
+                                    readTime="4 minutes"
+                                    image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                                    tag="Case Study"
+                                />
 
-                    <div className="flex px-6 gap-10">
-                        <div>
-                            <ArticleReferenceCard
-                                href="/article"
-                                title="Private credit growth adds liquidity but heightens risk in CRE market"
-                                date="July 25, 2025"
-                                readTime="4 minutes"
-                                image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
-                                tag="Case Study"
-                            />
+                                <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div>
+                            </div>
+                            <div>
+                                <ArticleReferenceCard
+                                    href="/article"
+                                    title="Private credit growth adds liquidity but heightens risk in CRE market"
+                                    date="July 25, 2025"
+                                    readTime="4 minutes"
+                                    image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                                    tag="Case Study"
+                                />
 
-                            <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div>
+                                <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div>
+                            </div>
                         </div>
-                        <div>
-                            <ArticleReferenceCard
-                                href="/article"
-                                title="Private credit growth adds liquidity but heightens risk in CRE market"
-                                date="July 25, 2025"
-                                readTime="4 minutes"
-                                image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
-                                tag="Case Study"
-                            />
+                        <div className="flex px-6 gap-10">
+                            <div>
+                                <ArticleReferenceCard
+                                    href="/article"
+                                    title="Private credit growth adds liquidity but heightens risk in CRE market"
+                                    date="July 25, 2025"
+                                    readTime="4 minutes"
+                                    image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                                    tag="Case Study"
+                                />
 
-                            <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div>
+                                {/* <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div> */}
+                            </div>
+                            <div>
+                                <ArticleReferenceCard
+                                    href="/article"
+                                    title="Private credit growth adds liquidity but heightens risk in CRE market"
+                                    date="July 25, 2025"
+                                    readTime="4 minutes"
+                                    image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                                    tag="Case Study"
+                                />
+
+                            </div>
+
                         </div>
 
                     </div>
-                    <div className="flex px-6 gap-10">
-                        <div>
-                            <ArticleReferenceCard
-                                href="/article"
-                                title="Private credit growth adds liquidity but heightens risk in CRE market"
-                                date="July 25, 2025"
-                                readTime="4 minutes"
-                                image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
-                                tag="Case Study"
-                            />
-
-                            {/* <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div> */}
-                        </div>
-                        <div>
-                            <ArticleReferenceCard
-                                href="/article"
-                                title="Private credit growth adds liquidity but heightens risk in CRE market"
-                                date="July 25, 2025"
-                                readTime="4 minutes"
-                                image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
-                                tag="Case Study"
-                            />
-
-                        </div>
-
-                    </div>
-
                 </div>
+
 
             </main>
         </Layout>

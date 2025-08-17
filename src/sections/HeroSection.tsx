@@ -1,8 +1,9 @@
 // grid background, announcement, heading, subtext, cta button
 // import { useEffect } from "react";
-import { useState, useRef } from "react";
-import { cn } from "../lib/utils";
-import { GridPattern } from "@/components/magicui/grid-pattern";
+// import { useState, useRef } from "react";
+// import { cn } from "../lib/utils";
+// import { GridPattern } from "@/components/magicui/grid-pattern";
+// import { DotPattern } from "@/components/ui/shadcn-io/dot-pattern";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
@@ -14,62 +15,28 @@ import {
 
 export default function HeroSection() {
 
-    // const [squares, setSquares] = useState<[number, number][]>([]);
+    // const demos = [
+    //     { label: "Systems", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
+    //     { label: "AI", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
+    //     { label: "Security", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" }
+    // ];
 
+    // const [activeDemo, setActiveDemo] = useState(demos[0]);
 
-    // useEffect(() => {
-    //     const updateSquares = () => {
-    //         const vw = window.innerWidth;
-    //         const vh = window.innerHeight;
+    // const [isPlaying, setIsPlaying] = useState(false);
+    // const videoRef = useRef<HTMLVideoElement>(null);
 
-    //         const gridWidth = 180;
-    //         const gridHeight = 180;
-
-    //         const cols = Math.floor(vw / gridWidth);
-    //         const rows = Math.floor(vh / gridHeight);
-
-    //         const result: [number, number][] = [];
-
-    //         for (let i = 0; i < cols; i++) {
-    //             for (let j = 0; j < rows; j++) {
-    //                 // Just pick some to highlight, or randomize
-    //                 if (Math.random() < 0.06) result.push([i, j]);
-    //                 // const n = perlin2(i * noiseScale, j * noiseScale);
-    //                 // if (n > threshold) result.push([i, j]);
-    //             }
-    //         }
-
-    //         setSquares(result);
-    //     };
-
-    //     updateSquares();
-    //     window.addEventListener("resize", updateSquares);
-
-    //     return () => window.removeEventListener("resize", updateSquares);
-    // }, []);
-
-    const demos = [
-        { label: "Systems", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
-        { label: "AI", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
-        { label: "Security", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" }
-    ];
-
-    const [activeDemo, setActiveDemo] = useState(demos[0]);
-
-    const [isPlaying, setIsPlaying] = useState(false);
-    const videoRef = useRef<HTMLVideoElement>(null);
-
-    const handlePlay = () => {
-        setIsPlaying(true);
-        setTimeout(() => {
-            videoRef.current?.play();
-        }, 100); // slight delay to ensure render
-    };
+    // const handlePlay = () => {
+    //     setIsPlaying(true);
+    //     setTimeout(() => {
+    //         videoRef.current?.play();
+    //     }, 100); // slight delay to ensure render
+    // };
 
     return (
-        <section className="relative flex mx-auto items-center min-h-screen justify-center bg-background my-auto">
+        <section className="flex flex-col items-center justify-center text-center">
             {/* grid backgorund */}
-            <GridPattern
+            {/* <GridPattern
                 width={180}
                 height={180}
                 x={-1}
@@ -84,17 +51,19 @@ export default function HeroSection() {
                 className={cn(
                     "absolute inset-0 opacity-50 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
                 )}
-            />
+            /> */}
+
+
 
 
             {/* content -> (anouncement, heading+subtext, cta) */}
-            <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full mt-32 mb-32 2xl:mt-44 2xl:mb-44">
+            <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full mt-24 ">
                 {/* Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    className="flex items-center justify-center gap-4 mb-2"
+                    className="flex items-center justify-center"
                 >
                     <a href="#">
                         <Announcement>
@@ -111,12 +80,14 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex justify-center px-4 w-full sm:w-[768px] md:w-[1152px]"
+                    className=""
                 >
                     <div className="text-center">
-                        <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground leading-tight">
-                            <span className="block">Empowering businesses</span>
-                            <span className="block bg-clip-text text-transparent bg-gradient-to-b from-privue-900 to-privue-900 via-privue-700">through Intelligent Data</span>
+                        {/* <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground leading-tight"> */}
+                        <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text p-2 text-4xl font-semibold tracking-tighter leading-tight text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
+                            Empowering business
+                            <br />
+                            <span className="bg-clip-text text-transparent bg-gradient-to-b from-privue-900 to-privue-900 via-privue-700">through Intelligent Data</span>
                         </h1>
                     </div>
                 </motion.div>
@@ -126,10 +97,13 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-lg text-foreground font-medium max-w-2xl"
+                // className="text-lg text-foreground font-medium max-w-2xl"
                 >
-                    Discover data-backed signals for smarter decisions.
-                    Mitigate risk and unlock high-value relationships.
+                    <p className="mt-4 max-w-lg text-lg text-gray-700 dark:text-gray-400">
+                        Discover data-backed signals for smarter decisions.
+                        Mitigate risk and unlock high-value relationships.
+                    </p>
+
                 </motion.p>
 
                 {/* CTA Button */}
@@ -137,7 +111,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
+                    className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2"
                 >
 
                     <a href="/#">
@@ -154,14 +128,13 @@ export default function HeroSection() {
                 </motion.div>
 
                 {/* Demo Video */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="mt-20 w-full max-w-[1000px] px-4 "
                 >
                     <div className="w-full max-w-[1000px] mx-auto px-4">
-                        {/* Tabs */}
                         <div className="flex justify-center gap-8">
                             {demos.map(demo => (
                                 <button
@@ -177,7 +150,6 @@ export default function HeroSection() {
                             ))}
                         </div>
 
-                        {/* Gradient + Video */}
                         <div className="relative mt-4 h-full">
                             <div className="absolute -inset-4 rounded-sm bg-gradient-to-r from-privue-500/50 via-privue-700/40 to-privue-500/50 blur-2xl opacity-80" />
 
@@ -208,31 +180,33 @@ export default function HeroSection() {
                                     </button>
                                 )}
                             </div>
-                        </div>
-
-                        {/* <div className="relative mt-4 h-auto">
-                            <div className="absolute -inset-4 rounded-sm bg-gradient-to-r from-privue-500/40 via-privue-700/30 to-privue-500/40 blur-2xl opacity-80" />
-                            <div className="relative overflow-hidden bg-background border border-black/10 shadow-lg h-full">
-                                <video
-                                    key={activeDemo.video}
-                                    controls
-                                    autoPlay
-                                    muted
-                                    loop
-                                    poster={activeDemo.poster}
-                                    className="w-full aspect-video object-cover"
-                                >
-                                    <source src={activeDemo.video} type="video/mp4" />
-                                </video>
-                            </div>
-                        </div> */}
+                        </div>                        
                     </div>
-                </motion.div>
+                </motion.div> */}
+
+                <div
+                    className="relative mx-auto ml-3 mt-20 h-fit w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
+                    style={{ animationDuration: "1400ms" }}
+                >
+                    <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-inset ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10">
+                        <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
+                            <img
+                                src="/hero-light.webp"
+                                alt="A preview of the Database web app"
+                                width={2400}
+                                height={1600}
+                                className="rounded-xl shadow-2xl dark:shadow-indigo-600/10"
+                            />
+                        </div>
+                    </div>
+
+                </div>
 
 
 
             </div>
 
         </section >
+
     );
 }

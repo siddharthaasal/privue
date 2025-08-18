@@ -32,7 +32,7 @@ export default function ModuleListing2() {
 
 
             {/* Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-12 py-20">
                 {/* Left side */}
                 <div className="flex flex-col justify-left">
                     <h2 className="text-lg font-medium mb-4">Get the Full Picture</h2>

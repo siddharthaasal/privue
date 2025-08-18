@@ -57,7 +57,7 @@ export default function HeroSection() {
 
 
             {/* content -> (anouncement, heading+subtext, cta) */}
-            <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full mt-24 ">
+            <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full my-24 ">
                 {/* Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -67,7 +67,7 @@ export default function HeroSection() {
                 >
                     <a href="#">
                         <Announcement>
-                            <AnnouncementTag>New to Privue?</AnnouncementTag>
+                            <AnnouncementTag className="">New to Privue?</AnnouncementTag>
                             <AnnouncementTitle className="text-foreground-lighter">
                                 Start building clarity with your data →
                             </AnnouncementTitle>

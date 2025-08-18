@@ -97,8 +97,8 @@ const Gallery = ({
     <section className="py-0">
       <div className="container">
         {/* Header with arrows aligned right */}
-        <div className="mb-8 flex flex-col justify-between md:mb-14 md:flex-row md:items-end lg:mb-16">
-          <div className="mt-8 flex w-full items-center justify-end gap-2">
+        <div className="mb-8 flex flex-col justify-between md:flex-row md:items-end">
+          <div className="mt-4 flex w-full items-center justify-end gap-2">
             <Button
               size="icon"
               variant="outline"
@@ -136,7 +136,7 @@ const Gallery = ({
         >
           <CarouselContent className="hide-scrollbar w-full max-w-full">
             {items.map((item) => (
-              <CarouselItem key={item.id} className="ml-4 md:max-w-[452px]">
+              <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
                 <a
                   href={item.url}
                   className="group flex flex-col justify-between"

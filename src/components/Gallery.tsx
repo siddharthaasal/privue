@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -11,6 +9,69 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
+import { BlogCard } from "./articles/ArticleCard";
+
+interface BlogCardProps {
+  href: string;
+  title: string;
+  description: string;
+  date: string;
+  readTime: string;
+  image: string;
+}
+
+const blogs: BlogCardProps[] = [
+  {
+    href: "/article",
+    title: "Computer Vision Technology",
+    description:
+      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+    date: "Jul 24, 2025",
+    readTime: "4 min",
+    image:
+      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  },
+  {
+    href: "/article",
+    title: "Computer Vision Technology",
+    description:
+      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+    date: "Jul 24, 2025",
+    readTime: "4 min",
+    image:
+      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  },
+  {
+    href: "/article",
+    title: "Computer Vision Technology",
+    description:
+      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+    date: "Jul 24, 2025",
+    readTime: "4 min",
+    image:
+      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  },
+  {
+    href: "/article",
+    title: "Computer Vision Technology",
+    description:
+      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+    date: "Jul 24, 2025",
+    readTime: "4 min",
+    image:
+      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  },
+  {
+    href: "/article",
+    title: "Computer Vision Technology",
+    description:
+      "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+    date: "Jul 24, 2025",
+    readTime: "4 min",
+    image:
+      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  },
+]
 interface GalleryItem {
   id: string;
   title: string;
@@ -135,9 +196,11 @@ const Gallery = ({
           className="relative w-full max-w-full"
         >
           <CarouselContent className="hide-scrollbar w-full max-w-full">
-            {items.map((item) => (
-              <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
-                <a
+            {/* {items.map((item) => ( */}
+            {blogs.map((item) => (
+              // <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
+              <CarouselItem className="ml-2 md:max-w-[452px]">
+                {/* <a
                   href={item.url}
                   className="group flex flex-col justify-between"
                 >
@@ -164,7 +227,15 @@ const Gallery = ({
                     Read more{" "}
                     <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
                   </div>
-                </a>
+                </a> */}
+                <BlogCard
+                  href={item.href}
+                  title={item.title}
+                  description={item.description}
+                  date={item.date}
+                  readTime={item.readTime}
+                  image={item.image}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>

@@ -8,10 +8,8 @@ interface Heading {
 
 export default function TableOfContents({
     contentRef,
-    borderPlacement,
 }: {
     contentRef: React.RefObject<HTMLElement>;
-    borderPlacement: "l" | "r" | "t" | "b";
 }) {
     const [headings, setHeadings] = useState<Heading[]>([]);
     const [activeId, setActiveId] = useState<string | null>(null);
@@ -58,7 +56,7 @@ export default function TableOfContents({
                     {/* <TbListSearch size={16} /> */}
                     On this page
                 </div>
-                <div className={`border-${borderPlacement} border-gray-200`}>
+                <div className="">
                     <ul className="font-open-sans text-sm space-y-1 list-outside">
                         {headings.map((item) => (
                             <li key={item.id}>

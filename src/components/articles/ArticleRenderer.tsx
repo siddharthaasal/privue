@@ -93,7 +93,7 @@ export default function ArticleRenderer({ metadata, Content }: ArticleRendererPr
                 <Content components={components} />
             </main>
             {/* Sidebar */}
-            <TableOfContents contentRef={contentRef as React.RefObject<HTMLElement>} borderPlacement='l' />
+            <TableOfContents contentRef={contentRef as React.RefObject<HTMLElement>} />
         </div>
     );
 }

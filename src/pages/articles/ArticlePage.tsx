@@ -103,7 +103,6 @@ export default function ArticlePage() {
                                     <div className="sticky top-20">
                                         <TableOfContents
                                             contentRef={contentRef as React.RefObject<HTMLElement>}
-                                            borderPlacement="l"
                                         />
                                     </div>
                                 </div>

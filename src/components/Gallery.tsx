@@ -89,53 +89,53 @@ interface Gallery6Props {
 const Gallery = ({
   // heading = "Gallery",
   // demoUrl = "https://www.shadcnblocks.com",
-  items = [
-    {
-      id: "item-1",
-      title: "Build Modern UIs",
-      summary:
-        "Create stunning user interfaces with our comprehensive design system.",
-      url: "/article",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-2",
-      title: "Computer Vision Technology",
-      summary:
-        "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
-      url: "/article",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-3",
-      title: "Machine Learning Automation",
-      summary:
-        "Self-improving algorithms that learn from data patterns to automate complex tasks and make intelligent decisions with minimal human intervention.",
-      url: "/article",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-4",
-      title: "Predictive Analytics",
-      summary:
-        "Advanced forecasting capabilities that analyze historical data to predict future trends and outcomes, helping businesses make data-driven decisions.",
-      url: "/article",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-    },
-    {
-      id: "item-5",
-      title: "Neural Network Architecture",
-      summary:
-        "Sophisticated AI models inspired by human brain structure, capable of solving complex problems through deep learning and pattern recognition.",
-      url: "/article",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
-    },
-  ],
+  // items = [
+  //   {
+  //     id: "item-1",
+  //     title: "Build Modern UIs",
+  //     summary:
+  //       "Create stunning user interfaces with our comprehensive design system.",
+  //     url: "/article",
+  //     image:
+  //       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  //   },
+  //   {
+  //     id: "item-2",
+  //     title: "Computer Vision Technology",
+  //     summary:
+  //       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+  //     url: "/article",
+  //     image:
+  //       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  //   },
+  //   {
+  //     id: "item-3",
+  //     title: "Machine Learning Automation",
+  //     summary:
+  //       "Self-improving algorithms that learn from data patterns to automate complex tasks and make intelligent decisions with minimal human intervention.",
+  //     url: "/article",
+  //     image:
+  //       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  //   },
+  //   {
+  //     id: "item-4",
+  //     title: "Predictive Analytics",
+  //     summary:
+  //       "Advanced forecasting capabilities that analyze historical data to predict future trends and outcomes, helping businesses make data-driven decisions.",
+  //     url: "/article",
+  //     image:
+  //       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  //   },
+  //   {
+  //     id: "item-5",
+  //     title: "Neural Network Architecture",
+  //     summary:
+  //       "Sophisticated AI models inspired by human brain structure, capable of solving complex problems through deep learning and pattern recognition.",
+  //     url: "/article",
+  //     image:
+  //       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+  //   },
+  // ],~
 }: Gallery6Props) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);

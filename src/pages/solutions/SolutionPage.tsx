@@ -1,13 +1,56 @@
 import Layout from "@/components/Layout"
 // import { ChevronLeft, HatGlasses, ChartSpline, Cog } from 'lucide-react';
 import ModuleListing2 from "@/components/modules/ModuleListing2";
-import ArticleReferenceCard from "@/components/solutions/ArticleReferenceCard";
+// import ArticleReferenceCard from "@/components/solutions/ArticleReferenceCard";
 import ProblemCard from "@/components/solutions/ProblemCard";
 import CapabilitiesCard from "@/components/solutions/CapabilitiesCard";
 import ChallengeCard from "@/components/solutions/ChallengeCard";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
 
+import { BlogCard } from "@/components/articles/ArticleCard";
+
+interface BlogCardProps {
+    href: string;
+    title: string;
+    description: string;
+    date: string;
+    readTime: string;
+    image: string;
+}
+
+const blogs: BlogCardProps[] = [
+    {
+        href: "/article",
+        title: "Computer Vision Technology",
+        description:
+            "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+        date: "Jul 24, 2025",
+        readTime: "4 min",
+        image:
+            "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+    },
+    {
+        href: "/article",
+        title: "Computer Vision Technology",
+        description:
+            "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+        date: "Jul 24, 2025",
+        readTime: "4 min",
+        image:
+            "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+    },
+    {
+        href: "/article",
+        title: "Computer Vision Technology",
+        description:
+            "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
+        date: "Jul 24, 2025",
+        readTime: "4 min",
+        image:
+            "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+    },
+]
 
 const uniqueDifferentiators: string[] = [
     "Only platform providing complete NHI-to-human lineage",
@@ -202,7 +245,21 @@ export default function SolutionPage() {
                 </div>
 
                 {/* case studies */}
-                <div>
+                <div className="py-24">
+                    <h2 className="text-center text-4xl font-semibold  mb-8">Related <span className="text-privue-800">Articles</span></h2>
+                    <div className="container mx-auto px-4 py-4">
+                        <div
+                            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                        >
+                            {blogs.map((blog, index) => (
+                                <BlogCard key={index} {...blog} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* <div>
                     <h2 className="text-center text-4xl font-semibold my-12">Related <span className="text-privue-800">Articles</span></h2>
                     <div className="p-12">
                         <div className="flex px-6 gap-10">
@@ -242,7 +299,6 @@ export default function SolutionPage() {
                                     tag="Case Study"
                                 />
 
-                                {/* <div className="border-b border-[0.5] border-foreground-lighter opacity-30 my-4"></div> */}
                             </div>
                             <div>
                                 <ArticleReferenceCard
@@ -258,8 +314,9 @@ export default function SolutionPage() {
 
                         </div>
 
-                    </div>
-                </div>
+                    </div >
+                </div > */}
+
 
 
             </main>

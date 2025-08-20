@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout"
+import { useEffect, useState } from "react";
 // import { ChevronLeft, HatGlasses, ChartSpline, Cog } from 'lucide-react';
 import ModuleListing2 from "@/components/modules/ModuleListing2";
 // import ArticleReferenceCard from "@/components/solutions/ArticleReferenceCard";
@@ -9,6 +10,24 @@ import { GridPattern } from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
 
 import { BlogCard } from "@/components/articles/ArticleCard";
+import { Button } from "@/components/ui/button";
+import type { CarouselApi } from "@/components/ui/carousel";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+} from "@/components/ui/carousel";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+
+interface BlogCardProps {
+    href: string;
+    title: string;
+    description: string;
+    date: string;
+    readTime: string;
+    image: string;
+}
 
 interface BlogCardProps {
     href: string;
@@ -67,6 +86,22 @@ const integrationPoints: string[] = [
 
 
 export default function SolutionPage() {
+    const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
+
+    useEffect(() => {
+        if (!carouselApi) return;
+        const updateSelection = () => {
+            setCanScrollPrev(carouselApi.canScrollPrev());
+            setCanScrollNext(carouselApi.canScrollNext());
+        };
+        updateSelection();
+        carouselApi.on("select", updateSelection);
+        return () => {
+            carouselApi.off("select", updateSelection);
+        };
+    }, [carouselApi]);
     return (
         <Layout>
             <main className="relative mx-auto pt-12">
@@ -247,7 +282,7 @@ export default function SolutionPage() {
                 {/* case studies */}
                 <div className="py-24">
                     <h2 className="text-center text-4xl font-semibold  mb-8">Related <span className="text-privue-800">Articles</span></h2>
-                    <div className="container mx-auto px-4 py-4">
+                    {/* <div className="container mx-auto px-4 py-4">
                         <div
                             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
                         >
@@ -255,8 +290,69 @@ export default function SolutionPage() {
                                 <BlogCard key={index} {...blog} />
                             ))}
                         </div>
+                    </div> */}
+                    <div className="p-4">
+                        <div className="container">
+                            {/* Header with arrows aligned right */}
+                            <div className="mb-8 flex flex-col justify-between md:flex-row md:items-end">
+                                <div className="mt-4 flex w-full items-center justify-end gap-2">
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() => carouselApi?.scrollPrev()}
+                                        disabled={!canScrollPrev}
+                                        className="disabled:pointer-events-auto"
+                                    >
+                                        <ArrowLeft className="size-5" />
+                                    </Button>
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() => carouselApi?.scrollNext()}
+                                        disabled={!canScrollNext}
+                                        className="disabled:pointer-events-auto"
+                                    >
+                                        <ArrowRight className="size-5" />
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Carousel starting from left */}
+                        <div className="w-full max-w-full">
+                            <Carousel
+                                setApi={setCarouselApi}
+                                opts={{
+                                    breakpoints: {
+                                        "(max-width: 768px)": {
+                                            dragFree: true,
+                                        },
+                                    },
+                                }}
+                                className="relative w-full max-w-full"
+                            >
+                                <CarouselContent className="hide-scrollbar w-full max-w-full">
+                                    {/* {items.map((item) => ( */}
+                                    {blogs.map((item) => (
+                                        // <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
+                                        <CarouselItem className="ml-2 md:max-w-[452px]">
+                                            <BlogCard
+                                                href={item.href}
+                                                title={item.title}
+                                                description={item.description}
+                                                date={item.date}
+                                                readTime={item.readTime}
+                                                image={item.image}
+                                            />
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </Carousel>
+                        </div>
                     </div>
                 </div>
+
+
 
 
                 {/* <div>

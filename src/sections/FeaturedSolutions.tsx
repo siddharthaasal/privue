@@ -1,7 +1,7 @@
 // pages/FeaturesGrid.tsx
 import { useState } from "react";
 // import RGL, { WidthProvider, type Layout } from "react-grid-layout";
-import RGL, { WidthProvider, type Layout, Responsive, type ResponsiveProps } from "react-grid-layout";
+import { WidthProvider, type Layout, Responsive } from "react-grid-layout";
 
 
 import FeatureExpandableCard from "@/components/feature/FeatureExpandableCard";

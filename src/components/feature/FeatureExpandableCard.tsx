@@ -1,11 +1,9 @@
-// import { useState } from "react";
-
+// components/FeatureExpandableCard.tsx
 interface ExpandableCardProps {
     title: string;
     description: string;
     image: string;
     details: string[];
-    isRightMost?: boolean;
     expanded: boolean;
     onExpand: () => void;
     isSiblingExpanded: boolean;
@@ -16,7 +14,6 @@ export default function FeatureExpandableCard({
     description,
     image,
     details,
-    isRightMost = false,
     expanded,
     onExpand,
     isSiblingExpanded,
@@ -25,19 +22,17 @@ export default function FeatureExpandableCard({
         <div
             onClick={onExpand}
             className={`
-                transition-all duration-300 rounded-2xl p-6 shadow-md cursor-pointer
-                bg-gradient-to-br from-indigo-50 to-purple-50
-                flex overflow-hidden
-                ${expanded ? "col-span-3 md:col-span-2" : ""}
-                ${isSiblingExpanded ? "scale-95 opacity-80" : ""}
-                h-full
-            `}
+        transition-all duration-300 rounded-2xl p-6 shadow-md cursor-pointer
+        bg-gradient-to-br from-indigo-50 to-purple-50
+        flex overflow-hidden h-full
+        ${isSiblingExpanded ? "scale-95 opacity-80" : ""}
+      `}
         >
-            <div className={`
-                flex w-full
-                ${expanded ? (isRightMost ? "flex-row-reverse" : "flex-row") : "flex-col"}
-            `}>
-                {/* Content section */}
+            <div
+                className={`flex w-full ${expanded ? "flex-row" : "flex-col"
+                    }`}
+            >
+                {/* Content */}
                 <div className={`${expanded ? "flex-1" : "w-full"}`}>
                     <h3 className="text-xl font-semibold mb-2">{title}</h3>
                     <p className="text-gray-600 mb-4">{description}</p>

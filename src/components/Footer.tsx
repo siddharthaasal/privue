@@ -65,9 +65,9 @@ export default function Footer({
             title: "Company",
             links: [
                 { text: "Case Studies", url: "#" },
-                { text: "Client Stories", url: "#" },
                 { text: "About", url: "#" },
-                { text: "Policies", url: "/policies" },
+                { text: "Terms of Use", url: "/terms" },
+                { text: "Privacy Policy", url: "/privacy-policy" },
                 { text: "Contact", url: "#" },
             ],
         },

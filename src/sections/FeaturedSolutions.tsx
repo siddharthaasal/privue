@@ -57,6 +57,14 @@ export default function FeatureGrid() {
 
     return (
         <div className="container mx-auto px-6 py-16">
+            <div className="font-open-sans mx-auto text-center py-12">
+                <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
+                    Featured <span className="text-privue-900">Solutions</span>
+                </h1>
+                <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2">
+                    Insights, guides, and stories curated for you.
+                </p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {features.map((feature) => (
                     <FeatureCard

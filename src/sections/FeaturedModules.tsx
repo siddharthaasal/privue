@@ -6,7 +6,7 @@ export default function FeaturedModules() {
         <>
             <section className="font-open-sans relative mx-auto my-24">
 
-                <div className="font-open-sans mx-auto text-center">
+                <div className="font-open-sans mx-auto text-center py-12">
                     <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
                         {/* Our <span className="text-privue-900">Modules</span> */}
                         Our <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">Modules</span>

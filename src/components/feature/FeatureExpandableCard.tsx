@@ -1,62 +1,122 @@
-// components/FeatureExpandableCard.tsx
-interface ExpandableCardProps {
+// FeatureCard.tsx (no framer-motion)
+
+interface FeatureCardProps {
+    id: number;
     title: string;
     description: string;
     image: string;
     details: string[];
-    expanded: boolean;
-    onExpand: () => void;
-    isSiblingExpanded: boolean;
+    expanded: number | null;
+    setExpanded: (id: number | null) => void;
 }
 
-export default function FeatureExpandableCard({
+export default function FeatureCard({
+    id,
     title,
     description,
     image,
     details,
     expanded,
-    onExpand,
-    isSiblingExpanded,
-}: ExpandableCardProps) {
+    setExpanded,
+}: FeatureCardProps) {
+    const isExpanded = expanded === id;
+
+    const toggle = () => setExpanded(isExpanded ? null : id);
+    const onKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggle();
+        }
+    };
+
     return (
         <div
-            onClick={onExpand}
-            className={`
-        transition-all duration-300 rounded-2xl p-6 shadow-md cursor-pointer
-        bg-gradient-to-br from-indigo-50 to-purple-50
-        flex overflow-hidden h-full
-        ${isSiblingExpanded ? "scale-95 opacity-80" : ""}
-      `}
+            onClick={toggle}
+            onKeyDown={onKey}
+            role="button"
+            tabIndex={0}
+            aria-expanded={isExpanded}
+            className={`relative cursor-pointer rounded-2xl p-6 shadow-md bg-white border
+        ${isExpanded ? "sm:col-span-2 lg:col-span-2 row-span-2" : ""}`}
         >
-            <div
-                className={`flex w-full ${expanded ? "flex-row" : "flex-col"
-                    }`}
-            >
-                {/* Content */}
-                <div className={`${expanded ? "flex-1" : "w-full"}`}>
-                    <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                    <p className="text-gray-600 mb-4">{description}</p>
-                    <img src={image} alt={title} className="h-28 mx-auto" />
-                    <button className="mt-4 px-4 py-2 bg-white rounded-full shadow text-sm font-medium flex items-center gap-2 mx-auto">
-                        Learn more ↗
-                    </button>
-                </div>
-
-                {/* Expanded details */}
-                {expanded && (
-                    <div className="flex-1 flex flex-col justify-center gap-4 pl-6 border-l border-gray-200">
-                        {details.map((point, i) => (
-                            <div
-                                key={i}
-                                className="flex items-center gap-2 bg-white p-3 rounded-xl shadow-sm text-gray-700"
-                            >
-                                <span className="text-indigo-600">✓</span>
-                                <span>{point}</span>
-                            </div>
-                        ))}
-                    </div>
-                )}
+            <div>
+                <img src={image} alt={title} className="h-20 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-gray-600">{description}</p>
             </div>
+
+            {isExpanded && (
+                <div className="mt-6 space-y-3">
+                    {details.map((point, i) => (
+                        <div key={i} className="flex items-center gap-2 text-gray-700">
+                            ✅ <span>{point}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
+
+
+
+/*
+import { motion, AnimatePresence } from "framer-motion";
+
+interface FeatureCardProps {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    details: string[];
+    expanded: number | null;
+    setExpanded: (id: number | null) => void;
+}
+
+export default function FeatureCard({
+    id,
+    title,
+    description,
+    image,
+    details,
+    expanded,
+    setExpanded,
+}: FeatureCardProps) {
+    const isExpanded = expanded === id;
+
+    return (
+        <motion.div
+            layout
+            onClick={() => setExpanded(isExpanded ? null : id)}  // 👈 toggle on click
+            className={`relative cursor-pointer rounded-2xl p-6 shadow-md bg-white border transition-all duration-300 ${isExpanded ? "sm:col-span-2 lg:col-span-2 row-span-2" : ""
+                }`}
+        >
+            <motion.div layout>
+                <img src={image} alt={title} className="h-20 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-gray-600">{description}</p>
+            </motion.div>
+
+            <AnimatePresence>
+                {isExpanded && (
+                    <motion.div
+                        layout
+                        initial={{ opacity: 0, y: 2 }}       // smaller slide
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 2 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }} // quicker & smoother
+                        className="mt-6 space-y-3"
+                    >
+                        {details.map((point, i) => (
+                            <div key={i} className="flex items-center gap-2 text-gray-700">
+                                ✅ <span>{point}</span>
+                            </div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+        </motion.div>
+    );
+}
+*/

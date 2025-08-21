@@ -17,20 +17,19 @@ export default function ArticlePage() {
     return (
         <Layout>
             <main className="relative min-h-screen">
-                <div className="container mx-auto py-4 md:py-8 xl:py-10 px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6 max-w-[1269px]">
+                <div className="container mx-auto py-4 md:py-8 xl:py-10 px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-24">
                     <div className="grid grid-cols-12 gap-4">
-                        {/* Left Sidebar (Back link) - visible only on xl+ */}
-                        <div className="hidden xl:block xl:col-span-2">
-                            <a href="/articles" className="flex items-center cursor-pointer text-sm text-[#707070] hover:text-[#171717]">
-                                <ChevronLeft size={18} className="p-0" />
-                                <p className="ml-2">Back</p>
-                            </a>
-                        </div>
 
                         {/* Main Content Area */}
-                        <div className="col-span-12 xl:col-span-10">
+                        <div className="col-span-12 xl:col-span-12">
                             {/* Header */}
                             <div className="mt-0 pt-0 mb-8 max-w-5xl space-y-4">
+                                <div className="">
+                                    <a href="/articles" className="ml-0 pl-0 flex items-center cursor-pointer text-sm text-[#707070] hover:text-[#171717]">
+                                        <ChevronLeft size={18} className="p-0" />
+                                        <p className="ml-2">Back</p>
+                                    </a>
+                                </div>
                                 <ArticleHeader
                                     title="Storage: 10x Larger Uploads, 3x Cheaper Cached Egress, and 2x Egress Quota"
                                     date="Aug 05, 2024"
@@ -40,27 +39,23 @@ export default function ArticlePage() {
                             </div>
 
                             {/* Content + TOC */}
-                            <div className="grid grid-cols-12 lg:gap-16  xl:gap-8 mb-12">
+                            <div className="grid grid-cols-12 lg:gap-14  xl:gap-10 mb-12">
                                 {/* Main Article */}
-                                <div className="ccol-span-12 lg:col-span-7 xl:col-span-7 font-open-sans prose prose-docs">
+                                {/* Main Article */}
+                                <div className="col-span-12 lg:col-span-8 xl:col-span-8 font-open-sans">
                                     <div ref={contentRef}>
-                                        <article className="prose prose-docs">
+                                        <article className="prose prose-docs max-w-none">
                                             <Content components={mdxComponents} />
                                         </article>
                                     </div>
                                 </div>
 
+
                                 {/* TOC Sidebar */}
-                                <div className="hidden relative col-span-12 space-y-8 lg:block lg:col-span-5 xl:col-span-3 xl:col-start-9">
+                                <div className="hidden relative col-span-12 space-y-8 lg:block lg:col-span-3 xl:col-span-3 xl:col-start-10">
                                     {/* tags */}
                                     <div className="space-y-4">
-                                        {/* <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-privue-700 border border-privue-700 border-strong px-2.5 py-0.5 text-[11px] gap-1">
-                                            Solution
-                                            <Link size={10} color="#5c7cfa" />
-                                        </div> */}
-
                                         <div className="flex flex-wrap gap-2 select-none">
-
                                             <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-[#505050] border border-strong px-2.5 py-0.5 text-[11px]">launch-week</div>
                                             <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-[#505050] border border-strong px-2.5 py-0.5 text-[11px]">tag</div>
                                             <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-[#505050] border border-strong px-2.5 py-0.5 text-[11px]">another tag</div>

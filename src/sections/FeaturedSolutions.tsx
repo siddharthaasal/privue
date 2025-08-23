@@ -1,80 +1,48 @@
-import { useState } from "react";
-import FeatureCard from "@/components/feature/FeatureExpandableCard";
+import ExpandingCard from "@/components/feature/FeatureExpandableCard";
+import Layout from "@/components/Layout";
+/**
+ * ExpandingCards
+ * Row‑scoped layout: each row is 12 cols → default 4 | 4 | 4.
+ * On hover inside a row: hovered → 6, its siblings → 3 (other rows unchanged).
+ * The last card of a row expands to the LEFT so it doesn't overflow.
+ *
+ * Details panel opens only for the hovered card (via group/card),
+ * while the row shrinking is controlled by group/row.
+ */
+export default function FeaturedSolutions() {
+    const items = [
+        { id: 1, img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 1", sub: "Short subheading here", details: ["Point one about this card", "Another quick detail", "Yet another concise point"] },
+        { id: 2, img: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 2", sub: "Another subheading", details: ["Useful stat or highlight", "Secondary insight", "Callout worth noting"] },
+        { id: 3, img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 3", sub: "Overlay text sample", details: ["Short bullet A", "Short bullet B", "Short bullet C"] },
+        { id: 4, img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 4", sub: "Row 2 — item 1", details: ["Info A", "Info B", "Info C"] },
+        { id: 5, img: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 5", sub: "Row 2 — item 2", details: ["Detail 1", "Detail 2", "Detail 3"] },
+        { id: 6, img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop", heading: "Dummy Heading 6", sub: "Row 2 — item 3", details: ["Note 1", "Note 2", "Note 3"] }
+    ];
 
-const features = [
-    {
-        id: 1,
-        title: "Data Suite",
-        description:
-            "Get access to verified emails, phone numbers, professional details and revenue intelligence of 250M+ profiles.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Verified contact details", "Revenue intelligence", "Global reach"],
-    },
-    {
-        id: 2,
-        title: "Personality Suite",
-        description:
-            "Gain visibility into buyer personality and tailor their engagement strategies.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Buyer insights", "Engagement strategies", "Predictive signals"],
-    },
-    {
-        id: 3,
-        title: "HR Suite",
-        description:
-            "Identify your ideal candidate by assessing their LinkedIn profiles or resumes.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Find the right candidate", "Conduct effective interviews", "Know personality traits"],
-    },
-    {
-        id: 4,
-        title: "Sales Suite",
-        description:
-            "Empower sales teams with data-backed insights to close deals faster.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Lead scoring", "Pipeline insights", "Win predictions"],
-    },
-    {
-        id: 5,
-        title: "Analytics Suite",
-        description:
-            "Visualize performance data and uncover actionable insights.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Dashboards", "Reports", "KPI tracking"],
-    },
-    {
-        id: 6,
-        title: "Marketing Suite",
-        description:
-            "Build personalized campaigns with precision targeting.",
-        image: "/articlesFeatureImages/undraw_chat-with-ai_ir62.svg",
-        details: ["Audience segmentation", "Campaign insights", "ROI analysis"],
-    },
-];
+    // chunk into rows of 3 so hover effects never affect other rows
+    const chunk = (arr: any, size: any) => arr.reduce((acc: any, _: any, i: any) => {
+        if (i % size === 0) acc.push(arr.slice(i, i + size));
+        return acc;
+    }, []);
 
-export default function FeatureGrid() {
-    const [expanded, setExpanded] = useState<number | null>(null);
+    const rows = chunk(items, 3);
 
     return (
-        <div className="container mx-auto px-6 py-16">
-            <div className="font-open-sans mx-auto text-center py-12">
-                <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
-                    Featured <span className="text-privue-900">Solutions</span>
-                </h1>
-                <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2">
-                    Insights, guides, and stories curated for you.
-                </p>
+        <Layout>
+            <div className="mx-auto max-w-7xl px-4 py-10">
+                <h1 className="mb-6 text-2xl font-semibold tracking-tight">Expanding Cards (row‑scoped hover)</h1>
+                <div className="flex flex-col gap-4">
+                    {rows.map((row: any, rIdx: any) => (
+                        <div key={rIdx} className="group/row grid grid-cols-1 gap-4 md:grid-cols-12">
+                            {row.map((item: any, cIdx: any) => (
+                                <ExpandingCard key={item.id} item={item} isLastInRow={cIdx === 2} />
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {features.map((feature) => (
-                    <FeatureCard
-                        key={feature.id}
-                        {...feature}
-                        expanded={expanded}
-                        setExpanded={setExpanded}
-                    />
-                ))}
-            </div>
-        </div>
-    );
+
+        </Layout>
+    )
 }
+

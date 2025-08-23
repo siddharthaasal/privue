@@ -1,122 +1,58 @@
-// FeatureCard.tsx (no framer-motion)
-
-interface FeatureCardProps {
+// Types
+type Item = {
     id: number;
-    title: string;
-    description: string;
-    image: string;
+    img: string;
+    heading: string;
+    sub: string;
     details: string[];
-    expanded: number | null;
-    setExpanded: (id: number | null) => void;
-}
+};
 
-export default function FeatureCard({
-    id,
-    title,
-    description,
-    image,
-    details,
-    expanded,
-    setExpanded,
-}: FeatureCardProps) {
-    const isExpanded = expanded === id;
 
-    const toggle = () => setExpanded(isExpanded ? null : id);
-    const onKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            toggle();
-        }
-    };
+type ExpandingCardProps = {
+    item: Item;
+    isLastInRow: boolean;
+};
 
+export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps) {
     return (
-        <div
-            onClick={toggle}
-            onKeyDown={onKey}
-            role="button"
-            tabIndex={0}
-            aria-expanded={isExpanded}
-            className={`relative cursor-pointer rounded-2xl p-6 shadow-md bg-white border
-        ${isExpanded ? "sm:col-span-2 lg:col-span-2 row-span-2" : ""}`}
+        <article
+            className={[
+                // card chrome
+                "relative h-64 md:h-80 overflow-hidden rounded-xl border border-black/10 bg-neutral-100 shadow-sm hover:shadow-md",
+                // sizing behavior per row
+                "md:col-span-4 md:[transition:all_.35s_ease]",
+                // row-level shrink, card-level grow
+                "group/card md:group-hover/row:col-span-3 md:hover:col-span-6",
+                // last in row grows left
+                isLastInRow ? "md:hover:col-start-7" : "",
+            ].join(" ")}
         >
-            <div>
-                <img src={image} alt={title} className="h-20 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-gray-600">{description}</p>
-            </div>
-
-            {isExpanded && (
-                <div className="mt-6 space-y-3">
-                    {details.map((point, i) => (
-                        <div key={i} className="flex items-center gap-2 text-gray-700">
-                            ✅ <span>{point}</span>
+            <div className="absolute inset-0 flex h-full w-full">
+                {/* LEFT IMAGE */}
+                <div className="relative flex-shrink-0 w-full md:w-full group-hover/card:w-1/2 transition-[width] duration-300 ease-out">
+                    <img
+                        src={item.img}
+                        alt=""
+                        className="h-full w-full object-cover grayscale md:group-hover/row:grayscale md:hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0">
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 p-4">
+                            <h3 className="text-base font-semibold text-white md:text-lg">{item.heading}</h3>
+                            <p className="text-sm text-white/80 md:text-[0.925rem]">{item.sub}</p>
                         </div>
-                    ))}
+                    </div>
                 </div>
-            )}
-        </div>
-    );
-}
-
-
-
-/*
-import { motion, AnimatePresence } from "framer-motion";
-
-interface FeatureCardProps {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    details: string[];
-    expanded: number | null;
-    setExpanded: (id: number | null) => void;
-}
-
-export default function FeatureCard({
-    id,
-    title,
-    description,
-    image,
-    details,
-    expanded,
-    setExpanded,
-}: FeatureCardProps) {
-    const isExpanded = expanded === id;
-
-    return (
-        <motion.div
-            layout
-            onClick={() => setExpanded(isExpanded ? null : id)}  // 👈 toggle on click
-            className={`relative cursor-pointer rounded-2xl p-6 shadow-md bg-white border transition-all duration-300 ${isExpanded ? "sm:col-span-2 lg:col-span-2 row-span-2" : ""
-                }`}
-        >
-            <motion.div layout>
-                <img src={image} alt={title} className="h-20 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-gray-600">{description}</p>
-            </motion.div>
-
-            <AnimatePresence>
-                {isExpanded && (
-                    <motion.div
-                        layout
-                        initial={{ opacity: 0, y: 2 }}       // smaller slide
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 2 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }} // quicker & smoother
-                        className="mt-6 space-y-3"
-                    >
-                        {details.map((point, i) => (
-                            <div key={i} className="flex items-center gap-2 text-gray-700">
-                                ✅ <span>{point}</span>
-                            </div>
+                {/* RIGHT DETAILS */}
+                <div className="hidden md:flex flex-col justify-end gap-2 w-0 group-hover/card:w-1/2 transition-[width] duration-300 ease-out bg-neutral-900/55 backdrop-blur-sm p-4 text-white">
+                    <div className="mb-2 h-px w-12 bg-white/40" />
+                    <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed">
+                        {item.details.map((d, i) => (
+                            <li key={i}>{d}</li>
                         ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-        </motion.div>
+                    </ul>
+                </div>
+            </div>
+        </article>
     );
 }
-*/

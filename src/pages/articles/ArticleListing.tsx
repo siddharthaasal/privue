@@ -68,7 +68,7 @@ export default function ArticleListing() {
                             description="Bring lightning-fast search to your Supabase apps,  with no code required."
                             date="Jul 17, 2025"
                             readTime="5 minute"
-                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                            image="https://images.unsplash.com/photo-1639815188546-c43c240ff4df?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop"
                         />
                         <BlogCard
                             href="/article"
@@ -76,16 +76,16 @@ export default function ArticleListing() {
                             description="Bring lightning-fast search to your Supabase apps, with no code required."
                             date="Jul 17, 2025"
                             readTime="5 minute"
-                            image="/testBlogImage.png"
+                            image="https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop"
                         />
-                        <BlogCard
+                        {/* <BlogCard
                             href="/article"
                             title="Algolia Connector for Supabase"
                             description="Bring lightning-fast search to your Supabase apps, with no code required."
                             date="Jul 17, 2025"
                             readTime="5 minute"
                             image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
-                        />
+                        /> */}
 
                     </div>
                     <div className="flex w-full gap-4 m-6">
@@ -95,7 +95,7 @@ export default function ArticleListing() {
                             description="Bring lightning-fast search to your Supabase apps, with no code required."
                             date="Jul 17, 2025"
                             readTime="5 minute"
-                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                            image="https://images.unsplash.com/photo-1639815188546-c43c240ff4df?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop"
                         />
                         <BlogCard
                             href="/article"
@@ -103,7 +103,7 @@ export default function ArticleListing() {
                             description="Bring lightning-fast search to your Supabase apps, with no code required."
                             date="Jul 17, 2025"
                             readTime="5 minute"
-                            image="https://raw.githubusercontent.com/supabase/supabase/refs/heads/master/apps/www/public/images/blog/dbos/og.png"
+                            image="https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop"
                         />
                         <BlogCard
                             href="/article"

@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import TableOfContents from "@/components/articles/TableOfContents";
-import { ChevronLeft } from 'lucide-react';
 import { FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import ArticleHeader from "@/components/articles/ArticleHeader";
@@ -24,12 +23,6 @@ export default function ArticlePage() {
                         <div className="col-span-12 xl:col-span-12">
                             {/* Header */}
                             <div className="mt-0 pt-0 mb-8 max-w-5xl space-y-4">
-                                <div className="">
-                                    <a href="/articles" className="ml-0 pl-0 flex items-center cursor-pointer text-sm text-[#707070] hover:text-[#171717]">
-                                        <ChevronLeft size={18} className="p-0" />
-                                        <p className="ml-2">Back</p>
-                                    </a>
-                                </div>
                                 <ArticleHeader
                                     title="Storage: 10x Larger Uploads, 3x Cheaper Cached Egress, and 2x Egress Quota"
                                     date="Aug 05, 2024"

@@ -19,7 +19,7 @@ export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps)
         <article
             className={[
                 // card chrome
-                "relative h-64 md:h-96 overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm hover:shadow-md",
+                "relative h-64 md:h-80 overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm hover:shadow-md",
                 // sizing behavior per row
                 "md:col-span-4 md:[transition:all_.35s_ease]",
                 // row-level shrink, card-level grow
@@ -31,21 +31,21 @@ export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps)
             <a href="/solution">
                 <div className="absolute inset-0 flex h-full w-full">
                     {/* LEFT IMAGE */}
-                    <div className="relative flex-shrink-0 w-full md:w-full group-hover/card:w-1/2 transition-[width] duration-300 ease-out">
+                    <div className="relative flex-shrink-0 w-full md:w-full group-hover/card:w-1/2 transition-[width] duration-300">
                         <img
                             src={item.img}
                             alt=""
                             className="
         h-full w-full object-cover
         grayscale                      /* default: gray */
-        md:group-hover/row:grayscale-25   /* row in hover state: keep others gray */
+        md:group-hover/row:grayscale  /* row in hover state: keep others gray */
         md:group-hover/card:!grayscale-0 /* THIS card hovered: un-gray (wins) */
       "
                         />
                         <div className="absolute inset-0">
                             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-4">
-                                <h3 className="text-base font-semibold text-white md:text-lg">{item.heading}</h3>
+                                <h3 className="text-base font-medium text-white md:text-lg">{item.heading}</h3>
                                 <p className="text-sm  text-white/90">{item.sub}</p>
                             </div>
                         </div>

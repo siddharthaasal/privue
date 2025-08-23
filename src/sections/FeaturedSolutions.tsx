@@ -19,8 +19,6 @@ export default function FeaturedSolutions() {
                 "Identify outliers across millions of transactions",
                 "Reduce fraud exposure with predictive scoring",
                 "Stay compliant with evolving regulations",
-                "Stay compliant with evolving regulations",
-
             ]
         },
         {
@@ -36,7 +34,7 @@ export default function FeaturedSolutions() {
         },
         {
             id: 3,
-            img: "https://images.unsplash.com/photo-1653378972336-103e1ea62721?q=80&w=1600&auto=format&fit=crop",
+            img: "https://images.unsplash.com/photo-1511883040705-6011fad9edfc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGZpbmFuY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop",
             heading: "Portfolio Optimization",
             sub: "AI insights for smarter asset allocation",
             details: [
@@ -47,7 +45,7 @@ export default function FeaturedSolutions() {
         },
         {
             id: 4,
-            img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop",
+            img: "https://images.unsplash.com/photo-1639815188546-c43c240ff4df?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop",
             heading: "Regulatory Intelligence",
             sub: "Automated monitoring and compliance alerts",
             details: [
@@ -58,7 +56,7 @@ export default function FeaturedSolutions() {
         },
         {
             id: 5,
-            img: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1600&auto=format&fit=crop",
+            img: "https://images.unsplash.com/photo-1726137569966-a7354383e2ae?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop",
             heading: "Customer Insights",
             sub: "AI-driven segmentation and personalization",
             details: [
@@ -69,7 +67,7 @@ export default function FeaturedSolutions() {
         },
         {
             id: 6,
-            img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+            img: "https://images.unsplash.com/photo-1754887966362-952236591654?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNzZ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop",
             heading: "Cash Flow Intelligence",
             sub: "Visibility into liquidity and forecasting",
             details: [

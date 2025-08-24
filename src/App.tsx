@@ -7,6 +7,7 @@ import OldArticleListing from "./pages/articles/OldArticleListing";
 import DarkHeroSection from "./sections/DarkHeroSection";
 import TestStyles from "./pages/TestStyles";
 import SolutionPage from "./pages/solutions/SolutionPage";
+import ContactPage from "./pages/contact/ContactPage";
 // legal
 import Terms from "./pages/legal/Terms";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />
         <Route path="/solution" element={<SolutionPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         {/* legal */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

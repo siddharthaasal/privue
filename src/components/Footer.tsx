@@ -68,7 +68,7 @@ export default function Footer({
                 { text: "About", url: "#" },
                 { text: "Terms of Use", url: "/terms" },
                 { text: "Privacy Policy", url: "/privacy-policy" },
-                { text: "Contact", url: "#" },
+                { text: "Contact", url: "/contact" },
             ],
         },
     ],

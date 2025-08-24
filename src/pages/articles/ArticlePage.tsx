@@ -27,7 +27,6 @@ export default function ArticlePage() {
                                     title="Storage: 10x Larger Uploads, 3x Cheaper Cached Egress, and 2x Egress Quota"
                                     date="Aug 05, 2024"
                                     author="Saurabh Verma"
-                                    articleType="Case Study"
                                 />
                             </div>
 
@@ -48,6 +47,7 @@ export default function ArticlePage() {
                                 <div className="hidden relative col-span-12 space-y-8 lg:block lg:col-span-3 xl:col-span-3 xl:col-start-10">
                                     {/* tags */}
                                     <div className="space-y-4">
+                                        <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-privue-700 border border-privue-500 border-strong px-2.5 py-0.5 text-[11px]">{"Case Study"}</div>
                                         <div className="flex flex-wrap gap-2 select-none">
                                             <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-[#505050] border border-strong px-2.5 py-0.5 text-[11px]">launch-week</div>
                                             <div className="inline-flex items-center rounded-full bg-opacity-10 bg-surface-200 text-[#505050] border border-strong px-2.5 py-0.5 text-[11px]">tag</div>

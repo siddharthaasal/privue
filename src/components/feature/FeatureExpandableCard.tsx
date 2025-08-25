@@ -1,4 +1,4 @@
-import { useState } from "react";
+// components/feature/FeatureExpandableCard.tsx
 import { motion, useReducedMotion } from "framer-motion";
 
 export type Item = {
@@ -9,49 +9,59 @@ export type Item = {
     details: string[];
 };
 
-export type ExpandingCardProps = {
+interface ExpandingCardProps {
     item: Item;
     isLastInRow: boolean;
-};
+    isHovered: boolean;
+    isAnyHovered: boolean;
+    onHoverStart: () => void;
+    onHoverEnd: () => void;
+}
 
-export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps) {
-    const [hovered, setHovered] = useState(false);
+
+export default function ExpandingCard({
+    item,
+    isLastInRow,
+    isHovered,
+    isAnyHovered,
+    onHoverStart,
+    onHoverEnd,
+}: ExpandingCardProps) {
     const reduce = useReducedMotion();
+    const hovered = isHovered; // alias for animation logic
+    const WIDTH_MS = 300; // match CSS width transition
 
     return (
         <article
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            onMouseEnter={onHoverStart}
+            onMouseLeave={onHoverEnd}
             className={[
-                // chrome
-                "relative h-64 md:h-80 overflow-hidden rounded-lg border border-black/10 bg-white shadow-sm hover:shadow-md",
-                // row sizing (instant; minimal motion)
-                "md:col-span-4 md:[transition:all_.001s_linear]",
-                "group/card md:group-hover/row:col-span-3 md:hover:col-span-6",
-                isLastInRow ? "md:hover:col-start-7" : "",
-            ].join(" ")}
+                "group/card relative h-64 md:h-80 overflow-hidden rounded-lg",
+                "border border-black/10 bg-white shadow-sm transition-all",
+                // choose ONE col-span
+                isHovered ? "md:col-span-6" : (isAnyHovered ? "md:col-span-3" : "md:col-span-4"),
+                // shift last card left when expanded
+                isHovered && isLastInRow ? "md:col-start-7" : "",
+            ].filter(Boolean).join(" ")}
         >
+
             <a href="/solution" className="absolute inset-0 block">
                 <div className="absolute inset-0 flex h-full w-full">
-                    {/* LEFT: image & overlay (width via CSS only) */}
+                    {/* LEFT */}
                     <div
                         className={[
                             "relative flex-shrink-0 w-full",
-                            "md:w-full group-hover/card:w-1/2 transition-normal duration-300 ease-out",
+                            // width transition matches WIDTH_MS (300ms)
+                            "md:w-full group-hover/card:w-1/2 transition-[width] duration-300 ease-out will-change-[width]",
                         ].join(" ")}
                     >
                         <img
                             src={item.img}
-                            alt=""
-                            className={[
-                                "h-full w-full object-cover",
-                                "grayscale md:group-hover/row:grayscale",
-                                hovered ? "!grayscale-0" : "",
-                                "transition-[filter] duration-180",
-                            ].join(" ")}
+                            alt={item.heading}
+                            className="h-full w-full object-cover transition-[filter] duration-300"
                         />
                         <div className="pointer-events-none absolute inset-0">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-4">
                                 <h3 className="text-base font-medium text-white md:text-lg">
                                     {item.heading}
@@ -61,35 +71,43 @@ export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps)
                         </div>
                     </div>
 
-                    {/* RIGHT: details (fade only; width via CSS) */}
-                    <div className="hidden md:flex w-0 group-hover/card:w-1/2 transition-[width] duration-300 ease-out">
+                    {/* RIGHT */}
+                    <div className="hidden md:flex w-0 group-hover/card:w-1/2 transition-[width] duration-100 ease-out will-change-[width]">
                         <motion.section
                             initial={false}
-                            animate={{ opacity: (reduce ? 1 : undefined) }}
-                            // Delay the overall panel a touch so width change finishes first
-                            transition={reduce ? { duration: 0 } : { duration: 0.45, ease: [0.22, 0.08, 0.18, 1], delay: 0.08 }}
-                            className="w-full h-full bg-white/70 backdrop-blur-sm"
-                            // Use variants + stagger for children
-                            variants={{
-                                show: {
-                                    transition: reduce
-                                        ? { duration: 0 }
-                                        : { staggerChildren: 0.04, delayChildren: 0.14 }
-                                }
-                            }}
-                            // Toggle variants with hover state using CSS :has poly via class
-                            // We'll just drive it with opacity; children will still stagger in
-                            onUpdate={() => { }}
+                            // keep it invisible until width has finished growing
+                            animate={
+                                reduce
+                                    ? { opacity: 1 }
+                                    : hovered
+                                        ? { opacity: 1 }
+                                        : { opacity: 0 }
+                            }
+                            transition={
+                                reduce
+                                    ? { duration: 0 }
+                                    : {
+                                        ease: [0.42, 0, 0.58, 1],
+                                        duration: 0.5,
+                                        // enter slightly after width starts growing
+                                        delay: hovered ? WIDTH_MS / 2500 : 0,
+                                    }
+                            }
+                            className={[
+                                "w-full h-full bg-white/70 backdrop-blur-sm",
+                                // prevent accidental hover/focus while hidden
+                                !hovered && !reduce ? "pointer-events-none" : "",
+                            ].join(" ")}
                         >
                             <motion.div
                                 initial={reduce ? undefined : { opacity: 0 }}
-                                animate={reduce ? { opacity: 1 } : { opacity: 1 }}
+                                animate={{ opacity: 1 }}
                                 className="flex h-full flex-col justify-between p-6 text-neutral-900"
                             >
                                 <motion.div
                                     initial={reduce ? undefined : { opacity: 0, y: 2 }}
-                                    animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                                    transition={reduce ? { duration: 0 } : { duration: 0.28, ease: "easeOut" }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={reduce ? { duration: 0 } : { duration: 0.1, ease: "easeOut" }}
                                     className="text-xs font-semibold uppercase tracking-wide text-neutral-700"
                                 >
                                     Highlights
@@ -100,7 +118,7 @@ export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps)
                                         <motion.li
                                             key={i}
                                             initial={reduce ? undefined : { opacity: 0, y: 2 }}
-                                            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                                            animate={{ opacity: 1, y: 0 }}
                                             transition={reduce ? { duration: 0 } : { duration: 0.26, ease: "easeOut" }}
                                             className="relative pl-6 text-sm leading-relaxed"
                                         >
@@ -120,8 +138,8 @@ export default function ExpandingCard({ item, isLastInRow }: ExpandingCardProps)
 
                                 <motion.div
                                     initial={reduce ? undefined : { opacity: 0, y: 1 }}
-                                    animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                                    transition={reduce ? { duration: 0 } : { duration: 0.24, ease: "easeOut" }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={reduce ? { duration: 0 } : { duration: 0.1, ease: "easeOut" }}
                                     className="mt-5"
                                 >
                                     <span className="text-xs font-medium text-neutral-600 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-800">

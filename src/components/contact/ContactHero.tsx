@@ -1,65 +1,53 @@
-type Founder = {
-    name: string;
-    role: string;
-    image: string;
-}
+import { Announcement } from "../ui/shadcn-io/announcement";
+import CalMeetingPopup from "./CalMeetingPopup";
+import { ShimmerButton } from "../magicui/shimmer-button";
 
-const founders: Founder[] = [
-    {
-        name: "Saurabh Verma",
-        role: "Founder & CEO",
-        image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXIlMjBwcm9maWxlfGVufDB8fDB8fHww",
-    },
-    {
-        name: "Snehil Vijay",
-        role: "Co-Founder",
-        image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXIlMjBwcm9maWxlfGVufDB8fDB8fHww",
-    }
-]
+const CalendarIcon = () => (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+        <path
+            d="M7 2v3m10-3v3M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"
+            fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
+        />
+    </svg>
+);
 
-export default function ContactHero() {
+export default function ContactHero({
+    title = "Contact us",
+    subtitle = "Talk to us about:",
+    bullets = [
+        "Financial Statement Extract",
+        "Insurance Policy Extract",
+        "Credit Models",
+        "ESG Scoring",
+    ],
+}) {
     return (
-        <>
-            <div className="flex flex-col justify-between">
-                <div>
-                    <h1 className="text-xl font-normal tracking-tight text-neutral-900 md:text-2xl">
-                        Hit a roadblock? Let's talk.
-                    </h1>
+        <section className="text-left">
+            <h2 className="text-3xl leading-[1.05] font-semibold tracking-tight text-gray-900 md:text-5xl">
+                {title}
+            </h2>
 
-                    <p className="mt-4 max-w-xl text-neutral-600 md:text-base tracking-wide">
-                        Tried Privue locally and have questions, feedback, or ran into something tricky?
-                        We’re the founders, and we’d love to hear from you. Whether you’re evaluating for production,
-                        want help with setup, or just want to chat about your use case.
-                        Connect with us in a call or write to us at{" "}
-                        <a
-                            href="mailto:query@privue.ai"
-                            className="text-privue-700 hover:text-privue-800 hover:underline"
-                        >
-                            query@privue.ai
-                        </a>.
-                    </p>
+            <p className="mt-6 text-lg text-gray-600">{subtitle}</p>
 
-                    <div className="py-12 container flex flex-wrap gap-8">
-                        {founders.map((founder) => (
-                            <div key={founder.name} className="flex items-center space-x-2">
-                                <img
-                                    src={founder.image}
-                                    alt={founder.name}
-                                    width={34}
-                                    height={34}
-                                    className="rounded-full object-cover"
-                                />
-                                <div>
-                                    <p className="font-normal text-sm text-foreground leading-tight">{founder.name}</p>
-                                    <p className="text-xs text-foreground-lighter">{founder.role}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+            <ul className="mt-4 space-y-2">
+                {bullets.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                        <span className="mt-1 text-privue-800">
+                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                        </span>
+                        <span className="text-base text-gray-700">{item}</span>
+                    </li>
+                ))}
+            </ul>
 
-
+            {/* Neat pill announcement placed right under bullets */}
+            <div className="mt-5">
+                <Announcement className="inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white/70 px-3 py-2 shadow-sm">
+                    <CalMeetingPopup />
+                </Announcement>
             </div>
-        </>
-    )
+        </section>
+    );
 }

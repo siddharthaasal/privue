@@ -180,3 +180,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* globals.css */
+.contact-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 2.5rem
+}
+
+.contact-left {
+  min-width: 0;
+  max-width: 540px;
+  flex: 1 1 0
+}
+
+.contact-right {
+  flex: 0 0 auto;
+  width: 560px
+}
+
+@media (max-width:1279px) {
+  .contact-right {
+    width: 460px
+  }
+}
+
+@media (max-width:1023px) {
+  .contact-row {
+    flex-direction: column
+  }
+
+  .contact-right {
+    width: 100%
+  }
+}

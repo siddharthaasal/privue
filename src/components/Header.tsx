@@ -136,7 +136,7 @@ export default function Header() {
                                 <p>Demo</p>
                             </Button>
                         </a>
-                        <a href="/book">
+                        <a href="/contact">
                             <Button variant="default" size="sm" className="cursor-pointer text-[#FAFAFA]"> <p>Book a Call</p>
                             </Button>
                         </a>

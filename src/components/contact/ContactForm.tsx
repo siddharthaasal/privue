@@ -61,7 +61,7 @@ export default function ContactForm() {
     }
 
     return (
-        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
             <div className="p-5 sm:p-6 lg:p-8">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -71,7 +71,7 @@ export default function ContactForm() {
                             name="topic"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="px-1 text-[13px] text-gray-700">Select topic</FormLabel>
+                                    <FormLabel className="px-1 text-[14px] text-gray-700">Select topic</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                             <SelectTrigger className="w-full h-11 rounded-md bg-white">
@@ -96,7 +96,7 @@ export default function ContactForm() {
                                 name="firstName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[13px] text-gray-700">First name</FormLabel>
+                                        <FormLabel className="px-1 text-[14px] text-gray-700">First name</FormLabel>
                                         <FormControl>
                                             <Input className="h-11 rounded-md" placeholder="Siddharth" {...field} />
                                         </FormControl>
@@ -109,7 +109,7 @@ export default function ContactForm() {
                                 name="lastName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[13px] text-gray-700">Last name</FormLabel>
+                                        <FormLabel className="px-1 text-[14px] text-gray-700">Last name</FormLabel>
                                         <FormControl>
                                             <Input className="h-11 rounded-md" placeholder="Aasal" {...field} />
                                         </FormControl>
@@ -126,7 +126,7 @@ export default function ContactForm() {
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[13px] text-gray-700">Work email</FormLabel>
+                                        <FormLabel className="px-1 text-[14px] text-gray-700">Work email</FormLabel>
                                         <FormControl>
                                             <Input className="h-11 rounded-md" type="email" placeholder="siddharth@privue.in" {...field} />
                                         </FormControl>
@@ -139,7 +139,7 @@ export default function ContactForm() {
                                 name="company"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[13px] text-gray-700">Company</FormLabel>
+                                        <FormLabel className="px-1 text-[14px] text-gray-700">Company</FormLabel>
                                         <FormControl>
                                             <Input className="h-11 rounded-md" placeholder="Privue" {...field} />
                                         </FormControl>
@@ -155,10 +155,10 @@ export default function ContactForm() {
                             name="message"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="px-1 text-[13px] text-gray-700">Message</FormLabel>
+                                    <FormLabel className="px-1 text-[14px] text-gray-700">Message</FormLabel>
                                     <FormControl>
                                         <Textarea
-                                            className="min-h-[140px] rounded-md"
+                                            className="min-h-[100px] rounded-md"
                                             placeholder="Let us know how we can help"
                                             {...field}
                                         />

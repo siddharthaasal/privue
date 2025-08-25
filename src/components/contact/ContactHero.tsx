@@ -3,7 +3,7 @@ import CalMeetingPopup from "./CalMeetingPopup";
 
 
 export default function ContactHero({
-    title = "Contact us",
+    title = "Contact",
     subtitle = "Talk to us about:",
     bullets = [
         "Financial Statement Extract",
@@ -16,6 +16,10 @@ export default function ContactHero({
         <section className="text-left">
             <h2 className="text-3xl leading-[1.05] font-semibold tracking-tight text-gray-900 md:text-5xl">
                 {title}
+                {" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
+                    Us
+                </span>
             </h2>
 
             <p className="mt-6 text-lg text-gray-600">{subtitle}</p>
@@ -23,7 +27,7 @@ export default function ContactHero({
             <ul className="mt-4 space-y-2">
                 {bullets.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                        <span className="mt-1 text-privue-800">
+                        <span className="mt-1 text-privue-900">
                             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M20 6 9 17l-5-5" />
                             </svg>

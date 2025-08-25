@@ -1,15 +1,6 @@
 import { Announcement } from "../ui/shadcn-io/announcement";
 import CalMeetingPopup from "./CalMeetingPopup";
-import { ShimmerButton } from "../magicui/shimmer-button";
 
-const CalendarIcon = () => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-        <path
-            d="M7 2v3m10-3v3M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"
-            fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-        />
-    </svg>
-);
 
 export default function ContactHero({
     title = "Contact us",

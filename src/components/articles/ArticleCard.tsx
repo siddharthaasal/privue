@@ -1,3 +1,5 @@
+import { Badge } from "../ui/badge";
+
 interface BlogCardProps {
     href: string;
     title: string;
@@ -5,6 +7,7 @@ interface BlogCardProps {
     date: string;
     readTime: string;
     image: string;
+    articleType: string;
 }
 
 
@@ -15,6 +18,7 @@ export function BlogCard({
     date,
     readTime,
     image,
+    articleType = "Case Study"
 }: BlogCardProps) {
     return (
         <div className="w-full h-full">
@@ -31,6 +35,15 @@ export function BlogCard({
                             loading="lazy"
                             className="absolute inset-0 w-full h-full object-cover scale-100"
                         />
+
+                        {articleType && (
+                            <Badge className="absolute top-2 right-2 text-xs bg-black/40 font-normal text-white 
+               px-2 py-1 rounded-lg 
+               backdrop-blur-xs shadow-sm">
+                                {articleType}
+                            </Badge>
+                        )}
+
                     </div>
 
                     {/* Metadata */}

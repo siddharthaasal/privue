@@ -9,6 +9,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps,  with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Case Study",
         image:
             "https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop",
     },
@@ -19,6 +20,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Case Study",
         image: "https://plus.unsplash.com/premium_photo-1742443218246-1ebbf01c4689?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
@@ -28,6 +30,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Case Study",
         image: "https://images.unsplash.com/photo-1735902912145-c86917f1f97f?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
     },
@@ -38,6 +41,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps,  with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Case Study",
         image:
             "https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop",
     },
@@ -48,6 +52,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Blog",
         image: "https://plus.unsplash.com/premium_photo-1742443218246-1ebbf01c4689?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
@@ -57,6 +62,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Blog",
         image: "https://images.unsplash.com/photo-1735902912145-c86917f1f97f?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
@@ -66,6 +72,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps,  with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Blog",
         image:
             "https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop",
     },
@@ -76,6 +83,7 @@ const articles = [
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
         readTime: "5 minute",
+        articleType: "Case Study",
         image: "https://plus.unsplash.com/premium_photo-1742443218246-1ebbf01c4689?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
@@ -84,6 +92,7 @@ const articles = [
         description:
             "Bring lightning-fast search to your Supabase apps, with no code required.",
         date: "Jul 17, 2025",
+        articleType: "Case Study",
         readTime: "5 minute",
         image: "https://images.unsplash.com/photo-1735902912145-c86917f1f97f?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },

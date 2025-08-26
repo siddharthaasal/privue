@@ -12,8 +12,8 @@ export default function CapabilitiesCard({ icon, heading, subheading }: Capabili
 
             {/* Text */}
             <div className="">
-                <p className="font-medium text-xl 2xl:text-2xl mb-2 leading-tight">{heading}</p>
-                <p className="font-normal text-[15px]">{subheading}</p>
+                <p className="font-semibold text-lg mb-2 leading-tight">{heading}</p>
+                <p className="font-normal text-base">{subheading}</p>
             </div>
         </div>
     );

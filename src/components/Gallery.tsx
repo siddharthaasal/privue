@@ -18,6 +18,7 @@ interface BlogCardProps {
   date: string;
   readTime: string;
   image: string;
+  articleType: string;
 }
 
 const blogs: BlogCardProps[] = [
@@ -28,6 +29,7 @@ const blogs: BlogCardProps[] = [
       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
     date: "Jul 24, 2025",
     readTime: "4 min",
+    articleType: "Case Study",
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   },
@@ -38,6 +40,7 @@ const blogs: BlogCardProps[] = [
       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
     date: "Jul 24, 2025",
     readTime: "4 min",
+    articleType: "Blog",
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   },
@@ -48,6 +51,7 @@ const blogs: BlogCardProps[] = [
       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
     date: "Jul 24, 2025",
     readTime: "4 min",
+    articleType: "Blog",
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   },
@@ -58,6 +62,7 @@ const blogs: BlogCardProps[] = [
       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
     date: "Jul 24, 2025",
     readTime: "4 min",
+    articleType: "Case Study",
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   },
@@ -68,6 +73,7 @@ const blogs: BlogCardProps[] = [
       "Powerful image recognition and processing capabilities that allow AI systems to analyze, understand, and interpret visual information from the world.",
     date: "Jul 24, 2025",
     readTime: "4 min",
+    articleType: "Case Study",
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   },
@@ -207,6 +213,7 @@ const Gallery = ({
                   date={item.date}
                   readTime={item.readTime}
                   image={item.image}
+                  articleType={item.articleType}
                 />
               </CarouselItem>
             ))}

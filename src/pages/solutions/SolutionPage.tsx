@@ -155,7 +155,7 @@ export default function SolutionPage() {
 
                 <div className="relative pt-16">
                     {/* Heading */}
-                    <h3 className="text-center text-5xl font-semibold py-10 leading-tight tracking-tight">The <span className="text-privue-800">Problem</span></h3>
+                    <h3 className="text-center text-4xl font-semibold py-10 leading-tight tracking-tight">The <span className="text-privue-800">Problem</span></h3>
 
                     {/* Grid */}
                     <div className=" border-t-[1px] border-gray-200 mt-12 flex">
@@ -188,7 +188,7 @@ export default function SolutionPage() {
                 </div>
                 {/* challenge section */}
                 <div className="border-t border-gray-200">
-                    <h3 className="text-center p-20 text-5xl font-semibold leading-tight tracking-tight">The <span className="text-privue-800">Challenge</span></h3>
+                    <h3 className="text-center p-20 text-4xl font-semibold leading-tight tracking-tight">The <span className="text-privue-800">Challenge</span></h3>
                     <p></p>
                     {/* Grid */}
                     <div className="flex">
@@ -211,7 +211,7 @@ export default function SolutionPage() {
                 {/* capabilities section */}
                 <div className="border-t-[1px] border-gray-200">
                     <div className="pt-20">
-                        <h2 className="text-center text-5xl font-semibold mb-6">How Privue Solves It</h2>
+                        <h2 className="text-center text-4xl font-semibold mb-6">How Privue Solves It</h2>
                         <h3 className="text-center text-3xl font-semibold">Core <span className="text-privue-800">Capabilities</span></h3>
                     </div>
 
@@ -343,6 +343,7 @@ export default function SolutionPage() {
                                                 date={item.date}
                                                 readTime={item.readTime}
                                                 image={item.image}
+                                                articleType="Case Study"
                                             />
                                         </CarouselItem>
                                     ))}

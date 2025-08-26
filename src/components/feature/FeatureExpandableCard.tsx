@@ -53,9 +53,11 @@ export default function ExpandingCard({
                             "relative overflow-hidden min-w-0",          // prevents text/img reflow
                             "flex-grow-0 flex-shrink-0",                 // only basis changes
                             // animate basis instead of width
-                            "transition-[flex-basis] duration-300 ease-out will-change-[flex-basis]",
+                            "transition-[width] duration-300 ease-in will-change-auto",
+                            // "transition-[flex-basis] duration-300 ease-out will-change-[flex-basis]",
                             // full when not hovered, half when hovered
-                            isHovered ? "basis-1/2 delay-500" : "basis-full delay-0",
+                            // isHovered ? "basis-1/2 delay-500" : "basis-full delay-0",
+                            isHovered ? "basis-1/2" : "basis-full",
                         ].join(" ")}
                     >
                         <img
@@ -92,7 +94,7 @@ export default function ExpandingCard({
                                         ease: [0.42, 0, 0.58, 1],
                                         duration: 0.5,
                                         // enter slightly after width starts growing
-                                        delay: hovered ? WIDTH_MS / 2500 : 0,
+                                        delay: hovered ? WIDTH_MS / 3000 : 0,
                                     }
                             }
                             className={[

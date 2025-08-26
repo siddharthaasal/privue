@@ -50,26 +50,28 @@ export default function ExpandingCard({
                     {/* LEFT */}
                     <div
                         className={[
-                            "relative flex-shrink-0 w-full",
-                            // width transition matches WIDTH_MS (300ms)
-                            "md:w-full group-hover/card:w-1/2 transition-[width] duration-300 ease-out will-change-[width]",
+                            "relative overflow-hidden min-w-0",          // prevents text/img reflow
+                            "flex-grow-0 flex-shrink-0",                 // only basis changes
+                            // animate basis instead of width
+                            "transition-[flex-basis] duration-300 ease-out will-change-[flex-basis]",
+                            // full when not hovered, half when hovered
+                            isHovered ? "basis-1/2 delay-500" : "basis-full delay-0",
                         ].join(" ")}
                     >
                         <img
                             src={item.img}
                             alt={item.heading}
-                            className="h-full w-full object-cover transition-[filter] duration-300"
+                            className="h-full w-full object-cover transition-none"
                         />
                         <div className="pointer-events-none absolute inset-0">
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-4">
-                                <h3 className="text-base font-medium text-white md:text-lg">
-                                    {item.heading}
-                                </h3>
+                                <h3 className="text-base font-medium text-white md:text-lg">{item.heading}</h3>
                                 <p className="text-sm text-white/90">{item.sub}</p>
                             </div>
                         </div>
                     </div>
+
 
                     {/* RIGHT */}
                     <div className="hidden md:flex w-0 group-hover/card:w-1/2 transition-[width] duration-100 ease-out will-change-[width]">

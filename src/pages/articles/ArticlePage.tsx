@@ -12,7 +12,9 @@ import mdxComponents from '@/lib/mdxComponents';
 
 import Layout from "@/components/Layout";
 import ArticleHeader from "@/components/articles/ArticleHeader";
-import RightPane from "@/components/articles/RightPane";
+// import RightPane from "@/components/articles/RightPane";
+import RightPaneHeader from '@/components/articles/RightPaneHeader';
+import RightPaneSticky from '@/components/articles/RightPaneSticky';
 
 export default function ArticlePage() {
     const { slug } = useParams<{ slug: string }>();
@@ -68,17 +70,17 @@ export default function ArticlePage() {
 
 
                                 {/* Right column (visible from lg+) */}
-                                <div className="hidden lg:block col-span-12 lg:col-span-3 xl:col-span-3 xl:col-start-10">
-                                    <div className="sticky top-20 space-y-8">
-                                        <RightPane
-                                            articleType={meta.articleType}
-                                            tags={meta.tags}
-                                            solution={{ name: meta.solutionName, link: meta.solutionLink }}
-                                            share={{ url: shareUrl, title: meta.title }}
-                                            contentRef={contentRef as React.RefObject<HTMLElement>}
-                                        />
-                                    </div>
-                                </div>
+                                <aside className="hidden lg:block col-span-12 lg:col-span-3 xl:col-span-3 xl:col-start-10 space-y-8">
+                                    {/* Non-sticky header */}
+                                    <RightPaneHeader articleType={meta.articleType} tags={meta.tags} />
+
+                                    {/* Sticky group: TOC + Solution + Share */}
+                                    <RightPaneSticky
+                                        solution={{ name: meta.solutionName, link: meta.solutionLink }}
+                                        share={{ url: shareUrl, title: meta.title }}
+                                        contentRef={contentRef as React.RefObject<HTMLElement>}
+                                    />
+                                </aside>
 
 
                             </div>

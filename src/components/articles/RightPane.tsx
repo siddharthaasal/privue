@@ -46,48 +46,50 @@ export default function RightPane({
 
 
 
+                <div className="sticky top-20 space-y-8">
 
-                {/* toc */}
-                <div className="">
-                    <TableOfContents
-                        contentRef={contentRef}
-                    />
-                </div>
-
-                <div>
-                    <a
-                        href={`/${solution?.link}`}
-                        className="inline-flex text-[15px] items-center gap-1 text-privue-700 hover:text-privue-900"
-                    >
-                        <LinkIcon size={14} />
-                        Solution
-                    </a>
-                </div>
-
-                {/* share */}
-                <div className="hidden lg:block">
-                    <div className="font-open-sans flex items-center gap-2 mb-4 text-[15px] p-0 text-[#171717] tracking-wide">
-                        Share this Article
+                    {/* toc */}
+                    <div >
+                        <TableOfContents
+                            contentRef={contentRef}
+                        />
                     </div>
-                    <div className="mt-4 flex items-center gap-2">
+
+                    <div>
                         <a
-                            aria-label="Share on LinkedIn"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-foreground-lighter hover:text-foreground"
-                            href={`https://www.linkedin.com/shareArticle?url=${encodedUrl}&text=${encodedTitle}`}
+                            href={`/${solution?.link}`}
+                            className="inline-flex text-[15px] items-center gap-1 text-privue-700 hover:text-privue-900"
                         >
-                            <FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" />
+                            <LinkIcon size={14} />
+                            Solution
                         </a>
-                        <a
-                            aria-label="Share on X"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-foreground-lighter hover:text-foreground"
-                            href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
-                        >
-                            <FaXTwitter className="text-[#707070] text-lg hover:text-[#525252]" />
-                        </a>
+                    </div>
+
+                    {/* share */}
+                    <div className="hidden lg:block">
+                        <div className="font-open-sans flex items-center gap-2 mb-4 text-[15px] p-0 text-[#171717] tracking-wide">
+                            Share this Article
+                        </div>
+                        <div className="mt-4 flex items-center gap-2">
+                            <a
+                                aria-label="Share on LinkedIn"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-foreground-lighter hover:text-foreground"
+                                href={`https://www.linkedin.com/shareArticle?url=${encodedUrl}&text=${encodedTitle}`}
+                            >
+                                <FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" />
+                            </a>
+                            <a
+                                aria-label="Share on X"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-foreground-lighter hover:text-foreground"
+                                href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
+                            >
+                                <FaXTwitter className="text-[#707070] text-lg hover:text-[#525252]" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

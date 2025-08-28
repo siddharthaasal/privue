@@ -66,7 +66,7 @@ export default function TableOfContents({
     }, [contentRef, headings]);
 
     return (
-        <aside className="w-64 sticky top-20 h-auto overflow-y-auto">
+        <aside className="w-auto h-auto">
             <div>
                 <div className="font-open-sans flex items-center gap-2 mb-4 text-[16px] p-0 text-[#171717] tracking-wide">
                     On this page

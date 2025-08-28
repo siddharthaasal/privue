@@ -20,6 +20,7 @@ function App() {
         <Route path="/articles" element={<ArticleListing />} />
         <Route path="/test" element={<TestBlogPlage />} />
         <Route path="/article" element={<ArticlePage />} />
+        <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/articles-0" element={<OldArticleListing />} />
         <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />

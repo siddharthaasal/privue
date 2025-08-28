@@ -2,11 +2,26 @@ const mdxComponents = {
     h1: (props: any) => (
         <h1 className="text-3xl font-medium text-zinc-800 mt-10 mb-6" {...props} />
     ),
+
     h2: (props: any) => (
-        <h2 className="text-2xl font-normal scroll-mt-24 mt-10 mb-4 text-zinc-700" {...props} />
+        <h2
+            className="
+      text-2xl font-normal scroll-mt-24 mt-10 mb-4 text-zinc-700
+      [&>a]:no-underline [&>a:hover]:no-underline
+      [&>a]:[color:inherit] [&>a:hover]:[color:inherit]
+    "
+            {...props}
+        />
     ),
+
     h3: (props: any) => (
-        <h3 className="text-xl font-normal mt-8 mb-3 text-zinc-600" {...props} />
+        <h3 className="text-xl font-normal mt-8 mb-3 text-zinc-600 [&>a]:no-underline [&>a:hover]:no-underline
+      [&>a]:[color:inherit] [&>a:hover]:[color:inherit]" {...props} />
+    ),
+
+    h4: (props: any) => (
+        <h3 className="text-base font-normal mt-6 mb-2 text-zinc-600 [&>a]:no-underline [&>a:hover]:no-underline
+      [&>a]:[color:inherit] [&>a:hover]:[color:inherit]" {...props} />
     ),
     p: (props: any) => (
         <p className="text-[15px] leading-7 my-4 text-zinc-600 text-pretty" {...props} />
@@ -47,8 +62,20 @@ const mdxComponents = {
     ),
     strong: (props: any) => <strong className="text-zinc-700 font-medium" {...props} />,
     img: (props: any) => (
-        <img className="rounded-md my-6 w-full max-w-full object-contain" loading="lazy" {...props} />
+        <img
+            className="
+      rounded-md
+      my-6
+      mx-auto
+      h-auto
+      shadow-sm
+      w-full aspect-[2/1] lg:aspect-[5/3] overflow-hidden 
+    "
+            loading="lazy"
+            {...props}
+        />
     ),
+
 };
 
 export default mdxComponents;

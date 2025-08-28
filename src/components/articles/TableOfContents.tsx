@@ -22,7 +22,7 @@ export default function TableOfContents({
         if (!root) return;
 
         const extract = () => {
-            const nodes = root.querySelectorAll<HTMLElement>("h2, h3");
+            const nodes = root.querySelectorAll<HTMLElement>("h2");
             const list: Heading[] = [];
             nodes.forEach((el) => {
                 const text = el.textContent?.trim() ?? "";

@@ -57,7 +57,7 @@ export default function RightPane({
                 <div>
                     <a
                         href={`/${solution?.link}`}
-                        className="inline-flex items-center gap-1 text-privue-700 hover:text-privue-900"
+                        className="inline-flex text-[15px] items-center gap-1 text-privue-700 hover:text-privue-900"
                     >
                         <LinkIcon size={14} />
                         Solution

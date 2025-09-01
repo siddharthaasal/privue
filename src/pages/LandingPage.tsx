@@ -3,6 +3,7 @@ import HeroSection from "@/sections/HeroSection"
 import FeaturedArticles from "@/sections/FeaturedArticles"
 import FeaturedModules from "@/sections/FeaturedModules"
 import FeaturedSolutions from "@/sections/FeaturedSolutions"
+import FeaturedSolutions2 from "@/sections/FeaturedSolutions2"
 // import Products from "@/sections/Products"
 
 
@@ -21,6 +22,9 @@ export default function LandingPage() {
                     </section> */}
                     <section id="modules" data-theme="light">
                         <FeaturedSolutions />
+                    </section>
+                    <section id="modules" data-theme="light">
+                        <FeaturedSolutions2 />
                     </section>
                     <section id="modules" data-theme="light">
                         <FeaturedModules />

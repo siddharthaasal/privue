@@ -1,6 +1,8 @@
 // components/feature/FeaturedSolutions.tsx
 import { useState } from "react";
-import ExpandingCard, { type Item } from "@/components/feature/FeatureExpandableCard";
+import ExpandingCard1, { type Item } from "@/components/feature/FeatureExpandableCard";
+// import ExpandingCard from "@/components/feature/ExpandingCard";
+// import { motion } from "motion/react";
 
 export default function FeaturedSolutions() {
     const items: Item[] = [
@@ -81,6 +83,8 @@ export default function FeaturedSolutions() {
 
     const rows = chunk(items, 3);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    // const [activeId, setActiveId] = useState<number | null>(null);
+
 
     return (
         <section className="font-open-sans relative mx-auto my-24">
@@ -98,6 +102,44 @@ export default function FeaturedSolutions() {
                     </p>
                 </div>
 
+                {/* <div className="flex flex-col m-0 p-0 gap-4">
+                    {rows.map((row, rIdx) => {
+                        const isAnyActive = row.some(i => i.id === activeId);
+
+                        return (
+                            <motion.div
+                                key={rIdx}
+                                layout
+                                className="group/row grid grid-cols-1 md:grid-cols-12 gap-4"
+                            >
+                                {row.map((item, cIdx) => (
+                                    <ExpandingCard
+                                        key={item.id}
+                                        item={item}
+                                        isLastInRow={cIdx === 2}
+                                        isActive={activeId === item.id}
+                                        isAnyActive={isAnyActive}
+                                        onClick={() =>
+                                            setActiveId(activeId === item.id ? null : item.id)
+                                        }
+                                    />
+                                ))}
+                            </motion.div>
+                        );
+                    })}
+                </div>
+                <div className="font-open-sans mx-auto text-center py-12">
+                    <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
+                        Our{" "}
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
+                            Solutions
+                        </span>
+                    </h1>
+                    <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
+                        Scalable solutions to optimize decisions, reduce risk, and drive
+                        growth.
+                    </p>
+                </div> */}
                 <div className="flex flex-col m-0 p-0 gap-4">
                     {rows.map((row, rIdx) => {
                         const isAnyHoveredInRow = row.some(i => i.id === hoveredIndex);
@@ -108,7 +150,7 @@ export default function FeaturedSolutions() {
                                 className="group/row grid grid-cols-1 m-0 p-0 gap-4 md:grid-cols-12"
                             >
                                 {row.map((item, cIdx) => (
-                                    <ExpandingCard
+                                    <ExpandingCard1
                                         key={item.id}
                                         item={item}
                                         isLastInRow={cIdx === 2}

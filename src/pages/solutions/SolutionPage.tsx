@@ -5,7 +5,7 @@ import ModuleListing2 from "@/components/modules/ModuleListing2";
 // import ArticleReferenceCard from "@/components/solutions/ArticleReferenceCard";
 import ProblemCard from "@/components/solutions/ProblemCard";
 import CapabilitiesCard from "@/components/solutions/CapabilitiesCard";
-import ChallengeCard from "@/components/solutions/ChallengeCard";
+// import ChallengeCard from "@/components/solutions/ChallengeCard";
 import { GridPattern } from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
+import { solutions } from "@/data/solutions/solutions";
 
 interface BlogCardProps {
     href: string;
@@ -71,24 +72,26 @@ const blogs: BlogCardProps[] = [
     },
 ]
 
-const uniqueDifferentiators: string[] = [
-    "Only platform providing complete NHI-to-human lineage",
-    "Tracks relationships across all systems and storage locations",
-    "Maintains attribution even when employees leave",
-    "Provides forensic-quality audit trails",
-];
+// const uniqueDifferentiators: string[] = [
+//     "Only platform providing complete NHI-to-human lineage",
+//     "Tracks relationships across all systems and storage locations",
+//     "Maintains attribution even when employees leave",
+//     "Provides forensic-quality audit trails",
+// ];
 
-const integrationPoints: string[] = [
-    "Connects to identity providers such as Entra ID, Okta, and more",
-    "Integrates with HR systems for employee lifecycle management",
-    "Links with development tools and secret managers",
-];
+// const integrationPoints: string[] = [
+//     "Connects to identity providers such as Entra ID, Okta, and more",
+//     "Integrates with HR systems for employee lifecycle management",
+//     "Links with development tools and secret managers",
+// ];
 
 
 export default function SolutionPage() {
     const [carouselApi, setCarouselApi] = useState<CarouselApi>();
     const [canScrollPrev, setCanScrollPrev] = useState(false);
     const [canScrollNext, setCanScrollNext] = useState(false);
+
+    const soln = solutions[0];
 
     useEffect(() => {
         if (!carouselApi) return;
@@ -110,11 +113,10 @@ export default function SolutionPage() {
                         {/* Heading */}
                         <div className="py-20 mx-auto flex max-w-2xl flex-col gap-4 text-center">
                             <h1 className=" text-5xl 2xl:text-5xl font-semibold text-gray-800">
-                                Workforce Attribution
+                                {soln.heading}
                             </h1>
-                            <p className="text-base text-center 2xl:text-lg max-w-[500px] font-medium text-gray-600">
-                                Map every Non-Human Identity to its associated human users for complete
-                                accountability and governance.
+                            <p className="text-base text-center 2xl:text-lg max-w-[750px] font-medium text-gray-600">
+                                {soln.subHeading}
                             </p>
                         </div>
 
@@ -158,65 +160,46 @@ export default function SolutionPage() {
                     <h3 className="text-center text-4xl font-semibold py-10 leading-tight tracking-tight">The <span className="text-privue-800">Problem</span></h3>
 
                     {/* Grid */}
-                    <div className=" border-t-[1px] border-gray-200 mt-12 flex">
-                        <ProblemCard
-                            icon="/solutions/action.svg"
-                            text="No visibility into who created, owns, or can access critical NHIs"
-                        />
-                        <ProblemCard
-                            icon="/solutions/consumers.svg"
-                            text="Impossible to assign accountability when security incidents occur"
-                        />
-                        <ProblemCard
-                            icon="/solutions/hide.svg"
-                            text="Former employees may still be tied to active NHIs"
-                        />
+                    <div className="border-t border-gray-200 mt-12 flex gap-1">
+                        {soln.problems.map((p, idx) => (
+                            <div key={idx} className="flex-1">
+                                <ProblemCard
+                                    icon={p.icon}
+                                    heading={p.problemHeading}
+                                    description={p.problemDesc}
+                                />
+                            </div>
+                        ))}
                     </div>
+
                 </div>
                 {/* solution line */}
                 <div className="border-t border-gray-200 p-24">
-                    <div className="max-w-3xl mx-auto text-center px-6">
+                    <div className="max-w-5xl mx-auto text-center px-6">
                         <h4 className="text-xl  tracking-normal font-semibold text-privue-800">
                             Solution
                         </h4>
-                        <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-normal leading-snug tracking-tight text-gray-900">
-                            Provides complete workforce attribution showing
-                            who created, stored, revealed, and accessed
-                            every NHI in your environment.
+                        <h2
+                            className="mt-6 text-md md:text-md lg:text-xl font-normal leading-relaxed tracking-tight text-gray-800"
+                            style={{ textAlign: "justify", textAlignLast: "center" }}
+                        >
+                            {soln.mainSolnDesc}
                         </h2>
-                    </div>
-                </div>
-                {/* challenge section */}
-                <div className="border-t border-gray-200">
-                    <h3 className="text-center p-20 text-4xl font-semibold leading-tight tracking-tight">The <span className="text-privue-800">Challenge</span></h3>
-                    <p></p>
-                    {/* Grid */}
-                    <div className="flex">
-                        <ChallengeCard
-                            heading="For CISOs"
-                            subheading="When a security incident involves an NHI, you need to know immediately who's responsible, but this information is scattered across systems or doesn't exist, slowing response and hampering accountability."
-                        />
-                        <ChallengeCard
-                            heading="For CISOs"
-                            subheading="When a security incident involves an NHI, you need to know immediately who's responsible, but this information is scattered across systems or doesn't exist, slowing response and hampering accountability."
-                        />
-                        <ChallengeCard
-                            heading="For CISOs"
-                            subheading="When a security incident involves an NHI, you need to know immediately who's responsible, but this information is scattered across systems or doesn't exist, slowing response and hampering accountability."
-                        />
 
                     </div>
-
                 </div>
+
+
                 {/* capabilities section */}
                 <div className="border-t-[1px] border-gray-200">
                     <div className="pt-20">
-                        <h2 className="text-center text-4xl font-semibold mb-6">How Privue Solves It</h2>
-                        <h3 className="text-center text-3xl font-semibold">Core <span className="text-privue-800">Capabilities</span></h3>
+                        {/* <h2 className="text-center text-4xl font-semibold mb-6">How Privue Solves It</h2> */}
+                        <h3 className="text-center text-4xl font-semibold">Core <span className="text-privue-800">Capabilities</span></h3>
+                        {/* <h3 className="text-center text-3xl font-semibold">Core <span className="text-privue-800">Capabilities</span></h3> */}
                     </div>
 
 
-                    <div className="flex px-12 py-20">
+                    {/* <div className="flex px-12 py-20">
                         <CapabilitiesCard
                             icon="/solutions/lock.svg"
                             heading="Customer Relationship Mapping"
@@ -237,38 +220,22 @@ export default function SolutionPage() {
                             heading="Lifecycle Tracking"
                             subheading="Tracks Creator, Owner, Modifier, User Relationships"
                         />
+                    </div> */}
+
+                    <div className=" border-gray-200 flex gap-1 px-12 py-20">
+                        {soln.coreCapabilities.map((c, idx) => (
+                            <div key={idx} className="flex-1">
+                                <CapabilitiesCard
+                                    icon={c.icon}
+                                    // heading={c.desc}
+                                    subheading={c.desc}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div className="border-t-[1px] border-gray-200">
-                    <div className="mx-auto max-w-6xl flex flex-col md:flex-row px-8 ">
-                        {/* Left Column */}
-                        <div className="flex-1 pr-6 md:pr-12 border-b md:border-b-0 md:border-r border-gray-200 py-20">
-                            <h2 className="text-2xl font-semibold mb-10">Unique Differentiators</h2>
-                            <ul className="space-y-6 px-2 text-gray-700">
-                                {uniqueDifferentiators.map((point, idx) => (
-                                    <li key={idx} className="flex items-start gap-3">
-                                        <span className="text-xl">→</span>
-                                        <span>{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
 
-                        {/* Right Column */}
-                        <div className="flex-1 px-8 mt-12 md:mt-0 py-20">
-                            <h2 className="text-2xl font-semibold mb-10">Integration Points</h2>
-                            <ul className="space-y-6 px-2 text-gray-700">
-                                {integrationPoints.map((point, idx) => (
-                                    <li key={idx} className="flex items-start gap-3">
-                                        <span className="text-xl">→</span>
-                                        <span>{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
 
                 {/* modules */}

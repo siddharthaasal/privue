@@ -75,12 +75,14 @@ const blogs: BlogCardProps[] = [
 
 
 
-// const uniqueDifferentiators: string[] = [
-//     "Only platform providing complete NHI-to-human lineage",
-//     "Tracks relationships across all systems and storage locations",
-//     "Maintains attribution even when employees leave",
-//     "Provides forensic-quality audit trails",
-// ];
+const solutionPoints: string[] = [
+    "Evaluate distributors’ ability to pay: Privue checks if a distributor or dealer can pay you.",
+    "Support finance teams: Provides guidance on how much credit to extend to each distributor.",
+    "Regular monitoring: Reviews each distributor every six months.",
+    "Early warning system: Alerts you if a distributor shows signs of struggle, so credit terms can be adjusted to prevent losses.",
+    "Comprehensive evaluation: Assesses each distributor across 300 + data points from public and private repositories.",
+    "Integrated risk engine: Combines external data with documents provided by the distributor.",
+];
 
 // const integrationPoints: string[] = [
 //     "Connects to identity providers such as Entra ID, Okta, and more",
@@ -217,7 +219,23 @@ export default function SolutionPage() {
                         description="Assesses 300+ data points from public/private sources plus distributor documents for accurate creditworthiness."
                     />
                 </div>
+                <div className="border-t border-gray-200 p-12">
+                    <div className="max-w-5xl mx-auto text-center px-6">
+                        <h3 className="text-center text-4xl font-semibold">Our <span className="text-privue-800">Solution</span></h3>
 
+                        <div className="text-left flex-1 pr-6 md:pr-12 border-b md:border-b-0 border-gray-200 py-20">
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6 px-2 text-gray-700">
+                                {solutionPoints.map((point, idx) => (
+                                    <li key={idx} className="flex items-start gap-3">
+                                        <span className="text-lg">→</span>
+                                        <span>{point}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
 
                 {/* capabilities section */}
                 <div className="border-t-[1px] border-gray-200">

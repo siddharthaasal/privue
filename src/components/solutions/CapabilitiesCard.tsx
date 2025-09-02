@@ -13,7 +13,7 @@ export default function CapabilitiesCard({ icon, heading, subheading }: Capabili
             {/* Text */}
             <div className="">
                 {heading && <p className="font-semibold text-lg mb-2 leading-tight">{heading}</p>}
-                {subheading && <p className="font-medium text-base tracking-tight">{subheading}</p>}
+                {subheading && <p className="font-medium text-base tracking-normal">{subheading}</p>}
             </div>
         </div>
     );

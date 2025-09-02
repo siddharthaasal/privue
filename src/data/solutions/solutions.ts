@@ -1,5 +1,6 @@
 // src/data/solutions.ts
 
+
 export type Problem = {
     problemHeading: string;
     problemDesc: string;
@@ -7,9 +8,10 @@ export type Problem = {
 };
 
 export type Module = {
-    moduleName: string;
-    moduleDesc: string;
-    moduleImg: string;
+    title: string;
+    description: string;
+    imgSrc: string;
+    link: string;
 };
 
 export type Capability = {
@@ -20,6 +22,7 @@ export type Capability = {
 export type Solution = {
     id: number;
     img: string;
+
     heading: string;
     subHeading: string;
     mainSolnDesc: string;
@@ -64,24 +67,55 @@ export const solutions: Solution[] = [
         ],
         modules: [
             {
-                moduleName: "Credit Risk Engine",
-                moduleDesc:
-                    "Problems surface only when payments are missed",
-                moduleImg: "/images/modules/credit-risk-engine.png",
+                title: "Dealer Onboarding",
+                description:
+                    "Add dealers, upload documents and verify identity",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
             },
             {
-                moduleName: "Fraud Detection Suite",
-                moduleDesc:
-                    "Uses machine learning to detect and prevent fraudulent transactions across channels.",
-                moduleImg: "/images/modules/fraud-detection.png",
+                title: "Data Acquisition",
+                description:
+                    "Obtain, data available publicly and from financials and GST",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Risk Assessment",
+                description:
+                    "Determine risk score of the dealer using advance models",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Credit Terms",
+                description:
+                    "Use the score to choose safe credit terms for every dealer",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Continuous Monitoring",
+                description:
+                    "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Go Live in 2 weeks",
+                description:
+                    "The tool can be integrated into your ERP system for a seamless experience",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
             },
         ],
         coreCapabilities: [
-            { desc: "Implement systematic, datadriven distributor onboarding", icon: "/solutions/lock.svg" },
+            { desc: "Implement systematic, data driven distributor onboarding", icon: "/solutions/lock.svg" },
             { desc: "Regularly monitor behavioural and external data feeds", icon: "/solutions/token.svg" },
             { desc: "Dynamically recalibrate credit limits using predictive risk scores", icon: "/solutions/context-driven.svg" },
             { desc: "Integrate risk alerts into ERP or CRM workflows", icon: "/solutions/streamlined.svg" },
-            { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
+            // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
         ],
     },
 ];
+

@@ -5,8 +5,8 @@ interface ChallengeCardProps {
 
 export default function ChallengeCard({ heading, description }: ChallengeCardProps) {
     return (
-        <div className="flex flex-col items-start gap-4 px-8 pt-6 pb-20 text-left border-x-[0.5px] border-gray-200">
-            <p className="font-semibold text-lg mb-1">{heading}</p>
+        <div className="flex flex-col items-start gap-2 px-8 py-12 text-left border-x-[0.5px] border-gray-200">
+            <p className="font-medium text-lg">{heading}</p>
             <p className="font-normal text-base">{description}</p>
         </div>
     );

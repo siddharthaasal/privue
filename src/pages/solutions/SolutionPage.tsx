@@ -20,6 +20,7 @@ import {
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { solutions } from "@/data/solutions/solutions";
+import ChallengeCard from "@/components/solutions/ChallengeCard";
 
 interface BlogCardProps {
     href: string;
@@ -71,6 +72,8 @@ const blogs: BlogCardProps[] = [
             "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
     },
 ]
+
+
 
 // const uniqueDifferentiators: string[] = [
 //     "Only platform providing complete NHI-to-human lineage",
@@ -180,13 +183,39 @@ export default function SolutionPage() {
                             Solution
                         </h4>
                         <h2
-                            className="mt-6 text-md md:text-md lg:text-xl font-normal leading-relaxed tracking-tight text-gray-800"
+                            className="mt-6 text-md md:text-md lg:text-xl font-normal text-gray-800"
                             style={{ textAlign: "justify", textAlignLast: "center" }}
                         >
                             {soln.mainSolnDesc}
                         </h2>
 
                     </div>
+                </div>
+                <div className="border-t border-gray-200 p-12">
+                    <div className="max-w-5xl mx-auto text-center px-6">
+                        <h3 className="text-center text-4xl font-semibold">Our <span className="text-privue-800">Solution</span></h3>
+
+                        <h2
+                            className="py-12 text-md md:text-md lg:text-2xl font-normal text-gray-900"
+                            style={{ textAlign: "justify", textAlignLast: "center" }}
+                        >
+                            Privue is a simple tool that helps you check if a distributor or dealer can pay you. It tells your finance team how much credit to give each distributor.
+                        </h2>
+                    </div>
+                </div>
+                <div className="grid grid-cols-3">
+                    <ChallengeCard
+                        heading="Credit evaluation"
+                        description="Check if a distributor/dealer can pay and guide how much credit to extend."
+                    />
+                    <ChallengeCard
+                        heading="Ongoing monitoring"
+                        description="Reviews every six months and sends early warnings to prevent losses."
+                    />
+                    <ChallengeCard
+                        heading="Comprehensive insights"
+                        description="Assesses 300+ data points from public/private sources plus distributor documents for accurate creditworthiness."
+                    />
                 </div>
 
 
@@ -242,22 +271,13 @@ export default function SolutionPage() {
                 <div className="border-t-[1px] border-gray-200">
                     <h3 className="text-center text-4xl font-semibold pt-20">Our <span className="text-privue-800">Modules</span></h3>
                     <div className="py-8 flex">
-                        <ModuleListing2 />
+                        <ModuleListing2 items={soln.modules} defaultIndex={0} />;
                     </div>
                 </div>
 
                 {/* case studies */}
                 <div className="py-24">
                     <h2 className="text-center text-4xl font-semibold  mb-8">Related <span className="text-privue-800">Articles</span></h2>
-                    {/* <div className="container mx-auto px-4 py-4">
-                        <div
-                            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-                        >
-                            {blogs.map((blog, index) => (
-                                <BlogCard key={index} {...blog} />
-                            ))}
-                        </div>
-                    </div> */}
                     <div className="p-4">
                         <div className="container">
                             {/* Header with arrows aligned right */}

@@ -1,10 +1,9 @@
 interface CapabilitiesCardProps {
     icon: string; // path to the icon
-    heading?: string;
-    subheading?: string;
+    desc: string;
 }
 
-export default function CapabilitiesCard({ icon, heading, subheading }: CapabilitiesCardProps) {
+export default function CapabilitiesCard({ icon, desc }: CapabilitiesCardProps) {
     return (
         <div className="flex flex-col items-start gap-6 px-4 text-left">
             {/* Icon */}
@@ -12,8 +11,7 @@ export default function CapabilitiesCard({ icon, heading, subheading }: Capabili
 
             {/* Text */}
             <div className="">
-                {heading && <p className="font-semibold text-lg mb-2 leading-tight">{heading}</p>}
-                {subheading && <p className="font-medium text-base tracking-normal">{subheading}</p>}
+                {<p className="font-medium text-base tracking-normal">{desc}</p>}
             </div>
         </div>
     );

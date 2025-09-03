@@ -11,6 +11,7 @@ import ContactPage from "./pages/contact/ContactPage";
 // legal
 import Terms from "./pages/legal/Terms";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import SolutionsPage from "./pages/solutions/SolutionsPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />
         <Route path="/solution" element={<SolutionPage />} />
+        <Route path="/solutions-final" element={<SolutionsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         {/* legal */}
         <Route path="/terms" element={<Terms />} />

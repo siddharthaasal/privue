@@ -19,6 +19,11 @@ export type Capability = {
     icon: string; // you can store a URL, icon name, or even import React components
 };
 
+export type SolutionPoints = {
+    solutionHeading: string;
+    solutionDescription: string;
+}
+
 export type Solution = {
     id: number;
     img: string;
@@ -26,19 +31,35 @@ export type Solution = {
     heading: string;
     subHeading: string;
     mainSolnDesc: string;
+    solnPoints: SolutionPoints[];
     problems: Problem[];
     modules: Module[];
     coreCapabilities: Capability[];
+    mainArticleSlug: string;
 };
 
 export const solutions: Solution[] = [
     {
         id: 1,
-        img: "/images/solutions/risk-analytics.jpg",
+        img: "/solutions/demo-image.png",
         heading: "Distributor Performance Management",
         subHeading: "Reduce leakages. Improve collections. Safeguard growth.",
         mainSolnDesc:
-            "Privue is a simple tool that helps you check if a distributor or dealer can pay you. It tells your finance team how much credit to give each distributor. It checks on each distributor every six months. If a distributor starts to struggle, PRIVUE sends an early warning so you can change the credit terms and avoid loss. Privue evaluates each distributor across 300+ data points sourced from public and private repositories. Our credit risk engine integrates these insights with documents provided by the distributor, delivering a comprehensive and accurate assessment of their creditworthiness",
+            "Privue is a simple tool that helps you check if a distributor or dealer can pay you. credit to give each distributor.",
+        solnPoints: [
+            {
+                solutionHeading: "Credit evaluation",
+                solutionDescription: "Check if a distributor/dealer can pay and guide how much credit to extend."
+            },
+            {
+                solutionHeading: "Ongoing monitoring",
+                solutionDescription: "Reviews every six months and sends early warnings to prevent losses."
+            },
+            {
+                solutionHeading: "Comprehensive insights",
+                solutionDescription: "Assesses 300+ data points from public/private sources plus distributor documents for accurate creditworthiness."
+            },
+        ],
         problems: [
             {
                 icon: "/solutions/hide.svg",
@@ -116,6 +137,7 @@ export const solutions: Solution[] = [
             { desc: "Integrate risk alerts into ERP or CRM workflows", icon: "/solutions/streamlined.svg" },
             // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
         ],
+        mainArticleSlug: "optimising-distributor-credit-risk-management"
     },
 ];
 

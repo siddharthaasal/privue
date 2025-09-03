@@ -1,0 +1,37 @@
+import ChallengeCard from "@/components/solutions/ChallengeCard";
+import type { SolutionPoints } from "@/data/solutions/solutions";
+
+interface SolutionSectionProps {
+    mainDesc: string;
+    solnPoints: SolutionPoints[];
+}
+
+export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectionProps) {
+    return (
+        <>
+
+            <div className="p-12">
+                <div className="max-w-5xl mx-auto text-center px-6">
+                    <h3 className="text-center text-4xl font-semibold">Our <span className="text-privue-800">Solution</span></h3>
+
+                    <h2
+                        className="py-12 text-md md:text-md lg:text-2xl font-normal text-gray-900"
+                        style={{ textAlign: "justify", textAlignLast: "center" }}
+                    >
+                        {mainDesc}
+                    </h2>
+                </div>
+            </div>
+            <div className=" divide-x-1 divide-gray-200 mt-12 flex gap-1 border-b-[1px] border-gray-200">
+                {solnPoints.map((sol, idx) => (
+                    <div key={idx} className="flex-1">
+                        <ChallengeCard
+                            heading={sol.solutionHeading}
+                            description={sol.solutionDescription}
+                        />
+                    </div>
+                ))}
+            </div>
+        </>
+    )
+}

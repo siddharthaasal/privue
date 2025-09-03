@@ -6,14 +6,12 @@ interface ProblemCardProps {
 
 export default function ProblemCard({ icon, heading, description }: ProblemCardProps) {
     return (
-        <div className="flex flex-col items-start px-8 py-12 gap-16 border-r-[1px] border-gray-200 text-left">
-            {/* Icon */}
+        <div className="flex flex-col items-start px-6 py-12 gap-12 text-left">
             <img src={icon} alt="" className="w-8 h-8" />
 
-            {/* Text */}
             <div>
-                <p className="font-semibold text-lg mb-1 tracking-tight">{heading}</p>
-                <p className="font-normal text-base">{description}</p>
+                <p className="font-medium text-lg mb-1 tracking-normal">{heading}</p>
+                <p className="font-normal text-[15px]">{description}</p>
             </div>
 
         </div>

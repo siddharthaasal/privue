@@ -7,9 +7,9 @@ import SolutionSection from "@/sections/solutions/SolutionSection";
 import ModulesSection from "@/sections/solutions/MoudulesSection";
 import RelatedArticles from "@/sections/solutions/RelatedArticles";
 
-export default function SolutionsPage() {
+export default function DPM() {
 
-    const soln = solutions[1];
+    const soln = solutions[0];
 
     return (
         <Layout>

@@ -1,5 +1,4 @@
-// import ArticleGrid from "@/components/articles/FeaturedGrid";
-import { Gallery } from "@/components/Gallery";
+import ArticleGallery from "@/components/ArticleGallery";
 
 export default function FeaturedArticles() {
     return (
@@ -13,7 +12,7 @@ export default function FeaturedArticles() {
                     Insights, guides, and stories curated for you.
                 </p>
             </div>
-            <Gallery />
+            <ArticleGallery mainArticleSlug="strengthening-insolvency-investigations" />
         </section>
     );
 }

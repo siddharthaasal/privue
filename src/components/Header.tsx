@@ -13,10 +13,10 @@ export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const desktopLinks: linkType[] = [
-        { name: "Modules", href: "/modules", variant: "link" },
-        { name: "Solutions", href: "/solution", variant: "link" },
-        { name: "API", href: "/api", variant: "link" },
-        { name: "Integrations", href: "/integrations", variant: "link" }
+        { name: "Industry", href: "/industry", variant: "link" },
+        { name: "DPM", href: "/solution1", variant: "link" },
+        { name: "Sustainability", href: "/solution2", variant: "link" },
+        { name: "Articles", href: "/articles", variant: "link" },
     ];
     const mobileLinks: linkType[] = [
         { name: "Modules", href: "/modules", variant: "link" },

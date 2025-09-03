@@ -139,5 +139,85 @@ export const solutions: Solution[] = [
         ],
         mainArticleSlug: "optimising-distributor-credit-risk-management"
     },
+    {
+        id: 2,
+        img: "/solutions/demo-image.png",
+        heading: "Sustainability Assessment",
+        subHeading: "Climate Risk. Emissions Estimation. ESG Score.",
+        mainSolnDesc:
+            "Privue empowers companies to assess vendors, partners, and borrowers through intelligent, data-backed sustainability evaluations with the same rigor as financial risk assessments.",
+        problems: [
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Over-Reliance on Self-Reported Information",
+                problemDesc:
+                    "Assessments today are heavily dependent on inputs provided by vendors or borrowers, which may be incomplete, inconsistent, or biased.",
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Fragmented ESG Signals",
+                problemDesc:
+                    "Critical information lies scattered across regulatory filings, disclosures, websites, and news reports—difficult to aggregate and interpret at scale.",
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Lack of Standardised Assessment Framework",
+                problemDesc:
+                    "Without a consistent methodology, sustainability evaluations vary across counterparties and geographies, reducing comparability.",
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Blind Spots in Scope 3 Emissions",
+                problemDesc:
+                    "Companies often underestimate emissions embedded in their supply chains or financed portfolios, leaving material risks unaccounted for.",
+            },
+        ],
+        solnPoints: [
+            {
+                solutionHeading: "Climate Risk Assessment",
+                solutionDescription: "Our models, built on CMIP6 projections and IMD data, quantify physical climate risks at the company or asset level. This allows you to assess whether your vendor, partner, or borrower is exposed to material risks that could disrupt supply chains, business continuity, or repayment capacity."
+            },
+            {
+                solutionHeading: "Carbon Emission Estimation",
+                solutionDescription: "We estimate Scope 1, 2, and proxy Scope 3 emissions for companies, even where disclosures are absent. By combining industry, turnover, workforce, and state-level energy mix data, we provide credible emission footprints that help you evaluate high-emission counterparties and meet your own reporting obligations."
+            },
+            {
+                solutionHeading: "ESG Scoring",
+                solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network."
+            },
+        ],
+        coreCapabilities: [
+            { desc: "Implement systematic, data driven distributor onboarding", icon: "/solutions/lock.svg" },
+            { desc: "Regularly monitor behavioural and external data feeds", icon: "/solutions/token.svg" },
+            { desc: "Dynamically recalibrate credit limits using predictive risk scores", icon: "/solutions/context-driven.svg" },
+            { desc: "Integrate risk alerts into ERP or CRM workflows", icon: "/solutions/streamlined.svg" },
+            // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
+        ],
+        modules: [
+            {
+                title: "Climate Risk Assessment",
+                description:
+                    "Pinpoint climate vulnerabilities across India using geo-tagged data powered by our API. Integrate insights directly into your workflows or access them on our platform to evaluate heat, flood, and drought risks at asset or company level.",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Carbon Emission Estimation",
+                description:
+                    "Get reliable Scope 1, 2, and proxy Scope 3 emission estimates—even for companies with no disclosures. Our models combine industry, turnover, workforce, and state-level energy mix data to generate defensible carbon footprints, enabling stronger vendor and borrower evaluations.",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "ESG Scoring",
+                description:
+                    "Leverage AI Agents that scan regulatory filings, company websites, court and tribunal cases, and news sources to surface ESG signals. We translate these into an objective ESG score—providing a robust baseline for deeper sustainability due diligence.",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+        ],
+
+        mainArticleSlug: "optimising-distributor-credit-risk-management"
+    },
 ];
 

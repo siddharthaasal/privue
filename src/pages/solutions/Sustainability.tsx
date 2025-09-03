@@ -7,7 +7,7 @@ import SolutionSection from "@/sections/solutions/SolutionSection";
 import ModulesSection from "@/sections/solutions/MoudulesSection";
 import RelatedArticles from "@/sections/solutions/RelatedArticles";
 
-export default function SolutionsPage() {
+export default function Sustainability() {
 
     const soln = solutions[1];
 

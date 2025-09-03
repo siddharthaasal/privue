@@ -27,7 +27,7 @@ export default function ModuleListing({
     return (
         <section className="w-full border-t border-b border-gray-200">
             {/* Tabs */}
-            <div className="grid grid-cols-2 sm:grid-cols-6 text-center border-b border-gray-200">
+            <div className="grid grid-cols-2 sm:grid-cols-3 text-center border-b border-gray-200">
                 {items.map((item, index) => (
                     <button
                         key={slugify(item.title)}
@@ -51,7 +51,7 @@ export default function ModuleListing({
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.25 }}
                         className="flex flex-col justify-left"
                     >
                         <h2 className="text-lg font-medium mb-4">{activeItem.title}</h2>
@@ -65,10 +65,10 @@ export default function ModuleListing({
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeItem.title + "-image"}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
+                        // initial={{ opacity: 0, scale: 1.0 }}
+                        // animate={{ opacity: 1, scale: 0.95 }}
+                        // exit={{ opacity: 0, scale: 0.90 }}
+                        // transition={{ duration: 0.25 }}
                         className="flex items-center justify-center border border-gray-200 rounded-xl bg-gray-50 p-8 col-span-2"
                     >
                         <img

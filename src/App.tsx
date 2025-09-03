@@ -12,6 +12,8 @@ import ContactPage from "./pages/contact/ContactPage";
 import Terms from "./pages/legal/Terms";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import SolutionsPage from "./pages/solutions/SolutionsPage";
+import DPM from "./pages/solutions/DPM";
+import Sustainability from "./pages/solutions/Sustainability";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/styles" element={<TestStyles />} />
         <Route path="/solution" element={<SolutionPage />} />
         <Route path="/solutions-final" element={<SolutionsPage />} />
+        <Route path="/solution1" element={<DPM />} />
+        <Route path="/solution2" element={<Sustainability />} />
         <Route path="/contact" element={<ContactPage />} />
         {/* legal */}
         <Route path="/terms" element={<Terms />} />

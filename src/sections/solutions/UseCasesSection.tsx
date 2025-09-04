@@ -16,15 +16,19 @@ export default function UseCasesSection({
                 </h3>
             </div>
 
-            <div className="border-gray-200 flex gap-1 px-12 py-20">
+            <div
+                className={`
+          grid gap-8 px-12 py-20
+          ${useCases.length <= 6 ? "sm:grid-cols-3" : "sm:grid-cols-4"}
+        `}
+            >
                 {useCases.map((c, idx) => (
-                    <div key={idx} className="flex-1">
-                        <UseCasesCard
-                            icon={c.icon}
-                            heading={c.heading || undefined}
-                            desc={c.desc}
-                        />
-                    </div>
+                    <UseCasesCard
+                        key={idx}
+                        icon={c.icon}
+                        heading={c.heading || undefined}
+                        desc={c.desc}
+                    />
                 ))}
             </div>
         </div>

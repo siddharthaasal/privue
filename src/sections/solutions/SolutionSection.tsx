@@ -15,7 +15,7 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
                     <h3 className="text-center text-4xl font-semibold">Our <span className="text-privue-800">Solution</span></h3>
 
                     <h2
-                        className="py-12 text-md md:text-md lg:text-2xl font-normal text-gray-900"
+                        className="pt-12 text-md md:text-md lg:text-2xl font-normal text-gray-900"
                         style={{ textAlign: "justify", textAlignLast: "center" }}
                     >
                         {mainDesc}

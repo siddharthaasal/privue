@@ -1,142 +1,45 @@
 // components/feature/FeaturedSolutions.tsx
-import { useState } from "react";
-import { type Item } from "@/components/feature/FeatureExpandableCard";
-import OverlayCard from "@/components/feature/OverlayCard";
-// import FlipCard from "@/components/feature/FlipCard";
-// import ExpandingCard from "@/components/feature/ExpandingCard";
-// import { motion } from "motion/react";
+import { useState, useMemo } from "react";
+import { solutions } from "@/data/solutions/solutions.ts";
+import OverlayCard, { type Item } from "@/components/feature/OverlayCard";
 
 export default function FeaturedSolutions() {
-
-    const items: Item[] = [
-        {
-            id: 1,
-            img: "https://images.unsplash.com/photo-1661773040856-91e96c56668d?q=80&w=1035&auto=format&fit=crop",
-            heading: "Insurnace Underwriting and Pricing",
-            sub: "AI models that detect anomalies in real time",
-            details: [
-                "Identify outliers across millions of transactions",
-                "Reduce fraud exposure with predictive scoring",
-                "Stay compliant with evolving regulations",
-            ],
-        },
-        {
-            id: 2,
-            img: "https://images.unsplash.com/photo-1634638022845-1ab614a94128?w=900&auto=format&fit=crop&q=60",
-            heading: "Dealer Performance Management",
-            sub: "Data-driven demand and inventory predictions",
-            details: [
-                "Anticipate disruptions with scenario modeling",
-                "Optimize working capital with accurate forecasts",
-                "Enhance supplier reliability and transparency",
-            ],
-        },
-        {
-            id: 3,
-            img: "https://images.unsplash.com/photo-1511883040705-6011fad9edfc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGZpbmFuY2V8ZW58MHx8MHx8fDA%3D",
-            heading: "Insolvency Assessment",
-            sub: "AI insights for smarter asset allocation",
-            details: [
-                "Balance risk and return with dynamic rebalancing",
-                "Leverage alternative data for alpha generation",
-                "Personalize strategies at scale",
-            ],
-        },
-        {
-            id: 4,
-            img: "https://images.unsplash.com/photo-1639815188546-c43c240ff4df?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            heading: "Sustainability Assessment",
-            sub: "Automated monitoring and compliance alerts",
-            details: [
-                "Track regulatory changes across markets",
-                "Flag risks before audits occur",
-                "Streamline reporting and documentation",
-            ],
-        },
-        {
-            id: 5,
-            img: "https://images.unsplash.com/photo-1726137569966-a7354383e2ae?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            heading: "Private Credit Analysis",
-            sub: "AI-driven segmentation and personalization",
-            details: [
-                "Predict churn with behavioral models",
-                "Tailor recommendations in real time",
-                "Boost engagement with targeted offers",
-            ],
-        },
-        {
-            id: 6,
-            img: "https://images.unsplash.com/photo-1754887966362-952236591654?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNzZ8fHxlbnwwfHx8fHw%3D",
-            heading: "Legal Due Diligence",
-            sub: "Visibility into liquidity and forecasting",
-            details: [
-                "Project inflows and outflows with confidence",
-                "Spot shortfalls before they happen",
-                "Optimize treasury operations with AI",
-            ],
-        },
-        {
-            id: 7,
-            img: "https://images.unsplash.com/photo-1754887966362-952236591654?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNzZ8fHxlbnwwfHx8fHw%3D",
-            heading: "Vendor Risk Assessment",
-            sub: "Visibility into liquidity and forecasting",
-            details: [
-                "Project inflows and outflows with confidence",
-                "Spot shortfalls before they happen",
-                "Optimize treasury operations with AI",
-            ],
-        },
-        {
-            id: 8,
-            img: "https://images.unsplash.com/photo-1754887966362-952236591654?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNzZ8fHxlbnwwfHx8fHw%3D",
-            heading: "Customer Receivable Risk Assessment",
-            sub: "Visibility into liquidity and forecasting",
-            details: [
-                "Project inflows and outflows with confidence",
-                "Spot shortfalls before they happen",
-                "Optimize treasury operations with AI",
-            ],
-        },
-        {
-            id: 9,
-            img: "https://images.unsplash.com/photo-1754887966362-952236591654?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNzZ8fHxlbnwwfHx8fHw%3D",
-            heading: "Lending - Credit Risk Assessment",
-            sub: "Visibility into liquidity and forecasting",
-            details: [
-                "Project inflows and outflows with confidence",
-                "Spot shortfalls before they happen",
-                "Optimize treasury operations with AI",
-            ],
-        },
-    ];
-
-    // chunk into rows of 3 so hover effects never affect other rows
-
-    // const rows = chunk(items, 3);
-    // const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [hoveredId, setHoveredId] = useState<number | null>(null);
-    // const [activeId, setActiveId] = useState<number | null>(null);
 
+    // derive the items the card expects
+    const items: Item[] = useMemo(() => {
+        return solutions.map((s) => ({
+            id: s.id,
+            img: s.coverImg || s.img,
+            heading: s.heading,
+            sub: s.subHeading,
+            // prefer your featurePoints; else fall back to solnPoints headings; else empty
+            details:
+                s.featurePoints?.length
+                    ? s.featurePoints
+                    : s.solnPoints?.map((p) => p.solutionHeading) ?? [],
+            link: `/solutions/${s.slug}`, // <-- route to the solution
+        }));
+    }, []);
 
     return (
-        <>
+        <section className="font-open-sans relative mx-auto my-24">
+            <div className="mx-auto max-w-7xl px-4 py-10">
+                <div className="mx-auto text-center py-12">
+                    <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
+                        Our{" "}
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
+                            Solutions
+                        </span>
+                    </h1>
+                    <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
+                        Scalable solutions to optimize decisions, reduce risk, and drive growth.
+                    </p>
+                </div>
 
-            <section className="font-open-sans relative mx-auto my-24">
-                <div className="mx-auto max-w-7xl px-4 py-10">
-                    <div className="font-open-sans mx-auto text-center py-12">
-                        <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
-                            Our{" "}
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
-                                Solutions
-                            </span>
-                        </h1>
-                        <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
-                            Scalable solutions to optimize decisions, reduce risk, and drive
-                            growth.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {items.map((item) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {items.map((item) => (
+                        <a href={item.link}>
                             <OverlayCard
                                 key={item.id}
                                 item={item}
@@ -144,38 +47,11 @@ export default function FeaturedSolutions() {
                                 onHoverStart={() => setHoveredId(item.id)}
                                 onHoverEnd={() => setHoveredId(null)}
                             />
-                        ))}
-                    </div>
+                        </a>
 
+                    ))}
                 </div>
-            </section>
-            {/* <section className="font-open-sans relative mx-auto my-24">
-                <div className="mx-auto max-w-7xl px-4 py-10">
-                    <div className="font-open-sans mx-auto text-center py-12">
-                        <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
-                            Flip{" "}
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
-                                Solutions
-                            </span>
-                        </h1>
-                        <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
-                            Scalable solutions to optimize decisions, reduce risk, and drive
-                            growth.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto items-center">
-                        {items.map((item) => (
-                            <FlipCard
-                                key={item.id}
-                                title={item.heading}
-                                subtitle={item.sub}
-                                description={item.sub}
-                                features={item.details}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section> */}
-        </>
+            </div>
+        </section>
     );
 }

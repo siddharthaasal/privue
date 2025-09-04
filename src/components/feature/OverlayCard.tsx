@@ -78,27 +78,28 @@ export default function OverlayCard({
                             {item.details.map((d, i) => (
                                 <li
                                     key={i}
-                                    className="relative pl-6 text-sm leading-relaxed text-neutral-200"
+                                    className="flex items-start gap-2 text-sm leading-relaxed text-neutral-200"
                                 >
                                     <svg
                                         viewBox="0 0 24 24"
-                                        className="absolute left-0 top-[0.55rem] h-4 w-4 text-green-400"
+                                        className="mt-1 h-4 w-4 shrink-0 text-privue-700"
                                         fill="none"
                                         stroke="currentColor"
                                         strokeWidth="2"
                                     >
                                         <path d="M20 6L9 17l-5-5" />
                                     </svg>
-                                    {d}
+                                    <span>{d}</span>
                                 </li>
                             ))}
                         </ul>
+
                     </div>
 
                     {item.link && (
                         <a
                             href={item.link}
-                            className="mt-4 inline-block text-sm font-medium text-green-400 hover:text-green-300 underline underline-offset-4 decoration-green-600"
+                            className="mt-4 inline-block text-sm font-medium text-privue-700 hover:text-privue-500 underline underline-offset-4 decoration-privue-700"
                         >
                             Learn more →
                         </a>

@@ -37,17 +37,17 @@ export default function Footer({
         url: "https://www.privue.ai",
     },
     // tagline = "Empowering Businesses via Intelligent Data",
-    address = ["WeWork Blue One Square,", "Sector 18, Gurugram - 122016, Haryana"],
+    //  M
+    address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road, Gurugram, Haryana 12200"],
     menuItems = [
         {
-            title: "Product",
+            title: "Solutions",
             links: [
-                { text: "Overview", url: "#" },
-                { text: "Demo", url: "#" },
-                { text: "API", url: "#" },
-                { text: "Features", url: "#" },
-                { text: "Integrations", url: "#" },
-                { text: "Pricing", url: "#" },
+                { text: "Dealer Performance Management", url: "#" },
+                { text: "Sustainability Assessment", url: "#" },
+                { text: "Large Customer Risk Assessment", url: "#" },
+                { text: "Lending - Credit Risk Assessment", url: "#" },
+
             ],
         },
         {

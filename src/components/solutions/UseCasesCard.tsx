@@ -1,10 +1,10 @@
-interface CapabilitiesCardProps {
+interface UseCasesCardProps {
     icon: string; // path to the icon
     heading?: string;
     desc: string;
 }
 
-export default function CapabilitiesCard({ icon, heading, desc }: CapabilitiesCardProps) {
+export default function UseCasesCard({ icon, heading, desc }: UseCasesCardProps) {
     return (
         <div className="flex flex-col items-start gap-6 px-4 text-left">
             {/* Icon */}

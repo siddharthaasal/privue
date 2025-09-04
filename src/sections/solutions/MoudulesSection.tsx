@@ -1,4 +1,5 @@
 import ModuleListing2 from "@/components/modules/ModuleListing2"
+import ModulesListing from "@/components/modules/ModulesListing";
 import type { Module } from "@/data/solutions/solutions"
 
 interface ModulesSectionProps {
@@ -11,6 +12,7 @@ export default function ModulesSection({ modules }: ModulesSectionProps) {
             <div className="py-8 flex">
                 <ModuleListing2 items={modules} defaultIndex={0} />
             </div>
+            <ModulesListing />
         </div>
     )
 }

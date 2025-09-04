@@ -51,7 +51,7 @@ export default function RelatedArticles({ mainArticleSlug }: RelatedArticlesProp
 
     return (
         <>
-            <div className="py-24">
+            <div className="py-12">
                 <h2 className="text-center text-4xl font-semibold  mb-8">Related <span className="text-privue-800">Articles</span></h2>
                 <div className="p-4">
                     <div className="container">
@@ -97,7 +97,7 @@ export default function RelatedArticles({ mainArticleSlug }: RelatedArticlesProp
                                 {/* {items.map((item) => ( */}
                                 {relatedArticles.map((item) => (
                                     // <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
-                                    <CarouselItem className="ml-2 md:max-w-[452px]">
+                                    <CarouselItem key={item.url} className="ml-2 md:max-w-[452px]">
                                         <BlogCard
                                             href={item.url}
                                             title={item.title}

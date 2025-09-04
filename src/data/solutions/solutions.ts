@@ -44,7 +44,7 @@ export type Solution = {
     problems: Problem[];
     modules: Module[];
     coreCapabilities?: Capability[];
-    useCases?: Capability[];
+    useCases?: UseCase[];
     mainArticleSlug: string;
 };
 
@@ -210,7 +210,38 @@ export const solutions: Solution[] = [
                 solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network."
             },
         ],
-
+        useCases: [
+            {
+                heading: "Banks & Lenders",
+                desc: "Evaluate loan portfolios with our ESG Scoring to obtain indicative sustainability scores for counterparties.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Financial Institutions",
+                desc: "Use our Carbon Emissions Estimator to measure financed emissions across portfolios, even when disclosures are missing.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Sustainability Investors",
+                desc: "Build and triage target portfolios by combining estimated ESG scores with modeled carbon emissions data.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Corporates",
+                desc: "Assess vendors’ sustainability practices using indicative ESG scores and estimated carbon emissions for better supply chain visibility.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Collateral Risk Assessment",
+                desc: " Banks can quantify climate exposure of properties offered as collateral to strengthen lending decisions.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Supply Chain & Facility Risk",
+                desc: "Corporates can evaluate climate risks to their own operations and their suppliers’ facilities, identifying vulnerabilities to floods, heat stress, or drought.",
+                icon: "/solutions/lock.svg"
+            },
+        ],
         modules: [
             {
                 title: "Climate Risk Assessment",

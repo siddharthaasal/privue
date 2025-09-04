@@ -1,9 +1,6 @@
-// grid background, announcement, heading, subtext, cta button
-// import { useEffect } from "react";
-// import { useState, useRef } from "react";
+
 // import { cn } from "../lib/utils";
 // import { GridPattern } from "@/components/magicui/grid-pattern";
-// import { DotPattern } from "@/components/ui/shadcn-io/dot-pattern";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
@@ -13,25 +10,20 @@ import {
     AnnouncementTitle,
 } from '@/components/ui/shadcn-io/announcement';
 
+import Marquee from "react-fast-marquee";
+
 export default function HeroSection() {
 
-    // const demos = [
-    //     { label: "Systems", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
-    //     { label: "AI", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" },
-    //     { label: "Security", video: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/animation/hero@2x.IN.webm", poster: "https://a.slack-edge.com/0cedc3b/marketing/img/homepage/true-prospects/hero-revamp/static/hero@2x.IN.jpg" }
-    // ];
+    const logos = [
+        "/integration-logos/dnb.png",
+        "/integration-logos/ikanoon.png",
+        "/integration-logos/myGate.png",
+        "/integration-logos/nasscom.png",
+        "/integration-logos/salesforce.png",
+        "/integration-logos/SAP-Logo.png",
+    ];
 
-    // const [activeDemo, setActiveDemo] = useState(demos[0]);
 
-    // const [isPlaying, setIsPlaying] = useState(false);
-    // const videoRef = useRef<HTMLVideoElement>(null);
-
-    // const handlePlay = () => {
-    //     setIsPlaying(true);
-    //     setTimeout(() => {
-    //         videoRef.current?.play();
-    //     }, 100); // slight delay to ensure render
-    // };
 
     return (
         <section className="flex flex-col items-center justify-center text-center">
@@ -127,62 +119,28 @@ export default function HeroSection() {
 
                 </motion.div>
 
-                {/* Demo Video */}
-                {/* <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-20 w-full max-w-[1000px] px-4 "
-                >
-                    <div className="w-full max-w-[1000px] mx-auto px-4">
-                        <div className="flex justify-center gap-8">
-                            {demos.map(demo => (
-                                <button
-                                    key={demo.label}
-                                    onClick={() => setActiveDemo(demo)}
-                                    className={`pb-2 text-sm 2xl:text-base cursor-pointer transition-colors font-semibold ${activeDemo.label === demo.label
-                                        ? "text-foreground underline underline-offset-2"
-                                        : "text-foreground-lighter hover:text-foreground"
-                                        }`}
-                                >
-                                    {demo.label}
-                                </button>
-                            ))}
+                <section className="pt-20">
+                    {/* Layout container */}
+                    <div className="mx-auto max-w-6xl px-4">
+                        {/* Clip the moving track so it doesn't overflow your layout */}
+                        <div className="relative overflow-hidden rounded-xl">
+                            <Marquee
+                                className="w-full"
+                                speed={50}
+                                pauseOnHover
+                                gradient
+                                gradientWidth={48}
+                                autoFill                           // duplicate logos to avoid empty gaps
+                            >
+                                {logos.map((src, i) => (
+                                    <div key={i} className="mx-10 flex h-14 w-28 items-center justify-center">
+                                        <img src={src} alt="integration logo" className="max-h-10 w-auto object-contain" />
+                                    </div>
+                                ))}
+                            </Marquee>
                         </div>
-
-                        <div className="relative mt-4 h-full">
-                            <div className="absolute -inset-4 rounded-sm bg-gradient-to-r from-privue-500/50 via-privue-700/40 to-privue-500/50 blur-2xl opacity-80" />
-
-                            <div className="relative overflow-hidden rounded-xl bg-background border border-black/10 shadow-lg h-full">
-                                <video
-                                    ref={videoRef}
-                                    key={activeDemo.video}
-                                    controls
-                                    poster={activeDemo.poster}
-                                    className="w-full h-full object-cover"
-                                >
-                                    <source src={activeDemo.video} type="video/mp4" />
-                                </video>
-
-                                {!isPlaying && (
-                                    <button
-                                        onClick={handlePlay}
-                                        className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="white"
-                                            viewBox="0 0 24 24"
-                                            className="w-16 h-16"
-                                        >
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </button>
-                                )}
-                            </div>
-                        </div>                        
                     </div>
-                </motion.div> */}
+                </section>
 
                 <div
                     className="relative mx-auto ml-3 mt-20 h-fit w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"

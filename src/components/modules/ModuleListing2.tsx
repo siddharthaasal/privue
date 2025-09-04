@@ -27,20 +27,21 @@ export default function ModuleListing({
     return (
         <section className="w-full border-t border-b border-gray-200">
             {/* Tabs */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 text-center border-b border-gray-200">
+            <div className="flex border-b border-gray-200 overflow-x-auto">
                 {items.map((item, index) => (
                     <button
                         key={slugify(item.title)}
                         onClick={() => setActiveIndex(index)}
-                        className={`cursor-pointer py-8 px-2 text-base font-medium border-r-[0.5px] ${activeIndex === index
+                        className={`flex-1 cursor-pointer py-6 px-4 text-base font-medium border-r border-gray-200 whitespace-nowrap ${activeIndex === index
                             ? "border-b-2 border-b-black text-black"
-                            : "border-b-[0.5px] border-gray-200 text-gray-500 hover:text-black"
+                            : "border-b-[0.5px] text-gray-500 hover:text-black"
                             }`}
                     >
                         {item.title}
                     </button>
                 ))}
             </div>
+
 
             {/* Content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-12 py-24">

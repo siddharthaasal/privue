@@ -7,7 +7,6 @@ import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
 import DarkHeroSection from "./sections/DarkHeroSection";
 import TestStyles from "./pages/TestStyles";
-import SolutionPage from "./pages/solutions/SolutionPage";
 import ContactPage from "./pages/contact/ContactPage";
 // legal
 import Terms from "./pages/legal/Terms";
@@ -28,7 +27,6 @@ function App() {
         <Route path="/articles-0" element={<OldArticleListing />} />
         <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />
-        <Route path="/solution" element={<SolutionPage />} />
         <Route path="/solutions-final" element={<SolutionsPage />} />
         <Route path="/solution1" element={<DPM />} />
         <Route path="/solution2" element={<Sustainability />} />
@@ -36,7 +34,7 @@ function App() {
         {/* legal */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/solutions/:slug" element={<SolutionPage />} />
+        <Route path="/solutions/:slug" element={<SolutionsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes >
     </>

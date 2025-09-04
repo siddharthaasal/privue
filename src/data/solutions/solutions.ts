@@ -15,8 +15,15 @@ export type Module = {
 };
 
 export type Capability = {
+    heading?: string;
     desc: string;
-    icon: string; // you can store a URL, icon name, or even import React components
+    icon: string;
+};
+
+export type UseCase = {
+    heading: string;
+    desc: string;
+    icon: string;
 };
 
 export type SolutionPoints = {
@@ -26,24 +33,34 @@ export type SolutionPoints = {
 
 export type Solution = {
     id: number;
+    slug: string;
     img: string;
-
+    coverImg: string;
     heading: string;
     subHeading: string;
+    featurePoints: string[];
     mainSolnDesc: string;
     solnPoints: SolutionPoints[];
     problems: Problem[];
     modules: Module[];
-    coreCapabilities: Capability[];
+    coreCapabilities?: Capability[];
+    useCases?: Capability[];
     mainArticleSlug: string;
 };
 
 export const solutions: Solution[] = [
     {
         id: 1,
+        slug: "distributor-performance-management",
         img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
         heading: "Distributor Performance Management",
         subHeading: "Reduce leakages. Improve collections. Safeguard growth.",
+        featurePoints: [
+            "hi",
+            "hi",
+            "hi",
+        ],
         mainSolnDesc:
             "Privue is a simple tool that helps you check if a distributor or dealer can pay you. credit to give each distributor.",
         solnPoints: [
@@ -141,9 +158,16 @@ export const solutions: Solution[] = [
     },
     {
         id: 2,
+        slug: "sustainability-assessment",
         img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
         heading: "Sustainability Assessment",
         subHeading: "Climate Risk. Emissions Estimation. ESG Score.",
+        featurePoints: [
+            "Climate Risk",
+            "Climate Risk",
+            "Climate Risk",
+        ],
         mainSolnDesc:
             "Privue empowers companies to assess vendors, partners, and borrowers through intelligent, data-backed sustainability evaluations with the same rigor as financial risk assessments.",
         problems: [
@@ -186,13 +210,7 @@ export const solutions: Solution[] = [
                 solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network."
             },
         ],
-        coreCapabilities: [
-            { desc: "Implement systematic, data driven distributor onboarding", icon: "/solutions/lock.svg" },
-            { desc: "Regularly monitor behavioural and external data feeds", icon: "/solutions/token.svg" },
-            { desc: "Dynamically recalibrate credit limits using predictive risk scores", icon: "/solutions/context-driven.svg" },
-            { desc: "Integrate risk alerts into ERP or CRM workflows", icon: "/solutions/streamlined.svg" },
-            // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
-        ],
+
         modules: [
             {
                 title: "Climate Risk Assessment",

@@ -13,11 +13,15 @@ export default function SolutionsPage() {
 
     return (
         <Layout>
-            <main className="relative mx-auto space-y-12">
+            <main className="relative mx-auto">
                 <Hero heading={soln.heading} subHeading={soln.subHeading} image={soln.img} />
                 <ProblemSection problems={soln.problems} />
                 <SolutionSection mainDesc={soln.mainSolnDesc} solnPoints={soln.solnPoints} />
-                <CapabilitiesSection capabilities={soln.coreCapabilities} />
+                {!!soln.coreCapabilities?.length && (
+                    console.log("Rendering CapabilitiesSection with", soln.coreCapabilities.length),
+                    <CapabilitiesSection capabilities={soln.coreCapabilities} />
+                )}
+
                 <ModulesSection modules={soln.modules} />
                 <RelatedArticles mainArticleSlug={soln.mainArticleSlug} />
             </main>

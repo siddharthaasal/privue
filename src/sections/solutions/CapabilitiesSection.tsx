@@ -17,15 +17,19 @@ export default function CapabilitiesSection({
                 </h3>
             </div>
 
-            <div className="border-gray-200 flex gap-1 px-12 py-20">
+            <div
+                className={`
+          grid gap-12 px-12 py-20
+          ${capabilities.length % 3 == 0 ? "sm:grid-cols-3" : "sm:grid-cols-4"}
+        `}
+            >
                 {capabilities.map((c, idx) => (
-                    <div key={idx} className="flex-1">
-                        <CapabilitiesCard
-                            icon={c.icon}
-                            heading={c.heading || undefined}
-                            desc={c.desc}
-                        />
-                    </div>
+                    <CapabilitiesCard
+                        key={idx}
+                        icon={c.icon}
+                        heading={c.heading || undefined}
+                        desc={c.desc}
+                    />
                 ))}
             </div>
         </div>

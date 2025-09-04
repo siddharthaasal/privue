@@ -18,8 +18,8 @@ export default function UseCasesSection({
 
             <div
                 className={`
-          grid gap-8 px-12 py-20
-          ${useCases.length <= 6 ? "sm:grid-cols-3" : "sm:grid-cols-4"}
+          grid gap-12 px-12 py-20
+          ${useCases.length % 3 == 0 ? "sm:grid-cols-3" : "sm:grid-cols-4"}
         `}
             >
                 {useCases.map((c, idx) => (

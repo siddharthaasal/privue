@@ -270,87 +270,110 @@ export const solutions: Solution[] = [
     },
     {
         id: 3,
-        slug: "sustainability-assessment",
+        slug: "commercial-insurance-underwriting",
         img: "/solutions/demo-image.png",
-        coverImg: "https://images.unsplash.com/photo-1569227997603-33b9f12af927?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        heading: "Sustainability Assessment",
-        subHeading: "Climate Risk. Emissions Estimation. ESG Score.",
+        coverImg: "https://images.unsplash.com/photo-1647348815424-8e8206ea7c83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        heading: "Commercial Insurance Underwriting",
+        subHeading: "Sharper insights. Smarter underwriting. Stronger outcomes.",
         featurePoints: [
-            "Assess Climate Risk",
+            "Intelligent Data Extraction",
             "Carbon Emissions Estimation",
             "ESG Score",
         ],
         mainSolnDesc:
-            "Privue empowers companies to assess vendors, partners, and borrowers through intelligent, data-backed sustainability evaluations with the same rigor as financial risk assessments.",
+            "At Privue, we design agentic workflows that integrate into an insurer’s underwriting desk, automating manual tasks and delivering insights so underwriters can focus on risk selection and decision quality, driving faster turnaround, improved risk assessment, and portfolio consistency.",
         problems: [
             {
                 icon: "/solutions/hide.svg",
-                problemHeading: "Over-Reliance on Self-Reported Information",
+                problemHeading: "Data Blind Spots",
                 problemDesc:
-                    "Assessments today are heavily dependent on inputs provided by vendors or borrowers, which may be incomplete, inconsistent, or biased.",
+                    "Over-reliance on insured-provided information and limited third-party data"
             },
             {
                 icon: "/solutions/hide.svg",
-                problemHeading: "Fragmented ESG Signals",
+                problemHeading: "Fragmented Access",
                 problemDesc:
-                    "Critical information lies scattered across regulatory filings, disclosures, websites, and news reports—difficult to aggregate and interpret at scale.",
+                    "Challenges in managing or integrating multiple data subscriptions "
             },
             {
                 icon: "/solutions/hide.svg",
-                problemHeading: "Lack of Standardised Assessment Framework",
+                problemHeading: "Manual Overload",
                 problemDesc:
-                    "Without a consistent methodology, sustainability evaluations vary across counterparties and geographies, reducing comparability.",
+                    "Heavy manual effort to convert insured documents into system-ready inputs "
             },
             {
                 icon: "/solutions/hide.svg",
-                problemHeading: "Blind Spots in Scope 3 Emissions",
+                problemHeading: "Outdated Risk View",
                 problemDesc:
-                    "Companies often underestimate emissions embedded in their supply chains or financed portfolios, leaving material risks unaccounted for.",
+                    "Limited visibility into insureds during the policy term, especially before a claim"
             },
         ],
         solnPoints: [
             {
-                solutionHeading: "Climate Risk Assessment",
-                solutionDescription: "Our models, built on CMIP6 projections and IMD data, quantify physical climate risks at the company or asset level. This allows you to assess whether your vendor, partner, or borrower is exposed to material risks that could disrupt supply chains, business continuity, or repayment capacity."
+                solutionHeading: "Trusted Data Acquisition",
+                solutionDescription: "Verified and validated data from third-party partners"
             },
             {
-                solutionHeading: "Carbon Emission Estimation",
-                solutionDescription: "We estimate Scope 1, 2, and proxy Scope 3 emissions for companies, even where disclosures are absent. By combining industry, turnover, workforce, and state-level energy mix data, we provide credible emission footprints that help you evaluate high-emission counterparties and meet your own reporting obligations."
+                solutionHeading: "Intelligent Data Extraction",
+                solutionDescription: "Seamless capture of information from internal and insured files"
             },
             {
-                solutionHeading: "ESG Scoring",
-                solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network."
+                solutionHeading: "Smart Analysis & Summaries",
+                solutionDescription: "Convert raw data into actionable underwriting insights"
+            },
+            {
+                solutionHeading: "API-Ready Integration",
+                solutionDescription: "Direct connectivity with underwriting systems for smooth workflows "
+            },
+            {
+                solutionHeading: "Continuous Risk Monitoring",
+                solutionDescription: "Track key parameters and deliver timely alerts"
             },
         ],
-        useCases: [
+        coreCapabilities: [
             {
-                heading: "Banks & Lenders",
-                desc: "Evaluate loan portfolios with our ESG Scoring to obtain indicative sustainability scores for counterparties.",
+                heading: "MCA Insights",
+                desc: "Extract filings and compliance records directly from MCA databases.",
                 icon: "/solutions/lock.svg"
             },
             {
-                heading: "Financial Institutions",
-                desc: "Use our Carbon Emissions Estimator to measure financed emissions across portfolios, even when disclosures are missing.",
+                heading: "Financial Analysis",
+                desc: "Digitise and analyse audited financials from PDFs and images.",
                 icon: "/solutions/lock.svg"
             },
             {
-                heading: "Sustainability Investors",
-                desc: "Build and triage target portfolios by combining estimated ESG scores with modeled carbon emissions data.",
+                heading: "Financial Summaries",
+                desc: "Generate concise financial insights tailored for underwriting.",
                 icon: "/solutions/lock.svg"
             },
             {
-                heading: "Corporates",
-                desc: "Assess vendors’ sustainability practices using indicative ESG scores and estimated carbon emissions for better supply chain visibility.",
+                heading: "Policy Document Insights",
+                desc: "Highlight coverage, exclusions, and special conditions at a glance.",
                 icon: "/solutions/lock.svg"
             },
             {
-                heading: "Collateral Risk Assessment",
-                desc: " Banks can quantify climate exposure of properties offered as collateral to strengthen lending decisions.",
+                heading: "Technical Survey Insights",
+                desc: "Extract and summarise key findings from plant and facility surveys.",
                 icon: "/solutions/lock.svg"
             },
             {
-                heading: "Supply Chain & Facility Risk",
-                desc: "Corporates can evaluate climate risks to their own operations and their suppliers’ facilities, identifying vulnerabilities to floods, heat stress, or drought.",
+                heading: "Comprehensive Data Coverage",
+                desc: "Access 300+ critical data points from public and private sources.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Litigation Check",
+                desc: "Aggregate cases from courts and tribunals, tagged by risk relevance.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "News Monitoring",
+                desc: "Curate news from multiple publications, categorised by risk factors.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Policy Consistency Checks",
+                desc: "Compare quoting and issuance documents to ensure alignment.",
                 icon: "/solutions/lock.svg"
             },
         ],
@@ -378,7 +401,161 @@ export const solutions: Solution[] = [
             },
         ],
 
-        mainArticleSlug: "optimising-distributor-credit-risk-management"
+        mainArticleSlug: "redefining-commercial-lines-underwriting"
+    },
+    {
+        id: 4,
+        slug: "large-customer-risk-assessment",
+        img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
+        heading: "Large Customer Risk Assessment",
+        subHeading: "Reduce defaults. Protect cash flow. Secure growth.",
+        featurePoints: [
+            "",
+        ],
+        mainSolnDesc:
+            "PRIVUE enables companies to assess the financial reliability of large customers pre-contract, giving finance and sales teams clarity on safe exposure, payment terms, and when to decline.",
+
+        problems: [
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "High Exposure Risk",
+                problemDesc:
+                    "A single default can significantly impact revenue and cash flow."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Subjective Credit Decisions",
+                problemDesc:
+                    "Credit terms are often influenced by sales pressure or relationship bias, lacking objective risk assessment."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Inefficient Manual Processes",
+                problemDesc:
+                    "Reviews of financial statements and declarations are slow, error-prone, and resource-intensive."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Fragmented Customer Data",
+                problemDesc:
+                    "Incomplete and scattered data makes it difficult to form a reliable view of financial health."
+            },
+        ],
+        solnPoints: [
+            {
+                solutionHeading: "Assess Contract Risk Upfront",
+                solutionDescription: "Avoid signing with customers who may not pay."
+            },
+            {
+                solutionHeading: "Manage Large-Ticket Exposures",
+                solutionDescription: "Make systematic, data-backed credit decisions."
+            },
+            {
+                solutionHeading: "Mitigate Concentration Risk",
+                solutionDescription: "Track and control portfolio-level exposure."
+            },
+            {
+                solutionHeading: "Recalibrate Credit Terms Dynamically",
+                solutionDescription: "Use predictive risk scores to adjust terms in real time."
+            },
+            {
+                solutionHeading: "Integrate Risk into Daily Workflows",
+                solutionDescription: "Embed proactive risk alerts within ERP or CRM systems."
+            },
+        ],
+        coreCapabilities: [
+            {
+                heading: "Identity Verification",
+                desc: "Validate customer businesses using GST, PAN, and MCA filings",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Financial Analysis",
+                desc: "Digitise and analyse audited statements from images and PDFs",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "MCA Insights",
+                desc: "Extract filings and compliance data from MCA records",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Transaction Data",
+                desc: "Capture turnover and transaction history from GST",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Data Coverage",
+                desc: "Leverage 300+ critical data points from public and private repositories",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Receivable Analysis",
+                desc: "Assess invoicing and ageing patterns to spot delayed payment behaviour",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Credit Scoring",
+                desc: "Generate a model-driven score for customer creditworthiness",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Exposure & Terms",
+                desc: "Define safe contract exposure and payment terms",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Early Warning Signals",
+                desc: "Detect deteriorating financial health to prevent defaults",
+                icon: "/solutions/lock.svg"
+            },
+        ],
+        modules: [
+            {
+                title: "Customer Onboarding",
+                description:
+                    "Add customers, upload documents, and verify identity",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Data Acquisition",
+                description:
+                    "Pull financial, GST, and compliance data seamlessly",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Risk Assessment",
+                description:
+                    "Generate a comprehensive risk score for each customer",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Contract & Credit Terms",
+                description:
+                    "Use the score to decide on exposure limits and payment terms",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Continuous Monitoring",
+                description:
+                    "PRIVUE re-scores customers periodically and raises alerts on emerging risks",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Go Live in 2 weeks",
+                description:
+                    "The tool can be integrated into your ERP system for a seamless experience",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+        ],
+        mainArticleSlug: "redefining-commercial-lines-underwriting"
     },
 
 ];

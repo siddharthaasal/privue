@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import NotFound from "./pages/NotFound";
 import ArticleListing from "./pages/articles/ArticleListing";
 import TestBlogPlage from "./pages/TestBlogPage";
 import ArticlePage from "./pages/articles/ArticlePage";
@@ -35,6 +36,8 @@ function App() {
         {/* legal */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/solutions/:slug" element={<SolutionPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes >
     </>
   )

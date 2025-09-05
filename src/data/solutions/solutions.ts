@@ -108,42 +108,42 @@ export const solutions: Solution[] = [
                 title: "Dealer Onboarding",
                 description:
                     "Add dealers, upload documents and verify identity",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Data Acquisition",
                 description:
                     "Obtain, data available publicly and from financials and GST",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Risk Assessment",
                 description:
                     "Determine risk score of the dealer using advance models",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Credit Terms",
                 description:
                     "Use the score to choose safe credit terms for every dealer",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Continuous Monitoring",
                 description:
                     "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Go Live in 2 weeks",
                 description:
                     "The tool can be integrated into your ERP system for a seamless experience",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
@@ -247,21 +247,21 @@ export const solutions: Solution[] = [
                 title: "Climate Risk Assessment",
                 description:
                     "Pinpoint climate vulnerabilities across India using geo-tagged data powered by our API. Integrate insights directly into your workflows or access them on our platform to evaluate heat, flood, and drought risks at asset or company level.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Carbon Emission Estimation",
                 description:
                     "Get reliable Scope 1, 2, and proxy Scope 3 emission estimates—even for companies with no disclosures. Our models combine industry, turnover, workforce, and state-level energy mix data to generate defensible carbon footprints, enabling stronger vendor and borrower evaluations.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "ESG Scoring",
                 description:
                     "Leverage AI Agents that scan regulatory filings, company websites, court and tribunal cases, and news sources to surface ESG signals. We translate these into an objective ESG score—providing a robust baseline for deeper sustainability due diligence.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
@@ -382,21 +382,21 @@ export const solutions: Solution[] = [
                 title: "Climate Risk Assessment",
                 description:
                     "Pinpoint climate vulnerabilities across India using geo-tagged data powered by our API. Integrate insights directly into your workflows or access them on our platform to evaluate heat, flood, and drought risks at asset or company level.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Carbon Emission Estimation",
                 description:
                     "Get reliable Scope 1, 2, and proxy Scope 3 emission estimates—even for companies with no disclosures. Our models combine industry, turnover, workforce, and state-level energy mix data to generate defensible carbon footprints, enabling stronger vendor and borrower evaluations.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "ESG Scoring",
                 description:
                     "Leverage AI Agents that scan regulatory filings, company websites, court and tribunal cases, and news sources to surface ESG signals. We translate these into an objective ESG score—providing a robust baseline for deeper sustainability due diligence.",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
@@ -518,42 +518,42 @@ export const solutions: Solution[] = [
                 title: "Customer Onboarding",
                 description:
                     "Add customers, upload documents, and verify identity",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Data Acquisition",
                 description:
                     "Pull financial, GST, and compliance data seamlessly",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Risk Assessment",
                 description:
                     "Generate a comprehensive risk score for each customer",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Contract & Credit Terms",
                 description:
                     "Use the score to decide on exposure limits and payment terms",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Continuous Monitoring",
                 description:
                     "PRIVUE re-scores customers periodically and raises alerts on emerging risks",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Go Live in 2 weeks",
                 description:
                     "The tool can be integrated into your ERP system for a seamless experience",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
@@ -751,35 +751,35 @@ export const solutions: Solution[] = [
 Trace linked entities and assets connected to promoters.
 Monitor news on transactions, asset sales, or restructuring events.
                     `,
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Accounting Firms ",
                 description:
                     ".",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Law Firms",
                 description:
                     ".",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Consulting Firms",
                 description:
                     ".",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Procurement Teams",
                 description:
                     ".",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
@@ -829,7 +829,7 @@ Monitor news on transactions, asset sales, or restructuring events.
                 title: "",
                 description:
                     "",
-                imgSrc: "/demo-chart.webp",
+                imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],

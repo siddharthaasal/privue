@@ -55,7 +55,7 @@ const modules = [
 
 ];
 
-export default function ModulesListing() {
+export default function VerticalModulesListing() {
     const [activeModule, setActiveModule] = useState(modules[0]);
 
     return (

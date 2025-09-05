@@ -8,8 +8,10 @@ import UseCasesSection from "@/sections/solutions/UseCasesSection";
 import Hero from "@/sections/solutions/Hero";
 import ProblemSection from "@/sections/solutions/ProblemSection";
 import SolutionSection from "@/sections/solutions/SolutionSection";
-import ModulesSection from "@/sections/solutions/MoudulesSection";
+// import ModulesSection from "@/sections/solutions/MoudulesSection";
 import RelatedArticles from "@/sections/solutions/RelatedArticles";
+// import VerticalModulesListing from "@/components/modules/VerticalModulesListing";
+import TestVerticalModules from "@/components/TestVerticalModules";
 
 export default function SolutionsPage() {
     const { slug = "" } = useParams();
@@ -50,7 +52,9 @@ export default function SolutionsPage() {
                     <UseCasesSection useCases={soln.useCases} />
                 )}
 
-                <ModulesSection modules={soln.modules} />
+                {/* <ModulesSection modules={soln.modules} /> */}
+                {/* <VerticalModulesListing /> */}
+                <TestVerticalModules items={soln.modules} />
                 <RelatedArticles mainArticleSlug={soln.mainArticleSlug} />
             </main>
         </Layout>

@@ -557,6 +557,278 @@ export const solutions: Solution[] = [
         ],
         mainArticleSlug: "redefining-commercial-lines-underwriting"
     },
+    {
+        id: 5,
+        slug: "entity-due-diligence",
+        img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
+        heading: "Entity Due Diligence",
+        subHeading: "A Unified Solution for Smarter Due Diligence",
+        featurePoints: [
+            "",
+        ],
+        mainSolnDesc:
+            "Our Entity Due Diligence platform unifies data, technology, and intelligence to help professionals verify identities, analyze financials, track litigations, and monitor news—enabling faster, more confident decisions.",
+
+
+        problems: [
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Fragmented Data Sources",
+                problemDesc:
+                    "Struggle of pulling company information from multiple databases and filings."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Time-Consuming Research ",
+                problemDesc:
+                    "Manual checks and reconciliations leading to long due diligence cycles."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Unstructured Informatioin",
+                problemDesc:
+                    "Difficulty in summarising lengthy filings, judgments, and news articles."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Cumbersome Reporting",
+                problemDesc:
+                    "Extracting and formatting data for reports and analysis is tedious."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "High Cost of Diligence",
+                problemDesc:
+                    "Excessive time and resources required for routine checks."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Missed Red Flags",
+                problemDesc:
+                    "Critical news, litigations, or compliance lapses often overlooked in manual reviews."
+            },
+
+        ],
+        solnPoints: [
+            {
+                solutionHeading: "Unified Data Platform",
+                solutionDescription: "Aggregate 300+ data points from public and private repositories into one view."
+            },
+            {
+                solutionHeading: "Automated Workflows",
+                solutionDescription: "Digitise, process, and analyse data instantly to cut review time."
+            },
+            {
+                solutionHeading: "Smart Summaries",
+                solutionDescription: "Auto-extract key points and deliver concise, actionable insights."
+            },
+            {
+                solutionHeading: "Custom Reports",
+                solutionDescription: "Generate tailored, ready-to-share reports in just a few clicks."
+            },
+        ],
+        coreCapabilities: [
+            {
+                heading: "Identity Verification",
+                desc: "Verify businesses instantly with GST, PAN, and MCA records.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Financial Analysis",
+                desc: "Digitise and analyse audited statements directly from images or PDFs.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "MCA Insights",
+                desc: "Access filings and compliance data seamlessly from MCA records.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Transaction Data",
+                desc: "Track turnover and transaction history through GST data.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Data Coverage",
+                desc: "Tap into 300+ critical data points from public and private sources.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Company News",
+                desc: "Scan 100+ publications for adverse news or event-based triggers, with concise summaries.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Legal Cases",
+                desc: "Extract and categorise court and tribunal cases, with clear summaries for quick review.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Custom Reports",
+                desc: "Generate tailored due diligence reports in just a few clicks.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Conversational Queries",
+                desc: "Ask questions in natural language and get instant insights on any company.",
+                icon: "/solutions/lock.svg"
+            },
+        ],
+        /*
+         
+
+  
+
+   
+
+   
+
+ 
+	
+
+
+ 
+
+  Verify client identity and compliance through MCA, GST, and PAN records. 
+
+  Analyse financial statements and transaction history for assurance and advisory. 
+
+  Automate due diligence for audits, tax reviews, and forensic investigations. 
+
+ 
+	
+
+ 
+ 
+
+ 
+
+  Conduct thorough legal due diligence on counterparties in transactions. 
+
+  Track litigation and tribunal cases tagged to relevant practice areas. 
+
+  Access compliance history and filings to support corporate restructuring or M&A. 
+
+ 
+	
+
+ 
+
+ 
+
+ 
+
+  Assess financial health and risk profile of companies during strategy or M&A advisory. 
+
+  Benchmark compliance and governance standards across industries. 
+
+  Generate custom reports to support client presentations and recommendations. 
+
+ 
+	
+
+ 
+ 
+
+  Verify vendor legitimacy and corporate standing. 
+
+  Screen suppliers for adverse news, compliance issues, or ongoing litigations. 
+
+  Monitor transaction and turnover data to assess vendor reliability and scale. 
+
+ 
+        */
+        modules: [
+            {
+                title: "Insolvency Professionals",
+                description:
+                    `Identify company assets and promoters.
+Trace linked entities and assets connected to promoters.
+Monitor news on transactions, asset sales, or restructuring events.
+                    `,
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Accounting Firms ",
+                description:
+                    ".",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Law Firms",
+                description:
+                    ".",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Consulting Firms",
+                description:
+                    ".",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+            {
+                title: "Procurement Teams",
+                description:
+                    ".",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+        ],
+        mainArticleSlug: "redefining-commercial-lines-underwriting"
+    },
 
 ];
 
+/*
+{
+        id: 5,
+        slug: "",
+        img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
+        heading: "",
+        subHeading: "",
+        featurePoints: [
+            "",
+        ],
+        mainSolnDesc:
+            "",
+
+        problems: [
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "",
+                problemDesc:
+                    ""
+            },
+            
+        ],
+        solnPoints: [
+            {
+                solutionHeading: "",
+                solutionDescription: ""
+            },
+        ],
+        coreCapabilities: [
+            {
+                heading: "",
+                desc: "",
+                icon: "/solutions/lock.svg"
+            },
+        ],
+        modules: [
+            {
+                title: "",
+                description:
+                    "",
+                imgSrc: "/demo-chart.webp",
+                link: "#",
+            },
+        ],
+        mainArticleSlug: "redefining-commercial-lines-underwriting"
+    },
+ */

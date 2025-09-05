@@ -9,6 +9,7 @@ export interface CardFlipProps {
     subtitle?: string;
     description?: string;
     features: string[];
+    slug: string;
 }
 
 export default function FlipCard({
@@ -16,12 +17,13 @@ export default function FlipCard({
     subtitle,
     description,
     features,
+    slug,
 }: CardFlipProps) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
         <div
-            className="relative w-full max-w-[280px] h-[320px] group [perspective:2000px]"
+            className="relative w-full  h-[320px] group [perspective:2000px]"
             onMouseEnter={() => setIsFlipped(true)}
             onMouseLeave={() => setIsFlipped(false)}
         >
@@ -85,10 +87,10 @@ export default function FlipCard({
                                 <div
                                     className={cn(
                                         "absolute inset-[-8px] rounded-lg transition-opacity duration-300",
-                                        "bg-gradient-to-br from-orange-500/20 via-orange-500/10 to-transparent"
+                                        "bg-gradient-to-br from-privue-500/20 via-privue-500/10 to-transparent"
                                     )}
                                 />
-                                <Repeat2 className="relative z-10 w-4 h-4 text-orange-500 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:-rotate-12" />
+                                <Repeat2 className="relative z-10 w-4 h-4 text-privue-500 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:-rotate-12" />
                             </div>
                         </div>
                     </div>
@@ -133,15 +135,22 @@ export default function FlipCard({
                                             }ms`,
                                     }}
                                 >
-                                    <ArrowRight className="w-3 h-3 text-orange-500" />
+                                    <ArrowRight className="w-3 h-3 text-privue-500" />
                                     <span>{feature}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
+                    <a
+                        href={`/solutions/${slug}`}
+                        className="mt-4 inline-block text-sm font-medium text-gray-700 hover:text-privue-700 underline underline-offset-4"
+                    >
+                        Learn more
+                    </a>
 
-                    <div className="pt-6 mt-6 border-t border-zinc-200 dark:border-zinc-800">
-                        <div
+                    {/* <div className="pt-6 mt-6 border-t border-zinc-200 dark:border-zinc-800">
+                        <a
+                            href={`/solutions/${slug}`}
                             className={cn(
                                 "group/start relative",
                                 "flex items-center justify-between",
@@ -149,26 +158,26 @@ export default function FlipCard({
                                 "transition-all duration-300",
                                 "bg-gradient-to-r from-zinc-100 via-zinc-100 to-zinc-100",
                                 "dark:from-zinc-800 dark:via-zinc-800 dark:to-zinc-800",
-                                "hover:from-orange-500/10 hover:from-0% hover:via-orange-500/5 hover:via-100% hover:to-transparent hover:to-100%",
-                                "dark:hover:from-orange-500/20 dark:hover:from-0% dark:hover:via-orange-500/10 dark:hover:via-100% dark:hover:to-transparent dark:hover:to-100%",
+                                "hover:from-privue-500/10 hover:from-0% hover:via-privue-500/5 hover:via-100% hover:to-transparent hover:to-100%",
+                                "dark:hover:from-privue-500/20 dark:hover:from-0% dark:hover:via-privue-500/10 dark:hover:via-100% dark:hover:to-transparent dark:hover:to-100%",
                                 "hover:scale-[1.02] hover:cursor-pointer"
                             )}
                         >
-                            <span className="text-sm font-medium text-zinc-900 dark:text-white transition-colors duration-300 group-hover/start:text-orange-600 dark:group-hover/start:text-orange-400">
-                                Start today
+                            <span className="text-sm font-medium text-zinc-900 dark:text-white transition-colors duration-300 group-hover/start:text-privue-600 dark:group-hover/start:text-privue-400">
+                                Learn More
                             </span>
                             <div className="relative group/icon">
                                 <div
                                     className={cn(
                                         "absolute inset-[-6px] rounded-lg transition-all duration-300",
-                                        "bg-gradient-to-br from-orange-500/20 via-orange-500/10 to-transparent",
+                                        "bg-gradient-to-br from-privue-500/20 via-privue-500/10 to-transparent",
                                         "opacity-0 group-hover/start:opacity-100 scale-90 group-hover/start:scale-100"
                                     )}
                                 />
-                                <ArrowRight className="relative z-10 w-4 h-4 text-orange-500 transition-all duration-300 group-hover/start:translate-x-0.5 group-hover/start:scale-110" />
+                                <ArrowRight className="relative z-10 w-4 h-4 text-privue-500 transition-all duration-300 group-hover/start:translate-x-0.5 group-hover/start:scale-110" />
                             </div>
-                        </div>
-                    </div>
+                        </a>
+                    </div> */}
                 </div>
             </div>
 

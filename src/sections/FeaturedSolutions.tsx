@@ -2,6 +2,10 @@
 import { useState, useMemo } from "react";
 import { solutions } from "@/data/solutions/solutions.ts";
 import OverlayCard, { type Item } from "@/components/feature/OverlayCard";
+// import Features from "./solutions/Features";
+import Features2 from "./solutions/Features2";
+import FeaturesFlip from "./solutions/FeaturesFlip";
+import FeaturesInfo from "./solutions/FeaturesInfo";
 
 export default function FeaturedSolutions() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
@@ -51,6 +55,11 @@ export default function FeaturedSolutions() {
 
                     ))}
                 </div>
+
+                {/* <Features /> */}
+                <Features2 />
+                <FeaturesFlip />
+                <FeaturesInfo />
             </div>
         </section>
     );

@@ -22,6 +22,7 @@ export default function HeroSection() {
         "/integration-logos/nasscom.png",
         "/integration-logos/SAP-Logo.png",
         "/integration-logos/salesforce.png",
+        "/integration-logos/myPaisa.svg",
     ];
 
 

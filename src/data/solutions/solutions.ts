@@ -277,8 +277,8 @@ export const solutions: Solution[] = [
         subHeading: "Sharper insights. Smarter underwriting. Stronger outcomes.",
         featurePoints: [
             "Intelligent Data Extraction",
-            "Carbon Emissions Estimation",
-            "ESG Score",
+            "Trusted Data Acquisition",
+            "API Ready Integration",
         ],
         mainSolnDesc:
             "At Privue, we design agentic workflows that integrate into an insurer’s underwriting desk, automating manual tasks and delivering insights so underwriters can focus on risk selection and decision quality, driving faster turnaround, improved risk assessment, and portfolio consistency.",
@@ -407,11 +407,13 @@ export const solutions: Solution[] = [
         id: 4,
         slug: "large-customer-risk-assessment",
         img: "/solutions/demo-image.png",
-        coverImg: "/solutions/demo-image.png",
+        coverImg: "https://images.unsplash.com/photo-1581091877018-dac6a371d50f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Large Customer Risk Assessment",
         subHeading: "Reduce defaults. Protect cash flow. Secure growth.",
         featurePoints: [
-            "",
+            "Assess Contract Risk Upfront",
+            "Manage Large-Ticket Exposures",
+            "Recalibrate Credit Terms Dynamically",
         ],
         mainSolnDesc:
             "PRIVUE enables companies to assess the financial reliability of large customers pre-contract, giving finance and sales teams clarity on safe exposure, payment terms, and when to decline.",
@@ -561,11 +563,13 @@ export const solutions: Solution[] = [
         id: 5,
         slug: "entity-due-diligence",
         img: "/solutions/demo-image.png",
-        coverImg: "/solutions/demo-image.png",
+        coverImg: "https://plus.unsplash.com/premium_photo-1681681061613-8540c8d67f0d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVlJTIwZGlsaWdlbmNlfGVufDB8fDB8fHww",
         heading: "Entity Due Diligence",
         subHeading: "A Unified Solution for Smarter Due Diligence",
         featurePoints: [
-            "",
+            "Unified Data Platform",
+            "Automated Workflows",
+            "Smart Summaries"
         ],
         mainSolnDesc:
             "Our Entity Due Diligence platform unifies data, technology, and intelligence to help professionals verify identities, analyze financials, track litigations, and monitor news—enabling faster, more confident decisions.",

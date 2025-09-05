@@ -15,12 +15,13 @@ import Marquee from "react-fast-marquee";
 export default function HeroSection() {
 
     const logos = [
-        "/integration-logos/dnb.png",
+        // "/integration-logos/dnb.png",
+        "/integration-logos/logo-dnb.svg",
         "/integration-logos/ikanoon.png",
-        "/integration-logos/myGate.png",
+        "/integration-logos/myGate_cr.png",
         "/integration-logos/nasscom.png",
-        "/integration-logos/salesforce.png",
         "/integration-logos/SAP-Logo.png",
+        "/integration-logos/salesforce.png",
     ];
 
 
@@ -133,7 +134,7 @@ export default function HeroSection() {
                                 autoFill                           // duplicate logos to avoid empty gaps
                             >
                                 {logos.map((src, i) => (
-                                    <div key={i} className="mx-10 flex h-14 w-28 items-center justify-center">
+                                    <div key={i} className="mx-10 flex h-14 w-32 items-center justify-center">
                                         <img src={src} alt="integration logo" className="max-h-10 w-auto object-contain" />
                                     </div>
                                 ))}

@@ -32,7 +32,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Insolvency Investigations",
     "solutionLink": "#",
-    "coverImage": "/article-images/insolvency.jpg",
+    "coverImage": "/court-hearing.png",
     "readTime": "4 min",
     "file": "src/data/articles/strengthening-insolvency-investigations.mdx",
     "url": "/articles/strengthening-insolvency-investigations"

@@ -33,6 +33,7 @@ export type SolutionPoints = {
 
 export type Solution = {
     id: number;
+    icon: React.ComponentType<any>;
     slug: string;
     img: string;
     coverImg: string;
@@ -48,10 +49,13 @@ export type Solution = {
     mainArticleSlug: string;
 };
 
+import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow } from 'lucide-react';
+
 export const solutions: Solution[] = [
     {
         id: 1,
         slug: "distributor-performance-management",
+        icon: AlignVerticalJustifyCenter,
         img: "/solutions/demo-image.png",
         coverImg: "https://plus.unsplash.com/premium_photo-1682148458133-cf5a01a50cce?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlzdHJpYnV0b3J8ZW58MHx8MHx8fDA%3D",
         heading: "Distributor Performance Management",
@@ -159,6 +163,7 @@ export const solutions: Solution[] = [
     {
         id: 2,
         slug: "sustainability-assessment",
+        icon: Recycle,
         img: "/solutions/demo-image.png",
         coverImg: "https://images.unsplash.com/photo-1569227997603-33b9f12af927?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Sustainability Assessment",
@@ -271,6 +276,7 @@ export const solutions: Solution[] = [
     {
         id: 3,
         slug: "commercial-insurance-underwriting",
+        icon: Landmark,
         img: "/solutions/demo-image.png",
         coverImg: "https://images.unsplash.com/photo-1647348815424-8e8206ea7c83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Commercial Insurance Underwriting",
@@ -406,6 +412,7 @@ export const solutions: Solution[] = [
     {
         id: 4,
         slug: "large-customer-risk-assessment",
+        icon: BookAlert,
         img: "/solutions/demo-image.png",
         coverImg: "https://images.unsplash.com/photo-1581091877018-dac6a371d50f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Large Customer Risk Assessment",
@@ -562,6 +569,7 @@ export const solutions: Solution[] = [
     {
         id: 5,
         slug: "entity-due-diligence",
+        icon: Workflow,
         img: "/solutions/demo-image.png",
         coverImg: "https://plus.unsplash.com/premium_photo-1681681061613-8540c8d67f0d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVlJTIwZGlsaWdlbmNlfGVufDB8fDB8fHww",
         heading: "Entity Due Diligence",

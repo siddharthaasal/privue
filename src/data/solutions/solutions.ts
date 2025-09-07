@@ -49,7 +49,7 @@ export type Solution = {
     mainArticleSlug: string;
 };
 
-import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow } from 'lucide-react';
+import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow, TriangleAlert } from 'lucide-react';
 
 export const solutions: Solution[] = [
     {
@@ -793,7 +793,196 @@ Monitor news on transactions, asset sales, or restructuring events.
         ],
         mainArticleSlug: "redefining-commercial-lines-underwriting"
     },
+    {
+        id: 6,
+        slug: "third-party-risk-management",
+        icon: TriangleAlert,
+        img: "/solutions/demo-image.png",
+        coverImg: "/solutions/demo-image.png",
+        heading: "Third Party Risk Management",
+        subHeading: "Reduce disruptions. Safeguard reputation. Build resilient partnerships.",
+        featurePoints: [
+            "",
+        ],
+        mainSolnDesc:
+            "PRIVUE enables organisations to comprehensively assess and continuously monitor third parties to mitigate risk. It provides early warnings, event-based triggers, and risk scores that help businesses protect their supply chain, reputation, and operations.",
+        problems: [
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Blind Spots",
+                problemDesc:
+                    "Vendors and partners are deeply integrated into critical operations, yet their risks are often overlooked."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Data Gaps",
+                problemDesc:
+                    "Fragmented and incomplete information makes it difficult to build a 360° risk profile of third parties."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Static Reviews",
+                problemDesc:
+                    "Assessments are usually point-in-time and fail to capture emerging risks."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Manual Processes",
+                problemDesc:
+                    "Reviews of financials, compliance records, and declarations are slow and inconsistent."
+            },
+            {
+                icon: "/solutions/hide.svg",
+                problemHeading: "Event Exposure",
+                problemDesc:
+                    "Organisations are often unprepared to respond when an adverse event impacts a vendor, leaving them exposed."
+            },
 
+        ],
+        solnPoints: [
+            {
+                solutionHeading: "360° Risk Profiling",
+                solutionDescription: "Develop a comprehensive view of each third party’s risk profile, covering a broad spectrum of risk categories."
+            },
+            {
+                solutionHeading: "Continuous Monitoring & Alerts",
+                solutionDescription: "Dynamically re-score vendors with continuous monitoring and real-time alerts."
+            },
+            {
+                solutionHeading: "Strengthened Vendor Governance",
+                solutionDescription: "Strengthen vendor governance with objective, data-backed assessments."
+            },
+            {
+                solutionHeading: "Proactive Risk Response",
+                solutionDescription: "Enable proactive risk response when an event impacts a vendor or supplier."
+            },
+            {
+                solutionHeading: "Seamless Workflow Integration",
+                solutionDescription: "Integrate risk alerts seamlessly into ERP, procurement, or compliance workflows."
+            },
+        ],
+        coreCapabilities: [
+            {
+                heading: "Data Acquisition",
+                desc: "Pull financial, compliance, legal, and ESG data seamlessly.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Document Parsing",
+                desc: "Extract structured insights from documents and files submitted by the vendor or partner.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Spend Analysis",
+                desc: "Analyse spend patterns across vendors to identify concentration, inefficiencies, and potential risks.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Financial Analysis",
+                desc: "Analyse financial statements to identify issues and assess financial stability.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Cyber Risk Assessment",
+                desc: "Conduct vulnerability assessments and penetration testing on vendor infrastructure.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Climate Risk Models",
+                desc: "Use IMD and CMIP6 data to evaluate exposure to climate-related risks.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Legal Case Insights",
+                desc: "Extract and categorise court and tribunal cases with clear, concise summaries.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Adverse Media Scanning",
+                desc: "Monitor 100+ publications for negative news and event-based triggers.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Sustainability Signals",
+                desc: "Capture indicators from public sources and documents on ESG posture.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Event Monitoring",
+                desc: "Detect adverse events in real time and provide actionable triggers.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Continuous Monitoring",
+                desc: "Re-score vendors periodically and raise alerts on emerging risks.",
+                icon: "/solutions/lock.svg"
+            },
+            {
+                heading: "Conversational Queries",
+                desc: "Ask questions in natural language and get instant insights on any company.",
+                icon: "/solutions/lock.svg"
+            },
+        ],
+        modules: [
+            {
+                title: "Financial Stability Assessment",
+                description:
+                    "Analyse financial statements, liquidity, and solvency metrics.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Creditworthiness Assessment",
+                description:
+                    "Generate predictive credit scores to evaluate payment reliability.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Compliance Review",
+                description:
+                    "Check adherence to regulatory requirements and compliance track records.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Legal Due Diligence",
+                description:
+                    "Review corporate filings, litigations, and adverse media.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Cyber Risk Assessment",
+                description:
+                    "Identify vulnerabilities in digital infrastructure and data handling.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Climate Risk Assessment",
+                description:
+                    "Evaluate exposure to physical and transition climate risks.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "ESG Scoring",
+                description:
+                    "Benchmark sustainability performance against peers.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Event Response",
+                description:
+                    "Provide real-time triggers and alerts when events impact vendor stability.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+        ],
+        mainArticleSlug: "enhancing-supply-chain-resilience"
+    },
 ];
 
 /*

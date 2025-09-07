@@ -1,6 +1,6 @@
 // components/feature/FeaturedSolutions.tsx
-import { useState, useMemo } from "react";
-import { solutions } from "@/data/solutions/solutions.ts";
+// import { useState, useMemo } from "react";
+// import { solutions } from "@/data/solutions/solutions.ts";
 // import OverlayCard, { type Item } from "@/components/feature/OverlayCard";
 // import Features from "./solutions/Features";
 // import Features2 from "./solutions/Features2";
@@ -9,7 +9,7 @@ import { solutions } from "@/data/solutions/solutions.ts";
 import FinalFeaturesGrid from "./solutions/FinalFeaturesGrid";
 
 export default function FeaturedSolutions() {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
+    // const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     // derive the items the card expects
     // const items: Item[] = useMemo(() => {

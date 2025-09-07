@@ -1,51 +1,51 @@
 // import ModulesListing from "@/components/modules/ModulesListing"
-import ModuleListing2 from "@/components/modules/ModuleListing2"
+// import ModuleListing2 from "@/components/modules/ModuleListing2"
 import TestVerticalModules from "@/components/TestVerticalModules";
 import { solutions } from "@/data/solutions/solutions";
-const modules = [
-    {
-        title: "Dealer Onboarding",
-        description:
-            "Add dealers, upload documents and verify identity",
-        imgSrc: "/demo-chart.webp",
-        link: "#",
-    },
-    {
-        title: "Data Acquisition",
-        description:
-            "Obtain, data available publicly and from financials and GST",
-        imgSrc: "/demo-chart.webp",
-        link: "#",
-    },
-    {
-        title: "Risk Assessment",
-        description:
-            "Determine risk score of the dealer using advance models",
-        imgSrc: "/demo-chart.webp",
-        link: "#",
-    },
-    {
-        title: "Credit Terms",
-        description:
-            "Use the score to choose safe credit terms for every dealer",
-        imgSrc: "/demo-chart.webp",
-        link: "#",
-    },
-    {
-        title: "Continuous Monitoring",
-        description:
-            "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
-        imgSrc: "/images/modules/credit-risk-engine.png",
-        link: "#",
-    },
-    {
-        title: "Go Live in 2 weeks",
-        description:
-            "The tool can be integrated into your ERP system for a seamless experience",
-        imgSrc: "/demo-chart.webp",
-        link: "#",
-    },
-];
+// const modules = [
+//     {
+//         title: "Dealer Onboarding",
+//         description:
+//             "Add dealers, upload documents and verify identity",
+//         imgSrc: "/demo-chart.webp",
+//         link: "#",
+//     },
+//     {
+//         title: "Data Acquisition",
+//         description:
+//             "Obtain, data available publicly and from financials and GST",
+//         imgSrc: "/demo-chart.webp",
+//         link: "#",
+//     },
+//     {
+//         title: "Risk Assessment",
+//         description:
+//             "Determine risk score of the dealer using advance models",
+//         imgSrc: "/demo-chart.webp",
+//         link: "#",
+//     },
+//     {
+//         title: "Credit Terms",
+//         description:
+//             "Use the score to choose safe credit terms for every dealer",
+//         imgSrc: "/demo-chart.webp",
+//         link: "#",
+//     },
+//     {
+//         title: "Continuous Monitoring",
+//         description:
+//             "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
+//         imgSrc: "/images/modules/credit-risk-engine.png",
+//         link: "#",
+//     },
+//     {
+//         title: "Go Live in 2 weeks",
+//         description:
+//             "The tool can be integrated into your ERP system for a seamless experience",
+//         imgSrc: "/demo-chart.webp",
+//         link: "#",
+//     },
+// ];
 
 export default function FeaturedModules() {
     return (

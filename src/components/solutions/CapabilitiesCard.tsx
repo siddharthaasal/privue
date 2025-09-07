@@ -8,7 +8,7 @@ export default function CapabilitiesCard({ icon, heading, desc }: CapabilitiesCa
     return (
         <div className="flex flex-col items-start gap-6 px-4 text-left">
             {/* Icon */}
-            <img src={icon} alt="" className="w-11 h-11" />
+            <img src={icon} alt="" className="w-9 h-9" />
 
             {/* Text */}
             <div className="">

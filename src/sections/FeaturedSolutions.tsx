@@ -28,7 +28,7 @@ export default function FeaturedSolutions() {
     // }, []);
 
     return (
-        <section className="font-open-sans relative mx-auto my-24">
+        <section className="font-open-sans relative mx-auto">
             <div className="mx-auto max-w-7xl px-4 py-10">
                 <div className="mx-auto text-center py-12">
                     <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">

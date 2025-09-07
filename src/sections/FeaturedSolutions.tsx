@@ -1,30 +1,31 @@
 // components/feature/FeaturedSolutions.tsx
 import { useState, useMemo } from "react";
 import { solutions } from "@/data/solutions/solutions.ts";
-import OverlayCard, { type Item } from "@/components/feature/OverlayCard";
+// import OverlayCard, { type Item } from "@/components/feature/OverlayCard";
 // import Features from "./solutions/Features";
-import Features2 from "./solutions/Features2";
-import FeaturesFlip from "./solutions/FeaturesFlip";
-import FeaturesInfo from "./solutions/FeaturesInfo";
+// import Features2 from "./solutions/Features2";
+// import FeaturesFlip from "./solutions/FeaturesFlip";
+// import FeaturesInfo from "./solutions/FeaturesInfo";
+import FinalFeaturesGrid from "./solutions/FinalFeaturesGrid";
 
 export default function FeaturedSolutions() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     // derive the items the card expects
-    const items: Item[] = useMemo(() => {
-        return solutions.map((s) => ({
-            id: s.id,
-            img: s.coverImg || s.img,
-            heading: s.heading,
-            sub: s.subHeading,
-            // prefer your featurePoints; else fall back to solnPoints headings; else empty
-            details:
-                s.featurePoints?.length
-                    ? s.featurePoints
-                    : s.solnPoints?.map((p) => p.solutionHeading) ?? [],
-            link: `/solutions/${s.slug}`, // <-- route to the solution
-        }));
-    }, []);
+    // const items: Item[] = useMemo(() => {
+    //     return solutions.map((s) => ({
+    //         id: s.id,
+    //         img: s.coverImg || s.img,
+    //         heading: s.heading,
+    //         sub: s.subHeading,
+    //         // prefer your featurePoints; else fall back to solnPoints headings; else empty
+    //         details:
+    //             s.featurePoints?.length
+    //                 ? s.featurePoints
+    //                 : s.solnPoints?.map((p) => p.solutionHeading) ?? [],
+    //         link: `/solutions/${s.slug}`,
+    //     }));
+    // }, []);
 
     return (
         <section className="font-open-sans relative mx-auto my-24">
@@ -41,7 +42,7 @@ export default function FeaturedSolutions() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {items.map((item) => (
                         <a href={item.link}>
                             <OverlayCard
@@ -54,12 +55,13 @@ export default function FeaturedSolutions() {
                         </a>
 
                     ))}
-                </div>
+                </div> */}
 
                 {/* <Features /> */}
-                <Features2 />
+                {/* <Features2 />
                 <FeaturesFlip />
-                <FeaturesInfo />
+                <FeaturesInfo /> */}
+                <FinalFeaturesGrid />
             </div>
         </section>
     );

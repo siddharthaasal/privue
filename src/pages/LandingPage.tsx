@@ -3,9 +3,8 @@ import HeroSection from "@/sections/HeroSection"
 import FeaturedArticles from "@/sections/FeaturedArticles"
 import FeaturedModules from "@/sections/FeaturedModules"
 import FeaturedSolutions from "@/sections/FeaturedSolutions"
-// import FeaturedSolutions2 from "@/sections/FeaturedSolutions2"
-// import Products from "@/sections/Products"
-
+import IndustrySection from "@/sections/IndustrySection"
+import FeaturedCapabilities from "@/sections/FeaturedCapabilities"
 
 
 
@@ -19,11 +18,14 @@ export default function LandingPage() {
                             <HeroSection />
                         </div>
                     </section>
-                    {/* <section id="products" data-theme="dark">
-                        <Products />
-                    </section> */}
                     <section id="modules" data-theme="light">
                         <FeaturedSolutions />
+                    </section>
+                    <section id="modules" data-theme="light">
+                        <FeaturedCapabilities />
+                    </section>
+                    <section id="modules" data-theme="light">
+                        <IndustrySection />
                     </section>
                     <section id="modules" data-theme="light">
                         <FeaturedModules />

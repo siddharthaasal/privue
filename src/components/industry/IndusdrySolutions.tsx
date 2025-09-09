@@ -88,11 +88,11 @@ export default function IndustryModules() {
 
     // Render
     return (
-        <section className="py-16">
+        <section className="py-12">
             {/* background / decorative element copied from your original component */}
             <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 
-            <div className="mx-auto space-y-8 px-6 md:space-y-16 lg:space-y-20">
+            <div className="p-4 rounded-2xl border border-gray-200 mx-auto space-y-8 md:space-y-16 lg:space-y-20">
 
 
                 {/* Two-column layout: LHS (accordion), RHS (cards) */}
@@ -127,7 +127,7 @@ export default function IndustryModules() {
               - col-span-2 to occupy remaining grid columns
               - maps dummySolutions exactly using the snippet you provided
               ------------------------ */}
-                    <div className="bg-background relative flex overflow-hidden rounded-3xl border p-0 col-span-2">
+                    <div className="bg-background relative flex overflow-hidden p-0 col-span-2">
                         {/* decorative vertical separator like original */}
                         {/* <div className="absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)] pointer-events-none" /> */}
 

@@ -2,8 +2,6 @@ import Layout from "@/components/Layout"
 import HeroSection from "@/sections/HeroSection"
 import AboutSection from "@/sections/AboutSection"
 import FeaturedArticles from "@/sections/FeaturedArticles"
-import FeaturedModules from "@/sections/FeaturedModules"
-import FeaturedSolutions from "@/sections/FeaturedSolutions"
 import IndustrySection from "@/sections/IndustrySection"
 import FeaturedCapabilities from "@/sections/FeaturedCapabilities"
 
@@ -31,9 +29,9 @@ export default function LandingPage() {
                     <section id="modules" data-theme="light">
                         <IndustrySection />
                     </section>
-                    <section id="modules" data-theme="light">
+                    {/* <section id="modules" data-theme="light">
                         <FeaturedModules />
-                    </section>
+                    </section> */}
                     <section id="articles" data-theme="light">
                         <FeaturedArticles />
                     </section>

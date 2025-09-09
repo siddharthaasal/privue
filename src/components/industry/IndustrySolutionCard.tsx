@@ -26,7 +26,7 @@ export default function IndustrySolutionCard({
         return (
             <a
                 href={href}
-                className="group block rounded-lg border border-gray-100 bg-white hover:shadow-md transition-shadow duration-200"
+                className="group block rounded-lg border border-gray-100 bg-[#FBFBFB] hover:shadow-md transition-shadow duration-200"
             >
                 <div className="flex items-center gap-4 p-3 md:p-3">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-privue-50 group-hover:bg-privue-100 transition-colors">
@@ -72,6 +72,12 @@ export default function IndustrySolutionCard({
                     <p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors duration-300">
                         {description}
                     </p>
+                </div>
+
+                <div className="ml-auto my-auto hidden md:flex items-center align-middle text-muted-foreground group-hover:text-privue-700 transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                 </div>
             </div>
 

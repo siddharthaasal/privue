@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout"
 import HeroSection from "@/sections/HeroSection"
+import AboutSection from "@/sections/AboutSection"
 import FeaturedArticles from "@/sections/FeaturedArticles"
 import FeaturedModules from "@/sections/FeaturedModules"
 import FeaturedSolutions from "@/sections/FeaturedSolutions"
@@ -17,6 +18,9 @@ export default function LandingPage() {
                         <div>
                             <HeroSection />
                         </div>
+                    </section>
+                    <section id="modules" data-theme="light">
+                        <AboutSection />
                     </section>
                     <section id="modules" data-theme="light">
                         <FeaturedSolutions />

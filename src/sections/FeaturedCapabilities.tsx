@@ -1,35 +1,37 @@
 // import { motion } from 'framer-motion'
-
+import { Zap } from "lucide-react";
 export default function FeaturedCapabilities() {
 
     const coreCapabilities = [
         {
-            "icon": "/solutions/lock.svg",
+            // "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "AI-Powered Intelligence",
             "desc": "Transform raw data into strategic insights that drive smarter business decisions.",
         },
         {
-            "icon": "/solutions/lock.svg",
+            // "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "Predictive Risk Management",
             "desc": "Anticipate and mitigate financial, operational, and compliance risks before they impact your business.",
         },
         {
-            "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "Intelligent Data Integration",
             "desc": "Unify disparate data sources into a single, enriched view of your business landscape.",
         },
         {
-            "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "Strategic Decision Intelligence",
             "desc": "Empower leadership with AI-backed recommendations for critical business choices.",
         },
         {
-            "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "Industry-Focused AI Solutions",
             "desc": "Purpose-built applications for BFSI, enterprise, consulting, and legal sectors.",
         },
         {
-            "icon": "/solutions/lock.svg",
+            "icon": Zap,
             "heading": "Enterprise-Grade AI",
             "desc": "Platform Scalable, secure, and cloud-native infrastructure designed for mission-critical operations.",
         },
@@ -70,12 +72,13 @@ export default function FeaturedCapabilities() {
 }
 
 type FeatureCapabilityCardProps = {
-    icon: string
+    // icon: string
+    icon: React.ComponentType<any>
     title: string
     description: string
 }
 
-function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
+function FeatureCapabilityCard({ icon: Icon, title, description }: FeatureCapabilityCardProps) {
     return (
         <div
             className={`
@@ -86,11 +89,14 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
         >
             {/* Icon wrapper */}
             <div className="w-15 h-15 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300 overflow-hidden">
-                <img
+                {/* <img
                     src={icon}
                     alt=""
                     className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110"
-                />
+                /> */}
+                <div className="text-privue-700 group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-6 h-6 text-privue-700" aria-hidden />
+                </div>
             </div>
 
             {/* Text */}

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 
 export default function FeaturedCapabilities() {
 
@@ -51,91 +51,56 @@ export default function FeaturedCapabilities() {
                 </div>
 
 
-                <div className="px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-                    {coreCapabilities.map((c, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 18 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.25 }}
-                            transition={{ duration: 0.45, delay: i * 0.06 }}
-                        >
-                            <CapabilitiesCardLP2 icon={c.icon} heading={c.heading} desc={c.desc} />
-                        </motion.div>
-                    ))}
-                </div>
-
-
-                {/* <div className="mx-auto text-center mt-24 py-12">
-                    <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
-                        Core{" "}
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-privue-950 to-privue-900 via-privue-800 font-semibold">
-                            Capabilities
-                        </span>
-                    </h1>
-                    <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
-                        Scalable solutions to optimize decisions, reduce risk, and drive growth.
-                    </p>
-                </div>
-
-                <div className="px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
-                    {coreCapabilities.map((c, i) => {
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {coreCapabilities.map((s, i) => {
                         return (
-                            <CapabilitiesCardLP
+                            <FeatureCapabilityCard
                                 key={i}
-                                heading={c.heading}
-                                desc={c.desc}
-                                icon={c.icon}
+                                title={s.heading}
+                                description={s.desc}
+                                icon={s.icon}
                             />
                         )
                     })}
 
-                </div> */}
+                </div>
             </div>
         </section>
     );
 }
 
-interface CapabilitiesCardProps {
-    icon: string; // path to the icon
-    heading?: string;
-    desc: string;
+type FeatureCapabilityCardProps = {
+    icon: string
+    title: string
+    description: string
 }
 
-// function CapabilitiesCardLP({ icon, heading, desc }: CapabilitiesCardProps) {
-//     return (
-//         <div
-//             className="flex flex-col items-start gap-6 p-6 text-left rounded-2xl border border-gray-100 
-//                  bg-white/80 backdrop-blur-sm shadow-sm 
-//                  hover:shadow-lg hover:-translate-y-1 
-//                  transition-all duration-300"
-//         >
-//             {/* Icon */}
-//             <div className="p-3">
-//                 <img src={icon} alt="" className="w-7 h-7" />
-//             </div>
-
-//             {/* Text */}
-//             <div>
-//                 {heading && <p className="font-semibold text-lg text-gray-900">{heading}</p>}
-//                 <p className="mt-1 text-sm text-gray-600 leading-relaxed">{desc}</p>
-//             </div>
-//         </div>
-//     )
-// }
-
-
-function CapabilitiesCardLP2({ icon, heading, desc }: CapabilitiesCardProps) {
+function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
     return (
-        <div className="flex flex-col items-start gap-6 px-4 text-left">
-            {/* Icon */}
-            <img src={icon} alt="" className="w-9 h-9" />
+        <div
+            className={`
+        group block p-6 rounded-xl border border-gray-100
+        bg-white transition-all duration-300
+        hover:-translate-y-2 hover:shadow-xl hover:shadow-privue-200/60
+      `}
+        >
+            {/* Icon wrapper */}
+            <div className="w-15 h-15 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300 overflow-hidden">
+                <img
+                    src={icon}
+                    alt=""
+                    className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+            </div>
 
             {/* Text */}
-            <div className="">
-                {heading && <p className="font-medium text-base tracking-normal">{heading}</p>}
-                {<p className="font-normal text-base tracking-normal">{desc}</p>}
-            </div>
+            <h3 className="text-lg font-medium mb-2 group-hover:text-privue-800 transition-colors duration-300 tracking-tight">
+                {title}
+            </h3>
+            <p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors duration-300">
+                {description}
+            </p>
         </div>
-    );
+    )
 }
+

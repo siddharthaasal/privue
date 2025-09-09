@@ -1,16 +1,11 @@
 'use client'
 
-import { useMemo, useState, useRef, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { motion, AnimatePresence } from 'motion/react'
-import { Button } from '@/components/ui/button' // adjust path if different
-import { Separator } from '@/components/ui/separator' // adjust path if different
-import { ArrowRight } from 'lucide-react'
-import type { ComponentType } from 'react'
-
-/* -------------------------
-   Types & helpers
-   ------------------------- */
+import IndustrySolutionCard from './IndustrySolutionCard' // <- adjust path if needed
+import { Zap } from 'lucide-react'
+// Types
 type Industry = {
     id?: string
     name: string
@@ -20,76 +15,54 @@ type Industry = {
 type Solution = {
     heading: string
     subHeading: string
-    icon: ComponentType<any>
+    icon: React.ComponentType<any>
     slug: string
 }
 
+/**
+ * Helper to generate fallback IDs when crypto.randomUUID is not available.
+ */
 function makeId(fallbackIndex: number) {
     if (typeof crypto !== 'undefined' && typeof (crypto as any).randomUUID === 'function') {
         try {
             return (crypto as any).randomUUID()
         } catch {
-            // fall through
+            // ignore and fall through to timestamp id
         }
     }
     return `gen-${Date.now().toString(36)}-${fallbackIndex}`
 }
 
-/* -------------------------
-   Component
-   ------------------------- */
-export default function IndustrySolutionsList() {
-    // ---------- Dummy industries ----------
+/**
+ * IndustryModules
+ *
+ * Left: accordion of industries. First industry opened by default.
+ * Right: list of IndustrySolutionCard components for the active industry.
+ *
+ * For now the same dummy `solutions` list is used for every industry (per your request).
+ */
+export default function IndustryModules() {
+    // ---------------------
+    // Dummy data (replace with real data later)
+    // ---------------------
     const dummyIndustries: Industry[] = [
-        { id: 'ind-retail', name: 'Retail', description: 'Retail industry solutions' },
-        { id: 'ind-health', name: 'Healthcare', description: 'Healthcare industry solutions' },
-        { id: 'ind-finance', name: 'Finance', description: 'Finance industry solutions' },
-        { id: 'ind-manuf', name: 'Manufacturing', description: 'Manufacturing industry solutions' },
+        { id: 'ind-1', name: 'Retail', description: 'Retail industry solutions' },
+        { id: 'ind-2', name: 'Healthcare', description: 'Healthcare industry solutions' },
+        { id: 'ind-3', name: 'Finance', description: 'Finance industry solutions' },
+        { id: 'ind-4', name: 'Manufacturing', description: 'Manufacturing industry solutions' },
     ]
 
-    // ---------- Placeholder icons (replace with your real icons) ----------
-    const CircleIcon: ComponentType<any> = (props) => (
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" {...props}>
-            <circle cx="12" cy="12" r="8" />
-        </svg>
-    )
-    const SquareIcon: ComponentType<any> = (props) => (
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" {...props}>
-            <rect x="6" y="6" width="12" height="12" rx="2" />
-        </svg>
-    )
-    const TriangleIcon: ComponentType<any> = (props) => (
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" {...props}>
-            <path d="M12 6l6 12H6z" />
-        </svg>
-    )
+    // Same solutions used for every industry (per your instruction).
+    const dummySolutions: Solution[] = [
+        { heading: 'Personalized Recommendations', subHeading: 'Increase conversion with tailored offers', icon: Zap, slug: 'personalized-recs' },
+        { heading: 'Automated Support', subHeading: '24/7 AI-driven customer support', icon: Zap, slug: 'automated-support' },
+        { heading: 'Demand Forecasting', subHeading: 'Reduce stockouts with accurate forecasts', icon: Zap, slug: 'demand-forecasting' },
+        { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: Zap, slug: 'fraud-detection' },
+    ]
 
-    // ---------- Dummy solutions per industry ----------
-    const solutionsByIndustry: Record<string, Solution[]> = {
-        'ind-retail': [
-            { heading: 'Personalized Recommendations', subHeading: 'Increase conversion with tailored offers', icon: CircleIcon, slug: 'personalized-recs' },
-            { heading: 'Dynamic Pricing', subHeading: 'Optimize margins in real-time', icon: SquareIcon, slug: 'dynamic-pricing' },
-            { heading: 'Inventory Optimization', subHeading: 'Reduce carrying costs & stockouts', icon: TriangleIcon, slug: 'inventory-optimization' },
-            { heading: 'Inventory Optimization 2', subHeading: 'Reduce carrying costs & stockouts', icon: TriangleIcon, slug: 'inventory-optimization' },
-        ],
-        'ind-health': [
-            { heading: 'Clinical Decision Support', subHeading: 'Assist clinicians with recommendations', icon: TriangleIcon, slug: 'clinical-support' },
-            { heading: 'Patient Triage Bot', subHeading: 'Fast triage & routing for patient intake', icon: CircleIcon, slug: 'patient-triage' },
-            { heading: 'Remote Monitoring', subHeading: 'Continuous vitals & alerts', icon: SquareIcon, slug: 'remote-monitoring' },
-        ],
-        'ind-finance': [
-            { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: SquareIcon, slug: 'fraud-detection' },
-            { heading: 'Credit Scoring', subHeading: 'Smarter risk models with explainability', icon: CircleIcon, slug: 'credit-scoring' },
-            { heading: 'Portfolio Insights', subHeading: 'Actionable ML-driven portfolio suggestions', icon: TriangleIcon, slug: 'portfolio-insights' },
-        ],
-        'ind-manuf': [
-            { heading: 'Predictive Maintenance', subHeading: 'Reduce downtime with early failure alerts', icon: TriangleIcon, slug: 'predictive-maintenance' },
-            { heading: 'Quality Inspection', subHeading: 'Automate defect detection on the line', icon: SquareIcon, slug: 'quality-inspection' },
-            { heading: 'Supply Chain Visibility', subHeading: 'End-to-end visibility & demand alignment', icon: CircleIcon, slug: 'supplychain-visibility' },
-        ],
-    }
-
-    // ---------- Normalize industries ----------
+    // ---------------------
+    // Normalize industries ensuring each has an id
+    // ---------------------
     const industries = useMemo(
         () =>
             dummyIndustries.map((ind, idx) => ({
@@ -100,120 +73,98 @@ export default function IndustrySolutionsList() {
         []
     )
 
-    // Active industry (first open by default)
+    // Active industry id state. Default to first industry.
     const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id)
 
-    // RHS scroll ref to reset scroll when industry changes
-    const rhsScrollRef = useRef<HTMLDivElement | null>(null)
+    // When activeIndustryId changes, we could do side effects (analytics, fetch, etc.)
+    // For this demo we simply log (you can remove this).
     useEffect(() => {
-        if (rhsScrollRef.current) rhsScrollRef.current.scrollTop = 0
+        // Example side-effect: fetch industry-specific solutions here if needed.
+        // console.log('Active industry changed to', activeIndustryId)
     }, [activeIndustryId])
 
-    // Active solutions for the selected industry
-    const activeSolutions = solutionsByIndustry[activeIndustryId] ?? []
+    // --- optional: keep a ref to the RHS scroll container so we can manage focus/scroll if desired ---
+    const rhsScrollRef = useRef<HTMLDivElement | null>(null)
 
-    /* -------------------------
-       Render
-       ------------------------- */
+    // Render
     return (
-        <section className="py-6">
-            <div className="mx-auto max-w-6xl px-6">
-                {/* NOTE: no primary heading rendered above the panel (per request) */}
+        <section className="py-16">
+            {/* background / decorative element copied from your original component */}
+            <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 
-                {/* Cohesive container (transparent background) */}
-                <div className="relative rounded-2xl border border-gray-200 dark:border-zinc-700 bg-transparent overflow-visible">
-                    <div className="grid grid-cols-1 md:grid-cols-3">
-                        {/* LEFT column: the accordion of industries */}
-                        <div className="border-b md:border-b-0 md:border-r p-4 md:pl-6 md:py-6 bg-transparent">
-                            <Accordion
-                                type="single"
-                                value={activeIndustryId}
-                                onValueChange={(value) => value && setActiveIndustryId(value)}
-                                className="w-full"
-                            >
-                                {industries.map((ind) => {
-                                    const isActive = ind.id === activeIndustryId
+            <div className="mx-auto space-y-8 px-6 md:space-y-16 lg:space-y-20">
+
+
+                {/* Two-column layout: LHS (accordion), RHS (cards) */}
+                <div className="grid gap-12 sm:px-12 md:grid-cols-3 lg:gap-20 lg:px-8">
+                    {/* -----------------------
+              LEFT: Industries (Accordion)
+              - type="single" with value controlled by activeIndustryId
+              - changing the accordion updates the RHS via setActiveIndustryId
+              ------------------------ */}
+                    <Accordion
+                        type="single"
+                        value={activeIndustryId}
+                        onValueChange={(value) => value && setActiveIndustryId(value)}
+                        className="w-full"
+                    >
+                        {industries.map((ind) => (
+                            <AccordionItem key={ind.id} value={ind.id}>
+                                <AccordionTrigger>
+                                    {/* Each trigger shows industry name */}
+                                    <div className="flex items-center gap-2 text-base">{ind.name}</div>
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    {/* The description could be longer; keep it concise */}
+                                    <div className="text-sm text-muted-foreground">{ind.description || 'Explore tailored solutions for this industry.'}</div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+
+                    {/* -----------------------
+              RIGHT: Solutions list for the selected industry
+              - col-span-2 to occupy remaining grid columns
+              - maps dummySolutions exactly using the snippet you provided
+              ------------------------ */}
+                    <div className="bg-background relative flex overflow-hidden rounded-3xl border p-0 col-span-2">
+                        {/* decorative vertical separator like original */}
+                        {/* <div className="absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)] pointer-events-none" /> */}
+
+                        {/* scrollable container for cards */}
+                        <div
+                            ref={rhsScrollRef}
+                            className="relative w-full rounded-2xl overflow-auto p-4 grid gap-2"
+                            // Use a responsive grid: on narrow screens it's single column, on wider screens it flows into two columns
+                            // style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', maxHeight: 520 }}
+                            aria-live="polite"
+                        >
+                            {/* AnimatePresence + motion for subtle entrance animations */}
+                            <AnimatePresence initial={false}>
+                                {/* Map the solutions array into IndustrySolutionCard components.
+                    This uses the exact mapping you asked for. */}
+                                {dummySolutions.map((s, i) => {
                                     return (
-                                        <AccordionItem key={ind.id} value={ind.id}>
-                                            <AccordionTrigger>
-                                                <div className={`flex items-center justify-between w-full ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
-                                                    <div className={`text-sm md:text-base font-medium ${isActive ? 'text-foreground' : ''}`}>{ind.name}</div>
-                                                </div>
-                                            </AccordionTrigger>
-
-                                            <AccordionContent>
-                                                <div className="text-sm text-muted-foreground">{ind.description || 'Solutions tailored to this industry.'}</div>
-                                            </AccordionContent>
-                                        </AccordionItem>
+                                        <motion.div
+                                            key={s.slug}
+                                            initial={{ opacity: 0, y: 6 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 6 }}
+                                            transition={{ duration: 0.18 }}
+                                        >
+                                            <IndustrySolutionCard
+                                                key={i}
+                                                title={s.heading}
+                                                description={s.subHeading}
+                                                icon={s.icon}
+                                                href={`/solutions/${s.slug}`}
+                                            // NOTE: IndustrySolutionCard currently doesn't accept isActive; if you want active styling,
+                                            // pass an `isActive` prop here and update the card component accordingly.
+                                            />
+                                        </motion.div>
                                     )
                                 })}
-                            </Accordion>
-                        </div>
-
-                        {/* RIGHT column: list-style solutions (inspired by List2) */}
-                        <div className="col-span-2 p-4 md:p-6 bg-transparent">
-                            {/* minimal label of active industry */}
-                            {/* <div className="mb-3">
-                                <div className="text-sm font-semibold">{industries.find((i) => i.id === activeIndustryId)?.name ?? ''}</div>
-                            </div> */}
-
-                            {/* The list area is scrollable and constrained to avoid page jump */}
-                            <div ref={rhsScrollRef} className="flex flex-col" style={{ maxHeight: 420, minHeight: 300 }}>
-                                {/* <Separator /> */}
-
-                                <AnimatePresence initial={false}>
-                                    {activeSolutions.map((s) => {
-                                        const Icon = s.icon
-                                        return (
-                                            <motion.div
-                                                key={s.slug}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ duration: 0.12 }}
-                                            >
-                                                <div className="grid items-center justify-between gap-4 px-2 py-4 md:grid-cols-4">
-                                                    {/* large description column on the left on md+, stacked on mobile */}
-                                                    <div className='order-1 md:order-none md:col-span-3 flex gap-2'>
-                                                        <div>
-                                                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-muted">
-                                                                <Icon />
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <p className="text-lg font-medium text-foreground">{s.subHeading}</p>
-                                                            <p className="text-sm font-normal text-foreground-lighter md:order-none md:col-span-3">{s.subHeading}</p>
-                                                        </div>
-
-                                                    </div>
-                                                    {/* icon + title */}
-                                                    {/* <div className="order-2 flex items-center gap-3 md:order-none">
-                                                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-muted">
-                                                            <Icon />
-                                                        </span>
-                                                        <div className="flex flex-col gap-1">
-                                                            <h3 className="font-semibold">{s.heading}</h3>
-                                                            <p className="text-sm text-muted-foreground">Solution</p>
-                                                        </div>
-                                                    </div> */}
-
-                                                    {/* CTA button */}
-                                                    <div className="order-3 ml-auto md:order-none">
-                                                        <Button variant="outline" asChild>
-                                                            <a href={`/solutions/${s.slug}`} className="flex items-center gap-2">
-                                                                <span>View solution</span>
-                                                                <ArrowRight className="h-4 w-4" />
-                                                            </a>
-                                                        </Button>
-                                                    </div>
-                                                </div>
-
-                                                <Separator />
-                                            </motion.div>
-                                        )
-                                    })}
-                                </AnimatePresence>
-                            </div>
+                            </AnimatePresence>
                         </div>
                     </div>
                 </div>

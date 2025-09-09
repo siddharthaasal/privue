@@ -22,9 +22,9 @@ export default function LandingPage() {
                     <section id="modules" data-theme="light">
                         <AboutSection />
                     </section>
-                    <section id="modules" data-theme="light">
+                    {/* <section id="modules" data-theme="light">
                         <FeaturedSolutions />
-                    </section>
+                    </section> */}
                     <section id="modules" data-theme="light">
                         <FeaturedCapabilities />
                     </section>

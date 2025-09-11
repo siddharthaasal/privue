@@ -95,7 +95,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Supplier Risk Intelligence",
     "solutionLink": "#",
-    "coverImage": "/article-images/global-supply-selection.jpg",
+    "coverImage": "/article-images/SupplyChainGraphic.png",
     "readTime": "3 min",
     "file": "src/data/articles/mitigating-risk in-global-supplier-selection.mdx",
     "url": "/articles/mitigating-risk-in-global-supplier-selection"

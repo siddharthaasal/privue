@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import ArticleListing from "./pages/articles/ArticleListing";
-import TestBlogPlage from "./pages/TestBlogPage";
+import TestBlogPlage from "./pages/TestBlogPage.tsx";
 import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
 import DarkHeroSection from "./sections/DarkHeroSection";

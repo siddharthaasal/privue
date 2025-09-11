@@ -1,244 +1,351 @@
-'use client'
-
-import { useMemo } from 'react'
+// components/FlowNodesExample.tsx
+import React, { useCallback } from "react";
 import ReactFlow, {
-    Background,
+    Controls,
+    addEdge,
     useNodesState,
     useEdgesState,
+    Handle,
+    Position,
+    MarkerType,
     type Node,
     type Edge,
-    type EdgeProps,
-    getBezierPath,
-    Position,
-    Controls,
-} from 'reactflow'
-import 'reactflow/dist/style.css'
+} from "reactflow";
+import "reactflow/dist/style.css";
+import { FileText, ImageIcon, Database, Cloud } from "lucide-react"; // dummy icons
 
-/* --------------------------
-   Types for node data
-   -------------------------- */
-type SchemaNodeData = {
-    title: string
-    rows: string[]
-}
+type DataNodeProps = {
+    data: {
+        label: string;
+        icons?: { id: string; label?: string; src?: string }[];
+        compact?: boolean;
+    };
+};
 
-type AggregationNodeData = {
-    title: string
-    subtitle?: string
-}
+function DataNodeInner({ data }: DataNodeProps) {
+    const { label, icons = [], compact } = data;
 
-/* --------------------------
-   Schema node: a DB-like block
-   -------------------------- */
-function SchemaNode({ data }: { data: SchemaNodeData }) {
     return (
-        <div className="select-none pointer-events-none w-72">
-            <div className="rounded-2xl border border-gray-200 dark:border-zinc-700 overflow-hidden shadow-sm">
-                {/* header */}
-                <div className="px-4 py-3 bg-gradient-to-b from-white/60 to-white/40 dark:from-zinc-800/40">
-                    <div className="text-sm font-semibold text-slate-900">Source Data</div>
-                    <div className="text-xs text-slate-500 mt-0.5">ingest / raw sources</div>
-                </div>
-
-                {/* rows (like schema table rows) */}
-                <div className="bg-white dark:bg-transparent">
-                    {data.rows.map((r, idx) => (
-                        <div
-                            key={r}
-                            className={`flex items-center justify-between px-4 py-3 text-sm ${idx % 2 === 0 ? 'bg-transparent' : 'bg-slate-50/40'
-                                }`}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="h-2.5 w-2.5 rounded-full bg-privue-600" />
-                                <div className="text-slate-800 dark:text-slate-200 truncate">{r}</div>
-                            </div>
-
-                            <div className="text-xs text-slate-400">source</div>
-                        </div>
-                    ))}
-                </div>
+        <div
+            className="flex flex-col items-start gap-4 p-3 bg-white/95 text-slate-900 border border-privue-800"
+            style={{
+                borderTopLeftRadius: 18,
+                borderBottomLeftRadius: 18,
+                borderTopRightRadius: 6,
+                borderBottomRightRadius: 6,
+                minWidth: compact ? 200 : 260,
+            }}
+        >
+            {/* left content: label */}
+            <div className="flex-1 min-w-0">
+                <div className="text-sm text-privue-900 font-semibold truncate">{label}</div>
+                <div className="text-xs text-slate-500 mt-0.5">Data source</div>
             </div>
-        </div>
-    )
-}
 
-/* --------------------------
-   Aggregation node
-   -------------------------- */
-function AggregationNode({ data }: { data: AggregationNodeData }) {
-    return (
-        <div className="select-none pointer-events-none w-80">
-            <div className="rounded-2xl bg-gradient-to-b from-white/50 to-white/30 border border-gray-200 dark:border-zinc-700 p-4 shadow-md">
-                <div className="flex items-start gap-3">
-                    <div className="flex-1">
-                        <div className="text-base font-semibold text-slate-900">{data.title}</div>
-                        {data.subtitle && <div className="text-sm text-slate-500 mt-1">{data.subtitle}</div>}
+            {/* icons column */}
+            <div className="flex items-center gap-2">
+                {(icons.length ? icons : [{ id: "file" }, { id: "img" }, { id: "db" }, { id: "cloud" }]).map((it) => (
+                    <div
+                        key={it.id}
+                        className="w-9 h-9 rounded-md flex items-center justify-center bg-slate-50 border border-slate-100 shadow-sm"
+                        title={it.label ?? it.id}
+                        aria-label={it.label ?? it.id}
+                    >
+                        {it.id === "file" && <FileText size={16} className="text-slate-700" />}
+                        {it.id === "img" && <ImageIcon size={16} className="text-slate-700" />}
+                        {it.id === "db" && <Database size={16} className="text-slate-700" />}
+                        {it.id === "cloud" && <Cloud size={16} className="text-slate-700" />}
                     </div>
-
-                    <div className="flex-shrink-0">
-                        <div className="h-9 w-9 rounded-md bg-privue-100 flex items-center justify-center">
-                            <svg width="18" height="18" viewBox="0 0 24 24" className="text-privue-700" aria-hidden>
-                                <path d="M4 6h16M4 12h10M4 18h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
-        </div>
-    )
-}
 
-/* --------------------------
-   Custom Edge (Bezier) using getBezierPath
-   - moved out of component so reference is stable
-   -------------------------- */
-function CustomAnimatedEdge({
-    id,
-    sourceX,
-    sourceY,
-    sourcePosition = Position.Right,
-    targetX,
-    targetY,
-    targetPosition = Position.Left,
-    style,
-}: EdgeProps) {
-    const [edgePath] = getBezierPath({
-        sourceX,
-        sourceY,
-        sourcePosition,
-        targetX,
-        targetY,
-        targetPosition,
-    })
-
-    const stroke = (style as any)?.stroke ?? '#0ea5e9' // cyan-500 fallback
-    const strokeWidth = (style as any)?.strokeWidth ?? 3
-    const dash = (style as any)?.strokeDasharray ?? '8 6'
-
-    return (
-        <>
-            <defs>
-                <marker id={`arrow-${id}`} markerWidth="20" markerHeight="20" refX="10" refY="7" orient="auto">
-                    <path d="M0,0 L0,14 L10,7 z" fill={stroke} />
-                </marker>
-            </defs>
-
-            <path
-                id={id}
-                className="rf-edge-path"
-                d={edgePath}
-                fill="none"
-                stroke={stroke}
-                strokeWidth={strokeWidth}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray={dash}
-                markerEnd={`url(#arrow-${id})`}
+            {/* connection handles: left target and right source */}
+            {/* styled to resemble the circular connectors in your image */}
+            <Handle
+                type="target"
+                position={Position.Left}
+                id="left"
+                style={{
+                    left: -10,
+                    width: 14,
+                    height: 14,
+                    borderRadius: 999,
+                    background: "#ffffff",
+                    border: "3px solid rgba(255,255,255,0.95)",
+                    boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                }}
             />
-        </>
-    )
+            <Handle
+                type="source"
+                position={Position.Right}
+                id="right"
+                style={{
+                    right: -10,
+                    width: 14,
+                    height: 14,
+                    borderRadius: 999,
+                    background: "#ffffff",
+                    border: "3px solid rgba(255,255,255,0.95)",
+                    boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                }}
+            />
+        </div>
+    );
 }
 
-/* --------------------------
-   nodeTypes / edgeTypes
-   - defined at module scope so they are stable between renders
-   -------------------------- */
-const nodeTypes = {
-    schemaNode: (props: any) => <SchemaNode data={props.data} />,
-    aggregationNode: (props: any) => <AggregationNode data={props.data} />,
-}
+const DataNode = React.memo(DataNodeInner);
 
-const edgeTypes = {
-    customAnimated: (props: any) => <CustomAnimatedEdge {...props} />,
-}
+// ---------- Models node (bucket style) ----------
+type ModelsNodeProps = {
+    data: {
+        label: string;
+        models: { id: string; title: string; icon?: "db" | "file" | "cloud" }[];
+    };
+};
 
-/* --------------------------
-   Main component
-   -------------------------- */
-export default function LeftSchemaAggregationGraph() {
-    const nodesInitial: Node[] = useMemo(
-        () => [
-            {
-                id: 'schema',
-                type: 'schemaNode',
-                data: {
-                    title: 'Source Data',
-                    rows: ['Structured Data', 'Unstructured Data', "Privue's Prop. Data", 'Third Party Data'],
-                } as SchemaNodeData,
-                position: { x: 40, y: 80 },
-                draggable: false,
-                selectable: false,
-            },
-            {
-                id: 'aggregation',
-                type: 'aggregationNode',
-                data: { title: 'Data Aggregation', subtitle: 'Normalization · Enrichment · Indexing' } as AggregationNodeData,
-                position: { x: 360, y: 120 },
-                draggable: false,
-                selectable: false,
-            },
-        ],
-        []
-    )
-
-    const edgesInitial: Edge[] = useMemo(
-        () => [
-            {
-                id: 'e-schema-agg',
-                source: 'schema',
-                target: 'aggregation',
-                type: 'customAnimated',
-                style: {
-                    stroke: '#0ea5e9',
-                    strokeWidth: 3,
-                    strokeDasharray: '8 6',
-                },
-                selectable: false,
-            },
-        ],
-        []
-    )
-
-    const [nodes] = useNodesState(nodesInitial)
-    const [edges] = useEdgesState(edgesInitial)
+function ModelsNodeInner({ data }: ModelsNodeProps) {
+    const { label, models } = data;
 
     return (
-        <div className="w-full h-[520px] rounded-2xl overflow-hidden relative">
-            <style>{`
-        .rf-edge-path {
-          animation: dash-move 1.2s linear infinite;
-        }
-        @keyframes dash-move {
-          to { stroke-dashoffset: -28; }
-        }
-      `}</style>
+        <div
+            className="bg-white/95 border border-slate-200 rounded-2xl shadow-sm p-4 w-64"
+            style={{ fontFamily: "sans-serif" }}
+        >
+            <div className="font-semibold text-privue-800 text-base mb-3">{label}</div>
+
+            <div className="bg-white rounded-lg border border-slate-100 overflow-hidden">
+                {models.map((m, i) => (
+                    <div
+                        key={m.id}
+                        className={`flex items-center justify-between px-4 py-3 text-sm ${i < models.length - 1 ? "border-b border-slate-100" : ""}`}
+                    >
+                        <div className="flex items-center gap-3 min-w-0">
+                            <div className="w-8 h-8 flex items-center justify-center rounded-md bg-slate-50 border border-slate-100 shadow-xs">
+                                {m.icon === "db" && <Database size={16} className="text-slate-700" />}
+                                {m.icon === "file" && <FileText size={16} className="text-slate-700" />}
+                                {m.icon === "cloud" && <Cloud size={16} className="text-slate-700" />}
+                            </div>
+                            <div className="text-slate-700 truncate">{m.title}</div>
+                        </div>
+
+                        {/* optional chevron / more control placeholder */}
+                        <div className="text-slate-300 text-xs">…</div>
+                    </div>
+                ))}
+            </div>
+
+            {/* handles */}
+            <Handle
+                type="target"
+                position={Position.Left}
+                id="models-left"
+                style={{
+                    left: -10,
+                    width: 14,
+                    height: 14,
+                    borderRadius: 999,
+                    background: "#ffffff",
+                    border: "3px solid rgba(255,255,255,0.95)",
+                    boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                }}
+            />
+            <Handle
+                type="source"
+                position={Position.Right}
+                id="models-right"
+                style={{
+                    right: -10,
+                    width: 14,
+                    height: 14,
+                    borderRadius: 999,
+                    background: "#ffffff",
+                    border: "3px solid rgba(255,255,255,0.95)",
+                    boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                }}
+            />
+        </div>
+    );
+}
+
+const ModelsNode = React.memo(ModelsNodeInner);
+
+// register both node types
+const nodeTypes = { dataNode: DataNode, modelsNode: ModelsNode };
+
+// ---------- Main flow component ----------
+export default function FlowNodesExample() {
+    const initialNodes: Node[] = [
+        {
+            id: "structured",
+            type: "dataNode",
+            position: { x: 80, y: 40 },
+            data: {
+                label: "Structured Data",
+                icons: [
+                    { id: "file", label: "CSV" },
+                    { id: "img", label: "Charts" },
+                    { id: "db", label: "DB" },
+                    { id: "cloud", label: "API" },
+                ],
+            },
+        },
+        {
+            id: "unstructured",
+            type: "dataNode",
+            position: { x: 80, y: 180 },
+            data: {
+                label: "Unstructured Data",
+                icons: [
+                    { id: "file", label: "Email" },
+                    { id: "img", label: "Docs" },
+                    { id: "db", label: "OCR" },
+                    { id: "cloud", label: "Scrapes" },
+                ],
+            },
+        },
+        {
+            id: "privue",
+            type: "dataNode",
+            position: { x: 80, y: 320 },
+            data: {
+                label: "Privue's Proprietary Data",
+                icons: [
+                    { id: "db", label: "Proprietary DB" },
+                    { id: "file", label: "Signals" },
+                    { id: "cloud", label: "Streams" },
+                    { id: "img", label: "Enriched" },
+                ],
+            },
+        },
+        {
+            id: "thirdparty",
+            type: "dataNode",
+            position: { x: 80, y: 460 },
+            data: {
+                label: "Third Party Data",
+                icons: [
+                    { id: "cloud", label: "Vendors" },
+                    { id: "file", label: "Feeds" },
+                    { id: "db", label: "Partners" },
+                    { id: "img", label: "APIs" },
+                ],
+            },
+        },
+        {
+            id: "unified",
+            type: "dataNode",
+            position: { x: 880, y: 220 },
+            data: {
+                label: "Unified Data Platform",
+                icons: [{ id: "db", label: "Store" }, { id: "cloud", label: "API" }, { id: "img", label: "UI" }, { id: "file", label: "Exports" }],
+                compact: false,
+            },
+        },
+
+        // LLM Models (kept from your earlier version)
+        {
+            id: "llm-models",
+            type: "dataNode",
+            position: { x: 560, y: 220 },
+            data: {
+                label: "LLM Models",
+                icons: [
+                    { id: "db", label: "Weights" },
+                    { id: "file", label: "Configs" },
+                    { id: "cloud", label: "Endpoints" },
+                ],
+                compact: true,
+            },
+        },
+
+        // --- NEW Models bucket node (Models: Credit Risk, Climate Risk, Compliance Risk)
+        {
+            id: "models",
+            type: "modelsNode",
+            position: { x: 1360, y: 220 }, // placed to the right of "unified"
+            data: {
+                label: "Models",
+                models: [
+                    { id: "m1", title: "Credit Risk", icon: "db" },
+                    { id: "m2", title: "Climate Risk", icon: "cloud" },
+                    { id: "m3", title: "Compliance Risk", icon: "file" },
+                ],
+            },
+        },
+    ];
+
+    // improved marker/edge styles: rounded caps + arrow marker that inherits color
+    const initialEdges: Edge[] = [
+        {
+            id: "e-pdf-un",
+            source: "pdf-ocr",
+            target: "unstructured",
+            animated: true,
+            style: { stroke: "#94A3B8", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" },
+            markerEnd: { type: MarkerType.Arrow }, // uses same color as stroke
+        },
+
+        { id: "e-structured-unified", source: "structured", target: "llm-models", animated: true, style: { stroke: "#4c6ef5", strokeWidth: 2.5, strokeLinecap: "round", strokeLinejoin: "round" }, markerEnd: { type: MarkerType.Arrow } },
+        { id: "e-unstructured-unified", source: "unstructured", target: "llm-models", animated: true, style: { stroke: "#4c6ef5", strokeWidth: 2.5, strokeLinecap: "round", strokeLinejoin: "round" }, markerEnd: { type: MarkerType.Arrow } },
+        { id: "e-privue-unified", source: "privue", target: "llm-models", animated: true, style: { stroke: "#4c6ef5", strokeWidth: 2.5, strokeLinecap: "round", strokeLinejoin: "round" }, markerEnd: { type: MarkerType.Arrow } },
+        { id: "e-thirdparty-unified", source: "thirdparty", target: "llm-models", animated: true, style: { stroke: "#4c6ef5", strokeWidth: 2.5, strokeLinecap: "round", strokeLinejoin: "round" }, markerEnd: { type: MarkerType.Arrow } },
+
+        // Unified -> LLM Models (green)
+        {
+            id: "e-unified-llm",
+            source: "llm-models",
+            target: "unified",
+            animated: true,
+            style: { stroke: "#10b981", strokeWidth: 2.2, strokeLinecap: "round", strokeLinejoin: "round" },
+            markerEnd: { type: MarkerType.Arrow },
+        },
+
+        // NEW: Unified -> Models (bucket)
+        {
+            id: "e-unified-models",
+            source: "unified",
+            target: "models",
+            animated: true,
+            style: { stroke: "#4c6ef5", strokeWidth: 2.2, strokeLinecap: "round", strokeLinejoin: "round" },
+            markerEnd: { type: MarkerType.Arrow },
+        },
+    ];
+
+    const [nodes, , onNodesChange] = useNodesState(initialNodes);
+    const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+
+    const onConnect = useCallback((connection: any) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        addEdge(connection, edges);
+    }, [edges]);
+
+    return (
+        <div className="w-full h-[760px] bg-slate-50 rounded-lg p-6 relative">
+            <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    backgroundImage: "radial-gradient(circle, rgba(2,6,23,0.06) 1px, transparent 1px)",
+                    backgroundSize: "20px 20px",
+                }}
+            />
 
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
                 nodeTypes={nodeTypes}
-                edgeTypes={edgeTypes}
                 fitView
-                attributionPosition="bottom-left"
                 nodesDraggable={false}
                 nodesConnectable={false}
-                // nodesSelectable={false}
-                edgesFocusable={false}
-                onNodesChange={() => { }}
-                onEdgesChange={() => { }}
-                onConnect={() => { }}
-                // disable interactivity
-                panOnDrag={false}
+                panOnScroll
                 zoomOnScroll={false}
-                panOnScroll={false}
-                zoomOnPinch={false}
-                panOnScrollSpeed={0}
-                minZoom={1}
-                maxZoom={1}
             >
-                <Background gap={16} size={1} color="#f1f5f9" />
                 <Controls showInteractive={false} />
             </ReactFlow>
         </div>
-    )
+    );
 }

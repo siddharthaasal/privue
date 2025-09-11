@@ -10,7 +10,7 @@ export default function AboutSection() {
                 </h2>
 
                 {/* parent flex: items-stretch so children match heights */}
-                <div className="relative flex flex-col md:flex-row items-center gap-8">
+                <div className="relative flex flex-col md:flex-row items-stretch gap-8">
 
                     {/* Left: Text - allow it to be a flex column and not force min-height */}
                     <div className="relative z-10 space-y-4 md:w-1/2 min-h-0">
@@ -23,20 +23,19 @@ export default function AboutSection() {
                         </p>
 
                         <div className="grid grid-cols-2 gap-3 pt-6 sm:gap-4">
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                    <Zap className="h-4 w-4" />
-                                    <h3 className="text-sm font-medium">Actionable Insights</h3>
-                                </div>
-                                <p className="text-muted-foreground text-sm">Turning complex data into clear intelligence.</p>
-                            </div>
-
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2">
                                     <Cpu className="h-4 w-4" />
                                     <h3 className="text-sm font-medium">AI-Driven</h3>
                                 </div>
                                 <p className="text-muted-foreground text-sm">Proprietary models for smarter, faster decisions.</p>
+                            </div>
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                    <Zap className="h-4 w-4" />
+                                    <h3 className="text-sm font-medium">Actionable Insights</h3>
+                                </div>
+                                <p className="text-muted-foreground text-sm">Turning complex data into clear intelligence.</p>
                             </div>
                         </div>
 
@@ -64,16 +63,12 @@ export default function AboutSection() {
                     </div>
 
                     {/* Right: Image - allow shrinking and set image to h-full w-auto */}
-                    <div className="md:w-1/2 flex min-h-0"> {/* min-h-0 is important here */}
-                        <div className="border-border/50 relative w-full h-full rounded-xl border border-dotted p-0 overflow-hidden">
+                    <div className="md:w-1/2 flex min-h-0">
+                        <div className="border-border/50 relative w-full h-full rounded-xl border border-dotted p-4 flex overflow-hidden">
                             <img
-                                src="/charts.png"
-                                className="hidden h-full w-auto object-contain rounded-[12px] dark:block"
-                                alt="Privue analytics dashboard (dark)"
-                            />
-                            <img
-                                src="https://images.unsplash.com/photo-1610374792793-f016b77ca51a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                className="h-full w-auto object-contain rounded-[12px] shadow dark:hidden"
+                                // src="/demo-about-section-img.webp"
+                                src="/demo-about.png"
+                                className="h-full w-full  rounded-[12px] shadow dark:hidden"
                                 alt="Privue analytics dashboard (light)"
                             />
                         </div>

@@ -1,5 +1,5 @@
 // components/FlowNodesExample.tsx
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import ReactFlow, {
     Controls,
     addEdge,
@@ -12,6 +12,8 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { FileText, ImageIcon, Database, Cloud, Cpu } from "lucide-react";
+import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
+import privueLogo from "/privue-logo.png";
 
 /* ======================
    IconNode (left tiles + big DB)
@@ -267,8 +269,180 @@ function ModelsNodeInner({ data }: { data: ModelsNodeData }) {
 }
 const ModelsNode = React.memo(ModelsNodeInner);
 
+/* ======================
+   NEW: OrbitNode (LLM runtimes) — uses OrbitingCircles
+   ====================== */
+
+
+type OrbitNodeData = {
+    label?: string;
+    centerLogo?: string;
+    icons?: React.ReactNode[];
+    radius?: number; // px
+    iconSize?: number; // px
+    duration?: number; // seconds for full revolution
+    reverse?: boolean;
+    speed?: number; // multiplier
+};
+
+function OrbitNodeInner({ data }: { data: OrbitNodeData }) {
+    const {
+        label = "LLM Runtimes",
+        centerLogo,
+        icons = [],
+        radius = 80,
+        iconSize = 34,
+        duration = 20,
+        reverse = false,
+        speed = 1,
+    } = data;
+
+    const wrapperStyle: React.CSSProperties = {
+        width: 340,
+        height: 200,
+        padding: 12,
+        boxSizing: "border-box",
+        borderRadius: 12,
+        background: "transparent",
+        border: "1px solid rgba(15,23,36,0.04)",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "visible", // allow icons outside the center area
+    };
+
+    const centerBox: React.CSSProperties = {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 8,
+        pointerEvents: "auto",
+        zIndex: 2, // keep logo on top of orbiting items if needed
+    };
+
+    const logoStyle: React.CSSProperties = { width: 64, height: 64, objectFit: "contain" };
+
+    // handles refs for each icon wrapper element so we can set inline styles without re-renders
+    const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+    iconRefs.current = [];
+
+    const addRef = useCallback((el: HTMLDivElement | null) => {
+        if (el) iconRefs.current.push(el);
+    }, []);
+
+    useEffect(() => {
+        if (!icons || icons.length === 0) return;
+
+        let rafId: number | null = null;
+        const start = performance.now();
+        const count = icons.length;
+        const baseOffsets = new Array(count).fill(0).map((_, i) => (360 / count) * i);
+
+        // degrees per ms for one revolution: 360 / (duration * 1000) scaled by speed
+        const degPerMs = (360 / (duration * 1000)) * (speed ?? 1) * (reverse ? -1 : 1);
+
+        function step(now: number) {
+            const elapsed = now - start;
+            const baseRotation = elapsed * degPerMs; // degrees progressed since start
+
+            for (let i = 0; i < count; i++) {
+                const el = iconRefs.current[i];
+                if (!el) continue;
+                const angle = baseOffsets[i] + baseRotation;
+                // transform trick: translate(-50%,-50%) so element center is at center, rotate(angle) then translateX(radius), then reverse rotate so icon remains upright
+                const transform = `translate(-50%, -50%) rotate(${angle}deg) translateX(${radius}px) rotate(${-angle}deg)`;
+                // also set size via inline styles and ensure it's absolutely centered
+                el.style.position = "absolute";
+                el.style.left = "50%";
+                el.style.top = "50%";
+                el.style.width = `${iconSize}px`;
+                el.style.height = `${iconSize}px`;
+                el.style.display = "flex";
+                el.style.alignItems = "center";
+                el.style.justifyContent = "center";
+                el.style.transform = transform;
+                el.style.pointerEvents = "auto";
+                el.style.zIndex = "1";
+            }
+
+            rafId = requestAnimationFrame(step);
+        }
+
+        rafId = requestAnimationFrame(step);
+
+        return () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            // clear transform/styles optionally
+        };
+    }, [icons, radius, iconSize, duration, speed, reverse]);
+
+    // small circular handle style (inline)
+    const dotHandle: React.CSSProperties = {
+        left: -6,
+        width: 8,
+        height: 8,
+        borderRadius: 999,
+        background: "var(--privue-700,#475569)",
+        border: "none",
+        top: "45%",
+    };
+
+    return (
+        <div style={wrapperStyle}>
+            <div style={centerBox}>
+                {centerLogo && <img src={centerLogo} alt="logo" style={logoStyle} />}
+                {/* <div style={{ fontSize: 13, fontWeight: 700, color: "var(--privue-900,#0f1724)" }}>{label}</div> */}
+            </div>
+
+            {/* orbit children — we create wrappers we can mutate via refs */}
+            <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+                {icons.map((Ic, i) => (
+                    <div key={i} ref={addRef as any}>
+                        {/* the actual icon component stays as child; wrapper receives inline positioning */}
+                        {Ic}
+                    </div>
+                ))}
+            </div>
+
+            <Handle type="target" position={Position.Left} id="left" style={dotHandle} />
+            <Handle type="source" position={Position.Right} id="right" style={{ ...dotHandle, left: undefined, right: -6 } as React.CSSProperties} />
+        </div>
+    );
+}
+
+const OrbitNode = React.memo(OrbitNodeInner);
+
+/* ======================
+   small helper icons set for orbit (use your SVGs)
+   Replace these with your actual OpenAI/LLaMA/Gemini/Claude svgs.
+   ====================== */
+const OrbitIcons = {
+    openai: () => (
+        <svg width="28" height="28" viewBox="0 0 24 24" className="fill-current">
+            {/* simplified OpenAI-ish placeholder; replace with your asset */}
+            <circle cx="12" cy="12" r="10" />
+        </svg>
+    ),
+    llama: () => (
+        <svg width="28" height="28" viewBox="0 0 24 24" className="fill-current">
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+        </svg>
+    ),
+    gemini: () => (
+        <svg width="28" height="28" viewBox="0 0 24 24" className="fill-current">
+            <path d="M3 12h18" stroke="currentColor" strokeWidth="2" />
+        </svg>
+    ),
+    claude: () => (
+        <svg width="28" height="28" viewBox="0 0 24 24" className="fill-current">
+            <polygon points="12,2 22,22 2,22" />
+        </svg>
+    ),
+};
 /* register nodes */
-const nodeTypes = { iconNode: IconNode, miniIconNode: MiniIconNode, modelsNode: ModelsNode };
+const nodeTypes = { iconNode: IconNode, miniIconNode: MiniIconNode, modelsNode: ModelsNode, orbitNode: OrbitNode };
 const edgeTypes = {}; // built-in edge types
 
 export default function FlowNodesExample() {
@@ -289,10 +463,10 @@ export default function FlowNodesExample() {
 
     const llmModels = useMemo(
         () => [
-            { id: "llm1", title: "OpenAI (GPT)", icon: "cloud" },
-            { id: "llm2", title: "LLaMA", icon: "file" },
-            { id: "llm3", title: "Claude", icon: "db" },
-            { id: "llm4", title: "Gemini", icon: "cloud" },
+            { id: "llm1", title: "OpenAI (GPT)", icon: "openai" },
+            { id: "llm2", title: "LLaMA", icon: "llama" },
+            { id: "llm3", title: "Claude", icon: "claude" },
+            { id: "llm4", title: "Gemini", icon: "gemini" },
         ],
         []
     );
@@ -337,13 +511,31 @@ export default function FlowNodesExample() {
             // Unified Data Platform moved slightly right & centered
             { id: "unified", type: "iconNode", position: { x: 560, y: 160 }, data: { label: "Unified Data Platform", iconId: "db", big: true, showTarget: true, showSource: true } },
 
-            // LLM Models: horizontal animation for distinct feeling
-            { id: "llmmodels", type: "modelsNode", position: { x: 820, y: 88 }, data: { label: "LLM Runtimes", models: llmModels, visible: 1, intervalMs: 1600, width: 340, animation: "horizontal" } },
-
+            // NEW: Orbit node using OrbitingCircles - note icon components passed as React nodes
+            {
+                id: "llmmodels",
+                type: "orbitNode",
+                position: { x: 820, y: 88 },
+                data: {
+                    label: "LLM Runtimes",
+                    centerLogo: privueLogo,
+                    icons: [
+                        <OrbitIcons.openai key="oai" />,
+                        <OrbitIcons.llama key="llama" />,
+                        <OrbitIcons.gemini key="gemini" />,
+                        <OrbitIcons.claude key="claude" />,
+                    ],
+                    radius: 80,
+                    iconSize: 34,
+                    duration: 24,
+                    reverse: false,
+                    speed: 1.2,
+                },
+            },
             // Models: keep vertical animation (visual registry), pushed further right
             { id: "models", type: "modelsNode", position: { x: 820, y: 280 }, data: { label: "Models", models: fullModels, visible: 3, intervalMs: 2000, width: 360, animation: "vertical" } },
         ],
-        [fullModels, llmModels]
+        [fullModels]
     );
 
     const [nodes, , onNodesChange] = useNodesState(initialNodes);

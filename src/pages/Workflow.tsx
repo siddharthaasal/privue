@@ -1,5 +1,5 @@
 // components/FlowNodesExample.tsx
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import ReactFlow, {
     Controls,
     addEdge,
@@ -13,8 +13,8 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { FileText, ImageIcon, Database as DbIconDummy, Cloud, ShieldAlert } from "lucide-react"; // dummy icons
-// import { IconOpenAI, IconLlama, IconGemini, IconClaude } from "@/components/workflow-animation/IconsLlm";
-// import privueLogo from "/privue-logo.png";
+import { IconOpenAI, IconLlama, IconGemini, IconClaude } from "@/components/workflow-animation/IconsLlm";
+import privueLogo from "/privue-logo.png";
 
 /* ======================
    DataNode (your existing card-style nodes)
@@ -72,29 +72,29 @@ function DataNodeInner({ data }: DataNodeProps) {
                 </div>
 
                 {/* connection handles: left target and right source */}
-                <Handle
+                {/* <Handle
                     type="target"
                     position={Position.Left}
                     id="left"
                     style={{
-                        left: -5,
-                        width: 8,
-                        height: 8,
-                        borderRadius: 99,
+                        left: -10,
+                        width: 14,
+                        height: 14,
+                        borderRadius: 999,
                         background: "#ffffff",
                         border: "3px solid rgba(255,255,255,0.95)",
                         boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
                     }}
-                />
+                /> */}
                 <Handle
                     type="source"
                     position={Position.Right}
                     id="right"
                     style={{
-                        right: -5,
-                        width: 8,
-                        height: 8,
-                        borderRadius: 99,
+                        right: -10,
+                        width: 14,
+                        height: 14,
+                        borderRadius: 999,
                         background: "#ffffff",
                         border: "3px solid rgba(255,255,255,0.95)",
                         boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
@@ -721,226 +721,6 @@ function OrbitNodeInner({ data }: { data: OrbitNodeData }) {
 
 const OrbitNode = React.memo(OrbitNodeInner);
 
-
-function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactNode } }) {
-    const title = data?.title ?? "AI Agent";
-    // const IconNode = data?.icon ?? (
-    //     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
-    //         <rect x="4" y="6" width="16" height="10" rx="2" stroke="currentColor" strokeWidth="1.2" />
-    //         <circle cx="9" cy="11" r="1.2" fill="currentColor" />
-    //         <circle cx="15" cy="11" r="1.2" fill="currentColor" />
-    //         <rect x="10.5" y="16" width="3" height="2" rx="0.6" fill="currentColor" />
-    //     </svg>
-    // );
-
-    return (
-        <div
-            className="border border-privue-800 bg-gray-100 rounded-lg flex"
-            style={{
-                // width:,
-                padding: "16px 20px",
-                // borderRadius: 12,
-                // background: "#fff",
-                alignItems: "center",
-                gap: 2,
-                boxSizing: "border-box",
-                boxShadow: "0 6px 18px rgba(2,6,23,0.06)",
-            }}
-        >
-            {/* <div
-                className=""
-                style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: 12,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    // background: "var(--privue-50,#fbfdff)",
-                    border: "1px solid var(--privue-100,#f1f5f9)",
-                }}
-            >
-                <div
-                    className="text-privue-700"
-                    style={{ width: 28, height: 28, }}>{IconNode}
-                </div>
-            </div> */}
-
-            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--privue-900,#0f1724)", textAlign: "center" }}>{title}</div>
-
-            {/* connection handles */}
-            <Handle
-                type="target"
-                position={Position.Left}
-                id="agent-left"
-                style={{
-                    left: -8,
-                    top: "50%",
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: "#fff",
-                    border: "2px solid rgba(2,6,23,0.12)",
-                }}
-            />
-            <Handle
-                type="source"
-                position={Position.Right}
-                id="agent-right"
-                style={{
-                    right: -8,
-                    top: "50%",
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: "#fff",
-                    border: "2px solid rgba(2,6,23,0.12)",
-                }}
-            />
-            {/* bottom branch handle */}
-            <Handle
-                type="source"
-                position={Position.Bottom}
-                id="agent-bottom-center"
-                style={{
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    bottom: -10,
-                    width: 12,
-                    height: 12,
-                    borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "2px solid white",
-                }}
-            />
-            {/* top branch handle */}
-            <Handle
-                type="source"
-                position={Position.Top}
-                id="agent-top-center"
-                style={{
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    top: -10,
-                    width: 12,
-                    height: 12,
-                    borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "2px solid white",
-                }}
-            />
-        </div>
-    );
-}
-
-const AgentNode = React.memo(AgentNodeInner);
-
-/* Tool child node — circular node with icon and small label */
-function ToolNodeInner({ data }: { data?: { title?: string; subtitle?: string } }) {
-    const title = (data && data.title) || "Tool";
-    const subtitle = (data && data.subtitle) || "";
-
-    return (
-        <div
-            style={{
-                width: 120,
-                height: 120,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 6,
-                position: "relative",
-            }}
-        >
-            <div
-                className="border border-privue-700 bg-privue-200/50"
-                style={{
-                    width: 76,
-                    height: 76,
-                    borderRadius: 999,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 8px 24px rgba(76,110,245,0.06)",
-                    boxSizing: "border-box",
-                    padding: 8, // ensure some breathing room around the icon
-                }}
-            >
-                {/* wrapper lets us control icon color via `color` and its size via svg width/height */}
-                <div style={{ width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--privue-700,#475569)" }}>
-                    {/* simplified globe icon, uses currentColor and a compact viewBox */}
-                    {/* <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 48 48"
-                        width="28"
-                        height="28"
-                        preserveAspectRatio="xMidYMid meet"
-                        aria-hidden
-                        style={{ display: "block" }}
-                        fill="currentColor"
-                    >
-                        <path d="M24 4a20 20 0 1 0 0 40 20 20 0 0 0 0-40zm0 4c2.8 0 5.4.6 7.8 1.7-1.5 2.5-3.4 4.6-5.6 6.2-1.8-1.9-3.8-3.5-6.1-4.6C21.4 9.2 22.7 8 24 8zM12.8 12.8c1.8 1.1 3.4 2.4 4.8 3.9-3.1 1.7-5.6 4.3-7.1 7.6A16 16 0 0 1 12.8 12.8zM24 40c-2.8 0-5.4-.6-7.8-1.7 1.5-2.5 3.4-4.6 5.6-6.2 1.8 1.9 3.8 3.5 6.1 4.6C26.6 38.8 25.3 40 24 40zM35.2 35.2a16 16 0 0 1-4.8-3.9c3.1-1.7 5.6-4.3 7.1-7.6a16 16 0 0 1-2.3 11.5z" />
-                    </svg> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24">
-                        <path d="M 9.6660156 2 L 9.1757812 4.5234375 C 8.3516137 4.8342536 7.5947862 5.2699307 6.9316406 5.8144531 L 4.5078125 4.9785156 L 2.171875 9.0214844 L 4.1132812 10.708984 C 4.0386488 11.16721 4 11.591845 4 12 C 4 12.408768 4.0398071 12.832626 4.1132812 13.291016 L 4.1132812 13.292969 L 2.171875 14.980469 L 4.5078125 19.021484 L 6.9296875 18.1875 C 7.5928951 18.732319 8.3514346 19.165567 9.1757812 19.476562 L 9.6660156 22 L 14.333984 22 L 14.824219 19.476562 C 15.648925 19.165543 16.404903 18.73057 17.068359 18.185547 L 19.492188 19.021484 L 21.826172 14.980469 L 19.886719 13.291016 C 19.961351 12.83279 20 12.408155 20 12 C 20 11.592457 19.96113 11.168374 19.886719 10.710938 L 19.886719 10.708984 L 21.828125 9.0195312 L 19.492188 4.9785156 L 17.070312 5.8125 C 16.407106 5.2676813 15.648565 4.8344327 14.824219 4.5234375 L 14.333984 2 L 9.6660156 2 z M 11.314453 4 L 12.685547 4 L 13.074219 6 L 14.117188 6.3945312 C 14.745852 6.63147 15.310672 6.9567546 15.800781 7.359375 L 16.664062 8.0664062 L 18.585938 7.40625 L 19.271484 8.5917969 L 17.736328 9.9277344 L 17.912109 11.027344 L 17.912109 11.029297 C 17.973258 11.404235 18 11.718768 18 12 C 18 12.281232 17.973259 12.595718 17.912109 12.970703 L 17.734375 14.070312 L 19.269531 15.40625 L 18.583984 16.59375 L 16.664062 15.931641 L 15.798828 16.640625 C 15.308719 17.043245 14.745852 17.36853 14.117188 17.605469 L 14.115234 17.605469 L 13.072266 18 L 12.683594 20 L 11.314453 20 L 10.925781 18 L 9.8828125 17.605469 C 9.2541467 17.36853 8.6893282 17.043245 8.1992188 16.640625 L 7.3359375 15.933594 L 5.4140625 16.59375 L 4.7285156 15.408203 L 6.265625 14.070312 L 6.0878906 12.974609 L 6.0878906 12.972656 C 6.0276183 12.596088 6 12.280673 6 12 C 6 11.718768 6.026742 11.404282 6.0878906 11.029297 L 6.265625 9.9296875 L 4.7285156 8.59375 L 5.4140625 7.40625 L 7.3359375 8.0683594 L 8.1992188 7.359375 C 8.6893282 6.9567546 9.2541467 6.6314701 9.8828125 6.3945312 L 10.925781 6 L 11.314453 4 z M 12 8 C 9.8034768 8 8 9.8034768 8 12 C 8 14.196523 9.8034768 16 12 16 C 14.196523 16 16 14.196523 16 12 C 16 9.8034768 14.196523 8 12 8 z M 12 10 C 13.111477 10 14 10.888523 14 12 C 14 13.111477 13.111477 14 12 14 C 10.888523 14 10 13.111477 10 12 C 10 10.888523 10.888523 10 12 10 z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <div style={{ fontSize: 12, fontWeight: 700, color: "var(--privue-900,#0f1724)", textAlign: "center" }}>
-                {title}
-            </div>
-            {subtitle ? <div style={{ fontSize: 11, color: "var(--privue-600,#64748b)", textAlign: "center" }}>{subtitle}</div> : null}
-
-            {/* tiny diamond above to visually connect to agent diamonds (purely decorative) */}
-            <div
-                style={{
-                    position: "absolute",
-                    top: -8,
-                    left: "50%",
-                    transform: "translateX(-50%) rotate(45deg)",
-                    width: 10,
-                    height: 10,
-                    background: "transparent",
-                    border: "2px solid rgba(2,6,23,0.06)",
-                    borderRadius: 2,
-                }}
-            />
-
-            {/* allow incoming connection */}
-            <Handle
-                type="target"
-                position={Position.Top}
-                id={`tool-top-${title}`}
-                style={{
-                    top: -6,
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: "#fff",
-                    border: "2px solid rgba(2,6,23,0.08)",
-                }}
-            />
-            <Handle
-                type="target"
-                position={Position.Bottom}
-                id={"tool-bottom"}
-                style={{
-                    bottom: -6,
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: "#fff",
-                    border: "2px solid rgba(2,6,23,0.08)",
-                }}
-            />
-        </div>
-    );
-
-}
-const ToolNode = React.memo(ToolNodeInner);
-
 /* ======================
    ResponseNode (three-icon response card)
    data: {
@@ -1044,28 +824,28 @@ const ResponseNode = React.memo(ResponseNodeInner);
 /* ======================
    register node types
    ====================== */
-const nodeTypes = { dataNode: DataNode, modelsNode: ModelsNode, orbitNode: OrbitNode, dbNode: DbNode, responseNode: ResponseNode, agentNode: AgentNode, toolNode: ToolNode };
+const nodeTypes = { dataNode: DataNode, modelsNode: ModelsNode, orbitNode: OrbitNode, dbNode: DbNode, responseNode: ResponseNode };
 
 /* ======================
    main Flow component
    ====================== */
 export default function FlowNodesExample() {
-    // const fullModels = useMemo(
-    //     () => [
-    //         { id: "m1", title: "Credit Risk", icon: "db" },
-    //         { id: "m2", title: "Climate Risk", icon: "cloud" },
-    //         { id: "m3", title: "Compliance Risk", icon: "file" },
-    //         { id: "m4", title: "Cyber Risk", icon: "cyber" },
-    //         { id: "m5", title: "Financial Engine", icon: "file" },
-    //         { id: "m6", title: "Macro Economic Engine", icon: "db" },
-    //         { id: "m7", title: "Industry Engine", icon: "file" },
-    //     ],
-    //     []
-    // );
+    const fullModels = useMemo(
+        () => [
+            { id: "m1", title: "Credit Risk", icon: "db" },
+            { id: "m2", title: "Climate Risk", icon: "cloud" },
+            { id: "m3", title: "Compliance Risk", icon: "file" },
+            { id: "m4", title: "Cyber Risk", icon: "cyber" },
+            { id: "m5", title: "Financial Engine", icon: "file" },
+            { id: "m6", title: "Macro Economic Engine", icon: "db" },
+            { id: "m7", title: "Industry Engine", icon: "file" },
+        ],
+        []
+    );
 
     const initialNodes: Node[] = [
         {
-            id: "unstructured",
+            id: "structured",
             type: "dataNode",
             position: { x: 80, y: 40 },
             data: {
@@ -1079,35 +859,7 @@ export default function FlowNodesExample() {
             },
         },
         {
-            id: "ocr",
-            type: "dataNode",
-            position: { x: 200, y: 40 },
-            data: {
-                label: "Structured Data",
-                icons: [
-                    { id: "file", label: "CSV" },
-                    { id: "img", label: "Charts" },
-                    { id: "db", label: "DB" },
-                    { id: "cloud", label: "API" },
-                ],
-            },
-        },
-        {
-            id: "llm",
-            type: "dataNode",
-            position: { x: 320, y: 40 },
-            data: {
-                label: "Structured Data",
-                icons: [
-                    { id: "file", label: "CSV" },
-                    { id: "img", label: "Charts" },
-                    { id: "db", label: "DB" },
-                    { id: "cloud", label: "API" },
-                ],
-            },
-        },
-        {
-            id: "structured",
+            id: "unstructured",
             type: "dataNode",
             position: { x: 80, y: 180 },
             data: {
@@ -1158,104 +910,40 @@ export default function FlowNodesExample() {
         },
 
         // LLM Models (orbit)
-        // {
-        //     id: "llm-models",
-        //     type: "orbitNode",
-        //     position: { x: 640, y: 70 },
-        //     data: {
-        //         label: "LLM Runtimes",
-        //         centerLogo: privueLogo,
-        //         icons: [
-        //             <div key="oai" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconOpenAI /></div>,
-        //             <div key="llama" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconLlama /></div>,
-        //             <div key="gemini" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconGemini /></div>,
-        //             <div key="claude" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconClaude /></div>,
-        //         ],
-        //         radius: 72,
-        //         iconSize: 32,
-        //         duration: 20,
-        //         reverse: false,
-        //         speed: 1.1,
-        //     },
-        // },
         {
-            id: "all-llm",
-            type: "agentNode",
-            position: { x: 640, y: 150 }, // tune Y so children sit below
+            id: "llm-models",
+            type: "orbitNode",
+            position: { x: 640, y: 70 },
             data: {
-                title: "AI Agents",
-            }
+                label: "LLM Runtimes",
+                centerLogo: privueLogo,
+                icons: [
+                    <div key="oai" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconOpenAI /></div>,
+                    <div key="llama" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconLlama /></div>,
+                    <div key="gemini" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconGemini /></div>,
+                    <div key="claude" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconClaude /></div>,
+                ],
+                radius: 72,
+                iconSize: 32,
+                duration: 20,
+                reverse: false,
+                speed: 1.1,
+            },
         },
+
         // Models bucket is to the right / below the LLMs
-        // {
-        //     id: "models",
-        //     type: "modelsNode",
-        //     position: { x: 640, y: 370 },
-        //     data: {
-        //         label: "Models",
-        //         models: fullModels,
-        //         visible: 3,
-        //         intervalMs: 2000,
-        //         width: 320,
-        //         animation: "vertical",
-        //     },
-        // },
         {
-            id: "agent",
-            type: "agentNode",
-            position: { x: 640, y: 370 }, // tune Y so children sit below
+            id: "models",
+            type: "modelsNode",
+            position: { x: 640, y: 370 },
             data: {
-                title: "Models & Engines",
-            }
-        },
-        {
-            id: "llm-a",
-            type: "toolNode",
-            position: { x: 500, y: -45 },
-            data: { title: "OpenAI" }
-        },
-        {
-            id: "llm-b",
-            type: "toolNode",
-            position: { x: 650, y: -45 },
-            data: { title: "Claude" }
-        },
-        {
-            id: "llm-c",
-            type: "toolNode",
-            position: { x: 800, y: -45 },
-            data: { title: "Gemini" }
-        },
-        {
-            id: "llm-d",
-            type: "toolNode",
-            position: { x: 950, y: -45 },
-            data: { title: "LLaMa" }
-        },
-        // children tool nodes (branch targets)
-        {
-            id: "tool-a",
-            type: "toolNode",
-            position: { x: 500, y: 520 },
-            data: { title: "Credit Risk", subtitle: "Conversational UI" }
-        },
-        {
-            id: "tool-b",
-            type: "toolNode",
-            position: { x: 650, y: 520 },
-            data: { title: "Cyber Risk", subtitle: "Documentation" }
-        },
-        {
-            id: "tool-c",
-            type: "toolNode",
-            position: { x: 800, y: 520 },
-            data: { title: "Financial Engine", subtitle: "Existing Details" }
-        },
-        {
-            id: "tool-d",
-            type: "toolNode",
-            position: { x: 950, y: 520 },
-            data: { title: "Industry Engine", subtitle: "Wrapper / API" }
+                label: "Models",
+                models: fullModels,
+                visible: 3,
+                intervalMs: 2000,
+                width: 320,
+                animation: "vertical",
+            },
         },
         // response node
         {
@@ -1277,24 +965,8 @@ export default function FlowNodesExample() {
     // edges - sources -> dbNode(unified) -> llm-models -> models
     const initialEdges: Edge[] = [
         {
-            id: "e-unstructured-unified-dashed",
-            source: "unstructured",
-            target: "ocr",
-            animated: true,
-            type: "smoothstep",
-            style: { stroke: "rgba(100,116,139,0.55)", strokeWidth: 2, strokeDasharray: "4 6", strokeLinecap: "round" },
-        },
-        {
-            id: "e-unstructured-ocr",
-            source: "ocr",
-            target: "llm",
-            animated: true,
-            type: "smoothstep",
-            style: { stroke: "rgba(100,116,139,0.55)", strokeWidth: 2, strokeDasharray: "4 6", strokeLinecap: "round" },
-        },
-        {
-            id: "e-unstructured-llm",
-            source: "llm",
+            id: "e-structured-unified-dashed",
+            source: "structured",
             target: "unified",
             animated: true,
             type: "smoothstep",
@@ -1302,7 +974,7 @@ export default function FlowNodesExample() {
         },
         {
             id: "e-unstructured-unified-dashed",
-            source: "structured",
+            source: "unstructured",
             target: "unified",
             animated: true,
             type: "smoothstep",
@@ -1328,7 +1000,7 @@ export default function FlowNodesExample() {
         {
             id: "e-unified-llm-blue",
             source: "unified",
-            target: "all-llm",
+            target: "llm-models",
             animated: true,
             type: "smoothstep",
             style: { stroke: "#4c6ef5", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" },
@@ -1338,87 +1010,11 @@ export default function FlowNodesExample() {
         {
             id: "e-unified-models",
             source: "unified",
-            target: "agent",
+            target: "models",
             animated: true,
             type: "smoothstep",
             style: { stroke: "#4c6ef5", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" },
             markerEnd: { type: MarkerType.ArrowClosed },
-        },
-        {
-            id: "e-agent-tool-a",
-            source: "agent",
-            sourceHandle: "agent-bottom-center",
-            target: "tool-a",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-tool-b",
-            source: "agent",
-            sourceHandle: "agent-bottom-center",
-            target: "tool-b",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-tool-c",
-            source: "agent",
-            sourceHandle: "agent-bottom-center",
-            target: "tool-c",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-tool-d",
-            source: "agent",
-            sourceHandle: "agent-bottom-center",
-            target: "tool-d",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-llm-a",
-            source: "all-llm",
-            sourceHandle: "agent-top-center",
-            targetHandle: "tool-bottom",
-            target: "llm-a",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-llm-b",
-            source: "all-llm",
-            sourceHandle: "agent-top-center",
-            targetHandle: "tool-bottom",
-            target: "llm-b",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-llm-c",
-            source: "all-llm",
-            sourceHandle: "agent-top-center",
-            targetHandle: "tool-bottom",
-            target: "llm-c",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
-        },
-        {
-            id: "e-agent-llm-d",
-            source: "all-llm",
-            sourceHandle: "agent-top-center",
-            targetHandle: "tool-bottom",
-            target: "llm-d",
-            animated: true,
-            type: "default",
-            style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
         },
 
         // optional faint connector
@@ -1432,7 +1028,7 @@ export default function FlowNodesExample() {
         },
         {
             id: "e-models-response",
-            source: "agent",
+            source: "models",
             target: "response",
             animated: true,
             type: "smoothstep",
@@ -1468,7 +1064,7 @@ export default function FlowNodesExample() {
     );
 
     return (
-        <div className="w-full h-screen bg-slate-100 rounded-lg p-6 relative">
+        <div className="w-full h-[760px] bg-slate-100 rounded-lg p-6 relative">
             <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none"

@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import ArticleListing from "./pages/articles/ArticleListing";
 import TestBlogPlage from "./pages/TestBlogPage.tsx";
+import Workflow from "./pages/Workflow.tsx";
 import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
 import DarkHeroSection from "./sections/DarkHeroSection";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/articles" element={<ArticleListing />} />
         <Route path="/test" element={<TestBlogPlage />} />
+        <Route path="/workflow" element={<Workflow />} />
         <Route path="/article" element={<ArticlePage />} />
         <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/articles-0" element={<OldArticleListing />} />

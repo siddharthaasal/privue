@@ -32,7 +32,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Insolvency Investigations",
     "solutionLink": "#",
-    "coverImage": "/article-images/insolvency.jpg",
+    "coverImage": "/articles-test-images/insolvency.jpg",
     "readTime": "4 min",
     "file": "src/data/articles/strengthening-insolvency-investigations.mdx",
     "url": "/articles/strengthening-insolvency-investigations"
@@ -53,7 +53,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Commercial Lines Underwriting",
     "solutionLink": "#",
-    "coverImage": "/article-images/redefining-commercial-lines.jpg",
+    "coverImage": "/articles-test-images/commercial-lines-2.jpg",
     "readTime": "3 min",
     "file": "src/data/articles/redefining-commercial-lines-underwriting.mdx",
     "url": "/articles/redefining-commercial-lines-underwriting"
@@ -74,7 +74,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Distributor Credit Risk Management",
     "solutionLink": "#",
-    "coverImage": "/article-images/distributer-cra.jpg",
+    "coverImage": "/articles-test-images/distributor-credit-risk.jpg",
     "readTime": "2 min",
     "file": "src/data/articles/optimising-distributor-credit-risk-management.mdx",
     "url": "/articles/optimising-distributor-credit-risk-management"
@@ -95,7 +95,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Supplier Risk Intelligence",
     "solutionLink": "#",
-    "coverImage": "/article-images/global-supply-selection.jpg",
+    "coverImage": "/articles-test-images/global-supplier-risk.jpg",
     "readTime": "3 min",
     "file": "src/data/articles/mitigating-risk in-global-supplier-selection.mdx",
     "url": "/articles/mitigating-risk-in-global-supplier-selection"
@@ -116,7 +116,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Credit Risk Assessment",
     "solutionLink": "#",
-    "coverImage": "/article-images/transforming-cra.jpg",
+    "coverImage": "/articles-test-images/credit-risk-2.jpg",
     "readTime": "4 min",
     "file": "src/data/articles/transforming-credit-risk-assessment.mdx",
     "url": "/articles/transforming-credit-risk-assessment"
@@ -135,7 +135,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Third-Party Risk Intelligence",
     "solutionLink": "#",
-    "coverImage": "/article-images/supply-chain-resilience.jpg",
+    "coverImage": "/articles-test-images/supply-chain.jpg",
     "readTime": "4 min",
     "file": "src/data/articles/enhancing-supply-chain-resilience.mdx",
     "url": "/articles/enhancing-supply-chain-resilience"

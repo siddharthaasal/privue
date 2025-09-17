@@ -1,8 +1,9 @@
 import ArticleGallery from "@/components/ArticleGallery";
+import TestArticleGallery from "@/components/TestArticleGallery";
 
 export default function FeaturedArticles() {
     return (
-        <section className="font-open-sans relative pb-48 px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6">
+        <section className="font-open-sans relative pb-48 px-4 sm:px-6">
 
             <div className="font-open-sans mx-auto text-center">
                 <h1 className="text-3xl md:text-4xl font-semibold text-[#171717] mb-4">
@@ -13,6 +14,9 @@ export default function FeaturedArticles() {
                 </p>
             </div>
             <ArticleGallery mainArticleSlug="strengthening-insolvency-investigations" />
+            <div>
+                <TestArticleGallery mainArticleSlug="strengthening-insolvency-investigations" />
+            </div>
         </section>
     );
 }

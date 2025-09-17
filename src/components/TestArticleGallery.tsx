@@ -1,10 +1,35 @@
-import Layout from "@/components/Layout";
+import { articles } from "@/data/articles/index.ts";
+
+import { Button } from "@/components/ui/button";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    type CarouselApi,
+} from "@/components/ui/carousel";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
 import { BlogCard } from "@/components/articles/ArticleCard";
-// import { articles as generatedArticles } from "@/lib/articles";
-import { formatDate } from "@/lib/helpers";
+import { useState, useEffect } from "react";
 
-export default function DummyArticleListing() {
+function getRelatedArticles(mainSlug: string, count = 4) {
+    const main = articles.find((a) => a.slug === mainSlug);
+    if (!main) return [];
+    // pick random others (excluding main)
+    const others = articles
+        .filter((a) => a.slug !== mainSlug)
+        .slice(0, count - 1);
 
+    return [main, ...others];
+}
+
+interface RelatedArticlesProps {
+    mainArticleSlug: string;
+}
+
+export default function TestArticleGallery({ mainArticleSlug }: RelatedArticlesProps) {
+
+    const relatedArticles = getRelatedArticles(mainArticleSlug, 4);
     const dummyArticles: any[] = [
         {
             "slug": "strengthening-insolvency-investigations",
@@ -131,40 +156,88 @@ export default function DummyArticleListing() {
             "url": "/articles/enhancing-supply-chain-resilience"
         }
     ];
+    const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
 
-    const cards = dummyArticles.map((a) => ({
-        href: a.url,
-        title: a.title,
-        description: a.summary,
-        date: formatDate(a.date),
-        readTime: a.readTime,
-        articleType: a.articleType ?? "Article",
-        image: a.coverImage,
-    }));
+    useEffect(() => {
+        if (!carouselApi) return;
+        const updateSelection = () => {
+            setCanScrollPrev(carouselApi.canScrollPrev());
+            setCanScrollNext(carouselApi.canScrollNext());
+        };
+        updateSelection();
+        carouselApi.on("select", updateSelection);
+        return () => {
+            carouselApi.off("select", updateSelection);
+            console.log("Rel articles", relatedArticles);
+        };
+    }, [carouselApi]);
 
     return (
-        <Layout>
-            <div className="mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6">
-                <div className="font-open-sans mx-auto mb-12 text-center pt-24">
-                    <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
-                        Explore <span className="text-privue-900">Articles</span>
-                    </h1>
-                    <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
-                        Guides, trends, and tools for decision-makers
-                    </p>
-                </div>
+        <>
+            <div className="py-8">
+                <div className="p-4">
+                    <div className="container">
+                        {/* Header with arrows aligned right */}
+                        <div className="mb-8 flex flex-col justify-between md:flex-row md:items-end">
+                            <div className="mt-4 flex w-full items-center justify-end gap-2">
+                                <Button
+                                    size="icon"
+                                    variant="outline"
+                                    onClick={() => carouselApi?.scrollPrev()}
+                                    disabled={!canScrollPrev}
+                                    className="disabled:pointer-events-auto"
+                                >
+                                    <ArrowLeft className="size-5" />
+                                </Button>
+                                <Button
+                                    size="icon"
+                                    variant="outline"
+                                    onClick={() => carouselApi?.scrollNext()}
+                                    disabled={!canScrollNext}
+                                    className="disabled:pointer-events-auto"
+                                >
+                                    <ArrowRight className="size-5" />
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
 
-                {/* Articles Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-32">
-                    {cards.map((article, idx) => (
-                        <BlogCard key={idx} {...article} />
-                    ))}
+                    {/* Carousel starting from left */}
+                    <div className="w-full max-w-full">
+                        <Carousel
+                            setApi={setCarouselApi}
+                            opts={{
+                                breakpoints: {
+                                    "(max-width: 768px)": {
+                                        dragFree: true,
+                                    },
+                                },
+                            }}
+                            className="relative w-full max-w-full"
+                        >
+                            <CarouselContent className="hide-scrollbar w-full max-w-full">
+                                {/* {items.map((item) => ( */}
+                                {dummyArticles.map((item) => (
+                                    // <CarouselItem key={item.id} className="ml-2 md:max-w-[452px]">
+                                    <CarouselItem className="ml-2 md:max-w-[452px]">
+                                        <BlogCard
+                                            href={item.url}
+                                            title={item.title}
+                                            description={item.summary}
+                                            date={item.date}
+                                            readTime={item.readTime}
+                                            image={item.coverImage}
+                                            articleType={item.articleType ? item.articleType : "Article"}
+                                        />
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </div>
                 </div>
-                <br />
             </div>
-        </Layout>
-    );
+        </>
+    )
 }
-
-
-

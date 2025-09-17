@@ -44,7 +44,7 @@ export function AnimatedChatNodeInner({
 
     // phases: 0 hidden, 1 outgoing visible, 2 typing, 3 reply visible, 4 pause
     const [phase, setPhase] = useState<number>(reduceMotion ? 3 : 0);
-    const [containerHeight, setContainerHeight] = useState<number | "auto">("auto");
+    // const [containerHeight, setContainerHeight] = useState<number | "auto">("auto");
 
     const contRef = useRef<HTMLDivElement | null>(null);
     const outRef = useRef<HTMLDivElement | null>(null);
@@ -120,14 +120,14 @@ export function AnimatedChatNodeInner({
     useLayoutEffect(() => {
         const cont = contRef.current;
         const out = outRef.current;
-        const inc = incRef.current;
+        // const inc = incRef.current;
         if (!cont || !out) return;
 
-        const basePadding = 28;
-        const outH = out.scrollHeight;
-        const incH = inc ? inc.scrollHeight : 0;
-        const desired = Math.max(150, outH + incH + basePadding + 56);
-        setContainerHeight(desired);
+        // const basePadding = 28;
+        // const outH = out.scrollHeight;
+        // const incH = inc ? inc.scrollHeight : 0;
+        // const desired = Math.max(150, outH + incH + basePadding + 56);
+        // setContainerHeight(desired);
     }, [phase, outgoing, incoming]);
 
     const showOutgoing = phase >= 1;

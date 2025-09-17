@@ -131,7 +131,7 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Left}
                 id="left"
                 style={{
-                    left: 15,
+                    left: 23,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
@@ -146,13 +146,13 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Bottom}
                 id="right"
                 style={{
-                    bottom: 60,
+                    bottom: 30,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
                     border: "none",
-                    left: "20%",
+                    left: "45%",
                     transform: "translateY(-50%)",
                 }}
             />
@@ -167,7 +167,22 @@ function DbNodeInner({ data }: { data?: any }) {
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
                     border: "none",
-                    left: "80%",
+                    left: "70%",
+                    transform: "translateY(-50%)",
+                }}
+            />
+            <Handle
+                type="target"
+                position={Position.Top}
+                id="top-center"
+                style={{
+                    top: 45,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: "var(--privue-700,#475569)",
+                    border: "none",
+                    left: "30%",
                     transform: "translateY(-50%)",
                 }}
             />

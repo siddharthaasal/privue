@@ -14,7 +14,7 @@ function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactN
 
     return (
         <div
-            className="border border-privue-800 bg-gray-100 rounded-lg flex"
+            className="border border-privue-800 bg-privue-100/20 rounded-lg flex"
             style={{
                 // width:,
                 padding: "16px 20px",
@@ -93,7 +93,7 @@ function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactN
                 }}
             />
             {/* top branch handle */}
-            <Handle
+            {/* <Handle
                 type="source"
                 position={Position.Top}
                 id="agent-top-center"
@@ -107,7 +107,7 @@ function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactN
                     background: "var(--privue-700,#475569)",
                     border: "2px solid white",
                 }}
-            />
+            /> */}
         </div>
     );
 }

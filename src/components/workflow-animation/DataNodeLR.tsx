@@ -14,7 +14,7 @@ type DataNodeProps = {
     };
 };
 
-function SecDataNodeInner({ data }: DataNodeProps) {
+function DataNodeInnerLR({ data }: DataNodeProps) {
     const { icon, label } = data;
 
     const cardRef = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ function SecDataNodeInner({ data }: DataNodeProps) {
         }
 
         const IconComponent = ic as React.ComponentType<any>;
-        return <IconComponent size={25} />;
+        return <IconComponent size={30} />;
     };
 
     return (
@@ -81,10 +81,10 @@ function SecDataNodeInner({ data }: DataNodeProps) {
                 {/* handles */}
                 <Handle
                     type="target"
-                    position={Position.Top}
-                    id="top"
+                    position={Position.Left}
+                    id="left"
                     style={{
-                        top: -6,
+                        left: -6,
                         width: 10,
                         height: 10,
                         borderRadius: 99,
@@ -111,7 +111,7 @@ function SecDataNodeInner({ data }: DataNodeProps) {
 
             {/* Label (multi-line, wraps instead of ellipsis) */}
             <div
-                className="text-xs text-privue-900 font-medium"
+                className="text-sm text-privue-900 font-semibold"
                 style={{
                     width: cardWidth || "auto",
                     maxWidth: cardWidth || "auto",
@@ -129,4 +129,4 @@ function SecDataNodeInner({ data }: DataNodeProps) {
     );
 }
 
-export const SecDataNode = React.memo(SecDataNodeInner);
+export const DataNodeLR = React.memo(DataNodeInnerLR);

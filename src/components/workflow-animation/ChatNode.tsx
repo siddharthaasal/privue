@@ -322,7 +322,7 @@ export function AnimatedChatNodeInner({
                 Get quick, accurate, and personalized answers from Privue's workbench.
             </div>
 
-            <Handle type="target" position={Position.Left} id="chat-left" style={{ left: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "45%" }} />
+            <Handle type="target" position={Position.Left} id="chat-left" style={{ left: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "18%" }} />
             <Handle type="source" position={Position.Right} id="chat-right" style={{ right: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "45%" }} />
         </div>
     );

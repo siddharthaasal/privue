@@ -23,7 +23,7 @@ function DataNodeInner({ data }: DataNodeProps) {
     // measure actual card width after render
     useLayoutEffect(() => {
         if (cardRef.current) {
-            setCardWidth(cardRef.current.offsetWidth);
+            setCardWidth(cardRef.current.offsetWidth + 20);
         }
     }, [label, icon]);
 
@@ -48,7 +48,7 @@ function DataNodeInner({ data }: DataNodeProps) {
         }
 
         const IconComponent = ic as React.ComponentType<any>;
-        return <IconComponent size={25} />;
+        return <IconComponent size={30} />;
     };
 
     return (
@@ -64,7 +64,7 @@ function DataNodeInner({ data }: DataNodeProps) {
             {/* Card (auto width, based on icon + padding) */}
             <div
                 ref={cardRef}
-                className="flex items-center justify-center p-3 bg-white/50 text-slate-900 border border-privue-800"
+                className="flex items-center justify-center p-3 bg-privue-100/20 text-slate-900 border border-privue-800"
                 style={{
                     borderTopLeftRadius: 18,
                     borderBottomLeftRadius: 18,
@@ -79,7 +79,7 @@ function DataNodeInner({ data }: DataNodeProps) {
                 </div>
 
                 {/* handles */}
-                <Handle
+                {/* <Handle
                     type="target"
                     position={Position.Left}
                     id="left"
@@ -92,7 +92,7 @@ function DataNodeInner({ data }: DataNodeProps) {
                         border: "3px solid rgba(255,255,255,0.95)",
                         boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
                     }}
-                />
+                /> */}
                 <Handle
                     type="source"
                     position={Position.Right}
@@ -111,7 +111,7 @@ function DataNodeInner({ data }: DataNodeProps) {
 
             {/* Label (multi-line, wraps instead of ellipsis) */}
             <div
-                className="text-xs text-privue-900 font-medium"
+                className="text-sm text-privue-900 font-semibold"
                 style={{
                     width: cardWidth || "auto",
                     maxWidth: cardWidth || "auto",

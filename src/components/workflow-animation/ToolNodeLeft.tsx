@@ -14,7 +14,7 @@ type ToolNodeData = {
     iconSize?: number; // optional override (px)
 };
 
-function ToolNodeInner({ data }: { data?: ToolNodeData }) {
+function ToolNodeLeftInner({ data }: { data?: ToolNodeData }) {
     const title = (data && data.title) || "Tool";
     const subtitle = (data && data.subtitle) || "";
     const icon = data?.icon;
@@ -129,9 +129,23 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
                     border: "2px solid rgba(2,6,23,0.08)",
                 }}
             />
+            <Handle
+                type="target"
+                position={Position.Left}
+                id="tool-left"
+                style={{
+                    left: 15,
+                    width: 10,
+                    height: 10,
+                    top: "50%",
+                    borderRadius: 999,
+                    background: "#fff",
+                    border: "2px solid rgba(2,6,23,0.08)",
+                }}
+            />
         </div>
     );
 }
 
-const ToolNode = React.memo(ToolNodeInner);
-export { ToolNode };
+const ToolNodeLeft = React.memo(ToolNodeLeftInner);
+export { ToolNodeLeft };

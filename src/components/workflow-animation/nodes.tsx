@@ -1,5 +1,10 @@
 import { type Node } from "reactflow";
-import { ClipboardPlus } from 'lucide-react';
+import { FaRegFilePdf } from "react-icons/fa6";
+import { PiMicrosoftExcelLogo } from "react-icons/pi";
+import { MdFormatAlignCenter } from "react-icons/md";
+import { FaRobot, FaDatabase } from "react-icons/fa";
+import { BsDatabaseCheck } from "react-icons/bs";
+import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp } from 'lucide-react';
 
 export const initialNodes: Node[] = [
     {
@@ -8,40 +13,25 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 40 },
         data: {
             label: "Unstructured Data",
-            icons: [
-                { id: "file", label: "CSV" },
-                { id: "img", label: "Charts" },
-                { id: "db", label: "DB" },
-                { id: "cloud", label: "API" },
-            ],
+            icon: FaRegFilePdf
         },
     },
     {
         id: "ocr",
-        type: "dataNode",
+        type: "dataNodeLR",
         position: { x: 200, y: 40 },
         data: {
             label: "OCR",
-            icons: [
-                { id: "file", label: "CSV" },
-                { id: "img", label: "Charts" },
-                { id: "db", label: "DB" },
-                { id: "cloud", label: "API" },
-            ],
+            icon: MdFormatAlignCenter
         },
     },
     {
         id: "llm",
-        type: "dataNode",
+        type: "dataNodeLR",
         position: { x: 320, y: 40 },
         data: {
             label: "LLM Parsing",
-            icons: [
-                { id: "file", label: "CSV" },
-                { id: "img", label: "Charts" },
-                { id: "db", label: "DB" },
-                { id: "cloud", label: "API" },
-            ],
+            icon: FaRobot
         },
     },
     {
@@ -50,13 +40,7 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 180 },
         data: {
             label: "Structured Data",
-            icon: ClipboardPlus,
-            // icons: [
-            //     { id: "file", label: "Email" },
-            //     { id: "img", label: "Docs" },
-            //     { id: "db", label: "OCR" },
-            //     { id: "cloud", label: "Scrapes" },
-            // ],
+            icon: PiMicrosoftExcelLogo
         },
     },
     {
@@ -65,12 +49,7 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 320 },
         data: {
             label: "Privue's Proprietary Data",
-            icons: [
-                { id: "db", label: "Proprietary DB" },
-                { id: "file", label: "Signals" },
-                { id: "cloud", label: "Streams" },
-                { id: "img", label: "Enriched" },
-            ],
+            icon: BsDatabaseCheck
         },
     },
     {
@@ -79,12 +58,7 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 460 },
         data: {
             label: "Third Party Data",
-            icons: [
-                { id: "cloud", label: "Vendors" },
-                { id: "file", label: "Feeds" },
-                { id: "db", label: "Partners" },
-                { id: "img", label: "APIs" },
-            ],
+            icon: FaDatabase
         },
     },
 
@@ -99,15 +73,10 @@ export const initialNodes: Node[] = [
     {
         id: "ai-agent",
         type: "secDataNode",
-        position: { x: 325, y: 450 },
+        position: { x: 428, y: 448 },
         data: {
             label: "AI Agent",
-            icons: [
-                { id: "cloud", label: "Vendors" },
-                { id: "file", label: "Feeds" },
-                { id: "db", label: "Partners" },
-                { id: "img", label: "APIs" },
-            ],
+            icon: FaRobot
         },
     },
 
@@ -122,27 +91,27 @@ export const initialNodes: Node[] = [
 
     {
         id: "tool-a",
-        type: "toolNode",
+        type: "toolNodeLeft",
         position: { x: 550, y: 420 },
-        data: { title: "Credit Risk", }
+        data: { title: "Credit Risk", icon: BanknoteArrowUp }
     },
     {
         id: "tool-b",
         type: "toolNode",
         position: { x: 700, y: 420 },
-        data: { title: "Compliance Risk", }
+        data: { title: "Compliance Risk", icon: Scale }
     },
     {
         id: "tool-c",
         type: "toolNode",
         position: { x: 850, y: 420 },
-        data: { title: "Climate Risk", }
+        data: { title: "Climate Risk", icon: CloudLightning }
     },
     {
         id: "tool-d",
         type: "toolNode",
         position: { x: 1000, y: 420 },
-        data: { title: "Financial Engine", }
+        data: { title: "Financial Engine", icon: ChartCandlestick }
     },
     {
         id: "live-chat",

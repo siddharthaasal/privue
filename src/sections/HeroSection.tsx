@@ -146,7 +146,7 @@ export default function HeroSection() {
                     </div>
                 </section>
 
-                <div
+                {/* <div
                     className="relative mx-auto ml-3 mt-20  w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
                     style={{ animationDuration: "1400ms" }}
                 >
@@ -156,8 +156,8 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                </div>
-                {/* <div
+                </div> */}
+                <div
                     className="relative mx-auto ml-3 mt-20 h-fit w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
                     style={{ animationDuration: "1400ms" }}
                 >
@@ -173,7 +173,7 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                </div> */}
+                </div>
 
 
 

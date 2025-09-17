@@ -1,4 +1,5 @@
 import { type Node } from "reactflow";
+import { ClipboardPlus } from 'lucide-react';
 
 export const initialNodes: Node[] = [
     {
@@ -6,7 +7,7 @@ export const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 80, y: 40 },
         data: {
-            label: "Structured Data",
+            label: "Unstructured Data",
             icons: [
                 { id: "file", label: "CSV" },
                 { id: "img", label: "Charts" },
@@ -20,7 +21,7 @@ export const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 200, y: 40 },
         data: {
-            label: "Structured Data",
+            label: "OCR",
             icons: [
                 { id: "file", label: "CSV" },
                 { id: "img", label: "Charts" },
@@ -34,7 +35,7 @@ export const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 320, y: 40 },
         data: {
-            label: "Structured Data",
+            label: "LLM Parsing",
             icons: [
                 { id: "file", label: "CSV" },
                 { id: "img", label: "Charts" },
@@ -48,13 +49,14 @@ export const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 80, y: 180 },
         data: {
-            label: "Unstructured Data",
-            icons: [
-                { id: "file", label: "Email" },
-                { id: "img", label: "Docs" },
-                { id: "db", label: "OCR" },
-                { id: "cloud", label: "Scrapes" },
-            ],
+            label: "Structured Data",
+            icon: ClipboardPlus,
+            // icons: [
+            //     { id: "file", label: "Email" },
+            //     { id: "img", label: "Docs" },
+            //     { id: "db", label: "OCR" },
+            //     { id: "cloud", label: "Scrapes" },
+            // ],
         },
     },
     {
@@ -90,128 +92,62 @@ export const initialNodes: Node[] = [
     {
         id: "unified",
         type: "dbNode",
-        position: { x: 320, y: 220 },
+        position: { x: 350, y: 180 },
         data: { label: "Unified Data Platform" },
     },
 
-    // LLM Models (orbit)
-    // {
-    //     id: "llm-models",
-    //     type: "orbitNode",
-    //     position: { x: 640, y: 70 },
-    //     data: {
-    //         label: "LLM Runtimes",
-    //         centerLogo: privueLogo,
-    //         icons: [
-    //             <div key="oai" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconOpenAI /></div>,
-    //             <div key="llama" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconLlama /></div>,
-    //             <div key="gemini" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconGemini /></div>,
-    //             <div key="claude" style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center" }}><IconClaude /></div>,
-    //         ],
-    //         radius: 72,
-    //         iconSize: 32,
-    //         duration: 20,
-    //         reverse: false,
-    //         speed: 1.1,
-    //     },
-    // },
-    // {
-    //     id: "all-llm",
-    //     type: "agentNode",
-    //     position: { x: 640, y: 150 }, // tune Y so children sit below
-    //     data: {
-    //         title: "AI Agents",
-    //     }
-    // },
-    // Models bucket is to the right / below the LLMs
-    // {
-    //     id: "models",
-    //     type: "modelsNode",
-    //     position: { x: 640, y: 370 },
-    //     data: {
-    //         label: "Models",
-    //         models: fullModels,
-    //         visible: 3,
-    //         intervalMs: 2000,
-    //         width: 320,
-    //         animation: "vertical",
-    //     },
-    // },
+    {
+        id: "ai-agent",
+        type: "secDataNode",
+        position: { x: 325, y: 450 },
+        data: {
+            label: "AI Agent",
+            icons: [
+                { id: "cloud", label: "Vendors" },
+                { id: "file", label: "Feeds" },
+                { id: "db", label: "Partners" },
+                { id: "img", label: "APIs" },
+            ],
+        },
+    },
+
     {
         id: "agent",
         type: "agentNode",
-        position: { x: 640, y: 150 }, // tune Y so children sit below
+        position: { x: 700, y: 100 }, // tune Y so children sit below
         data: {
             title: "Models & Engines",
         }
     },
-    // {
-    //     id: "llm-a",
-    //     type: "toolNode",
-    //     position: { x: 500, y: -45 },
-    //     data: { title: "OpenAI" }
-    // },
-    // {
-    //     id: "llm-b",
-    //     type: "toolNode",
-    //     position: { x: 650, y: -45 },
-    //     data: { title: "Claude" }
-    // },
-    // {
-    //     id: "llm-c",
-    //     type: "toolNode",
-    //     position: { x: 800, y: -45 },
-    //     data: { title: "Gemini" }
-    // },
-    // {
-    //     id: "llm-d",
-    //     type: "toolNode",
-    //     position: { x: 950, y: -45 },
-    //     data: { title: "LLaMa" }
-    // },
-    // children tool nodes (branch targets)
+
     {
         id: "tool-a",
         type: "toolNode",
-        position: { x: 500, y: 520 },
-        data: { title: "Credit Risk", subtitle: "Conversational UI" }
+        position: { x: 550, y: 420 },
+        data: { title: "Credit Risk", }
     },
     {
         id: "tool-b",
         type: "toolNode",
-        position: { x: 650, y: 520 },
-        data: { title: "Compliance Risk", subtitle: "Documentation" }
+        position: { x: 700, y: 420 },
+        data: { title: "Compliance Risk", }
     },
     {
         id: "tool-c",
         type: "toolNode",
-        position: { x: 800, y: 520 },
-        data: { title: "Climate Risk", subtitle: "Existing Details" }
+        position: { x: 850, y: 420 },
+        data: { title: "Climate Risk", }
     },
     {
         id: "tool-d",
         type: "toolNode",
-        position: { x: 950, y: 520 },
-        data: { title: "Financial Engine", subtitle: "Existing Details" }
+        position: { x: 1000, y: 420 },
+        data: { title: "Financial Engine", }
     },
-    // response node
-    // {
-    //     id: "response",
-    //     type: "responseNode",
-    //     position: { x: 1100, y: 200 }, // tweak coordinates to place it visually where you like
-    //     data: {
-    //         title: "RESPONSE",
-    //         items: [
-    //             { id: "resp1", Icon: (<DbIconDummy size={20} />), title: "Delivered via API", subtitle: "to Client System" },
-    //             { id: "resp2", Icon: (<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" /></svg>), title: "Specific response", subtitle: "on the interface" },
-    //             { id: "resp3", Icon: (<FileText size={20} />), title: "Custom report", subtitle: "or pre-compiled" },
-    //         ],
-    //     },
-    // },
     {
         id: "live-chat",
         type: "chatNode",
-        position: { x: 1100, y: 100 },
+        position: { x: 1100, y: 75 },
         data: {
             outgoing: "Hey, is it possible to expense office rent through my startup?",
             incoming: "Yes — you can expense rent as a business expense if it meets local rules.",

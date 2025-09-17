@@ -143,16 +143,31 @@ function DbNodeInner({ data }: { data?: any }) {
             />
             <Handle
                 type="source"
-                position={Position.Right}
+                position={Position.Bottom}
                 id="right"
                 style={{
-                    right: 8,
+                    bottom: 60,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
                     border: "none",
-                    top: "50%",
+                    left: "20%",
+                    transform: "translateY(-50%)",
+                }}
+            />
+            <Handle
+                type="source"
+                position={Position.Top}
+                id="top"
+                style={{
+                    top: 45,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: "var(--privue-700,#475569)",
+                    border: "none",
+                    left: "80%",
                     transform: "translateY(-50%)",
                 }}
             />

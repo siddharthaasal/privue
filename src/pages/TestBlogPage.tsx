@@ -10,6 +10,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import { AnimatedChatNode } from "@/components/workflow-animation/ChatNode";
 import { DataNode } from "@/components/workflow-animation/DataNode";
+import { SecDataNode } from "@/components/workflow-animation/SecDataNode";
 import { ResponseNode } from "@/components/workflow-animation/ResponseNode";
 import { ModelsNode } from "@/components/workflow-animation/ModelsNode";
 import { DbNode } from "@/components/workflow-animation/DbNode";
@@ -19,7 +20,7 @@ import { ToolNode } from "@/components/workflow-animation/ToolNode";
 
 import { initialEdges } from "@/components/workflow-animation/edges";
 import { initialNodes } from "@/components/workflow-animation/nodes";
-const nodeTypes = { dataNode: DataNode, modelsNode: ModelsNode, orbitNode: OrbitNode, dbNode: DbNode, responseNode: ResponseNode, agentNode: AgentNode, toolNode: ToolNode, chatNode: AnimatedChatNode };
+const nodeTypes = { dataNode: DataNode, secDataNode: SecDataNode, modelsNode: ModelsNode, orbitNode: OrbitNode, dbNode: DbNode, responseNode: ResponseNode, agentNode: AgentNode, toolNode: ToolNode, chatNode: AnimatedChatNode };
 
 
 export default function FlowNodesExample() {

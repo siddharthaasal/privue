@@ -14,7 +14,7 @@ type DataNodeProps = {
     };
 };
 
-function DataNodeInner({ data }: DataNodeProps) {
+function SecDataNodeInner({ data }: DataNodeProps) {
     const { icon, label } = data;
 
     const cardRef = useRef<HTMLDivElement>(null);
@@ -81,10 +81,10 @@ function DataNodeInner({ data }: DataNodeProps) {
                 {/* handles */}
                 <Handle
                     type="target"
-                    position={Position.Left}
-                    id="left"
+                    position={Position.Top}
+                    id="top"
                     style={{
-                        left: -6,
+                        top: -6,
                         width: 10,
                         height: 10,
                         borderRadius: 99,
@@ -129,4 +129,4 @@ function DataNodeInner({ data }: DataNodeProps) {
     );
 }
 
-export const DataNode = React.memo(DataNodeInner);
+export const SecDataNode = React.memo(SecDataNodeInner);

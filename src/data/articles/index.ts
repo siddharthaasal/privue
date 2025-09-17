@@ -32,7 +32,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Insolvency Investigations",
     "solutionLink": "#",
-    "coverImage": "/court-hearing.png",
+    "coverImage": "/article-images/insolvency.jpg",
     "readTime": "4 min",
     "file": "src/data/articles/strengthening-insolvency-investigations.mdx",
     "url": "/articles/strengthening-insolvency-investigations"
@@ -95,7 +95,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Supplier Risk Intelligence",
     "solutionLink": "#",
-    "coverImage": "/article-images/SupplyChainGraphic.png",
+    "coverImage": "/article-images/global-supply-selection.jpg",
     "readTime": "3 min",
     "file": "src/data/articles/mitigating-risk in-global-supplier-selection.mdx",
     "url": "/articles/mitigating-risk-in-global-supplier-selection"

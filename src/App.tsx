@@ -15,6 +15,7 @@ import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import SolutionsPage from "./pages/solutions/SolutionsPage";
 import DPM from "./pages/solutions/DPM";
 import Sustainability from "./pages/solutions/Sustainability";
+import DummyArticleListing from "./pages/test/DummyArticles.tsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       < Routes >
         <Route path="/" element={<LandingPage />} />
         <Route path="/articles" element={<ArticleListing />} />
+        <Route path="/dummy-articles" element={<DummyArticleListing />} />
         <Route path="/test" element={<TestBlogPlage />} />
         <Route path="/workflow" element={<Workflow />} />
         <Route path="/article" element={<ArticlePage />} />

@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/shadcn-io/announcement';
 
 import Marquee from "react-fast-marquee";
+import FlowNodesExample from "@/pages/TestBlogPage";
 
 export default function HeroSection() {
 
@@ -146,6 +147,17 @@ export default function HeroSection() {
                 </section>
 
                 <div
+                    className="relative mx-auto ml-3 mt-20  w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
+                    style={{ animationDuration: "1400ms" }}
+                >
+                    <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-inset ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10">
+                        <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
+                            <FlowNodesExample />
+                        </div>
+                    </div>
+
+                </div>
+                {/* <div
                     className="relative mx-auto ml-3 mt-20 h-fit w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
                     style={{ animationDuration: "1400ms" }}
                 >
@@ -161,7 +173,7 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
 
 
 

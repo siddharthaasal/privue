@@ -34,8 +34,8 @@ export function AnimatedChatNodeInner({
         loopPause: data?.timings?.loopPause ?? 1000,
     };
     const MAX_W = data?.maxWidth ?? 480;
-    const avatarSrc = data?.avatarSrc ?? "";
-    const name = data?.name ?? "Andy from Finta";
+    // const avatarSrc = data?.avatarSrc ?? "";
+    // const name = data?.name ?? "Andy from Finta";
 
     const reduceMotion =
         typeof window !== "undefined" &&

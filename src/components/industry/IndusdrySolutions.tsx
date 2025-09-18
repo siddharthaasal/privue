@@ -63,31 +63,31 @@ export default function IndustryModules() {
 
     const solutionsByIndustry: Record<string, Solution[]> = {
         'ind-1': [
-            { heading: 'Large Customer Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: BookAlert, slug: '/' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
-            { heading: 'Distributor Performance Management', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: AlignVerticalJustifyCenter, slug: '/' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+            { heading: 'Large Customer Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: BookAlert, slug: 'large-customer-risk-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
+            { heading: 'Distributor Performance Management', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: AlignVerticalJustifyCenter, slug: 'distributor-performance-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
         ],
         'ind-2': [
-            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Landmark, slug: '/' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Landmark, slug: 'commercial-insurance-underwriting' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
         ],
         'ind-3': [
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
         ],
         'ind-4': [
-            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: '/' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: 'entity-due-diligence' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
         ],
         'ind-5': [
-            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: '/' },
+            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: 'entity-due-diligence' },
         ],
         'ind-6': [
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
         ],
 
         // fallback key

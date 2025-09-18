@@ -14,9 +14,9 @@ export default function FeaturedArticles() {
                 </p>
             </div>
             <ArticleGallery mainArticleSlug="strengthening-insolvency-investigations" />
-            <div>
+            {/* <div>
                 <TestArticleGallery mainArticleSlug="strengthening-insolvency-investigations" />
-            </div>
+            </div> */}
         </section>
     );
 }

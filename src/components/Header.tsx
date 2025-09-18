@@ -41,8 +41,8 @@ export default function Header() {
             items: solutionMenuItems,
         },
         { name: "Articles", href: "/articles", variant: "link" },
-        { name: "Dummy Articles", href: "/dummy-articles", variant: "link" },
-        { name: "Workflow", href: "/test", variant: "link" },
+        // { name: "Dummy Articles", href: "/dummy-articles", variant: "link" },
+        // { name: "Workflow", href: "/test", variant: "link" },
     ];
 
     const mobileLinks: LinkType[] = [

@@ -1,16 +1,18 @@
 'use client'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
 
 type IncomingItem = {
     id?: string
     title: string
     description: string
-    imgSrc: string
+    imgSrc?: string
     alt?: string
     link?: string
+    renderAnimation?: ReactNode // NEW
 }
 
 type Props = {
@@ -31,7 +33,6 @@ function makeId(fallbackIndex: number) {
 export default function TestVerticalModules({ items }: Props) {
     if (!items || items.length === 0) return null
 
-    // Ensure every item has an ID
     const processed = useMemo(() => {
         return items.map((it, idx) => ({
             id: it.id ?? makeId(idx),
@@ -39,7 +40,8 @@ export default function TestVerticalModules({ items }: Props) {
             description: it.description,
             imgSrc: it.imgSrc,
             alt: it.alt ?? it.title,
-            link: it.link, // not used now
+            link: it.link,
+            renderAnimation: it.renderAnimation, // pass along
         }))
     }, [items])
 
@@ -85,14 +87,13 @@ export default function TestVerticalModules({ items }: Props) {
                         ))}
                     </Accordion>
 
-                    {/* Right: Image only */}
+                    {/* Right: Animation or Image */}
                     <div className="bg-background relative flex overflow-hidden rounded-3xl border p-2 col-span-2">
                         <div className="absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)]"></div>
 
-                        {/* Use w-full so the image fits the column width; minHeight keeps the healthy size and maxHeight prevents oversize */}
                         <div
-                            className="bg-background relative w-full rounded-2xl overflow-hidden"
-                            style={{ minHeight: 420, maxHeight: 520 }}
+                            className="bg-background relative w-full rounded-2xl overflow-hidden flex items-center justify-center"
+                        // style={{ minHeight: 420, maxHeight: 520 }}
                         >
                             <AnimatePresence mode="wait">
                                 <motion.div
@@ -100,17 +101,26 @@ export default function TestVerticalModules({ items }: Props) {
                                     initial={{ opacity: 0, y: 6, scale: 0.98 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="w-full h-full"
+                                    transition={{ duration: 0.25 }}
+                                    className="w-full h-full flex items-center justify-center"
                                 >
-                                    <img
-                                        src={active.imgSrc}
-                                        alt={active.alt}
-                                        className="w-full h-full object-cover object-left-top"
-                                        style={{ display: 'block' }}
-                                        width={1207}
-                                        height={929}
-                                    />
+                                    <div className="w-full h-full mx-auto">
+                                        <VideoLikeFlowDummy />
+                                    </div>
+                                    {/* {active.renderAnimation ? (
+                                        <div className="w-full h-full max-w-[500px] max-h-[400px] mx-auto">
+                                            {active.renderAnimation}
+                                        </div>
+                                    ) : (
+                                        <img
+                                            src={active.imgSrc!}
+                                            alt={active.alt}
+                                            className="w-full h-full object-cover object-left-top"
+                                            style={{ display: 'block' }}
+                                            width={1207}
+                                            height={929}
+                                        />
+                                    )} */}
                                 </motion.div>
                             </AnimatePresence>
                         </div>

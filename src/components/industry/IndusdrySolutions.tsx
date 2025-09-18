@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { motion, AnimatePresence } from 'motion/react'
 import IndustrySolutionCard from './IndustrySolutionCard' // <- adjust path if needed
 import { Zap } from 'lucide-react'
+import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow, TriangleAlert } from 'lucide-react';
 // Types
 type Industry = {
     id?: string
@@ -42,14 +43,14 @@ function makeId(fallbackIndex: number) {
  * For now the same dummy `solutions` list is used for every industry (per your request).
  */
 export default function IndustryModules() {
-    // ---------------------
-    // Dummy data (replace with real data later)
-    // ---------------------
+
     const dummyIndustries: Industry[] = [
-        { id: 'ind-1', name: 'Retail', description: 'Retail industry solutions' },
-        { id: 'ind-2', name: 'Healthcare', description: 'Healthcare industry solutions' },
-        { id: 'ind-3', name: 'Finance', description: 'Finance industry solutions' },
-        { id: 'ind-4', name: 'Manufacturing', description: 'Manufacturing industry solutions' },
+        { id: 'ind-1', name: 'Corporations', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-2', name: 'Insurance', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-3', name: 'Banking', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-4', name: 'Asset Management', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-5', name: 'Consulting', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-6', name: 'Government', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
     ]
 
     // Same solutions used for every industry (per your instruction).
@@ -59,6 +60,39 @@ export default function IndustryModules() {
         { heading: 'Demand Forecasting', subHeading: 'Reduce stockouts with accurate forecasts', icon: Zap, slug: 'demand-forecasting' },
         { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: Zap, slug: 'fraud-detection' },
     ]
+
+    const solutionsByIndustry: Record<string, Solution[]> = {
+        'ind-1': [
+            { heading: 'Large Customer Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: BookAlert, slug: '/' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+            { heading: 'Distributor Performance Management', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: AlignVerticalJustifyCenter, slug: '/' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+        ],
+        'ind-2': [
+            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Landmark, slug: '/' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+        ],
+        'ind-3': [
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+        ],
+        'ind-4': [
+            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: '/' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+        ],
+        'ind-5': [
+            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: '/' },
+        ],
+        'ind-6': [
+            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: '/' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: '/' },
+        ],
+
+        // fallback key
+        default: dummySolutions,
+    }
 
     // ---------------------
     // Normalize industries ensuring each has an id
@@ -75,6 +109,7 @@ export default function IndustryModules() {
 
     // Active industry id state. Default to first industry.
     const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id)
+    const currentSolutions = solutionsByIndustry[activeIndustryId] ?? solutionsByIndustry.default;
 
     // When activeIndustryId changes, we could do side effects (analytics, fetch, etc.)
     // For this demo we simply log (you can remove this).
@@ -134,7 +169,7 @@ export default function IndustryModules() {
                         {/* scrollable container for cards */}
                         <div
                             ref={rhsScrollRef}
-                            className="relative w-full rounded-2xl overflow-auto p-4 grid gap-2"
+                            className="relative w-full rounded-2xl overflow-auto p-4 grid gap-2 content-start auto-rows-min"
                             // Use a responsive grid: on narrow screens it's single column, on wider screens it flows into two columns
                             // style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', maxHeight: 520 }}
                             aria-live="polite"
@@ -143,7 +178,7 @@ export default function IndustryModules() {
                             <AnimatePresence initial={false}>
                                 {/* Map the solutions array into IndustrySolutionCard components.
                     This uses the exact mapping you asked for. */}
-                                {dummySolutions.map((s, i) => {
+                                {currentSolutions.map((s, i) => {
                                     return (
                                         <motion.div
                                             key={s.slug}

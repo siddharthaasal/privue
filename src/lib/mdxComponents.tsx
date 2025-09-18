@@ -75,6 +75,40 @@ const mdxComponents = {
             {...props}
         />
     ),
+    table: (props: any) => (
+        <div className="my-6 overflow-x-auto">
+            <table className="min-w-full border-collapse text-sm" {...props} />
+        </div>
+    ),
+
+    thead: (props: any) => (
+        <thead className="bg-zinc-50/80" {...props} />
+    ),
+
+    tbody: (props: any) => (
+        <tbody className="bg-white divide-y divide-zinc-100" {...props} />
+    ),
+
+    tr: (props: any) => (
+        // ensures rows use the same spacing as your text system
+        <tr className="odd:bg-white even:bg-zinc-50/40" {...props} />
+    ),
+
+    th: (props: any) => (
+        <th
+            scope="col"
+            className="text-left font-medium text-zinc-700 px-4 py-3 border-b border-zinc-100"
+            {...props}
+        />
+    ),
+
+    td: (props: any) => (
+        <td className="px-4 py-3 text-zinc-600 align-top" {...props} />
+    ),
+
+    caption: (props: any) => (
+        <caption className="sr-only text-sm text-zinc-600" {...props} />
+    ),
 
 };
 

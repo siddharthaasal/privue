@@ -16,6 +16,9 @@ import SolutionsPage from "./pages/solutions/SolutionsPage";
 import DPM from "./pages/solutions/DPM";
 import Sustainability from "./pages/solutions/Sustainability";
 import DummyArticleListing from "./pages/test/DummyArticles.tsx";
+import CookiePolicy from "./pages/legal/CookiePolicy.tsx";
+import CaliforniaNotice from "./pages/legal/CaliforniaNotice.tsx";
+import DataSecurity from "./pages/legal/DataSecurity.tsx";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         {/* legal */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/california-notice" element={<CaliforniaNotice />} />
+        <Route path="/data-security" element={<DataSecurity />} />
         <Route path="/solutions/:slug" element={<SolutionsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes >

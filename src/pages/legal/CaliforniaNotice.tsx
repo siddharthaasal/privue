@@ -1,9 +1,9 @@
 import Layout from "@/components/Layout";
 import mdxComponents from '@/lib/mdxComponents';
-import Content from '@/data/legal/terms-of-use.mdx';
+import Content from '../../data/legal/california-notice.mdx'
 import { useRef } from 'react';
 
-export default function Terms() {
+export default function CaliforniaNotice() {
     const contentRef = useRef<HTMLDivElement>(null);
 
     return (
@@ -15,6 +15,7 @@ export default function Terms() {
                     </article>
                 </div>
             </div>
+
         </Layout>
     );
 }

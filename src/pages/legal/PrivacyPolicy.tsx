@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import mdxComponents from '@/lib/mdxComponents';
 // import Content from '@data/legal/privacy.mdx';
-import Content from '../../data/legal/privacy.mdx'
+import Content from '../../data/legal/privacy-policy.mdx'
 import { useRef } from 'react';
 
 export default function PrivacyPolicy() {

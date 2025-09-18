@@ -38,7 +38,7 @@ export default function Footer({
     },
     // tagline = "Empowering Businesses via Intelligent Data",
     //  M
-    address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road, Gurugram, Haryana 12200"],
+    address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road, Gurugram, Haryana 122001"],
     menuItems = [
         {
             title: "Solutions",
@@ -64,8 +64,9 @@ export default function Footer({
         {
             title: "Company",
             links: [
-                { text: "Case Studies", url: "/articles" },
-                { text: "About", url: "#" },
+                { text: "Data Security", url: "/data-security" },
+                { text: "Cookie Notice", url: "/cookie-policy" },
+                { text: "California Notice", url: "/california-notice" },
                 { text: "Terms of Use", url: "/terms" },
                 { text: "Privacy Policy", url: "/privacy-policy" },
                 { text: "Contact", url: "/contact" },

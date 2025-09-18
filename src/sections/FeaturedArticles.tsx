@@ -1,5 +1,5 @@
 import ArticleGallery from "@/components/ArticleGallery";
-import TestArticleGallery from "@/components/TestArticleGallery";
+// import TestArticleGallery from "@/components/TestArticleGallery";
 
 export default function FeaturedArticles() {
     return (

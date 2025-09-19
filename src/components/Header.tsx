@@ -40,6 +40,7 @@ export default function Header() {
             name: "Solutions",
             items: solutionMenuItems,
         },
+        // { name: "Industries", href: "#article", variant: "link" },
         { name: "Articles", href: "/articles", variant: "link" },
         // { name: "Dummy Articles", href: "/dummy-articles", variant: "link" },
         // { name: "Workflow", href: "/test", variant: "link" },
@@ -51,7 +52,7 @@ export default function Header() {
         { name: "API", href: "/api", variant: "link" },
         { name: "Integrations", href: "/integrations", variant: "link" },
         { name: "Demo", href: "/demo", variant: "outline" },
-        { name: "Book a Call", href: "/book-a-call", variant: "default" }
+        { name: "Book a Demo", href: "/book-a-call", variant: "default" }
     ];
 
     useEffect(() => {
@@ -210,7 +211,7 @@ export default function Header() {
                         </a> */}
                         <a href="/contact">
                             <Button variant="default" size="sm" className="cursor-pointer text-[#FAFAFA]">
-                                <p>Book a Call</p>
+                                <p>Book a Demo</p>
                             </Button>
                         </a>
                     </div>

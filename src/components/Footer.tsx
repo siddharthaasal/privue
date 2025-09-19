@@ -34,19 +34,19 @@ export default function Footer({
         src: privueLogo,
         alt: "logo for privue",
         title: "privue",
-        url: "https://www.privue.ai",
+        url: "https://privue-sage.vercel.app/",
     },
-    // tagline = "Empowering Businesses via Intelligent Data",
-    //  M
     address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road, Gurugram, Haryana 122001"],
     menuItems = [
         {
             title: "Solutions",
             links: [
-                { text: "Dealer Performance Management", url: "#" },
-                { text: "Sustainability Assessment", url: "#" },
-                { text: "Large Customer Risk Assessment", url: "#" },
-                { text: "Lending - Credit Risk Assessment", url: "#" },
+                { text: "Distributor Performance Management", url: "/solutions/distributor-performance-management" },
+                { text: "Sustainability Assessment", url: "/solutions/sustainability-assessment" },
+                { text: "Commercial Insurance Underwriting", url: "/solutions/commercial-insurance-underwriting" },
+                { text: "Large Customer Risk Assessment", url: "/solutions/large-customer-risk-assessment" },
+                { text: "Entity Due Diligence", url: "/solutions/entity-due-diligence" },
+                { text: "Third Party Risk Management", url: "/solutions/third-party-risk-management" },
 
             ],
         },
@@ -117,8 +117,12 @@ export default function Footer({
 
                         <div className="mt-3 flex gap-2 items-center">
                             <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><FaLinkedin className="text-[#707070] text-lg hover:text-[#525252]" /></a>
-                            <a href="https://www.linkedin.com/company/privue/posts/?feedView=all"><Mail size="20" className="text-[#707070] hover:text-[#525252]" /></a>
-                        </div>
+                            <a
+                                href="mailto:query@privue.ai"
+                                aria-label="Send us an email"
+                            >
+                                <Mail size={20} className="text-[#707070] hover:text-[#525252]" />
+                            </a>                        </div>
                     </div>
                 </div>
 
@@ -150,7 +154,12 @@ export default function Footer({
                 <ul className="flex gap-4 underline underline-offset-4">
                     {bottomLinks.map((link, idx) => (
                         <li key={idx}>
-                            <a href={link.url}>{link.text}</a>
+                            <a
+                                href="mailto:query@privue.ai"
+                                aria-label="Send us an email"
+                            >
+                                {link.text}
+                            </a>
                         </li>
                     ))}
                 </ul>

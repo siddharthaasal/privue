@@ -47,7 +47,8 @@ const demoNotifications: NotificationItem[] = [
 ]
 
 export default function NotificationOverlayWithLeftFade({
-  bgUrl = '/t.png',
+  // bgUrl = '/t.png',
+  bgUrl = '/module-animations/cont-monitoring-dashboard-light.png',
   items = demoNotifications,
   // revealDelay = 900, // unused for sequencing here but kept for compatibility
   holdBeforeMove = 1100, // how long top-center pops stays before moving
@@ -204,17 +205,17 @@ export default function NotificationOverlayWithLeftFade({
   const cardClassInline = (variant?: NotificationItem['variant']) =>
     clsx(
       'pointer-events-auto select-none rounded-lg p-2 shadow-lg ring-1 ring-black/20 inline-block',
-      variant === 'danger' && 'bg-[#262626] text-red-700',
-      variant === 'warning' && 'bg-[#262626] text-yellow-700',
-      variant === 'info' && 'bg-[#262626] text-green-700',
+      variant === 'danger' && 'bg-[#f5f5f5] text-red-700',
+      variant === 'warning' && 'bg-[#f5f5f5] text-yellow-700',
+      variant === 'info' && 'bg-[#f5f5f5] text-green-700',
     )
 
   const cardClassFixed = (variant?: NotificationItem['variant']) =>
     clsx(
       'pointer-events-auto select-none rounded-lg p-2 shadow-lg ring-1 ring-black/20',
-      variant === 'danger' && 'bg-[#262626] text-gray-200',
-      variant === 'warning' && 'bg-[#262626] text-yellow-700',
-      variant === 'info' && 'bg-[#262626] text-green-700',
+      variant === 'danger' && 'bg-[#f5f5f5] text-gray-700',
+      variant === 'warning' && 'bg-[#f5f5f5] text-yellow-700',
+      variant === 'info' && 'bg-[#f5f5f5] text-green-700',
     )
 
   // movement transition: use tween (duration) for consistent slower timing, spring can be jittery with large shrink
@@ -226,14 +227,15 @@ export default function NotificationOverlayWithLeftFade({
       {/* Background — no blur */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-center bg-no-repeat bg-cover"
+        className="absolute inset-0 bg-center bg-no-repeat bg-cover border border-gray-100 rounded-2xl"
         style={{
           backgroundImage: `url('${bgUrl.replace(/'/g, "\\'")}')`,
           transform: 'scale(1.02)',
           // filter: 'brightness(0.32) saturate(0.9)',
         }}
       />
-      <div className="absolute inset-0 bg-black/36" />
+
+      {/* <div className="absolute inset-0 bg-black/36" /> */}
 
       {/* left fade overlay (no blur) */}
       <motion.div
@@ -280,7 +282,7 @@ export default function NotificationOverlayWithLeftFade({
                           </div>
 
                           <div className="flex-1 text-left">
-                            <div className="text-sm font-medium text-white">{it.title}</div>
+                            <div className="text-sm font-medium text-gray-600">{it.title}</div>
                             {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>}
                           </div>
                         </div>
@@ -331,7 +333,7 @@ export default function NotificationOverlayWithLeftFade({
                     </div>
 
                     <div className="flex-1 text-left">
-                      <div className="text-sm font-medium text-white">{it.title}</div>
+                      <div className="text-sm font-medium text-gray-600">{it.title}</div>
                       {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>}
                     </div>
                   </div>
@@ -369,7 +371,7 @@ export default function NotificationOverlayWithLeftFade({
                   </div>
 
                   <div className="flex-1 text-left">
-                    <div className="text-sm font-medium text-white">{it.title}</div>
+                    <div className="text-sm font-medium text-gray-700">{it.title}</div>
                     {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>}
                   </div>
                 </div>
@@ -399,8 +401,8 @@ export default function NotificationOverlayWithLeftFade({
                   </div>
 
                   <div className="flex-1 text-left">
-                    <div className="text-[10px] font-normal text-white">{it.title}</div>
-                    {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>}
+                    <div className="text-[10px] font-normal text-gray-700">{it.title}</div>
+                    {/* {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>} */}
                   </div>
                 </div>
               </div>

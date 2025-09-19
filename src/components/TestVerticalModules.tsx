@@ -3,7 +3,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { useMemo, useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
+// import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
+import NotificationOverlayDemo from './product-animations/ContinuousMonitoringDemo'
 
 type IncomingItem = {
     id?: string
@@ -105,7 +106,8 @@ export default function TestVerticalModules({ items }: Props) {
                                     className="w-full h-full flex items-center justify-center"
                                 >
                                     <div className="w-full h-full mx-auto">
-                                        <VideoLikeFlowDummy />
+                                        {/* <VideoLikeFlowDummy /> */}
+                                        <NotificationOverlayDemo />
                                     </div>
                                     {/* {active.renderAnimation ? (
                                         <div className="w-full h-full max-w-[500px] max-h-[400px] mx-auto">

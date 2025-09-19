@@ -182,7 +182,7 @@ export default function IndustryModules() {
                                     // Keep the same 1-card-per-row layout: each card will fill available width
                                     style={{ gridTemplateColumns: '1fr' }}
                                 >
-                                    {currentSolutions.map((s, i) => (
+                                    {currentSolutions.map((s) => (
                                         <div key={s.slug} className="w-full">
                                             {/* keep your original IndustrySolutionCard usage so cards remain full-width */}
                                             <IndustrySolutionCard

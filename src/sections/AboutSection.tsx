@@ -1,5 +1,6 @@
-import { Cpu, Zap, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Cpu, Zap } from 'lucide-react'
+// ChevronRight
+// import { Button } from '@/components/ui/button'
 
 export default function AboutSection() {
     return (

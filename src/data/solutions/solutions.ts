@@ -1,5 +1,6 @@
 // src/data/solutions.ts
 import VideoLikeFlowDummy from '@/components/product-animations/ThreeImageFlow';
+import DataAcquisition from '@/components/product-animations/DataAcquisition';
 import NotificationOverlayWithLeftFade from '@/components/product-animations/ContinuousMonitoringDemo';
 
 export type Problem = {
@@ -124,6 +125,7 @@ export const solutions: Solution[] = [
                     "Obtain, data available publicly and from financials and GST",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: DataAcquisition
             },
             {
                 title: "Risk Assessment",

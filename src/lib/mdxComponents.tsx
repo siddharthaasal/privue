@@ -1,6 +1,8 @@
 const mdxComponents = {
     h1: (props: any) => (
-        <h1 className="text-3xl font-medium text-zinc-800 mt-10 mb-6" {...props} />
+        <h1 className="text-3xl font-medium text-zinc-800 mt-10 mb-6
+        [&>a]:no-underline [&>a:hover]:no-underline
+      [&>a]:[color:inherit] [&>a:hover]:[color:inherit]" {...props} />
     ),
 
     h2: (props: any) => (

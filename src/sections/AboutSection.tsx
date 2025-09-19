@@ -19,7 +19,7 @@ export default function AboutSection() {
                             Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. It integrate multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights via API or custom applications.
                         </p>
                         <p className="text-base">
-                            From credit and vendor risk to compliance and advisory, we empower organizations to assess counterparties, mitigate risks, and act with confidence.
+                            From credit and vendor risk to compliance and climate, we empower organizations to assess counterparties, mitigate risks, and act with confidence.
                         </p>
 
                         <div className="grid grid-cols-2 gap-3 pt-6 sm:gap-4">

@@ -16,14 +16,12 @@ import FlowNodesExample from "@/pages/Workflow";
 export default function HeroSection() {
 
     const logos = [
-        // "/integration-logos/dnb.png",
-        "/integration-logos/logo-dnb.svg",
         "/integration-logos/ikanoon.png",
-        "/integration-logos/myGate_cr.png",
-        // "/integration-logos/nasscom.png",
-        "/integration-logos/myPaisa.svg",
         "/integration-logos/SAP-Logo.png",
+        "/integration-logos/logo-dnb.svg",
+        "/integration-logos/myGate_cr.png",
         "/integration-logos/salesforce.png",
+        "/integration-logos/myPaisa.svg",
         "/integration-logos/zoho.png",
     ];
 

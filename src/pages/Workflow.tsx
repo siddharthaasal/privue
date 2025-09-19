@@ -14,6 +14,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 
 import { AnimatedChatNode } from "@/components/workflow-animation/ChatNode";
+import { BoxNode } from "@/components/workflow-animation/BoxNode";
 import { DataNode } from "@/components/workflow-animation/DataNode";
 import { DataNodeLR } from "@/components/workflow-animation/DataNodeLR";
 import { SecDataNode } from "@/components/workflow-animation/SecDataNode";
@@ -29,6 +30,7 @@ import { initialEdges } from "@/components/workflow-animation/edges";
 import { initialNodes } from "@/components/workflow-animation/nodes";
 
 const nodeTypes = {
+    boxNode: BoxNode,
     dataNode: DataNode,
     dataNodeLR: DataNodeLR,
     secDataNode: SecDataNode,

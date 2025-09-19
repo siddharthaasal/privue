@@ -7,6 +7,12 @@ import { BsDatabaseCheck } from "react-icons/bs";
 import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp } from 'lucide-react';
 
 export const initialNodes: Node[] = [
+    // {
+    //     id: "group-1",
+    //     type: "boxNode",
+    //     data: { label: "Internal Company Data" },
+    //     position: { x: 25, y: 20 },
+    // },
     {
         id: "unstructured",
         type: "dataNode",
@@ -15,6 +21,8 @@ export const initialNodes: Node[] = [
             label: "Unstructured Data",
             icon: FaRegFilePdf
         },
+        // parentNode: "group-1",
+        // extent: "parent",
     },
     {
         id: "ocr",
@@ -25,6 +33,7 @@ export const initialNodes: Node[] = [
             icon: MdFormatAlignCenter
         },
     },
+
     {
         id: "llm",
         type: "dataNodeLR",

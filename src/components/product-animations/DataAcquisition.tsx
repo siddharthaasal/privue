@@ -154,7 +154,7 @@ export default function DataAcquisition({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 12, scale: 0.995 }}
                             transition={{ duration: 0.45 }}
-                            className="absolute right-2 bottom-2 w-[450px] max-w-[94vw] bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border p-3 pointer-events-auto"
+                            className="absolute right-2 bottom-2 w-auto max-w-[94vw] bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border p-3 pointer-events-auto"
                             style={{ fontSize: 12 }}
                         >
                             {/* header */}
@@ -176,6 +176,7 @@ export default function DataAcquisition({
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -6 }}
                                             transition={{ duration: 0.35 }}
+                                            className="min-w-[350px]"
                                         >
                                             {/* Top: two progress bars */}
                                             <div className="space-y-2">
@@ -244,6 +245,7 @@ export default function DataAcquisition({
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -6 }}
                                             transition={{ duration: 0.35 }}
+                                            className="min-w-[400px]"
                                         >
                                             {/* Larger table filling animation (row-wise) */}
                                             <div className="text-xs font-medium text-slate-700 mb-2">Imported data preview</div>
@@ -281,7 +283,7 @@ export default function DataAcquisition({
                                             exit={{ opacity: 0, y: -6 }}
                                             transition={{ duration: 0.28 }}
                                         >
-                                            <div className="text-sm font-medium text-privue-600">All data acquired</div>
+                                            <div className="text-sm font-normal text-privue-600">All data acquired</div>
                                             {/* <div className="mt-2 text-xs text-slate-500">Insights ready — refresh view to see final changes</div> */}
                                         </motion.div>
                                     )}
@@ -289,10 +291,10 @@ export default function DataAcquisition({
                             </div>
 
                             {/* footer timestamp */}
-                            <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
+                            {/* <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
                                 <div>Last action</div>
                                 <div>{new Date().toLocaleTimeString()}</div>
-                            </div>
+                            </div> */}
                         </motion.div>
                     )}
                 </AnimatePresence>

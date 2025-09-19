@@ -6,10 +6,11 @@ export default function ContactHero({
     title = "Contact",
     subtitle = "Talk to us about:",
     bullets = [
-        "Financial Statement Extract",
-        "Insurance Policy Extract",
-        "Credit Models",
-        "ESG Scoring",
+        "Private Company Intelligence",
+        "Financial Data Analysis",
+        "Credit & other Risk Models",
+        "Climate & Sustainability Scoring",
+        "Sanctions & Compliance Checks"
     ],
 }) {
     return (

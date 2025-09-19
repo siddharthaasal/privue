@@ -1,9 +1,9 @@
 'use client'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { useMemo, useState, type ReactNode } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
+// import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
 // import NotificationOverlayDemo from './product-animations/ContinuousMonitoringDemo'
 
 type IncomingItem = {
@@ -13,7 +13,7 @@ type IncomingItem = {
     imgSrc?: string
     alt?: string
     link?: string
-    renderAnimation?: ReactNode // NEW
+    renderAnimation?: React.ComponentType<any>;
 }
 
 type Props = {
@@ -105,13 +105,12 @@ export default function TestVerticalModules({ items }: Props) {
                                     transition={{ duration: 0.25 }}
                                     className="w-full h-full flex items-center justify-center"
                                 >
-                                    <div className="w-full h-full mx-auto">
+                                    {/* <div className="w-full h-full mx-auto">
                                         <VideoLikeFlowDummy />
-                                        {/* <NotificationOverlayDemo /> */}
-                                    </div>
-                                    {/* {active.renderAnimation ? (
-                                        <div className="w-full h-full max-w-[500px] max-h-[400px] mx-auto">
-                                            {active.renderAnimation}
+                                    </div> */}
+                                    {active.renderAnimation ? (
+                                        <div className="w-full h-full mx-auto">
+                                            <active.renderAnimation />
                                         </div>
                                     ) : (
                                         <img
@@ -122,7 +121,7 @@ export default function TestVerticalModules({ items }: Props) {
                                             width={1207}
                                             height={929}
                                         />
-                                    )} */}
+                                    )}
                                 </motion.div>
                             </AnimatePresence>
                         </div>

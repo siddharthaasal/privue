@@ -1,5 +1,6 @@
 // src/data/solutions.ts
-
+import VideoLikeFlowDummy from '@/components/product-animations/ThreeImageFlow';
+import NotificationOverlayWithLeftFade from '@/components/product-animations/ContinuousMonitoringDemo';
 
 export type Problem = {
     problemHeading: string;
@@ -12,6 +13,7 @@ export type Module = {
     description: string;
     imgSrc: string;
     link: string;
+    renderAnimation?: React.ComponentType<any>;
 };
 
 export type Capability = {
@@ -114,6 +116,7 @@ export const solutions: Solution[] = [
                     "Add dealers, upload documents and verify identity",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: VideoLikeFlowDummy
             },
             {
                 title: "Data Acquisition",
@@ -142,6 +145,7 @@ export const solutions: Solution[] = [
                     "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: NotificationOverlayWithLeftFade
             },
             {
                 title: "Go Live in 2 weeks",

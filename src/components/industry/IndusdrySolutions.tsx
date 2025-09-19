@@ -45,12 +45,14 @@ function makeId(fallbackIndex: number) {
 export default function IndustryModules() {
 
     const dummyIndustries: Industry[] = [
-        { id: 'ind-1', name: 'Corporations', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
-        { id: 'ind-2', name: 'Insurance', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
-        { id: 'ind-3', name: 'Banking', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
-        { id: 'ind-4', name: 'Asset Management', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
-        { id: 'ind-5', name: 'Consulting', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
-        { id: 'ind-6', name: 'Government', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum dui non laoreet aliquet.' },
+        { id: 'ind-1', name: 'Corporations', description: 'Transform supply chains from vulnerable to resilient. Monitor distributors in real-time, predict sustainability risks, and make decisions backed by AI-powered intelligence.' },
+        { id: 'ind-2', name: 'Insurance', description: 'Fortify compliance, slash credit exposure, and unlock smarter lending. Our AI-driven platform revolutionizes internal audits, sustainability assessments, and third-party risk management for the modern bank.' },
+        { id: 'ind-3', name: 'Banking', description: 'Build bulletproof portfolios that investors trust. Accelerate due diligence, master sustainability metrics, and neutralize third-party risks with precision analytics that see around corners.' },
+        { id: 'ind-4', name: 'Asset Management', description: 'Underwrite with unprecedented confidence. Price commercial risk accurately, validate sustainability claims instantly, and detect third-party threats before they materialize—all powered by advanced AI analytics.' },
+        {
+            id: 'ind-5', name: 'Consulting', description: "Deliver client insights at the speed of business. Cut due diligence time by half, automate audit workflows, and amplify your firm's value with AI-driven analytics that turn data into competitive advantage."
+        },
+        { id: 'ind-6', name: 'Government', description: 'Safeguard public trust through smarter procurement. Validate vendors instantly, exceed sustainability mandates, and ensure compliance with AI-powered risk intelligence designed for public sector excellence.' },
     ]
 
     // Same solutions used for every industry (per your instruction).
@@ -163,45 +165,39 @@ export default function IndustryModules() {
               - maps dummySolutions exactly using the snippet you provided
               ------------------------ */}
                     <div className="bg-background relative flex overflow-hidden p-0 col-span-2">
-                        {/* decorative vertical separator like original */}
-                        {/* <div className="absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)] pointer-events-none" /> */}
-
-                        {/* scrollable container for cards */}
                         <div
                             ref={rhsScrollRef}
                             className="relative w-full rounded-2xl overflow-auto p-4 grid gap-2 content-start auto-rows-min"
-                            // Use a responsive grid: on narrow screens it's single column, on wider screens it flows into two columns
-                            // style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', maxHeight: 520 }}
                             aria-live="polite"
                         >
-                            {/* AnimatePresence + motion for subtle entrance animations */}
-                            <AnimatePresence initial={false}>
-                                {/* Map the solutions array into IndustrySolutionCard components.
-                    This uses the exact mapping you asked for. */}
-                                {currentSolutions.map((s, i) => {
-                                    return (
-                                        <motion.div
-                                            key={s.slug}
-                                            initial={{ opacity: 0, y: 6 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: 6 }}
-                                            transition={{ duration: 0.18 }}
-                                        >
+                            {/* Animate the whole list as one panel keyed by activeIndustryId */}
+                            <AnimatePresence mode="wait" initial={false}>
+                                <motion.div
+                                    key={activeIndustryId}               // <--- switching industry replaces this panel
+                                    initial={{ opacity: 0, y: 8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -8 }}
+                                    transition={{ opacity: { duration: 0.16 }, y: { type: 'spring', stiffness: 300, damping: 28, duration: 0.24 } }}
+                                    className="grid gap-2"
+                                    // Keep the same 1-card-per-row layout: each card will fill available width
+                                    style={{ gridTemplateColumns: '1fr' }}
+                                >
+                                    {currentSolutions.map((s, i) => (
+                                        <div key={s.slug} className="w-full">
+                                            {/* keep your original IndustrySolutionCard usage so cards remain full-width */}
                                             <IndustrySolutionCard
-                                                key={i}
                                                 title={s.heading}
                                                 description={s.subHeading}
                                                 icon={s.icon}
                                                 href={`/solutions/${s.slug}`}
-                                            // NOTE: IndustrySolutionCard currently doesn't accept isActive; if you want active styling,
-                                            // pass an `isActive` prop here and update the card component accordingly.
                                             />
-                                        </motion.div>
-                                    )
-                                })}
+                                        </div>
+                                    ))}
+                                </motion.div>
                             </AnimatePresence>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>

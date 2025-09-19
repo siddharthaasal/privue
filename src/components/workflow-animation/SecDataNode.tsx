@@ -111,7 +111,7 @@ function SecDataNodeInner({ data }: DataNodeProps) {
 
             {/* Label (multi-line, wraps instead of ellipsis) */}
             <div
-                className="text-xs text-privue-900 font-medium"
+                className="text-sm text-privue-900 font-semibold"
                 style={{
                     width: cardWidth || "auto",
                     maxWidth: cardWidth || "auto",

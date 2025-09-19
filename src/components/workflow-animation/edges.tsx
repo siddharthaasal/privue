@@ -108,7 +108,7 @@ export const initialEdges: Edge[] = [
         target: "tool-a",
         animated: true,
         type: "default",
-        style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
+        style: { stroke: "#4c6ef5", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
     },
     {
         id: "e-agent-tool-b",
@@ -117,7 +117,7 @@ export const initialEdges: Edge[] = [
         target: "tool-b",
         animated: true,
         type: "default",
-        style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
+        style: { stroke: "#4c6ef5", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
     },
     {
         id: "e-agent-tool-c",
@@ -126,7 +126,7 @@ export const initialEdges: Edge[] = [
         target: "tool-c",
         animated: true,
         type: "default",
-        style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
+        style: { stroke: "#4c6ef5", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
     },
     {
         id: "e-agent-tool-d",
@@ -135,7 +135,7 @@ export const initialEdges: Edge[] = [
         target: "tool-d",
         animated: true,
         type: "default",
-        style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
+        style: { stroke: "#4c6ef5", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
     },
     {
         id: "e-agent-llm-a",
@@ -145,7 +145,7 @@ export const initialEdges: Edge[] = [
         target: "llm-a",
         animated: true,
         type: "default",
-        style: { stroke: "rgba(148,163,184,0.55)", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
+        style: { stroke: "#4c6ef5", strokeWidth: 1.8, strokeDasharray: "6 6", strokeLinecap: "round" }
     },
     {
         id: "e-agent-llm-b",

@@ -117,8 +117,7 @@ function DataNodeInner({ data }: DataNodeProps) {
                     maxWidth: cardWidth || "auto",
                     textAlign: "center",
                     whiteSpace: "normal",   // ✅ allow wrapping
-                    overflowWrap: "break-word",
-                    wordBreak: "break-word", // ensures long words break if needed
+                    wordBreak: "keep-all", // ensures long words break if needed
                 }}
                 title={label}
             >

@@ -80,10 +80,27 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
         setTimeout(() => instance.fitView({ padding: fitPadding }), 0);
     };
 
+    const handleWheel = (e: React.WheelEvent) => {
+        if (e.ctrlKey) return;
+
+        const el = containerRef.current;
+        if (!el) return;
+
+        // if the container itself can scroll vertically, let it handle the wheel (don't forward)
+        const canScroll = el.scrollHeight > el.clientHeight;
+        if (canScroll) return;
+
+        (e.nativeEvent as any).stopImmediatePropagation?.();
+        window.scrollBy({ top: e.deltaY, left: 0, behavior: "auto" });
+        e.preventDefault();
+    };
+
+
     return (
         <div
             ref={containerRef}
             className={className}
+            onWheel={handleWheel}
             style={{
                 width: "100%",
                 height: "100%",
@@ -101,14 +118,11 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
                 nodeTypes={nodeTypes}
                 onInit={handleInit}
                 fitView={false} // we call fitView manually to control padding
-                // lock interactions
                 nodesDraggable={false}
                 nodesConnectable={false}
-                // nodesSelectable={false}
                 elementsSelectable={false}
                 panOnDrag={false}
                 panOnScroll={false}
-                // panOnPinch={false}
                 zoomOnScroll={false}
                 zoomOnPinch={false}
                 // style to fully fill the parent container
@@ -130,7 +144,7 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
                     color="rgba(71,85,105,0.02)"
                 />
 
-                <Controls showInteractive={false} />
+                <Controls showInteractive={false} showZoom={false} showFitView={false} />
             </ReactFlow>
         </div>
     );

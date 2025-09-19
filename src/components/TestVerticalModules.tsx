@@ -89,11 +89,11 @@ export default function TestVerticalModules({ items }: Props) {
                     </Accordion>
 
                     {/* Right: Animation or Image */}
-                    <div className="bg-background relative flex overflow-hidden rounded-3xl border p-2 col-span-2">
-                        <div className="absolute inset-0 right-0 ml-auto border-l bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_8px)]"></div>
+                    <div className="relative flex overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-inset ring-slate-200/50 p-2 col-span-2">
+                        {/* <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15"></div> */}
 
                         <div
-                            className="bg-background relative w-full rounded-2xl overflow-hidden flex items-center justify-center"
+                            className="relative w-full rounded-2xl bg-slate-50/40 ring-1 ring-inset ring-slate-200/50 overflow-hidden flex items-center justify-center"
                         // style={{ minHeight: 420, maxHeight: 520 }}
                         >
                             <AnimatePresence mode="wait">

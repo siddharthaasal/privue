@@ -15,9 +15,8 @@ export default function AboutSection() {
                     {/* Left: Text - allow it to be a flex column and not force min-height */}
                     <div className="relative z-10 space-y-4 md:w-1/2 min-h-0">
                         <p className="text-base">
-                            Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. Our platform integrates multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights.
+                            Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. It integrate multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights via API or custom applications.
                         </p>
-
                         <p className="text-base">
                             From credit and vendor risk to compliance and advisory, we empower organizations to assess counterparties, mitigate risks, and act with confidence.
                         </p>
@@ -28,18 +27,18 @@ export default function AboutSection() {
                                     <Cpu className="h-4 w-4" />
                                     <h3 className="text-sm font-medium">AI-Driven</h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">Proprietary models for smarter, faster decisions.</p>
+                                <p className="text-muted-foreground text-sm">Secure infrastructure enabling adoption with confidence.</p>
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-2">
                                     <Zap className="h-4 w-4" />
                                     <h3 className="text-sm font-medium">Actionable Insights</h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">Turning complex data into clear intelligence.</p>
+                                <p className="text-muted-foreground text-sm">Turning complex data into clear intelligence</p>
                             </div>
                         </div>
 
-                        <Button
+                        {/* <Button
                             asChild
                             variant="outline"
                             size="sm"
@@ -59,7 +58,7 @@ export default function AboutSection() {
                                 <span className="group-hover:underline">Learn More</span>
                                 <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                             </a>
-                        </Button>
+                        </Button> */}
                     </div>
 
                     {/* Right: Image - allow shrinking and set image to h-full w-auto */}

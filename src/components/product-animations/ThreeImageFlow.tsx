@@ -163,7 +163,6 @@ export default function VideoLikeFlowDummySlow() {
 
 
 
-
             {/* overlay */}
             <div className="relative z-10 w-full h-full">
                 <AnimatePresence mode="wait">
@@ -176,9 +175,9 @@ export default function VideoLikeFlowDummySlow() {
                             transition={{ duration: 0.6 }}
                             className="absolute -right-2 -bottom-2 w-[350px] max-w-full bg-white rounded-xl p-4 shadow-2xl"
                         >
-                            <div className="text-base font-semibold mb-2">Add Dealer</div>
+                            <div className="text-sm font-medium mb-2">Add Dealer</div>
                             <DummyFormCompactSlow onSubmit={handleSubmitFromForm} />
-                            <div className="mt-2 text-xs text-slate-500">Status: Preparing to add dealer…</div>
+                            <div className="mt-1 text-[10px] text-slate-500">Status: Preparing to add dealer…</div>
                         </motion.div>
                     )}
 
@@ -191,8 +190,8 @@ export default function VideoLikeFlowDummySlow() {
                             transition={{ duration: 0.55 }}
                             className="absolute -right-2 -bottom-2 w-[250px] max-w-full bg-white/95 rounded-xl p-3 shadow-lg"
                         >
-                            <div className="text-sm font-semibold">New dealer added</div>
-                            <div className="text-sm text-privue-800 mt-1">Waiting for verification</div>
+                            <div className="text-[13px] font-semibold">New dealer added</div>
+                            <div className="text-[12px] text-privue-800 mt-1">Waiting for documents</div>
                         </motion.div>
                     )}
 
@@ -205,7 +204,7 @@ export default function VideoLikeFlowDummySlow() {
                             transition={{ duration: 0.55 }}
                             className="absolute -right-2 -bottom-2 w-[350px] max-w-full bg-white rounded-xl p-4 shadow-2xl"
                         >
-                            <div className="text-base font-medium mb-2">Uploading documents</div>
+                            <div className="text-sm font-medium mb-2">Uploading documents</div>
 
                             <div className="flex flex-col gap-2 w-full mb-2">
                                 {["dummy-file.pdf", "invoice-doc.pdf", "license-scan.png"].map((file, i) => (
@@ -217,8 +216,8 @@ export default function VideoLikeFlowDummySlow() {
                                             {file.split(".").pop()?.toUpperCase()}
                                         </div>
                                         <div className="flex-1">
-                                            <div className="text-sm font-medium text-slate-700">{file}</div>
-                                            <div className="text-xs text-slate-500">1.2 MB</div>
+                                            <div className="text-[12px] font-medium text-slate-700">{file}</div>
+                                            <div className="text-[10px] text-slate-500">1.2 MB</div>
                                         </div>
                                     </div>
                                 ))}
@@ -234,7 +233,7 @@ export default function VideoLikeFlowDummySlow() {
                                 />
                             </div>
 
-                            <div className="mt-2 text-xs text-slate-500">Status: Verifying…</div>
+                            <div className="mt-2 text-[10px] text-slate-500">Status: Uploading...</div>
                         </motion.div>
                     )}
 
@@ -247,7 +246,7 @@ export default function VideoLikeFlowDummySlow() {
                             transition={{ duration: 0.5 }}
                             className="absolute -right-2 -bottom-2 w-auto max-w-full bg-white/95 rounded-xl p-3 shadow-lg"
                         >
-                            <div className="text-sm font-semibold text-emerald-600 text-right">Dealer verified</div>
+                            <div className="text-[12px] font-semibold text-emerald-600 text-right">Dealer verified</div>
                             {/* <div className="text-xs text-slate-500 mt-1">Table updated in the background.</div> */}
                         </motion.div>
                     )}
@@ -421,22 +420,22 @@ function DummyFormCompactSlow({
             }}
             className="flex flex-col gap-1"
         >
-            <label className="text-xs text-slate-600">Dealer Name</label>
-            <input value={dealerName} readOnly className="rounded-md p-2 border border-slate-200 font-sans tracking-wide w-full" />
+            <label className="text-[8px] text-slate-600">Dealer Name</label>
+            <input value={dealerName} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
-            <label className="text-xs text-slate-600">GSTIN</label>
-            <input value={gstin} readOnly className="rounded-md p-2 border border-slate-200 font-sans tracking-wide w-full" />
+            <label className="text-[8px] text-slate-600">GSTIN</label>
+            <input value={gstin} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
-            <label className="text-xs text-slate-600">Mobile no</label>
-            <input value={mobile} readOnly className="rounded-md p-2 border border-slate-200 font-sans tracking-wide w-full" />
+            <label className="text-[8px] text-slate-600">Mobile no</label>
+            <input value={mobile} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
-            <div className="pt-2 flex items-center justify-end">
+            <div className="pt-1 flex items-center justify-end">
                 {/* <div className="text-xs text-slate-400">Tip: wait for typing or force submit</div> */}
 
                 <div className="flex items-center gap-1">
                     <motion.button
                         type="submit"
-                        className="inline-flex items-center gap-1 px-2 py-2 rounded-md font-medium text-white shadow-md bg-[var(--color-privue-600)]"
+                        className="inline-flex items-center gap-1 px-1 py-1 text-xs rounded-sm font-normal text-white shadow-md bg-[var(--color-privue-600)]"
                         animate={{
                             opacity: step >= 3 ? [1, 0.85, 1] : 0.45,
                             scale: step >= 3 ? [1, 1.02, 1] : 1,
@@ -515,9 +514,9 @@ function DealerRow({
             // avoid conflicting tailwind background classes here
             style={{ backgroundColor: undefined }}
         >
-            <td className="px-3 py-3">{d.name}</td>
-            <td className="px-3 py-3">{d.gst}</td>
-            <td className="px-3 py-3">{d.mobile}</td>
+            <td className="px-3 py-3 text-[12px]">{d.name}</td>
+            <td className="px-3 py-3 text-[12px]">{d.gst}</td>
+            <td className="px-3 py-3 text-[12px]">{d.mobile}</td>
 
             <td className="px-3 py-3">
                 <AnimatePresence mode="sync">
@@ -528,7 +527,7 @@ function DealerRow({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -4, scale: 0.98 }}
                             transition={{ duration: 0.35 }}
-                            className="inline-flex items-center gap-2 text-emerald-600 font-medium"
+                            className="inline-flex items-center gap-2 text-emerald-600 font-medium text-[12px]"
                         >
                             <span aria-hidden>✓</span>
                             Verified
@@ -540,7 +539,7 @@ function DealerRow({
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -4, scale: 0.98 }}
                             transition={{ duration: 0.35 }}
-                            className="text-amber-600 font-medium"
+                            className="text-amber-600 font-medium text-[12px]"
                         >
                             Unverified
                         </motion.span>
@@ -555,17 +554,17 @@ function BackgroundDealersTable({ dealers, highlightId }: { dealers: Dealer[]; h
     return (
         <div className="w-full h-full rounded-xl overflow-hidden border bg-white/60 backdrop-blur-sm">
             <div className="p-4">
-                <div className="text-lg font-semibold">Dealers</div>
+                <div className="text-sm font-medium">Dealers</div>
             </div>
 
             <div className="h-[calc(100%-64px)] overflow-auto">
-                <table className="w-full text-sm">
+                <table className="w-full text-xs">
                     <thead className="bg-slate-50 text-slate-600 sticky top-0">
                         <tr>
-                            <th className="text-left px-3 py-3">Name</th>
-                            <th className="text-left px-3 py-3">GSTIN</th>
-                            <th className="text-left px-3 py-3">Mobile</th>
-                            <th className="text-left px-3 py-3">Status</th>
+                            <th className="text-left px-3 py-3 text-[11px]">Name</th>
+                            <th className="text-left px-3 py-3 text-[11px]">GSTIN</th>
+                            <th className="text-left px-3 py-3 text-[11px]">Mobile</th>
+                            <th className="text-left px-3 py-3 text-[11px]">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -574,35 +573,6 @@ function BackgroundDealersTable({ dealers, highlightId }: { dealers: Dealer[]; h
                         ))}
                     </tbody>
 
-                    {/* <tbody>
-                        {dealers.map((d, i) => {
-                            const isHighlighted = highlightId === d.id;
-                            const targetBg = isHighlighted ? "rgba(120,115,255,0.06)" : "rgba(255,255,255,0)";
-
-                            return (
-                                <motion.tr
-                                    key={d.id}
-                                    layout
-                                    initial={{ opacity: 0, y: 12, backgroundColor: "rgba(255,255,255,0)" }}
-                                    animate={{
-                                        opacity: 1,
-                                        y: 0,
-                                        backgroundColor: targetBg,
-                                    }}
-                                    exit={{ opacity: 0, y: -8 }}
-                                    transition={{ duration: 0.45, ease: "easeOut" }}
-                                    style={{ backgroundColor: undefined }}
-                                >
-                                    <td className="px-3 py-3">{d.name}</td>
-                                    <td className="px-3 py-3">{d.gst}</td>
-                                    <td className="px-3 py-3">{d.mobile}</td>
-                                    <td className="px-3 py-3">
-                                        {d.verified ? <span className="text-emerald-600 font-medium">Verified</span> : <span className="text-amber-600 font-medium">Unverified</span>}
-                                    </td>
-                                </motion.tr>
-                            );
-                        })}
-                    </tbody> */}
                 </table>
             </div>
         </div>
@@ -616,4 +586,14 @@ const dealerRowsInitial = [
     { name: "Metro Supplies", gst: "27MTRPL9999F2CD", mobile: "+91 98111 22334" },
     { name: "Quick Parts", gst: "27QKPTR1111Z9PQ", mobile: "+91 90000 12345" },
     { name: "Nova Distributors", gst: "27NVDST2222Y8ZX", mobile: "+91 91234 00001" },
+    { name: "Prime Hardware", gst: "27PRMHW3333A1BB", mobile: "+91 92345 67890" },
+    { name: "Alpha Traders", gst: "27ALPHT4444C2CC", mobile: "+91 93456 78901" },
+    { name: "Omega Parts", gst: "27OMGPT5555D3DD", mobile: "+91 94567 89012" },
+    { name: "Eastern Motors", gst: "27EASTM6666E4EE", mobile: "+91 95678 90123" },
+    { name: "West Point", gst: "27WSTPT7777F5FF", mobile: "+91 96789 01234" },
+    { name: "Sunrise Supplies", gst: "27SUNRS8888G6GG", mobile: "+91 97890 12345" },
+    { name: "Lakeside Components", gst: "27LAKSC9999H7HH", mobile: "+91 98901 23456" },
+    { name: "Horizon Export", gst: "27HRZNX0000J8JJ", mobile: "+91 99012 34567" },
+    { name: "Crest Technologies", gst: "27CRSTT1111K9KK", mobile: "+91 90123 45678" },
+    { name: "Pioneer Goods", gst: "27PIONR2222L0LL", mobile: "+91 81234 56780" },
 ];

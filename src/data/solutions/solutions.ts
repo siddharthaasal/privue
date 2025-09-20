@@ -2,6 +2,7 @@
 import VideoLikeFlowDummy from '@/components/product-animations/ThreeImageFlow';
 import DataAcquisition from '@/components/product-animations/DataAcquisition';
 import NotificationOverlayWithLeftFade from '@/components/product-animations/ContinuousMonitoringDemo';
+import RiskAssessment from '@/components/product-animations/RiskAssessment';
 
 export type Problem = {
     problemHeading: string;
@@ -133,6 +134,7 @@ export const solutions: Solution[] = [
                     "Determine risk score of the dealer using advance models",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: RiskAssessment
             },
             {
                 title: "Credit Terms",

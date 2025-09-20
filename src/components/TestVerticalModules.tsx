@@ -109,7 +109,7 @@ export default function TestVerticalModules({ items }: Props) {
                                         <VideoLikeFlowDummy />
                                     </div> */}
                                     {active.renderAnimation ? (
-                                        <div className="w-full h-full mx-auto">
+                                        <div className="w-full h-full max-h-[520px] mx-auto">
                                             <active.renderAnimation />
                                         </div>
                                     ) : (

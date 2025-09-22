@@ -5,6 +5,9 @@ import privueLogo from "/privue-logo.png";
 import { Button } from "@/components/ui/button";
 import { solutions } from "@/data/solutions/solutions.ts";
 
+import { AiOutlineApi } from "react-icons/ai";
+import { IoMdGitNetwork } from "react-icons/io";
+
 type LinkType = {
     name: string;
     href?: string;
@@ -20,7 +23,6 @@ export default function Header() {
     const timeoutRef = useRef<number | null>(null);
 
     const solutionMenuItems = solutions.map((s) => {
-        // s.icon is a React.ComponentType<any> (a component reference).
         const IconComp = s.icon as React.ComponentType<any> | undefined;
 
         const icon = IconComp ? (
@@ -35,10 +37,44 @@ export default function Header() {
         };
     });
 
+    const products = [
+        {
+            name: "API",
+            href: "#",
+            description: "lorem ipsum",
+            icon: AiOutlineApi
+        },
+        {
+            name: "Workbench",
+            href: "#",
+            description: "lorem ipsum",
+            icon: IoMdGitNetwork
+        },
+    ]
+    const productMenuItems = products.map((s) => {
+        // s.icon is a React.ComponentType<any> (a component reference).
+        const IconComp = s.icon as React.ComponentType<any> | undefined;
+
+        const icon = IconComp ? (
+            <IconComp className="w-5 h-5 text-gray-700" aria-hidden />
+        ) : null;
+
+        return {
+            name: s.name,
+            href: s.href,
+            description: s.description,
+            icon
+        };
+    });
+
     const desktopLinks: LinkType[] = [
         {
             name: "Solutions",
             items: solutionMenuItems,
+        },
+        {
+            name: "Product",
+            items: productMenuItems,
         },
         // { name: "Industries", href: "#article", variant: "link" },
         { name: "Articles", href: "/articles", variant: "link" },

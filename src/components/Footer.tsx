@@ -41,9 +41,9 @@ export default function Footer({
         {
             title: "Solutions",
             links: [
-                { text: "Distributor Performance Management", url: "/solutions/distributor-performance-management" },
+                { text: "Distributor Management", url: "/solutions/distributor-performance-management" },
                 { text: "Sustainability Assessment", url: "/solutions/sustainability-assessment" },
-                { text: "Commercial Insurance Underwriting", url: "/solutions/commercial-insurance-underwriting" },
+                { text: "Insurance Underwriting", url: "/solutions/commercial-insurance-underwriting" },
                 { text: "Large Customer Risk Assessment", url: "/solutions/large-customer-risk-assessment" },
                 { text: "Entity Due Diligence", url: "/solutions/entity-due-diligence" },
                 { text: "Third Party Risk Management", url: "/solutions/third-party-risk-management" },
@@ -65,7 +65,7 @@ export default function Footer({
             title: "Company",
             links: [
                 { text: "Data Security", url: "/data-security" },
-                { text: "Cookie Notice", url: "/cookie-policy" },
+                { text: "Cookie Policy", url: "/cookie-policy" },
                 { text: "California Notice", url: "/california-notice" },
                 { text: "Terms of Use", url: "/terms" },
                 { text: "Privacy Policy", url: "/privacy-policy" },

@@ -1,4 +1,9 @@
 import { Cpu, Zap } from 'lucide-react'
+// import AboutImageFlow from '@/components/about/AboutImageFlow'
+// import { OrbitNode } from '@/components/workflow-animation/OrbitNode'
+// import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
+// import { File, Settings, Search } from "lucide-react";
+import TwoOrbit from '@/components/about/TwoOrbit';
 // ChevronRight
 // import { Button } from '@/components/ui/button'
 
@@ -11,7 +16,7 @@ export default function AboutSection() {
                 </h2>
 
                 {/* parent flex: items-stretch so children match heights */}
-                <div className="relative flex flex-col md:flex-row items-stretch gap-8">
+                <div className="relative flex flex-col md:flex-row items-center gap-8">
 
                     {/* Left: Text - allow it to be a flex column and not force min-height */}
                     <div className="relative z-10 space-y-4 md:w-1/2 min-h-0">
@@ -63,7 +68,7 @@ export default function AboutSection() {
                     </div>
 
                     {/* Right: Image - allow shrinking and set image to h-full w-auto */}
-                    <div className="md:w-1/2 flex min-h-0">
+                    {/* <div className="md:w-1/2 flex min-h-0">
                         <div className="border-border/50 relative w-full h-full rounded-xl border border-dotted p-4 flex overflow-hidden">
                             <img
                                 // src="/demo-about-section-img.webp"
@@ -72,10 +77,37 @@ export default function AboutSection() {
                                 alt="Privue analytics dashboard (light)"
                             />
                         </div>
+                    </div> */}
+                    <div className="md:w-1/2 flex min-h-0">
+                        <div className=" relative w-full">
+                            <div className='ml-25'>
+                                <TwoOrbit
+                                    centerLogo="/privue-logo.png"
+                                    innerIcons={[
+                                        <IconImg key="m1" src="/icons/excel.png" alt="predict" />,
+                                        <IconImg key="m2" src="/icons/postgre.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/pdf-2.png" alt="graph" />,
+                                    ]}
+                                    outerIcons={[
+                                        <IconImg key="m1" src="/icons/gpt.png" alt="predict" />,
+                                        // <IconImg key="m2" src="/icons/climate-risk.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/gemini.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/claude.png" alt="graph" />,
+                                    ]}
+                                    innerConfig={{ radius: 80, iconSize: 40, duration: 10 }}
+                                    outerConfig={{ radius: 150, iconSize: 50, duration: 26, reverse: true }}
+                                    containerPadding={28}
+                                />
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </section>
     )
+}
+
+function IconImg({ src, alt = "" }: { src: string; alt?: string }) {
+    return <img src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 6 }} />;
 }

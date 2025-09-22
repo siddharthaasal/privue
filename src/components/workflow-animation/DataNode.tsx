@@ -38,8 +38,8 @@ function DataNodeInner({ data }: DataNodeProps) {
                     src={ic}
                     alt={label}
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 50,
+                        height: 50,
                         objectFit: "contain",
                         display: "block",
                     }}
@@ -64,7 +64,7 @@ function DataNodeInner({ data }: DataNodeProps) {
             {/* Card (auto width, based on icon + padding) */}
             <div
                 ref={cardRef}
-                className="flex items-center justify-center p-3 bg-privue-100/20 text-slate-900 border border-privue-800"
+                className="flex items-center justify-center p-3 bg-privue-100/20 text-slate-900 border-2 border-privue-700"
                 style={{
                     borderTopLeftRadius: 18,
                     borderBottomLeftRadius: 18,

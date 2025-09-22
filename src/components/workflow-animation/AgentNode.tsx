@@ -14,7 +14,7 @@ function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactN
 
     return (
         <div
-            className="border border-privue-800 bg-privue-100/20 rounded-lg flex"
+            className="border-2 border-privue-700 bg-privue-100/20 rounded-lg flex"
             style={{
                 // width:,
                 padding: "16px 20px",
@@ -45,8 +45,12 @@ function AgentNodeInner({ data }: { data?: { title?: string; icon?: React.ReactN
                 </div>
             </div> */}
 
-            <div style={{ fontSize: 15, fontWeight: 700, color: "var(--privue-900,#0f1724)", textAlign: "center" }}>{title}</div>
-
+            {/* <div style={{ fontSize: 15, fontWeight: 700, color: "var(--privue-900,#0f1724)", textAlign: "center" }}>{title}</div> */}
+            <div
+                className="text-base text-privue-900 font-semibold"
+            >
+                {title}
+            </div>
             {/* connection handles */}
             <Handle
                 type="target"

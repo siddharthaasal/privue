@@ -69,6 +69,8 @@ export default function IndustryModules() {
             { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
             { heading: 'Distributor Performance Management', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: AlignVerticalJustifyCenter, slug: 'distributor-performance-management' },
             { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
         ],
         'ind-2': [
             { heading: 'Insurance Underwriting and Pricing', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Landmark, slug: 'commercial-insurance-underwriting' },
@@ -167,9 +169,10 @@ export default function IndustryModules() {
                     <div className="bg-background relative flex overflow-hidden p-0 col-span-2">
                         <div
                             ref={rhsScrollRef}
-                            className="relative w-full rounded-2xl overflow-auto p-4 grid gap-2 content-start auto-rows-min"
+                            className="relative w-full rounded-2xl p-4 grid gap-2 content-start auto-rows-min h-[450px] overflow-y-auto "
                             aria-live="polite"
                         >
+
                             {/* Animate the whole list as one panel keyed by activeIndustryId */}
                             <AnimatePresence mode="wait" initial={false}>
                                 <motion.div
@@ -200,6 +203,6 @@ export default function IndustryModules() {
 
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

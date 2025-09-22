@@ -1,10 +1,11 @@
 import { type Node } from "reactflow";
-import { FaRegFilePdf } from "react-icons/fa6";
-import { PiMicrosoftExcelLogo } from "react-icons/pi";
-import { MdFormatAlignCenter } from "react-icons/md";
-import { FaRobot, FaDatabase } from "react-icons/fa";
-import { BsDatabaseCheck } from "react-icons/bs";
-import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp } from 'lucide-react';
+// import { FaRegFilePdf } from "react-icons/fa6";
+// import { PiMicrosoftExcelLogo } from "react-icons/pi";
+// import { MdFormatAlignCenter } from "react-icons/md";
+// import { FaRobot, FaDatabase } from "react-icons/fa";
+// import { BsDatabaseCheck } from "react-icons/bs";
+// import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp, ScanText, Bot, DatabaseZap } from 'lucide-react';
+import { ScanText, Bot, DatabaseZap } from 'lucide-react';
 
 export const initialNodes: Node[] = [
     // {
@@ -19,7 +20,20 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 40 },
         data: {
             label: "Unstructured Data",
-            icon: FaRegFilePdf
+            // icon: FaRegFilePdf
+            icon: "/icons/pdf-2.png"
+        },
+        // parentNode: "group-1",
+        // extent: "parent",
+    },
+    {
+        id: "structured",
+        type: "dataNode",
+        position: { x: 80, y: 180 },
+        data: {
+            label: "Structured Data",
+            // icon: PiMicrosoftExcelLogo
+            icon: "/icons/excel.png"
         },
         // parentNode: "group-1",
         // extent: "parent",
@@ -30,7 +44,7 @@ export const initialNodes: Node[] = [
         position: { x: 200, y: 40 },
         data: {
             label: "OCR",
-            icon: MdFormatAlignCenter
+            icon: ScanText
         },
     },
 
@@ -40,25 +54,19 @@ export const initialNodes: Node[] = [
         position: { x: 320, y: 40 },
         data: {
             label: "LLM Parsing",
-            icon: FaRobot
+            icon: Bot
+            // icon: "/icons/robot-2.png"
         },
     },
-    {
-        id: "structured",
-        type: "dataNode",
-        position: { x: 80, y: 180 },
-        data: {
-            label: "Structured Data",
-            icon: PiMicrosoftExcelLogo
-        },
-    },
+
     {
         id: "privue",
         type: "dataNode",
         position: { x: 80, y: 320 },
         data: {
-            label: "Privue's Proprietary Data",
-            icon: BsDatabaseCheck
+            label: "Proprietary Data",
+            // icon: BsDatabaseCheck
+            icon: "/icons/postgre.png"
         },
     },
     {
@@ -67,7 +75,8 @@ export const initialNodes: Node[] = [
         position: { x: 80, y: 460 },
         data: {
             label: "Third Party Data",
-            icon: FaDatabase
+            icon: DatabaseZap
+            // icon: "/icons/database-2.png"
         },
     },
 
@@ -82,10 +91,11 @@ export const initialNodes: Node[] = [
     {
         id: "ai-agent",
         type: "secDataNode",
-        position: { x: 428, y: 448 },
+        position: { x: 428, y: 443 },
         data: {
             label: "AI Agent",
-            icon: FaRobot
+            // icon: FaRobot
+            icon: "/icons/gpt.png"
         },
     },
 
@@ -102,25 +112,41 @@ export const initialNodes: Node[] = [
         id: "tool-a",
         type: "toolNodeLeft",
         position: { x: 550, y: 420 },
-        data: { title: "Credit Risk", icon: BanknoteArrowUp }
+        data: {
+            title: "Credit Risk",
+            // icon: BanknoteArrowUp
+            icon: "/icons/credit-risk-2.png"
+        }
     },
     {
         id: "tool-b",
         type: "toolNode",
         position: { x: 700, y: 420 },
-        data: { title: "Compliance Risk", icon: Scale }
+        data: {
+            title: "Compliance Risk",
+            // icon: Scale
+            icon: "/icons/compliance-risk.png"
+        }
     },
     {
         id: "tool-c",
         type: "toolNode",
         position: { x: 850, y: 420 },
-        data: { title: "Climate Risk", icon: CloudLightning }
+        data: {
+            title: "Climate Risk",
+            // icon: CloudLightning
+            icon: "/icons/climate-risk.png"
+        }
     },
     {
         id: "tool-d",
         type: "toolNode",
         position: { x: 1000, y: 420 },
-        data: { title: "Financial Engine", icon: ChartCandlestick }
+        data: {
+            title: "Financial Engine",
+            // icon: ChartCandlestick
+            icon: "/icons/financial-engine.png"
+        }
     },
     {
         id: "live-chat",

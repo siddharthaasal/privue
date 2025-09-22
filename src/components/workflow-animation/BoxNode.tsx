@@ -6,18 +6,19 @@ const BoxNode = ({ data }: any) => {
                 padding: "6px",
                 borderRadius: "6px",
                 background: "rgba(3, 105, 161, 0.05)",
-                width: 180,
-                height: 220,
+                width: 150,
+                height: 275,
                 position: "relative",
             }}
         >
             <div
                 style={{
                     position: "absolute",
-                    left: -30,
+                    // textAlign: "center",
+                    left: -50,
                     top: "40%",
                     transform: "rotate(-90deg)",
-                    fontSize: "12px",
+                    fontSize: "14px",
                     fontWeight: "600",
                     color: "#0f172a",
                 }}

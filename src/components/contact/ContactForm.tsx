@@ -1,30 +1,30 @@
 "use client";
-
+import { toast } from "sonner"
+import { CircleCheck } from "lucide-react";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { useForm as useReactHookForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // shadcn/ui
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+import { useForm as useFormspree, ValidationError } from "@formspree/react";
 import { useState, useRef, useEffect } from "react";
 
-// schema: topic now an array of strings
 const schema = z.object({
-    topic: z.array(z.string()).min(1, "Please select at least one topic"),
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
-    email: z.string().email("Enter a valid work email"),
-    company: z.string().optional(),
-    message: z.string().min(1, "Please add a short message"),
+    topic: z.array(z.string()).optional(),
+    firstName: z.string().min(1, ""),
+    lastName: z.string().optional(),
+    email: z.string().email(""),
+    company: z.string().min(1, ""),
+    message: z.string().optional(),
     website: z.string().max(0).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
-
 
 const topics = [
     "Distributor Performance Management",
@@ -36,42 +36,65 @@ const topics = [
 ];
 
 export default function ContactForm() {
-    const form = useForm<FormValues>({
+    const defaultValues: FormValues = {
+        topic: [],
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        message: "",
+        website: "",
+    } as unknown as FormValues;
+
+    // smaller vertical spacing & sizes
+    const form = useReactHookForm<FormValues>({
         resolver: zodResolver(schema),
-        defaultValues: {
-            topic: [], // now an array
-            firstName: "",
-            lastName: "",
-            email: "",
-            company: "",
-            message: "",
-            website: "",
-        },
+        defaultValues,
     });
 
+    const [spreeState, handleSpreeSubmit] = useFormspree("mnnbewpw");
+
+    useEffect(() => {
+        if (spreeState.succeeded) {
+            form.reset(defaultValues);
+        }
+    }, [spreeState.succeeded]); // eslint-disable-line react-hooks/exhaustive-deps
 
     async function onSubmit(values: FormValues) {
-        const res = await fetch("/api/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
-        });
-        if (!res.ok) {
-            const { error } = await res.json().catch(() => ({ error: "Something went wrong" }));
-            throw new Error(error);
+        const topicString = Array.isArray(values.topic) ? values.topic.join(", ") : "";
+        const payload = {
+            firstName: values.firstName,
+            lastName: values.lastName ?? "",
+            email: values.email,
+            company: values.company,
+            topic: topicString,
+            message: values.message ?? "",
+            website: values.website ?? "",
+        };
+        await handleSpreeSubmit(payload as any);
+        try {
+            // const res = await handleSpreeSubmit(payload as any);
+
+            if (!spreeState.errors) {
+                toast.success("Thanks! We will contact you soon.", {
+                    icon: <CircleCheck className="text-green-500 h-5 w-5 " />,
+                });
+            } else {
+                toast.error("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Submission failed. Please try again later.");
         }
-        form.reset();
-        // optionally toast success
     }
 
     return (
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-            <div className="p-5 sm:p-6 lg:p-8">
+            {/* Reduced container padding */}
+            <div className="p-3 sm:p-4 lg:p-5">
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    {/* tighter vertical spacing */}
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         {/* Topic */}
-                        {/* Topic - multi-select as checkbox group */}
-                        {/* Topic - dropdown multi-select */}
                         <FormField
                             control={form.control}
                             name="topic"
@@ -79,7 +102,6 @@ export default function ContactForm() {
                                 const [open, setOpen] = useState(false);
                                 const rootRef = useRef<HTMLDivElement | null>(null);
 
-                                // toggle value in the array
                                 const toggle = (value: string) => {
                                     const set = new Set(field.value || []);
                                     if (set.has(value)) set.delete(value);
@@ -87,7 +109,6 @@ export default function ContactForm() {
                                     field.onChange(Array.from(set));
                                 };
 
-                                // close on outside click
                                 useEffect(() => {
                                     function onDocClick(e: MouseEvent) {
                                         if (!rootRef.current) return;
@@ -105,125 +126,110 @@ export default function ContactForm() {
                                 }, []);
 
                                 const selected = field.value || [];
+                                const maxShownPills = 1;
+                                const shown = selected.slice(0, maxShownPills);
+                                const remaining = selected.length - shown.length;
 
                                 return (
-                                    <FormItem ref={rootRef}>
-                                        <FormLabel className="px-1 text-[14px] text-gray-700 dark:text-slate-200">
-                                            Select Solution(s)
-                                        </FormLabel>
+                                    <div ref={rootRef}>
+                                        <FormItem>
+                                            {/* slightly smaller label */}
+                                            <FormLabel className="px-1 text-sm text-gray-700 dark:text-slate-200">
+                                                Select Solution(s)
+                                            </FormLabel>
 
-                                        <div className="relative">
-                                            {/* Trigger */}
-                                            <button
-                                                type="button"
-                                                aria-haspopup="listbox"
-                                                aria-expanded={open}
-                                                onClick={() => setOpen((s) => !s)}
-                                                className="w-full flex items-center justify-between px-3 py-2 h-11 rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
-                                            >
-                                                <div className="text-left">
-                                                    {selected.length === 0 ? (
-                                                        <span className="text-sm text-slate-400">Select Solution(s)</span>
-                                                    ) : selected.length === 1 ? (
-                                                        <span className="text-sm text-slate-700 dark:text-slate-100">{selected[0]}</span>
-                                                    ) : (
-                                                        <span className="text-sm text-slate-700 dark:text-slate-100">
-                                                            {selected.join(", ")}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <div className="ml-2 text-slate-400">
-                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                                        <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                </div>
-                                            </button>
-
-                                            {/* Dropdown panel */}
-                                            {open && (
-                                                <div
-                                                    role="listbox"
-                                                    aria-multiselectable="true"
-                                                    className="absolute z-50 mt-2 w-full max-h-56 overflow-auto rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-lg py-2"
+                                            <div className="relative">
+                                                {/* Trigger: reduced height */}
+                                                <button
+                                                    type="button"
+                                                    aria-haspopup="listbox"
+                                                    aria-expanded={open}
+                                                    onClick={() => setOpen((s) => !s)}
+                                                    className="w-full flex items-center justify-between px-3 h-9 rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
                                                 >
-                                                    <div className="px-2">
-                                                        {topics.map((t) => {
-                                                            const checked = selected.includes(t);
-                                                            return (
-                                                                <label
-                                                                    key={t}
-                                                                    className={`flex items-center gap-3 cursor-pointer px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700
-                        ${checked ? "bg-[var(--color-privue-600)]/10 border-[var(--color-privue-600)]" : ""}`}
-                                                                >
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        checked={checked}
-                                                                        onChange={() => toggle(t)}
-                                                                        className="h-4 w-4 rounded text-[var(--color-privue-600)] accent-[var(--color-privue-600)]"
-                                                                    />
-                                                                    <span className={`${checked ? "text-[var(--color-privue-600)]" : "text-slate-700 dark:text-slate-100"} text-sm`}>
-                                                                        {t}
+                                                    <div className="min-w-0 w-full text-left">
+                                                        {selected.length === 0 ? (
+                                                            <span className="text-sm text-muted-foreground">Selected Solution(s)</span>
+                                                        ) : (
+                                                            <div className="flex items-center gap-2 overflow-hidden min-h-[1rem]">
+                                                                {shown.map((s) => (
+                                                                    <span
+                                                                        key={s}
+                                                                        className="inline-flex text-[12px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-100 whitespace-pre-wrap max-w-full truncate"
+                                                                        title={s}
+                                                                    >
+                                                                        {s}
                                                                     </span>
-                                                                </label>
-                                                            );
-                                                        })}
+                                                                ))}
+                                                                {remaining > 0 && (
+                                                                    <span className="text-xs text-slate-500">+{remaining} more</span>
+                                                                )}
+                                                            </div>
+                                                        )}
                                                     </div>
 
-                                                    {/* footer with actions */}
-                                                    <div className="mt-2 border-t border-slate-100 dark:border-slate-700 px-2 py-2 flex items-center justify-between gap-2">
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => {
-                                                                // clear selection
-                                                                field.onChange([]);
-                                                            }}
-                                                            className="text-sm text-slate-500 hover:underline"
-                                                        >
-                                                            Clear
-                                                        </button>
+                                                    <div className="ml-2 text-slate-400 shrink-0">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                                                            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
 
-                                                        <div className="flex items-center gap-2">
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => {
-                                                                    // close and keep selection
-                                                                    setOpen(false);
-                                                                }}
-                                                                className="px-3 py-1 rounded-md text-sm bg-slate-50 dark:bg-slate-700"
-                                                            >
-                                                                Done
-                                                            </button>
+                                                {/* Dropdown panel: slightly smaller max height */}
+                                                {open && (
+                                                    <div
+                                                        role="listbox"
+                                                        aria-multiselectable="true"
+                                                        className="absolute z-50 mt-2 w-full max-h-44 overflow-auto rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-lg py-1"
+                                                    >
+                                                        <div className="px-2">
+                                                            {topics.map((t) => {
+                                                                const checked = selected.includes(t);
+                                                                return (
+                                                                    <label
+                                                                        key={t}
+                                                                        className={`flex items-center gap-3 cursor-pointer px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-700
+                          ${checked ? "bg-[var(--color-privue-600)]/10 border-[var(--color-privue-600)]" : ""}`}
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            checked={checked}
+                                                                            onChange={() => toggle(t)}
+                                                                            className="h-4 w-4 rounded text-[var(--color-privue-600)] accent-[var(--color-privue-600)]"
+                                                                        />
+                                                                        <span className={`${checked ? "text-[var(--color-privue-600)]" : "text-slate-700 dark:text-slate-100"} text-sm`}>
+                                                                            {t}
+                                                                        </span>
+                                                                    </label>
+                                                                );
+                                                            })}
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        {/* tiny summary + validation message */}
-                                        <div className="mt-2 flex items-center justify-between">
-                                            <div className="text-xs text-slate-500">
-                                                {selected.length > 0 ? `${selected.length} selected` : "No topics selected"}
+                                                )}
                                             </div>
-                                            <FormMessage />
-                                        </div>
-                                    </FormItem>
+
+                                            <div className="mt-1 ml-1 flex items-center justify-between">
+                                                <div className="text-xs">{selected.length > 0 ? `${selected.length} selected` : "No topics selected"}</div>
+                                                {/* <FormMessage /> */}
+                                            </div>
+                                        </FormItem>
+                                    </div>
                                 );
                             }}
                         />
 
-
-                        {/* Names */}
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        {/* Names (reduced gap) */}
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                             <FormField
                                 control={form.control}
                                 name="firstName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[14px] text-gray-700">First name</FormLabel>
+                                        <FormLabel className="px-1 text-sm text-gray-700">First name</FormLabel>
                                         <FormControl>
-                                            <Input className="h-11 rounded-md" placeholder="Siddharth" {...field} />
+                                            <Input className="h-9 rounded-md" placeholder="Siddharth" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
@@ -232,28 +238,28 @@ export default function ContactForm() {
                                 name="lastName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[14px] text-gray-700">Last name</FormLabel>
+                                        <FormLabel className="px-1 text-sm text-gray-700">Last name</FormLabel>
                                         <FormControl>
-                                            <Input className="h-11 rounded-md" placeholder="Aasal" {...field} />
+                                            <Input className="h-9 rounded-md" placeholder="Aasal" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
                         </div>
 
                         {/* Email + Company */}
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                             <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[14px] text-gray-700">Work email</FormLabel>
+                                        <FormLabel className="px-1 text-sm text-gray-700">Work email</FormLabel>
                                         <FormControl>
-                                            <Input className="h-11 rounded-md" type="email" placeholder="siddharth@privue.in" {...field} />
+                                            <Input className="h-9 rounded-md" type="email" placeholder="siddharth@privue.in" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
@@ -262,31 +268,31 @@ export default function ContactForm() {
                                 name="company"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-[14px] text-gray-700">Company</FormLabel>
+                                        <FormLabel className="px-1 text-sm text-gray-700">Company</FormLabel>
                                         <FormControl>
-                                            <Input className="h-11 rounded-md" placeholder="Privue" {...field} />
+                                            <Input className="h-9 rounded-md" placeholder="Privue" {...field} />
                                         </FormControl>
-                                        <FormMessage />
+                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
                         </div>
 
-                        {/* Message */}
+                        {/* Message: smaller textarea */}
                         <FormField
                             control={form.control}
                             name="message"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="px-1 text-[14px] text-gray-700">Message</FormLabel>
+                                    <FormLabel className="px-1 text-sm text-gray-700">Message</FormLabel>
                                     <FormControl>
                                         <Textarea
-                                            className="min-h-[100px] rounded-md"
+                                            className="min-h-[70px] rounded-md"
                                             placeholder="Let us know how we can help"
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    {/* <FormMessage /> */}
                                 </FormItem>
                             )}
                         />
@@ -300,9 +306,18 @@ export default function ContactForm() {
                             <a href="/privacy-policy" className="underline">Privacy Policy</a>.
                         </p>
 
-                        <Button type="submit" className="text-white cursor-pointer h-12 w-full rounded-md text-base font-semibold">
-                            Send message
+                        <Button
+                            type="submit"
+                            className="text-white cursor-pointer h-10 w-full rounded-md text-sm font-semibold"
+                            disabled={spreeState.submitting}
+                        >
+                            {spreeState.submitting ? "Sending..." : "Send message"}
                         </Button>
+                        {/* {spreeState.succeeded && (
+                            <p className="text-sm text-green-600">Thanks! Your message has been sent.</p>
+                        )} */}
+
+                        <ValidationError errors={spreeState.errors} />
                     </form>
                 </Form>
             </div>

@@ -35,8 +35,8 @@ function ToolNodeLeftInner({ data }: { data?: ToolNodeData }) {
                     src={ic}
                     alt={title}
                     style={{
-                        width: iconSize,
-                        height: iconSize,
+                        width: 50,
+                        height: 50,
                         objectFit: "contain",
                         display: "block",
                     }}
@@ -64,7 +64,7 @@ function ToolNodeLeftInner({ data }: { data?: ToolNodeData }) {
             }}
         >
             <div
-                className="border border-privue-700 bg-privue-100/20"
+                className="border-2 border-privue-700 bg-privue-100/20"
                 style={{
                     width: 76,
                     height: 76,
@@ -137,7 +137,7 @@ function ToolNodeLeftInner({ data }: { data?: ToolNodeData }) {
                     left: 15,
                     width: 10,
                     height: 10,
-                    top: "50%",
+                    top: "45%",
                     borderRadius: 999,
                     background: "#fff",
                     border: "2px solid rgba(2,6,23,0.08)",

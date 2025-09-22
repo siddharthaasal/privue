@@ -261,7 +261,7 @@ export function AnimatedChatNodeInner({
     })();
 
     return (
-        <div ref={contRef} style={containerStyle} role="group" aria-label="Chat preview node" className="border border-privue-800 rounded-lg bg-white/75 ">
+        <div ref={contRef} style={containerStyle} role="group" aria-label="Chat preview node" className="border-2 border-privue-700 rounded-lg bg-white/75 ">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}
             >
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>

@@ -152,7 +152,7 @@ export default function HeroSection() {
                         <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
 
                             {/* instead of <img>, put your Flow */}
-                            <div className="rounded-xl shadow-2xl dark:shadow-indigo-600/10 w-full h-[38rem] p-4">
+                            <div className="rounded-xl shadow-2xl dark:shadow-indigo-600/10 w-full h-[30rem] p-4">
                                 <FlowNodesExample />
                             </div>
 

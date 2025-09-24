@@ -266,3 +266,16 @@
 .react-flow__attribution {
   display: none !important;
 }
+
+/* hide scrollbars but allow scrolling */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
+}

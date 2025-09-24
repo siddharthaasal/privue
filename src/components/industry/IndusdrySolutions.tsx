@@ -224,8 +224,7 @@ export default function IndustryModules() {
                     <div className="bg-background relative flex overflow-hidden p-0 col-span-2">
                         <div
                             ref={rhsScrollRef}
-                            className="relative w-full rounded-2xl p-4 grid gap-2 content-start auto-rows-min h-[450px] overflow-y-auto "
-                            aria-live="polite"
+                            className="relative w-full rounded-2xl p-4 grid gap-2 content-start auto-rows-min h-[450px] overflow-y-auto scrollbar-none"
                         >
 
                             {/* Animate the whole list as one panel keyed by activeIndustryId */}

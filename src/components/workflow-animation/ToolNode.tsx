@@ -47,7 +47,7 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
         // component (function/class)
         const IconComponent = ic as React.ComponentType<any>;
         // pass props commonly supported by svg icon libs
-        return <IconComponent size={iconSize} width={iconSize} height={iconSize} />;
+        return <IconComponent size={30} color={"#010101"} />;
     };
 
     return (

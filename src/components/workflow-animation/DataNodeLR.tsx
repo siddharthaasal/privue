@@ -48,7 +48,7 @@ function DataNodeInnerLR({ data }: DataNodeProps) {
         }
 
         const IconComponent = ic as React.ComponentType<any>;
-        return <IconComponent size={30} />;
+        return <IconComponent size={30} color={"#010101"} />;
     };
 
     return (

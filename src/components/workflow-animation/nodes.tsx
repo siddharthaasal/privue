@@ -4,9 +4,7 @@ import { type Node } from "reactflow";
 // import { MdFormatAlignCenter } from "react-icons/md";
 // import { FaRobot, FaDatabase } from "react-icons/fa";
 // import { BsDatabaseCheck } from "react-icons/bs";
-// import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp, ScanText, Bot, DatabaseZap } from 'lucide-react';
-import { ScanText, Bot, DatabaseZap } from 'lucide-react';
-
+import { ChartCandlestick, CloudLightning, Scale, BanknoteArrowUp, ScanText, Bot, DatabaseZap } from 'lucide-react';
 export const initialNodes: Node[] = [
     // {
     //     id: "group-1",
@@ -66,7 +64,8 @@ export const initialNodes: Node[] = [
         data: {
             label: "Proprietary Data",
             // icon: BsDatabaseCheck
-            icon: "/icons/postgre.png"
+            // icon: "/icons/postgre.png"
+            icon: "/icons/aws.png"
         },
     },
     {
@@ -94,8 +93,8 @@ export const initialNodes: Node[] = [
         position: { x: 428, y: 443 },
         data: {
             label: "AI Agent",
-            // icon: FaRobot
-            icon: "/icons/gpt.png"
+            icon: Bot
+            // icon: "/icons/gpt.png"
         },
     },
 
@@ -114,8 +113,8 @@ export const initialNodes: Node[] = [
         position: { x: 550, y: 420 },
         data: {
             title: "Credit Risk",
-            // icon: BanknoteArrowUp
-            icon: "/icons/credit-risk-2.png"
+            icon: BanknoteArrowUp
+            // icon: "/icons/credit-risk-2.png"
         }
     },
     {
@@ -124,8 +123,8 @@ export const initialNodes: Node[] = [
         position: { x: 700, y: 420 },
         data: {
             title: "Compliance Risk",
-            // icon: Scale
-            icon: "/icons/compliance-risk.png"
+            icon: Scale
+            // icon: "/icons/compliance-risk.png"
         }
     },
     {
@@ -134,8 +133,8 @@ export const initialNodes: Node[] = [
         position: { x: 850, y: 420 },
         data: {
             title: "Climate Risk",
-            // icon: CloudLightning
-            icon: "/icons/climate-risk.png"
+            icon: CloudLightning
+            // icon: "/icons/climate-risk.png"
         }
     },
     {
@@ -144,8 +143,8 @@ export const initialNodes: Node[] = [
         position: { x: 1000, y: 420 },
         data: {
             title: "Financial Engine",
-            // icon: ChartCandlestick
-            icon: "/icons/financial-engine.png"
+            icon: ChartCandlestick
+            // icon: "/icons/financial-engine.png"
         }
     },
     {

@@ -3,6 +3,7 @@ import VideoLikeFlowDummy from '@/components/product-animations/ThreeImageFlow';
 import DataAcquisition from '@/components/product-animations/DataAcquisition';
 import NotificationOverlayWithLeftFade from '@/components/product-animations/ContinuousMonitoringDemo';
 import RiskAssessment from '@/components/product-animations/RiskAssessment';
+import CreditTerms from '@/components/product-animations/CreditTerms';
 
 export type Problem = {
     problemHeading: string;
@@ -142,6 +143,7 @@ export const solutions: Solution[] = [
                     "Use the score to choose safe credit terms for every dealer",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CreditTerms
             },
             {
                 title: "Continuous Monitoring",

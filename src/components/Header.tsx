@@ -51,6 +51,45 @@ export default function Header() {
             icon: IoMdGitNetwork
         },
     ]
+
+    const industries = [
+        {
+            id: "ind-1",
+            name: "Corporation",
+            href: "#",
+            icon: AiOutlineApi
+        },
+        {
+            id: "ind-2",
+            name: "Insurance",
+            href: "#",
+            icon: AiOutlineApi
+        },
+        {
+            id: "ind-3",
+            name: "Banking",
+            href: "#",
+            icon: AiOutlineApi
+        },
+        {
+            id: "ind-4",
+            name: "Asset Management",
+            href: "#",
+            icon: AiOutlineApi
+        },
+        {
+            id: "ind-5",
+            name: "Consulting",
+            href: "#",
+            icon: AiOutlineApi
+        },
+        {
+            id: "ind-6",
+            name: "Government",
+            href: "#",
+            icon: AiOutlineApi
+        },
+    ]
     const productMenuItems = products.map((s) => {
         // s.icon is a React.ComponentType<any> (a component reference).
         const IconComp = s.icon as React.ComponentType<any> | undefined;
@@ -66,6 +105,20 @@ export default function Header() {
             icon
         };
     });
+    const industryMenuItems = industries.map((s, idx) => {
+        const IconComp = s.icon as React.ComponentType<any> | undefined;
+
+        const icon = IconComp ? (
+            <IconComp className="w-5 h-5 text-gray-700" aria-hidden />
+        ) : null;
+
+        return {
+            id: s.id ?? `ind-${idx + 1}`,
+            name: s.name,
+            href: `#industry-${s.id}`,
+            icon
+        };
+    });
 
     const desktopLinks: LinkType[] = [
         {
@@ -76,10 +129,11 @@ export default function Header() {
             name: "Product",
             items: productMenuItems,
         },
-        // { name: "Industries", href: "#article", variant: "link" },
+        {
+            name: "Industries",
+            items: industryMenuItems,
+        },
         { name: "Articles", href: "/articles", variant: "link" },
-        // { name: "Dummy Articles", href: "/dummy-articles", variant: "link" },
-        // { name: "Workflow", href: "/test", variant: "link" },
     ];
 
     const mobileLinks: LinkType[] = [
@@ -125,6 +179,47 @@ export default function Header() {
         if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
         timeoutRef.current = window.setTimeout(() => setOpenIndex(null), delay);
     };
+
+    // change this if your landing page is not at '/'
+    const BASE_PATH = '/';
+
+    const handleIndustryClick = (industryId: string) => {
+        const targetHash = `#industry-${industryId}`;
+
+        // If already on base path (landing page) -> smooth scroll + dispatch event
+        if (window.location.pathname === BASE_PATH) {
+            try {
+                // update URL without jumping
+                history.pushState(null, '', targetHash);
+            } catch {
+                location.hash = targetHash.replace('#', '');
+            }
+
+            const sec = document.getElementById('industries-section');
+            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // notify IndustryModules on the same page
+            window.dispatchEvent(new CustomEvent('openIndustry', { detail: { id: industryId } }));
+
+            // close menus (your local state)
+            setOpenIndex(null);
+            return;
+        }
+
+        // Otherwise: navigate to landing page and include the hash.
+        // This lets IndustryModules read location.hash on mount and open the right accordion.
+        // Use origin + base path to make this absolute and robust.
+        const origin = window.location.origin;
+        const normalizedBase = BASE_PATH.startsWith('/') ? BASE_PATH : `/${BASE_PATH}`;
+        // ensure no double slash at end
+        const baseNoTrailing = normalizedBase.endsWith('/') && normalizedBase !== '/' ? normalizedBase.slice(0, -1) : normalizedBase;
+
+        // set href to landing page + hash. Using replace() avoids creating extra history entries
+        // if you prefer user to go back, use window.location.href = ...
+        window.location.href = `${origin}${baseNoTrailing}${targetHash}`;
+    };
+
+
 
     return (
         <header className="font-open-sans fixed top-0 inset-x-0 z-50 ">
@@ -215,20 +310,47 @@ export default function Header() {
                                             <div
                                                 onMouseEnter={() => openMenu(idx)}
                                                 onMouseLeave={() => closeMenu()}
-                                                className="absolute left-0 mt-2 w-80 bg-popover text-popover-foreground rounded-md shadow-lg border border-foreground/5 z-50"
+                                                className="absolute left-0 mt-2 w-max min-w-max bg-popover text-popover-foreground rounded-md shadow-lg border border-foreground/5 z-50"
                                             >
                                                 <div className="p-2">
-                                                    {link.items!.map((sub) => (
-                                                        <a key={sub.name} href={sub.href} className="flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline">
-                                                            <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
-                                                                {sub.icon}
-                                                            </div>
-                                                            <div className="min-w-0">
-                                                                <div className="text-sm font-semibold">{sub.name}</div>
-                                                                {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
-                                                            </div>
-                                                        </a>
-                                                    ))}
+                                                    {link.items!.map((sub) => {
+                                                        const isIndustryLink = link.name === 'Industries' && (sub as any).id;
+                                                        // default href fallback (keeps behavior for non-industry lists)
+                                                        const defaultHref = sub.href ?? '#';
+
+                                                        return isIndustryLink ? (
+                                                            <button
+                                                                key={(sub as any).id}
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    handleIndustryClick((sub as any).id);
+                                                                }}
+                                                                className="w-full text-left flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline bg-transparent border-0"
+                                                                // a11y
+                                                                aria-label={`Open ${sub.name} industry`}
+                                                            >
+                                                                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
+                                                                    {sub.icon}
+                                                                </div>
+                                                                <div className="min-w-0">
+                                                                    <div className="text-sm font-semibold">{sub.name}</div>
+                                                                    {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
+                                                                </div>
+                                                            </button>
+                                                        ) : (
+                                                            // existing default anchor (unchanged for other menus)
+                                                            <a key={sub.name} href={defaultHref} className="flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline">
+                                                                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
+                                                                    {sub.icon}
+                                                                </div>
+                                                                <div className="min-w-0">
+                                                                    <div className="text-sm font-semibold">{sub.name}</div>
+                                                                    {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
+                                                                </div>
+                                                            </a>
+                                                        );
+                                                    })}
+
                                                 </div>
                                             </div>
                                         )}

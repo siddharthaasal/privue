@@ -111,6 +111,61 @@ export default function IndustryModules() {
         []
     )
 
+    // at top of IndustryModules, after your state defs
+    useEffect(() => {
+        function handleOpenIndustry(e: Event) {
+            const detail = (e as CustomEvent).detail;
+            if (!detail?.id) return;
+            const id = detail.id as string;
+
+            // if the id exists in industries, open it
+            const found = industries.find((x) => x.id === id);
+            if (found) {
+                setActiveIndustryId(id);
+
+                // also scroll the industry container into view if necessary
+                const el = document.getElementById('industries-section');
+                if (el) {
+                    // small timeout ensures accordion has rendered before scrolling if needed
+                    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 40);
+                }
+            }
+        }
+
+        // listen
+        window.addEventListener('openIndustry' as any, handleOpenIndustry as EventListener);
+        return () => window.removeEventListener('openIndustry' as any, handleOpenIndustry as EventListener);
+    }, [industries]);
+
+    // on mount: if URL hash like #industry-ind-2, open it
+    useEffect(() => {
+        const hash = location.hash?.replace('#', '');
+        if (hash && hash.startsWith('industry-')) {
+            const idFromHash = hash.replace('industry-', '');
+            const found = industries.find((x) => x.id === idFromHash);
+            if (found) {
+                setActiveIndustryId(idFromHash);
+                // small timeout to allow layout
+                setTimeout(() => {
+                    const el = document.getElementById('industries-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 40);
+            }
+        }
+        // if you want to respond to hashchange (user pressing back/forward) we can:
+        function onHashChange() {
+            const newHash = location.hash?.replace('#', '');
+            if (newHash && newHash.startsWith('industry-')) {
+                const idFromHash = newHash.replace('industry-', '');
+                const found = industries.find((x) => x.id === idFromHash);
+                if (found) setActiveIndustryId(idFromHash);
+            }
+        }
+        window.addEventListener('hashchange', onHashChange);
+        return () => window.removeEventListener('hashchange', onHashChange);
+    }, [industries]);
+
+
     // Active industry id state. Default to first industry.
     const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id)
     const currentSolutions = solutionsByIndustry[activeIndustryId] ?? solutionsByIndustry.default;

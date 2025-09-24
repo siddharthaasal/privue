@@ -7,12 +7,13 @@ export default function ContactPage() {
     return (
         <Layout>
             <main className="min-h-screen mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 gap-10 pt-24 px-12">
+                <div className="grid grid-cols-2 gap-x-48 pt-24 px-12">
                     <div >
-                        <ContactHero />
+                        <ContactForm />
+
                     </div>
                     <div>
-                        <ContactForm />
+                        <ContactHero />
                     </div>
 
                 </div>

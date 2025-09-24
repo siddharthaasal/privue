@@ -1,5 +1,5 @@
 "use client";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { CircleCheck } from "lucide-react";
 import * as z from "zod";
 import { useForm as useReactHookForm } from "react-hook-form";
@@ -14,8 +14,18 @@ import { Button } from "@/components/ui/button";
 import { useForm as useFormspree, ValidationError } from "@formspree/react";
 import { useState, useRef, useEffect } from "react";
 
+const topics = [
+    "Distributor Performance Management",
+    "Sustainability Assessment",
+    "Commercial Insurance Underwriting",
+    "Large Customer Risk Assessment",
+    "Entity Due Diligence",
+    "Third Party Risk Assessment",
+];
+
+// Validation: require at least one topic
 const schema = z.object({
-    topic: z.array(z.string()).optional(),
+    topic: z.array(z.string()).min(1, "Select at least one solution"),
     firstName: z.string().min(1, ""),
     lastName: z.string().optional(),
     email: z.string().email(""),
@@ -26,16 +36,8 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const topics = [
-    "Distributor Performance Management",
-    "Sustainability Assessment",
-    "Commercial Insurance Underwriting",
-    "Large Customer Risk Assessment",
-    "Entity Due Diligence",
-    "Third Party Risk Assessment",
-];
-
 export default function ContactForm() {
+    // no default selected topic
     const defaultValues: FormValues = {
         topic: [],
         firstName: "",
@@ -44,7 +46,7 @@ export default function ContactForm() {
         company: "",
         message: "",
         website: "",
-    } as unknown as FormValues;
+    } as FormValues;
 
     // smaller vertical spacing & sizes
     const form = useReactHookForm<FormValues>({
@@ -73,8 +75,6 @@ export default function ContactForm() {
         };
         await handleSpreeSubmit(payload as any);
         try {
-            // const res = await handleSpreeSubmit(payload as any);
-
             if (!spreeState.errors) {
                 toast.success("Thanks! We will contact you soon.", {
                     icon: <CircleCheck className="text-green-500 h-5 w-5 " />,
@@ -184,7 +184,8 @@ export default function ContactForm() {
                                                     >
                                                         <div className="px-2">
                                                             {topics.map((t) => {
-                                                                const checked = selected.includes(t);
+                                                                const checked = (field.value || []).includes(t);
+
                                                                 return (
                                                                     <label
                                                                         key={t}
@@ -210,8 +211,14 @@ export default function ContactForm() {
 
                                             <div className="mt-1 ml-1 flex items-center justify-between">
                                                 <div className="text-xs">{selected.length > 0 ? `${selected.length} selected` : "No topics selected"}</div>
-                                                {/* <FormMessage /> */}
+                                                {/* show validation error for topic if present */}
+                                                <div />
                                             </div>
+
+                                            {/* inline error for topic */}
+                                            {form.formState.errors.topic?.message && (
+                                                <p className="mt-1 text-xs text-red-600">{String(form.formState.errors.topic.message)}</p>
+                                            )}
                                         </FormItem>
                                     </div>
                                 );
@@ -313,9 +320,6 @@ export default function ContactForm() {
                         >
                             {spreeState.submitting ? "Sending..." : "Send message"}
                         </Button>
-                        {/* {spreeState.succeeded && (
-                            <p className="text-sm text-green-600">Thanks! Your message has been sent.</p>
-                        )} */}
 
                         <ValidationError errors={spreeState.errors} />
                     </form>

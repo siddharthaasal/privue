@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FileSpreadsheet, FileText, File } from "lucide-react";
 
 /**
  * Defensive slower demo:
@@ -134,6 +135,32 @@ export default function VideoLikeFlowDummySlow() {
         }, UNVERIFIED_DISPLAY_MS);
     }
 
+    // static file percents (keep per-file values as-is)
+    const filePercents = [72, 45, 18];
+    // target is the average (rounded)
+    const targetProgress = Math.round(filePercents.reduce((a, b) => a + b, 0) / filePercents.length);
+
+    // animated progress state (0 -> targetProgress)
+
+    useEffect(() => {
+        let raf = 0;
+        const duration = 700; // ms for the animation
+        const start = performance.now();
+
+        function step(now: number) {
+            const t = Math.min(1, (now - start) / duration);
+            // ease-out cubic
+            const eased = 1 - Math.pow(1 - t, 3);
+            const value = Math.round(eased * targetProgress);
+            setProgress(value);
+            if (t < 1) raf = requestAnimationFrame(step);
+        }
+
+        raf = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(raf);
+    }, [targetProgress]);
+
+
     return (
         <div className="w-full h-full relative flex items-center justify-center p-4">
             {/* BACKGROUND TABLE */}
@@ -207,20 +234,44 @@ export default function VideoLikeFlowDummySlow() {
                             <div className="text-sm font-medium mb-2">Uploading documents</div>
 
                             <div className="flex flex-col gap-2 w-full mb-2">
-                                {["dummy-file.pdf", "invoice-doc.pdf", "license-scan.png"].map((file, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm"
-                                    >
-                                        <div className="w-8 h-10 bg-slate-200 flex items-center justify-center rounded text-slate-600 font-bold text-xs">
-                                            {file.split(".").pop()?.toUpperCase()}
-                                        </div>
-                                        <div className="flex-1">
-                                            <div className="text-[12px] font-medium text-slate-700">{file}</div>
-                                            <div className="text-[10px] text-slate-500">1.2 MB</div>
-                                        </div>
+                                <div className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm">
+                                    <div className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded text-slate-600">
+                                        <FileText className="h-4 w-4" />
                                     </div>
-                                ))}
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[12px] font-medium truncate">balance-sheet.pdf</div>
+                                        <div className="text-[10px] text-slate-500">1.2 MB</div>
+                                    </div>
+
+                                    {/* <div className="text-[11px] text-slate-500 ml-2">72%</div> */}
+                                </div>
+
+                                <div className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm">
+                                    <div className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded text-slate-600">
+                                        <FileSpreadsheet className="h-4 w-4" />
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[12px] font-medium truncate">profit-and-loss-account.xlsx</div>
+                                        <div className="text-[10px] text-slate-500">840 KB</div>
+                                    </div>
+
+                                    {/* <div className="text-[11px] text-slate-500 ml-2">45%</div> */}
+                                </div>
+
+                                <div className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm">
+                                    <div className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded text-slate-600">
+                                        <File className="h-4 w-4" />
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[12px] font-medium truncate">income-sheet-detail.docx</div>
+                                        <div className="text-[10px] text-slate-500">320 KB</div>
+                                    </div>
+
+                                    {/* <div className="text-[11px] text-slate-500 ml-2">18%</div> */}
+                                </div>
                             </div>
 
                             <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
@@ -229,12 +280,14 @@ export default function VideoLikeFlowDummySlow() {
                                         width: `${progress}%`,
                                         background: "linear-gradient(90deg,#748ffc,#4c6ef5)",
                                     }}
-                                    className="h-full transition-all duration-500"
+                                    className="h-full transition-all duration-200"
                                 />
                             </div>
 
-                            <div className="mt-2 text-[10px] text-slate-500">Status: Uploading...</div>
+                            <div className="mt-2 text-[10px] text-slate-500">Status: Uploading... {progress}%</div>
                         </motion.div>
+
+
                     )}
 
                     {stage === "table_verified" && (

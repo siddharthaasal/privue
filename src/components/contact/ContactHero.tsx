@@ -1,5 +1,5 @@
-import { Announcement } from "../ui/shadcn-io/announcement";
-import CalMeetingPopup from "./CalMeetingPopup";
+// import { Announcement } from "../ui/shadcn-io/announcement";
+// import CalMeetingPopup from "./CalMeetingPopup";
 
 
 export default function ContactHero({
@@ -39,11 +39,11 @@ export default function ContactHero({
             </ul>
 
             {/* Neat pill announcement placed right under bullets */}
-            <div className="mt-5">
+            {/* <div className="mt-5">
                 <Announcement className="inline-flex items-center gap-3 rounded-full border border-gray-200 bg-white/70 px-3 py-2 shadow-sm">
                     <CalMeetingPopup />
                 </Announcement>
-            </div>
+            </div> */}
         </section>
     );
 }

@@ -1,38 +1,30 @@
 'use client'
 
-import {
-    ResponsiveContainer,
-    BarChart,
-    Bar,
-    XAxis,
-    Cell,
-    Tooltip,
-} from 'recharts'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Info, ChevronDown } from 'lucide-react'
+import { Info, ChevronDown, AlertCircle, XCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 /**
  * --- DATA ---
  */
-const creditData = [
-    { name: 'Very Low', value: 10, color: '#9AD34D' },
-    { name: 'Low', value: 25, color: '#EFB23C' },
-    { name: 'Medium', value: 40, color: '#F08A3A' },
-    { name: 'High', value: 60, color: '#F06B6B' },
-    { name: 'Unknown', value: 5, color: '#9AA0A6' },
-]
+
+
+// const creditData = [
+//     { name: 'Very Low', value: 10, color: '#9AD34D' },
+//     { name: 'Low', value: 25, color: '#EFB23C' },
+//     { name: 'Medium', value: 40, color: '#F08A3A' },
+//     { name: 'High', value: 60, color: '#F06B6B' },
+//     { name: 'Unknown', value: 5, color: '#9AA0A6' },
+// ]
 
 /**
  * --- FRAME 1: Minimal credit info card (bottom-right) ---
- * Matches the provided screenshot: title, name dropdown, credit score bucket w/ info icon,
- * months delinquent (36 months), max delinquency (6 months), age of oldest account.
+ * (unchanged)
  */
 function CreditInfoCard() {
-    // Staggered reveal for content inside the card
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -53,8 +45,8 @@ function CreditInfoCard() {
             className="rounded-lg"
         >
             <Card className="w-72 shadow-lg ring-0">
-                <CardHeader className="pb-1 pt-2">
-                    <div className="flex items-center justify-between gap-2">
+                <CardHeader className="">
+                    <div className="flex items-start justify-between gap-2">
                         <CardTitle className="text-[11px] font-medium">Reported Credit Information</CardTitle>
                         <span
                             className="text-[10px] text-muted-foreground flex items-center gap-1"
@@ -67,14 +59,12 @@ function CreditInfoCard() {
                 </CardHeader>
 
                 <CardContent className="px-3 pb-3 text-[11px]">
-                    {/* Grid content with staggered children */}
                     <motion.div
                         variants={container}
                         initial="hidden"
                         animate="show"
-                        className="grid grid-cols-2 gap-x-3 gap-y-1.5"
+                        className=" space-x-3 space-y-3"
                     >
-                        {/* Name */}
                         <motion.div className="col-span-2" variants={item}>
                             <div className="text-[10px] text-muted-foreground uppercase">Name</div>
                             <motion.div
@@ -86,14 +76,13 @@ function CreditInfoCard() {
                             </motion.div>
                         </motion.div>
 
-                        {/* Credit Score Bucket */}
-                        <motion.div className="flex flex-col items-start" variants={item}>
+                        <motion.div className="flex flex-col space-y-1.5 items-start" variants={item}>
                             <span className="text-[10px] text-muted-foreground uppercase">Credit Score Bucket</span>
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ type: 'spring', stiffness: 360, damping: 22, delay: 0.2 }}
-                                className="flex items-center gap-2 mt-0.5"
+                                className="flex items-center gap-2 -ml-0.5"
                             >
                                 <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-200">
                                     Good
@@ -101,21 +90,18 @@ function CreditInfoCard() {
                             </motion.div>
                         </motion.div>
 
-                        {/* Months Delinquent */}
                         <motion.div className="flex flex-col" variants={item}>
                             <span className="text-[10px] text-muted-foreground uppercase">Months Delinquent (36 months)</span>
-                            <span className="font-medium text-[11px]">3</span>
+                            <span className="font-medium text-[11px]">36</span>
                         </motion.div>
 
-                        {/* Max Delinquency */}
                         <motion.div className="flex flex-col" variants={item}>
                             <span className="text-[10px] text-muted-foreground uppercase">Max Delinquency (6 months)</span>
-                            <span className="font-medium text-[11px]">29</span>
+                            <span className="font-medium text-[11px]">900</span>
                         </motion.div>
 
-                        <motion.div className="col-span-2 mt-1 border-t pt-1.5 border-gray-100" variants={item} />
+                        {/* <motion.div className="col-span-2 mt-1 border-t pt-1.5 border-gray-100" variants={item} /> */}
 
-                        {/* Age of Oldest Account */}
                         <motion.div className="flex flex-col col-span-2" variants={item}>
                             <span className="text-[10px] text-muted-foreground uppercase">Age of Oldest Account</span>
                             <span className="font-medium text-[11px]">2 months</span>
@@ -128,82 +114,211 @@ function CreditInfoCard() {
 }
 
 /**
- * --- FRAME 2: Probability chart (centered) ---
+ * --- NEW FRAME 2: Financial snapshot card (bottom-right) ---
+ * Pulled values from the provided screenshot and formatted to match Frame 1 style.
  */
-function ProbabilityChartCard() {
+function FinancialSnapshotCard() {
+    // extracted from the screenshot:
+    const data = [
+        { label: 'Return on Equity', value: '22%' },
+        { label: 'Gross Profit Margin', value: '25%' },
+        { label: 'Net Profit Margin', value: '3%' },
+        { label: 'Working Capital Turnover Ratio', value: '18.78' },
+        { label: 'Estimated GST filed for PAN', value: '₹ 8,75,49,958' },
+    ]
+
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.06, delayChildren: 0.08 },
+        },
+    }
+    const item = {
+        hidden: { opacity: 0, y: 6 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.28 } },
+    }
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.995 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.995 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="absolute bottom-4 right-4 w-[340px] max-w-[90%]"
+            initial={{ opacity: 0, y: 14, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.42, ease: 'easeOut' } }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            className="rounded-lg"
         >
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white/95 backdrop-blur-sm border border-gray-100 rounded-2xl p-3 shadow-sm"
-            >
-                <div className="flex items-center justify-between mb-1.5">
-                    <h3 className="text-xs font-medium">
-                        Probability of Default — <span className="font-semibold">5%</span>
-                    </h3>
-                    <div className="text-[10px] text-muted-foreground">ℹ️</div>
-                </div>
-
-                <div className="h-50" style={{ pointerEvents: 'none' }}>
-                    <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                            data={creditData}
-                            margin={{ top: 6, right: 6, left: 6, bottom: 2 }}
-                            barSize={12}
+            <Card className="w-72 shadow-lg ring-0">
+                <CardHeader className="">
+                    <div className="flex items-start justify-start gap-2">
+                        <CardTitle className="text-[11px] font-medium">Financial Performance</CardTitle>
+                        <span
+                            className="text-[10px] text-muted-foreground flex items-start gap-1"
+                            title="Snapshot extracted from uploaded image"
+                            aria-label="Financial snapshot details"
                         >
-                            <XAxis
-                                dataKey="name"
-                                tick={{ fontSize: 10 }}
-                                axisLine={false}
-                                tickLine={false}
-                            />
-                            <Tooltip formatter={(val: number) => `${val}%`} />
-                            <Bar
-                                dataKey="value"
-                                isAnimationActive
-                                animationDuration={900}
-                                animationEasing="ease"
-                                animationBegin={200}
-                            >
-                                {creditData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-            </motion.div>
+                            <Info className="h-3.5 w-3.5" />
+                        </span>
+                    </div>
+                </CardHeader>
+
+                <CardContent className="px-3 pb-3 text-[11px]">
+                    <motion.div variants={container} initial="hidden" animate="show" className="grid gap-y-2">
+                        {data.map((d, i) => (
+                            <motion.div key={i} variants={item} className="flex items-center justify-between">
+                                <div className="text-[10px] text-muted-foreground">{d.label}</div>
+                                <div className="font-medium text-[11px] ml-3">{d.value}</div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </CardContent>
+            </Card>
         </motion.div>
     )
 }
 
 
-/**
- * --- MAIN: Two-frame loop with background image preserved ---
- * Loops: Frame 1 (card, bottom-right) → Frame 2 (chart) → Frame 1 ...
- */
+
+/** ContributoryFactorsCard — reveals items one-by-one like your table */
+function ContributoryFactorsCard() {
+    const leftItems = [
+        'High exposure to credit compared to earnings.',
+        'Balance sheet is highly leveraged',
+        '5 months delinquent in last 36 Months',
+        '2 delayed contributions in last 6 months',
+    ]
+
+    const [itemsShown, setItemsShown] = useState(0)
+
+    useEffect(() => {
+        // reveal one item every 140ms (tweak to taste)
+        if (itemsShown >= leftItems.length) return
+        const t = setTimeout(() => setItemsShown((s) => s + 1), 140)
+        return () => clearTimeout(t)
+    }, [itemsShown, leftItems.length])
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.32 }}
+            className="rounded-lg"
+            aria-live="polite"
+        >
+            <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
+                <CardHeader className="pb-1 pt-1">
+                    <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-[11px] font-medium">Contributory Factors</CardTitle>
+                        <span className="text-[10px] text-muted-foreground flex items-center gap-1" title="Contributory factors" aria-label="Contributory factors">
+                            <AlertCircle className="h-4 w-4" />
+                        </span>
+                    </div>
+                </CardHeader>
+
+                <CardContent className="px-3 text-[13px]">
+                    <div className="flex flex-col gap-1.5">
+                        {leftItems.map((text, i) => (
+                            <motion.div
+                                key={i}
+                                // animate to visible only when itemsShown > i
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={itemsShown > i ? { opacity: 1, x: 0 } : { opacity: 0.08, x: -4 }}
+                                transition={{ duration: 0.36, ease: 'easeOut' }}
+                                className="flex items-start gap-3"
+                            >
+                                <div className="min-w-[22px] h-[22px] rounded-full bg-red-50 flex items-center justify-center">
+                                    <XCircle className="h-3 w-3 text-red-500" />
+                                </div>
+                                <div className="text-[11px] text-muted-foreground leading-snug">{text}</div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </CardContent>
+            </Card>
+        </motion.div>
+    )
+}
+
+/** RiskSignalsCard — same pattern, right column */
+function RiskSignalsCard() {
+    const rightItems = [
+        'No GST filings done in the last year',
+        'Multiple address in different data fetch',
+        'Multiple GST with different names',
+        'Age group above 60',
+    ]
+
+    const [itemsShown, setItemsShown] = useState(0)
+
+    useEffect(() => {
+        if (itemsShown >= rightItems.length) return
+        const t = setTimeout(() => setItemsShown((s) => s + 1), 140)
+        return () => clearTimeout(t)
+    }, [itemsShown, rightItems.length])
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.32 }}
+            className="rounded-lg"
+            aria-live="polite"
+        >
+            <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
+                <CardHeader className="pb-1 pt-1">
+                    <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-[11px] font-medium">Risk Signals</CardTitle>
+                        <span className="text-[10px] text-muted-foreground flex items-center gap-1" title="Risk signals" aria-label="Risk signals">
+                            <AlertCircle className="h-4 w-4" />
+                        </span>
+                    </div>
+                </CardHeader>
+
+                <CardContent className="px-3 text-[13px]">
+                    <div className="flex flex-col gap-1.5">
+                        {rightItems.map((text, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, x: 8 }}
+                                animate={itemsShown > i ? { opacity: 1, x: 0 } : { opacity: 0.08, x: 4 }}
+                                transition={{ duration: 0.36, ease: 'easeOut' }}
+                                className="flex items-start gap-3"
+                            >
+                                <div className="min-w-[22px] h-[22px] rounded-full bg-amber-50 flex items-center justify-center">
+                                    <XCircle className="h-3 w-3 text-amber-600" />
+                                </div>
+                                <div className="text-[11px] text-muted-foreground leading-snug">{text}</div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </CardContent>
+            </Card>
+        </motion.div>
+    )
+}
+
+
 export default function RiskAssessmentTourWithChart() {
-    const bgUrl = '/module-animations/risk-ass-2.png' // keep existing background
-    type Step = 'frame1' | 'frame2'
+    const bgUrl = '/module-animations/risk-ass-2.png' // unchanged background
+
+    type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4'
     const [step, setStep] = useState<Step>('frame1')
 
-    // Loop: show frame1 for 2400ms, transition to frame2 for 2800ms, repeat
-    useEffect(() => {
-        const durations: Record<Step, number> = {
-            frame1: 5000, // time to keep card visible
-            frame2: 5000, // time to keep chart visible
-        }
+    const durations: Record<Step, number> = {
+        frame1: 4000, // credit
+        frame2: 4000, // financial snapshot
+        frame3: 4000, // contributory (keep slightly longer for sequential item animation)
+        frame4: 4000, // risk signals (same)
+    }
 
+    useEffect(() => {
         const t = setTimeout(() => {
-            setStep((prev) => (prev === 'frame1' ? 'frame2' : 'frame1'))
+            setStep((prev) => {
+                if (prev === 'frame1') return 'frame2'
+                if (prev === 'frame2') return 'frame3'
+                if (prev === 'frame3') return 'frame4'
+                return 'frame1'
+            })
         }, durations[step])
 
         return () => clearTimeout(t)
@@ -211,7 +326,7 @@ export default function RiskAssessmentTourWithChart() {
 
     return (
         <div className="relative w-full h-full rounded-lg overflow-hidden bg-white">
-            {/* Background image (unchanged) */}
+            {/* background (unchanged) */}
             <div
                 aria-hidden
                 className="absolute inset-0.5 bg-center bg-no-repeat bg-cover border border-gray-200 rounded-2xl"
@@ -221,7 +336,6 @@ export default function RiskAssessmentTourWithChart() {
                 }}
             />
 
-            {/* FRAME 1: minimal card at bottom-right */}
             <AnimatePresence>
                 {step === 'frame1' && (
                     <motion.div key="card-frame" className="absolute bottom-4 right-4">
@@ -230,8 +344,30 @@ export default function RiskAssessmentTourWithChart() {
                 )}
             </AnimatePresence>
 
-            {/* FRAME 2: chart replaces frame 1 */}
-            <AnimatePresence>{step === 'frame2' && <ProbabilityChartCard key="chart-frame" />}</AnimatePresence>
+            <AnimatePresence>
+                {step === 'frame2' && (
+                    <motion.div key="financial-frame" className="absolute bottom-4 right-4">
+                        <FinancialSnapshotCard />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {step === 'frame3' && (
+                    <motion.div key="contrib-frame" className="absolute bottom-4 right-4">
+                        <ContributoryFactorsCard />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {step === 'frame4' && (
+                    <motion.div key="risk-frame" className="absolute bottom-4 right-4">
+                        <RiskSignalsCard />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     )
 }
+

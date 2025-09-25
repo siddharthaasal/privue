@@ -155,7 +155,7 @@ export const solutions: Solution[] = [
                 renderAnimation: NotificationOverlayWithLeftFade
             },
             {
-                title: "Go Live in 2 weeks",
+                title: "Integrations",
                 description:
                     "The tool can be integrated into your ERP system for a seamless experience",
                 imgSrc: "/demo-module-image.png",
@@ -398,27 +398,49 @@ export const solutions: Solution[] = [
         ],
         modules: [
             {
-                title: "Climate Risk Assessment",
+                title: "MCA Documents Acquisition and Summarisation",
                 description:
-                    "Pinpoint climate vulnerabilities across India using geo-tagged data powered by our API. Integrate insights directly into your workflows or access them on our platform to evaluate heat, flood, and drought risks at asset or company level.",
+                    "Delivers structured insights from MCA filings directly into your underwriting system.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Carbon Emission Estimation",
+                title: "Financial Document Parsing",
                 description:
-                    "Get reliable Scope 1, 2, and proxy Scope 3 emission estimates—even for companies with no disclosures. Our models combine industry, turnover, workforce, and state-level energy mix data to generate defensible carbon footprints, enabling stronger vendor and borrower evaluations.",
+                    "Transforms financial statements from any format (images, pdf, excel, word) into a systematic, underwriter-ready view.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "ESG Scoring",
+                title: "Insurance Policy Document Parsing",
                 description:
-                    "Leverage AI Agents that scan regulatory filings, company websites, court and tribunal cases, and news sources to surface ESG signals. We translate these into an objective ESG score—providing a robust baseline for deeper sustainability due diligence.",
+                    "Extracts key details from past insurance policies and integrates them into your underwriting platform.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Engineering Report Parsing",
+                description:
+                    "Summarises engineering reports into actionable insights for underwriting decisions.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Court Case Acquisition and Summarisation",
+                description:
+                    "Acquires and summarises court and tribunal cases involving the company, highlighting case nature for underwriting.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "News Acquisition and Summarisation",
+                description:
+                    "Captures and summarises adverse News and industry developments from multiple publications for underwriting context.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
+
 
         mainArticleSlug: "redefining-commercial-lines-underwriting"
     },
@@ -571,7 +593,7 @@ export const solutions: Solution[] = [
                 link: "#",
             },
             {
-                title: "Go Live in 2 weeks",
+                title: "Integrations",
                 description:
                     "The tool can be integrated into your ERP system for a seamless experience",
                 imgSrc: "/demo-module-image.png",
@@ -702,106 +724,40 @@ export const solutions: Solution[] = [
                 icon: "/solutions/lock.svg"
             },
         ],
-        /*
-         
 
-  
-
-   
-
-   
-
- 
-	
-
-
- 
-
-  Verify client identity and compliance through MCA, GST, and PAN records. 
-
-  Analyse financial statements and transaction history for assurance and advisory. 
-
-  Automate due diligence for audits, tax reviews, and forensic investigations. 
-
- 
-	
-
- 
- 
-
- 
-
-  Conduct thorough legal due diligence on counterparties in transactions. 
-
-  Track litigation and tribunal cases tagged to relevant practice areas. 
-
-  Access compliance history and filings to support corporate restructuring or M&A. 
-
- 
-	
-
- 
-
- 
-
- 
-
-  Assess financial health and risk profile of companies during strategy or M&A advisory. 
-
-  Benchmark compliance and governance standards across industries. 
-
-  Generate custom reports to support client presentations and recommendations. 
-
- 
-	
-
- 
- 
-
-  Verify vendor legitimacy and corporate standing. 
-
-  Screen suppliers for adverse news, compliance issues, or ongoing litigations. 
-
-  Monitor transaction and turnover data to assess vendor reliability and scale. 
-
- 
-        */
         modules: [
             {
                 title: "Insolvency Professionals",
                 description:
-                    `Identify company assets and promoters.
-Trace linked entities and assets connected to promoters.
-Monitor news on transactions, asset sales, or restructuring events.
-                    `,
+                    "Locate company assets and promoters, trace linked entities and connected assets, and monitor news on transactions, asset sales, and restructuring events to support recovery and insolvency actions.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Accounting Firms ",
+                title: "Accounting Firms",
                 description:
-                    ".",
+                    "Verify client identity and regulatory compliance via MCA/GST/PAN records, analyse financial statements and transaction history, and automate due-diligence workflows for audits, tax reviews, and forensic investigations.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Law Firms",
                 description:
-                    ".",
+                    "Conduct comprehensive legal due diligence on counterparties, track relevant litigation and tribunal cases, and access compliance histories and filings to support corporate restructuring, M&A, and transactional work.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Consulting Firms",
                 description:
-                    ".",
+                    "Assess financial health and risk profiles for strategy and M&A advisory, benchmark governance and compliance across industries, and generate custom reports to support client presentations and recommendations.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
                 title: "Procurement Teams",
                 description:
-                    ".",
+                    "Verify vendor legitimacy and corporate standing, screen suppliers for adverse news, compliance issues, or litigation, and monitor transaction and turnover data to evaluate vendor reliability and scale.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },

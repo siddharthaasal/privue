@@ -1,41 +1,39 @@
-// import { motion } from 'framer-motion'
-import { Zap } from "lucide-react";
-export default function FeaturedCapabilities() {
+import React from "react";
 
+export default function FeaturedCapabilities() {
     const coreCapabilities = [
         {
-            // "icon": "/solutions/lock.svg",
-            "icon": Zap,
-            "heading": "AI-Powered Intelligence",
-            "desc": "Transform raw data into strategic insights that drive smarter business decisions.",
+            icon: "/icons/core-capabilities/predictive-risk-management.png",
+            heading: "Predictive Risk Management",
+            desc: "Anticipate and mitigate financial, operational, and compliance risks before they impact your business.",
         },
         {
-            // "icon": "/solutions/lock.svg",
-            "icon": Zap,
-            "heading": "Predictive Risk Management",
-            "desc": "Anticipate and mitigate financial, operational, and compliance risks before they impact your business.",
+            icon: "/icons/core-capabilities/ai-powered-intelligence.png",
+            heading: "AI-Powered Intelligence",
+            desc: "Transform raw data into strategic insights that drive smarter business decisions.",
         },
         {
-            "icon": Zap,
-            "heading": "Intelligent Data Integration",
-            "desc": "Unify disparate data sources into a single, enriched view of your business landscape.",
+            icon: "/icons/core-capabilities/intelligent-data-integration.png",
+            heading: "Intelligent Data Integration",
+            desc: "Unify disparate data sources into a single, enriched view of your business landscape.",
         },
         {
-            "icon": Zap,
-            "heading": "Strategic Decision Intelligence",
-            "desc": "Empower leadership with AI-backed recommendations for critical business choices.",
+            icon: "/icons/core-capabilities/strategic-decision-intelligence.png",
+            heading: "Strategic Decision Intelligence",
+            desc: "Empower leadership with AI-backed recommendations for critical business choices.",
         },
         {
-            "icon": Zap,
-            "heading": "Industry-Focused AI Solutions",
-            "desc": "Purpose-built applications for BFSI, enterprise, consulting, and legal sectors.",
+            icon: "/icons/core-capabilities/industry-focussed-ai-solutions.png",
+            heading: "Industry-Focused AI Solutions",
+            desc: "Purpose-built applications for BFSI, enterprise, consulting, and legal sectors.",
         },
         {
-            "icon": Zap,
-            "heading": "Enterprise-Grade AI",
-            "desc": "Platform Scalable, secure, and cloud-native infrastructure designed for mission-critical operations.",
+            icon: "/icons/core-capabilities/enterprise-grade-ai.png",
+            heading: "Enterprise-Grade AI",
+            desc: "Platform Scalable, secure, and cloud-native infrastructure designed for mission-critical operations.",
         },
-    ]
+    ];
+
 
     return (
         <section className="font-open-sans relative mx-auto ">
@@ -52,19 +50,10 @@ export default function FeaturedCapabilities() {
                     </p>
                 </div>
 
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {coreCapabilities.map((s, i) => {
-                        return (
-                            <FeatureCapabilityCard
-                                key={i}
-                                title={s.heading}
-                                description={s.desc}
-                                icon={s.icon}
-                            />
-                        )
-                    })}
-
+                    {coreCapabilities.map((s, i) => (
+                        <FeatureCapabilityCard key={i} title={s.heading} description={s.desc} icon={s.icon} />
+                    ))}
                 </div>
             </div>
         </section>
@@ -72,13 +61,47 @@ export default function FeaturedCapabilities() {
 }
 
 type FeatureCapabilityCardProps = {
-    // icon: string
-    icon: React.ComponentType<any>
-    title: string
-    description: string
-}
+    icon?: string | React.ComponentType<any> | React.ReactNode;
+    title: string;
+    description: string;
+};
 
-function FeatureCapabilityCard({ icon: Icon, title, description }: FeatureCapabilityCardProps) {
+function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
+    const renderIcon = (icon?: string | React.ComponentType<any> | React.ReactNode) => {
+        if (!icon) return null;
+
+        // string -> <img>
+        if (typeof icon === "string") {
+            return (
+                <img
+                    src={icon}
+                    alt=""
+                    className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
+                    loading="lazy"
+                    aria-hidden
+                />
+            );
+        }
+
+        // already a JSX element (e.g. <Icon /> instance)
+        if (React.isValidElement(icon)) {
+            // Tell TS that this is a ReactElement with unknown props so cloneElement accepts our props.
+            const elem = icon as React.ReactElement<any, any>;
+            return React.cloneElement(elem, {
+                className: `w-6 h-6 ${elem.props?.className ?? ""}`.trim(),
+                "aria-hidden": true,
+            });
+        }
+
+        // function / component constructor (e.g. Zap)
+        if (typeof icon === "function") {
+            const IconComp = icon as React.ComponentType<any>;
+            return <IconComp className="w-6 h-6" aria-hidden />;
+        }
+
+        return null;
+    };
+
     return (
         <div
             className={`
@@ -87,19 +110,14 @@ function FeatureCapabilityCard({ icon: Icon, title, description }: FeatureCapabi
         hover:-translate-y-2 hover:shadow-xl hover:shadow-privue-200/60
       `}
         >
-            {/* Icon wrapper */}
-            <div className="w-15 h-15 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300 overflow-hidden">
-                {/* <img
-                    src={icon}
-                    alt=""
-                    className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110"
-                /> */}
-                <div className="text-privue-700 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-6 h-6 text-privue-700" aria-hidden />
+            {icon ? (
+                <div className="w-15 h-15 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300 overflow-hidden">
+                    <div className="text-privue-700 transform transition-transform duration-300 group-hover:scale-110">
+                        {renderIcon(icon)}
+                    </div>
                 </div>
-            </div>
+            ) : null}
 
-            {/* Text */}
             <h3 className="text-lg font-medium mb-2 group-hover:text-privue-800 transition-colors duration-300 tracking-tight">
                 {title}
             </h3>
@@ -107,6 +125,5 @@ function FeatureCapabilityCard({ icon: Icon, title, description }: FeatureCapabi
                 {description}
             </p>
         </div>
-    )
+    );
 }
-

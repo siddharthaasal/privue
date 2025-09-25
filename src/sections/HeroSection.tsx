@@ -4,11 +4,11 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-import {
-    Announcement,
-    AnnouncementTag,
-    AnnouncementTitle,
-} from '@/components/ui/shadcn-io/announcement';
+// import {
+//     Announcement,
+//     AnnouncementTag,
+//     AnnouncementTitle,
+// } from '@/components/ui/shadcn-io/announcement';
 
 import Marquee from "react-fast-marquee";
 import FlowNodesExample from "@/pages/Workflow";
@@ -53,7 +53,7 @@ export default function HeroSection() {
             {/* content -> (anouncement, heading+subtext, cta) */}
             <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full my-24 ">
                 {/* Banner */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
@@ -67,7 +67,7 @@ export default function HeroSection() {
                             </AnnouncementTitle>
                         </Announcement>
                     </a>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Heading */}
                 <motion.div

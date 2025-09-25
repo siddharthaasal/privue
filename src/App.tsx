@@ -7,7 +7,6 @@ import ShowcasePage from "./pages/test/ShowcasePage.tsx";
 import Workflow from "./pages/Workflow.tsx";
 import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
-import DarkHeroSection from "./sections/DarkHeroSection";
 import TestStyles from "./pages/TestStyles";
 import ContactPage from "./pages/contact/ContactPage";
 // legal
@@ -34,7 +33,6 @@ function App() {
         <Route path="/article" element={<ArticlePage />} />
         <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/articles-0" element={<OldArticleListing />} />
-        <Route path="/dark" element={<DarkHeroSection />} />
         <Route path="/styles" element={<TestStyles />} />
         <Route path="/solutions-final" element={<SolutionsPage />} />
         <Route path="/solution1" element={<DPM />} />

@@ -64,16 +64,16 @@ export default function Header() {
     };
 
     const solutionMenuItems: MenuItem[] = solutions.map((s) => {
-        const IconComp = s.icon as React.ComponentType<any> | string | undefined;
+        // const IconComp = s.icon as React.ComponentType<any> | string | undefined;
 
         // Keep icon as either a string/component/element — we'll render later with renderIcon()
-        const icon = IconComp ?? null;
+        // const icon = IconComp ?? null;
 
         return {
             name: s.heading,
             href: `/solutions/${s.slug}`,
-            description: s.subHeading ?? s.mainSolnDesc ?? undefined,
-            icon,
+            // description: s.subHeading ?? s.mainSolnDesc ?? undefined,
+            // icon,
         };
     });
 
@@ -112,7 +112,7 @@ export default function Header() {
         return {
             name: s.name,
             href: s.href,
-            description: s.description,
+            // description: s.description,
             icon: s.icon ?? null,
         };
     });
@@ -311,7 +311,7 @@ export default function Header() {
                                                                 ) : null}
 
                                                                 <div className="min-w-0">
-                                                                    <div className="text-sm font-semibold">{sub.name}</div>
+                                                                    <div className="text-sm font-medium">{sub.name}</div>
                                                                     {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
                                                                 </div>
                                                             </>
@@ -330,7 +330,7 @@ export default function Header() {
                                                                 {itemContent}
                                                             </button>
                                                         ) : (
-                                                            <a key={sub.name} href={defaultHref} className="flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline">
+                                                            <a key={sub.name} href={defaultHref} className="flex items-center gap-3 p-3 rounded-md hover:bg-muted no-underline">
                                                                 {itemContent}
                                                             </a>
                                                         );

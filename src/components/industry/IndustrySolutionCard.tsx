@@ -3,7 +3,7 @@
 import React from 'react'
 
 type IndustrySolutionCardProps = {
-    icon: React.ComponentType<any>
+    icon?: string | React.ComponentType<any> | React.ReactNode
     title: string
     description: string
     href: string
@@ -14,24 +14,69 @@ type IndustrySolutionCardProps = {
  * IndustrySolutionCard
  * - If isCompact === true: renders a tight, horizontal "list-like" card suitable for the RHS list.
  * - Otherwise: renders the full card (your original style).
+ *
+ * icon can be:
+ *  - a string path -> rendered as <img>
+ *  - a component constructor -> rendered as <IconComp className="..." />
+ *  - a JSX element -> cloned to inject className
  */
 export default function IndustrySolutionCard({
-    icon: Icon,
+    icon,
     title,
     description,
     href,
     isCompact = false,
 }: IndustrySolutionCardProps) {
+    // helper to normalize/render icon (sizeClass like "w-5 h-5" or "w-6 h-6")
+    const renderIconNode = (iconVal: string | React.ComponentType<any> | React.ReactNode, sizeClass = 'w-5 h-5') => {
+        if (!iconVal) return null
+
+        // string -> <img />
+        if (typeof iconVal === 'string') {
+            return (
+                <img
+                    src={iconVal}
+                    alt=""
+                    aria-hidden
+                    loading="lazy"
+                    className={`${sizeClass} object-contain`}
+                />
+            )
+        }
+
+        // already a JSX element instance
+        if (React.isValidElement(iconVal)) {
+            // assure TypeScript that this is a ReactElement with any props so cloneElement accepts className
+            const elem = iconVal as React.ReactElement<any, any>
+            return React.cloneElement(elem, {
+                className: `${sizeClass} ${elem.props?.className ?? ''}`.trim(),
+                'aria-hidden': true,
+            })
+        }
+
+        // component constructor/function
+        if (typeof iconVal === 'function') {
+            const IconComp = iconVal as React.ComponentType<any>
+            return <IconComp className={sizeClass} aria-hidden />
+        }
+
+        return null
+    }
+
+    // Compact (list-like) card
     if (isCompact) {
+        const hasIcon = !!icon
         return (
             <a
                 href={href}
                 className="group block rounded-lg border border-gray-100 bg-[#FBFBFB] hover:shadow-md transition-shadow duration-200"
             >
                 <div className="flex items-center gap-4 p-3 md:p-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-privue-50 group-hover:bg-privue-100 transition-colors">
-                        <Icon className="w-5 h-5 text-privue-700" aria-hidden />
-                    </div>
+                    {hasIcon ? (
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-privue-50 group-hover:bg-privue-100 transition-colors">
+                            {renderIconNode(icon!, 'w-8 h-8 text-privue-700')}
+                        </div>
+                    ) : null}
 
                     <div className="min-w-0">
                         <div className="text-sm font-medium text-foreground truncate">{title}</div>
@@ -48,7 +93,8 @@ export default function IndustrySolutionCard({
         )
     }
 
-    // full (original) card layout
+    // Full (original) card layout
+    const hasIcon = !!icon
     return (
         <a
             href={href}
@@ -60,11 +106,14 @@ export default function IndustrySolutionCard({
       `}
         >
             <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300">
-                    <div className="text-privue-700 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-5 h-5 text-privue-700" aria-hidden />
+                {hasIcon ? (
+                    <div className="w-11 h-11 rounded-full bg-privue-100 flex items-center justify-center mb-4 group-hover:bg-privue-200 transition-colors duration-300">
+                        <div className="text-privue-700 group-hover:scale-110 transition-transform duration-300">
+                            {renderIconNode(icon!, 'w-7 h-7')}
+                        </div>
                     </div>
-                </div>
+                ) : null}
+
                 <div>
                     <h3 className="text-base font-medium mb-1 group-hover:text-privue-800 transition-colors duration-300 tracking-tight">
                         {title}
@@ -80,7 +129,6 @@ export default function IndustrySolutionCard({
                     </svg>
                 </div>
             </div>
-
         </a>
     )
 }

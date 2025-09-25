@@ -4,8 +4,10 @@ import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { motion, AnimatePresence } from 'motion/react'
 import IndustrySolutionCard from './IndustrySolutionCard' // <- adjust path if needed
-import { Zap } from 'lucide-react'
-import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow, TriangleAlert } from 'lucide-react';
+// removed lucide imports for icons we convert to images
+// import { Zap } from 'lucide-react'
+// import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow, TriangleAlert } from 'lucide-react';
+
 // Types
 type Industry = {
     id?: string
@@ -13,10 +15,11 @@ type Industry = {
     description?: string
 }
 
+// allow icon as either a string path (image) OR a React component (icon constructor) OR a ReactNode
 type Solution = {
     heading: string
     subHeading: string
-    icon: React.ComponentType<any>
+    icon?: string | React.ComponentType<any> | React.ReactNode
     slug: string
 }
 
@@ -57,41 +60,47 @@ export default function IndustryModules() {
 
     // Same solutions used for every industry (per your instruction).
     const dummySolutions: Solution[] = [
-        { heading: 'Personalized Recommendations', subHeading: 'Increase conversion with tailored offers', icon: Zap, slug: 'personalized-recs' },
-        { heading: 'Automated Support', subHeading: '24/7 AI-driven customer support', icon: Zap, slug: 'automated-support' },
-        { heading: 'Demand Forecasting', subHeading: 'Reduce stockouts with accurate forecasts', icon: Zap, slug: 'demand-forecasting' },
-        { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: Zap, slug: 'fraud-detection' },
+        { heading: 'Personalized Recommendations', subHeading: 'Increase conversion with tailored offers', icon: "/solutions/personalized-recommendations.png", slug: 'personalized-recs' },
+        { heading: 'Automated Support', subHeading: '24/7 AI-driven customer support', icon: "/solutions/automated-support.png", slug: 'automated-support' },
+        { heading: 'Demand Forecasting', subHeading: 'Reduce stockouts with accurate forecasts', icon: "/solutions/demand-forecasting.png", slug: 'demand-forecasting' },
+        { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: "/solutions/fraud-detection.png", slug: 'fraud-detection' },
     ]
 
+    /**
+     * NOTE:
+     * I converted the icon entries below to image paths (string) to match your example:
+     * { icon: "/solutions/large-customer-risk-assessment.png", ... }
+     *
+     * Make sure these image files exist in /public/solutions/ with the filenames used below.
+     * If you prefer other filenames, update the strings accordingly.
+     */
     const solutionsByIndustry: Record<string, Solution[]> = {
         'ind-1': [
-            { heading: 'Large Customer Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: BookAlert, slug: 'large-customer-risk-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
-            { heading: 'Distributor Performance Management', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: AlignVerticalJustifyCenter, slug: 'distributor-performance-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Large Customer Risk Assessment', subHeading: 'Reduce defaults. Protect cash flow. Secure growth.', icon: "/icons/solutions/large-customer-risk-assessment.png", slug: 'large-customer-risk-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
+            { heading: 'Distributor Performance Management', subHeading: 'Reduce leakages. Improve collections. Safeguard growth.', icon: "/icons/solutions/distributor-performance-management.png", slug: 'distributor-performance-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
         ],
         'ind-2': [
-            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Landmark, slug: 'commercial-insurance-underwriting' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Sharper insights. Smarter underwriting. Stronger outcomes.', icon: "/icons/solutions/insurance-underwriting.png", slug: 'commercial-insurance-underwriting' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
         ],
         'ind-3': [
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
         ],
         'ind-4': [
-            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: 'entity-due-diligence' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
+            { heading: 'Entity Due Dilligence', subHeading: 'A Unified Solution for Smarter Due Diligence', icon: "/icons/solutions/entity-due-diligence.png", slug: 'entity-due-diligence' },
+            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
         ],
         'ind-5': [
-            { heading: 'Entity Due Dilligence', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Workflow, slug: 'entity-due-diligence' },
+            { heading: 'Entity Due Dilligence', subHeading: 'A Unified Solution for Smarter Due Diligence', icon: "/icons/solutions/entity-due-diligence.png", slug: 'entity-due-diligence' },
         ],
         'ind-6': [
-            { heading: 'Third Party Risk Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: TriangleAlert, slug: 'third-party-risk-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', icon: Recycle, slug: 'sustainability-assessment' },
+            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
+            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
         ],
 
         // fallback key
@@ -167,7 +176,7 @@ export default function IndustryModules() {
 
 
     // Active industry id state. Default to first industry.
-    const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id)
+    const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id!)
     const currentSolutions = solutionsByIndustry[activeIndustryId] ?? solutionsByIndustry.default;
 
     // When activeIndustryId changes, we could do side effects (analytics, fetch, etc.)
@@ -182,7 +191,7 @@ export default function IndustryModules() {
 
     // Render
     return (
-        <section className="py-12">
+        <section className="py-12" id="industries-section">
             {/* background / decorative element copied from your original component */}
             <div className="bg-linear-to-b absolute inset-0 -z-10 sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 

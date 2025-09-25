@@ -1,5 +1,5 @@
 type FeatureCardProps = {
-    icon: React.ComponentType<any>
+    icon: React.ComponentType<any> | string
     title: string
     description: string
     href: string

@@ -5,14 +5,22 @@ import privueLogo from "/privue-logo.png";
 import { Button } from "@/components/ui/button";
 import { solutions } from "@/data/solutions/solutions.ts";
 
-import { AiOutlineApi } from "react-icons/ai";
-import { IoMdGitNetwork } from "react-icons/io";
+// import { AiOutlineApi } from "react-icons/ai";
+// import { IoMdGitNetwork } from "react-icons/io";
+
+type MenuItem = {
+    name: string;
+    href?: string;
+    description?: string;
+    // icon can be a JSX element, a component constructor/function, or a string path
+    icon?: React.ReactNode | string | React.ComponentType<any>;
+};
 
 type LinkType = {
     name: string;
     href?: string;
     variant?: "link" | "outline" | "default" | "ghost";
-    items?: { name: string; href: string; description?: string; icon?: React.ReactNode }[];
+    items?: MenuItem[];
 };
 
 export default function Header() {
@@ -22,117 +30,105 @@ export default function Header() {
     const navRef = useRef<HTMLElement | null>(null);
     const timeoutRef = useRef<number | null>(null);
 
-    const solutionMenuItems = solutions.map((s) => {
-        const IconComp = s.icon as React.ComponentType<any> | undefined;
+    // Helper: render icon gracefully
+    const renderIcon = (icon?: React.ReactNode | string | React.ComponentType<any>, className = "w-5 h-5") => {
+        if (!icon) return null;
 
-        const icon = IconComp ? (
-            <IconComp className="w-5 h-5 text-gray-700" aria-hidden />
-        ) : null;
+        // If string => render <img>
+        if (typeof icon === "string") {
+            return (
+                <img
+                    src={icon}
+                    alt=""
+                    className={`${className} object-contain`}
+                    loading="lazy"
+                    aria-hidden
+                />
+            );
+        }
+
+        // If it's already a JSX element
+        // if (React.isValidElement(icon)) {
+        //     return React.cloneElement(icon as React.ReactElement, {
+        //         className: `${className} ${(icon as any).props?.className ?? ""}`.trim()
+        //     });
+        // }
+
+        // If it's a component constructor/function, create it
+        if (typeof icon === "function") {
+            const IconComp = icon as React.ComponentType<any>;
+            return <IconComp className={className} aria-hidden />;
+        }
+
+        return null;
+    };
+
+    const solutionMenuItems: MenuItem[] = solutions.map((s) => {
+        const IconComp = s.icon as React.ComponentType<any> | string | undefined;
+
+        // Keep icon as either a string/component/element — we'll render later with renderIcon()
+        const icon = IconComp ?? null;
 
         return {
             name: s.heading,
             href: `/solutions/${s.slug}`,
             description: s.subHeading ?? s.mainSolnDesc ?? undefined,
-            icon
+            icon,
         };
     });
 
-    const products = [
+    const products: MenuItem[] = [
         {
             name: "API",
             href: "#",
             description: "lorem ipsum",
-            icon: AiOutlineApi
+            icon: "/icons/products/api.png",
         },
         {
             name: "Workbench",
             href: "#",
             description: "lorem ipsum",
-            icon: IoMdGitNetwork
+            icon: "/icons/products/workbench.png",
         },
-    ]
+        {
+            name: "Application",
+            href: "#",
+            description: "lorem ipsum",
+            icon: "/icons/products/application.png",
+        },
+    ];
 
     const industries = [
-        {
-            id: "ind-1",
-            name: "Corporation",
-            href: "#",
-            icon: AiOutlineApi
-        },
-        {
-            id: "ind-2",
-            name: "Insurance",
-            href: "#",
-            icon: AiOutlineApi
-        },
-        {
-            id: "ind-3",
-            name: "Banking",
-            href: "#",
-            icon: AiOutlineApi
-        },
-        {
-            id: "ind-4",
-            name: "Asset Management",
-            href: "#",
-            icon: AiOutlineApi
-        },
-        {
-            id: "ind-5",
-            name: "Consulting",
-            href: "#",
-            icon: AiOutlineApi
-        },
-        {
-            id: "ind-6",
-            name: "Government",
-            href: "#",
-            icon: AiOutlineApi
-        },
-    ]
-    const productMenuItems = products.map((s) => {
-        // s.icon is a React.ComponentType<any> (a component reference).
-        const IconComp = s.icon as React.ComponentType<any> | undefined;
+        { id: "ind-1", name: "Corporation", href: "#" },
+        { id: "ind-2", name: "Insurance", href: "#" },
+        { id: "ind-3", name: "Banking", href: "#" },
+        { id: "ind-4", name: "Asset Management", href: "#" },
+        { id: "ind-5", name: "Consulting", href: "#" },
+        { id: "ind-6", name: "Government", href: "#" },
+    ];
 
-        const icon = IconComp ? (
-            <IconComp className="w-5 h-5 text-gray-700" aria-hidden />
-        ) : null;
-
+    const productMenuItems: MenuItem[] = products.map((s) => {
+        // keep s.icon as-is (string or component)
         return {
             name: s.name,
             href: s.href,
             description: s.description,
-            icon
+            icon: s.icon ?? null,
         };
     });
+
     const industryMenuItems = industries.map((s, idx) => {
-        const IconComp = s.icon as React.ComponentType<any> | undefined;
-
-        const icon = IconComp ? (
-            <IconComp className="w-5 h-5 text-gray-700" aria-hidden />
-        ) : null;
-
         return {
-            id: s.id ?? `ind-${idx + 1}`,
+            id: (s as any).id ?? `ind-${idx + 1}`,
             name: s.name,
-            href: `#industry-${s.id}`,
-            icon
-        };
+            href: `#industry-${(s as any).id ?? idx + 1}`,
+        } as any;
     });
 
     const desktopLinks: LinkType[] = [
-        {
-            name: "Solutions",
-            items: solutionMenuItems,
-        },
-        {
-            name: "Product",
-            items: productMenuItems,
-        },
-        {
-            name: "Industries",
-            items: industryMenuItems,
-        },
+        { name: "Solutions", items: solutionMenuItems },
+        { name: "Product", items: productMenuItems },
+        { name: "Industries", items: industryMenuItems },
         { name: "Articles", href: "/articles", variant: "link" },
     ];
 
@@ -142,7 +138,7 @@ export default function Header() {
         { name: "API", href: "/api", variant: "link" },
         { name: "Integrations", href: "/integrations", variant: "link" },
         { name: "Demo", href: "/demo", variant: "outline" },
-        { name: "Book a Demo", href: "/book-a-call", variant: "default" }
+        { name: "Book a Demo", href: "/book-a-call", variant: "default" },
     ];
 
     useEffect(() => {
@@ -181,45 +177,33 @@ export default function Header() {
     };
 
     // change this if your landing page is not at '/'
-    const BASE_PATH = '/';
+    const BASE_PATH = "/";
 
     const handleIndustryClick = (industryId: string) => {
         const targetHash = `#industry-${industryId}`;
 
-        // If already on base path (landing page) -> smooth scroll + dispatch event
         if (window.location.pathname === BASE_PATH) {
             try {
-                // update URL without jumping
-                history.pushState(null, '', targetHash);
+                history.pushState(null, "", targetHash);
             } catch {
-                location.hash = targetHash.replace('#', '');
+                location.hash = targetHash.replace("#", "");
             }
 
-            const sec = document.getElementById('industries-section');
-            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const sec = document.getElementById("industries-section");
+            if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
 
-            // notify IndustryModules on the same page
-            window.dispatchEvent(new CustomEvent('openIndustry', { detail: { id: industryId } }));
+            window.dispatchEvent(new CustomEvent("openIndustry", { detail: { id: industryId } }));
 
-            // close menus (your local state)
             setOpenIndex(null);
             return;
         }
 
-        // Otherwise: navigate to landing page and include the hash.
-        // This lets IndustryModules read location.hash on mount and open the right accordion.
-        // Use origin + base path to make this absolute and robust.
         const origin = window.location.origin;
-        const normalizedBase = BASE_PATH.startsWith('/') ? BASE_PATH : `/${BASE_PATH}`;
-        // ensure no double slash at end
-        const baseNoTrailing = normalizedBase.endsWith('/') && normalizedBase !== '/' ? normalizedBase.slice(0, -1) : normalizedBase;
+        const normalizedBase = BASE_PATH.startsWith("/") ? BASE_PATH : `/${BASE_PATH}`;
+        const baseNoTrailing = normalizedBase.endsWith("/") && normalizedBase !== "/" ? normalizedBase.slice(0, -1) : normalizedBase;
 
-        // set href to landing page + hash. Using replace() avoids creating extra history entries
-        // if you prefer user to go back, use window.location.href = ...
         window.location.href = `${origin}${baseNoTrailing}${targetHash}`;
     };
-
-
 
     return (
         <header className="font-open-sans fixed top-0 inset-x-0 z-50 ">
@@ -231,11 +215,7 @@ export default function Header() {
                 />
 
                 {/* Actual navbar content */}
-                <nav
-                    ref={navRef}
-                    className="relative mx-auto flex items-center justify-between py-0 px-4 max-w-[1200px]"
-                    aria-label="Global"
-                >
+                <nav ref={navRef} className="relative mx-auto flex items-center justify-between py-0 px-4 max-w-[1200px]" aria-label="Global">
                     {/* Logo (left) */}
                     <div className="flex flex-1">
                         <a href="/" className="flex items-center">
@@ -301,7 +281,9 @@ export default function Header() {
                                             </button>
                                         ) : (
                                             <Button asChild variant={link.variant || "link"} className="font-medium text-sm text-foreground hover:text-privue-600">
-                                                <a href={link.href} target="_blank" rel="noopener noreferrer">{link.name}</a>
+                                                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                                    {link.name}
+                                                </a>
                                             </Button>
                                         )}
 
@@ -314,9 +296,26 @@ export default function Header() {
                                             >
                                                 <div className="p-2">
                                                     {link.items!.map((sub) => {
-                                                        const isIndustryLink = link.name === 'Industries' && (sub as any).id;
-                                                        // default href fallback (keeps behavior for non-industry lists)
-                                                        const defaultHref = sub.href ?? '#';
+                                                        const isIndustryLink = link.name === "Industries" && (sub as any).id;
+                                                        const defaultHref = sub.href ?? "#";
+
+                                                        const hasIcon = !!sub.icon;
+
+                                                        const itemContent = (
+                                                            <>
+                                                                {/* render icon container only when icon exists */}
+                                                                {hasIcon ? (
+                                                                    <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
+                                                                        {renderIcon(sub.icon, "w-6 h-6")}
+                                                                    </div>
+                                                                ) : null}
+
+                                                                <div className="min-w-0">
+                                                                    <div className="text-sm font-semibold">{sub.name}</div>
+                                                                    {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
+                                                                </div>
+                                                            </>
+                                                        );
 
                                                         return isIndustryLink ? (
                                                             <button
@@ -326,31 +325,16 @@ export default function Header() {
                                                                     handleIndustryClick((sub as any).id);
                                                                 }}
                                                                 className="w-full text-left flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline bg-transparent border-0"
-                                                                // a11y
                                                                 aria-label={`Open ${sub.name} industry`}
                                                             >
-                                                                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
-                                                                    {sub.icon}
-                                                                </div>
-                                                                <div className="min-w-0">
-                                                                    <div className="text-sm font-semibold">{sub.name}</div>
-                                                                    {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
-                                                                </div>
+                                                                {itemContent}
                                                             </button>
                                                         ) : (
-                                                            // existing default anchor (unchanged for other menus)
                                                             <a key={sub.name} href={defaultHref} className="flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline">
-                                                                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center text-foreground">
-                                                                    {sub.icon}
-                                                                </div>
-                                                                <div className="min-w-0">
-                                                                    <div className="text-sm font-semibold">{sub.name}</div>
-                                                                    {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
-                                                                </div>
+                                                                {itemContent}
                                                             </a>
                                                         );
                                                     })}
-
                                                 </div>
                                             </div>
                                         )}
@@ -362,11 +346,6 @@ export default function Header() {
 
                     {/* CTA Buttons (right) */}
                     <div className="hidden lg:flex gap-2 flex-1 justify-end">
-                        {/* <a href="/login">
-                            <Button variant="outline" size="sm" className="cursor-pointer dark:text-[#FAFAFA] text-[#121212]">
-                                <p>Demo</p>
-                            </Button>
-                        </a> */}
                         <a href="/contact">
                             <Button variant="default" size="sm" className="cursor-pointer text-[#FAFAFA]">
                                 <p>Book a Demo</p>

@@ -19,7 +19,7 @@ export const initialNodes: Node[] = [
         data: {
             label: "Unstructured Data",
             // icon: FaRegFilePdf
-            icon: "/icons/pdf-2.png"
+            icon: "/icons/workflow/pdf.png"
         },
         // parentNode: "group-1",
         // extent: "parent",
@@ -31,7 +31,8 @@ export const initialNodes: Node[] = [
         data: {
             label: "Structured Data",
             // icon: PiMicrosoftExcelLogo
-            icon: "/icons/excel.png"
+            // icon: "/icons/workflow/sheets.png"
+            icon: "/icons/workflow/excel-2.png"
         },
         // parentNode: "group-1",
         // extent: "parent",
@@ -65,7 +66,7 @@ export const initialNodes: Node[] = [
             label: "Proprietary Data",
             // icon: BsDatabaseCheck
             // icon: "/icons/postgre.png"
-            icon: "/icons/aws.png"
+            icon: "/icons/workflow/aws.png"
         },
     },
     {

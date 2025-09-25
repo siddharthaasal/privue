@@ -84,15 +84,15 @@ export default function AboutSection() {
                                 <TwoOrbit
                                     centerLogo="/privue-logo.png"
                                     innerIcons={[
-                                        <IconImg key="m1" src="/icons/excel.png" alt="predict" />,
-                                        <IconImg key="m2" src="/icons/postgre.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/pdf-2.png" alt="graph" />,
+                                        <IconImg key="m1" src="/icons/workflow/excel.png" alt="predict" />,
+                                        <IconImg key="m2" src="/icons/workflow/postgre.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/workflow/pdf-2.png" alt="graph" />,
                                     ]}
                                     outerIcons={[
-                                        <IconImg key="m1" src="/icons/gpt.png" alt="predict" />,
+                                        <IconImg key="m1" src="/icons/workflow/gpt.png" alt="predict" />,
                                         // <IconImg key="m2" src="/icons/climate-risk.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/gemini.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/claude.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/workflow/gemini.png" alt="graph" />,
+                                        <IconImg key="m2" src="/icons/workflow/claude.png" alt="graph" />,
                                     ]}
                                     innerConfig={{ radius: 80, iconSize: 40, duration: 10 }}
                                     outerConfig={{ radius: 150, iconSize: 50, duration: 26, reverse: true }}

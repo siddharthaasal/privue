@@ -1,6 +1,3 @@
-
-// import { cn } from "../lib/utils";
-// import { GridPattern } from "@/components/magicui/grid-pattern";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
@@ -29,27 +26,6 @@ export default function HeroSection() {
 
     return (
         <section className="flex flex-col items-center justify-center text-center">
-            {/* grid backgorund */}
-            {/* <GridPattern
-                width={180}
-                height={180}
-                x={-1}
-                y={-1}
-                squares={[
-                    [0, 5],
-                    [6, 0],
-                    [7, 1],
-                    [8, 2],
-                ]}
-                // squares={squares}
-                className={cn(
-                    "absolute inset-0 opacity-50 [mask-image:linear-gradient(to_bottom_left,white,transparent)]"
-                )}
-            /> */}
-
-
-
-
             {/* content -> (anouncement, heading+subtext, cta) */}
             <div className="relative flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-36 xl:px-24 2xl:px-6 py-0 max-w-[1280px] gap-4 h-full my-24 ">
                 {/* Banner */}
@@ -135,23 +111,23 @@ export default function HeroSection() {
                                 autoFill                           // duplicate logos to avoid empty gaps
                             >
                                 {logos.map((src, i) => (
-                                    <div key={i} className="mx-10 flex h-14 w-32 items-center justify-center">
-                                        <img src={src} alt="integration logo" className="max-h-10 w-auto object-contain" />
+                                    <div key={i} className="mx-10 flex h-14 w-40 items-center justify-center">
+                                        <img src={src} alt="integration logo" className="h-10 w-full object-contain" />
                                     </div>
                                 ))}
+
+
                             </Marquee>
                         </div>
                     </div>
                 </section>
-
+                {/* Master Workflow Animation */}
                 <div
                     className="relative mx-auto ml-3 mt-20 h-fit w-full max-w-7xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
                     style={{ animationDuration: "1400ms" }}
                 >
                     <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-inset ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10">
                         <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
-
-                            {/* instead of <img>, put your Flow */}
                             <div className="rounded-xl shadow-2xl dark:shadow-indigo-600/10 w-full h-[30rem] p-4">
                                 <FlowNodesExample />
                             </div>
@@ -159,29 +135,7 @@ export default function HeroSection() {
                         </div>
                     </div>
                 </div>
-                {/* <div
-                    className="relative mx-auto ml-3 mt-20 h-fit w-[40rem] max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
-                    style={{ animationDuration: "1400ms" }}
-                >
-                    <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-inset ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10">
-                        <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
-                            <img
-                                src="/hero-light.webp"
-                                alt="A preview of the Database web app"
-                                width={2400}
-                                height={1600}
-                                className="rounded-xl shadow-2xl dark:shadow-indigo-600/10"
-                            />
-                        </div>
-                    </div>
-
-                </div> */}
-
-
-
             </div>
-
         </section >
-
     );
 }

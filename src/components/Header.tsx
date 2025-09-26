@@ -80,7 +80,7 @@ export default function Header() {
     const products: MenuItem[] = [
         {
             name: "API",
-            href: "#",
+            href: "/products#api",
             description: "lorem ipsum",
             icon: "/icons/products/api.png",
         },
@@ -92,7 +92,7 @@ export default function Header() {
         },
         {
             name: "Application",
-            href: "#",
+            href: "/products#platform",
             description: "lorem ipsum",
             icon: "/icons/products/application.png",
         },

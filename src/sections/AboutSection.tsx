@@ -1,11 +1,6 @@
 import { Cpu, Zap } from 'lucide-react'
-// import AboutImageFlow from '@/components/about/AboutImageFlow'
-// import { OrbitNode } from '@/components/workflow-animation/OrbitNode'
-// import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
-// import { File, Settings, Search } from "lucide-react";
 import TwoOrbit from '@/components/about/TwoOrbit';
-// ChevronRight
-// import { Button } from '@/components/ui/button'
+
 
 export default function AboutSection() {
     return (
@@ -44,40 +39,8 @@ export default function AboutSection() {
                             </div>
                         </div>
 
-                        {/* <Button
-                            asChild
-                            variant="outline"
-                            size="sm"
-                            className="
-        group
-        rounded-lg
-        border border-dotted border-border/50
-        bg-background/40
-        text-sm font-medium
-        text-foreground
-        hover:bg-accent/30 hover:text-foreground
-        transition-all
-        gap-1 pr-1.5
-      "
-                        >
-                            <a href="#">
-                                <span className="group-hover:underline">Learn More</span>
-                                <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                            </a>
-                        </Button> */}
                     </div>
 
-                    {/* Right: Image - allow shrinking and set image to h-full w-auto */}
-                    {/* <div className="md:w-1/2 flex min-h-0">
-                        <div className="border-border/50 relative w-full h-full rounded-xl border border-dotted p-4 flex overflow-hidden">
-                            <img
-                                // src="/demo-about-section-img.webp"
-                                src="/demo-about.png"
-                                className="h-full w-full  rounded-[12px] shadow dark:hidden"
-                                alt="Privue analytics dashboard (light)"
-                            />
-                        </div>
-                    </div> */}
                     <div className="md:w-1/2 flex min-h-0">
                         <div className=" relative w-full">
                             <div className='ml-25'>

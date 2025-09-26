@@ -9,6 +9,7 @@ import ArticlePage from "./pages/articles/ArticlePage";
 import OldArticleListing from "./pages/articles/OldArticleListing";
 import TestStyles from "./pages/TestStyles";
 import ContactPage from "./pages/contact/ContactPage";
+import ProductPage from "./pages/ProductPage.tsx";
 // legal
 import Terms from "./pages/legal/Terms";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/show" element={<ShowcasePage />} />
         <Route path="/test" element={<TestBlogPlage />} />
         <Route path="/workflow" element={<Workflow />} />
+        <Route path="/products" element={<ProductPage />} />
         <Route path="/article" element={<ArticlePage />} />
         <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/articles-0" element={<OldArticleListing />} />

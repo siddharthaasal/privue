@@ -7,23 +7,7 @@ import { Info, ChevronDown, AlertCircle, XCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
-/**
- * --- DATA ---
- */
 
-
-// const creditData = [
-//     { name: 'Very Low', value: 10, color: '#9AD34D' },
-//     { name: 'Low', value: 25, color: '#EFB23C' },
-//     { name: 'Medium', value: 40, color: '#F08A3A' },
-//     { name: 'High', value: 60, color: '#F06B6B' },
-//     { name: 'Unknown', value: 5, color: '#9AA0A6' },
-// ]
-
-/**
- * --- FRAME 1: Minimal credit info card (bottom-right) ---
- * (unchanged)
- */
 function CreditInfoCard() {
     const container = {
         hidden: { opacity: 0 },
@@ -71,7 +55,13 @@ function CreditInfoCard() {
                                 variants={item}
                                 className="mt-1 h-7 inline-flex items-center justify-between w-full rounded-md border border-slate-200 px-2 text-[11px]"
                             >
-                                <span className="truncate" title="Ashish Goomer">Ashish Goomer</span>
+                                <span
+                                    className="truncate filter blur-xs select-none"
+                                    title="Ashish Goomer"
+                                >
+                                    Ashish Goomer
+                                </span>
+
                                 <ChevronDown className="h-3.5 w-3.5 opacity-60" />
                             </motion.div>
                         </motion.div>
@@ -84,8 +74,8 @@ function CreditInfoCard() {
                                 transition={{ type: 'spring', stiffness: 360, damping: 22, delay: 0.2 }}
                                 className="flex items-center gap-2 -ml-0.5"
                             >
-                                <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-700 border border-amber-200">
-                                    Good
+                                <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5 bg-red-50 text-red-700 border border-red-200">
+                                    Poor
                                 </Badge>
                             </motion.div>
                         </motion.div>
@@ -113,10 +103,73 @@ function CreditInfoCard() {
     )
 }
 
-/**
- * --- NEW FRAME 2: Financial snapshot card (bottom-right) ---
- * Pulled values from the provided screenshot and formatted to match Frame 1 style.
- */
+function ProbabilityOfDefaultCard({
+    level = "Low",
+    percent = "5%",
+}: {
+    level?: "Very Low" | "Low" | "Medium" | "High" | "Unknown";
+    percent?: string;
+}) {
+    const levels = [
+        { key: "Very Low", color: "#9AD34D" },
+        { key: "Low", color: "#EFB23C" },
+        { key: "Medium", color: "#F08A3A" },
+        { key: "High", color: "#F06B6B" },
+        { key: "Unknown", color: "#9AA0A6" },
+    ];
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.25 }}
+            className="rounded-lg"
+        >
+            <Card className="w-[300px] shadow-sm ring-0">
+                <CardHeader className="pb-2 pt-2">
+                    <div className="flex items-center gap-2">
+                        <CardTitle className="text-[11px] font-medium">
+                            Probability of Default
+                        </CardTitle>
+                        <Info className="h-3.5 w-3.5 text-muted-foreground" />
+                    </div>
+                </CardHeader>
+
+                <CardContent className="px-3 pb-3">
+                    <div className="text-[12px] font-medium mb-3">
+                        {percent} — {level}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        {levels.map((l) => {
+                            const isActive = l.key === level;
+                            return (
+                                <div key={l.key} className="flex-1 flex flex-col items-center">
+                                    <div
+                                        className="w-full h-2 rounded"
+                                        style={{
+                                            background: isActive ? l.color : `${l.color}20`,
+                                        }}
+                                    />
+                                    <div
+                                        className={`mt-1 text-[10px] ${isActive ? "text-slate-800 font-medium" : "text-muted-foreground"
+                                            }`}
+                                    >
+                                        {l.key}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </CardContent>
+            </Card>
+        </motion.div>
+    );
+}
+
+
+
 function FinancialSnapshotCard() {
     // extracted from the screenshot:
     const data = [
@@ -148,7 +201,7 @@ function FinancialSnapshotCard() {
         >
             <Card className="w-72 shadow-lg ring-0">
                 <CardHeader className="">
-                    <div className="flex items-start justify-start gap-2">
+                    <div className="flex items-center justify-start gap-1">
                         <CardTitle className="text-[11px] font-medium">Financial Performance</CardTitle>
                         <span
                             className="text-[10px] text-muted-foreground flex items-start gap-1"
@@ -206,7 +259,7 @@ function ContributoryFactorsCard() {
         >
             <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
                 <CardHeader className="pb-1 pt-1">
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center justify-start gap-1">
                         <CardTitle className="text-[11px] font-medium">Contributory Factors</CardTitle>
                         <span className="text-[10px] text-muted-foreground flex items-center gap-1" title="Contributory factors" aria-label="Contributory factors">
                             <AlertCircle className="h-4 w-4" />
@@ -266,7 +319,7 @@ function RiskSignalsCard() {
         >
             <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
                 <CardHeader className="pb-1 pt-1">
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center justify-start gap-1">
                         <CardTitle className="text-[11px] font-medium">Risk Signals</CardTitle>
                         <span className="text-[10px] text-muted-foreground flex items-center gap-1" title="Risk signals" aria-label="Risk signals">
                             <AlertCircle className="h-4 w-4" />
@@ -301,14 +354,15 @@ function RiskSignalsCard() {
 export default function RiskAssessmentTourWithChart() {
     const bgUrl = '/module-animations/risk-ass-2.png' // unchanged background
 
-    type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4'
+    type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5'
     const [step, setStep] = useState<Step>('frame1')
 
     const durations: Record<Step, number> = {
         frame1: 4000, // credit
         frame2: 4000, // financial snapshot
-        frame3: 4000, // contributory (keep slightly longer for sequential item animation)
-        frame4: 4000, // risk signals (same)
+        frame3: 4000, // prob of def
+        frame4: 4000, // contributory (keep slightly longer for sequential item animation)
+        frame5: 4000, // risk signals (same)
     }
 
     useEffect(() => {
@@ -317,6 +371,7 @@ export default function RiskAssessmentTourWithChart() {
                 if (prev === 'frame1') return 'frame2'
                 if (prev === 'frame2') return 'frame3'
                 if (prev === 'frame3') return 'frame4'
+                if (prev === 'frame4') return 'frame5'
                 return 'frame1'
             })
         }, durations[step])
@@ -355,13 +410,21 @@ export default function RiskAssessmentTourWithChart() {
             <AnimatePresence>
                 {step === 'frame3' && (
                     <motion.div key="contrib-frame" className="absolute bottom-4 right-4">
-                        <ContributoryFactorsCard />
+                        <ProbabilityOfDefaultCard />
                     </motion.div>
                 )}
             </AnimatePresence>
 
             <AnimatePresence>
                 {step === 'frame4' && (
+                    <motion.div key="risk-frame" className="absolute bottom-4 right-4">
+                        <ContributoryFactorsCard />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {step === 'frame5' && (
                     <motion.div key="risk-frame" className="absolute bottom-4 right-4">
                         <RiskSignalsCard />
                     </motion.div>

@@ -1,0 +1,132 @@
+import React, { useRef, useLayoutEffect, useState } from "react";
+import { FileText } from "lucide-react"; // fallback only
+import { Handle, Position } from "reactflow";
+
+type IconProp =
+    | React.ReactNode // <MyIcon />
+    | React.ComponentType<any> // MyIcon
+    | string; // image URL
+
+type DataNodeProps = {
+    data: {
+        label: string;
+        icon?: IconProp;
+    };
+};
+
+function DataNodeRecInner({ data }: DataNodeProps) {
+    const { icon, label } = data;
+
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [cardWidth, setCardWidth] = useState<number>(0);
+
+    // measure actual card width after render
+    useLayoutEffect(() => {
+        if (cardRef.current) {
+            setCardWidth(cardRef.current.offsetWidth);
+        }
+    }, [label, icon]);
+
+    const renderIcon = (ic?: IconProp) => {
+        if (!ic) return <FileText size={25} />;
+
+        if (React.isValidElement(ic)) return ic;
+
+        if (typeof ic === "string") {
+            return (
+                <img
+                    src={ic}
+                    alt={label}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        objectFit: "contain",
+                        display: "block",
+                    }}
+                />
+            );
+        }
+
+        const IconComponent = ic as React.ComponentType<any>;
+        return <IconComponent size={30} color={"#010101"} />;
+    };
+
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 6,
+                boxSizing: "border-box",
+            }}
+        >
+            {/* Card (auto width, based on icon + padding) */}
+            <div
+                ref={cardRef}
+                className="flex items-center justify-center p-3 bg-privue-100/20 text-slate-900 border-2 border-privue-700"
+                style={{
+                    borderTopLeftRadius: 6,
+                    borderBottomLeftRadius: 6,
+                    borderTopRightRadius: 18,
+                    borderBottomRightRadius: 18,
+                    height: 64,
+                    position: "relative",
+                }}
+            >
+                <div className="w-10 h-10 rounded-md flex items-center justify-center ">
+                    {renderIcon(icon)}
+                </div>
+
+                {/* handles */}
+                <Handle
+                    type="target"
+                    position={Position.Left}
+                    id="left"
+                    style={{
+                        left: -6,
+                        width: 10,
+                        height: 10,
+                        borderRadius: 99,
+                        background: "#fff",
+                        border: "3px solid rgba(255,255,255,0.95)",
+                        boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                    }}
+                />
+                {/* <Handle
+                    type="source"
+                    position={Position.Right}
+                    id="right"
+                    style={{
+                        right: -6,
+                        width: 10,
+                        height: 10,
+                        borderRadius: 99,
+                        background: "#fff",
+                        border: "3px solid rgba(255,255,255,0.95)",
+                        boxShadow: "0 1px 4px rgba(2,6,23,0.35)",
+                    }}
+                /> */}
+            </div>
+
+            {/* Label (multi-line, wraps instead of ellipsis) */}
+            <div
+                className="text-sm text-privue-900 font-semibold"
+                style={{
+                    width: cardWidth || "auto",
+                    maxWidth: cardWidth || "auto",
+                    textAlign: "center",
+                    whiteSpace: "normal",   // ✅ allow wrapping
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word", // ensures long words break if needed
+                }}
+                title={label}
+            >
+                {label}
+            </div>
+
+        </div>
+    );
+}
+
+export const DataNodeRec = React.memo(DataNodeRecInner);

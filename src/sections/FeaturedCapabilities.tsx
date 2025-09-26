@@ -1,34 +1,35 @@
 import React from "react";
+import { Cpu, GitPullRequestCreateArrow, GitCompare, Landmark, Server } from "lucide-react";
 
 export default function FeaturedCapabilities() {
     const coreCapabilities = [
         {
-            icon: "/icons/core-capabilities/predictive-risk-management.png",
+            icon: <Cpu />,
             heading: "Predictive Risk Management",
             desc: "Anticipate and mitigate financial, operational, and compliance risks before they impact your business.",
         },
         {
-            icon: "/icons/core-capabilities/ai-powered-intelligence.png",
+            icon: <GitPullRequestCreateArrow />,
             heading: "AI-Powered Intelligence",
             desc: "Transform raw data into strategic insights that drive smarter business decisions.",
         },
         {
-            icon: "/icons/core-capabilities/intelligent-data-integration.png",
+            icon: <GitCompare />,
             heading: "Intelligent Data Integration",
             desc: "Unify disparate data sources into a single, enriched view of your business landscape.",
         },
         {
-            icon: "/icons/core-capabilities/strategic-decision-intelligence.png",
+            icon: <GitPullRequestCreateArrow />,
             heading: "Strategic Decision Intelligence",
             desc: "Empower leadership with AI-backed recommendations for critical business choices.",
         },
         {
-            icon: "/icons/core-capabilities/industry-focussed-ai-solutions.png",
+            icon: <Landmark />,
             heading: "Industry-Focused AI Solutions",
             desc: "Purpose-built applications for BFSI, enterprise, consulting, and legal sectors.",
         },
         {
-            icon: "/icons/core-capabilities/enterprise-grade-ai.png",
+            icon: <Server />,
             heading: "Enterprise-Grade AI",
             desc: "Platform Scalable, secure, and cloud-native infrastructure designed for mission-critical operations.",
         },

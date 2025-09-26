@@ -7,6 +7,7 @@ import CreditTerms from '@/components/product-animations/CreditTerms';
 import LargeDealerOnboarding from '@/components/product-animations/LargeDealerOnboarding';
 import LargeDataAcquisition from '@/components/product-animations/LargeDataAcquisition';
 import Integrations from '@/components/product-animations/Integrations';
+import FinancialStability from '@/components/product-animations/FinancialStability';
 
 export type Problem = {
     problemHeading: string;
@@ -912,6 +913,7 @@ export const solutions: Solution[] = [
                     "Analyse financial statements, liquidity, and solvency metrics.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: FinancialStability
             },
             {
                 title: "Creditworthiness Assessment",

@@ -36,8 +36,25 @@ export default function Footer({
         title: "privue",
         url: "https://privue-sage.vercel.app/",
     },
-    address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road, Gurugram, Haryana 122001"],
+    address = ["alt.f, JMD Empire Square,", "Mehrauli-Gurgaon Road,", "Gurugram, Haryana 122001"],
     menuItems = [
+        {
+            title: "Modules",
+            links: [
+                { text: "Financial Statement", url: "#" },
+                { text: "Credit Models", url: "#" },
+                { text: "Cyber Risk", url: "#" },
+                { text: "Carbon Estimation", url: "#" },
+                { text: "ESG", url: "#" },
+                { text: "Climate Risk", url: "#" },
+                { text: "Financial Statement", url: "#" },
+                { text: "Credit Models", url: "#" },
+                { text: "Cyber Risk", url: "#" },
+                { text: "Carbon Estimation", url: "#" },
+                { text: "ESG", url: "#" },
+                { text: "Climate Risk", url: "#" },
+            ],
+        },
         {
             title: "Solutions",
             links: [
@@ -50,17 +67,7 @@ export default function Footer({
 
             ],
         },
-        {
-            title: "Modules",
-            links: [
-                { text: "Financial Statement", url: "#" },
-                { text: "Credit Models", url: "#" },
-                { text: "Cyber Risk", url: "#" },
-                { text: "Carbon Estimation", url: "#" },
-                { text: "ESG", url: "#" },
-                { text: "Climate Risk", url: "#" },
-            ],
-        },
+
         {
             title: "Company",
             links: [
@@ -127,11 +134,11 @@ export default function Footer({
                 </div>
 
                 {/* Right Section */}
-                <div className="flex-[2] grid grid-cols-2 md:grid-cols-[repeat(3,minmax(0,1fr))] gap-8 max-w-max">
+                <div className="flex-[2] grid grid-cols-2 md:grid-cols-3 gap-8 w-full">
                     {menuItems.map((section, idx) => (
-                        <div key={idx} className="">
+                        <div key={idx} className="max-w-[200px]">
                             <h4 className="mb-2 text-foreground font-medium text-sm">{section.title}</h4>
-                            <ul className="space-y-2 max-w-max">
+                            <ul className="space-y-2">
                                 {section.links.map((link, linkIdx) => (
                                     <li key={linkIdx}>
                                         <a
@@ -146,6 +153,8 @@ export default function Footer({
                         </div>
                     ))}
                 </div>
+
+
             </footer>
 
             {/* Bottom Section */}

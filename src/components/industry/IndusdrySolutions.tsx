@@ -1,21 +1,18 @@
 'use client'
 
-import React, { useMemo, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { motion, AnimatePresence } from 'motion/react'
-import IndustrySolutionCard from './IndustrySolutionCard' // <- adjust path if needed
-// removed lucide imports for icons we convert to images
-// import { Zap } from 'lucide-react'
-// import { AlignVerticalJustifyCenter, Recycle, Landmark, BookAlert, Workflow, TriangleAlert } from 'lucide-react';
+import IndustrySolutionCard from './IndustrySolutionCard'
+import { Building, Factory, Warehouse, HousePlug, ShieldCheck, Building2 } from 'lucide-react'
 
 // Types
 type Industry = {
-    id?: string
+    id: string
     name: string
     description?: string
 }
 
-// allow icon as either a string path (image) OR a React component (icon constructor) OR a ReactNode
 type Solution = {
     heading: string
     subHeading: string
@@ -23,104 +20,137 @@ type Solution = {
     slug: string
 }
 
-/**
- * Helper to generate fallback IDs when crypto.randomUUID is not available.
- */
-function makeId(fallbackIndex: number) {
-    if (typeof crypto !== 'undefined' && typeof (crypto as any).randomUUID === 'function') {
-        try {
-            return (crypto as any).randomUUID()
-        } catch {
-            // ignore and fall through to timestamp id
-        }
-    }
-    return `gen-${Date.now().toString(36)}-${fallbackIndex}`
-}
 
-/**
- * IndustryModules
- *
- * Left: accordion of industries. First industry opened by default.
- * Right: list of IndustrySolutionCard components for the active industry.
- *
- * For now the same dummy `solutions` list is used for every industry (per your request).
- */
 export default function IndustryModules() {
 
-    const dummyIndustries: Industry[] = [
+    const industries: Industry[] = [
         { id: 'ind-1', name: 'Corporations', description: 'Transform supply chains from vulnerable to resilient. Monitor distributors in real-time, predict sustainability risks, and make decisions backed by AI-powered intelligence.' },
         { id: 'ind-2', name: 'Insurance', description: 'Fortify compliance, slash credit exposure, and unlock smarter lending. Our AI-driven platform revolutionizes internal audits, sustainability assessments, and third-party risk management for the modern bank.' },
         { id: 'ind-3', name: 'Banking', description: 'Build bulletproof portfolios that investors trust. Accelerate due diligence, master sustainability metrics, and neutralize third-party risks with precision analytics that see around corners.' },
         { id: 'ind-4', name: 'Asset Management', description: 'Underwrite with unprecedented confidence. Price commercial risk accurately, validate sustainability claims instantly, and detect third-party threats before they materialize—all powered by advanced AI analytics.' },
-        {
-            id: 'ind-5', name: 'Consulting', description: "Deliver client insights at the speed of business. Cut due diligence time by half, automate audit workflows, and amplify your firm's value with AI-driven analytics that turn data into competitive advantage."
-        },
+        { id: 'ind-5', name: 'Consulting', description: "Deliver client insights at the speed of business. Cut due diligence time by half, automate audit workflows, and amplify your firm's value with AI-driven analytics that turn data into competitive advantage." },
         { id: 'ind-6', name: 'Government', description: 'Safeguard public trust through smarter procurement. Validate vendors instantly, exceed sustainability mandates, and ensure compliance with AI-powered risk intelligence designed for public sector excellence.' },
     ]
 
-    // Same solutions used for every industry (per your instruction).
-    const dummySolutions: Solution[] = [
-        { heading: 'Personalized Recommendations', subHeading: 'Increase conversion with tailored offers', icon: "/solutions/personalized-recommendations.png", slug: 'personalized-recs' },
-        { heading: 'Automated Support', subHeading: '24/7 AI-driven customer support', icon: "/solutions/automated-support.png", slug: 'automated-support' },
-        { heading: 'Demand Forecasting', subHeading: 'Reduce stockouts with accurate forecasts', icon: "/solutions/demand-forecasting.png", slug: 'demand-forecasting' },
-        { heading: 'Fraud Detection', subHeading: 'Real-time anomaly detection', icon: "/solutions/fraud-detection.png", slug: 'fraud-detection' },
-    ]
-
-    /**
-     * NOTE:
-     * I converted the icon entries below to image paths (string) to match your example:
-     * { icon: "/solutions/large-customer-risk-assessment.png", ... }
-     *
-     * Make sure these image files exist in /public/solutions/ with the filenames used below.
-     * If you prefer other filenames, update the strings accordingly.
-     */
     const solutionsByIndustry: Record<string, Solution[]> = {
         'ind-1': [
-            { heading: 'Large Customer Risk Assessment', subHeading: 'Reduce defaults. Protect cash flow. Secure growth.', icon: "/icons/solutions/large-customer-risk-assessment.png", slug: 'large-customer-risk-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
-            { heading: 'Distributor Performance Management', subHeading: 'Reduce leakages. Improve collections. Safeguard growth.', icon: "/icons/solutions/distributor-performance-management.png", slug: 'distributor-performance-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
+            {
+                heading: 'Large Customer Risk Assessment',
+                subHeading: 'Reduce defaults. Protect cash flow. Secure growth.',
+                icon: <Building />,
+                slug: 'large-customer-risk-assessment'
+            },
+            {
+                heading: 'Third Party Risk Assessment',
+                subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
+                icon: <Factory />,
+                slug: 'third-party-risk-management'
+            },
+            {
+                heading: 'Distributor Performance Management',
+                subHeading: 'Reduce leakages. Improve collections. Safeguard growth.',
+                icon: <Warehouse />,
+                slug: 'distributor-performance-management'
+            },
+            {
+                heading: 'Sustainability Assessment',
+                subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
+                icon: <HousePlug />,
+                slug: 'sustainability-assessment'
+            },
         ],
         'ind-2': [
-            { heading: 'Insurance Underwriting and Pricing', subHeading: 'Sharper insights. Smarter underwriting. Stronger outcomes.', icon: "/icons/solutions/insurance-underwriting.png", slug: 'commercial-insurance-underwriting' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
+            {
+                heading: 'Insurance Underwriting and Pricing',
+                subHeading: 'Sharper insights. Smarter underwriting. Stronger outcomes.',
+                icon: <ShieldCheck />,
+                slug: 'commercial-insurance-underwriting'
+
+            },
+            {
+                heading: 'Third Party Risk Assessment',
+                subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
+                icon: <Factory />,
+                slug: 'third-party-risk-management'
+
+            },
+            {
+                heading: 'Sustainability Assessment',
+                subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
+                icon: <HousePlug />,
+                slug: 'sustainability-assessment'
+
+            },
         ],
         'ind-3': [
-            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
+            {
+                heading: 'Sustainability Assessment',
+                subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
+                icon: <HousePlug />,
+                slug: 'sustainability-assessment'
+
+            },
+            {
+                heading: 'Third Party Risk Assessment',
+                subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
+                icon: <Factory />,
+                slug: 'third-party-risk-management'
+
+            },
         ],
         'ind-4': [
-            { heading: 'Entity Due Dilligence', subHeading: 'A Unified Solution for Smarter Due Diligence', icon: "/icons/solutions/entity-due-diligence.png", slug: 'entity-due-diligence' },
-            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
-            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
+            {
+                heading: 'Entity Due Dilligence',
+                subHeading: 'A Unified Solution for Smarter Due Diligence',
+                icon: <Building2 />,
+                slug: 'entity-due-diligence'
+
+            },
+            {
+                heading: 'Sustainability Assessment',
+                subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
+                icon: <HousePlug />,
+                slug: 'sustainability-assessment'
+
+            },
+            {
+                heading: 'Third Party Risk Assessment',
+                subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
+                icon: <Factory />,
+                slug: 'third-party-risk-management'
+
+            },
         ],
         'ind-5': [
-            { heading: 'Entity Due Dilligence', subHeading: 'A Unified Solution for Smarter Due Diligence', icon: "/icons/solutions/entity-due-diligence.png", slug: 'entity-due-diligence' },
+            {
+                heading: 'Entity Due Dilligence',
+                subHeading: 'A Unified Solution for Smarter Due Diligence',
+                icon: <Building2 />,
+                slug: 'entity-due-diligence'
+
+            },
         ],
         'ind-6': [
-            { heading: 'Third Party Risk Assessment', subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.', icon: "/icons/solutions/third-party-risk-management.png", slug: 'third-party-risk-management' },
-            { heading: 'Sustainability Assessment', subHeading: 'Climate Risk. Emissions Estimation. ESG Score.', icon: "/icons/solutions/sustainability-assessment.png", slug: 'sustainability-assessment' },
+            {
+                heading: 'Third Party Risk Assessment',
+                subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
+                icon: <Factory />,
+                slug: 'third-party-risk-management'
+
+            },
+            {
+                heading: 'Sustainability Assessment',
+                subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
+                icon: <HousePlug />,
+                slug: 'sustainability-assessment'
+
+            },
         ],
 
         // fallback key
-        default: dummySolutions,
+        // default: dummySolutions,
     }
 
-    // ---------------------
-    // Normalize industries ensuring each has an id
-    // ---------------------
-    const industries = useMemo(
-        () =>
-            dummyIndustries.map((ind, idx) => ({
-                id: ind.id ?? makeId(idx),
-                name: ind.name,
-                description: ind.description ?? '',
-            })),
-        []
-    )
-
-    // at top of IndustryModules, after your state defs
     useEffect(() => {
         function handleOpenIndustry(e: Event) {
             const detail = (e as CustomEvent).detail;

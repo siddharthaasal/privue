@@ -131,7 +131,7 @@ function FinancialChartCard() {
                         yAxisId="left"
                         stroke="#9ca3af"
                         tick={{ fontSize: 9, fill: "#6b7280" }}
-                        tickFormatter={(v) => `₹${v}`}
+                        tickFormatter={(v) => `₹${v} Cr.`}
                         axisLine={false}
                         tickLine={false}
                     />
@@ -140,7 +140,7 @@ function FinancialChartCard() {
                         orientation="right"
                         stroke="#9ca3af"
                         tick={{ fontSize: 9, fill: "#6b7280" }}
-                        tickFormatter={(v) => `₹${v}`}
+                        tickFormatter={(v) => `₹${v} Cr.`}
                         axisLine={false}
                         tickLine={false}
                     />

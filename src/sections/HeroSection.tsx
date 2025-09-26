@@ -108,9 +108,9 @@ export default function HeroSection() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2"
                 >
 
-                    <a href="/#">
+                    <a href="#industries-section">
                         <Button variant="default" size="default" className="cursor-pointer text-sm text-[#FAFAFA]">
-                            <p>Get Started</p>
+                            <p>Browse Solutions</p>
                         </Button>
                     </a>
                     <a href="/articles">

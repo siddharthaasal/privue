@@ -151,7 +151,7 @@ export const initialNodes: Node[] = [
     {
         id: "live-chat",
         type: "chatNode",
-        position: { x: 1100, y: 75 },
+        position: { x: 1150, y: 50 },
         data: {
             outgoing: "Hey, is it possible to expense office rent through my startup?",
             incoming: "Yes — you can expense rent as a business expense if it meets local rules.",

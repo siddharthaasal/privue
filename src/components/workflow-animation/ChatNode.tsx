@@ -1,332 +1,526 @@
 // AnimatedChatNode.tsx
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
-import { CheckCheck } from "lucide-react";
+import { CheckCheck, XCircle, AlertTriangle, Circle } from "lucide-react";
 
-type Timings = {
-    showOutgoing?: number;
-    moveUpAfter?: number;
-    showReplyAfter?: number;
-    loopPause?: number;
+/**
+ * Phase mapping:
+ * 0 = hidden
+ * 1 = userTyping (right)
+ * 2 = outgoing (question shown)
+ * 3 = incomingTyping (left)
+ * 4 = incomingShown (answer visible, question stays)
+ * 5 = finished
+ */
+
+type Severity = "critical" | "warning" | "neutral";
+
+/* --- QnA types --- */
+type AnswerItem = { text: string; severity: Severity };
+
+type ListQna = {
+    kind: "list";
+    question: string;
+    answerItems: AnswerItem[];
 };
 
-export function AnimatedChatNodeInner({
-    data,
-}: {
-    data?: {
-        outgoing?: string;
-        incoming?: string;
-        timestamp?: string;
-        status?: "sending" | "sent" | "delivered" | "read";
-        timings?: Timings;
-        maxWidth?: number;
-        avatarSrc?: string;
-        name?: string;
-    };
-}) {
-    const outgoing = data?.outgoing ?? "Hey, is it possible to expense office rent through my startup?";
-    const incoming = data?.incoming ?? "Yes — you can expense rent as a business expense if it meets local rules.";
-    const timestamp = data?.timestamp ?? new Date().toISOString();
-    const timings: Required<Timings> = {
-        showOutgoing: data?.timings?.showOutgoing ?? 160,
-        moveUpAfter: data?.timings?.moveUpAfter ?? 700,
-        showReplyAfter: data?.timings?.showReplyAfter ?? 1600,
-        loopPause: data?.timings?.loopPause ?? 1000,
-    };
-    const MAX_W = data?.maxWidth ?? 480;
-    // const avatarSrc = data?.avatarSrc ?? "";
-    // const name = data?.name ?? "Andy from Finta";
+type ChartQna = {
+    kind: "chart";
+    question: string;
+    data: {
+        year: string;
+        sales: number;
+        grossMargin: number;
+    }[];
+    note?: string; // e.g. "Sales on a bar graph and gross profit as a line graph"
+};
 
-    const reduceMotion =
-        typeof window !== "undefined" &&
-        window.matchMedia &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // phases: 0 hidden, 1 outgoing visible, 2 typing, 3 reply visible, 4 pause
-    const [phase, setPhase] = useState<number>(reduceMotion ? 3 : 0);
-    // const [containerHeight, setContainerHeight] = useState<number | "auto">("auto");
+type ImageQna = {
+    kind: "image";
+    question: string;
+    imageSrc: string;
+    imageCaption?: string;
+};
 
-    const contRef = useRef<HTMLDivElement | null>(null);
-    const outRef = useRef<HTMLDivElement | null>(null);
-    const incRef = useRef<HTMLDivElement | null>(null);
-    const loopRef = useRef<number | null>(null);
+type Qna = ListQna | ChartQna | ImageQna;
 
-    // measured incoming height (used to compute outgoing anchor)
-    const [incomingHeight, setIncomingHeight] = useState<number>(0);
+/* --- Timing constants --- */
+// const STAY_MS = 4000;
+const QUESTION_TYPING_MS = 1000;
+const ANSWER_TYPING_MS = 1000;
+const QUESTION_GAP = 3000;
 
-    // Layout constants
-    const TYPING_BOTTOM = 48; // where typing indicator is anchored from bottom
-    const TYPING_HEIGHT = 36; // approximate height of typing indicator
-    const OUTGOING_GAP_WHILE_TYPING = 12; // gap between outgoing and typing indicator
-    const INCOMING_BOTTOM = 50; // incoming bubble anchor from bottom
-    const GAP_BETWEEN_BUBBLES = 14; // desired gap when outgoing sits above incoming
-    const outgoingDefaultBottom = 68; // default resting bottom when no typing/incoming
+/* --- example QNAs --- */
+const BASE_QNA: ListQna = {
+    kind: "list",
+    question: "Why is the Risk Score so high?",
+    answerItems: [
+        { text: "High exposure to credit compared to earnings", severity: "critical" },
+        { text: "Balance sheet is highly leveraged", severity: "critical" },
+        { text: "5 months delinquent in last 36 months", severity: "critical" },
+        { text: "No GST filings done in the last year", severity: "warning" },
+        { text: "Age group above 60", severity: "warning" },
+    ],
+};
+
+const SALES_QNA: ChartQna = {
+    kind: "chart",
+    question: "What is the sales and gross margin in the last 3 years?",
+    data: [
+        { year: "FY 2021-22", sales: 119697880, grossMargin: 18568060 },
+        { year: "FY 2022-23", sales: 97710280, grossMargin: 15662720 },
+        { year: "FY 2023-24", sales: 67569687, grossMargin: 10721827 },
+    ],
+    // note: "Sales- Bar graph and gross profit as a line graph",
+};
+
+
+/* Third QnA is an image answer (put your image in public/images/...) */
+const VEMBU_QNA: ImageQna = {
+    kind: "image",
+    question: "What are the other business interests of Director Vembu?",
+    // adjust path as needed (public folder)
+    imageSrc: "/workflow/directorVembuImg.png",
+    imageCaption: "Other business interests of Director Vembu — source: filings",
+};
+
+const QNAS: Qna[] = [BASE_QNA, SALES_QNA, VEMBU_QNA];
+
+/* --- Component --- */
+export function AnimatedChatNodeInner(): any {
+    const [currentIdx, setCurrentIdx] = useState(0);
+    const [phase, setPhase] = useState(0);
+    const timeouts = useRef<number[]>([]);
 
     useEffect(() => {
-        if (reduceMotion) {
-            setPhase(3);
-            return;
-        }
-
-        if (loopRef.current) {
-            clearTimeout(loopRef.current);
-            loopRef.current = null;
-        }
-
-        const runSequence = () => {
-            setPhase(0);
-            const t1 = window.setTimeout(() => setPhase(1), timings.showOutgoing);
-            const t2 = window.setTimeout(() => setPhase(2), timings.moveUpAfter);
-            const t3 = window.setTimeout(() => setPhase(3), timings.showReplyAfter);
-            const t4 = window.setTimeout(() => {
-                setPhase(4);
-                loopRef.current = window.setTimeout(runSequence, timings.loopPause);
-            }, timings.showReplyAfter + 500);
-
-            loopRef.current = t4;
-            return () => {
-                clearTimeout(t1);
-                clearTimeout(t2);
-                clearTimeout(t3);
-                clearTimeout(t4);
-            };
-        };
-
-        const cleanup = runSequence();
+        runLifecycle();
         return () => {
-            if (loopRef.current) {
-                clearTimeout(loopRef.current);
-                loopRef.current = null;
-            }
-            if (cleanup) cleanup();
+            timeouts.current.forEach((t) => clearTimeout(t));
+            timeouts.current = [];
         };
-    }, [reduceMotion, timings.showOutgoing, timings.moveUpAfter, timings.showReplyAfter, timings.loopPause]);
+    }, [currentIdx]);
 
-    // measure incoming height when incoming is visible or content changes
-    useLayoutEffect(() => {
-        const incEl = incRef.current;
-        if (!incEl) {
-            setIncomingHeight(0);
-            return;
-        }
-        // measure after layout
-        requestAnimationFrame(() => {
-            const h = incEl.scrollHeight || incEl.getBoundingClientRect().height || 0;
-            setIncomingHeight(h);
-        });
-    }, [incoming, phase]);
+    const runLifecycle = () => {
+        timeouts.current.forEach((t) => clearTimeout(t));
+        timeouts.current = [];
 
-    // Keep container height big enough to show both messages (no clipping)
-    useLayoutEffect(() => {
-        const cont = contRef.current;
-        const out = outRef.current;
-        // const inc = incRef.current;
-        if (!cont || !out) return;
+        setPhase(1);
+        const t1 = window.setTimeout(() => {
+            setPhase(2);
+            const t2 = window.setTimeout(() => {
+                setPhase(3);
+                const t3 = window.setTimeout(() => {
+                    setPhase(4);
 
-        // const basePadding = 28;
-        // const outH = out.scrollHeight;
-        // const incH = inc ? inc.scrollHeight : 0;
-        // const desired = Math.max(150, outH + incH + basePadding + 56);
-        // setContainerHeight(desired);
-    }, [phase, outgoing, incoming]);
-
-    const showOutgoing = phase >= 1;
-    const showTyping = phase === 2;
-    const showIncoming = phase >= 3;
-
-    // compute outgoing bottom anchor:
-    // - when incoming visible: place above incoming using measured incomingHeight
-    // - else when typing: place above typing indicator
-    // - else default resting bottom
-    const outgoingBottomWhenTyping = TYPING_BOTTOM + TYPING_HEIGHT + OUTGOING_GAP_WHILE_TYPING;
-    const outgoingBottomWhenIncoming = INCOMING_BOTTOM + incomingHeight + GAP_BETWEEN_BUBBLES;
-    const outgoingBottom =
-        showIncoming && incomingHeight > 0
-            ? outgoingBottomWhenIncoming
-            : showTyping
-                ? outgoingBottomWhenTyping
-                : outgoingDefaultBottom;
-
-    const containerStyle: React.CSSProperties = {
-        width: "100%",
-        maxWidth: MAX_W,
-        minWidth: 340,
-        // height: containerHeight === "auto" ? "auto" : containerHeight,
-        height: 300,
-        padding: 14,
-        // borderRadius: 16,
-        background: "#fff",
-        // border: "1px solid rgba(15,23,36,0.06)",
-        position: "relative",
-        boxSizing: "border-box",
-        overflow: "hidden",
-        fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
+                    const t4 = window.setTimeout(() => {
+                        setPhase(5);
+                        setCurrentIdx((prev) => (prev + 1) % QNAS.length);
+                    }, QUESTION_GAP);
+                    timeouts.current.push(t4);
+                }, ANSWER_TYPING_MS);
+                timeouts.current.push(t3);
+            }, QUESTION_TYPING_MS);
+            timeouts.current.push(t2);
+        }, 600);
+        timeouts.current.push(t1);
     };
 
-    const bubbleBase: React.CSSProperties = {
-        padding: "12px 14px",
-        borderRadius: 14,
-        maxWidth: "100%",
-        boxSizing: "border-box",
-        wordBreak: "break-word",
-        whiteSpace: "pre-wrap",
-        transitionProperty: "transform, opacity, box-shadow, bottom",
-        transitionTimingFunction: "cubic-bezier(.22,.9,.34,1)",
-        transitionDuration: reduceMotion ? "0ms" : "320ms",
-        position: "absolute",
-        left: 16,
-        right: 16,
-        boxShadow: "0 8px 20px rgba(2,6,23,0.06)",
-    };
-
-    const outgoingStyle: React.CSSProperties = {
-        ...bubbleBase,
-        right: 16,
-        left: 64,
-        background: "linear-gradient(180deg,#fbfcff 0%, #eef6ff 100%)",
-        borderTopRightRadius: 8,
-        bottom: outgoingBottom,
-        zIndex: 70, // ensure outgoing sits on top
-        opacity: showOutgoing ? 1 : 0,
-        transform: showOutgoing ? "translateY(0)" : "translateY(10px)",
-    };
-
-    const incomingStyle: React.CSSProperties = {
-        ...bubbleBase,
-        left: 16,
-        right: 64,
-        bottom: INCOMING_BOTTOM,
-        background: "#ffffff",
-        border: "1px solid rgba(15,23,36,0.04)",
-        zIndex: 50,
-        opacity: showIncoming ? 1 : 0,
-        transform: showIncoming ? "translateY(0)" : "translateY(8px)",
-    };
-
-    const TypingIndicator: React.FC = () => {
-        if (reduceMotion) {
-            return (
-                <div
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        padding: "6px 10px",
-                        borderRadius: 6,
-                        background: "#f1f5f9",
-                        border: "1px solid rgba(15,23,36,0.03)",
-                    }}
-                >
-                    <span style={{ width: 4, height: 4, borderRadius: 999, background: "rgba(15,23,36,0.35)", margin: "0 4px" }} />
-                    <span style={{ width: 4, height: 4, borderRadius: 999, background: "rgba(15,23,36,0.35)", margin: "0 4px" }} />
-                    <span style={{ width: 4, height: 4, borderRadius: 999, background: "rgba(15,23,36,0.35)", margin: "0 4px" }} />
-                </div>
-            );
-        }
-
-        return (
-            <>
-                <style>{`
-          @keyframes acn-dot {
-            0% { transform: translateY(0); opacity: 0.35; }
-            50% { transform: translateY(-5px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.35; }
-          }
-        `}</style>
-                <div
-                    aria-hidden
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        padding: "8px 12px",
-                        borderRadius: 12,
-                        background: "#f8fafc",
-                        border: "1px solid rgba(15,23,36,0.03)",
-                    }}
-                >
-                    <span style={{ width: 5, height: 5, borderRadius: 999, margin: "0 5px", background: "rgba(15,23,36,0.35)", display: "inline-block", animation: "acn-dot 900ms ease-in-out 0ms infinite" }} />
-                    <span style={{ width: 5, height: 5, borderRadius: 999, margin: "0 5px", background: "rgba(15,23,36,0.35)", display: "inline-block", animation: "acn-dot 900ms ease-in-out 160ms infinite" }} />
-                    <span style={{ width: 5, height: 5, borderRadius: 999, margin: "0 5px", background: "rgba(15,23,36,0.35)", display: "inline-block", animation: "acn-dot 900ms ease-in-out 320ms infinite" }} />
-                </div>
-            </>
-        );
-    };
 
     const formattedTime = (() => {
         try {
-            const d = new Date(timestamp);
+            const d = new Date();
             return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         } catch {
-            return timestamp;
+            return "";
         }
     })();
 
-    return (
-        <div ref={contRef} style={containerStyle} role="group" aria-label="Chat preview node" className="border-2 border-privue-700 rounded-lg bg-white/75 ">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}
-            >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: "var(--privue-900,#0f1724)" }}>Conversational Workspace</div>
+    const renderSeverityIcon = (severity: Severity) => {
+        const size = 16;
+        if (severity === "critical") return <XCircle size={size} style={{ color: "#ef4444", minWidth: size }} />;
+        if (severity === "warning") return <AlertTriangle size={size} style={{ color: "#f59e0b", minWidth: size }} />;
+        return <Circle size={14} style={{ color: "#94a3b8", minWidth: 14 }} />;
+    };
+
+    // helper: parse "₹1,23,45,678" -> number 12345678
+    // const parseCurrencyToNumber = (s?: string | null) => {
+    //     if (!s) return 0;
+    //     const digits = s.replace(/[^\d]/g, "");
+    //     return digits ? Number(digits) : 0;
+    // };
+
+
+
+
+    function ChartForSalesAndGM({
+        data,
+    }: {
+        data: { year: string; sales: number; grossMargin: number }[];
+    }) {
+        const salesValues = data.map((r) => r.sales);
+        const maxSales = Math.max(...salesValues, 1);
+
+        // dimensions
+        const w = 240; // 3/4 width
+        const h = 80; // thin height
+        const padding = { top: 6, right: 8, bottom: 18, left: 8 };
+        const chartW = w - padding.left - padding.right;
+        const chartH = h - padding.top - padding.bottom;
+        const barGap = 16;
+        const n = data.length || 1;
+        const barWidth = Math.max(8, (chartW - barGap * (n - 1)) / n); // thinner bars
+
+        const yOf = (val: number) => padding.top + (1 - val / maxSales) * chartH;
+
+        const points = data.map((r, i) => {
+            const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
+            const y = yOf(r.grossMargin);
+            return `${x},${y}`;
+        });
+
+        // Ref for line animation
+        const polylineRef = useRef<SVGPolylineElement | null>(null);
+
+        useEffect(() => {
+            if (polylineRef.current) {
+                const length = polylineRef.current.getTotalLength();
+                polylineRef.current.style.strokeDasharray = String(length);
+                polylineRef.current.style.strokeDashoffset = String(length);
+                polylineRef.current.getBoundingClientRect(); // trigger reflow
+                polylineRef.current.style.transition = "stroke-dashoffset 1s ease-out";
+                polylineRef.current.style.strokeDashoffset = "0";
+            }
+        }, []);
+
+        return (
+            <div className="w-3/4">
+                <div className="rounded-md bg-[rgba(15,23,36,0.02)] px-1 py-1">
+                    <svg width={w} height={h}>
+                        {/* baseline axis */}
+                        <line
+                            x1={padding.left}
+                            x2={w - padding.right}
+                            y1={h - padding.bottom}
+                            y2={h - padding.bottom}
+                            stroke="rgba(15,23,36,0.1)"
+                            strokeWidth={1}
+                        />
+
+                        {/* bars (Sales) */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap);
+                            const barH = (r.sales / maxSales) * chartH;
+                            const y = padding.top + (chartH - barH);
+                            return (
+                                <rect
+                                    key={`bar-${i}`}
+                                    x={x}
+                                    y={y}
+                                    width={barWidth}
+                                    height={barH}
+                                    rx={3}
+                                    fill="#3b82f6"
+                                    opacity={0.85}
+                                    style={{
+                                        transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
+                                        transformBox: "fill-box",
+                                        transform: "scaleY(0)",
+                                        animation: `growBar 600ms ease-out ${i * 150}ms forwards`,
+                                    }}
+                                />
+                            );
+                        })}
+
+                        {/* gross margin line */}
+                        <polyline
+                            ref={polylineRef}
+                            points={points.join(" ")}
+                            fill="none"
+                            stroke="#ef4444"
+                            strokeWidth={1.5}
+                        />
+
+                        {/* gross margin circles */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
+                            const y = yOf(r.grossMargin);
+                            return (
+                                <circle
+                                    key={`pt-${i}`}
+                                    cx={x}
+                                    cy={y}
+                                    r={2.5}
+                                    fill="#ef4444"
+                                    stroke="#fff"
+                                    strokeWidth={0.8}
+                                    style={{
+                                        opacity: 0,
+                                        animation: `fadeIn 400ms ease-out ${600 + i * 200}ms forwards`,
+                                    }}
+                                />
+                            );
+                        })}
+
+                        {/* year labels under bars */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
+                            return (
+                                <text
+                                    key={`lbl-${i}`}
+                                    x={x}
+                                    y={h - 4}
+                                    textAnchor="middle"
+                                    fontSize={10}
+                                    fill="#64748b"
+                                >
+                                    {r.year.replace("FY ", "")}
+                                </text>
+                            );
+                        })}
+                    </svg>
                 </div>
+
+                {/* Animations */}
+                <style>{`
+        @keyframes growBar {
+          from { transform: scaleY(0); }
+          to { transform: scaleY(1); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
             </div>
+        );
+    }
 
-            {/* Outgoing bubble */}
-            <article ref={outRef} aria-label="Outgoing message" style={outgoingStyle}>
-                <p style={{ margin: 0, fontSize: 12, color: "var(--privue-900,#0f1724)", lineHeight: 1.42 }}>{outgoing}</p>
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 2, marginTop: 0 }}>
-                    <time dateTime={timestamp} style={{ fontSize: 10, color: "var(--privue-600,#64748b)" }}>{formattedTime}</time>
-                    <CheckCheck size={14} style={{ color: "rgba(99,102,241,0.9)" }} />
-                </div>
-            </article>
-
-            {/* Typing indicator positioned at bottom */}
+    const TypingIndicator: React.FC = () => (
+        <>
+            <style>{`
+        @keyframes acn-dot {
+          0% { transform: translateY(0); opacity: 0.35; }
+          50% { transform: translateY(-5px); opacity: 1; }
+          100% { transform: translateY(0); opacity: 0.35; }
+        }
+      `}</style>
             <div
-                style={{
-                    position: "absolute",
-                    bottom: TYPING_BOTTOM,
-                    left: 16,
-                    zIndex: 48,
-                    transition: "opacity 160ms ease, visibility 160ms",
-                    opacity: showTyping ? 1 : 0,
-                    visibility: showTyping ? "visible" : "hidden",
-                }}
-                aria-hidden={!showTyping}
+                aria-hidden
+                className="inline-flex items-center px-3 py-1.5 rounded-xl bg-slate-50 border"
+                style={{ borderColor: "rgba(15,23,36,0.03)" }}
             >
-                <TypingIndicator />
+                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 0ms infinite" }} />
+                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 160ms infinite" }} />
+                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 320ms infinite" }} />
+            </div>
+        </>
+    );
+
+    const qna = QNAS[currentIdx];
+
+    /* type guard (narrow to ImageQna) */
+    // const isImageQna = (q: Qna): q is ImageQna => "imageSrc" in q;
+
+    return (
+        <div
+            role="group"
+            aria-label="Chat preview node"
+            className="w-full max-w-[500px] min-w-[350px] h-[435px] p-3 relative box-border border-privue-700 overflow-hidden font-sans border-2 rounded-lg bg-white/75"
+            style={{ fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" }}
+        >
+            {/* Animation CSS (stagger + dagger) */}
+            <style>{`
+        /* staggered list item */
+        @keyframes stagger-in {
+          0% { opacity: 0; transform: translateY(6px) scale(0.995); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .acn-list-item-animate {
+          opacity: 0;
+          animation-name: stagger-in;
+          animation-duration: 420ms;
+          animation-fill-mode: forwards;
+          animation-timing-function: cubic-bezier(.2,.9,.2,1);
+        }
+
+        /* dagger fill overlay for image reveal */
+        @keyframes dagger-reveal {
+          0% { transform: translateX(0%) skewX(-20deg); width: 100%; }
+          100% { transform: translateX(120%) skewX(-20deg); width: 100%; }
+        }
+
+        .acn-image-wrap {
+          position: relative;
+          overflow: hidden;
+          border-radius: 12px;
+        }
+
+        .acn-image-wrap img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .acn-dagger-overlay {
+          position: absolute;
+          top: -25%;
+          left: 0;
+          height: 150%;
+          width: 100%;
+          background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(250,250,250,0.9) 30%, rgba(255,255,255,0.98) 100%);
+          transform-origin: left center;
+        }
+
+        /* when animate, slide the overlay to the right to reveal underlying image */
+        .acn-dagger-animate {
+          animation-name: dagger-reveal;
+          animation-duration: 700ms;
+          animation-fill-mode: forwards;
+          animation-timing-function: cubic-bezier(.22,.9,.32,1);
+        }
+      `}</style>
+
+            <div className="flex justify-between items-center mb-2">
+                <div className="flex items-center gap-2">
+                    <div className="text-[13px] font-medium text-privue-900">Conversational Workspace</div>
+                </div>
             </div>
 
-            {/* Incoming reply */}
-            <article ref={incRef} aria-label="Incoming message" style={incomingStyle}>
-                <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                    {/* <div style={{ width: 36, height: 36, borderRadius: 999, overflow: "hidden", flex: "0 0 36px", boxShadow: "inset 0 1px 0 rgba(0,0,0,0.04)" }}>
-                        {avatarSrc ? (
-                            <img src={avatarSrc} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                        ) : (
-                            <div style={{ width: "100%", height: "100%", background: "#f3f4f6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "#6b7280" }}>
-                                P
-                            </div>
-                        )}
-                    </div> */}
-
-                    <div style={{ flex: 1 }}>
-                        <p style={{ margin: 0, fontSize: 12, color: "var(--privue-900,#0f1724)" }}>{incoming}</p>
-                        <div style={{ marginTop: 0, display: "flex", gap: 2, alignItems: "right" }}>
-                            <time dateTime={timestamp} style={{ fontSize: 10, color: "var(--privue-600,#64748b)" }}>{formattedTime}</time>
-                            {/* <div style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>{name}</div> */}
+            <div className="absolute left-0 right-0 top-[20%] bottom-16 overflow-hidden pointer-events-none flex flex-col justify-end">
+                <div className="relative w-full pointer-events-auto flex flex-col gap-3 px-3">
+                    {/* User typing */}
+                    {phase === 1 && (
+                        <div className="self-end">
+                            <TypingIndicator />
                         </div>
-                    </div>
-                </div>
-            </article>
+                    )}
 
-            {/* helper caption (bottom) */}
-            <div style={{ position: "absolute", left: 16, right: 16, bottom: 12, pointerEvents: "none", fontSize: 12, color: "var(--privue-600,#64748b)" }}>
+                    {/* Question bubble */}
+                    {(phase === 2 || phase === 3 || phase === 4) && (
+                        <article className="self-end rounded-[14px] bg-gradient-to-b from-[#fbfcff] to-[#eef6ff] shadow-[0_8px_20px_rgba(2,6,23,0.06)] p-2 border-t-0">
+                            <div className="pl-4 pr-2 flex items-end gap-2">
+                                <p className="m-0 text-[12px] text-[#0f1724] leading-[1.42] text-right flex-1">{qna.question}</p>
+                            </div>
+                            <div className="flex justify-end items-center gap-1.5 mt-1">
+                                <time dateTime={new Date().toISOString()} className="text-[10px] text-[#64748b]">
+                                    {formattedTime}
+                                </time>
+                                <CheckCheck size={14} style={{ color: "rgba(99,102,241,0.9)" }} />
+                            </div>
+                        </article>
+                    )}
+
+                    {/* Incoming typing */}
+                    {phase === 3 && (
+                        <div className="self-start">
+                            <TypingIndicator />
+                        </div>
+                    )}
+
+                    {/* Answer bubble */}
+                    {phase === 4 && (
+                        <article className="self-start bg-white border rounded-[14px] p-3" style={{ borderColor: "rgba(15,23,36,0.04)" }}>
+                            {qna.kind === "list" && (
+                                <ul className="m-0 p-0 list-none flex flex-col gap-2 text-left">
+                                    {qna.answerItems.map((it, aidx) => {
+                                        // stagger delay each item slightly, measured before the item shows
+                                        const delayMs = aidx * 120; // 120ms per item
+                                        return (
+                                            <li
+                                                key={aidx}
+                                                className="flex gap-2 items-start acn-list-item-animate"
+                                                style={{ animationDelay: `${delayMs}ms` }}
+                                            >
+                                                <div className="mt-[2px]">{renderSeverityIcon(it.severity)}</div>
+                                                <div className="flex-1">
+                                                    <p className="m-0 text-[12px] text-[#0f1724] leading-[1.35]">{it.text}</p>
+                                                </div>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            )}
+                            {qna.kind === "image" && (
+                                <div className="flex flex-col gap-2 items-start">
+                                    <div className="w-3/4 acn-image-wrap">
+                                        {/* the overlay does dagger reveal; we add the animate class only once phase ===4 */}
+                                        <img src={qna.imageSrc} alt={qna.imageCaption ?? "Answer image"}
+                                            className="scale-100"
+                                        />
+                                        <div className={`acn-dagger-overlay ${phase === 4 ? "acn-dagger-animate" : ""}`} />
+                                    </div>
+                                    {/* optional caption */}
+                                    {/*{qna.imageCaption && <div className="text-[11px] text-[#64748b] mt-1">{qna.imageCaption}</div>}*/}
+                                </div>)}
+                            {qna.kind === "chart" && (
+                                <div className="flex flex-col gap-3">
+                                    {/* textual summary */}
+                                    <div className="flex flex-col gap-1 text-[11px] text-slate-600">
+                                        {qna.data.map((row, idx) => (
+                                            <div key={idx} className="flex items-center gap-2">
+                                                <span className="font-medium text-slate-700">{row.year.replace("FY ", "")}</span>
+                                                <span>S: {row.sales.toLocaleString()}</span>
+                                                <span>GM: {row.grossMargin.toLocaleString()}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {/* chart */}
+                                    <ChartForSalesAndGM data={qna.data} />
+
+                                    {qna.note && (
+                                        <div className="text-[11px] text-slate-500 mt-2 italic">{qna.note}</div>
+                                    )}
+                                </div>
+                            )}
+
+                            <div className="mt-1.5 flex justify-end gap-1.5">
+                                <time dateTime={new Date().toISOString()} className="text-[10px] text-[#64748b]">
+                                    {formattedTime}
+                                </time>
+                            </div>
+                        </article>
+                    )}
+                </div>
+            </div>
+
+            <div className="absolute left-4 right-4 bottom-3 pointer-events-none text-[12px] text-[#64748b] text-left">
                 Get quick, accurate, and personalized answers from Privue's workbench.
             </div>
 
-            <Handle type="target" position={Position.Left} id="chat-left" style={{ left: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "18%" }} />
-            <Handle type="source" position={Position.Right} id="chat-right" style={{ right: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "45%" }} />
+            <Handle
+                type="target"
+                position={Position.Left}
+                id="chat-left"
+                style={{
+                    left: -8,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: "var(--privue-700,#475569)",
+                    border: "none",
+                    top: "18%",
+                }}
+            />
+            <Handle
+                type="source"
+                position={Position.Right}
+                id="chat-right"
+                style={{
+                    right: -8,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: "var(--privue-700,#475569)",
+                    border: "none",
+                    top: "45%",
+                }}
+            />
         </div>
     );
 }
 
 const AnimatedChatNode = React.memo(AnimatedChatNodeInner);
 export { AnimatedChatNode };
+export default AnimatedChatNode;

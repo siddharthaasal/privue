@@ -12,7 +12,7 @@ import { DatabaseZap } from 'lucide-react';
 
 type Stage = "idle" | "docs" | "table_fill" | "done";
 
-export default function DataAcquisition({
+export default function LargeDataAcquisition({
     startImmediately = true,
     bgImage = "/module-animations/cont-monitoring-dashboard-light.png",
     // bgImage = "/module-animations/data-acq-2.png",
@@ -127,12 +127,12 @@ export default function DataAcquisition({
     };
 
     const tableRows = [
-        { k: "PAN", v: "ABCDE1234F" },
+        { k: "CIN", v: "U12345DL2011PTC000002" },
         { k: "GSTIN", v: "27AAEPM1234C1ZQ" },
-        // "in sync" dummy values:
-        { k: "Revenue (₹)", v: "28,45,350" },         // revenue (net)
-        { k: "ROE %", v: "23.5%" },                  // return on equity
-        { k: "GST Turnover (₹)", v: "36,84,535" },   // gross turnover reported for GST
+        // Large customer "in sync" dummy values:
+        { k: "Revenue (₹)", v: "28,45,35,000" },     // ~28.45 crore net revenue
+        { k: "ROE %", v: "23.7%" },                  // similar ratio to SME case
+        { k: "GST Turnover (₹)", v: "36,84,53,000" } // ~36.84 crore gross turnover
     ];
 
     return (
@@ -201,7 +201,7 @@ export default function DataAcquisition({
                                             {/* bottom: spinning loader discs */}
                                             <div className="mt-4 flex items-center justify-between">
                                                 {[
-                                                    { label: "Credit Reports", idx: 0 },
+                                                    { label: "Registry", idx: 0 },
                                                     { label: "GST Returns", idx: 1 },
                                                     { label: "Financials", idx: 2 },
                                                 ].map((f) => {
@@ -248,26 +248,32 @@ export default function DataAcquisition({
                                             transition={{ duration: 0.35 }}
                                             className="min-w-[400px]"
                                         >
-                                            {/* Larger table filling animation (row-wise) */}
                                             <div className="text-xs font-medium text-slate-700 mb-2">Imported data preview</div>
 
                                             <div className="bg-white border rounded-md overflow-hidden text-xs">
-                                                <div className="grid grid-cols-3 gap-0">
-                                                    <div className="px-2 py-1 font-medium border-b">Field</div>
-                                                    <div className="px-2 py-1 font-medium border-b">Value</div>
-                                                    <div className="px-2 py-1 font-medium border-b">Status</div>
+                                                {/* use a named grid-template for predictable column widths */}
+                                                <div className="grid grid-cols-[minmax(100px,140px)_1fr_minmax(60px,90px)]">
+                                                    {/* header */}
+                                                    <div className="px-2 py-1 font-medium border-b text-slate-700">Field</div>
+                                                    <div className="px-2 py-1 font-medium border-b text-slate-700">Value</div>
+                                                    <div className="px-2 py-1 font-medium border-b text-slate-700">Status</div>
 
                                                     {tableRows.map((r, i) => (
                                                         <motion.div
                                                             key={i}
+                                                            layout
                                                             initial={{ opacity: 0, y: 8 }}
                                                             animate={tableRowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.08, y: 6 }}
                                                             transition={{ duration: 0.36, delay: i * 0.06 }}
                                                             className="col-span-3 grid grid-cols-[minmax(100px,140px)_1fr_minmax(60px,90px)] items-center px-1 py-1 border-b gap-x-1"
                                                         >
-                                                            <div className="text-slate-700 font-normal">{r.k}</div>
-                                                            <div className="text-slate-800">{tableRowsShown > i ? r.v : "—"}</div>
-                                                            <div className={`${tableRowsShown > i ? "text-emerald-600" : "text-slate-400"}`}>{tableRowsShown > i ? "Imported" : "—"}</div>
+                                                            <div className="text-slate-700 text-left">{r.k}</div>
+                                                            <div className="text-slate-800 min-w-0 truncate text-left">
+                                                                {tableRowsShown > i ? r.v : "—"}
+                                                            </div>
+                                                            <div className={`${tableRowsShown > i ? "text-emerald-600" : "text-slate-400"} text-right`}>
+                                                                {tableRowsShown > i ? "Imported" : "—"}
+                                                            </div>
                                                         </motion.div>
                                                     ))}
                                                 </div>
@@ -275,6 +281,7 @@ export default function DataAcquisition({
                                             </div>
                                         </motion.div>
                                     )}
+
 
                                     {stage === "done" && (
                                         <motion.div

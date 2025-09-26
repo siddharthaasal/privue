@@ -12,9 +12,15 @@ import { FileSpreadsheet, FileText, File } from "lucide-react";
  * - Lots of console logs to trace where flow could stall
  */
 
-type Dealer = { id: string; name: string; gst: string; mobile: string; verified: boolean };
+type Dealer = {
+    id: string;
+    name: string;
+    gst: string;
+    cin: string;   // new: CIN shown in form + table
+    verified: boolean;
+};
 
-export default function VideoLikeFlowDummySlow() {
+export default function LargeDealerOnboarding() {
     const [stage, setStage] = useState<
         "idle" | "form" | "table_unverified" | "upload" | "table_verified"
     >("idle");
@@ -28,7 +34,7 @@ export default function VideoLikeFlowDummySlow() {
                 id: `${i}-${r.name}`,
                 name: r.name,
                 gst: r.gst,
-                mobile: r.mobile,
+                cin: r.cin ?? "—",
                 verified: true,
             })) as Dealer[]
     );
@@ -113,14 +119,14 @@ export default function VideoLikeFlowDummySlow() {
         }, 700) as unknown as number;
     }
 
-    function handleSubmitFromForm(values: { name: string; gst: string; mobile: string }) {
+    function handleSubmitFromForm(values: { name: string; gst: string; cin: string }) {
         console.log("[Flow] form submitted", values);
         const id = `new-${Date.now()}`;
         const newDealer: Dealer = {
             id,
             name: values.name || "New Dealer",
             gst: values.gst || "—",
-            mobile: values.mobile || "—",
+            cin: values.cin || "—",
             verified: false,
         };
 
@@ -243,8 +249,6 @@ export default function VideoLikeFlowDummySlow() {
                                         <div className="text-[12px] font-medium truncate">balance-sheet.pdf</div>
                                         <div className="text-[10px] text-slate-500">1.2 MB</div>
                                     </div>
-
-                                    {/* <div className="text-[11px] text-slate-500 ml-2">72%</div> */}
                                 </div>
 
                                 <div className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm">
@@ -256,8 +260,6 @@ export default function VideoLikeFlowDummySlow() {
                                         <div className="text-[12px] font-medium truncate">profit-and-loss-account.xlsx</div>
                                         <div className="text-[10px] text-slate-500">840 KB</div>
                                     </div>
-
-                                    {/* <div className="text-[11px] text-slate-500 ml-2">45%</div> */}
                                 </div>
 
                                 <div className="flex items-center gap-3 p-2 border rounded-md bg-slate-50 shadow-sm">
@@ -266,11 +268,9 @@ export default function VideoLikeFlowDummySlow() {
                                     </div>
 
                                     <div className="flex-1 min-w-0">
-                                        <div className="text-[12px] font-medium truncate">income-sheet-detail.docx</div>
+                                        <div className="text-[12px] font-medium truncate">income-tax-detail.docx</div>
                                         <div className="text-[10px] text-slate-500">320 KB</div>
                                     </div>
-
-                                    {/* <div className="text-[11px] text-slate-500 ml-2">18%</div> */}
                                 </div>
                             </div>
 
@@ -300,7 +300,6 @@ export default function VideoLikeFlowDummySlow() {
                             className="absolute -right-2 -bottom-2 w-auto max-w-full bg-white/95 rounded-xl p-3 shadow-lg"
                         >
                             <div className="text-[12px] font-semibold text-emerald-600 text-right">Dealer verified</div>
-                            {/* <div className="text-xs text-slate-500 mt-1">Table updated in the background.</div> */}
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -311,11 +310,6 @@ export default function VideoLikeFlowDummySlow() {
 
 /* --------------------------
    Compact slow form + manual fallback
-   -------------------------- */
-/* --------------------------
-   Module-level typing controller (singleton)
-   - runs once, emits incremental updates to subscribers
-   - survives React StrictMode remounts
    -------------------------- */
 
 type TypingListener = {
@@ -341,7 +335,8 @@ const TypingController = (() => {
     async function start() {
         if (started) return;
         started = true;
-        const sequences = ["Acme Traders", "27AAEPM1234C1ZQ", "+91 98765 43210"];
+        // sequence: [Company Name, GSTIN, CIN]
+        const sequences = ["Acme Traders", "27AAEPM1234C1ZQ", "U12345DL2020PTC000001"];
 
         function typeString(fieldIndex: number, text: string, charDelay = 95) {
             return new Promise<void>((resolve) => {
@@ -397,20 +392,14 @@ const TypingController = (() => {
     };
 })();
 
-
-/* --------------------------
-   Replace DummyFormCompactSlow with this subscriber-based version
-   (visual typing driven by the controller; manual fallback button kept)
-   -------------------------- */
-
 function DummyFormCompactSlow({
     onSubmit,
 }: {
-    onSubmit: (values: { name: string; gst: string; mobile: string }) => void;
+    onSubmit: (values: { name: string; gst: string; cin: string }) => void;
 }) {
     const [dealerName, setDealerName] = useState("");
     const [gstin, setGstin] = useState("");
-    const [mobile, setMobile] = useState("");
+    const [cin, setCin] = useState("");
     const [step, setStep] = useState(0);
 
     // finishedTypingRef used to gate autosubmit (and manual fallback)
@@ -428,14 +417,13 @@ function DummyFormCompactSlow({
                 // update the appropriate field and step
                 if (fieldIndex === 0) setDealerName(text);
                 if (fieldIndex === 1) setGstin(text);
-                if (fieldIndex === 2) setMobile(text);
+                if (fieldIndex === 2) setCin(text);
 
                 // compute step progress (0..3)
-                // step = number of fields fully typed or currently typing (approx)
                 const newStep =
                     (dealerName.length > 0 ? 1 : 0) +
                     (gstin.length > 0 ? 1 : 0) +
-                    (mobile.length > 0 ? 1 : 0);
+                    (cin.length > 0 ? 1 : 0);
                 setStep((s) => Math.max(s, newStep));
             },
             onFinished: () => {
@@ -449,7 +437,7 @@ function DummyFormCompactSlow({
                     onSubmit({
                         name: "Acme Traders",
                         gst: "27AAEPM1234C1ZQ",
-                        mobile: "+91 98765 43210",
+                        cin: "U12345DL2020PTC000001",
                     });
                 }, 60);
             },
@@ -469,22 +457,20 @@ function DummyFormCompactSlow({
             onSubmit={(e) => {
                 e.preventDefault();
                 finishedTypingRef.current = true;
-                onSubmit({ name: dealerName, gst: gstin, mobile });
+                onSubmit({ name: dealerName, gst: gstin, cin });
             }}
             className="flex flex-col gap-1"
         >
-            <label className="text-[8px] text-slate-600">Dealer Name</label>
+            <label className="text-[8px] text-slate-600">Company Name</label>
             <input value={dealerName} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
             <label className="text-[8px] text-slate-600">GSTIN</label>
             <input value={gstin} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
-            <label className="text-[8px] text-slate-600">Mobile no</label>
-            <input value={mobile} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
+            <label className="text-[8px] text-slate-600">CIN</label>
+            <input value={cin} readOnly className="text-xs rounded-md p-1 border border-slate-200 font-sans tracking-wide w-full" />
 
             <div className="pt-1 flex items-center justify-end">
-                {/* <div className="text-xs text-slate-400">Tip: wait for typing or force submit</div> */}
-
                 <div className="flex items-center gap-1">
                     <motion.button
                         type="submit"
@@ -497,31 +483,16 @@ function DummyFormCompactSlow({
                     >
                         Submit
                     </motion.button>
-
-                    {/* {step >= 3 && (
-                        <button
-                            type="button"
-                            onClick={() => {
-                                console.log("[Form] Force submit clicked (controller fallback)");
-                                finishedTypingRef.current = true;
-                                onSubmit({ name: dealerName || "Acme Traders", gst: gstin || "27AAEPM1234C1ZQ", mobile: mobile || "+91 98765 43210" });
-                            }}
-                            className="px-3 py-2 text-sm rounded-md border border-slate-200 bg-white"
-                        >
-                            Force submit now
-                        </button>
-                    )} */}
                 </div>
             </div>
         </form>
     );
 }
 
-
 /* --------------------------
    BackgroundDealersTable (explicit RGBA animation targets)
    -------------------------- */
-// Insert this DealerRow component above BackgroundDealersTable (or inside same file scope)
+
 function DealerRow({
     d,
     highlightId,
@@ -569,7 +540,7 @@ function DealerRow({
         >
             <td className="px-3 py-3 text-[12px]">{d.name}</td>
             <td className="px-3 py-3 text-[12px]">{d.gst}</td>
-            <td className="px-3 py-3 text-[12px]">{d.mobile}</td>
+            <td className="px-3 py-3 text-[12px]">{d.cin}</td>
 
             <td className="px-3 py-3">
                 <AnimatePresence mode="sync">
@@ -614,9 +585,9 @@ function BackgroundDealersTable({ dealers, highlightId }: { dealers: Dealer[]; h
                 <table className="w-full text-xs">
                     <thead className="bg-slate-50 text-slate-600 sticky top-0">
                         <tr>
-                            <th className="text-left px-3 py-3 text-[11px]">Name</th>
+                            <th className="text-left px-3 py-3 text-[11px]">Company Name</th>
                             <th className="text-left px-3 py-3 text-[11px]">GSTIN</th>
-                            <th className="text-left px-3 py-3 text-[11px]">Mobile</th>
+                            <th className="text-left px-3 py-3 text-[11px]">CIN</th>
                             <th className="text-left px-3 py-3 text-[11px]">Status</th>
                         </tr>
                     </thead>
@@ -625,28 +596,26 @@ function BackgroundDealersTable({ dealers, highlightId }: { dealers: Dealer[]; h
                             <DealerRow key={d.id} d={d} index={i} highlightId={highlightId} />
                         ))}
                     </tbody>
-
                 </table>
             </div>
         </div>
     );
 }
 
-/* initial seed WITHOUT Acme Traders */
+/* initial seed WITHOUT Acme Traders — now with dummy CINs */
 const dealerRowsInitial = [
-    { name: "Blue Wheels", gst: "27BBSRT9876D2YZ", mobile: "+91 91234 56789" },
-    { name: "Green Lines", gst: "27GGLNM5555F1AB", mobile: "+91 99876 54321" },
-    { name: "Metro Supplies", gst: "27MTRPL9999F2CD", mobile: "+91 98111 22334" },
-    { name: "Quick Parts", gst: "27QKPTR1111Z9PQ", mobile: "+91 90000 12345" },
-    { name: "Nova Distributors", gst: "27NVDST2222Y8ZX", mobile: "+91 91234 00001" },
-    { name: "Prime Hardware", gst: "27PRMHW3333A1BB", mobile: "+91 92345 67890" },
-    { name: "Alpha Traders", gst: "27ALPHT4444C2CC", mobile: "+91 93456 78901" },
-    { name: "Omega Parts", gst: "27OMGPT5555D3DD", mobile: "+91 94567 89012" },
-    { name: "Eastern Motors", gst: "27EASTM6666E4EE", mobile: "+91 95678 90123" },
-    { name: "West Point", gst: "27WSTPT7777F5FF", mobile: "+91 96789 01234" },
-    { name: "Sunrise Supplies", gst: "27SUNRS8888G6GG", mobile: "+91 97890 12345" },
-    { name: "Lakeside Components", gst: "27LAKSC9999H7HH", mobile: "+91 98901 23456" },
-    { name: "Horizon Export", gst: "27HRZNX0000J8JJ", mobile: "+91 99012 34567" },
-    { name: "Crest Technologies", gst: "27CRSTT1111K9KK", mobile: "+91 90123 45678" },
-    { name: "Pioneer Goods", gst: "27PIONR2222L0LL", mobile: "+91 81234 56780" },
+    { name: "Green Lines", gst: "07GGLNM5555F1AB", cin: "U12345DL2011PTC000002" },
+    { name: "Metro Supplies", gst: "29MTRPL9999F2CD", cin: "U12345KA2012PTC000003" },
+    { name: "Quick Parts", gst: "33QKPTR1111Z9PQ", cin: "U12345TN2013PTC000004" },
+    { name: "Nova Distributors", gst: "06NVDST2222Y8ZX", cin: "U12345HR2014PTC000005" },
+    { name: "Prime Hardware", gst: "24PRMHW3333A1BB", cin: "U12345GJ2015PTC000006" },
+    { name: "Alpha Traders", gst: "09ALPHT4444C2CC", cin: "U12345UP2016PTC000007" },
+    { name: "Omega Parts", gst: "19OMGPT5555D3DD", cin: "U12345WB2017PTC000008" },
+    { name: "Eastern Motors", gst: "10EASTM6666E4EE", cin: "U12345BR2018PTC000009" },
+    { name: "West Point", gst: "27WSTPT7777F5FF", cin: "U12345MH2019PTC000010" },
+    { name: "Sunrise Supplies", gst: "18SUNRS8888G6GG", cin: "U12345AS2020PTC000011" },
+    { name: "Lakeside Components", gst: "32LAKSC9999H7HH", cin: "U12345KL2021PTC000012" },
+    { name: "Horizon Export", gst: "36HRZNX0000J8JJ", cin: "U12345TG2022PTC000013" },
+    { name: "Crest Technologies", gst: "23CRSTT1111K9KK", cin: "U12345MP2023PTC000014" },
+    { name: "Pioneer Goods", gst: "21PIONR2222L0LL", cin: "U12345OD2024PTC000015" },
 ];

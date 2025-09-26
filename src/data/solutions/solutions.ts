@@ -1,9 +1,11 @@
 // src/data/solutions.ts
-import VideoLikeFlowDummy from '@/components/product-animations/ThreeImageFlow';
+import DealerOnboarding from '@/components/product-animations/DealerOnboarding';
 import DataAcquisition from '@/components/product-animations/DataAcquisition';
 import NotificationOverlayWithLeftFade from '@/components/product-animations/ContinuousMonitoringDemo';
 import RiskAssessment from '@/components/product-animations/RiskAssessment';
 import CreditTerms from '@/components/product-animations/CreditTerms';
+import LargeDealerOnboarding from '@/components/product-animations/LargeDealerOnboarding';
+import LargeDataAcquisition from '@/components/product-animations/LargeDataAcquisition';
 
 export type Problem = {
     problemHeading: string;
@@ -120,7 +122,7 @@ export const solutions: Solution[] = [
                     "Add dealers, upload documents and verify identity",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
-                renderAnimation: VideoLikeFlowDummy
+                renderAnimation: DealerOnboarding
             },
             {
                 title: "Data Acquisition",
@@ -563,6 +565,7 @@ export const solutions: Solution[] = [
                     "Add customers, upload documents, and verify identity",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: LargeDealerOnboarding
             },
             {
                 title: "Data Acquisition",
@@ -570,6 +573,7 @@ export const solutions: Solution[] = [
                     "Pull financial, GST, and compliance data seamlessly",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: LargeDataAcquisition
             },
             {
                 title: "Risk Assessment",
@@ -577,6 +581,7 @@ export const solutions: Solution[] = [
                     "Generate a comprehensive risk score for each customer",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: RiskAssessment
             },
             {
                 title: "Contract & Credit Terms",
@@ -584,6 +589,7 @@ export const solutions: Solution[] = [
                     "Use the score to decide on exposure limits and payment terms",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CreditTerms
             },
             {
                 title: "Continuous Monitoring",
@@ -591,6 +597,7 @@ export const solutions: Solution[] = [
                     "PRIVUE re-scores customers periodically and raises alerts on emerging risks",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: NotificationOverlayWithLeftFade
             },
             {
                 title: "Integrations",

@@ -292,9 +292,9 @@ export default function Header() {
                                             <div
                                                 onMouseEnter={() => openMenu(idx)}
                                                 onMouseLeave={() => closeMenu()}
-                                                className="absolute left-0 mt-2 w-max min-w-max bg-popover text-popover-foreground rounded-md shadow-lg border border-foreground/5 z-50"
+                                                className="absolute left-0 mt-2 w-max min-w-max bg-popover text-popover-foreground rounded-sm shadow-lg border border-foreground/5 z-50"
                                             >
-                                                <div className="p-2">
+                                                <div className="p-1">
                                                     {link.items!.map((sub) => {
                                                         const isIndustryLink = link.name === "Industries" && (sub as any).id;
                                                         const defaultHref = sub.href ?? "#";
@@ -311,7 +311,7 @@ export default function Header() {
                                                                 ) : null}
 
                                                                 <div className="min-w-0">
-                                                                    <div className="text-sm font-medium">{sub.name}</div>
+                                                                    <div className="text-sm font-normal">{sub.name}</div>
                                                                     {sub.description && <p className="text-sm text-muted-foreground leading-snug truncate">{sub.description}</p>}
                                                                 </div>
                                                             </>
@@ -324,13 +324,13 @@ export default function Header() {
                                                                     e.preventDefault();
                                                                     handleIndustryClick((sub as any).id);
                                                                 }}
-                                                                className="w-full text-left flex items-start gap-3 p-3 rounded-md hover:bg-muted no-underline bg-transparent border-0"
+                                                                className="w-full text-left flex items-start gap-3 px-3 py-2.5  rounded-sm hover:bg-muted no-underline bg-transparent border-0"
                                                                 aria-label={`Open ${sub.name} industry`}
                                                             >
                                                                 {itemContent}
                                                             </button>
                                                         ) : (
-                                                            <a key={sub.name} href={defaultHref} className="flex items-center gap-3 p-3 rounded-md hover:bg-muted no-underline">
+                                                            <a key={sub.name} href={defaultHref} className="flex items-center gap-3 px-3 py-2.5 rounded-sm hover:bg-muted no-underline">
                                                                 {itemContent}
                                                             </a>
                                                         );

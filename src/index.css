@@ -279,3 +279,37 @@
   display: none;
   /* Chrome, Safari */
 }
+
+
+/* integrations reactflow */
+/* make the main edge stroke look like small squares (dashed) */
+.react-flow__edge-path {
+  stroke-dasharray: 6 6;
+  stroke-linecap: butt;
+  /* square ends for blocky look */
+  stroke-opacity: 0.9;
+  animation: rf-dash-shift 1.6s linear infinite;
+}
+
+/* subtle dash offset move to imply flow */
+@keyframes rf-dash-shift {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+/* fix for duplicate invisible path id used by AnimatedSquareEdge (no visual impact) */
+path[id$='-path'] {
+  display: none;
+}
+
+/* make background dots softer on small widths */
+@media (max-width: 900px) {
+  .react-flow__background {
+    opacity: 0.6;
+  }
+}

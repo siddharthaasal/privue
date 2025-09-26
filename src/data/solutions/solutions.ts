@@ -6,6 +6,7 @@ import RiskAssessment from '@/components/product-animations/RiskAssessment';
 import CreditTerms from '@/components/product-animations/CreditTerms';
 import LargeDealerOnboarding from '@/components/product-animations/LargeDealerOnboarding';
 import LargeDataAcquisition from '@/components/product-animations/LargeDataAcquisition';
+import Integrations from '@/components/product-animations/Integrations';
 
 export type Problem = {
     problemHeading: string;
@@ -162,6 +163,7 @@ export const solutions: Solution[] = [
                     "The tool can be integrated into your ERP system for a seamless experience",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: Integrations
             },
         ],
         coreCapabilities: [
@@ -605,6 +607,7 @@ export const solutions: Solution[] = [
                     "The tool can be integrated into your ERP system for a seamless experience",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: Integrations
             },
         ],
         mainArticleSlug: "redefining-commercial-lines-underwriting"

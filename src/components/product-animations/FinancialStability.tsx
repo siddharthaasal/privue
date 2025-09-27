@@ -38,51 +38,78 @@ function FinancialMetricsCard() {
         >
             <div className="text-[10px] font-medium mb-1">Key Financial Metrics</div>
 
-            <div className="flex gap-3 h-[190px]">
+            <div className="flex gap-0 h-[190px]">
                 {/* left chart */}
-                <div className="flex-1">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={leftData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                            <CartesianGrid stroke="#e8e8e8" strokeDasharray="4 4" vertical={false} />
-                            <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
-                            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
-                            <Tooltip contentStyle={{ fontSize: 9, padding: "4px 6px" }} />
-                            <Line type="monotone" dataKey="current" stroke="#ef4444" strokeWidth={1} dot={{ r: 2 }} />
-                            <Line type="monotone" dataKey="quick" stroke="#059669" strokeWidth={1} dot={{ r: 2 }} />
-                            <Line type="monotone" dataKey="de" stroke="#f59e0b" strokeWidth={1} dot={{ r: 2 }} />
-                            <Line type="monotone" dataKey="at" stroke="#f97316" strokeWidth={1} dot={{ r: 2 }} />
-                        </LineChart>
-                    </ResponsiveContainer>
+                <div className="flex-1 flex flex-col">
+                    <div className="flex-1">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={leftData} margin={{ top: 4, right: 4, left: 0, bottom: 4 }}>
+                                <CartesianGrid stroke="#e8e8e8" strokeDasharray="4 4" vertical={false} />
+                                <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
+                                <Tooltip contentStyle={{ fontSize: 9, padding: "4px 6px" }} />
+                                <Line type="monotone" dataKey="current" stroke="#ef4444" strokeWidth={1} dot={{ r: 2 }} />
+                                <Line type="monotone" dataKey="quick" stroke="#059669" strokeWidth={1} dot={{ r: 2 }} />
+                                <Line type="monotone" dataKey="de" stroke="#f59e0b" strokeWidth={1} dot={{ r: 2 }} />
+                                <Line type="monotone" dataKey="at" stroke="#f97316" strokeWidth={1} dot={{ r: 2 }} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
 
-                    {/* compact legend */}
-                    <div className="flex items-center gap-2 text-[8.5px] mt-0.5">
-                        <span className="w-2 h-2 bg-[#ef4444] rounded-sm" /> Current
-                        <span className="w-2 h-2 bg-[#059669] rounded-sm" /> Quick
-                        <span className="w-2 h-2 bg-[#f59e0b] rounded-sm" /> D/E
-                        <span className="w-2 h-2 bg-[#f97316] rounded-sm" /> A/T
+                    {/* compact legend — each item is its own flex item */}
+                    <div className="w-full flex justify-center mt-0.5">
+                        <div className="flex gap-3 text-[8.5px]">
+                            <div className="flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span className="inline-block w-2 h-2 bg-[#ef4444] rounded-sm" />
+                                <span>Current</span>
+                            </div>
+
+                            <div className="flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span className="inline-block w-2 h-2 bg-[#059669] rounded-sm" />
+                                <span>Quick</span>
+                            </div>
+
+                            <div className="flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span className="inline-block w-2 h-2 bg-[#f59e0b] rounded-sm" />
+                                <span>D/E</span>
+                            </div>
+
+                            <div className="flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span className="inline-block w-2 h-2 bg-[#f97316] rounded-sm" />
+                                <span>A/T</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {/* right chart */}
-                <div className="flex-1">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={rightData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
-                            <CartesianGrid stroke="#e8e8e8" strokeDasharray="4 4" vertical={false} />
-                            <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
-                            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
-                            <Tooltip contentStyle={{ fontSize: 9, padding: "4px 6px" }} />
-                            <Line type="monotone" dataKey="icr" stroke="#0f172a" strokeWidth={1} dot={{ r: 2 }} />
-                        </LineChart>
-                    </ResponsiveContainer>
+                <div className="flex-1 flex flex-col">
+                    <div className="flex-1">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={rightData} margin={{ top: 4, right: 4, left: 4, bottom: 4 }}>
+                                <CartesianGrid stroke="#e8e8e8" strokeDasharray="4 4" vertical={false} />
+                                <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: "#71717a" }} />
+                                <Tooltip contentStyle={{ fontSize: 9, padding: "4px 6px" }} />
+                                <Line type="monotone" dataKey="icr" stroke="#0f172a" strokeWidth={1} dot={{ r: 2 }} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
 
-                    <div className="flex items-center gap-2 text-[8.5px] mt-0.5">
-                        <span className="w-2 h-2 bg-[#0f172a] rounded-sm" /> ICR
+                    <div className="w-full flex justify-center mt-0.5">
+                        <div className="flex gap-3 text-[8.5px]">
+                            <div className="flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span className="inline-block w-2 h-2 bg-[#0f172a] rounded-sm" />
+                                <span>ICR</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </motion.div>
     );
 }
+
 
 
 const chartData = [
@@ -131,7 +158,7 @@ function FinancialChartCard() {
                         yAxisId="left"
                         stroke="#9ca3af"
                         tick={{ fontSize: 9, fill: "#6b7280" }}
-                        tickFormatter={(v) => `₹${v} Cr.`}
+                        tickFormatter={(v) => `₹${v}\u00A0Cr.`}
                         axisLine={false}
                         tickLine={false}
                     />
@@ -140,7 +167,7 @@ function FinancialChartCard() {
                         orientation="right"
                         stroke="#9ca3af"
                         tick={{ fontSize: 9, fill: "#6b7280" }}
-                        tickFormatter={(v) => `₹${v} Cr.`}
+                        tickFormatter={(v) => `₹${v}\u00A0Cr.`}
                         axisLine={false}
                         tickLine={false}
                     />

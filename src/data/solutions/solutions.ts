@@ -12,6 +12,7 @@ import FinancialStability from '@/components/product-animations/FinancialStabili
 import { SquareLibrary, CopySlash, FileDigit, BetweenHorizonalEnd, Airplay, MonitorSpeaker, AlignLeft, GitPullRequestArrow, GitPullRequestCreateArrow, BookCopy, Factory, CloudRain, BanknoteArrowUp, Landmark, Building2, Building, Warehouse, Users, FolderSymlink, BookUp2, FolderGit2, BookOpenCheck, Files, FileChartPie, FileText, FileSearch, BookAlert, Layers, Scale, Newspaper, FileCheck2, BanknoteArrowDown, ChartNetwork, IdCardLanyard, ReceiptText, FileX2, FileInput, Workflow, MessageSquareText, GitGraph, FileClock, GitPullRequestClosed, FilePlay, FileCode2, ShieldAlert, CloudRainWind, MonitorDot } from "lucide-react";
 
 import DistributorPerformanceWorkflow from '@/components/solutions/header-workflows/DistributorPerformanceWorkflow';
+import SustainabilityWorkflow from '@/components/solutions/header-workflows/SustainabilityWorkflow';
 
 export type Problem = {
     problemHeading: string;
@@ -191,7 +192,8 @@ export const solutions: Solution[] = [
         slug: "sustainability-assessment",
         icon: "/icons/solutions/sustainability-assessment.png",
         // icon: Recycle,
-        img: "/solutions/demo-image.png",
+        // img: "/solutions/demo-image.png",
+        workflow: SustainabilityWorkflow,
         coverImg: "https://images.unsplash.com/photo-1569227997603-33b9f12af927?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Sustainability Assessment",
         subHeading: "Climate Risk. Emissions Estimation. ESG Score.",

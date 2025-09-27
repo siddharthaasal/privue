@@ -307,7 +307,7 @@ export function SustainabilityChatNodeInner(): any {
         <div
             role="group"
             aria-label="Sustainability chat preview node"
-            className="w-full max-w-[520px] min-w-[380px] h-[460px] p-4 relative box-border border-2 rounded-lg bg-white/95 overflow-hidden font-sans"
+            className="w-full max-w-[520px] min-w-[380px] h-[480px] p-4 relative box-border border-2 border-privue-700 rounded-lg bg-white/95 overflow-hidden font-sans"
         >
             <div className="flex justify-between items-center mb-2">
                 <div className="flex items-center gap-2">
@@ -386,7 +386,7 @@ export function SustainabilityChatNodeInner(): any {
                 type="target"
                 position={Position.Left}
                 id="chat-left"
-                style={{ left: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "18%" }}
+                style={{ left: -8, width: 8, height: 8, borderRadius: 999, background: "var(--privue-700,#475569)", border: "none", top: "16.5%" }}
             />
             <Handle
                 type="source"

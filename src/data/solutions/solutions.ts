@@ -11,6 +11,7 @@ import FinancialStability from '@/components/product-animations/FinancialStabili
 
 import { SquareLibrary, CopySlash, FileDigit, BetweenHorizonalEnd, Airplay, MonitorSpeaker, AlignLeft, GitPullRequestArrow, GitPullRequestCreateArrow, BookCopy, Factory, CloudRain, BanknoteArrowUp, Landmark, Building2, Building, Warehouse, Users, FolderSymlink, BookUp2, FolderGit2, BookOpenCheck, Files, FileChartPie, FileText, FileSearch, BookAlert, Layers, Scale, Newspaper, FileCheck2, BanknoteArrowDown, ChartNetwork, IdCardLanyard, ReceiptText, FileX2, FileInput, Workflow, MessageSquareText, GitGraph, FileClock, GitPullRequestClosed, FilePlay, FileCode2, ShieldAlert, CloudRainWind, MonitorDot } from "lucide-react";
 
+import DistributorPerformanceWorkflow from '@/components/solutions/header-workflows/DistributorPerformanceWorkflow';
 
 export type Problem = {
     problemHeading: string;
@@ -48,7 +49,8 @@ export type Solution = {
     id: number;
     icon: React.ComponentType<any> | string;
     slug: string;
-    img: string;
+    img?: string;
+    workflow?: React.ComponentType<any> | React.ReactNode
     coverImg: string;
     heading: string;
     subHeading: string;
@@ -70,7 +72,8 @@ export const solutions: Solution[] = [
         slug: "distributor-performance-management",
         // icon: AlignVerticalJustifyCenter,
         icon: "/icons/solutions/distributor-performance-management.png",
-        img: "/solutions/demo-image.png",
+        // img: "/solutions/demo-image.png",
+        workflow: DistributorPerformanceWorkflow,
         coverImg: "https://plus.unsplash.com/premium_photo-1682148458133-cf5a01a50cce?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlzdHJpYnV0b3J8ZW58MHx8MHx8fDA%3D",
         heading: "Distributor Performance Management",
         subHeading: "Reduce leakages. Improve collections. Safeguard growth.",

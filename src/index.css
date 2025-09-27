@@ -280,6 +280,19 @@
   /* Chrome, Safari */
 }
 
+.react-flow {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* pane / viewport that may show outlines */
+.react-flow__viewport,
+.react-flow__pane {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
 
 /* integrations reactflow */
 /* make the main edge stroke look like small squares (dashed) */

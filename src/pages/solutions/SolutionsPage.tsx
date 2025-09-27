@@ -39,7 +39,7 @@ export default function SolutionsPage() {
     return (
         <Layout>
             <main className="relative mx-auto">
-                <Hero heading={soln.heading} subHeading={soln.subHeading} image={soln.img} />
+                <Hero heading={soln.heading} subHeading={soln.subHeading} image={soln.img} workflow={soln.workflow} />
 
                 <ProblemSection problems={soln.problems} />
                 <SolutionSection mainDesc={soln.mainSolnDesc} solnPoints={soln.solnPoints} />

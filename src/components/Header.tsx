@@ -5,9 +5,6 @@ import privueLogo from "/privue-logo.png";
 import { Button } from "@/components/ui/button";
 import { solutions } from "@/data/solutions/solutions.ts";
 
-// import { AiOutlineApi } from "react-icons/ai";
-// import { IoMdGitNetwork } from "react-icons/io";
-
 type MenuItem = {
     name: string;
     href?: string;

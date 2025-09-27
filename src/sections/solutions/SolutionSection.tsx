@@ -1,4 +1,4 @@
-import ChallengeCard from "@/components/solutions/ChallengeCard";
+import SolutionCard from "@/components/solutions/SolutionCard";
 import type { SolutionPoints } from "@/data/solutions/solutions";
 
 interface SolutionSectionProps {
@@ -30,9 +30,10 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
             <div className={`divide-x-1 divide-y-1 divide-gray-200 mt-12 grid grid-cols-1 ${gridColsClass} gap-0 border-b-[1px] border-gray-200`}>
                 {solnPoints.map((sol, idx) => (
                     <div key={idx} className="flex-1">
-                        <ChallengeCard
+                        <SolutionCard
                             heading={sol.solutionHeading}
                             description={sol.solutionDescription}
+                            icon={sol.icon}
                         />
                     </div>
                 ))}

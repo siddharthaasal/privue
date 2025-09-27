@@ -9,10 +9,13 @@ import LargeDataAcquisition from '@/components/product-animations/LargeDataAcqui
 import Integrations from '@/components/product-animations/Integrations';
 import FinancialStability from '@/components/product-animations/FinancialStability';
 
+import { SquareLibrary, CopySlash, FileDigit, BetweenHorizonalEnd, Airplay, MonitorSpeaker, AlignLeft, GitPullRequestArrow, GitPullRequestCreateArrow, BookCopy, Factory, CloudRain, BanknoteArrowUp, Landmark, Building2, Building, Warehouse, Users, FolderSymlink, BookUp2, FolderGit2, BookOpenCheck, Files, FileChartPie, FileText, FileSearch, BookAlert, Layers, Scale, Newspaper, FileCheck2, BanknoteArrowDown, ChartNetwork, IdCardLanyard, ReceiptText, FileX2, FileInput, Workflow, MessageSquareText, GitGraph, FileClock, GitPullRequestClosed, FilePlay, FileCode2, ShieldAlert, CloudRainWind, MonitorDot } from "lucide-react";
+
+
 export type Problem = {
     problemHeading: string;
     problemDesc: string;
-    icon: string;
+    icon: React.ComponentType<any> | string;
 };
 
 export type Module = {
@@ -26,18 +29,19 @@ export type Module = {
 export type Capability = {
     heading?: string;
     desc: string;
-    icon: string;
+    icon: React.ComponentType<any> | string;
 };
 
 export type UseCase = {
     heading: string;
     desc: string;
-    icon: string;
+    icon: React.ComponentType<any> | string;
 };
 
 export type SolutionPoints = {
     solutionHeading: string;
     solutionDescription: string;
+    icon: React.ComponentType<any> | string;
 }
 
 export type Solution = {
@@ -80,38 +84,41 @@ export const solutions: Solution[] = [
         solnPoints: [
             {
                 solutionHeading: "Credit evaluation",
-                solutionDescription: "Check if a distributor/dealer can pay and guide how much credit to extend."
+                solutionDescription: "Check if a distributor/dealer can pay and guide how much credit to extend.",
+                icon: Airplay
             },
             {
                 solutionHeading: "Ongoing monitoring",
-                solutionDescription: "Reviews every six months and sends early warnings to prevent losses."
+                solutionDescription: "Reviews every six months and sends early warnings to prevent losses.",
+                icon: MonitorSpeaker
             },
             {
                 solutionHeading: "Comprehensive insights",
-                solutionDescription: "Assesses 300+ data points from public/private sources plus distributor documents for accurate creditworthiness."
+                solutionDescription: "Assesses 300+ data points from public/private sources plus distributor documents for accurate creditworthiness.",
+                icon: AlignLeft
             },
         ],
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: SquareLibrary,
                 problemHeading: "Insufficient information to evaluate distributors",
                 problemDesc:
                     "Distributor limit and credit period decisions based on relationships and gut",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: CopySlash,
                 problemHeading: "Fixed Credit Limits",
                 problemDesc:
                     "Cannot adapt to changing market conditions and distributor’s strength and reach",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: FileDigit,
                 problemHeading: "Limited visibility into distributor financial health",
                 problemDesc:
                     "Problems surface only when payments are missed",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: BetweenHorizonalEnd,
                 problemHeading: "Fragmented data across sources",
                 problemDesc:
                     "Manual work across excel, documents submitted by distributor creates errors and delays.",
@@ -168,10 +175,10 @@ export const solutions: Solution[] = [
             },
         ],
         coreCapabilities: [
-            { desc: "Implement systematic, data driven distributor onboarding", icon: "/solutions/lock.svg" },
-            { desc: "Regularly monitor behavioural and external data feeds", icon: "/solutions/token.svg" },
-            { desc: "Dynamically recalibrate credit limits using predictive risk scores", icon: "/solutions/context-driven.svg" },
-            { desc: "Integrate risk alerts into ERP or CRM workflows", icon: "/solutions/streamlined.svg" },
+            { desc: "Implement systematic, data driven distributor onboarding", icon: GitPullRequestArrow },
+            { desc: "Regularly monitor behavioural and external data feeds", icon: MonitorSpeaker },
+            { desc: "Dynamically recalibrate credit limits using predictive risk scores", icon: GitPullRequestCreateArrow },
+            { desc: "Integrate risk alerts into ERP or CRM workflows", icon: Airplay },
             // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
         ],
         mainArticleSlug: "optimising-distributor-credit-risk-management"
@@ -194,25 +201,25 @@ export const solutions: Solution[] = [
             "Privue empowers companies to assess vendors, partners, and borrowers through intelligent, data-backed sustainability evaluations with the same rigor as financial risk assessments.",
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: SquareLibrary,
                 problemHeading: "Over-Reliance on Self-Reported Information",
                 problemDesc:
                     "Assessments today are heavily dependent on inputs provided by vendors or borrowers, which may be incomplete, inconsistent, or biased.",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: MonitorSpeaker,
                 problemHeading: "Fragmented ESG Signals",
                 problemDesc:
                     "Critical information lies scattered across regulatory filings, disclosures, websites, and news reports—difficult to aggregate and interpret at scale.",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: BookCopy,
                 problemHeading: "Lack of Standardised Assessment Framework",
                 problemDesc:
                     "Without a consistent methodology, sustainability evaluations vary across counterparties and geographies, reducing comparability.",
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: Factory,
                 problemHeading: "Blind Spots in Scope 3 Emissions",
                 problemDesc:
                     "Companies often underestimate emissions embedded in their supply chains or financed portfolios, leaving material risks unaccounted for.",
@@ -221,47 +228,50 @@ export const solutions: Solution[] = [
         solnPoints: [
             {
                 solutionHeading: "Climate Risk Assessment",
-                solutionDescription: "Our models, built on CMIP6 projections and IMD data, quantify physical climate risks at the company or asset level. This allows you to assess whether your vendor, partner, or borrower is exposed to material risks that could disrupt supply chains, business continuity, or repayment capacity."
+                solutionDescription: "Our models, built on CMIP6 projections and IMD data, quantify physical climate risks at the company or asset level. This allows you to assess whether your vendor, partner, or borrower is exposed to material risks that could disrupt supply chains, business continuity, or repayment capacity.",
+                icon: CloudRain
             },
             {
                 solutionHeading: "Carbon Emission Estimation",
-                solutionDescription: "We estimate Scope 1, 2, and proxy Scope 3 emissions for companies, even where disclosures are absent. By combining industry, turnover, workforce, and state-level energy mix data, we provide credible emission footprints that help you evaluate high-emission counterparties and meet your own reporting obligations."
+                solutionDescription: "We estimate Scope 1, 2, and proxy Scope 3 emissions for companies, even where disclosures are absent. By combining industry, turnover, workforce, and state-level energy mix data, we provide credible emission footprints that help you evaluate high-emission counterparties and meet your own reporting obligations.",
+                icon: Factory
             },
             {
                 solutionHeading: "ESG Scoring",
-                solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network."
+                solutionDescription: "Our bots scan regulatory filings, disclosures, company websites, and media reports to generate an objective ESG score for counterparties. This ensures ongoing monitoring of social and governance practices, regulatory compliance, and reputational risks across your vendor or borrower network.",
+                icon: MonitorSpeaker
             },
         ],
         useCases: [
             {
                 heading: "Banks & Lenders",
                 desc: "Evaluate loan portfolios with our ESG Scoring to obtain indicative sustainability scores for counterparties.",
-                icon: "/solutions/lock.svg"
+                icon: BanknoteArrowUp
             },
             {
                 heading: "Financial Institutions",
                 desc: "Use our Carbon Emissions Estimator to measure financed emissions across portfolios, even when disclosures are missing.",
-                icon: "/solutions/lock.svg"
+                icon: Factory
             },
             {
                 heading: "Sustainability Investors",
                 desc: "Build and triage target portfolios by combining estimated ESG scores with modeled carbon emissions data.",
-                icon: "/solutions/lock.svg"
+                icon: Landmark
             },
             {
                 heading: "Corporates",
                 desc: "Assess vendors’ sustainability practices using indicative ESG scores and estimated carbon emissions for better supply chain visibility.",
-                icon: "/solutions/lock.svg"
+                icon: Building2
             },
             {
                 heading: "Collateral Risk Assessment",
                 desc: " Banks can quantify climate exposure of properties offered as collateral to strengthen lending decisions.",
-                icon: "/solutions/lock.svg"
+                icon: Building
             },
             {
                 heading: "Supply Chain & Facility Risk",
                 desc: "Corporates can evaluate climate risks to their own operations and their suppliers’ facilities, identifying vulnerabilities to floods, heat stress, or drought.",
-                icon: "/solutions/lock.svg"
+                icon: Warehouse
             },
         ],
         modules: [
@@ -308,25 +318,25 @@ export const solutions: Solution[] = [
             "At Privue, we design agentic workflows that integrate into an insurer’s underwriting desk, automating manual tasks and delivering insights so underwriters can focus on risk selection and decision quality, driving faster turnaround, improved risk assessment, and portfolio consistency.",
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: BookCopy,
                 problemHeading: "Data Blind Spots",
                 problemDesc:
                     "Over-reliance on insured-provided information and limited third-party data"
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: BetweenHorizonalEnd,
                 problemHeading: "Fragmented Access",
                 problemDesc:
                     "Challenges in managing or integrating multiple data subscriptions "
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: Users,
                 problemHeading: "Manual Overload",
                 problemDesc:
                     "Heavy manual effort to convert insured documents into system-ready inputs "
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: MonitorSpeaker,
                 problemHeading: "Outdated Risk View",
                 problemDesc:
                     "Limited visibility into insureds during the policy term, especially before a claim"
@@ -335,70 +345,80 @@ export const solutions: Solution[] = [
         solnPoints: [
             {
                 solutionHeading: "Trusted Data Acquisition",
-                solutionDescription: "Verified and validated data from third-party partners"
+                solutionDescription: "Verified and validated data from third-party partners",
+                icon: FolderSymlink
             },
             {
                 solutionHeading: "Intelligent Data Extraction",
-                solutionDescription: "Seamless capture of information from internal and insured files"
+                solutionDescription: "Seamless capture of information from internal and insured files",
+                icon: BookUp2
             },
             {
                 solutionHeading: "Smart Analysis & Summaries",
-                solutionDescription: "Convert raw data into actionable underwriting insights"
+                solutionDescription: "Convert raw data into actionable underwriting insights",
+                icon: MonitorSpeaker
             },
             {
-                solutionHeading: "API-Ready Integration",
-                solutionDescription: "Direct connectivity with underwriting systems for smooth workflows "
+                solutionHeading: "Verification and Audit​",
+                solutionDescription: "Automated checks across documents and systems for consistency, lineage validation, and audit traceability",
+                icon: BookOpenCheck
             },
             {
                 solutionHeading: "Continuous Risk Monitoring",
-                solutionDescription: "Track key parameters and deliver timely alerts"
+                solutionDescription: "Track key parameters and deliver timely alerts",
+                icon: MonitorSpeaker
+            },
+            {
+                solutionHeading: "API-Ready Integration",
+                solutionDescription: "Direct connectivity with underwriting systems for smooth workflows",
+                icon: FolderGit2
             },
         ],
         coreCapabilities: [
             {
                 heading: "MCA Insights",
                 desc: "Extract filings and compliance records directly from MCA databases.",
-                icon: "/solutions/lock.svg"
+                icon: Files
             },
             {
                 heading: "Financial Analysis",
                 desc: "Digitise and analyse audited financials from PDFs and images.",
-                icon: "/solutions/lock.svg"
+                icon: FileChartPie
             },
             {
                 heading: "Financial Summaries",
                 desc: "Generate concise financial insights tailored for underwriting.",
-                icon: "/solutions/lock.svg"
+                icon: FileText
             },
             {
                 heading: "Policy Document Insights",
                 desc: "Highlight coverage, exclusions, and special conditions at a glance.",
-                icon: "/solutions/lock.svg"
+                icon: FileSearch
             },
             {
                 heading: "Technical Survey Insights",
                 desc: "Extract and summarise key findings from plant and facility surveys.",
-                icon: "/solutions/lock.svg"
+                icon: BookAlert
             },
             {
                 heading: "Comprehensive Data Coverage",
                 desc: "Access 300+ critical data points from public and private sources.",
-                icon: "/solutions/lock.svg"
+                icon: Layers
             },
             {
                 heading: "Litigation Check",
                 desc: "Aggregate cases from courts and tribunals, tagged by risk relevance.",
-                icon: "/solutions/lock.svg"
+                icon: Scale
             },
             {
                 heading: "News Monitoring",
                 desc: "Curate news from multiple publications, categorised by risk factors.",
-                icon: "/solutions/lock.svg"
+                icon: Newspaper
             },
             {
                 heading: "Policy Consistency Checks",
                 desc: "Compare quoting and issuance documents to ensure alignment.",
-                icon: "/solutions/lock.svg"
+                icon: FileCheck2
             },
         ],
         modules: [
@@ -468,25 +488,25 @@ export const solutions: Solution[] = [
 
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: BanknoteArrowDown,
                 problemHeading: "High Exposure Risk",
                 problemDesc:
                     "A single default can significantly impact revenue and cash flow."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: MonitorSpeaker,
                 problemHeading: "Subjective Credit Decisions",
                 problemDesc:
                     "Credit terms are often influenced by sales pressure or relationship bias, lacking objective risk assessment."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: Users,
                 problemHeading: "Inefficient Manual Processes",
                 problemDesc:
                     "Reviews of financial statements and declarations are slow, error-prone, and resource-intensive."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: BetweenHorizonalEnd,
                 problemHeading: "Fragmented Customer Data",
                 problemDesc:
                     "Incomplete and scattered data makes it difficult to form a reliable view of financial health."
@@ -495,70 +515,82 @@ export const solutions: Solution[] = [
         solnPoints: [
             {
                 solutionHeading: "Assess Contract Risk Upfront",
-                solutionDescription: "Avoid signing with customers who may not pay."
+                solutionDescription: "Avoid signing with customers who may not pay.",
+                icon: FileText
             },
             {
                 solutionHeading: "Manage Large-Ticket Exposures",
-                solutionDescription: "Make systematic, data-backed credit decisions."
+                solutionDescription: "Make systematic, data-backed credit decisions.",
+                icon: FileDigit
             },
             {
                 solutionHeading: "Mitigate Concentration Risk",
-                solutionDescription: "Track and control portfolio-level exposure."
+                solutionDescription: "Track and control portfolio-level exposure.",
+                icon: ChartNetwork
+            },
+            {
+                solutionHeading: "Litigation Check​",
+                solutionDescription: "Screen court cases and sanctions to flag past credit defaults and disputes.",
+                icon: Scale
+
             },
             {
                 solutionHeading: "Recalibrate Credit Terms Dynamically",
-                solutionDescription: "Use predictive risk scores to adjust terms in real time."
+                solutionDescription: "Use predictive risk scores to adjust terms in real time.",
+                icon: GitPullRequestCreateArrow
             },
             {
                 solutionHeading: "Integrate Risk into Daily Workflows",
-                solutionDescription: "Embed proactive risk alerts within ERP or CRM systems."
+                solutionDescription: "Embed proactive risk alerts within ERP or CRM systems.",
+                icon: FolderGit2
+
             },
         ],
         coreCapabilities: [
             {
                 heading: "Identity Verification",
                 desc: "Validate customer businesses using GST, PAN, and MCA filings",
-                icon: "/solutions/lock.svg"
+                icon: IdCardLanyard
             },
             {
                 heading: "Financial Analysis",
                 desc: "Digitise and analyse audited statements from images and PDFs",
-                icon: "/solutions/lock.svg"
+                icon: FileChartPie
             },
             {
                 heading: "MCA Insights",
                 desc: "Extract filings and compliance data from MCA records",
-                icon: "/solutions/lock.svg"
+                icon: Files
             },
             {
                 heading: "Transaction Data",
                 desc: "Capture turnover and transaction history from GST",
-                icon: "/solutions/lock.svg"
+                icon: ReceiptText
             },
             {
                 heading: "Data Coverage",
                 desc: "Leverage 300+ critical data points from public and private repositories",
-                icon: "/solutions/lock.svg"
+                icon: Layers
             },
             {
                 heading: "Receivable Analysis",
                 desc: "Assess invoicing and ageing patterns to spot delayed payment behaviour",
-                icon: "/solutions/lock.svg"
+                icon: Airplay
             },
             {
                 heading: "Credit Scoring",
                 desc: "Generate a model-driven score for customer creditworthiness",
-                icon: "/solutions/lock.svg"
+                icon: GitPullRequestCreateArrow
             },
             {
                 heading: "Exposure & Terms",
                 desc: "Define safe contract exposure and payment terms",
-                icon: "/solutions/lock.svg"
+                icon: FileText
             },
             {
                 heading: "Early Warning Signals",
                 desc: "Detect deteriorating financial health to prevent defaults",
-                icon: "/solutions/lock.svg"
+                icon: MonitorSpeaker
             },
         ],
         modules: [
@@ -633,37 +665,37 @@ export const solutions: Solution[] = [
 
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: BetweenHorizonalEnd,
                 problemHeading: "Fragmented Data Sources",
                 problemDesc:
                     "Struggle of pulling company information from multiple databases and filings."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: Users,
                 problemHeading: "Time-Consuming Research ",
                 problemDesc:
                     "Manual checks and reconciliations leading to long due diligence cycles."
             },
             {
-                icon: "/solutions/hide.svg",
-                problemHeading: "Unstructured Informatioin",
+                icon: Layers,
+                problemHeading: "Unstructured Information",
                 problemDesc:
                     "Difficulty in summarising lengthy filings, judgments, and news articles."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: FileX2,
                 problemHeading: "Cumbersome Reporting",
                 problemDesc:
                     "Extracting and formatting data for reports and analysis is tedious."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: FileDigit,
                 problemHeading: "High Cost of Diligence",
                 problemDesc:
                     "Excessive time and resources required for routine checks."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: FileInput,
                 problemHeading: "Missed Red Flags",
                 problemDesc:
                     "Critical news, litigations, or compliance lapses often overlooked in manual reviews."
@@ -673,66 +705,70 @@ export const solutions: Solution[] = [
         solnPoints: [
             {
                 solutionHeading: "Unified Data Platform",
-                solutionDescription: "Aggregate 300+ data points from public and private repositories into one view."
+                solutionDescription: "Aggregate 300+ data points from public and private repositories into one view.",
+                icon: Layers
             },
             {
                 solutionHeading: "Automated Workflows",
-                solutionDescription: "Digitise, process, and analyse data instantly to cut review time."
+                solutionDescription: "Digitise, process, and analyse data instantly to cut review time.",
+                icon: Workflow
             },
             {
                 solutionHeading: "Smart Summaries",
-                solutionDescription: "Auto-extract key points and deliver concise, actionable insights."
+                solutionDescription: "Auto-extract key points and deliver concise, actionable insights.",
+                icon: FileText
             },
             {
                 solutionHeading: "Custom Reports",
-                solutionDescription: "Generate tailored, ready-to-share reports in just a few clicks."
+                solutionDescription: "Generate tailored, ready-to-share reports in just a few clicks.",
+                icon: Airplay
             },
         ],
         coreCapabilities: [
             {
                 heading: "Identity Verification",
                 desc: "Verify businesses instantly with GST, PAN, and MCA records.",
-                icon: "/solutions/lock.svg"
+                icon: IdCardLanyard
             },
             {
                 heading: "Financial Analysis",
                 desc: "Digitise and analyse audited statements directly from images or PDFs.",
-                icon: "/solutions/lock.svg"
+                icon: FileChartPie
             },
             {
                 heading: "MCA Insights",
                 desc: "Access filings and compliance data seamlessly from MCA records.",
-                icon: "/solutions/lock.svg"
+                icon: Files
             },
             {
                 heading: "Transaction Data",
                 desc: "Track turnover and transaction history through GST data.",
-                icon: "/solutions/lock.svg"
+                icon: ReceiptText
             },
             {
                 heading: "Data Coverage",
                 desc: "Tap into 300+ critical data points from public and private sources.",
-                icon: "/solutions/lock.svg"
+                icon: Layers
             },
             {
                 heading: "Company News",
                 desc: "Scan 100+ publications for adverse news or event-based triggers, with concise summaries.",
-                icon: "/solutions/lock.svg"
+                icon: Newspaper
             },
             {
                 heading: "Legal Cases",
                 desc: "Extract and categorise court and tribunal cases, with clear summaries for quick review.",
-                icon: "/solutions/lock.svg"
+                icon: Scale
             },
             {
                 heading: "Custom Reports",
                 desc: "Generate tailored due diligence reports in just a few clicks.",
-                icon: "/solutions/lock.svg"
+                icon: FileText
             },
             {
                 heading: "Conversational Queries",
                 desc: "Ask questions in natural language and get instant insights on any company.",
-                icon: "/solutions/lock.svg"
+                icon: MessageSquareText
             },
         ],
 
@@ -791,32 +827,38 @@ export const solutions: Solution[] = [
             "PRIVUE enables organisations to comprehensively assess and continuously monitor third parties to mitigate risk. It provides early warnings, event-based triggers, and risk scores that help businesses protect their supply chain, reputation, and operations.",
         problems: [
             {
-                icon: "/solutions/hide.svg",
+                icon: GitGraph,
                 problemHeading: "Blind Spots",
                 problemDesc:
                     "Vendors and partners are deeply integrated into critical operations, yet their risks are often overlooked."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: BetweenHorizonalEnd,
                 problemHeading: "Data Gaps",
                 problemDesc:
                     "Fragmented and incomplete information makes it difficult to build a 360° risk profile of third parties."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: FileClock,
                 problemHeading: "Static Reviews",
                 problemDesc:
                     "Assessments are usually point-in-time and fail to capture emerging risks."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: Users,
                 problemHeading: "Manual Processes",
                 problemDesc:
                     "Reviews of financials, compliance records, and declarations are slow and inconsistent."
             },
             {
-                icon: "/solutions/hide.svg",
+                icon: GitPullRequestClosed,
                 problemHeading: "Event Exposure",
+                problemDesc:
+                    "Organisations are often unprepared to respond when an adverse event impacts a vendor, leaving them exposed."
+            },
+            {
+                icon: FileX2,
+                problemHeading: "Scalability Limits",
                 problemDesc:
                     "Organisations are often unprepared to respond when an adverse event impacts a vendor, leaving them exposed."
             },
@@ -824,86 +866,96 @@ export const solutions: Solution[] = [
         ],
         solnPoints: [
             {
+                solutionHeading: "Submission Review",
+                solutionDescription: "Analyse vendor submissions with automated workflows and an embedded chat assistant.",
+                icon: Files
+            },
+            {
                 solutionHeading: "360° Risk Profiling",
-                solutionDescription: "Develop a comprehensive view of each third party’s risk profile, covering a broad spectrum of risk categories."
+                solutionDescription: "Develop a comprehensive view of each third party’s risk profile, covering a broad spectrum of risk categories.",
+                icon: SquareLibrary
             },
             {
                 solutionHeading: "Continuous Monitoring & Alerts",
-                solutionDescription: "Dynamically re-score vendors with continuous monitoring and real-time alerts."
-            },
-            {
-                solutionHeading: "Strengthened Vendor Governance",
-                solutionDescription: "Strengthen vendor governance with objective, data-backed assessments."
+                solutionDescription: "Dynamically re-score vendors with continuous monitoring and real-time alerts.",
+                icon: MonitorSpeaker
             },
             {
                 solutionHeading: "Proactive Risk Response",
-                solutionDescription: "Enable proactive risk response when an event impacts a vendor or supplier."
+                solutionDescription: "Enable proactive risk response when an event impacts a vendor or supplier.",
+                icon: FilePlay
+            },
+            {
+                solutionHeading: "Strengthened Vendor Governance",
+                solutionDescription: "Strengthen vendor governance with objective, data-backed assessments.",
+                icon: BookUp2
             },
             {
                 solutionHeading: "Seamless Workflow Integration",
-                solutionDescription: "Integrate risk alerts seamlessly into ERP, procurement, or compliance workflows."
+                solutionDescription: "Integrate risk alerts seamlessly into ERP, procurement, or compliance workflows.",
+                icon: FolderGit2
             },
         ],
         coreCapabilities: [
             {
                 heading: "Data Acquisition",
                 desc: "Pull financial, compliance, legal, and ESG data seamlessly.",
-                icon: "/solutions/lock.svg"
+                icon: FolderSymlink
             },
             {
                 heading: "Document Parsing",
                 desc: "Extract structured insights from documents and files submitted by the vendor or partner.",
-                icon: "/solutions/lock.svg"
+                icon: FileCode2
             },
             {
                 heading: "Spend Analysis",
                 desc: "Analyse spend patterns across vendors to identify concentration, inefficiencies, and potential risks.",
-                icon: "/solutions/lock.svg"
+                icon: FileChartPie
             },
             {
                 heading: "Financial Analysis",
                 desc: "Analyse financial statements to identify issues and assess financial stability.",
-                icon: "/solutions/lock.svg"
+                icon: FileDigit
             },
             {
                 heading: "Cyber Risk Assessment",
                 desc: "Conduct vulnerability assessments and penetration testing on vendor infrastructure.",
-                icon: "/solutions/lock.svg"
+                icon: ShieldAlert
             },
             {
                 heading: "Climate Risk Models",
                 desc: "Use IMD and CMIP6 data to evaluate exposure to climate-related risks.",
-                icon: "/solutions/lock.svg"
+                icon: CloudRainWind
             },
             {
                 heading: "Legal Case Insights",
                 desc: "Extract and categorise court and tribunal cases with clear, concise summaries.",
-                icon: "/solutions/lock.svg"
+                icon: Scale
             },
             {
                 heading: "Adverse Media Scanning",
                 desc: "Monitor 100+ publications for negative news and event-based triggers.",
-                icon: "/solutions/lock.svg"
+                icon: Newspaper
             },
             {
                 heading: "Sustainability Signals",
                 desc: "Capture indicators from public sources and documents on ESG posture.",
-                icon: "/solutions/lock.svg"
+                icon: Layers
             },
             {
                 heading: "Event Monitoring",
                 desc: "Detect adverse events in real time and provide actionable triggers.",
-                icon: "/solutions/lock.svg"
+                icon: MonitorDot
             },
             {
                 heading: "Continuous Monitoring",
                 desc: "Re-score vendors periodically and raise alerts on emerging risks.",
-                icon: "/solutions/lock.svg"
+                icon: MonitorSpeaker
             },
             {
                 heading: "Conversational Queries",
                 desc: "Ask questions in natural language and get instant insights on any company.",
-                icon: "/solutions/lock.svg"
+                icon: MessageSquareText
             },
         ],
         modules: [
@@ -924,6 +976,13 @@ export const solutions: Solution[] = [
             },
             {
                 title: "Compliance Review",
+                description:
+                    "Check adherence to regulatory requirements and compliance track records.",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Adverse News",
                 description:
                     "Check adherence to regulatory requirements and compliance track records.",
                 imgSrc: "/demo-module-image.png",

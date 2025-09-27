@@ -13,6 +13,7 @@ import { SquareLibrary, CopySlash, FileDigit, BetweenHorizonalEnd, Airplay, Moni
 
 import DistributorPerformanceWorkflow from '@/components/solutions/header-workflows/DistributorPerformanceWorkflow';
 import SustainabilityWorkflow from '@/components/solutions/header-workflows/SustainabilityWorkflow';
+import LargeCustomerWorkflow from '@/components/solutions/header-workflows/LargeCustomerWorkflow';
 
 export type Problem = {
     problemHeading: string;
@@ -310,7 +311,8 @@ export const solutions: Solution[] = [
         slug: "commercial-insurance-underwriting",
         icon: "/icons/solutions/insurance-underwriting.png",
         // icon: Landmark,
-        img: "/solutions/demo-image.png",
+        // img: "/solutions/demo-image.png",
+        workflow: LargeCustomerWorkflow,
         coverImg: "https://images.unsplash.com/photo-1647348815424-8e8206ea7c83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         heading: "Commercial Insurance Underwriting",
         subHeading: "Sharper insights. Smarter underwriting. Stronger outcomes.",

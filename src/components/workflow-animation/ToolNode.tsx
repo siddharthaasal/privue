@@ -94,7 +94,7 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
             </div>
 
             <div
-                className="text-sm text-privue-900 font-semibold"
+                className="text-sm text-privue-900 font-semibold text-center"
             // style={{
             //     fontSize: 12,
             //     fontWeight: 700,

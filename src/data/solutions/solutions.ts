@@ -168,7 +168,7 @@ export const solutions: Solution[] = [
             {
                 title: "Continuous Monitoring",
                 description:
-                    "PRIVUE rescores dealers twice a year and sends an alert if anything looks risky",
+                    "Privue rescores dealers twice a year and sends an alert if anything looks risky",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
                 renderAnimation: NotificationOverlayWithLeftFade
@@ -495,7 +495,7 @@ export const solutions: Solution[] = [
             "Recalibrate Credit Terms Dynamically",
         ],
         mainSolnDesc:
-            "PRIVUE enables companies to assess the financial reliability of large customers pre-contract, giving finance and sales teams clarity on safe exposure, payment terms, and when to decline.",
+            "Privue enables companies to assess the financial reliability of large customers pre-contract, giving finance and sales teams clarity on safe exposure, payment terms, and when to decline.",
 
         problems: [
             {
@@ -640,7 +640,7 @@ export const solutions: Solution[] = [
             {
                 title: "Continuous Monitoring",
                 description:
-                    "PRIVUE re-scores customers periodically and raises alerts on emerging risks",
+                    "Privue re-scores customers periodically and raises alerts on emerging risks",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
                 renderAnimation: NotificationOverlayWithLeftFade
@@ -881,7 +881,7 @@ export const solutions: Solution[] = [
             "",
         ],
         mainSolnDesc:
-            "PRIVUE enables organisations to comprehensively assess and continuously monitor third parties to mitigate risk. It provides early warnings, event-based triggers, and risk scores that help businesses protect their supply chain, reputation, and operations.",
+            "Privue enables organisations to comprehensively assess and continuously monitor third parties to mitigate risk. It provides early warnings, event-based triggers, and risk scores that help businesses protect their supply chain, reputation, and operations.",
         problems: [
             {
                 icon: GitGraph,

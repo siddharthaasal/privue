@@ -24,7 +24,7 @@ import { AgentNode } from "@/components/workflow-animation/AgentNode";
 import { ToolNode } from "@/components/workflow-animation/ToolNode";
 import { ToolNodeLeft } from "@/components/workflow-animation/ToolNodeLeft";
 
-import { BanknoteArrowUp, ScanText, Bot, DatabaseZap, ReceiptText, FileText } from 'lucide-react';
+import { BanknoteArrowUp, ScanText, Bot, DatabaseZap, ReceiptText, FileText, FolderGit2 } from 'lucide-react';
 
 const initialNodes: Node[] = [
     {
@@ -43,7 +43,7 @@ const initialNodes: Node[] = [
         position: { x: 80, y: 180 },
         data: {
             label: "Government Portals",
-            icon: "/icons/products/api.png",
+            icon: FolderGit2
         },
     },
     {

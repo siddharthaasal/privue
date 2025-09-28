@@ -53,7 +53,7 @@ const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 80, y: 180 },
         data: {
-            label: "Government Portal",
+            label: "Government Portals",
             // icon: PiMicrosoftExcelLogo
             // icon: "/icons/workflow/sheets.png"
             icon: FolderGit2

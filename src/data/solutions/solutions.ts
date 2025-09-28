@@ -23,6 +23,7 @@ import AdverseNews from '@/components/product-animations/AdverseNews';
 import CyberRisk from '@/components/product-animations/CyberRisk';
 import ClimateRisk from '@/components/product-animations/ClimateRisk';
 import EngineeringReportParsing from '@/components/product-animations/EngineeringReportParsing';
+import EsgScoring from '@/components/product-animations/EsgScoring';
 
 export type Problem = {
     problemHeading: string;
@@ -1084,6 +1085,7 @@ export const solutions: Solution[] = [
                     "Benchmark sustainability performance against peers.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: EsgScoring
             },
             {
                 title: "Event Response",

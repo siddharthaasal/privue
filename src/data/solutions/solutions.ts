@@ -22,6 +22,7 @@ import EntityDueDiligenceWorkflow from '@/components/solutions/header-workflows/
 import AdverseNews from '@/components/product-animations/AdverseNews';
 import CyberRisk from '@/components/product-animations/CyberRisk';
 import ClimateRisk from '@/components/product-animations/ClimateRisk';
+import EngineeringReportParsing from '@/components/product-animations/EngineeringReportParsing';
 
 export type Problem = {
     problemHeading: string;
@@ -464,6 +465,7 @@ export const solutions: Solution[] = [
                     "Summarises engineering reports into actionable insights for underwriting decisions.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: EngineeringReportParsing
             },
             {
                 title: "Court Case Acquisition and Summarisation",

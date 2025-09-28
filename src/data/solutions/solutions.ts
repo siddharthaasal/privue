@@ -786,41 +786,85 @@ export const solutions: Solution[] = [
 
         modules: [
             {
-                title: "Insolvency Professionals",
+                title: "Registry Data",
                 description:
-                    "Locate company assets and promoters, trace linked entities and connected assets, and monitor news on transactions, asset sales, and restructuring events to support recovery and insolvency actions.",
+                    "MCA filings delivered in a structured, custom format—no need to sift through multiple documents.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Accounting Firms",
+                title: "Financial Analysis",
                 description:
-                    "Verify client identity and regulatory compliance via MCA/GST/PAN records, analyse financial statements and transaction history, and automate due-diligence workflows for audits, tax reviews, and forensic investigations.",
+                    "Advanced, use-case-specific analysis highlights strengths, risks, and key insights.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Law Firms",
+                title: "Legal Cases",
                 description:
-                    "Conduct comprehensive legal due diligence on counterparties, track relevant litigation and tribunal cases, and access compliance histories and filings to support corporate restructuring, M&A, and transactional work.",
+                    "Court cases mapped, tagged, and summarised for quick understanding of an entity’s legal history.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Consulting Firms",
+                title: "Compliance Checks",
                 description:
-                    "Assess financial health and risk profiles for strategy and M&A advisory, benchmark governance and compliance across industries, and generate custom reports to support client presentations and recommendations.",
+                    "Instantly identify compliance red flags, sanctions, and overall compliance health.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
             {
-                title: "Procurement Teams",
+                title: "Adverse News",
                 description:
-                    "Verify vendor legitimacy and corporate standing, screen suppliers for adverse news, compliance issues, or litigation, and monitor transaction and turnover data to evaluate vendor reliability and scale.",
+                    "Over 90,000 news sources scanned to flag negative events connected to the entity.​",
+                imgSrc: "/demo-module-image.png",
+                link: "#",
+            },
+            {
+                title: "Conversational AI",
+                description:
+                    "Interact with the data, ask questions, and generate notes to include directly in reports or memos.​​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },
         ],
+        // modules: [
+        //     {
+        //         title: "Insolvency Professionals",
+        //         description:
+        //             "Locate company assets and promoters, trace linked entities and connected assets, and monitor news on transactions, asset sales, and restructuring events to support recovery and insolvency actions.",
+        //         imgSrc: "/demo-module-image.png",
+        //         link: "#",
+        //     },
+        //     {
+        //         title: "Accounting Firms",
+        //         description:
+        //             "Verify client identity and regulatory compliance via MCA/GST/PAN records, analyse financial statements and transaction history, and automate due-diligence workflows for audits, tax reviews, and forensic investigations.",
+        //         imgSrc: "/demo-module-image.png",
+        //         link: "#",
+        //     },
+        //     {
+        //         title: "Law Firms",
+        //         description:
+        //             "Conduct comprehensive legal due diligence on counterparties, track relevant litigation and tribunal cases, and access compliance histories and filings to support corporate restructuring, M&A, and transactional work.",
+        //         imgSrc: "/demo-module-image.png",
+        //         link: "#",
+        //     },
+        //     {
+        //         title: "Consulting Firms",
+        //         description:
+        //             "Assess financial health and risk profiles for strategy and M&A advisory, benchmark governance and compliance across industries, and generate custom reports to support client presentations and recommendations.",
+        //         imgSrc: "/demo-module-image.png",
+        //         link: "#",
+        //     },
+        //     {
+        //         title: "Procurement Teams",
+        //         description:
+        //             "Verify vendor legitimacy and corporate standing, screen suppliers for adverse news, compliance issues, or litigation, and monitor transaction and turnover data to evaluate vendor reliability and scale.",
+        //         imgSrc: "/demo-module-image.png",
+        //         link: "#",
+        //     },
+        // ],
         mainArticleSlug: "redefining-commercial-lines-underwriting"
     },
     {
@@ -997,7 +1041,7 @@ export const solutions: Solution[] = [
             {
                 title: "Adverse News",
                 description:
-                    "Check adherence to regulatory requirements and compliance track records.",
+                    "Over 90,000 news sources scanned to flag negative events connected to the entity.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
             },

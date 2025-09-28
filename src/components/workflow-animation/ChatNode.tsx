@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import { CheckCheck, XCircle, AlertTriangle, Circle } from "lucide-react";
+import TechnicalDiagram from "./TechnicalDiagram";
 
 /**
  * Phase mapping:
@@ -35,18 +36,16 @@ type ChartQna = {
     note?: string; // e.g. "Sales on a bar graph and gross profit as a line graph"
 };
 
-
 type ImageQna = {
     kind: "image";
     question: string;
-    imageSrc: string;
+    imageSrc?: string;
     imageCaption?: string;
 };
 
 type Qna = ListQna | ChartQna | ImageQna;
 
 /* --- Timing constants --- */
-// const STAY_MS = 4000;
 const QUESTION_TYPING_MS = 1000;
 const ANSWER_TYPING_MS = 1000;
 const QUESTION_GAP = 3000;
@@ -72,20 +71,18 @@ const SALES_QNA: ChartQna = {
         { year: "FY 2022-23", sales: 97710280, grossMargin: 15662720 },
         { year: "FY 2023-24", sales: 67569687, grossMargin: 10721827 },
     ],
-    // note: "Sales- Bar graph and gross profit as a line graph",
 };
 
-
-/* Third QnA is an image answer (put your image in public/images/...) */
-const VEMBU_QNA: ImageQna = {
+/* replaced image QnA - we still use kind "image" but render SVG animation */
+const Interests_QNA: ImageQna = {
     kind: "image",
-    question: "What are the other business interests of Director Vembu?",
-    // adjust path as needed (public folder)
-    imageSrc: "/workflow/directorVembuImg.png",
-    imageCaption: "Other business interests of Director Vembu — source: filings",
+    question: "What are the other business interests of Director Kumar?",
+    imageCaption: "Animated network view (interactive preview)",
 };
 
-const QNAS: Qna[] = [BASE_QNA, SALES_QNA, VEMBU_QNA];
+const QNAS: Qna[] = [BASE_QNA, SALES_QNA, Interests_QNA];
+
+
 
 /* --- Component --- */
 export function AnimatedChatNodeInner(): any {
@@ -99,6 +96,7 @@ export function AnimatedChatNodeInner(): any {
             timeouts.current.forEach((t) => clearTimeout(t));
             timeouts.current = [];
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentIdx]);
 
     const runLifecycle = () => {
@@ -126,7 +124,6 @@ export function AnimatedChatNodeInner(): any {
         timeouts.current.push(t1);
     };
 
-
     const formattedTime = (() => {
         try {
             const d = new Date();
@@ -143,27 +140,13 @@ export function AnimatedChatNodeInner(): any {
         return <Circle size={14} style={{ color: "#94a3b8", minWidth: 14 }} />;
     };
 
-    // helper: parse "₹1,23,45,678" -> number 12345678
-    // const parseCurrencyToNumber = (s?: string | null) => {
-    //     if (!s) return 0;
-    //     const digits = s.replace(/[^\d]/g, "");
-    //     return digits ? Number(digits) : 0;
-    // };
-
-
-
-
-    function ChartForSalesAndGM({
-        data,
-    }: {
-        data: { year: string; sales: number; grossMargin: number }[];
-    }) {
+    function ChartForSalesAndGM({ data }: { data: { year: string; sales: number; grossMargin: number }[] }) {
         const salesValues = data.map((r) => r.sales);
         const maxSales = Math.max(...salesValues, 1);
 
         // dimensions
-        const w = 240; // 3/4 width
-        const h = 80; // thin height
+        const w = 150; // 3/4 width
+        const h = 150; // thin height
         const padding = { top: 6, right: 8, bottom: 18, left: 8 };
         const chartW = w - padding.left - padding.right;
         const chartH = h - padding.top - padding.bottom;
@@ -195,7 +178,7 @@ export function AnimatedChatNodeInner(): any {
 
         return (
             <div className="w-3/4">
-                <div className="rounded-md bg-[rgba(15,23,36,0.02)] px-1 py-1">
+                <div className="rounded-md px-1 py-1">
                     <svg width={w} height={h}>
                         {/* baseline axis */}
                         <line
@@ -220,8 +203,8 @@ export function AnimatedChatNodeInner(): any {
                                     width={barWidth}
                                     height={barH}
                                     rx={3}
-                                    fill="#3b82f6"
-                                    opacity={0.85}
+                                    fill="#5c7cfa"
+                                    // opacity={0.85}
                                     style={{
                                         transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
                                         transformBox: "fill-box",
@@ -233,13 +216,7 @@ export function AnimatedChatNodeInner(): any {
                         })}
 
                         {/* gross margin line */}
-                        <polyline
-                            ref={polylineRef}
-                            points={points.join(" ")}
-                            fill="none"
-                            stroke="#ef4444"
-                            strokeWidth={1.5}
-                        />
+                        <polyline ref={polylineRef} points={points.join(" ")} fill="none" stroke="#ef4444" strokeWidth={1.5} />
 
                         {/* gross margin circles */}
                         {data.map((r, i) => {
@@ -266,14 +243,7 @@ export function AnimatedChatNodeInner(): any {
                         {data.map((r, i) => {
                             const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
                             return (
-                                <text
-                                    key={`lbl-${i}`}
-                                    x={x}
-                                    y={h - 4}
-                                    textAnchor="middle"
-                                    fontSize={10}
-                                    fill="#64748b"
-                                >
+                                <text key={`lbl-${i}`} x={x} y={h - 4} textAnchor="middle" fontSize={10} fill="#64748b">
                                     {r.year.replace("FY ", "")}
                                 </text>
                             );
@@ -310,17 +280,23 @@ export function AnimatedChatNodeInner(): any {
                 className="inline-flex items-center px-3 py-1.5 rounded-xl bg-slate-50 border"
                 style={{ borderColor: "rgba(15,23,36,0.03)" }}
             >
-                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 0ms infinite" }} />
-                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 160ms infinite" }} />
-                <span className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]" style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 320ms infinite" }} />
+                <span
+                    className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]"
+                    style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 0ms infinite" }}
+                />
+                <span
+                    className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]"
+                    style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 160ms infinite" }}
+                />
+                <span
+                    className="inline-block w-[5px] h-[5px] rounded-full mx-[5px]"
+                    style={{ background: "rgba(15,23,36,0.35)", animation: "acn-dot 900ms ease-in-out 320ms infinite" }}
+                />
             </div>
         </>
     );
 
     const qna = QNAS[currentIdx];
-
-    /* type guard (narrow to ImageQna) */
-    // const isImageQna = (q: Qna): q is ImageQna => "imageSrc" in q;
 
     return (
         <div
@@ -345,7 +321,7 @@ export function AnimatedChatNodeInner(): any {
           animation-timing-function: cubic-bezier(.2,.9,.2,1);
         }
 
-        /* dagger fill overlay for image reveal */
+        /* dagger fill overlay for image reveal (kept for backward compatibility) */
         @keyframes dagger-reveal {
           0% { transform: translateX(0%) skewX(-20deg); width: 100%; }
           100% { transform: translateX(120%) skewX(-20deg); width: 100%; }
@@ -399,8 +375,8 @@ export function AnimatedChatNodeInner(): any {
 
                     {/* Question bubble */}
                     {(phase === 2 || phase === 3 || phase === 4) && (
-                        <article className="self-end rounded-[14px] bg-gradient-to-b from-[#fbfcff] to-[#eef6ff] shadow-[0_8px_20px_rgba(2,6,23,0.06)] p-2 border-t-0">
-                            <div className="pl-4 pr-2 flex items-end gap-2">
+                        <article className="self-end rounded-[14px] border border-gray-50 shadow-[0_8px_20px_rgba(2,6,23,0.06)] px-1 py-2">
+                            <div className="pl-2 pr-2 flex items-end gap-2">
                                 <p className="m-0 text-[12px] text-[#0f1724] leading-[1.42] text-right flex-1">{qna.question}</p>
                             </div>
                             <div className="flex justify-end items-center gap-1.5 mt-1">
@@ -428,11 +404,7 @@ export function AnimatedChatNodeInner(): any {
                                         // stagger delay each item slightly, measured before the item shows
                                         const delayMs = aidx * 120; // 120ms per item
                                         return (
-                                            <li
-                                                key={aidx}
-                                                className="flex gap-2 items-start acn-list-item-animate"
-                                                style={{ animationDelay: `${delayMs}ms` }}
-                                            >
+                                            <li key={aidx} className="flex gap-2 items-start acn-list-item-animate" style={{ animationDelay: `${delayMs}ms` }}>
                                                 <div className="mt-[2px]">{renderSeverityIcon(it.severity)}</div>
                                                 <div className="flex-1">
                                                     <p className="m-0 text-[12px] text-[#0f1724] leading-[1.35]">{it.text}</p>
@@ -442,22 +414,20 @@ export function AnimatedChatNodeInner(): any {
                                     })}
                                 </ul>
                             )}
+
                             {qna.kind === "image" && (
-                                <div className="flex flex-col gap-2 items-start">
-                                    <div className="w-3/4 acn-image-wrap">
-                                        {/* the overlay does dagger reveal; we add the animate class only once phase ===4 */}
-                                        <img src={qna.imageSrc} alt={qna.imageCaption ?? "Answer image"}
-                                            className="scale-100"
-                                        />
-                                        <div className={`acn-dagger-overlay ${phase === 4 ? "acn-dagger-animate" : ""}`} />
+                                <div className="flex flex-col items-start">
+                                    <div className="mx-auto px-2">
+                                        <TechnicalDiagram />
                                     </div>
-                                    {/* optional caption */}
-                                    {/*{qna.imageCaption && <div className="text-[11px] text-[#64748b] mt-1">{qna.imageCaption}</div>}*/}
-                                </div>)}
+
+                                </div>
+                            )}
+
                             {qna.kind === "chart" && (
                                 <div className="flex flex-col gap-3">
                                     {/* textual summary */}
-                                    <div className="flex flex-col gap-1 text-[11px] text-slate-600">
+                                    {/* <div className="flex flex-col gap-1 text-[11px] text-slate-600">
                                         {qna.data.map((row, idx) => (
                                             <div key={idx} className="flex items-center gap-2">
                                                 <span className="font-medium text-slate-700">{row.year.replace("FY ", "")}</span>
@@ -465,13 +435,11 @@ export function AnimatedChatNodeInner(): any {
                                                 <span>GM: {row.grossMargin.toLocaleString()}</span>
                                             </div>
                                         ))}
-                                    </div>
+                                    </div> */}
                                     {/* chart */}
                                     <ChartForSalesAndGM data={qna.data} />
 
-                                    {qna.note && (
-                                        <div className="text-[11px] text-slate-500 mt-2 italic">{qna.note}</div>
-                                    )}
+                                    {qna.note && <div className="text-[11px] text-slate-500 mt-2 italic">{qna.note}</div>}
                                 </div>
                             )}
 
@@ -483,7 +451,7 @@ export function AnimatedChatNodeInner(): any {
                         </article>
                     )}
                 </div>
-            </div>
+            </div >
 
             <div className="absolute left-4 right-4 bottom-3 pointer-events-none text-[12px] text-[#64748b] text-left">
                 Get quick, accurate, and personalized answers from Privue's workbench.
@@ -517,7 +485,7 @@ export function AnimatedChatNodeInner(): any {
                     top: "45%",
                 }}
             />
-        </div>
+        </div >
     );
 }
 

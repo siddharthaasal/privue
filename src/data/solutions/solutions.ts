@@ -8,6 +8,8 @@ import LargeDealerOnboarding from '@/components/product-animations/LargeDealerOn
 import LargeDataAcquisition from '@/components/product-animations/LargeDataAcquisition';
 import Integrations from '@/components/product-animations/Integrations';
 import FinancialStability from '@/components/product-animations/FinancialStability';
+import CreditAssessment from '@/components/product-animations/CreditAssessment';
+import ComplianceRisk from '@/components/product-animations/ComplianceRisk';
 
 import { SquareLibrary, CopySlash, FileDigit, BetweenHorizonalEnd, Airplay, MonitorSpeaker, AlignLeft, GitPullRequestArrow, GitPullRequestCreateArrow, BookCopy, Factory, CloudRain, BanknoteArrowUp, Landmark, Building2, Building, Warehouse, Users, FolderSymlink, BookUp2, FolderGit2, BookOpenCheck, Files, FileChartPie, FileText, FileSearch, BookAlert, Layers, Scale, Newspaper, FileCheck2, BanknoteArrowDown, ChartNetwork, IdCardLanyard, ReceiptText, FileX2, FileInput, Workflow, MessageSquareText, GitGraph, FileClock, GitPullRequestClosed, FilePlay, FileCode2, ShieldAlert, CloudRainWind, MonitorDot } from "lucide-react";
 
@@ -17,6 +19,9 @@ import InsuranceUnderwritingWorkflow from '@/components/solutions/header-workflo
 import LargeCustomerWorkflow from '@/components/solutions/header-workflows/LargeCustomerWorkflow';
 import ThirdPartyWorkflow from '@/components/solutions/header-workflows/ThirdPartyWorkflow';
 import EntityDueDiligenceWorkflow from '@/components/solutions/header-workflows/EntityDueDiligenceWorkflow';
+import AdverseNews from '@/components/product-animations/AdverseNews';
+import CyberRisk from '@/components/product-animations/CyberRisk';
+import ClimateRisk from '@/components/product-animations/ClimateRisk';
 
 export type Problem = {
     problemHeading: string;
@@ -1030,6 +1035,7 @@ export const solutions: Solution[] = [
                     "Generate predictive credit scores to evaluate payment reliability.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CreditAssessment
             },
             {
                 title: "Compliance Review",
@@ -1037,6 +1043,7 @@ export const solutions: Solution[] = [
                     "Check adherence to regulatory requirements and compliance track records.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: ComplianceRisk
             },
             {
                 title: "Adverse News",
@@ -1044,6 +1051,7 @@ export const solutions: Solution[] = [
                     "Over 90,000 news sources scanned to flag negative events connected to the entity.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: AdverseNews
             },
             {
                 title: "Legal Due Diligence",
@@ -1058,6 +1066,7 @@ export const solutions: Solution[] = [
                     "Identify vulnerabilities in digital infrastructure and data handling.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CyberRisk
             },
             {
                 title: "Climate Risk Assessment",
@@ -1065,6 +1074,7 @@ export const solutions: Solution[] = [
                     "Evaluate exposure to physical and transition climate risks.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: ClimateRisk
             },
             {
                 title: "ESG Scoring",

@@ -501,7 +501,7 @@ export default function RiskAssessmentTour() {
         <div className="relative w-full h-full rounded-lg overflow-hidden bg-white">
             {/* background layer */}
             <div className="absolute inset-0">
-                <img src={bgUrl} alt="background" className="w-full h-full object-contain" />
+                <img src={bgUrl} alt="background" className="w-full h-full object-contain backdrop-opacity-95" />
                 <div
                     className="absolute inset-0"
                     style={{
@@ -560,7 +560,7 @@ export default function RiskAssessmentTour() {
             </AnimatePresence>
 
             {/* Optional tiny controls for testing — remove if you want purely automatic cycling */}
-            <div className="absolute top-4 right-4 flex gap-2 z-20">
+            {/* <div className="absolute top-4 right-4 flex gap-2 z-20">
                 <button
                     onClick={() => setStep((s) => (s === "frame1" ? "frame3" : s === "frame2" ? "frame1" : "frame2"))}
                     className="text-xs px-2 py-1 rounded bg-white/80 shadow-sm"
@@ -575,7 +575,7 @@ export default function RiskAssessmentTour() {
                 >
                     Next
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }

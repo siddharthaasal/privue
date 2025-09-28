@@ -21,7 +21,7 @@ const QUESTION_GAP = 3200;
 /* --- Data for Q1: facility table (from the screenshot provided) --- */
 const FACILITIES = [
     {
-        location: "Surat Manufacturing Plant",
+        location: "Alpha Energy Corp",
         type: "Industrial",
         riskScore: "Moderate",
         primaryRisk: "Flood, Heatwave",
@@ -29,7 +29,7 @@ const FACILITIES = [
         lastAssessed: "15 Nov 2024",
     },
     {
-        location: "Mumbai Office Complex",
+        location: "Beta Mining Ltd",
         type: "Commercial",
         riskScore: "High",
         primaryRisk: "Coastal Flooding",
@@ -37,7 +37,7 @@ const FACILITIES = [
         lastAssessed: "10 Nov 2024",
     },
     {
-        location: "Chennai Distribution Center",
+        location: "Gamma Power Co",
         type: "Logistics",
         riskScore: "Moderate",
         primaryRisk: "Cyclone, Storm Surge",
@@ -45,29 +45,13 @@ const FACILITIES = [
         lastAssessed: "08 Nov 2024",
     },
     {
-        location: "Delhi Regional Office",
+        location: "Delta Resources",
         type: "Administrative",
         riskScore: "Moderate",
         primaryRisk: "Extreme Heat, Air Quality",
         vulnerability: 5.1,
         lastAssessed: "12 Nov 2024",
     },
-    // {
-    //     location: "Bangalore Tech Hub",
-    //     type: "Technology",
-    //     riskScore: "Low",
-    //     primaryRisk: "Water Scarcity",
-    //     vulnerability: 3.7,
-    //     lastAssessed: "14 Nov 2024",
-    // },
-    // {
-    //     location: "Kolkata Port Operations",
-    //     type: "Maritime",
-    //     riskScore: "High",
-    //     primaryRisk: "Sea Level Rise, Cyclone",
-    //     vulnerability: 7.1,
-    //     lastAssessed: "09 Nov 2024",
-    // },
 ] as const;
 
 /* --- Data for Q2: supplier emissions (from the screenshot) --- */

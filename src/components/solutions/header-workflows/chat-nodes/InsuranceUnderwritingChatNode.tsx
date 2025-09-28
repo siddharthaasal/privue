@@ -131,14 +131,14 @@ export function InsuranceUnderwritingChatNodeInner(): any {
         const maxSales = Math.max(...salesValues, 1);
 
         // dimensions
-        const w = 150;
-        const h = 150; // increased height
-        const padding = { top: 6, right: 8, bottom: 20, left: 8 };
+        const w = 150; // 3/4 width
+        const h = 150; // thin height
+        const padding = { top: 6, right: 8, bottom: 18, left: 8 };
         const chartW = w - padding.left - padding.right;
         const chartH = h - padding.top - padding.bottom;
-        const barGap = 20;
+        const barGap = 16;
         const n = data.length || 1;
-        const barWidth = Math.max(6, (chartW - barGap * (n - 1)) / n); // narrower bars
+        const barWidth = Math.max(8, (chartW - barGap * (n - 1)) / n); // thinner bars
 
         const yOf = (val: number) => padding.top + (1 - val / maxSales) * chartH;
 
@@ -148,6 +148,7 @@ export function InsuranceUnderwritingChatNodeInner(): any {
             return `${x},${y}`;
         });
 
+        // Ref for line animation
         const polylineRef = useRef<SVGPolylineElement | null>(null);
 
         useEffect(() => {
@@ -155,7 +156,7 @@ export function InsuranceUnderwritingChatNodeInner(): any {
                 const length = polylineRef.current.getTotalLength();
                 polylineRef.current.style.strokeDasharray = String(length);
                 polylineRef.current.style.strokeDashoffset = String(length);
-                polylineRef.current.getBoundingClientRect();
+                polylineRef.current.getBoundingClientRect(); // trigger reflow
                 polylineRef.current.style.transition = "stroke-dashoffset 1s ease-out";
                 polylineRef.current.style.strokeDashoffset = "0";
             }
@@ -163,71 +164,90 @@ export function InsuranceUnderwritingChatNodeInner(): any {
 
         return (
             <div className="w-3/4">
-                <svg width={w} height={h}>
-                    {/* baseline axis */}
-                    <line
-                        x1={padding.left}
-                        x2={w - padding.right}
-                        y1={h - padding.bottom}
-                        y2={h - padding.bottom}
-                        stroke="rgba(15,23,36,0.1)"
-                        strokeWidth={1}
-                    />
+                <div className="rounded-md px-1 py-1">
+                    <svg width={w} height={h}>
+                        {/* baseline axis */}
+                        <line
+                            x1={padding.left}
+                            x2={w - padding.right}
+                            y1={h - padding.bottom}
+                            y2={h - padding.bottom}
+                            stroke="rgba(15,23,36,0.1)"
+                            strokeWidth={1}
+                        />
 
-                    {/* bars (Sales) */}
-                    {data.map((r, i) => {
-                        const x = padding.left + i * (barWidth + barGap);
-                        const barH = (r.sales / maxSales) * chartH;
-                        const y = padding.top + (chartH - barH);
-                        return (
-                            <rect
-                                key={`bar-${i}`}
-                                x={x}
-                                y={y}
-                                width={barWidth}
-                                height={barH}
-                                rx={2}
-                                fill="#3b82f6"
-                                opacity={0.85}
-                                style={{
-                                    transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
-                                    transformBox: "fill-box",
-                                    transform: "scaleY(0)",
-                                    animation: `growBar 600ms ease-out ${i * 200}ms forwards`,
-                                }}
-                            />
-                        );
-                    })}
+                        {/* bars (Sales) */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap);
+                            const barH = (r.sales / maxSales) * chartH;
+                            const y = padding.top + (chartH - barH);
+                            return (
+                                <rect
+                                    key={`bar-${i}`}
+                                    x={x}
+                                    y={y}
+                                    width={barWidth}
+                                    height={barH}
+                                    rx={3}
+                                    fill="#5c7cfa"
+                                    // opacity={0.85}
+                                    style={{
+                                        transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
+                                        transformBox: "fill-box",
+                                        transform: "scaleY(0)",
+                                        animation: `growBar 600ms ease-out ${i * 150}ms forwards`,
+                                    }}
+                                />
+                            );
+                        })}
 
-                    {/* gross margin line */}
-                    <polyline ref={polylineRef} points={points.join(" ")} fill="none" stroke="#ef4444" strokeWidth={1.5} />
+                        {/* gross margin line */}
+                        <polyline ref={polylineRef} points={points.join(" ")} fill="none" stroke="#ef4444" strokeWidth={1.5} />
 
-                    {/* gross margin circles */}
-                    {data.map((r, i) => {
-                        const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
-                        const y = yOf(r.grossMargin);
-                        return (
-                            <circle
-                                key={`pt-${i}`}
-                                cx={x}
-                                cy={y}
-                                r={2.5}
-                                fill="#ef4444"
-                                stroke="#fff"
-                                strokeWidth={0.8}
-                                style={{
-                                    opacity: 0,
-                                    animation: `fadeIn 400ms ease-out ${600 + i * 200}ms forwards`,
-                                }}
-                            />
-                        );
-                    })}
-                </svg>
+                        {/* gross margin circles */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
+                            const y = yOf(r.grossMargin);
+                            return (
+                                <circle
+                                    key={`pt-${i}`}
+                                    cx={x}
+                                    cy={y}
+                                    r={2.5}
+                                    fill="#ef4444"
+                                    stroke="#fff"
+                                    strokeWidth={0.8}
+                                    style={{
+                                        opacity: 0,
+                                        animation: `fadeIn 400ms ease-out ${600 + i * 200}ms forwards`,
+                                    }}
+                                />
+                            );
+                        })}
 
+                        {/* year labels under bars */}
+                        {data.map((r, i) => {
+                            const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
+                            return (
+                                <text key={`lbl-${i}`} x={x} y={h - 4} textAnchor="middle" fontSize={10} fill="#64748b">
+                                    {r.year.replace("FY ", "")}
+                                </text>
+                            );
+                        })}
+                    </svg>
+                </div>
+
+                {/* Animations */}
                 <style>{`
-          @keyframes growBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-          @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        `}</style>
+            @keyframes growBar {
+              from { transform: scaleY(0); }
+              to { transform: scaleY(1); }
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+          `}</style>
             </div>
         );
     }

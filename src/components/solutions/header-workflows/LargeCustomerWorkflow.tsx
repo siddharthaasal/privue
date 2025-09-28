@@ -26,7 +26,7 @@ import { OrbitNode } from "@/components/workflow-animation/OrbitNode";
 import { AgentNode } from "@/components/workflow-animation/AgentNode";
 import { ToolNode } from "@/components/workflow-animation/ToolNode";
 import { ToolNodeLeft } from "@/components/workflow-animation/ToolNodeLeft";
-import { ScanText, Bot, DatabaseZap, BanknoteArrowUp, Scale, Gavel, Newspaper } from "lucide-react";
+import { ScanText, Bot, DatabaseZap, BanknoteArrowUp, Scale, Newspaper, FileChartPie, FolderGit2 } from "lucide-react";
 
 const initialNodes: Node[] = [
     // {
@@ -40,7 +40,7 @@ const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 80, y: 40 },
         data: {
-            label: "Unstructured Data",
+            label: "KYC Doc Submitted",
             // icon: FaRegFilePdf
             icon: "/icons/workflow/pdf.png"
         },
@@ -52,10 +52,10 @@ const initialNodes: Node[] = [
         type: "dataNode",
         position: { x: 80, y: 180 },
         data: {
-            label: "Structured Data",
+            label: "Government Portal",
             // icon: PiMicrosoftExcelLogo
             // icon: "/icons/workflow/sheets.png"
-            icon: "/icons/workflow/excel-2.png"
+            icon: FolderGit2
         },
         // parentNode: "group-1",
         // extent: "parent",
@@ -147,7 +147,7 @@ const initialNodes: Node[] = [
         position: { x: 700, y: 420 },
         data: {
             title: "Financial Stability",
-            icon: Scale
+            icon: FileChartPie
             // icon: "/icons/compliance-risk.png"
         }
     },
@@ -157,7 +157,7 @@ const initialNodes: Node[] = [
         position: { x: 850, y: 420 },
         data: {
             title: "Compliance and Legal",
-            icon: Gavel
+            icon: Scale
             // icon: "/icons/climate-risk.png"
         }
     },

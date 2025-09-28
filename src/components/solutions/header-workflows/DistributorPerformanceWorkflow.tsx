@@ -11,7 +11,8 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 
-import { AnimatedChatNode } from "@/components/workflow-animation/ChatNode";
+// import { AnimatedChatNode } from "@/components/workflow-animation/ChatNode";
+import { DistributorChatNode } from "./chat-nodes/DistributorChatNode";
 import { DataNode } from "@/components/workflow-animation/DataNode";
 import { DataNodeLR } from "@/components/workflow-animation/DataNodeLR";
 import { SecDataNode } from "@/components/workflow-animation/SecDataNode";
@@ -405,7 +406,7 @@ const nodeTypes = {
     agentNode: AgentNode,
     toolNode: ToolNode,
     toolNodeLeft: ToolNodeLeft,
-    chatNode: AnimatedChatNode,
+    chatNode: DistributorChatNode,
 };
 
 type Props = {

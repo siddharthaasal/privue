@@ -15,6 +15,8 @@ import DistributorPerformanceWorkflow from '@/components/solutions/header-workfl
 import SustainabilityWorkflow from '@/components/solutions/header-workflows/SustainabilityWorkflow';
 import InsuranceUnderwritingWorkflow from '@/components/solutions/header-workflows/IsuranceUnderwritingWorkflow';
 import LargeCustomerWorkflow from '@/components/solutions/header-workflows/LargeCustomerWorkflow';
+import ThirdPartyWorkflow from '@/components/solutions/header-workflows/ThirdPartyWorkflow';
+import EntityDueDiligenceWorkflow from '@/components/solutions/header-workflows/EntityDueDiligenceWorkflow';
 
 export type Problem = {
     problemHeading: string;
@@ -659,7 +661,8 @@ export const solutions: Solution[] = [
         slug: "entity-due-diligence",
         icon: "/icons/solutions/entity-due-diligence.png",
         // icon: Workflow,
-        img: "/solutions/demo-image.png",
+        // img: "/solutions/demo-image.png",
+        workflow: EntityDueDiligenceWorkflow,
         coverImg: "https://plus.unsplash.com/premium_photo-1681681061613-8540c8d67f0d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVlJTIwZGlsaWdlbmNlfGVufDB8fDB8fHww",
         heading: "Entity Due Diligence",
         subHeading: "A Unified Solution for Smarter Due Diligence",
@@ -825,7 +828,8 @@ export const solutions: Solution[] = [
         slug: "third-party-risk-management",
         icon: "/icons/solutions/third-party-risk-management.png",
         // icon: TriangleAlert,
-        img: "/solutions/demo-image.png",
+        // img: "/solutions/demo-image.png",
+        workflow: ThirdPartyWorkflow,
         coverImg: "/solutions/demo-image.png",
         heading: "Third Party Risk Management",
         subHeading: "Reduce disruptions. Safeguard reputation. Build resilient partnerships.",

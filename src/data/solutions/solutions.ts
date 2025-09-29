@@ -25,6 +25,7 @@ import ClimateRisk from '@/components/product-animations/ClimateRisk';
 import EngineeringReportParsing from '@/components/product-animations/EngineeringReportParsing';
 import EsgScoring from '@/components/product-animations/EsgScoring';
 import CarbonEstimation from '@/components/product-animations/CarbonEstimation';
+import News from '@/components/product-animations/News';
 
 export type Problem = {
     problemHeading: string;
@@ -485,6 +486,7 @@ export const solutions: Solution[] = [
                     "Captures and summarises adverse News and industry developments from multiple publications for underwriting context.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: News
             },
         ],
 

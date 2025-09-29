@@ -24,6 +24,7 @@ import CyberRisk from '@/components/product-animations/CyberRisk';
 import ClimateRisk from '@/components/product-animations/ClimateRisk';
 import EngineeringReportParsing from '@/components/product-animations/EngineeringReportParsing';
 import EsgScoring from '@/components/product-animations/EsgScoring';
+import CarbonEstimation from '@/components/product-animations/CarbonEstimation';
 
 export type Problem = {
     problemHeading: string;
@@ -305,6 +306,7 @@ export const solutions: Solution[] = [
                     "Get reliable Scope 1, 2, and proxy Scope 3 emission estimates—even for companies with no disclosures. Our models combine industry, turnover, workforce, and state-level energy mix data to generate defensible carbon footprints, enabling stronger vendor and borrower evaluations.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CarbonEstimation
             },
             {
                 title: "ESG Scoring",

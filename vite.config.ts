@@ -11,9 +11,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(),
-  visualizer({                 // ✅ adds visual analysis
+  visualizer({                 //  adds visual analysis
     filename: 'stats.html',
-    open: true,                // auto opens after build
+    open: false,                // auto opens after build
     gzipSize: true,
     brotliSize: true
   }),

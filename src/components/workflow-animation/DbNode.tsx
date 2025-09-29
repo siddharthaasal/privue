@@ -1,9 +1,9 @@
 import React from "react";
 import { Handle, Position } from "reactflow";
 
-// function DbNodeInner({ data }: { data?: any }) {
-function DbNodeInner() {
-    // const label = (data && data.label) || "UNIFIED DATA PLATFORM";
+function DbNodeInner({ data }: { data?: any }) {
+    // function DbNodeInner({ data }: { data?: any }) {
+    const label = (data && data.label) || "UNIFIED DATA PLATFORM";
 
     return (
         <div
@@ -93,9 +93,9 @@ function DbNodeInner() {
 
                 <ellipse cx="110" cy="108" rx="54" ry="8" fill="rgba(6,10,20,0.06)" />
             </svg> */}
-            <img src="./server-stack.png" alt="" />
+            <img src="./server-stack.png" alt="server-stack" />
             {/* Label below the svg */}
-            {/* <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
+            <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
                 <div
                     style={{
                         fontSize: 16,
@@ -109,7 +109,7 @@ function DbNodeInner() {
                 >
                     {label}
                 </div>
-            </div> */}
+            </div>
 
             {/* React Flow handles (unchanged positions) */}
             <Handle
@@ -132,7 +132,7 @@ function DbNodeInner() {
                 position={Position.Bottom}
                 id="right"
                 style={{
-                    bottom: 38,
+                    bottom: 23,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
@@ -147,7 +147,7 @@ function DbNodeInner() {
                 position={Position.Top}
                 id="top"
                 style={{
-                    top: 38,
+                    top: 52,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
@@ -162,7 +162,7 @@ function DbNodeInner() {
                 position={Position.Top}
                 id="top-center"
                 style={{
-                    top: 37,
+                    top: 51,
                     width: 8,
                     height: 8,
                     borderRadius: 999,

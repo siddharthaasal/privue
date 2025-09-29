@@ -25,75 +25,78 @@ const boxVariants: Variants = {
 /* ---------- FRAME 1: Upload (reduced bar thickness, privue colors) ---------- */
 export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: number }) {
     const uploadGradient = `linear-gradient(90deg, ${privue[600]}, ${privue[700]})`;
-
     return (
-        <motion.div key="upload-frame" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }}>
-            <div className="space-y-4 max-w-[500px] w-full">
-                <div className="rounded-lg bg-white/95 p-5 w-full border border-slate-200/60 shadow-sm">
-                    <div className="text-center mb-3">
-                        <div className="text-[17px] font-semibold text-slate-900">Upload file</div>
-                        <div className="text-[12.5px] text-slate-500 mt-1">Drag or drop your files here or click to upload</div>
-                    </div>
+        <>
 
-                    <div className="flex justify-center">
-                        <div className="relative w-full max-w-[360px] flex items-center justify-center">
-                            <motion.div variants={boxVariants} animate={stage === "dropping" ? "dropActive" : "idle"} className="w-52 h-36 rounded-lg border-2 border-dashed border-slate-200 flex items-center justify-center" style={{ background: "rgba(255,255,255,0.9)" }}>
-                                <div className="w-40 h-24 bg-white rounded-md shadow-[0_10px_20px_rgba(2,6,23,0.04)] flex items-center justify-center">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                        <path d="M12 3v10" stroke="#9ca3af" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M8 7l4-4 4 4" stroke="#9ca3af" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                        <rect x="4" y="13" width="16" height="6" rx="1" stroke="#e6e9ed" strokeWidth="1.2" fill="#fff" />
-                                    </svg>
+            <motion.div key="upload-frame" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.28 }}>
+                <div className="space-y-4 max-w-[500px] w-full">
+                    <div className="rounded-lg bg-white/95 p-5 w-full border border-slate-200/60 shadow-sm">
+                        <div className="text-center mb-3">
+                            <div className="text-[17px] font-semibold text-slate-900">Upload file</div>
+                            <div className="text-[12.5px] text-slate-500 mt-1">Drag or drop your files here or click to upload</div>
+                        </div>
+
+                        <div className="flex justify-center">
+                            <div className="relative w-full max-w-[360px] flex items-center justify-center">
+                                <motion.div variants={boxVariants} animate={stage === "dropping" ? "dropActive" : "idle"} className="w-52 h-36 rounded-lg border-2 border-dashed border-slate-200 flex items-center justify-center" style={{ background: "rgba(255,255,255,0.9)" }}>
+                                    <div className="w-40 h-24 bg-white rounded-md shadow-[0_10px_20px_rgba(2,6,23,0.04)] flex items-center justify-center">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                                            <path d="M12 3v10" stroke="#9ca3af" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M8 7l4-4 4 4" stroke="#9ca3af" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                            <rect x="4" y="13" width="16" height="6" rx="1" stroke="#e6e9ed" strokeWidth="1.2" fill="#fff" />
+                                        </svg>
+                                    </div>
+                                </motion.div>
+
+                                <motion.div initial={{ opacity: 0 }} animate={stage === "dropping" || stage === "uploading" ? { opacity: 1 } : stage === "done" ? { opacity: 0.95 } : { opacity: 0 }} transition={{ duration: 0.48 }} className="absolute z-20 w-48 h-26 rounded-lg bg-white border shadow-[0_10px_30px_rgba(2,6,23,0.06)] flex items-center gap-3 px-3" style={{ left: "5.6rem" }}>
+                                    <div className="w-10 h-10 rounded-md bg-slate-50 border flex items-center justify-center">
+                                        <svg width="18" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+                                            <path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" stroke="#374151" strokeWidth="1.2" strokeLinejoin="round" />
+                                            <path d="M13 2v6h6" stroke="#374151" strokeWidth="1.2" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[13px] font-medium text-slate-900 truncate">engineering_report.pdf</div>
+                                        <div className="text-[11px] text-slate-500">1.2 MB</div>
+                                    </div>
+
+                                    <div className="text-[12px] text-slate-500">{stage === "uploading" ? `${uploadPct}%` : ""}</div>
+                                </motion.div>
+                            </div>
+                        </div>
+
+                        <div className="mt-5">
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: stage === "uploading" || stage === "done" ? 1 : 0, height: stage === "uploading" || stage === "done" ? "auto" : 0 }} transition={{ duration: 0.24 }}>
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="text-[12px] text-slate-700">{stage === "uploading" ? "Uploading" : stage === "done" ? "Completed" : ""}</div>
+                                    <div className="text-[12px] text-slate-700 font-medium">{stage === "uploading" ? `${uploadPct}%` : stage === "done" ? "100%" : ""}</div>
+                                </div>
+
+                                <div className="h-2 rounded-full bg-slate-100 overflow-hidden">{/* reduced thickness */}
+                                    <motion.div style={{ height: "100%", borderRadius: 999, background: uploadGradient, boxShadow: "0 6px 16px rgba(92,124,250,0.08)" }} initial={{ width: 0 }} animate={{ width: stage === "uploading" ? `${uploadPct}%` : stage === "done" ? "100%" : 0 }} transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.6 }} />
                                 </div>
                             </motion.div>
 
-                            <motion.div initial={{ opacity: 0 }} animate={stage === "dropping" || stage === "uploading" ? { opacity: 1 } : stage === "done" ? { opacity: 0.95 } : { opacity: 0 }} transition={{ duration: 0.48 }} className="absolute z-20 w-48 h-26 rounded-lg bg-white border shadow-[0_10px_30px_rgba(2,6,23,0.06)] flex items-center gap-3 px-3" style={{ left: "5.6rem" }}>
-                                <div className="w-10 h-10 rounded-md bg-slate-50 border flex items-center justify-center">
-                                    <svg width="18" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                        <path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" stroke="#374151" strokeWidth="1.2" strokeLinejoin="round" />
-                                        <path d="M13 2v6h6" stroke="#374151" strokeWidth="1.2" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-
-                                <div className="flex-1 min-w-0">
-                                    <div className="text-[13px] font-medium text-slate-900 truncate">engineering_report.pdf</div>
-                                    <div className="text-[11px] text-slate-500">1.2 MB</div>
-                                </div>
-
-                                <div className="text-[12px] text-slate-500">{stage === "uploading" ? `${uploadPct}%` : ""}</div>
-                            </motion.div>
+                            {stage === "done" && (
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} className="mt-3 flex items-center gap-3">
+                                    <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                                            <path d="M20 6L9 17l-5-5" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div className="text-[13px] font-medium text-slate-900">Processing complete</div>
+                                        <div className="text-[12px] text-slate-500">Analysis finished — results are ready.</div>
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
                     </div>
-
-                    <div className="mt-5">
-                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: stage === "uploading" || stage === "done" ? 1 : 0, height: stage === "uploading" || stage === "done" ? "auto" : 0 }} transition={{ duration: 0.24 }}>
-                            <div className="flex items-center justify-between mb-2">
-                                <div className="text-[12px] text-slate-700">{stage === "uploading" ? "Uploading" : stage === "done" ? "Completed" : ""}</div>
-                                <div className="text-[12px] text-slate-700 font-medium">{stage === "uploading" ? `${uploadPct}%` : stage === "done" ? "100%" : ""}</div>
-                            </div>
-
-                            <div className="h-2 rounded-full bg-slate-100 overflow-hidden">{/* reduced thickness */}
-                                <motion.div style={{ height: "100%", borderRadius: 999, background: uploadGradient, boxShadow: "0 6px 16px rgba(92,124,250,0.08)" }} initial={{ width: 0 }} animate={{ width: stage === "uploading" ? `${uploadPct}%` : stage === "done" ? "100%" : 0 }} transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.6 }} />
-                            </div>
-                        </motion.div>
-
-                        {stage === "done" && (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }} className="mt-3 flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                        <path d="M20 6L9 17l-5-5" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div className="text-[13px] font-medium text-slate-900">Processing complete</div>
-                                    <div className="text-[12px] text-slate-500">Analysis finished — results are ready.</div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </div>
                 </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </>
+
     );
 }
 
@@ -423,11 +426,19 @@ export default function EngineeringReportParsing() {
         }, 600);
         timers.current.push(t as unknown as number);
     };
+    const bgUrl = "/module-animations/climate-risk-bg.png";
+
 
     return (
         <div className="relative w-full h-full rounded-lg overflow-hidden bg-white">
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.78) 100%)" }} />
+            <div className="absolute inset-0">
+                <img src={bgUrl} alt="background" className="w-full h-full object-contain backdrop-opacity-95" />
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: "linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)",
+                    }}
+                />
             </div>
 
             <div className="absolute bottom-6 right-6">

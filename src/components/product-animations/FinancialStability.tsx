@@ -501,11 +501,16 @@ export default function RiskAssessmentTour() {
         <div className="relative w-full h-full rounded-lg overflow-hidden bg-white">
             {/* background layer */}
             <div className="absolute inset-0">
-                <img src={bgUrl} alt="background" className="w-full h-full object-contain backdrop-opacity-95" />
+                <img
+                    src={bgUrl}
+                    alt="background"
+                    className="w-full h-full object-contain"
+                />
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: "linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)",
+                        background:
+                            "linear-gradient(180deg, rgba(237,242,255,0) 50%, rgba(219,228,255,0.4))",
                     }}
                 />
             </div>
@@ -513,7 +518,7 @@ export default function RiskAssessmentTour() {
             {/* overlay frames */}
             <AnimatePresence>
                 {step === "frame1" && (
-                    <motion.div key="frame1" className="absolute bottom-6 right-6">
+                    <motion.div key="frame1" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-xl">
                         <FinancialChartCard />
                     </motion.div>
                 )}
@@ -521,7 +526,7 @@ export default function RiskAssessmentTour() {
 
             <AnimatePresence>
                 {step === "frame2" && (
-                    <motion.div key="frame2" className="absolute bottom-6 right-6">
+                    <motion.div key="frame2" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-lg">
                         <DetailedAnalysisCard />
                     </motion.div>
                 )}
@@ -529,7 +534,7 @@ export default function RiskAssessmentTour() {
 
             <AnimatePresence>
                 {step === "frame3" && (
-                    <motion.div key="frame3" className="absolute bottom-6 right-6">
+                    <motion.div key="frame3" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-lg">
                         <FinancialMetricsCard />
                     </motion.div>
                 )}
@@ -537,7 +542,7 @@ export default function RiskAssessmentTour() {
 
             <AnimatePresence>
                 {step === "frame4" && (
-                    <motion.div key="frame4" className="absolute bottom-6 right-6">
+                    <motion.div key="frame4" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-lg">
                         <MetricsAnalysisCard />
                     </motion.div>
                 )}
@@ -545,7 +550,7 @@ export default function RiskAssessmentTour() {
 
             <AnimatePresence>
                 {step === "frame5" && (
-                    <motion.div key="frame5" className="absolute bottom-6 right-6">
+                    <motion.div key="frame5" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-lg">
                         <MetricsTableCard />
                     </motion.div>
                 )}
@@ -553,7 +558,7 @@ export default function RiskAssessmentTour() {
 
             <AnimatePresence>
                 {step === "frame6" && (
-                    <motion.div key="frame6" className="absolute bottom-6 right-6">
+                    <motion.div key="frame6" className="absolute bottom-6 right-6 rounded-md backdrop-blur-3xl shadow-lg">
                         <InsightsAnalysisCard />
                     </motion.div>
                 )}

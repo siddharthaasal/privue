@@ -297,6 +297,7 @@ export const solutions: Solution[] = [
                     "Pinpoint climate vulnerabilities across India using geo-tagged data powered by our API. Integrate insights directly into your workflows or access them on our platform to evaluate heat, flood, and drought risks at asset or company level.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: ClimateRisk
             },
             {
                 title: "Carbon Emission Estimation",
@@ -311,6 +312,7 @@ export const solutions: Solution[] = [
                     "Leverage AI Agents that scan regulatory filings, company websites, court and tribunal cases, and news sources to surface ESG signals. We translate these into an objective ESG score—providing a robust baseline for deeper sustainability due diligence.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: EsgScoring
             },
         ],
 
@@ -1093,6 +1095,7 @@ export const solutions: Solution[] = [
                     "Provide real-time triggers and alerts when events impact vendor stability.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: NotificationOverlayWithLeftFade
             },
         ],
         mainArticleSlug: "enhancing-supply-chain-resilience"

@@ -93,7 +93,7 @@ export default function TestVerticalModules({ items }: Props) {
                         {/* <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15"></div> */}
 
                         <div
-                            className="relative w-full rounded-2xl bg-slate-50/40 ring-1 ring-inset ring-slate-200/50 overflow-hidden flex items-center justify-center"
+                            className="relative w-full min-h-[400px] max-h-[600px] rounded-2xl bg-slate-50/40 ring-1 ring-inset ring-slate-200/50 overflow-hidden flex items-center justify-center"
                         // style={{ minHeight: 420, maxHeight: 520 }}
                         >
                             <AnimatePresence mode="wait">

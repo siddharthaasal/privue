@@ -93,9 +93,9 @@ function DbNodeInner({ data }: { data?: any }) {
 
                 <ellipse cx="110" cy="108" rx="54" ry="8" fill="rgba(6,10,20,0.06)" />
             </svg> */}
-            <img src="./server-stack.png" alt="server-stack" />
+            <img src="/server-stack-2.png" alt="server-stack" />
             {/* Label below the svg */}
-            <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
+            <div style={{ position: "absolute", bottom: 2, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
                 <div
                     style={{
                         fontSize: 16,
@@ -103,7 +103,7 @@ function DbNodeInner({ data }: { data?: any }) {
                         color: "var(--privue-900,#0f1724)",
                         letterSpacing: 0.4,
                         background: "transparent",
-                        padding: "4px 8px",
+                        padding: "4px 10px",
                         borderRadius: 6,
                     }}
                 >

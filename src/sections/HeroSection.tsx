@@ -63,7 +63,7 @@ export default function HeroSection() {
                 </motion.div>
 
                 {/* Subtext */}
-                <motion.p
+                <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
@@ -74,7 +74,7 @@ export default function HeroSection() {
                         Mitigate risk and unlock high-value relationships.
                     </p>
 
-                </motion.p>
+                </motion.div>
 
                 {/* CTA Button */}
                 <motion.div

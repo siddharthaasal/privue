@@ -26,6 +26,7 @@ import EngineeringReportParsing from '@/components/product-animations/Engineerin
 import EsgScoring from '@/components/product-animations/EsgScoring';
 import CarbonEstimation from '@/components/product-animations/CarbonEstimation';
 import News from '@/components/product-animations/News';
+import InsurancePolicy from '@/components/product-animations/InsurancePolicy';
 
 export type Problem = {
     problemHeading: string;
@@ -464,6 +465,7 @@ export const solutions: Solution[] = [
                     "Extracts key details from past insurance policies and integrates them into your underwriting platform.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: InsurancePolicy
             },
             {
                 title: "Engineering Report Parsing",

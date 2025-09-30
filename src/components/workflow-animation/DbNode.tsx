@@ -93,7 +93,7 @@ function DbNodeInner({ data }: { data?: any }) {
 
                 <ellipse cx="110" cy="108" rx="54" ry="8" fill="rgba(6,10,20,0.06)" />
             </svg> */}
-            <img src="/server-stack-2.png" alt="server-stack" />
+            <img src="/final-server-stack.png" alt="server-stack" />
             {/* Label below the svg */}
             <div style={{ position: "absolute", bottom: 2, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
                 <div
@@ -117,12 +117,13 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Left}
                 id="left"
                 style={{
-                    left: 28,
+                    left: 25,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
-                    border: "none",
+                    border: "10px solid #475569)",
+                    boxShadow: "0 1px 4px #475569",
                     top: "50%",
                     transform: "translateY(-50%)",
                 }}
@@ -132,13 +133,14 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Bottom}
                 id="right"
                 style={{
-                    bottom: 23,
+                    bottom: 30,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "none",
-                    left: "45%",
+                    background: "#475569",
+                    border: "10px solid #475569)",
+                    boxShadow: "0 1px 4px #475569",
+                    left: "48.5%",
                     transform: "translateY(-50%)",
                 }}
             />
@@ -147,13 +149,14 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Top}
                 id="top"
                 style={{
-                    top: 52,
+                    top: 41,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
-                    border: "none",
-                    left: "70%",
+                    border: "10px solid #475569)",
+                    boxShadow: "0 1px 4px #475569",
+                    left: "68%",
                     transform: "translateY(-50%)",
                 }}
             />
@@ -162,13 +165,14 @@ function DbNodeInner({ data }: { data?: any }) {
                 position={Position.Top}
                 id="top-center"
                 style={{
-                    top: 51,
+                    top: 41,
                     width: 8,
                     height: 8,
                     borderRadius: 999,
                     background: "var(--privue-700,#475569)",
-                    border: "none",
-                    left: "30%",
+                    border: "10px solid #475569)",
+                    boxShadow: "0 1px 4px #475569",
+                    left: "29%",
                     transform: "translateY(-50%)",
                 }}
             />

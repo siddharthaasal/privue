@@ -48,7 +48,7 @@ function SecDataNodeInner({ data }: DataNodeProps) {
         }
 
         const IconComponent = ic as React.ComponentType<any>;
-        return <IconComponent size={30} color={"#010101"} />;
+        return <IconComponent size={30} color={"#374151"} />;
     };
 
     return (
@@ -85,8 +85,9 @@ function SecDataNodeInner({ data }: DataNodeProps) {
                     id="top"
                     style={{
                         top: -6,
-                        width: 10,
-                        height: 10,
+                        left: "62%",
+                        width: 9,
+                        height: 9,
                         borderRadius: 99,
                         background: "#fff",
                         border: "3px solid rgba(255,255,255,0.95)",

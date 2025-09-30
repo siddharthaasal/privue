@@ -3,32 +3,32 @@ import { Handle, Position } from "reactflow";
 import { FileText } from "lucide-react"; // fallback icon
 
 type IconProp =
-    | React.ReactNode // <MyIcon />
-    | React.ComponentType<any> // MyIcon (component)
-    | string; // image URL
+    | React.ReactNode
+    | React.ComponentType<any>
+    | string;
 
 type ToolNodeData = {
     title?: string;
     subtitle?: string;
     icon?: IconProp;
-    iconSize?: number; // optional override (px)
+    iconSize?: number;
 };
+
+function slugify(str = "") {
+    return str.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-_]/g, "").toLowerCase();
+}
 
 function ToolNodeInner({ data }: { data?: ToolNodeData }) {
     const title = (data && data.title) || "Tool";
     const subtitle = (data && data.subtitle) || "";
     const icon = data?.icon;
-    const iconSize = data?.iconSize ?? 28; // default icon size
+    const iconSize = data?.iconSize ?? 28;
 
     const renderIcon = (ic?: IconProp) => {
         if (!ic) {
             return <FileText width={iconSize} height={iconSize} aria-hidden />;
         }
-
-        // already JSX element
         if (React.isValidElement(ic)) return ic;
-
-        // image url
         if (typeof ic === "string") {
             return (
                 <img
@@ -43,24 +43,25 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
                 />
             );
         }
-
-        // component (function/class)
         const IconComponent = ic as React.ComponentType<any>;
-        // pass props commonly supported by svg icon libs
-        return <IconComponent size={30} color={"#010101"} />;
+        return <IconComponent size={iconSize} color={"#374151"} />;
     };
 
     return (
         <div
             style={{
                 width: 120,
-                height: 120,
+                // allow height to grow when title/subtitle wrap -> don't fix height
+                minHeight: 120,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 6,
-                position: "relative",
+                position: "relative", // required so Handle styles are relative to this node
+                padding: 8,
+                boxSizing: "border-box",
+                textAlign: "center",
             }}
         >
             <div
@@ -85,7 +86,6 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
                         alignItems: "center",
                         justifyContent: "center",
                         color: "var(--privue-700,#475569)",
-                        // ensure svg fills the available box
                         lineHeight: 0,
                     }}
                 >
@@ -94,39 +94,54 @@ function ToolNodeInner({ data }: { data?: ToolNodeData }) {
             </div>
 
             <div
-                className="text-sm text-privue-900 font-semibold text-center"
-            // style={{
-            //     fontSize: 12,
-            //     fontWeight: 700,
-            //     color: "var(--privue-900,#0f1724)",
-            //     textAlign: "center",
-            // }}
+                className="text-sm text-privue-900 font-semibold"
+                style={{
+                    width: "auto",
+                    textAlign: "center",
+                    whiteSpace: "normal",   // ✅ allow wrapping
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word", // ensures long words break if needed
+                }}
+                title={title}
             >
                 {title}
             </div>
+
+
             {subtitle ? (
                 <div
                     style={{
                         fontSize: 11,
                         color: "var(--privue-600,#64748b)",
                         textAlign: "center",
+                        maxWidth: "100%",
+                        whiteSpace: "normal",
+                        wordBreak: "break-word",
                     }}
                 >
                     {subtitle}
                 </div>
             ) : null}
 
+            {/* Center handle horizontally using left:50% + translateX(-50%).
+                Use a small negative top so handle sits visually on the outside/top of the circle.
+                Note: don't rely on 'position: static' — the Handle will be absolutely positioned relative to parent. */}
             <Handle
                 type="target"
                 position={Position.Top}
-                id={`tool-top-${title}`}
+                id={`tool-top-${slugify(title)}`}
                 style={{
-                    top: 3,
+                    // center horizontally regardless of width/height changes
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    // move slightly above the node; adjust to taste (-6, -8, -12)
+                    top: 1,
                     width: 10,
                     height: 10,
                     borderRadius: 999,
                     background: "#fff",
                     border: "2px solid rgba(2,6,23,0.08)",
+                    zIndex: 10,
                 }}
             />
         </div>

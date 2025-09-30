@@ -1,6 +1,4 @@
 import { Cpu, Zap } from 'lucide-react'
-import TwoOrbit from '@/components/about/TwoOrbit';
-
 
 export default function AboutSection() {
     return (
@@ -10,11 +8,10 @@ export default function AboutSection() {
                     AI-powered data intelligence and risk management
                 </h2>
 
-                {/* parent flex: items-stretch so children match heights */}
-                <div className="relative flex flex-col md:flex-row items-center gap-8">
+                <div className="relative flex flex-col md:flex-row items-start gap-8">
 
-                    {/* Left: Text - allow it to be a flex column and not force min-height */}
-                    <div className="relative z-10 space-y-4 md:w-1/2 min-h-0">
+                    {/* Left: Text */}
+                    <div className="relative z-10 space-y-4 md:w-1/2">
                         <p className="text-base">
                             Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. It integrate multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights via API or custom applications.
                         </p>
@@ -28,38 +25,38 @@ export default function AboutSection() {
                                     <Cpu className="h-4 w-4" />
                                     <h3 className="text-sm font-medium">AI-Driven</h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">Secure infrastructure enabling adoption with confidence.</p>
+                                <p className="text-muted-foreground text-sm">
+                                    Secure infrastructure enabling adoption with confidence.
+                                </p>
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-2">
                                     <Zap className="h-4 w-4" />
                                     <h3 className="text-sm font-medium">Actionable Insights</h3>
                                 </div>
-                                <p className="text-muted-foreground text-sm">Turning complex data into clear intelligence</p>
+                                <p className="text-muted-foreground text-sm">
+                                    Turning complex data into clear intelligence
+                                </p>
                             </div>
                         </div>
-
                     </div>
 
-                    <div className="md:w-1/2 flex min-h-0">
-                        <div className=" relative w-full">
-                            <div className='ml-25'>
-                                <TwoOrbit
-                                    centerLogo="/privue-logo.png"
-                                    innerIcons={[
-                                        <IconImg key="m1" src="/icons/workflow/excel.png" alt="predict" />,
-                                        <IconImg key="m2" src="/icons/workflow/postgre.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/workflow/pdf-2.png" alt="graph" />,
-                                    ]}
-                                    outerIcons={[
-                                        <IconImg key="m1" src="/icons/workflow/gpt.png" alt="predict" />,
-                                        // <IconImg key="m2" src="/icons/climate-risk.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/workflow/gemini.png" alt="graph" />,
-                                        <IconImg key="m2" src="/icons/workflow/claude.png" alt="graph" />,
-                                    ]}
-                                    innerConfig={{ radius: 80, iconSize: 40, duration: 10 }}
-                                    outerConfig={{ radius: 150, iconSize: 50, duration: 26, reverse: true }}
-                                    containerPadding={28}
+                    {/* Right: Image */}
+                    <div className="md:w-1/2 w-full relative mt-8 md:mt-6">
+                        <div className="md:absolute md:-inset-y-12 md:inset-x-0">
+                            <div
+                                className="
+                  relative rounded-2xl overflow-hidden
+                  [mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)]
+                  [mask-repeat:no-repeat] [mask-size:100%_100%]
+                  [--webkit-mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)]
+                  [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]
+                "
+                            >
+                                <img
+                                    src="/workflow-illustration.png"
+                                    alt="workflow illustration"
+                                    className="w-full h-auto object-cover rounded-[12px] shadow"
                                 />
                             </div>
                         </div>
@@ -69,8 +66,4 @@ export default function AboutSection() {
             </div>
         </section>
     )
-}
-
-function IconImg({ src, alt = "" }: { src: string; alt?: string }) {
-    return <img src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 6 }} />;
 }

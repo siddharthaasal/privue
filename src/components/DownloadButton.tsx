@@ -29,7 +29,7 @@ function DownloadButton() {
         }
 
         toPng(el, {
-            backgroundColor: '#1a365d',
+            backgroundColor: '#fcfcfc',
             width: imageWidth,
             height: imageHeight,
             style: {

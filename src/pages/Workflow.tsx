@@ -28,6 +28,7 @@ import { ToolNodeLeft } from "@/components/workflow-animation/ToolNodeLeft";
 
 import { initialEdges } from "@/components/workflow-animation/edges";
 import { initialNodes } from "@/components/workflow-animation/nodes";
+// import DownloadButton from "@/components/DownloadButton";
 
 const nodeTypes = {
     boxNode: BoxNode,
@@ -145,7 +146,7 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
                     size={1}
                     color="rgba(71,85,105,0.02)"
                 />
-
+                {/* <DownloadButton /> */}
                 <Controls showInteractive={false} showZoom={false} showFitView={false} />
             </ReactFlow>
         </div>

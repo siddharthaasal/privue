@@ -27,6 +27,7 @@ import EsgScoring from '@/components/product-animations/EsgScoring';
 import CarbonEstimation from '@/components/product-animations/CarbonEstimation';
 import News from '@/components/product-animations/News';
 import InsurancePolicy from '@/components/product-animations/InsurancePolicy';
+import FinancialDocumentParsing from '@/components/product-animations/FinancialDocumentParsing';
 
 export type Problem = {
     problemHeading: string;
@@ -458,6 +459,7 @@ export const solutions: Solution[] = [
                     "Transforms financial statements from any format (images, pdf, excel, word) into a systematic, underwriter-ready view.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: FinancialDocumentParsing
             },
             {
                 title: "Insurance Policy Document Parsing",

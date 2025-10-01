@@ -1,7 +1,7 @@
-import Layout from "@/components/Layout";
-import { BlogCard } from "@/components/articles/ArticleCard";
-import { articles as generatedArticles } from "@/lib/articles";
-import { formatDate } from "@/lib/helpers";
+import Layout from '@/components/Layout';
+import { BlogCard } from '@/components/articles/ArticleCard';
+import { articles as generatedArticles } from '@/lib/articles';
+import { formatDate } from '@/lib/helpers';
 
 // const articles = [
 //     {
@@ -101,37 +101,36 @@ import { formatDate } from "@/lib/helpers";
 // ];
 
 export default function ArticleListing() {
+  const cards = generatedArticles.map((a) => ({
+    href: a.url,
+    title: a.title,
+    description: a.summary,
+    date: formatDate(a.date),
+    readTime: a.readTime,
+    articleType: a.articleType ?? 'Article',
+    image: a.coverImage,
+  }));
 
-    const cards = generatedArticles.map((a) => ({
-        href: a.url,
-        title: a.title,
-        description: a.summary,
-        date: formatDate(a.date),
-        readTime: a.readTime,
-        articleType: a.articleType ?? "Article",
-        image: a.coverImage,
-    }));
+  return (
+    <Layout>
+      <div className="mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6">
+        <div className="font-open-sans mx-auto mb-12 pt-24 text-center">
+          <h1 className="mb-4 text-3xl font-medium text-[#171717] md:text-4xl">
+            Explore <span className="text-privue-900">Articles</span>
+          </h1>
+          <p className="mt-2 mb-4 text-base text-[#525252] md:text-lg dark:text-gray-400">
+            Guides, trends, and tools for decision-makers
+          </p>
+        </div>
 
-    return (
-        <Layout>
-            <div className="mx-auto px-4 sm:px-6 lg:px-42 xl:px-24 2xl:px-6">
-                <div className="font-open-sans mx-auto mb-12 text-center pt-24">
-                    <h1 className="text-3xl md:text-4xl font-medium text-[#171717] mb-4">
-                        Explore <span className="text-privue-900">Articles</span>
-                    </h1>
-                    <p className="text-[#525252] dark:text-gray-400 text-base md:text-lg mt-2 mb-4">
-                        Guides, trends, and tools for decision-makers
-                    </p>
-                </div>
-
-                {/* Articles Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-32">
-                    {cards.map((article, idx) => (
-                        <BlogCard key={idx} {...article} />
-                    ))}
-                </div>
-                <br />
-            </div>
-        </Layout>
-    );
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 gap-6 pb-32 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((article, idx) => (
+            <BlogCard key={idx} {...article} />
+          ))}
+        </div>
+        <br />
+      </div>
+    </Layout>
+  );
 }

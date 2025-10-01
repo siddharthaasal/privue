@@ -1,24 +1,22 @@
-import { articles } from "@/data/articles/index.ts";
+import { articles } from '@/data/articles/index.ts';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   type CarouselApi,
-} from "@/components/ui/carousel";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+} from '@/components/ui/carousel';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { BlogCard } from "@/components/articles/ArticleCard";
-import { useState, useEffect } from "react";
+import { BlogCard } from '@/components/articles/ArticleCard';
+import { useState, useEffect } from 'react';
 
 function getRelatedArticles(mainSlug: string, count = 4) {
   const main = articles.find((a) => a.slug === mainSlug);
   if (!main) return [];
   // pick random others (excluding main)
-  const others = articles
-    .filter((a) => a.slug !== mainSlug)
-    .slice(0, count - 1);
+  const others = articles.filter((a) => a.slug !== mainSlug).slice(0, count - 1);
 
   return [main, ...others];
 }
@@ -28,7 +26,6 @@ interface RelatedArticlesProps {
 }
 
 export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps) {
-
   const relatedArticles = getRelatedArticles(mainArticleSlug, 4);
 
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
@@ -42,10 +39,10 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
       setCanScrollNext(carouselApi.canScrollNext());
     };
     updateSelection();
-    carouselApi.on("select", updateSelection);
+    carouselApi.on('select', updateSelection);
     return () => {
-      carouselApi.off("select", updateSelection);
-      console.log("Rel articles", relatedArticles);
+      carouselApi.off('select', updateSelection);
+      console.log('Rel articles', relatedArticles);
     };
   }, [carouselApi]);
 
@@ -85,7 +82,7 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
               setApi={setCarouselApi}
               opts={{
                 breakpoints: {
-                  "(max-width: 768px)": {
+                  '(max-width: 768px)': {
                     dragFree: true,
                   },
                 },
@@ -104,7 +101,7 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
                       date={item.date}
                       readTime={item.readTime}
                       image={item.coverImage}
-                      articleType={item.articleType ? item.articleType : "Article"}
+                      articleType={item.articleType ? item.articleType : 'Article'}
                     />
                   </CarouselItem>
                 ))}
@@ -114,5 +111,5 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
         </div>
       </div>
     </>
-  )
+  );
 }

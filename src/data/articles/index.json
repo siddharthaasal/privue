@@ -5,13 +5,7 @@
     "date": "2025-06-04",
     "author": "Saurabh Verma",
     "summary": "Accelerating Asset Recovery Through Advanced Data Intelligence",
-    "tags": [
-      "insolvency",
-      "asset recovery",
-      "risk intelligence",
-      "bankruptcy",
-      "compliance"
-    ],
+    "tags": ["insolvency", "asset recovery", "risk intelligence", "bankruptcy", "compliance"],
     "articleType": "Case Study",
     "solutionName": "Insolvency Investigations",
     "solutionLink": "solutions/entity-due-diligence",
@@ -26,13 +20,7 @@
     "date": "2025-05-28",
     "author": "Saurabh Verma",
     "summary": "Unlocking Superior Risk Intelligence for Liability Insurance",
-    "tags": [
-      "underwriting",
-      "insurance",
-      "risk intelligence",
-      "liability",
-      "analytics"
-    ],
+    "tags": ["underwriting", "insurance", "risk intelligence", "liability", "analytics"],
     "articleType": "Case Study",
     "solutionName": "Commercial Lines Underwriting",
     "solutionLink": "solutions/commercial-insurance-underwriting",
@@ -47,13 +35,7 @@
     "date": "2025-05-20",
     "author": "Saurabh Verma",
     "summary": "Optimizing Financial Performance Through Data-Driven Credit Decisions",
-    "tags": [
-      "credit risk",
-      "distributor",
-      "financial performance",
-      "analytics",
-      "B2B"
-    ],
+    "tags": ["credit risk", "distributor", "financial performance", "analytics", "B2B"],
     "articleType": "Case Study",
     "solutionName": "Distributor Credit Risk Management",
     "solutionLink": "solutions/distributor-performance-management",
@@ -68,13 +50,7 @@
     "date": "2025-05-12",
     "author": "Saurabh Verma",
     "summary": "Building Resilient Supply Chains Through Advanced Compliance and Risk Analytics",
-    "tags": [
-      "supplier risk",
-      "compliance",
-      "supply chain",
-      "analytics",
-      "global trade"
-    ],
+    "tags": ["supplier risk", "compliance", "supply chain", "analytics", "global trade"],
     "articleType": "Case Study",
     "solutionName": "Supplier Risk Intelligence",
     "solutionLink": "solutions/third-party-risk-management",
@@ -89,13 +65,7 @@
     "date": "2025-04-21",
     "author": "Saurabh Verma",
     "summary": "Unlocking New Dimensions of Credit Intelligence for Financial Institutions",
-    "tags": [
-      "credit risk",
-      "alternative data",
-      "financial services",
-      "MSME",
-      "analytics"
-    ],
+    "tags": ["credit risk", "alternative data", "financial services", "MSME", "analytics"],
     "articleType": "Case Study",
     "solutionName": "Credit Risk Assessment",
     "solutionLink": "solutions/third-party-risk-management",
@@ -110,11 +80,7 @@
     "date": "2025-04-20",
     "author": "Saurabh Verma",
     "summary": "Intelligent Vendor Risk Monitoring for Operational Stability ",
-    "tags": [
-      "supply chain",
-      "risk",
-      "analytics"
-    ],
+    "tags": ["supply chain", "risk", "analytics"],
     "articleType": "Case Study",
     "solutionName": "Third-Party Risk Intelligence",
     "solutionLink": "solutions/third-party-risk-management",

@@ -1,59 +1,54 @@
 import {
-    Breadcrumb,
-    BreadcrumbList,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbSeparator,
-    BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from '@/components/ui/breadcrumb';
 
 type ArticleBreadcrumbsProps = {
-    title: string;
+  title: string;
 };
 
-
 export default function ArticleBreadcrumbs({ title }: ArticleBreadcrumbsProps) {
-    const truncatedTitle = title.length > 50 ? `${title.slice(0, 50)}…` : title;
+  const truncatedTitle = title.length > 50 ? `${title.slice(0, 50)}…` : title;
 
-    return (
-        <nav aria-label="Breadcrumb" className="w-full py-2">
-            {/* Desktop: Articles → Type → Title */}
-            <div className="hidden md:block">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/articles">Articles</BreadcrumbLink>
-                        </BreadcrumbItem>
+  return (
+    <nav aria-label="Breadcrumb" className="w-full py-2">
+      {/* Desktop: Articles → Type → Title */}
+      <div className="hidden md:block">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/articles">Articles</BreadcrumbLink>
+            </BreadcrumbItem>
 
-                        <BreadcrumbSeparator />
+            <BreadcrumbSeparator />
 
-                        <BreadcrumbItem>
-                            <BreadcrumbPage aria-current="page">
-                                {truncatedTitle}
-                            </BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </div>
+            <BreadcrumbItem>
+              <BreadcrumbPage aria-current="page">{truncatedTitle}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
 
-            {/* Mobile: Articles → Title (shorter) */}
-            <div className="md:hidden">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/articles">Articles</BreadcrumbLink>
-                        </BreadcrumbItem>
+      {/* Mobile: Articles → Title (shorter) */}
+      <div className="md:hidden">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/articles">Articles</BreadcrumbLink>
+            </BreadcrumbItem>
 
-                        <BreadcrumbSeparator />
+            <BreadcrumbSeparator />
 
-                        <BreadcrumbItem>
-                            <BreadcrumbPage aria-current="page">
-                                {truncatedTitle}
-                            </BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </div>
-        </nav>
-    );
+            <BreadcrumbItem>
+              <BreadcrumbPage aria-current="page">{truncatedTitle}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+    </nav>
+  );
 }

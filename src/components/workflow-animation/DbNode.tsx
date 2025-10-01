@@ -1,26 +1,26 @@
-import React from "react";
-import { Handle, Position } from "reactflow";
+import React from 'react';
+import { Handle, Position } from 'reactflow';
 
 function DbNodeInner({ data }: { data?: any }) {
-    // function DbNodeInner({ data }: { data?: any }) {
-    const label = (data && data.label) || "UNIFIED DATA PLATFORM";
+  // function DbNodeInner({ data }: { data?: any }) {
+  const label = (data && data.label) || 'UNIFIED DATA PLATFORM';
 
-    return (
-        <div
-            style={{
-                width: 240,
-                // allow the node to be a bit taller to accommodate the label below
-                height: 180,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative",
-                boxSizing: "border-box",
-                paddingTop: 6,
-            }}
-        >
-            {/* SVG only — no text inside */}
-            {/* <svg
+  return (
+    <div
+      style={{
+        width: 240,
+        // allow the node to be a bit taller to accommodate the label below
+        height: 180,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        boxSizing: 'border-box',
+        paddingTop: 6,
+      }}
+    >
+      {/* SVG only — no text inside */}
+      {/* <svg
                 width="220"
                 height="120"
                 viewBox="0 0 220 120"
@@ -93,92 +93,102 @@ function DbNodeInner({ data }: { data?: any }) {
 
                 <ellipse cx="110" cy="108" rx="54" ry="8" fill="rgba(6,10,20,0.06)" />
             </svg> */}
-            <img src="/final-server-stack.png" alt="server-stack" />
-            {/* Label below the svg */}
-            <div style={{ position: "absolute", bottom: 2, left: 0, right: 0, display: "flex", justifyContent: "center", pointerEvents: "none" }}>
-                <div
-                    style={{
-                        fontSize: 16,
-                        fontWeight: 600,
-                        color: "var(--privue-900,#0f1724)",
-                        letterSpacing: 0.4,
-                        background: "transparent",
-                        padding: "4px 10px",
-                        borderRadius: 6,
-                    }}
-                >
-                    {label}
-                </div>
-            </div>
-
-            {/* React Flow handles (unchanged positions) */}
-            <Handle
-                type="target"
-                position={Position.Left}
-                id="left"
-                style={{
-                    left: 25,
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "10px solid #475569)",
-                    boxShadow: "0 1px 4px #475569",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                }}
-            />
-            <Handle
-                type="source"
-                position={Position.Bottom}
-                id="right"
-                style={{
-                    bottom: 30,
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: "#475569",
-                    border: "10px solid #475569)",
-                    boxShadow: "0 1px 4px #475569",
-                    left: "48.5%",
-                    transform: "translateY(-50%)",
-                }}
-            />
-            <Handle
-                type="source"
-                position={Position.Top}
-                id="top"
-                style={{
-                    top: 41,
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "10px solid #475569)",
-                    boxShadow: "0 1px 4px #475569",
-                    left: "68%",
-                    transform: "translateY(-50%)",
-                }}
-            />
-            <Handle
-                type="target"
-                position={Position.Top}
-                id="top-center"
-                style={{
-                    top: 41,
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: "var(--privue-700,#475569)",
-                    border: "10px solid #475569)",
-                    boxShadow: "0 1px 4px #475569",
-                    left: "29%",
-                    transform: "translateY(-50%)",
-                }}
-            />
+      <img src="/final-server-stack.png" alt="server-stack" />
+      {/* Label below the svg */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 2,
+          left: 0,
+          right: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          pointerEvents: 'none',
+        }}
+      >
+        <div
+          style={{
+            fontSize: 16,
+            fontWeight: 600,
+            color: 'var(--privue-900,#0f1724)',
+            letterSpacing: 0.4,
+            background: 'transparent',
+            padding: '4px 10px',
+            borderRadius: 6,
+          }}
+        >
+          {label}
         </div>
-    );
+      </div>
+
+      {/* React Flow handles (unchanged positions) */}
+      <Handle
+        type="target"
+        position={Position.Left}
+        id="left"
+        style={{
+          left: 25,
+          width: 8,
+          height: 8,
+          borderRadius: 999,
+          background: 'var(--privue-700,#475569)',
+          border: '10px solid #475569)',
+          boxShadow: '0 1px 4px #475569',
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }}
+      />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="right"
+        style={{
+          bottom: 30,
+          width: 8,
+          height: 8,
+          borderRadius: 999,
+          background: '#475569',
+          border: '10px solid #475569)',
+          boxShadow: '0 1px 4px #475569',
+          left: '48.5%',
+          transform: 'translateY(-50%)',
+        }}
+      />
+      <Handle
+        type="source"
+        position={Position.Top}
+        id="top"
+        style={{
+          top: 41,
+          width: 8,
+          height: 8,
+          borderRadius: 999,
+          background: 'var(--privue-700,#475569)',
+          border: '10px solid #475569)',
+          boxShadow: '0 1px 4px #475569',
+          left: '68%',
+          transform: 'translateY(-50%)',
+        }}
+      />
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="top-center"
+        style={{
+          top: 41,
+          width: 8,
+          height: 8,
+          borderRadius: 999,
+          background: 'var(--privue-700,#475569)',
+          border: '10px solid #475569)',
+          boxShadow: '0 1px 4px #475569',
+          left: '29%',
+          transform: 'translateY(-50%)',
+        }}
+      />
+    </div>
+  );
 }
 
 const DbNode = React.memo(DbNodeInner);
-export { DbNode }
+export { DbNode };

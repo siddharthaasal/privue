@@ -6,47 +6,50 @@
    will combine them so the path has both classes.
 */
 .react-flow__edge-path.edge-base {
-    stroke: #9ca3af;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+  stroke: #9ca3af;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
 
-    /* small dashed pattern so movement is visible */
-    stroke-dasharray: 12 10;
-    stroke-dashoffset: 0;
+  /* small dashed pattern so movement is visible */
+  stroke-dasharray: 12 10;
+  stroke-dashoffset: 0;
 
-    transition: stroke 180ms ease, stroke-width 180ms ease, filter 180ms ease;
+  transition:
+    stroke 180ms ease,
+    stroke-width 180ms ease,
+    filter 180ms ease;
 }
 
 /* === Animated edge: move the dashes and tint color === */
 .react-flow__edge-path.edge-base.edge-animate {
-    stroke: #06b6d4;
-    /* teal highlight */
-    stroke-width: 4;
-    filter: drop-shadow(0 6px 14px rgba(6, 182, 212, 0.10));
-    animation: dash-move 900ms linear infinite;
+  stroke: #06b6d4;
+  /* teal highlight */
+  stroke-width: 4;
+  filter: drop-shadow(0 6px 14px rgba(6, 182, 212, 0.1));
+  animation: dash-move 900ms linear infinite;
 }
 
 /* Slightly different animation speed for query line */
 .react-flow__edge-path.edge-query.edge-animate {
-    stroke: #3b82f6;
-    stroke-width: 4;
-    animation: dash-move 1200ms linear infinite;
-    filter: drop-shadow(0 6px 18px rgba(59, 130, 246, 0.08));
+  stroke: #3b82f6;
+  stroke-width: 4;
+  animation: dash-move 1200ms linear infinite;
+  filter: drop-shadow(0 6px 18px rgba(59, 130, 246, 0.08));
 }
 
 /* === Keyframes that scroll the dash offset (gives illusion of motion) === */
 @keyframes dash-move {
-    from {
-        stroke-dashoffset: 0;
-    }
+  from {
+    stroke-dashoffset: 0;
+  }
 
-    to {
-        stroke-dashoffset: -48;
-    }
+  to {
+    stroke-dashoffset: -48;
+  }
 
-    /* negative moves dashes forward */
+  /* negative moves dashes forward */
 }
 
 /* === Add arrowheads by styling React Flow's markers ===
@@ -54,30 +57,29 @@
    We can style them via stroke/fill rules. This keeps arrows consistent with stroke.
 */
 .marker-arrow {
-    fill: currentColor;
-    stroke: none;
+  fill: currentColor;
+  stroke: none;
 }
 
 /* React Flow will copy edge's stroke color for the marker in many cases,
    but if it doesn't, force a matching color via these helper selectors. */
-.react-flow__edge-path.edge-base.edge-animate~defs .reactflow__arrowclosed,
-.react-flow__edge-path.edge-base.edge-animate~defs .reactflow__arrow {
-    color: #06b6d4;
-    fill: #06b6d4;
+.react-flow__edge-path.edge-base.edge-animate ~ defs .reactflow__arrowclosed,
+.react-flow__edge-path.edge-base.edge-animate ~ defs .reactflow__arrow {
+  color: #06b6d4;
+  fill: #06b6d4;
 }
 
-.react-flow__edge-path.edge-query.edge-animate~defs .reactflow__arrowclosed,
-.react-flow__edge-path.edge-query.edge-animate~defs .reactflow__arrow {
-    color: #3b82f6;
-    fill: #3b82f6;
+.react-flow__edge-path.edge-query.edge-animate ~ defs .reactflow__arrowclosed,
+.react-flow__edge-path.edge-query.edge-animate ~ defs .reactflow__arrow {
+  color: #3b82f6;
+  fill: #3b82f6;
 }
 
 /* === Accessibility: respects prefers-reduced-motion === */
 @media (prefers-reduced-motion: reduce) {
-
-    .react-flow__edge-path.edge-base.edge-animate,
-    .react-flow__edge-path.edge-query.edge-animate {
-        animation: none !important;
-        transition: none !important;
-    }
+  .react-flow__edge-path.edge-base.edge-animate,
+  .react-flow__edge-path.edge-query.edge-animate {
+    animation: none !important;
+    transition: none !important;
+  }
 }

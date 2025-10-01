@@ -19,7 +19,7 @@ export default function CapabilitiesSection({
 
             <div
                 className={`
-          grid gap-12 px-12 py-20
+          grid gap-12 px-12 py-20 border-b border-gray-200
           ${capabilities.length % 3 == 0 ? "sm:grid-cols-3" : "sm:grid-cols-4"}
         `}
             >

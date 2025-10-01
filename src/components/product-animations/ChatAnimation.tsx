@@ -1,6 +1,8 @@
 // AnimatedChat.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { CheckCheck, XCircle, AlertTriangle, Circle } from "lucide-react";
+import TechnicalDiagram from "../workflow-animation/TechnicalDiagram";
+type ChatAnimationProps = { className?: string };
 
 /**
  * Phase mapping:
@@ -37,7 +39,6 @@ type ChartQna = {
 type ImageQna = {
     kind: "image";
     question: string;
-    imageSrc: string;
     imageCaption?: string;
 };
 
@@ -71,19 +72,30 @@ const SALES_QNA: ChartQna = {
     ],
 };
 
-const VEMBU_QNA: ImageQna = {
+// const VEMBU_QNA: ImageQna = {
+//     kind: "image",
+//     question: "What are the other business interests of Director Vembu?",
+//     imageSrc: "/workflow/directorVembuImg.png",
+//     imageCaption: "Other business interests of Director Vembu — source: filings",
+// };
+
+const Interests_QNA: ImageQna = {
     kind: "image",
-    question: "What are the other business interests of Director Vembu?",
-    imageSrc: "/workflow/directorVembuImg.png",
-    imageCaption: "Other business interests of Director Vembu — source: filings",
+    question: "What are the other business interests of Director Kumar?",
+    imageCaption: "Animated network view (interactive preview)",
 };
 
-const QNAS: Qna[] = [BASE_QNA, SALES_QNA, VEMBU_QNA];
+const QNAS: Qna[] = [BASE_QNA, SALES_QNA, Interests_QNA];
+
+/* --- helpers --- */
+function mergeClassNames(...xs: Array<string | undefined>) {
+    return xs.filter(Boolean).join(" ");
+}
 
 /* --- Component --- */
-export function AnimatedChatInner(): any {
+export function AnimatedChatInner({ className = "" }: ChatAnimationProps) {
     const [currentIdx, setCurrentIdx] = useState(0);
-    const [phase, setPhase] = useState(0);
+    const [phase, setPhase] = useState<number>(0);
     const timeouts = useRef<number[]>([]);
 
     useEffect(() => {
@@ -145,8 +157,8 @@ export function AnimatedChatInner(): any {
         const maxSales = Math.max(...salesValues, 1);
 
         // dimensions
-        const w = 240; // 3/4 width
-        const h = 80; // thin height
+        const w = 150; // internal drawing width
+        const h = 150; // internal drawing height
         const padding = { top: 6, right: 8, bottom: 18, left: 8 };
         const chartW = w - padding.left - padding.right;
         const chartH = h - padding.top - padding.bottom;
@@ -169,16 +181,18 @@ export function AnimatedChatInner(): any {
                 const length = polylineRef.current.getTotalLength();
                 polylineRef.current.style.strokeDasharray = String(length);
                 polylineRef.current.style.strokeDashoffset = String(length);
+                // trigger reflow then animate
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 polylineRef.current.getBoundingClientRect();
                 polylineRef.current.style.transition = "stroke-dashoffset 1s ease-out";
                 polylineRef.current.style.strokeDashoffset = "0";
             }
-        }, []);
+        }, [data]);
 
         return (
-            <div className="w-3/4">
+            <div className="w-full">
                 <div className="rounded-md bg-[rgba(15,23,36,0.02)] px-1 py-1">
-                    <svg width={w} height={h}>
+                    <svg width="100%" height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
                         <line
                             x1={padding.left}
                             x2={w - padding.right}
@@ -286,7 +300,10 @@ export function AnimatedChatInner(): any {
         <div
             role="group"
             aria-label="Chat preview"
-            className="w-full max-w-[500px] min-w-[350px] h-[450px] p-3 relative box-border border-2 rounded-lg bg-white/75 overflow-hidden font-sans"
+            className={mergeClassNames(
+                "w-full max-w-[700px] box-border border-2 rounded-lg bg-white/75 overflow-hidden font-sans",
+                className
+            )}
             style={{ fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" }}
         >
             <style>{`
@@ -311,12 +328,15 @@ export function AnimatedChatInner(): any {
           position: relative;
           overflow: hidden;
           border-radius: 12px;
+          width: 100%;
+          max-height: 220px;
         }
 
         .acn-image-wrap img {
           display: block;
           width: 100%;
-          height: auto;
+          height: 100%;
+          object-fit: contain;
         }
 
         .acn-dagger-overlay {
@@ -337,20 +357,23 @@ export function AnimatedChatInner(): any {
         }
       `}</style>
 
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center p-3">
                 <div className="flex items-center gap-2">
                     <div className="text-[13px] font-medium text-privue-900">Conversational Workspace</div>
                 </div>
             </div>
 
+            {/* NOTE: this container is flexible height — parent must provide height (e.g. h-full) */}
             <div
-                className="absolute left-0 right-0 top-[5%] bottom-16 overflow-hidden pointer-events-none flex flex-col justify-end"
+                className="relative left-0 right-0 top-0 bottom-0 overflow-hidden pointer-events-none flex flex-col justify-end"
                 style={{
                     WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 4%, rgba(0,0,0,1) 12%)",
                     maskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 4%, rgba(0,0,0,1) 12%)",
+                    // Allow content to grow within parent height - no fixed height enforced here
+                    minHeight: 0,
                 }}
             >
-                <div className="relative w-full pointer-events-auto flex flex-col gap-3 px-3">
+                <div className="relative w-full pointer-events-auto flex flex-col gap-3 px-3 py-2">
                     {/* User typing */}
                     {phase === 1 && (
                         <div className="self-end">
@@ -359,9 +382,10 @@ export function AnimatedChatInner(): any {
                     )}
 
                     {/* Question bubble */}
+                    {/* Question bubble */}
                     {(phase === 2 || phase === 3 || phase === 4) && (
-                        <article className="self-end rounded-[14px] bg-gradient-to-b from-[#fbfcff] to-[#eef6ff] shadow-[0_8px_20px_rgba(2,6,23,0.06)] p-2 border-t-0">
-                            <div className="pl-4 pr-2 flex items-end gap-2">
+                        <article className="self-end rounded-[14px] border border-gray-50 shadow-[0_8px_20px_rgba(2,6,23,0.06)] px-1 py-2">
+                            <div className="pl-2 pr-2 flex items-end gap-2">
                                 <p className="m-0 text-[12px] text-[#0f1724] leading-[1.42] text-right flex-1">{qna.question}</p>
                             </div>
                             <div className="flex justify-end items-center gap-1.5 mt-1">
@@ -400,25 +424,25 @@ export function AnimatedChatInner(): any {
                             )}
 
                             {qna.kind === "image" && (
-                                <div className="flex flex-col gap-2 items-start w-3/4 h-3/4">
-                                    <div className=" acn-image-wrap">
-                                        <img src={qna.imageSrc} alt={qna.imageCaption ?? "Answer image"} className="scale-100" />
-                                        <div className={`acn-dagger-overlay ${phase === 4 ? "acn-dagger-animate" : ""}`} />
+                                <div className="flex flex-col items-start">
+                                    <div className="mx-auto px-2">
+                                        <TechnicalDiagram />
                                     </div>
+
                                 </div>
                             )}
 
                             {qna.kind === "chart" && (
                                 <div className="flex flex-col gap-3">
-                                    <div className="flex flex-col gap-1 text-[11px] text-slate-600">
+                                    {/* <div className="flex flex-col gap-1 text-[9px] text-slate-600">
                                         {qna.data.map((row, idx) => (
                                             <div key={idx} className="flex items-center gap-2">
-                                                <span className="font-medium text-slate-700">{row.year.replace("FY ", "")}</span>
+                                                <span className="font-normal text-slate-700">{row.year.replace("FY ", "")}</span>
                                                 <span>S: {row.sales.toLocaleString()}</span>
                                                 <span>GM: {row.grossMargin.toLocaleString()}</span>
                                             </div>
                                         ))}
-                                    </div>
+                                    </div> */}
 
                                     <ChartForSalesAndGM data={qna.data} />
 
@@ -436,9 +460,14 @@ export function AnimatedChatInner(): any {
                 </div>
             </div>
 
-            <div className="absolute left-4 right-4 bottom-3 pointer-events-none text-[12px] text-[#64748b] text-left">
-                Get quick, accurate, and personalized answers from Privue's workbench.
+            <div className="flex justify-between items-center p-3">
+                <div className="absolute bottom-4 items-center gap-2">
+                    <div className="text-[11px]  text-[#64748b]">Get quick, accurate, and personalized answers from Privue's workbench.</div>
+                </div>
             </div>
+            {/* <div className="absolute left-18 bottom-3 pointer-events-none text-[12px] text-[#64748b] text-left">
+                Get quick, accurate, and personalized answers from Privue's workbench.
+            </div> */}
         </div>
     );
 }

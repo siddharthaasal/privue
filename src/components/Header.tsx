@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 import privueLogo from "/privue-logo.png";
 import { Button } from "@/components/ui/button";
 import { solutions } from "@/data/solutions/solutions.ts";
+import { AppWindow, FolderGit2, LayoutPanelLeft } from "lucide-react";
 
-type MenuItem = {
+export type MenuItem = {
     name: string;
     href?: string;
     description?: string;
-    // icon can be a JSX element, a component constructor/function, or a string path
-    icon?: React.ReactNode | string | React.ComponentType<any>;
+    // only allow string (image src) or a component constructor (lucide)
+    icon?: string | React.ComponentType<any>;
 };
 
 type LinkType = {
@@ -27,11 +28,14 @@ export default function Header() {
     const navRef = useRef<HTMLElement | null>(null);
     const timeoutRef = useRef<number | null>(null);
 
-    // Helper: render icon gracefully
-    const renderIcon = (icon?: React.ReactNode | string | React.ComponentType<any>, className = "w-5 h-5") => {
+
+
+    const renderIcon = (
+        icon?: string | React.ComponentType<any>,
+        className = "w-9 h-9" // same default sizing used in CapabilitiesCard image
+    ): any | null => {
         if (!icon) return null;
 
-        // If string => render <img>
         if (typeof icon === "string") {
             return (
                 <img
@@ -39,26 +43,48 @@ export default function Header() {
                     alt=""
                     className={`${className} object-contain`}
                     loading="lazy"
-                    aria-hidden
+                    aria-hidden="true"
                 />
             );
         }
 
-        // If it's already a JSX element
-        // if (React.isValidElement(icon)) {
-        //     return React.cloneElement(icon as React.ReactElement, {
-        //         className: `${className} ${(icon as any).props?.className ?? ""}`.trim()
-        //     });
-        // }
-
-        // If it's a component constructor/function, create it
-        if (typeof icon === "function") {
-            const IconComp = icon as React.ComponentType<any>;
-            return <IconComp className={className} aria-hidden />;
-        }
-
-        return null;
+        // treat as component constructor (lucide icon)
+        const IconComp = icon as React.ComponentType<any>;
+        // Pass className so lucide picks up size via Tailwind, and let it inherit currentColor.
+        return <IconComp size={20} aria-hidden="true" color={"#374151"} />;
+        // note: in CapabilitiesCard you used w-7 for component icons; adjust as you like.
     };
+
+
+    const products: MenuItem[] = [
+        {
+            name: "API",
+            href: "/products#api",
+            description: "lorem ipsum",
+            icon: FolderGit2,
+        },
+        {
+            name: "Workbench",
+            href: "/products#workbench",
+            description: "lorem ipsum",
+            // icon: "/icons/products/workbench.png",
+            icon: LayoutPanelLeft,
+        },
+        {
+            name: "Application",
+            href: "/products#application",
+            description: "lorem ipsum",
+            icon: AppWindow,
+        },
+    ];
+
+    const productMenuItems: MenuItem[] = products.map((s) => {
+        return {
+            name: s.name,
+            href: s.href,
+            icon: s.icon,
+        };
+    });
 
     const solutionMenuItems: MenuItem[] = solutions.map((s) => {
         // const IconComp = s.icon as React.ComponentType<any> | string | undefined;
@@ -74,26 +100,6 @@ export default function Header() {
         };
     });
 
-    const products: MenuItem[] = [
-        {
-            name: "API",
-            href: "/products#api",
-            description: "lorem ipsum",
-            icon: "/icons/products/api.png",
-        },
-        {
-            name: "Workbench",
-            href: "#",
-            description: "lorem ipsum",
-            icon: "/icons/products/workbench.png",
-        },
-        {
-            name: "Application",
-            href: "/products#platform",
-            description: "lorem ipsum",
-            icon: "/icons/products/application.png",
-        },
-    ];
 
     const industries = [
         { id: "ind-1", name: "Corporation", href: "#" },
@@ -103,16 +109,6 @@ export default function Header() {
         { id: "ind-5", name: "Consulting", href: "#" },
         { id: "ind-6", name: "Government", href: "#" },
     ];
-
-    const productMenuItems: MenuItem[] = products.map((s) => {
-        // keep s.icon as-is (string or component)
-        return {
-            name: s.name,
-            href: s.href,
-            // description: s.description,
-            icon: s.icon ?? null,
-        };
-    });
 
     const industryMenuItems = industries.map((s, idx) => {
         return {

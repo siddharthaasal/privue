@@ -59,8 +59,8 @@ export const articles: ArticleMeta[] = [
     "url": "/articles/redefining-commercial-lines-underwriting"
   },
   {
-    "slug": "optimising-distributor-credit-risk-management",
-    "title": "Optimising Distributor Credit Risk Management",
+    "slug": "optimizing-distributor-credit-risk-management",
+    "title": "Optimizing Distributor Credit Risk Management",
     "date": "2025-05-20",
     "author": "Saurabh Verma",
     "summary": "Optimizing Financial Performance Through Data-Driven Credit Decisions",
@@ -76,8 +76,8 @@ export const articles: ArticleMeta[] = [
     "solutionLink": "solutions/distributor-performance-management",
     "coverImage": "/articles-test-images/distributor-credit-risk.jpg",
     "readTime": "2 min",
-    "file": "src/data/articles/optimising-distributor-credit-risk-management.mdx",
-    "url": "/articles/optimising-distributor-credit-risk-management"
+    "file": "src/data/articles/optimizing-distributor-credit-risk-management.mdx",
+    "url": "/articles/optimizing-distributor-credit-risk-management"
   },
   {
     "slug": "mitigating-risk-in-global-supplier-selection",
@@ -146,7 +146,7 @@ export const articles: ArticleMeta[] = [
 export const loaders: Record<string, () => Promise<any>> = {
   "strengthening-insolvency-investigations": () => import("/src/data/articles/strengthening-insolvency-investigations.mdx"),
   "redefining-commercial-lines-underwriting": () => import("/src/data/articles/redefining-commercial-lines-underwriting.mdx"),
-  "optimising-distributor-credit-risk-management": () => import("/src/data/articles/optimising-distributor-credit-risk-management.mdx"),
+  "optimizing-distributor-credit-risk-management": () => import("/src/data/articles/optimizing-distributor-credit-risk-management.mdx"),
   "mitigating-risk-in-global-supplier-selection": () => import("/src/data/articles/mitigating-risk in-global-supplier-selection.mdx"),
   "transforming-credit-risk-assessment": () => import("/src/data/articles/transforming-credit-risk-assessment.mdx"),
   "enhancing-supply-chain-resilience": () => import("/src/data/articles/enhancing-supply-chain-resilience.mdx")

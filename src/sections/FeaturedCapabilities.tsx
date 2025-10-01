@@ -26,7 +26,7 @@ export default function FeaturedCapabilities() {
         {
             icon: <Landmark />,
             heading: "Industry-Focused AI Solutions",
-            desc: "Purpose-built applications for BFSI, enterprise, consulting, and legal sectors.",
+            desc: "Purpose-built applications for BFSI, Enterprise, Consulting, and Legal sectors.",
         },
         {
             icon: <Server />,

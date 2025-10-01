@@ -46,8 +46,7 @@ function SectionAPIs() {
                         <p className="text-base">
                             Integrate directly with your workflow tools such as Salesforce, SAP,
                             core banking, or case management. Use the modules independently or
-                            stitch them together: data acquisition → document parsing → risk
-                            scoring → decisioning. Deploy quickly, scale securely, and maintain
+                            stitch them together: Data Acquisition → Document Parsing → Risk Scoring → Decisioning. Deploy quickly, scale securely, and maintain
                             full control of your customer experience.
                         </p>
 

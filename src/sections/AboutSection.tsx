@@ -13,7 +13,7 @@ export default function AboutSection() {
                     {/* Left: Text */}
                     <div className="relative z-10 space-y-4 md:w-1/2">
                         <p className="text-base">
-                            Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. It integrate multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights via API or custom applications.
+                            Privue helps financial institutions and corporates make smarter decisions by combining advanced AI with curated data intelligence. It integrates multiple data sources, applying machine learning and predictive modeling to deliver accurate, real-time insights via API or custom applications.
                         </p>
                         <p className="text-base">
                             From credit and vendor risk to compliance and climate, we empower organizations to assess counterparties, mitigate risks, and act with confidence.

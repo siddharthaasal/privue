@@ -453,6 +453,7 @@ export const solutions: Solution[] = [
                     "Delivers structured insights from MCA filings directly into your underwriting system.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: FinancialDocumentParsing
             },
             {
                 title: "Financial Document Parsing",
@@ -811,6 +812,7 @@ export const solutions: Solution[] = [
                     "MCA filings delivered in a structured, custom format—no need to sift through multiple documents.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: FinancialDocumentParsing
             },
             {
                 title: "Financial Analysis",

@@ -28,6 +28,7 @@ import CarbonEstimation from '@/components/product-animations/CarbonEstimation';
 import News from '@/components/product-animations/News';
 import InsurancePolicy from '@/components/product-animations/InsurancePolicy';
 import FinancialDocumentParsing from '@/components/product-animations/FinancialDocumentParsing';
+import CourtCase from '@/components/product-animations/CourtCase';
 
 export type Problem = {
     problemHeading: string;
@@ -483,6 +484,7 @@ export const solutions: Solution[] = [
                     "Acquires and summarises court and tribunal cases involving the company, highlighting case nature for underwriting.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CourtCase
             },
             {
                 title: "News Acquisition and Summarisation",
@@ -824,6 +826,7 @@ export const solutions: Solution[] = [
                     "Court cases mapped, tagged, and summarised for quick understanding of an entity’s legal history.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: CourtCase
             },
             {
                 title: "Compliance Checks",

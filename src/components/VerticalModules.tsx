@@ -6,10 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-// import VideoLikeFlowDummy from './product-animations/ThreeImageFlow'
-// import NotificationOverlayDemo from './product-animations/ContinuousMonitoringDemo'
 
 type IncomingItem = {
   id?: string;
@@ -36,26 +34,46 @@ function makeId(fallbackIndex: number) {
   return `gen-${Date.now().toString(36)}-${fallbackIndex}`;
 }
 
-export default function TestVerticalModules({ items }: Props) {
-  if (!items || items.length === 0) return null;
-
+export default function VerticalModules({ items }: Props) {
+  // ---- call hooks unconditionally ----
   const processed = useMemo(() => {
-    return items.map((it, idx) => ({
+    const list = Array.isArray(items) ? items : [];
+    return list.map((it, idx) => ({
       id: it.id ?? makeId(idx),
       title: it.title,
       description: it.description,
       imgSrc: it.imgSrc,
       alt: it.alt ?? it.title,
       link: it.link,
-      renderAnimation: it.renderAnimation, // pass along
+      renderAnimation: it.renderAnimation,
     }));
   }, [items]);
 
-  const [activeId, setActiveId] = useState<string>(processed[0].id);
+  const [activeId, setActiveId] = useState<string>(processed[0]?.id ?? '');
+
+  // Keep activeId in sync if processed changes and there's no valid activeId
+  useEffect(() => {
+    if (!activeId && processed.length > 0) {
+      setActiveId(processed[0].id);
+    } else if (processed.length === 0) {
+      setActiveId('');
+    } else {
+      // ensure activeId still exists in processed; if not, reset to first
+      const exists = processed.some((p) => p.id === activeId);
+      if (!exists && processed.length > 0) {
+        setActiveId(processed[0].id);
+      }
+    }
+  }, [processed, activeId]);
+
   const active = useMemo(
     () => processed.find((p) => p.id === activeId) ?? processed[0],
     [processed, activeId],
   );
+  // -------------------------------------
+
+  // safe early return AFTER hooks are declared
+  if (!processed || processed.length === 0) return null;
 
   return (
     <section className="py-16">
@@ -95,38 +113,38 @@ export default function TestVerticalModules({ items }: Props) {
 
           {/* Right: Animation or Image */}
           <div className="relative col-span-2 flex overflow-hidden rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset">
-            {/* <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15"></div> */}
-
             <div
               className="relative flex max-h-[600px] min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset"
-              // style={{ minHeight: 420, maxHeight: 520 }}
             >
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={active.id}
+                  key={active?.id}
                   initial={{ opacity: 0, y: 6, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 6, scale: 0.98 }}
                   transition={{ duration: 0.25 }}
                   className="flex h-full w-full items-center justify-center"
                 >
-                  {/* <div className="w-full h-full mx-auto">
-                                        <VideoLikeFlowDummy />
-                                    </div> */}
-                  {active.renderAnimation ? (
-                    <div className="mx-auto h-full w-full">
-                      <active.renderAnimation />
-                    </div>
-                  ) : (
+                  {active?.renderAnimation ? (
+                    // use capitalized component reference
+                    (() => {
+                      const Anim = active.renderAnimation!;
+                      return (
+                        <div className="mx-auto h-full w-full">
+                          <Anim />
+                        </div>
+                      );
+                    })()
+                  ) : active?.imgSrc ? (
                     <img
-                      src={active.imgSrc!}
+                      src={active.imgSrc}
                       alt={active.alt}
                       className="h-full w-full object-cover object-left-top"
                       style={{ display: 'block' }}
                       width={1207}
                       height={929}
                     />
-                  )}
+                  ) : null}
                 </motion.div>
               </AnimatePresence>
             </div>

@@ -11,7 +11,7 @@ import SolutionSection from '@/sections/solutions/SolutionSection';
 // import ModulesSection from "@/sections/solutions/MoudulesSection";
 import RelatedArticles from '@/sections/solutions/RelatedArticles';
 // import VerticalModulesListing from "@/components/modules/VerticalModulesListing";
-import TestVerticalModules from '@/components/TestVerticalModules';
+import VerticalModules from '@/components/VerticalModules';
 
 export default function SolutionsPage() {
   const { slug = '' } = useParams();
@@ -57,7 +57,7 @@ export default function SolutionsPage() {
 
         {/* <ModulesSection modules={soln.modules} /> */}
         {/* <VerticalModulesListing /> */}
-        <TestVerticalModules items={soln.modules} />
+        <VerticalModules items={soln.modules} />
         <RelatedArticles mainArticleSlug={soln.mainArticleSlug} />
       </main>
     </Layout>

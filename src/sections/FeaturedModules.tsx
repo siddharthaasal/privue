@@ -1,6 +1,6 @@
 // import ModulesListing from "@/components/modules/ModulesListing"
 // import ModuleListing2 from "@/components/modules/ModuleListing2"
-import TestVerticalModules from '@/components/TestVerticalModules';
+import TestVerticalModules from '@/components/VerticalModules';
 import { solutions } from '@/data/solutions/solutions';
 // const modules = [
 //     {

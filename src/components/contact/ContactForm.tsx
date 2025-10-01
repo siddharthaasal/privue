@@ -26,10 +26,9 @@ const topics = [
 // Validation: require at least one topic
 const schema = z.object({
     topic: z.array(z.string()).min(1, "Select at least one solution"),
-    firstName: z.string().min(1, ""),
-    lastName: z.string().optional(),
-    email: z.string().email(""),
-    company: z.string().min(1, ""),
+    name: z.string().min(1, "Please enter your name"),
+    email: z.string().email("Please enter a valid email"),
+    company: z.string().min(1, "Please enter your company"),
     message: z.string().optional(),
     website: z.string().max(0).optional(),
 });
@@ -40,8 +39,7 @@ export default function ContactForm() {
     // no default selected topic
     const defaultValues: FormValues = {
         topic: [],
-        firstName: "",
-        lastName: "",
+        name: "",
         email: "",
         company: "",
         message: "",
@@ -65,8 +63,7 @@ export default function ContactForm() {
     async function onSubmit(values: FormValues) {
         const topicString = Array.isArray(values.topic) ? values.topic.join(", ") : "";
         const payload = {
-            firstName: values.firstName,
-            lastName: values.lastName ?? "",
+            name: values.name,
             email: values.email,
             company: values.company,
             topic: topicString,
@@ -135,7 +132,7 @@ export default function ContactForm() {
                                         <FormItem>
                                             {/* slightly smaller label */}
                                             <FormLabel className="px-1 text-sm text-gray-700 dark:text-slate-200">
-                                                Select Solution(s)
+                                                Select Solution
                                             </FormLabel>
 
                                             <div className="relative">
@@ -149,7 +146,7 @@ export default function ContactForm() {
                                                 >
                                                     <div className="min-w-0 w-full text-left">
                                                         {selected.length === 0 ? (
-                                                            <span className="text-sm text-muted-foreground">Selected Solution(s)</span>
+                                                            <span className="text-sm text-muted-foreground">Selected Solution</span>
                                                         ) : (
                                                             <div className="flex items-center gap-2 overflow-hidden min-h-[1rem]">
                                                                 {shown.map((s) => (
@@ -180,7 +177,7 @@ export default function ContactForm() {
                                                     <div
                                                         role="listbox"
                                                         aria-multiselectable="true"
-                                                        className="absolute z-50 mt-2 w-full max-h-44 overflow-auto rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-lg py-1"
+                                                        className="scrollbar-thin absolute z-50 mt-2 w-full max-h-44 overflow-auto rounded-md border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-lg py-1"
                                                     >
                                                         <div className="px-2">
                                                             {topics.map((t) => {
@@ -209,12 +206,6 @@ export default function ContactForm() {
                                                 )}
                                             </div>
 
-                                            <div className="mt-1 ml-1 flex items-center justify-between">
-                                                <div className="text-xs">{selected.length > 0 ? `${selected.length} selected` : "No topics selected"}</div>
-                                                {/* show validation error for topic if present */}
-                                                <div />
-                                            </div>
-
                                             {/* inline error for topic */}
                                             {form.formState.errors.topic?.message && (
                                                 <p className="mt-1 text-xs text-red-600">{String(form.formState.errors.topic.message)}</p>
@@ -225,35 +216,19 @@ export default function ContactForm() {
                             }}
                         />
 
-                        {/* Names (reduced gap) */}
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                            <FormField
-                                control={form.control}
-                                name="firstName"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="px-1 text-sm text-gray-700">First name</FormLabel>
-                                        <FormControl>
-                                            <Input className="h-9 rounded-md" placeholder="Siddharth" {...field} />
-                                        </FormControl>
-                                        {/* <FormMessage /> */}
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="lastName"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="px-1 text-sm text-gray-700">Last name</FormLabel>
-                                        <FormControl>
-                                            <Input className="h-9 rounded-md" placeholder="Aasal" {...field} />
-                                        </FormControl>
-                                        {/* <FormMessage /> */}
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
+                        {/* Single Name field (replaces first + last) */}
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="px-1 text-sm text-gray-700">Name</FormLabel>
+                                    <FormControl>
+                                        <Input className="h-9 rounded-md" placeholder="Name" {...field} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
 
                         {/* Email + Company */}
                         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -262,11 +237,10 @@ export default function ContactForm() {
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="px-1 text-sm text-gray-700">Work email</FormLabel>
+                                        <FormLabel className="px-1 text-sm text-gray-700">Work Email</FormLabel>
                                         <FormControl>
-                                            <Input className="h-9 rounded-md" type="email" placeholder="siddharth@privue.in" {...field} />
+                                            <Input className="h-9 rounded-md" type="email" placeholder="Work Email" {...field} />
                                         </FormControl>
-                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
@@ -277,9 +251,8 @@ export default function ContactForm() {
                                     <FormItem>
                                         <FormLabel className="px-1 text-sm text-gray-700">Company</FormLabel>
                                         <FormControl>
-                                            <Input className="h-9 rounded-md" placeholder="Privue" {...field} />
+                                            <Input className="h-9 rounded-md" placeholder="Company" {...field} />
                                         </FormControl>
-                                        {/* <FormMessage /> */}
                                     </FormItem>
                                 )}
                             />
@@ -299,7 +272,6 @@ export default function ContactForm() {
                                             {...field}
                                         />
                                     </FormControl>
-                                    {/* <FormMessage /> */}
                                 </FormItem>
                             )}
                         />
@@ -308,9 +280,7 @@ export default function ContactForm() {
                         <input type="text" {...form.register("website")} className="hidden" tabIndex={-1} autoComplete="off" />
 
                         <p className="text-xs text-gray-500 leading-relaxed">
-                            By submitting this form, you acknowledge and agree that we will process your personal
-                            information in accordance with the{" "}
-                            <a href="/privacy-policy" className="underline">Privacy Policy</a>.
+                            By submitting this form, you agree to our <a href="/privacy-policy" className="underline">Privacy Policy</a>.
                         </p>
 
                         <Button

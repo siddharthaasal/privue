@@ -1,6 +1,8 @@
 // import { Announcement } from "../ui/shadcn-io/announcement";
 // import CalMeetingPopup from "./CalMeetingPopup";
 
+import { Minus } from "lucide-react";
+
 
 export default function ContactHero({
     title = "Contact",
@@ -27,11 +29,12 @@ export default function ContactHero({
 
             <ul className="mt-4 space-y-2">
                 {bullets.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                        <span className="mt-1 text-privue-900">
-                            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                    <li key={idx} className="flex items-center gap-2">
+                        <span className=" text-privue-900 w-4">
+                            {/* <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M20 6 9 17l-5-5" />
-                            </svg>
+                            </svg> */}
+                            <Minus size={18} />
                         </span>
                         <span className="text-base text-gray-700">{item}</span>
                     </li>

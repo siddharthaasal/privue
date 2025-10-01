@@ -15,7 +15,7 @@ export default function CalMeetingInline() {
             namespace="15min"
             calLink="siddharth-aasal-test/15min"
             className="flex"
-            style={{ width: "100%", overflow: "scroll" }}
+            style={{ width: "100%", overflow: "clip" }}
             config={{ layout: "month_view", theme: "light" }}
         />
     );

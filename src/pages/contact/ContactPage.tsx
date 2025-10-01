@@ -18,7 +18,7 @@ export default function ContactPage() {
                     </div>
 
                 </div>
-                <div className=" mt-8 px-12 space-y-6">
+                <div className=" mt-20 px-2 space-y-6">
                     <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg font-medium  leading-snug">
                         Or <span className="text-[var(--color-privue-600)]">book a call</span> directly with our founders
                     </p>

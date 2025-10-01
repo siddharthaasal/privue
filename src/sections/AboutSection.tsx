@@ -46,12 +46,12 @@ export default function AboutSection() {
                         <div className="md:absolute md:-inset-y-12 md:inset-x-0">
                             <div
                                 className="
-                  relative rounded-2xl overflow-hidden
-                  [mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)]
-                  [mask-repeat:no-repeat] [mask-size:100%_100%]
-                  [--webkit-mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)]
-                  [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]
-                "
+    relative rounded-2xl overflow-hidden
+    [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)]
+    [mask-repeat:no-repeat] [mask-size:100%_100%]
+    [--webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)]
+    [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]
+  "
                             >
                                 <img
                                     src="/workflow-illustration.png"

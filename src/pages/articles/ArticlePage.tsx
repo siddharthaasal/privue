@@ -7,7 +7,8 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import { useParams } from "react-router-dom";
 
 import { articles, loaders } from "@/lib/articles";
-import { formatDate, siteUrl } from "@/lib/helpers";
+// import { formatDate, siteUrl } from "@/lib/helpers";
+import { formatDate } from "@/lib/helpers";
 import mdxComponents from '@/lib/mdxComponents';
 
 import Layout from "@/components/Layout";
@@ -41,7 +42,7 @@ export default function ArticlePage() {
         );
     }
 
-    const shareUrl = `${siteUrl()}${meta.url}`;
+    // const shareUrl = `${siteUrl()}${meta.url}`;
 
     return (
         <Layout>
@@ -77,7 +78,7 @@ export default function ArticlePage() {
                                     {/* Sticky group: TOC + Solution + Share */}
                                     <RightPaneSticky
                                         solution={{ name: meta.solutionName, link: meta.solutionLink }}
-                                        share={{ url: shareUrl, title: meta.title }}
+                                        // share={{ url: shareUrl, title: meta.title }}
                                         contentRef={contentRef as React.RefObject<HTMLElement>}
                                     />
                                 </aside>

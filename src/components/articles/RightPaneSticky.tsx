@@ -1,19 +1,18 @@
 import TableOfContents from "@/components/articles/TableOfContents";
-import { FaLinkedin } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+// import { FaLinkedin } from "react-icons/fa";
+// import { FaXTwitter } from "react-icons/fa6";
 import { Link as LinkIcon } from "lucide-react";
 
 export default function RightPaneSticky({
     solution,
-    share,
     contentRef,
 }: {
     solution?: { name?: string | null; link?: string | null };
-    share: { url: string; title: string };
+    // share: { url: string; title: string };
     contentRef: React.RefObject<HTMLElement>;
 }) {
-    const encodedUrl = encodeURIComponent(share.url);
-    const encodedTitle = encodeURIComponent(share.title);
+    // const encodedUrl = encodeURIComponent(share.url);
+    // const encodedTitle = encodeURIComponent(share.title);
 
     return (
         // This wrapper sticks relative to the viewport (top offset matches your header)
@@ -32,7 +31,7 @@ export default function RightPaneSticky({
                     </a>
                 </div>
 
-                <div className="hidden lg:block">
+                {/* <div className="hidden lg:block">
                     <div className="font-open-sans flex items-center gap-2 mb-4 text-[15px] p-0 text-[#171717] tracking-wide">
                         Share this Article
                     </div>
@@ -56,7 +55,7 @@ export default function RightPaneSticky({
                             <FaXTwitter className="text-[#707070] text-lg hover:text-[#525252]" />
                         </a>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

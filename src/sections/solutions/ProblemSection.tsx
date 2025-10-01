@@ -19,7 +19,7 @@ export default function ProblemSection({ problems }: ProblemSectionProps) {
 
             {/* Grid with full borders like a table */}
             <div
-                className={`mt-12 grid grid-cols-1 ${gridColsClass} border border-gray-200 divide-x divide-y divide-gray-200`}
+                className={`mt-12 grid grid-cols-1 ${gridColsClass} border-y border-gray-200 divide-x  divide-gray-200`}
             >
                 {problems.map((p, idx) => (
                     <div key={idx} className="w-full">

@@ -944,7 +944,7 @@ export const solutions: Solution[] = [
                 icon: FileX2,
                 problemHeading: "Scalability Limits",
                 problemDesc:
-                    "Organisations are often unprepared to respond when an adverse event impacts a vendor, leaving them exposed."
+                    "Programmes cannot keep pace with vendor volume, leaving assessments stale."
             },
 
         ],

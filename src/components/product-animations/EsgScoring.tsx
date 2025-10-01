@@ -8,7 +8,6 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
 } from "recharts";
 
 /* ---------- tiny count-up hook ---------- */
@@ -59,25 +58,34 @@ function EsgTable({ title, rows }: TableData) {
     const maxScore = 100;
 
     return (
-        <div className="rounded-md bg-white/98 p-3 shadow-sm w-full max-w-[500px]">
-            <div className="mb-2">
-                <h4 className="text-[14px] font-semibold text-slate-900">{title}</h4>
+        <div className="rounded-md bg-white/98 p-2 shadow-sm w-full max-w-[420px]">
+            <div className="mb-1">
+                <h4 className="text-[12px] font-medium text-slate-900">{title}</h4>
             </div>
 
-            <div className="grid grid-cols-[1fr_90px_90px] gap-2 items-start px-1">
-                <div className="text-[10px] text-slate-500">Dimensions</div>
-                <div className="text-[10px] text-slate-500 text-right">Company Score</div>
-                <div className="text-[10px] text-slate-500 text-right">Industry Average</div>
+            <div className="grid grid-cols-[1fr_70px_70px] gap-1 items-start px-1">
+                <div className="text-[8px] text-slate-500">Dimensions</div>
+                <div className="text-[8px] text-slate-500 text-right">Company</div>
+                <div className="text-[8px] text-slate-500 text-right">Industry</div>
             </div>
 
-            <motion.div initial="hidden" animate="show" variants={containerVariants} className="mt-2 flex flex-col divide-y divide-slate-100">
+            <motion.div
+                initial="hidden"
+                animate="show"
+                variants={containerVariants}
+                className="mt-1 flex flex-col divide-y divide-slate-100"
+            >
                 {rows.map((r) => {
                     const companyProgress = Math.max(0, Math.min(1, r.companyScore / maxScore));
                     return (
-                        <motion.div key={r.id} variants={rowVariants} className="grid grid-cols-[1fr_90px_90px] items-center gap-2 px-1 py-2">
-                            <div className="text-[12px] text-slate-800">{r.label}</div>
+                        <motion.div
+                            key={r.id}
+                            variants={rowVariants}
+                            className="grid grid-cols-[1fr_70px_70px] items-center gap-1 px-1 py-1"
+                        >
+                            <div className="text-[10px] text-slate-800">{r.label}</div>
 
-                            <div className="relative text-right text-[12px] font-medium text-slate-800 tabular-nums">
+                            <div className="relative text-right text-[10px] font-medium text-slate-800 tabular-nums">
                                 <ScoreCounter target={r.companyScore} />
                                 <motion.div
                                     className="absolute inset-y-0 left-0 h-full bg-slate-50 rounded-r"
@@ -88,7 +96,9 @@ function EsgTable({ title, rows }: TableData) {
                                 />
                             </div>
 
-                            <div className="text-right text-[12px] text-slate-600 tabular-nums">{r.industryAvg}</div>
+                            <div className="text-right text-[10px] text-slate-600 tabular-nums">
+                                {r.industryAvg}
+                            </div>
                         </motion.div>
                     );
                 })}
@@ -96,6 +106,7 @@ function EsgTable({ title, rows }: TableData) {
         </div>
     );
 }
+
 
 /* ---------- score counter ---------- */
 function ScoreCounter({ target }: { target: number }) {
@@ -170,14 +181,14 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
     const COLORS = ["#0f172a", "#d6a04a", "#5b8ef3"];
 
     const avg = Math.round((environment + social + governance) / 3);
-    const centerValue = useCountUp(avg, 800);
+    const centerValue = useCountUp(avg, 700);
 
     return (
-        <div className="max-w-[500px] rounded-md bg-white/99 p-3 shadow-sm">
-            <div className="flex gap-3 items-start">
+        <div className="max-w-[420px] rounded-md bg-white/99 p-2 shadow-sm">
+            <div className="flex gap-2">
                 {/* donut area */}
-                <div className="w-[180px] h-[180px] flex items-center justify-center flex-shrink-0">
-                    <ResponsiveContainer width={160} height={160}>
+                <div className="w-[150px] h-[150px] flex items-center justify-center flex-shrink-0 relative">
+                    <ResponsiveContainer width={140} height={140}>
                         <PieChart>
                             {/* thin background track */}
                             <Pie
@@ -185,12 +196,12 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
                                 dataKey="value"
                                 cx="50%"
                                 cy="50%"
-                                innerRadius={62}
-                                outerRadius={70}
+                                innerRadius={48}
+                                outerRadius={56}
                                 startAngle={90}
                                 endAngle={-270}
                                 stroke="rgba(15,23,42,0.06)"
-                                strokeWidth={14}
+                                strokeWidth={12}
                                 paddingAngle={0}
                                 isAnimationActive={false}
                             />
@@ -199,12 +210,12 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
                                 dataKey="value"
                                 cx="50%"
                                 cy="50%"
-                                innerRadius={62}
-                                outerRadius={70}
+                                innerRadius={48}
+                                outerRadius={56}
                                 startAngle={90}
                                 endAngle={-270}
                                 paddingAngle={2}
-                                animationDuration={1000}
+                                animationDuration={900}
                                 animationEasing="ease-out"
                             >
                                 {pieData.map((_, i) => (
@@ -215,39 +226,57 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
                     </ResponsiveContainer>
 
                     {/* center */}
-                    <div className="absolute flex flex-col items-center justify-center pointer-events-none" style={{ width: 160, height: 160 }}>
-                        <div className="text-[18px] font-semibold leading-none text-slate-900 tabular-nums">{centerValue}</div>
-                        <div className="text-[10px] text-slate-500">ESG Score</div>
+                    <div
+                        className="absolute flex flex-col items-center justify-center pointer-events-none"
+                        style={{ width: 140, height: 140 }}
+                    >
+                        <div className="text-[12px] font-semibold leading-none text-slate-900 tabular-nums">{centerValue}</div>
+                        <div className="text-[8px] text-slate-500">ESG Score</div>
                     </div>
                 </div>
 
                 {/* right summary */}
-                <div className="flex-1 pt-1">
-                    <div className="mb-1">
-                        <div className="text-[10px] text-slate-500">Industry Percentile</div>
-                        <div className="text-[16px] font-semibold text-slate-900">{industryPercentile}</div>
+                <div className="flex-1 pt-0 flex flex-col items-start justify-between">
+                    <div className="mb-1 flex gap-1 items-center">
+                        <div className="text-[12px] text-slate-500">Industry Percentile:</div>
+                        <div className="text-[12px] text-slate-900 tabular-nums">{industryPercentile}</div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                         <AnimatePresence>
-                            <motion.div initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.36 }} className="flex items-center justify-between">
-                                <div className="text-[11px] text-slate-700">Environment Score</div>
-                                <div className="text-[14px] font-medium tabular-nums text-slate-900">{environment}/100</div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 6 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.28 }}
+                                className="flex items-start gap-1.5"
+                            >
+                                <div className="text-[10px] text-slate-700">Environment</div>
+                                <div className="text-[10px]  tabular-nums text-slate-900">{environment}/100</div>
                             </motion.div>
 
-                            <motion.div initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.36, delay: 0.12 }} className="flex items-center justify-between">
-                                <div className="text-[11px] text-slate-700">Social Score</div>
-                                <div className="text-[14px] font-medium tabular-nums text-slate-900">{social}/100</div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 6 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.28, delay: 0.08 }}
+                                className="flex items-start gap-1.5"
+                            >
+                                <div className="text-[10px] text-slate-700">Social</div>
+                                <div className="text-[10px]  tabular-nums text-slate-900">{social}/100</div>
                             </motion.div>
 
-                            <motion.div initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.36, delay: 0.22 }} className="flex items-center justify-between">
-                                <div className="text-[11px] text-slate-700">Governance Score</div>
-                                <div className="text-[14px] font-medium tabular-nums text-slate-900">{governance}/100</div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 6 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.28, delay: 0.16 }}
+                                className="flex items-start gap-1.5"
+                            >
+                                <div className="text-[10px] text-slate-700">Governance</div>
+                                <div className="text-[10px]  tabular-nums text-slate-900">{governance}/100</div>
                             </motion.div>
                         </AnimatePresence>
                     </div>
 
-                    <div className="mt-3 flex items-center gap-3 text-[10px] text-slate-500">
+                    <div className="mt-2 flex items-center gap-2 text-[8px] text-slate-500">
                         <div className="flex items-center gap-1">
                             <span className="inline-block w-2 h-2 rounded-sm bg-[#0f172a]" />
                             <span>Environment</span>
@@ -267,6 +296,7 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
     );
 }
 
+
 // EsgHistoricalFrame.tsx
 
 
@@ -278,7 +308,7 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
  * - dashed vertical marker at 'Jul' with a red point
  */
 
-const data = [
+const spikierData = [
     { month: "Jan", env: 52, soc: 65, gov: 58 },
     { month: "Feb", env: 58, soc: 72, gov: 72 },
     { month: "Mar", env: 49, soc: 60, gov: 68 },
@@ -287,68 +317,70 @@ const data = [
     { month: "Jun", env: 48, soc: 41, gov: 44 },
     { month: "Jul", env: 74, soc: 66, gov: 60 },
     { month: "Aug", env: 72, soc: 66, gov: 60 },
-    { month: "Sept", env: 66, soc: 62, gov: 64 },
+    { month: "Sep", env: 66, soc: 62, gov: 64 },
     { month: "Oct", env: 54, soc: 48, gov: 58 },
     { month: "Nov", env: 40, soc: 36, gov: 44 },
     { month: "Dec", env: 28, soc: 30, gov: 32 },
 ];
 
 const COLORS = {
-    env: "#0f172a", // dark navy
-    soc: "#d6a04a", // warm gold
-    gov: "#5b8ef3", // muted blue
+    env: "#0f172a",
+    soc: "#d6a04a",
+    gov: "#5b8ef3",
 };
 
 function EsgHistoricalStaggered() {
-    // total stagger timing (ms)
     const baseDelay = 0;
-    const stepDelay = 100;
+    const stepDelay = 80;
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.36 }}
-            className=" w-[500px] max-w-[500px] rounded-md bg-white p-3 shadow-sm"
+            transition={{ duration: 0.28 }}
+            className="w-[420px] max-w-[420px] rounded-md bg-white p-2 shadow-sm"
         >
-            <div className="text-[13px] font-semibold text-slate-900 mb-2">Historical ESG Performance</div>
+            <div className="text-[11px] font-medium text-slate-900 mb-1">Historical ESG Performance</div>
 
-            <div style={{ width: "100%", height: 220 }}>
+            <div style={{ width: "100%", height: 160 }} className="items-start">
                 <ResponsiveContainer>
-                    <LineChart data={data} margin={{ top: 6, right: 6, left: 8, bottom: 6 }}>
-                        <CartesianGrid stroke="#f1f5f9" vertical={false} strokeDasharray="3 6" />
+                    <LineChart data={spikierData} margin={{ top: 4, right: 6, left: 0, bottom: 4 }}>
+                        <CartesianGrid stroke="#f8fafc" vertical={false} strokeDasharray="2 6" />
 
                         <XAxis
                             dataKey="month"
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fontSize: 10, fill: "#64748b" }}
-                            padding={{ left: 4, right: 4 }}
+                            tick={{ fontSize: 9, fill: "#64748b" }}
+                            padding={{ left: 6, right: 6 }}
                         />
 
                         <YAxis
-                            domain={[0, 80]}
+                            domain={[20, 80]}
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fontSize: 10, fill: "#94a3b8" }}
-                            ticks={[0, 20, 40, 60, 80]}
+                            tick={{ fontSize: 9, fill: "#94a3b8" }}
+                            ticks={[30, 45, 60, 75]}
                         />
 
-                        <Tooltip wrapperStyle={{ fontSize: 11 }} contentStyle={{ padding: "6px 8px", borderRadius: 6 }} />
+                        <Tooltip
+                            wrapperStyle={{ fontSize: 10 }}
+                            contentStyle={{ padding: "6px 8px", borderRadius: 6, fontSize: 10 }}
+                        />
 
-                        <Legend verticalAlign="bottom" iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 10, gap: 3 }} />
+
 
                         {/* Staggered lines: animationBegin offsets (ms) */}
                         <Line
                             type="monotone"
                             dataKey="gov"
                             stroke={COLORS.gov}
-                            strokeWidth={2}
+                            strokeWidth={1.6}
                             dot={false}
                             activeDot={{ r: 3.5 }}
                             isAnimationActive={true}
-                            animationDuration={1000}
-                            animationBegin={baseDelay + stepDelay * 0} // governance first
+                            animationDuration={800}
+                            animationBegin={baseDelay + stepDelay * 0}
                             strokeLinecap="round"
                         />
 
@@ -356,12 +388,12 @@ function EsgHistoricalStaggered() {
                             type="monotone"
                             dataKey="soc"
                             stroke={COLORS.soc}
-                            strokeWidth={2}
+                            strokeWidth={1.6}
                             dot={false}
                             activeDot={{ r: 3.5 }}
                             isAnimationActive={true}
-                            animationDuration={1000}
-                            animationBegin={baseDelay + stepDelay * 1} // social second
+                            animationDuration={800}
+                            animationBegin={baseDelay + stepDelay * 1}
                             strokeLinecap="round"
                         />
 
@@ -369,20 +401,19 @@ function EsgHistoricalStaggered() {
                             type="monotone"
                             dataKey="env"
                             stroke={COLORS.env}
-                            strokeWidth={2}
+                            strokeWidth={1.6}
                             dot={false}
                             activeDot={{ r: 3.5 }}
                             isAnimationActive={true}
-                            animationDuration={1000}
-                            animationBegin={baseDelay + stepDelay * 2} // environment last
+                            animationDuration={800}
+                            animationBegin={baseDelay + stepDelay * 2}
                             strokeLinecap="round"
                         />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
 
-            {/* compact legend below */}
-            {/* <div className="mt-2 flex items-center gap-3 text-[10px] text-slate-600">
+            <div className="mt-2 flex items-center gap-3 text-[10px] text-slate-600">
                 <div className="flex items-center gap-1">
                     <span className="inline-block w-2 h-2 rounded-sm" style={{ background: COLORS.env }} />
                     <span>Environment</span>
@@ -395,10 +426,12 @@ function EsgHistoricalStaggered() {
                     <span className="inline-block w-2 h-2 rounded-sm" style={{ background: COLORS.gov }} />
                     <span>Governance</span>
                 </div>
-            </div> */}
+            </div>
         </motion.div>
     );
 }
+
+
 
 
 

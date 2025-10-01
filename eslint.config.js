@@ -28,5 +28,14 @@ export default tseslint.config([
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     },
+
   },
+  {
+    // target the shadcn/ui generated components — adjust path if needed
+    files: ['src/components/ui/**', 'src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      // silence the fast-refresh-only-export-components error for these generated files
+      'react-refresh/only-export-components': 'off'
+    }
+  }
 ]);

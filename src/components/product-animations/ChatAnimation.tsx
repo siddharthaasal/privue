@@ -104,7 +104,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [currentIdx]);
 
   const runLifecycle = () => {
@@ -184,7 +184,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
         polylineRef.current.style.strokeDasharray = String(length);
         polylineRef.current.style.strokeDashoffset = String(length);
         // trigger reflow then animate
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+         
         polylineRef.current.getBoundingClientRect();
         polylineRef.current.style.transition = 'stroke-dashoffset 1s ease-out';
         polylineRef.current.style.strokeDashoffset = '0';

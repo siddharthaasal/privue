@@ -81,7 +81,7 @@ export default function NotificationOverlayWithLeftFade({
       setRevealedId(items[0].id);
     }, 120);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [items]);
 
   // When revealedId is set, we hold for `holdBeforeMove` then start moving
@@ -137,7 +137,7 @@ export default function NotificationOverlayWithLeftFade({
     }, holdBeforeMove);
 
     return () => clearTimeout(holdTimer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [revealedId, holdBeforeMove, reduce, index, items]);
 
   // helper when moving animation completes

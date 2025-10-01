@@ -556,7 +556,7 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       return () => clearTimeout(t);
     }
     prevVerifiedRef.current = d.verified;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [d.verified]);
 
   const isHighlighted = highlightId === d.id;

@@ -75,7 +75,7 @@ export function SustainabilityChatNodeInner(): any {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [currentIdx]);
 
   const runLifecycle = () => {

@@ -18,18 +18,25 @@ export default function ProblemSection({ problems }: ProblemSectionProps) {
             </h3>
 
             {/* Grid with full borders like a table */}
-            <div
-                className={`mt-12 grid grid-cols-1 ${gridColsClass} border-y border-gray-200 divide-x  divide-gray-200`}
-            >
-                {problems.map((p, idx) => (
-                    <div key={idx} className="w-full">
-                        <ProblemCard
-                            icon={p.icon}
-                            heading={p.problemHeading}
-                            description={p.problemDesc}
-                        />
-                    </div>
-                ))}
+            {/* <div
+                className={`mt-12 grid grid-cols-1 ${gridColsClass} border border-gray-200 divide-x divide-y divide-gray-200`}
+                
+            > */}
+            <div className="border-t mt-12">
+                <div className={`divide-x-1 divide-y-1 divide-gray-200 grid grid-cols-1 ${gridColsClass} gap-0`}>
+                    {problems.map((p, idx) => (
+                        <div key={idx}
+                            className={`flex-1 border-b border-gray-200 ${idx === problems.length - 1 ? "border-b" : ""
+                                }`}
+                        >
+                            <ProblemCard
+                                icon={p.icon}
+                                heading={p.problemHeading}
+                                description={p.problemDesc}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );

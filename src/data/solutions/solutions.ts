@@ -816,6 +816,7 @@ export const solutions: Solution[] = [
                     "Advanced, use-case-specific analysis highlights strengths, risks, and key insights.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: FinancialStability
             },
             {
                 title: "Legal Cases",
@@ -830,6 +831,7 @@ export const solutions: Solution[] = [
                     "Instantly identify compliance red flags, sanctions, and overall compliance health.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: ComplianceRisk
             },
             {
                 title: "Adverse News",
@@ -837,6 +839,7 @@ export const solutions: Solution[] = [
                     "Over 90,000 news sources scanned to flag negative events connected to the entity.​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: AdverseNews
             },
             {
                 title: "Conversational AI",
@@ -844,6 +847,7 @@ export const solutions: Solution[] = [
                     "Interact with the data, ask questions, and generate notes to include directly in reports or memos.​​",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: EngineeringReportParsing
             },
         ],
         // modules: [
@@ -1072,6 +1076,7 @@ export const solutions: Solution[] = [
                     "Review corporate filings, litigations, and adverse media.",
                 imgSrc: "/demo-module-image.png",
                 link: "#",
+                renderAnimation: AdverseNews
             },
             {
                 title: "Cyber Risk Assessment",

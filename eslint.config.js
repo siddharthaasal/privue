@@ -19,5 +19,14 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+
+    // <<< added rules block to relax TypeScript checks for .ts/.tsx files >>>
+    // Turn off `no-explicit-any` and relax a couple of other strict rules.
+    // Adjust 'warn' / 'off' as you prefer.
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+    },
   },
 ]);

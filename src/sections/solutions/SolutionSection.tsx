@@ -27,7 +27,7 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
                     </h2>
                 </div>
             </div>
-            <div className={`divide-x-1 divide-y-1 divide-gray-200 mt-12 grid grid-cols-1 ${gridColsClass} gap-0 border-b-[1px] border-gray-200`}>
+            <div className={`divide-x-1 divide-gray-200 mt-12 grid grid-cols-1 ${gridColsClass} gap-0 border-b-[1px] border-gray-200`}>
                 {solnPoints.map((sol, idx) => (
                     <div key={idx} className="flex-1">
                         <SolutionCard

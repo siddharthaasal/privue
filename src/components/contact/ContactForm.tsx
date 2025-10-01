@@ -60,6 +60,27 @@ export default function ContactForm() {
     }
   }, [spreeState.succeeded]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // --- LIFTED state/ref/effect for topic dropdown (must not call hooks inside render) ---
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!rootRef.current) return;
+      if (!rootRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onEsc(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false);
+    }
+    document.addEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, []);
+  // -------------------------------------------------------------------------------
+
   async function onSubmit(values: FormValues) {
     const topicString = Array.isArray(values.topic) ? values.topic.join(', ') : '';
     const payload = {
@@ -70,7 +91,9 @@ export default function ContactForm() {
       message: values.message ?? '',
       website: values.website ?? '',
     };
+
     await handleSpreeSubmit(payload as any);
+
     try {
       if (!spreeState.errors) {
         toast.success('Thanks! We will contact you soon.', {
@@ -80,6 +103,8 @@ export default function ContactForm() {
         toast.error('Something went wrong. Please try again.');
       }
     } catch (error) {
+      // use the error so linter doesn't complain and so you have logging for debugging
+      console.error(error);
       toast.error('Submission failed. Please try again later.');
     }
   }
@@ -96,31 +121,12 @@ export default function ContactForm() {
               control={form.control}
               name="topic"
               render={({ field }) => {
-                const [open, setOpen] = useState(false);
-                const rootRef = useRef<HTMLDivElement | null>(null);
-
                 const toggle = (value: string) => {
                   const set = new Set(field.value || []);
                   if (set.has(value)) set.delete(value);
                   else set.add(value);
                   field.onChange(Array.from(set));
                 };
-
-                useEffect(() => {
-                  function onDocClick(e: MouseEvent) {
-                    if (!rootRef.current) return;
-                    if (!rootRef.current.contains(e.target as Node)) setOpen(false);
-                  }
-                  function onEsc(e: KeyboardEvent) {
-                    if (e.key === 'Escape') setOpen(false);
-                  }
-                  document.addEventListener('mousedown', onDocClick);
-                  document.addEventListener('keydown', onEsc);
-                  return () => {
-                    document.removeEventListener('mousedown', onDocClick);
-                    document.removeEventListener('keydown', onEsc);
-                  };
-                }, []);
 
                 const selected = field.value || [];
                 const maxShownPills = 1;

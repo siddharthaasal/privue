@@ -7,7 +7,7 @@ type Stage = 'idle' | 'frame1' | 'frame2' | 'frame3' | 'done';
 
 export default function CreditTerms({
   startImmediately = true,
-  bgImage = '/module-animations/cont-monitoring-dashboard-light.png',
+  bgImage = '/module-animations/data-acq-bg.png',
 
   // timing controls
   revealIntervalMs = 900,
@@ -155,7 +155,7 @@ export default function CreditTerms({
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <DatabaseZap size={12} />
-                  <div className="text-sm font-medium text-slate-800"> Underwriting Summary</div>
+                  <div className="text-xs font-medium text-slate-800"> Underwriting Summary</div>
                 </div>
 
                 <div className="text-xs text-slate-500">
@@ -174,32 +174,30 @@ export default function CreditTerms({
                   {stage === 'frame1' && (
                     <motion.div
                       key="ct-frame-1"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="min-w-[340px]"
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.28 }}
+                      className="min-w-[300px]"
                     >
-                      <div className="mb-2 text-xs font-medium text-slate-700">
+                      <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
                       </div>
 
-                      <div className="overflow-hidden rounded-md border bg-white text-xs">
+                      <div className="overflow-hidden rounded-md border bg-white text-[9px]">
                         <div className="grid grid-cols-2 gap-0">
-                          <div className="border-b px-2 py-1 font-medium">Field</div>
-                          <div className="border-b px-2 py-1 font-medium">Value</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Field</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Value</div>
 
                           {tableFrame1.map((r, i) => (
                             <motion.div
                               key={i}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={
-                                rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 6 }
-                              }
-                              transition={{ duration: 0.42, delay: i * rowStaggerDelay }}
-                              className="col-span-2 grid grid-cols-2 items-center gap-0 border-b px-2 py-1"
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 3 }}
+                              transition={{ duration: 0.25, delay: i * rowStaggerDelay }}
+                              className="col-span-2 grid grid-cols-2 items-center border-b px-1.5 py-0.5"
                             >
-                              <div className="font-normal text-slate-700">{r.k}</div>
+                              <div className="font-normal text-slate-600">{r.k}</div>
                               <div className="text-slate-800">{rowsShown > i ? r.v : '—'}</div>
                             </motion.div>
                           ))}
@@ -207,36 +205,35 @@ export default function CreditTerms({
                       </div>
                     </motion.div>
                   )}
+
 
                   {stage === 'frame2' && (
                     <motion.div
                       key="ct-frame-2"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="min-w-[380px]"
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.28 }}
+                      className="min-w-[320px]"
                     >
-                      <div className="mb-2 text-xs font-medium text-slate-700">
+                      <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
                       </div>
 
-                      <div className="overflow-hidden rounded-md border bg-white text-xs">
+                      <div className="overflow-hidden rounded-md border bg-white text-[9px]">
                         <div className="grid grid-cols-2 gap-0">
-                          <div className="border-b px-2 py-1 font-medium">Field</div>
-                          <div className="border-b px-2 py-1 font-medium">Value</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Field</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Value</div>
 
                           {tableFrame2.map((r, i) => (
                             <motion.div
                               key={i}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={
-                                rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 6 }
-                              }
-                              transition={{ duration: 0.42, delay: i * rowStaggerDelay }}
-                              className="col-span-2 grid grid-cols-2 items-center gap-0 border-b px-2 py-1"
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 2 }}
+                              transition={{ duration: 0.25, delay: i * rowStaggerDelay }}
+                              className="col-span-2 grid grid-cols-2 items-center border-b px-1.5 py-0.5"
                             >
-                              <div className="font-normal text-slate-700">{r.k}</div>
+                              <div className="font-normal text-slate-600">{r.k}</div>
                               <div className="text-slate-800">{rowsShown > i ? r.v : '—'}</div>
                             </motion.div>
                           ))}
@@ -244,36 +241,35 @@ export default function CreditTerms({
                       </div>
                     </motion.div>
                   )}
+
 
                   {stage === 'frame3' && (
                     <motion.div
                       key="ct-frame-3"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="min-w-[340px]"
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.28 }}
+                      className="min-w-[300px]"
                     >
-                      <div className="mb-2 text-xs font-medium text-slate-700">
+                      <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Underwriting Conclusions
                       </div>
 
-                      <div className="overflow-hidden rounded-md border bg-white text-xs">
+                      <div className="overflow-hidden rounded-md border bg-white text-[9px]">
                         <div className="grid grid-cols-2 gap-0">
-                          <div className="border-b px-2 py-1 font-medium">Term</div>
-                          <div className="border-b px-2 py-1 font-medium">Value</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Term</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-slate-600">Value</div>
 
                           {conclusions.map((r, i) => (
                             <motion.div
                               key={i}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={
-                                rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 6 }
-                              }
-                              transition={{ duration: 0.42, delay: i * rowStaggerDelay }}
-                              className="col-span-2 grid grid-cols-2 items-center gap-0 border-b px-2 py-1"
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={rowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.08, y: 2 }}
+                              transition={{ duration: 0.25, delay: i * rowStaggerDelay }}
+                              className="col-span-2 grid grid-cols-2 items-center border-b px-1.5 py-0.5"
                             >
-                              <div className="font-normal text-slate-700">{r.k}</div>
+                              <div className="font-normal text-slate-600">{r.k}</div>
                               <div className="text-slate-800">{rowsShown > i ? r.v : '—'}</div>
                             </motion.div>
                           ))}
@@ -281,21 +277,43 @@ export default function CreditTerms({
                       </div>
                     </motion.div>
                   )}
+
 
                   {stage === 'done' && (
                     <motion.div
                       key="ct-done"
                       className="max-w-auto"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.28 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.22 }}
                     >
-                      <div className="text-privue-600 text-sm font-normal">
-                        Credit Terms Set — Underwriting Complete
+                      <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50/80 px-3 py-1 shadow-sm ring-1 ring-emerald-100">
+                        {/* optional check icon — replace with your imported icon if different */}
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="flex-shrink-0"
+                          aria-hidden
+                        >
+                          <path d="M20 6L9 17L4 12" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+
+                        <div className="flex flex-col">
+                          <div className="text-[11px] font-semibold text-emerald-700 leading-tight">
+                            Credit Terms Set
+                          </div>
+                          <div className="text-[9px] text-slate-500 -mt-0.5">
+                            Underwriting complete
+                          </div>
+                        </div>
                       </div>
                     </motion.div>
                   )}
+
                 </AnimatePresence>
               </div>
             </motion.div>

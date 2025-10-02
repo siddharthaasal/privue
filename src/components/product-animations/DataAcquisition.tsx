@@ -14,7 +14,7 @@ type Stage = 'idle' | 'docs' | 'table_fill' | 'done';
 
 export default function DataAcquisition({
   startImmediately = true,
-  bgImage = '/module-animations/cont-monitoring-dashboard-light.png',
+  bgImage = '/module-animations/data-acq-bg.png',
   // bgImage = "/module-animations/data-acq-2.png",
 }: {
   startImmediately?: boolean;
@@ -161,14 +161,14 @@ export default function DataAcquisition({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="pointer-events-auto absolute right-2 bottom-2 w-auto max-w-[94vw] rounded-2xl border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
+              className="pointer-events-auto absolute right-2 bottom-2 w-auto max-w-[94vw] rounded-lg border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
               style={{ fontSize: 12 }}
             >
               {/* header */}
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <DatabaseZap size={12} />
-                  <div className="text-sm font-medium text-slate-800">Data acquisition</div>
+                  <div className="text-xs font-medium text-slate-800">Data acquisition</div>
                 </div>
 
                 <div className="text-xs text-slate-500">
@@ -185,49 +185,51 @@ export default function DataAcquisition({
                   {stage === 'docs' && (
                     <motion.div
                       key="frame-docs"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="min-w-[350px]"
+                      transition={{ duration: 0.28 }}
+                      className="min-w-[310px] p-2"
                     >
-                      {/* Top: two progress bars */}
+                      {/* Top: two progress bars (crisper) */}
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <div className="text-xs font-medium text-slate-700">Overall Progress</div>
-                          <div className="text-xs text-slate-500">
+                          <div className="text-[10px] font-medium text-slate-700">Overall Progress</div>
+                          <div className="text-[10px] text-slate-500">
                             {Math.min(100, Math.round(progress))}/100
                           </div>
                         </div>
-                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
                           <div
                             style={{
                               width: `${progress}%`,
-                              background: 'linear-gradient(90deg,#74c0fc,#4c6ef5)',
+                              background: 'linear-gradient(90deg,#5c7cfa,#5c7cfa)',
                             }}
-                            className="h-full transition-all duration-400"
+                            className="h-full transition-all duration-200"
                           />
                         </div>
 
                         <div className="flex items-center justify-between">
-                          <div className="text-xs font-medium text-slate-700">Documents</div>
-                          <div className="text-xs text-slate-500">
+                          <div className="text-[10px] font-medium text-slate-700">Documents</div>
+                          <div className="text-[10px] text-slate-500">
                             {Math.min(100, Math.round(docProgress))}%
                           </div>
                         </div>
-                        <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
                           <div
                             style={{
                               width: `${docProgress}%`,
-                              background: 'linear-gradient(90deg,#a5d8ff,#4c6ef5)',
+                              background: 'linear-gradient(90deg,#5c7cfa,#5c7cfa)',
                             }}
-                            className="h-full transition-all duration-400"
+                            className="h-full transition-all duration-200"
                           />
                         </div>
                       </div>
 
-                      {/* bottom: spinning loader discs */}
-                      <div className="mt-4 flex items-center justify-between">
+                      {/* bottom: compact spinning loader discs */}
+                      <div className="mt-2 flex items-center justify-between gap-2">
                         {[
                           { label: 'Credit Reports', idx: 0 },
                           { label: 'GST Returns', idx: 1 },
@@ -235,39 +237,22 @@ export default function DataAcquisition({
                         ].map((f) => {
                           const st = discStatus(f.idx);
                           return (
-                            <div
-                              key={f.idx}
-                              className="flex flex-1 flex-col items-center text-center"
-                            >
+                            <div key={f.idx} className="flex flex-1 flex-col items-center text-center">
                               <div
-                                className={`flex h-10 w-10 items-center justify-center rounded-full border`}
+                                className="flex h-8 w-8 items-center justify-center rounded-full border"
                                 style={{
                                   borderColor:
-                                    st === 'done'
-                                      ? 'rgba(34,197,94,0.12)'
-                                      : 'rgba(148,163,184,0.12)',
-                                  background: st === 'done' ? 'rgba(34,197,94,0.08)' : undefined,
+                                    st === 'done' ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.08)',
+                                  background: st === 'done' ? 'rgba(34,197,94,0.06)' : undefined,
                                 }}
                               >
                                 {st === 'done' ? (
-                                  <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      d="M20 6L9 17L4 12"
-                                      stroke="#16a34a"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    />
+                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 6L9 17L4 12" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                   </svg>
                                 ) : (
                                   <div
-                                    className="h-5 w-5 animate-spin rounded-full"
+                                    className="h-4 w-4 animate-spin rounded-full"
                                     style={{
                                       borderTop: '2px solid rgba(76,110,245,1)',
                                       borderRight: '2px solid transparent',
@@ -277,12 +262,14 @@ export default function DataAcquisition({
                                   />
                                 )}
                               </div>
-                              <div className="mt-2 text-xs text-slate-600">{f.label}</div>
+
+                              <div className="mt-1 text-[8px] text-slate-600">{f.label}</div>
                             </div>
                           );
                         })}
                       </div>
                     </motion.div>
+
                   )}
 
                   {stage === 'table_fill' && (

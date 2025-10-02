@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { AnimatedList } from '../ui/animated-list';
 import clsx from 'clsx';
@@ -21,7 +21,6 @@ const demoNotifications: NotificationItem[] = [
     id: 'n1',
     title:
       '1 severe compliance violations detected requiring immediate attention. \nPotential regulatory impact and high-risk exposure.',
-    // body: 'Immediate attention required',
     start: { left: '50%', top: '15%' },
     target: { left: '15%', top: '15%' },
     variant: 'danger',
@@ -31,7 +30,6 @@ const demoNotifications: NotificationItem[] = [
     id: 'n2',
     title:
       '1 moderate risk factors identified. Review vendor documentation and update risk assessments',
-    // body: '2 items to review',
     start: { left: '50%', top: '15%' },
     target: { left: '15%', top: '25%' },
     variant: 'warning',
@@ -40,7 +38,6 @@ const demoNotifications: NotificationItem[] = [
   {
     id: 'n3',
     title: '2 new updates to review including policy changes and vendor performance metrics.',
-    // body: 'Review vendor docs',
     start: { left: '50%', top: '15%' },
     target: { left: '15%', top: '35%' },
     variant: 'info',
@@ -49,11 +46,9 @@ const demoNotifications: NotificationItem[] = [
 ];
 
 export default function NotificationOverlayWithLeftFade({
-  // bgUrl = '/t.png',
-  bgUrl = '/module-animations/cont-monitoring-dashboard-light.png',
+  bgUrl = '/module-animations/cont-mon.png',
   items = demoNotifications,
-  // revealDelay = 900, // unused for sequencing here but kept for compatibility
-  holdBeforeMove = 1100, // how long top-center pops stays before moving
+  holdBeforeMove = 1100,
 }: {
   bgUrl?: string;
   items?: NotificationItem[];
@@ -64,11 +59,9 @@ export default function NotificationOverlayWithLeftFade({
   const [revealedId, setRevealedId] = useState<string | null>(null); // current pop at top-center (single)
   const [movingId, setMovingId] = useState<string | null>(null); // currently animating
   const [landedIds, setLandedIds] = useState<string[]>([]); // static landed cards (non-left)
-  const [blendedIds, setBlendedIds] = useState<string[]>([]); // currently blending (left) — kept for backward compatibility
+  const [landedLeftIds, setLandedLeftIds] = useState<string[]>([]); // static left-landed cards (stay there)
   const reduce = useReducedMotion();
-  const [leftFade, setLeftFade] = useState(false);
-  const blendTimeoutRef = useRef<number | null>(null);
-  const [isBlending, setIsBlending] = useState(false);
+  const [leftFade] = useState(false);
 
   // scale targets for movement (make shrink more pronounced)
   const targetScaleLeft = 0.35;
@@ -81,52 +74,37 @@ export default function NotificationOverlayWithLeftFade({
       setRevealedId(items[0].id);
     }, 120);
     return () => clearTimeout(t);
-     
   }, [items]);
 
   // When revealedId is set, we hold for `holdBeforeMove` then start moving
   useEffect(() => {
     if (!revealedId) return;
     if (reduce) {
-      // skip hold/move for reduced-motion: directly mark landed/blended and proceed
+      // reduced-motion: directly mark landed / left-landed and proceed
       const it = items.find((x) => x.id === revealedId);
       if (!it) return;
       if (it.landOnLeft) {
-        // simulate blend then proceed
-        setBlendedIds((p) => [...p, revealedId]);
-        const tid = window.setTimeout(() => {
-          setBlendedIds((p) => p.filter((id) => id !== revealedId));
-          setRevealedId(null);
-          setIndex((i) => Math.min(i + 1, items.length));
-          if (index + 1 < items.length) {
-            setTimeout(() => setRevealedId(items[index + 1].id), 120);
-          } else {
-            // restart loop
-            setTimeout(() => {
-              setIndex(0);
-              setLandedIds([]);
-              setRevealedId(items[0].id);
-            }, 400);
-          }
-        }, 700);
-        return () => clearTimeout(tid);
+        setLandedLeftIds((p) => [...p, revealedId]);
       } else {
         setLandedIds((p) => [...p, revealedId]);
-        setRevealedId(null);
-        setIndex((i) => Math.min(i + 1, items.length));
-        if (index + 1 < items.length) {
-          const tid = window.setTimeout(() => setRevealedId(items[index + 1].id), 220);
-          return () => clearTimeout(tid);
+      }
+      setRevealedId(null);
+      setIndex((i) => {
+        const next = i + 1;
+        if (next < items.length) {
+          setTimeout(() => setRevealedId(items[next].id), 120);
         } else {
           // restart loop
-          const tid = window.setTimeout(() => {
+          setTimeout(() => {
             setIndex(0);
             setLandedIds([]);
+            setLandedLeftIds([]);
             setRevealedId(items[0].id);
           }, 400);
-          return () => clearTimeout(tid);
         }
-      }
+        return next;
+      });
+      return;
     }
 
     const holdTimer = window.setTimeout(() => {
@@ -137,7 +115,6 @@ export default function NotificationOverlayWithLeftFade({
     }, holdBeforeMove);
 
     return () => clearTimeout(holdTimer);
-     
   }, [revealedId, holdBeforeMove, reduce, index, items]);
 
   // helper when moving animation completes
@@ -146,33 +123,30 @@ export default function NotificationOverlayWithLeftFade({
     if (!it) return;
 
     if (it.landOnLeft) {
-      // Start blending on the same moving element (do NOT clear movingId)
-      setIsBlending(true);
-      setLeftFade(true);
+      // add to left-landed list and keep it there
+      setMovingId(null);
+      setLandedLeftIds((p) => {
+        // avoid duplicates
+        if (p.includes(id)) return p;
+        return [...p, id];
+      });
 
-      // After blend duration, remove the moving element and advance to next
-      const blendDur = 1000;
-      if (blendTimeoutRef.current) window.clearTimeout(blendTimeoutRef.current);
-      blendTimeoutRef.current = window.setTimeout(() => {
-        setIsBlending(false);
-        setMovingId(null);
-        setLeftFade(false);
-
-        setIndex((i) => {
-          const next = i + 1;
-          if (next < items.length) {
-            setTimeout(() => setRevealedId(items[next].id), 220);
-          } else {
-            // loop: restart sequence
-            setTimeout(() => {
-              setIndex(0);
-              setLandedIds([]);
-              setRevealedId(items[0].id);
-            }, 600);
-          }
-          return next;
-        });
-      }, blendDur);
+      // small pause then reveal next
+      setIndex((i) => {
+        const next = i + 1;
+        if (next < items.length) {
+          setTimeout(() => setRevealedId(items[next].id), 220);
+        } else {
+          // loop: restart sequence
+          setTimeout(() => {
+            setIndex(0);
+            setLandedIds([]);
+            setLandedLeftIds([]);
+            setRevealedId(items[0].id);
+          }, 600);
+        }
+        return next;
+      });
     } else {
       // normal landed card
       setMovingId(null);
@@ -188,6 +162,7 @@ export default function NotificationOverlayWithLeftFade({
           setTimeout(() => {
             setIndex(0);
             setLandedIds([]);
+            setLandedLeftIds([]);
             setRevealedId(items[0].id);
           }, 600);
         }
@@ -195,13 +170,6 @@ export default function NotificationOverlayWithLeftFade({
       });
     }
   };
-
-  // cleanup timer on unmount
-  useEffect(() => {
-    return () => {
-      if (blendTimeoutRef.current) window.clearTimeout(blendTimeoutRef.current);
-    };
-  }, []);
 
   // card class: top-center pop is inline, moving/landed use fixed widths you had earlier
   const cardClassInline = (variant?: NotificationItem['variant']) =>
@@ -237,11 +205,8 @@ export default function NotificationOverlayWithLeftFade({
         style={{
           backgroundImage: `url('${bgUrl.replace(/'/g, "\\'")}')`,
           transform: 'scale(1.02)',
-          // filter: 'brightness(0.32) saturate(0.9)',
         }}
       />
-
-      {/* <div className="absolute inset-0 bg-black/36" /> */}
 
       {/* left fade overlay (no blur) */}
       <motion.div
@@ -280,7 +245,6 @@ export default function NotificationOverlayWithLeftFade({
                     return (
                       <div className={cardClassInline(it.variant) + ' w-[min(86vw,320px)] px-4'}>
                         <div className="flex items-start gap-1">
-                          {/* icon */}
                           <div className="mt-1 flex-shrink-0">
                             {it.variant === 'danger' && (
                               <AlertTriangle className="h-4 w-4 text-red-400" />
@@ -310,133 +274,119 @@ export default function NotificationOverlayWithLeftFade({
         {/* MOVING card (only one moves at a time in this logic) */}
         {movingId
           ? (() => {
-              const it = items.find((x) => x.id === movingId)!;
-              const targetScale = it.landOnLeft ? targetScaleLeft : targetScaleOther;
-              return (
-                <motion.div
-                  key={`moving-${it.id}`}
-                  initial={
-                    reduce
-                      ? {
-                          opacity: 1,
-                          scale: targetScale,
-                          left: it.target.left,
-                          top: it.target.top,
-                          position: 'absolute',
-                        }
-                      : {
-                          opacity: 1,
-                          scale: targetScale,
-                          left: '50%',
-                          top: '6%',
-                          position: 'absolute',
-                        }
-                  }
-                  animate={
-                    reduce
-                      ? {}
-                      : isBlending && movingId === it.id
-                        ? {
-                            opacity: 0,
-                            scale: 0.68,
-                            left: it.target.left,
-                            top: it.target.top,
-                            position: 'absolute',
-                          }
-                        : {
-                            opacity: 1,
-                            scale: targetScale,
-                            left: it.target.left,
-                            top: it.target.top,
-                            position: 'absolute',
-                          }
-                  }
-                  transition={
-                    isBlending && movingId === it.id
-                      ? { duration: 1.1, ease: 'easeOut' }
-                      : movementTransition
-                  }
-                  onAnimationComplete={() => {
-                    // call onMoveComplete only when this is the movement completion.
-                    // when blending is active we DON'T re-trigger onMoveComplete (the timeout handles finalizing).
-                    if (!isBlending) onMoveComplete(it.id);
-                  }}
-                  className="absolute -translate-x-1/2"
-                  style={{ willChange: 'left, top, transform, opacity', zIndex: 40 }}
-                >
-                  <div className={cardClassFixed(it.variant) + ' w-[320px] md:w-[360px]'}>
-                    <div className="flex items-start gap-1">
-                      <div className="mt-1 flex-shrink-0">
-                        {it.variant === 'danger' && (
-                          <AlertTriangle className="h-4 w-4 text-red-400" />
-                        )}
-                        {it.variant === 'warning' && (
-                          <AlertCircle className="h-4 w-4 text-yellow-400" />
-                        )}
-                        {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
-                      </div>
+            const it = items.find((x) => x.id === movingId)!;
+            const targetScale = it.landOnLeft ? targetScaleLeft : targetScaleOther;
+            return (
+              <motion.div
+                key={`moving-${it.id}`}
+                initial={
+                  reduce
+                    ? {
+                      opacity: 1,
+                      scale: targetScale,
+                      left: it.target.left,
+                      top: it.target.top,
+                      position: 'absolute',
+                    }
+                    : {
+                      opacity: 1,
+                      scale: 1,
+                      left: '50%',
+                      top: '6%',
+                      position: 'absolute',
+                    }
+                }
+                animate={
+                  reduce
+                    ? {}
+                    : {
+                      opacity: 1,
+                      scale: targetScale,
+                      left: it.target.left,
+                      top: it.target.top,
+                      position: 'absolute',
+                    }
+                }
+                transition={movementTransition}
+                onAnimationComplete={() => {
+                  // finalize landing for moving card
+                  onMoveComplete(it.id);
+                }}
+                className="absolute -translate-x-1/2"
+                style={{ willChange: 'left, top, transform, opacity', zIndex: 40 }}
+              >
+                <div className={cardClassFixed(it.variant) + ' w-[320px] md:w-[360px]'}>
+                  <div className="flex items-start gap-1">
+                    <div className="mt-1 flex-shrink-0">
+                      {it.variant === 'danger' && <AlertTriangle className="h-4 w-4 text-red-400" />}
+                      {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
+                      {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
+                    </div>
 
-                      <div className="flex-1 text-left">
-                        <div className="text-sm font-medium text-gray-600">{it.title}</div>
-                        {it.body && <div className="mt-1 text-xs text-white/80">{it.body}</div>}
-                      </div>
+                    <div className="flex-1 text-left">
+                      <div className="text-sm font-medium text-gray-600">{it.title}</div>
+                      {it.body && <div className="mt-1 text-xs text-white/80">{it.body}</div>}
                     </div>
                   </div>
-                </motion.div>
-              );
-            })()
+                </div>
+              </motion.div>
+            );
+          })()
           : null}
 
-        {/* BLEND (left): larger duration and stronger shrink so it truly disappears into the image */}
-        {blendedIds.map((id) => {
+        {/* LANDED LEFT (stay permanently at shrunken scale) */}
+        {landedLeftIds.map((id) => {
           const it = items.find((x) => x.id === id)!;
+          // render at the target position (they will remain there) at the same reduced scale
           return (
             <motion.div
-              key={`blend-${id}`}
+              key={`landed-left-${id}`}
               initial={{
-                opacity: 1,
-                scale: 0.88,
-                position: 'absolute',
-                left: it.target.left,
+                opacity: 0,
+                scale: targetScaleLeft,           // start already shrunken
+                left: it.target.left,             // keep same unit as target (e.g. "15%")
                 top: it.target.top,
+                position: 'absolute',
+                x: 100,                           // offset via transform, avoids unit mix
+                y: 30,
               }}
               animate={{
-                opacity: 0,
-                scale: 0.68,
-                position: 'absolute',
+                opacity: 1,
+                scale: targetScaleLeft,           // stay shrunken
                 left: it.target.left,
                 top: it.target.top,
+                position: 'absolute',
+                x: 100,                             // animate translate back to 0 so it "lands" at left/top
+                y: 30,
               }}
-              transition={{ duration: 1.1, ease: 'easeOut' }}
-              className="absolute -translate-x-1/2"
-              style={{ willChange: 'opacity, transform', zIndex: 35 }}
+              transition={{ duration: 0.36, type: 'tween' }}
+              className="absolute w-[min(86vw,320px)] max-w-[320px] -translate-x-1/2 break-words whitespace-pre-wrap md:max-w-[360px]"
+              style={{ willChange: 'transform, opacity', zIndex: 30, transformOrigin: 'left top' }}
             >
               <div
-                className={cardClassFixed(it.variant) + ' w-[320px] md:w-[360px]'}
-                style={{
-                  backgroundBlendMode: 'multiply',
-                  opacity: 0.94,
-                  filter: 'saturate(0.9)',
-                }}
+                className={
+                  cardClassFixed(it.variant) +
+                  ' w-[min(86vw,320px)] max-w-[320px] break-words whitespace-pre-wrap md:max-w-[360px]'
+                }
+                // keep inner content crisp
+                style={{ transform: `scale(1)`, transformOrigin: 'left top' }}
               >
                 <div className="flex items-start gap-1">
                   <div className="mt-1 flex-shrink-0">
-                    {it.variant === 'danger' && <AlertCircle className="h-4 w-4 text-red-400" />}
-                    {it.variant === 'warning' && (
-                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                    )}
+                    {it.variant === 'danger' && <AlertTriangle className="h-6 w-6 text-red-400" />}
+                    {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
                     {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
                   </div>
 
                   <div className="flex-1 text-left">
-                    <div className="text-sm font-medium text-gray-700">{it.title}</div>
-                    {it.body && <div className="mt-1 text-xs text-white/80">{it.body}</div>}
+                    <div className="text-[10px] font-normal text-gray-700">{it.title}</div>
                   </div>
                 </div>
               </div>
             </motion.div>
           );
         })}
+
 
         {/* LANDED (non-left) — gentle pop */}
         {landedIds.map((id) => {
@@ -465,21 +415,18 @@ export default function NotificationOverlayWithLeftFade({
               <div
                 className={
                   cardClassFixed(it.variant) +
-                  'w-[min(86vw,320px)] max-w-[320px] break-words whitespace-pre-wrap md:max-w-[360px]'
+                  ' w-[min(86vw,320px)] max-w-[320px] break-words whitespace-pre-wrap md:max-w-[360px]'
                 }
               >
                 <div className="flex items-start gap-1">
                   <div className="mt-1 flex-shrink-0">
                     {it.variant === 'danger' && <AlertTriangle className="h-6 w-6 text-red-400" />}
-                    {it.variant === 'warning' && (
-                      <AlertCircle className="h-4 w-4 text-yellow-400" />
-                    )}
+                    {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
                     {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
                   </div>
 
                   <div className="flex-1 text-left">
                     <div className="text-[10px] font-normal text-gray-700">{it.title}</div>
-                    {/* {it.body && <div className="text-xs mt-1 text-white/80">{it.body}</div>} */}
                   </div>
                 </div>
               </div>

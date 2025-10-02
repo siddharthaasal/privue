@@ -28,14 +28,14 @@ function CreditInfoCard() {
     >
       <Card className="w-72 shadow-lg ring-0">
         <CardHeader className="">
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex items-center justify-start gap-2">
             <CardTitle className="text-[11px] font-medium">Reported Credit Information</CardTitle>
             <span
               className="text-muted-foreground flex items-center gap-1 text-[10px]"
               title="Summary of the user's reported credit attributes (last 36 months)"
               aria-label="Credit information details"
             >
-              <Info className="h-3.5 w-3.5" />
+              <Info className="h-3 w-3" />
             </span>
           </div>
         </CardHeader>
@@ -126,40 +126,54 @@ function ProbabilityOfDefaultCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 6 }}
-      transition={{ duration: 0.25 }}
-      className="rounded-lg"
+      exit={{ opacity: 0, y: 4 }}
+      transition={{ duration: 0.18 }}
+      className="rounded-md"
+      aria-label={`Probability of Default: ${percent}, ${level}`}
+      role="group"
     >
-      <Card className="w-[300px] shadow-sm ring-0">
-        <CardHeader className="pt-2 pb-2">
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-[11px] font-medium">Probability of Default</CardTitle>
-            <Info className="text-muted-foreground h-3.5 w-3.5" />
+      <Card className="w-[260px] shadow-sm ring-0">
+        <CardHeader className="pt-2 pb-1 px-3">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-[9px] font-semibold leading-tight">
+                Probability of Default
+              </CardTitle>
+              <Info className="text-muted-foreground h-3 w-3" />
+            </div>
+
+            <div className="text-right">
+              <div className="text-[11px] font-semibold leading-none">{percent}</div>
+              <div className="text-[8px] text-slate-500 -mt-0.5">{level}</div>
+            </div>
           </div>
         </CardHeader>
 
-        <CardContent className="px-3 pb-3">
-          <div className="mb-3 text-[12px] font-medium">
-            {percent} — {level}
-          </div>
-
-          <div className="flex items-center gap-2">
+        <CardContent className="px-3 pb-3 pt-1">
+          {/* segmented bar */}
+          <div className="mb-2 flex items-end gap-2" aria-hidden>
             {levels.map((l) => {
               const isActive = l.key === level;
+              const inactiveBg = `${l.color}22`; // ~13% alpha hex suffix
               return (
-                <div key={l.key} className="flex flex-1 flex-col items-center">
-                  <div
-                    className="h-2 w-full rounded"
+                <div key={l.key} className="flex-1 min-w-0">
+                  <motion.div
+                    layout
+                    initial={false}
+                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
                     style={{
-                      background: isActive ? l.color : `${l.color}20`,
+                      background: isActive ? l.color : inactiveBg,
+                      height: isActive ? 10 : 6,
+                      borderRadius: 6,
                     }}
+                    className="w-full"
                   />
                   <div
-                    className={`mt-1 text-[10px] ${
-                      isActive ? 'font-medium text-slate-800' : 'text-muted-foreground'
-                    }`}
+                    className={`mt-1 text-[8px] text-center ${isActive ? 'font-medium text-slate-800' : 'text-slate-500'
+                      }`}
+                    style={{ lineHeight: '10px' }}
                   >
                     {l.key}
                   </div>
@@ -167,11 +181,17 @@ function ProbabilityOfDefaultCard({
               );
             })}
           </div>
+
+          {/* compact hint */}
+          <div className="text-[8px] text-slate-500">
+            Based on recent documents & credit signals
+          </div>
         </CardContent>
       </Card>
     </motion.div>
   );
 }
+
 
 function FinancialSnapshotCard() {
   // extracted from the screenshot:
@@ -211,7 +231,7 @@ function FinancialSnapshotCard() {
               title="Snapshot extracted from uploaded image"
               aria-label="Financial snapshot details"
             >
-              <Info className="h-3.5 w-3.5" />
+              <Info className="h-3 w-3" />
             </span>
           </div>
         </CardHeader>

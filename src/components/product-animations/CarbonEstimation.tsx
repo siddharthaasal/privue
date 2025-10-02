@@ -7,7 +7,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  LabelList,
   Tooltip,
   Cell,
 } from 'recharts';
@@ -51,14 +50,11 @@ function BusinessSiteFrame() {
           }
           // finish typing: clear caret slightly after final char
           timers.push(
-            window.setTimeout(
-              () => {
-                setTyping((s) => ({ ...s, [id]: false }));
-                // ensure final value is the full target
-                setValues((prev) => ({ ...prev, [id]: target }));
-              },
-              target.length * speed + 120,
-            ),
+            window.setTimeout(() => {
+              setTyping((s) => ({ ...s, [id]: false }));
+              // ensure final value is the full target
+              setValues((prev) => ({ ...prev, [id]: target }));
+            }, target.length * speed + 120),
           );
         }, delay),
       );
@@ -77,48 +73,52 @@ function BusinessSiteFrame() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36, ease: 'easeOut' }}
-      className="max-w-[500px] rounded-md bg-white p-4 shadow-sm"
+      transition={{ duration: 0.28, ease: 'easeOut' }}
+      className="max-w-[440px] rounded-md bg-white p-3 shadow-sm ring-1 ring-slate-100"
     >
-      <div className="text-[12px] font-semibold tracking-wide text-slate-800">
-        BUSINESS <span className="font-bold">SITE</span>
+      <div className="flex items-baseline justify-between">
+        <div className="text-[11px] font-semibold tracking-tight text-slate-800">
+          BUSINESS <span className="font-bold">SITE</span>
+        </div>
+        <div className="text-[9px] text-slate-500">energy usage</div>
       </div>
-      <div className="mt-1 mb-3 text-[10.5px] text-slate-600">
+
+      <div className="mt-1 mb-2 text-[10px] text-slate-600">
         Enter your business site energy usage
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5">
         {rows.map((r) => {
           // chosen displayed value: append caret '|' while typing for that row
           const isTyping = !!typing[r.id];
           const displayValue = isTyping ? `${values[r.id]}|` : values[r.id];
 
           return (
-            <div key={r.id} className="grid grid-cols-[90px_1fr_90px] items-center gap-2">
+            <div key={r.id} className="grid grid-cols-[84px_1fr_76px] items-center gap-2">
               {/* label */}
-              <div className="text-[10.5px] font-medium text-slate-700">
+              <div className="text-[10px] font-medium text-slate-700">
                 {r.label.toUpperCase()}
               </div>
 
               {/* input + unit */}
               <div className="relative flex items-center gap-2">
-                {/* readonly input styled — we render the animated text inside the input by setting its value */}
                 <input
                   type="text"
                   value={displayValue}
                   readOnly
-                  className="w-full rounded border border-slate-200 bg-white px-2 py-1 text-[11px] text-slate-800"
+                  className="w-full rounded border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-800"
                   aria-label={`${r.label} value`}
                   style={{
                     fontVariantNumeric: 'tabular-nums',
                     caretColor: 'transparent', // hide native caret
+                    lineHeight: '1.05',
                   }}
                 />
 
                 <select
-                  className="rounded border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-700"
+                  className="rounded border border-slate-200 bg-white px-2 py-1 text-[9px] text-slate-700"
                   aria-label={`${r.unit} unit select`}
                 >
                   <option>{r.unit}</option>
@@ -127,7 +127,7 @@ function BusinessSiteFrame() {
 
               {/* frequency */}
               <select
-                className="rounded border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-700"
+                className="rounded border border-slate-200 bg-white px-2 py-1 text-[9px] text-slate-700"
                 aria-label="frequency select"
               >
                 <option>per Month</option>
@@ -136,12 +136,10 @@ function BusinessSiteFrame() {
           );
         })}
       </div>
-
-      {/* subtle note about animation (for dev) */}
-      {/* <div className="mt-3 text-[10px] text-slate-400">Typing animation: Electricity & Natural Gas</div> */}
     </motion.div>
   );
 }
+
 
 // EmissionsFrame.tsx
 
@@ -185,56 +183,60 @@ function EmissionsFrame() {
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="w-[400px] max-w-[500px] rounded-md bg-white p-2 shadow-sm"
+      className="w-[380px] max-w-[500px] rounded-md bg-white p-2 ring-1 ring-slate-100 shadow-sm"
     >
-      <div className="mb-2 text-[11px] font-semibold text-slate-900">
+      <div className="mb-1 text-[11px] font-semibold text-slate-900">
         Total emission per category
       </div>
 
-      <div className="mb-1 grid grid-cols-[1fr_70px_70px_50px] border-b border-slate-100 pb-1 text-[11px] font-medium text-slate-600">
-        <div></div>
+      <div className="mb-1 grid grid-cols-[1fr_64px_64px_44px] border-b border-slate-100 pb-1 text-[10px] font-medium text-slate-600">
+        <div />
         <div className="text-right">FY 19</div>
         <div className="text-right">FY 20</div>
         <div className="text-right">vs Y-1</div>
       </div>
 
-      {data.map((section, si) => (
-        <div key={si} className="mb-1">
-          <motion.div
-            variants={rowVariants}
-            className="mb-[2px] text-[9.5px] font-medium text-slate-500"
-          >
-            {section.scope}
-          </motion.div>
-
-          {section.rows.map((r, ri) => (
+      <div className="space-y-1">
+        {data.map((section, si) => (
+          <div key={si}>
             <motion.div
-              key={ri}
               variants={rowVariants}
-              className="grid grid-cols-[1fr_70px_70px_50px] items-center py-[2px] text-[11px]"
+              className="mb-1 text-[9px] font-medium text-slate-500"
             >
-              <div className="text-slate-700">{r.label}</div>
-              <div className="text-right text-slate-800">{r.fy19}</div>
-              <div className="text-right text-slate-800">{r.fy20}</div>
-              <div className="text-right text-slate-600">{r.vs}</div>
+              {section.scope}
             </motion.div>
-          ))}
 
-          <motion.div
-            variants={rowVariants}
-            className="mt-[2px] grid grid-cols-[1fr_70px_70px_50px] items-center border-t border-slate-100 pt-[2px] text-[11px] font-semibold"
-          >
-            <div className="text-slate-800">Total</div>
-            <div className="text-right text-slate-900">{section.total.fy19}</div>
-            <div className="text-right text-slate-900">{section.total.fy20}</div>
-            <div className="text-right text-slate-700">{section.total.vs}</div>
-          </motion.div>
-        </div>
-      ))}
+            <div className="space-y-[2px]">
+              {section.rows.map((r, ri) => (
+                <motion.div
+                  key={ri}
+                  variants={rowVariants}
+                  className="grid grid-cols-[1fr_64px_64px_44px] items-center py-[4px] text-[10px]"
+                >
+                  <div className="text-slate-700 truncate">{r.label}</div>
+                  <div className="text-right text-slate-800">{r.fy19}</div>
+                  <div className="text-right text-slate-800">{r.fy20}</div>
+                  <div className="text-right text-slate-600">{r.vs}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              variants={rowVariants}
+              className="mt-1 grid grid-cols-[1fr_64px_64px_44px] items-center border-t border-slate-100 pt-1 text-[10px] font-semibold"
+            >
+              <div className="text-slate-800">Total</div>
+              <div className="text-right text-slate-900">{section.total.fy19}</div>
+              <div className="text-right text-slate-900">{section.total.fy20}</div>
+              <div className="text-right text-slate-700">{section.total.vs}</div>
+            </motion.div>
+          </div>
+        ))}
+      </div>
 
       <motion.div
         variants={rowVariants}
-        className="mt-1 grid grid-cols-[1fr_70px_70px_50px] items-center border-t border-slate-200 pt-1 text-[12px] font-semibold"
+        className="mt-2 grid grid-cols-[1fr_64px_64px_44px] items-center border-t border-slate-200 pt-2 text-[11px] font-semibold"
       >
         <div className="text-slate-900">Total</div>
         <div className="text-right text-slate-900">428 tCO2</div>
@@ -244,6 +246,7 @@ function EmissionsFrame() {
     </motion.div>
   );
 }
+
 
 /**
  * Waterfall chart implemented with Recharts (stacked bars).
@@ -321,30 +324,6 @@ function prepareWaterfall(data: typeof RAW) {
   return out;
 }
 
-/** custom label renderer for LabelList (avoids using formatter signature) */
-function renderLabel(props: any) {
-  const { x, y, value, payload } = props;
-  if (value == null || value === 0) return null;
-  const isTotal = !!payload?.isTotal;
-  const labelText = `${value} tCO2`;
-
-  // place total labels a little inset; adjustments slightly above bar
-  const dy = isTotal ? -8 : -8;
-
-  return (
-    <text
-      x={x}
-      y={y + dy}
-      fill={COLORS.totalText}
-      fontSize={11}
-      fontWeight={600}
-      textAnchor="middle"
-      style={{ pointerEvents: 'none' }}
-    >
-      {labelText}
-    </text>
-  );
-}
 
 function EmissionsWaterfallFrame() {
   const data = useMemo(() => prepareWaterfall(RAW), []);
@@ -357,30 +336,31 @@ function EmissionsWaterfallFrame() {
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36 }}
-      className="w-[500px] max-w-[500px] rounded-md bg-white p-2"
+      transition={{ duration: 0.28 }}
+      className="w-[460px] max-w-[100%] rounded-md bg-white p-2 ring-1 ring-slate-100 shadow-sm"
       aria-label="Emissions waterfall frame"
     >
-      <div className="mb-2 text-[11px] font-semibold text-slate-900">
+      <div className="mb-1 text-[11px] font-semibold text-slate-900">
         Total emission per waterfall
       </div>
 
-      <div style={{ width: '100%', height: 220 }}>
+      <div style={{ width: '100%', height: 180 }}>
         <ResponsiveContainer>
-          <BarChart data={data} margin={{ top: 8, right: 6, left: 6, bottom: 8 }}>
-            <CartesianGrid stroke={COLORS.grid} vertical={false} strokeDasharray="3 6" />
+          <BarChart data={data} margin={{ top: 6, right: 6, left: 6, bottom: 6 }}>
+            <CartesianGrid stroke={COLORS.grid} vertical={false} strokeDasharray="2 6" />
             <XAxis
               dataKey="name"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10, fill: COLORS.axis }}
+              tick={{ fontSize: 9, fill: COLORS.axis }}
               interval={0}
+              height={24}
             />
             <YAxis
               domain={[0, yMax]}
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 10, fill: COLORS.axis }}
+              tick={{ fontSize: 9, fill: COLORS.axis }}
               ticks={[
                 0,
                 Math.round(yMax * 0.25),
@@ -392,7 +372,7 @@ function EmissionsWaterfallFrame() {
 
             <Tooltip
               formatter={(v: any) => [`${v} tCO2`]}
-              wrapperStyle={{ fontSize: 12 }}
+              wrapperStyle={{ fontSize: 11 }}
               contentStyle={{ padding: '6px 8px', borderRadius: 6 }}
             />
 
@@ -404,16 +384,14 @@ function EmissionsWaterfallFrame() {
               dataKey="val"
               stackId="a"
               isAnimationActive={true}
-              animationDuration={900}
-              barSize={20}
-              radius={[3, 3, 0, 0]}
+              animationDuration={700}
+              barSize={14}
+              radius={[4, 4, 0, 0]}
               label={undefined}
             >
-              {/* Use LabelList with content renderer instead of formatter */}
-              <LabelList content={renderLabel} />
+              {/* <LabelList content={renderLabel} /> */}
 
               {data.map((d, i) => {
-                // pick color: totals use muted tall block; adjustments use green
                 const color = d.isTotal ? COLORS.baseline : COLORS.positive;
                 return <Cell key={`cell-${i}`} fill={color} />;
               })}
@@ -422,21 +400,21 @@ function EmissionsWaterfallFrame() {
         </ResponsiveContainer>
       </div>
 
-      {/* tiny minimal footer legend aligned left */}
+      {/* compact footer legend */}
       <div className="mt-2 flex items-center gap-3 text-[10px] text-slate-600">
         <div className="flex items-center gap-1">
           <span
-            className="inline-block h-3 w-3 rounded-sm"
+            className="inline-block h-2.5 w-2.5 rounded-sm"
             style={{ background: COLORS.baseline }}
           />
-          <span>FY totals</span>
+          <span className="text-[10px]">FY totals</span>
         </div>
         <div className="flex items-center gap-1">
           <span
-            className="inline-block h-3 w-3 rounded-sm"
+            className="inline-block h-2.5 w-2.5 rounded-sm"
             style={{ background: COLORS.positive }}
           />
-          <span>Adjustments</span>
+          <span className="text-[10px]">Adjustments</span>
         </div>
       </div>
     </motion.div>

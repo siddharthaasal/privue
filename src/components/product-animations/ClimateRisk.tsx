@@ -47,25 +47,26 @@ function Frame1ClimateRisk() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.25 }}
+      className="w-full max-w-[440px] rounded-md bg-white/95 p-3 shadow-sm ring-1 ring-slate-200/60 backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[14px] font-medium text-slate-900">Climate Risk Assessment</div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-800">
+        Climate Risk Assessment
+      </div>
 
-      <p className="mb-4 text-[11px] leading-relaxed text-slate-700">
-        The climate risk assessment shows a generally well-positioned organization with a strong
-        climate resilience score (72/100). Most locations have manageable risk levels and effective
-        adaptation plans, though coastal sites show higher exposure.
+      <p className="mb-3 text-[10px] leading-snug text-slate-600">
+        The assessment shows resilience score <span className="font-medium text-slate-800">72/100</span>.
+        Most sites have manageable risk levels and adaptation plans, though coastal areas show higher exposure.
       </p>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-3 gap-2"
+        className="grid grid-cols-3 gap-1.5"
       >
         {categories.map((c) => (
           <CategoryCard key={c.title} title={c.title} level={c.level} />
@@ -74,6 +75,7 @@ function Frame1ClimateRisk() {
     </motion.div>
   );
 }
+
 
 /**
  * Frame2: Locations of Interest (row-wise stagger fill)
@@ -123,10 +125,11 @@ const rowVariants: Variants = {
 };
 
 function riskTextClass(level: LocationRow['riskScore']) {
-  if (level === 'High') return 'text-rose-600 font-medium';
-  if (level === 'Moderate') return 'text-amber-600 font-medium';
-  return 'text-emerald-600 font-medium';
+  if (level === 'High') return 'text-rose-600 font-semibold text-[10px]';
+  if (level === 'Moderate') return 'text-amber-600 font-medium text-[10px]';
+  return 'text-emerald-600 font-medium text-[10px]';
 }
+
 
 /* Minimalized Frame 2: Locations of Interest (no overflow, colored text risk) */
 export function Frame2LocationsOfInterestMinimal() {
@@ -144,7 +147,7 @@ export function Frame2LocationsOfInterestMinimal() {
       <div className="w-full">
         <table className="w-full table-auto border-collapse">
           <thead>
-            <tr className="text-left text-[11px] font-normal text-gray-600">
+            <tr className="text-left text-[10px] font-normal text-gray-600">
               <th className="py-2 pr-2">Location</th>
               <th className="py-2 pr-2">Type</th>
               <th className="py-2 pr-2">Risk</th>
@@ -213,7 +216,7 @@ function polygonD(pointsStr: string) {
 }
 
 export function Frame3ClimateRadar({
-  size = 240,
+  size = 220,
   maxValue = 4,
 }: {
   size?: number;
@@ -221,14 +224,14 @@ export function Frame3ClimateRadar({
 }) {
   // labels and values (target = outer ring, current = teal)
   const labels = [
-    'Physical Risk Assessment',
-    'Transition Risk Management',
-    'Climate Adaptation Planning',
-    'Carbon Management',
-    'Supply Chain Resilience',
-    'Extreme Weather Preparedness',
-    'Climate Risk Governance',
-    'Climate Scenario Planning',
+    'Physical Risk',
+    'Transition Mgmt',
+    'Adaptation Planning',
+    'Carbon Mgmt',
+    'Supply Resilience',
+    'Extreme Weather',
+    'Governance',
+    'Scenario Planning',
   ];
 
   // target = full outer ring
@@ -241,7 +244,8 @@ export function Frame3ClimateRadar({
   const height = size;
   const cx = width / 2;
   const cy = height / 2;
-  const radius = Math.min(width, height) / 2 - 30; // leave space for labels
+  // reduced padding so chart fills area more crisply
+  const radius = Math.min(width, height) / 2 - 22;
 
   const stepAngle = 360 / labels.length;
   const targetPts = valuesToPoints(targetValues, maxValue, cx, cy, radius);
@@ -249,24 +253,32 @@ export function Frame3ClimateRadar({
   const targetD = polygonD(targetPts);
   const currentD = polygonD(currentPts);
 
-  // choose subset of labels to avoid overlap (aim ~6 labels)
-  const maxLabelsToShow = 6;
+  // show slightly fewer labels so text doesn't crowd (show ~5)
+  const maxLabelsToShow = 5;
   const labelStep = Math.max(1, Math.ceil(labels.length / maxLabelsToShow));
   const labelIndices = labels.map((_, i) => i).filter((i) => i % labelStep === 0);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.22 }}
+      className="w-full max-w-[420px] rounded-md bg-white/95 p-3 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
       aria-live="polite"
+      role="region"
+      aria-label="Risk Assessment Profile"
     >
-      <div className="mb-3 text-[14px] font-semibold text-slate-900">Risk Assessment Profile</div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-800">Risk Assessment Profile</div>
 
-      <div className="flex flex-col justify-center">
-        <svg width="100%" height={size} viewBox={`0 0 ${width} ${height}`} role="img">
-          {/* concentric rings */}
+      <div className="flex flex-col items-center">
+        <svg
+          width="100%"
+          height={size}
+          viewBox={`0 0 ${width} ${height}`}
+          role="img"
+          aria-hidden={false}
+        >
+          {/* concentric rings - thinner */}
           {[1, 2, 3, 4].map((lvl) => (
             <circle
               key={lvl}
@@ -275,38 +287,38 @@ export function Frame3ClimateRadar({
               r={(lvl / maxValue) * radius}
               fill="none"
               stroke="#eef2f7"
-              strokeWidth={1}
+              strokeWidth={0.9}
             />
           ))}
 
-          {/* radial axes */}
+          {/* radial axes - subtle */}
           {labels.map((_, i) => {
             const { x, y } = polarToCartesian(cx, cy, radius, i * stepAngle);
-            return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="#f1f5f9" strokeWidth={1} />;
+            return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="#f1f5f9" strokeWidth={0.8} />;
           })}
 
-          {/* target polygon (static, orange) */}
+          {/* target polygon (muted orange) */}
           <path
             d={targetD}
             fill="#f9731650"
             stroke="#f97316"
-            strokeWidth={1.4}
+            strokeWidth={1}
             strokeLinejoin="round"
             strokeLinecap="round"
           />
 
-          {/* animated current polygon (teal) */}
+          {/* animated current polygon (teal) - slightly thinner, faster */}
           <motion.g
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.86, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: `${cx}px ${cy}px` }}
           >
             <path
               d={currentD}
-              fill="#05966966"
+              fill="#05966955"
               stroke="#059669"
-              strokeWidth={1.2}
+              strokeWidth={1}
               strokeLinejoin="round"
             />
 
@@ -314,45 +326,47 @@ export function Frame3ClimateRadar({
               d={currentD}
               fill="none"
               stroke="#047857"
-              strokeWidth={1.4}
+              strokeWidth={1.2}
               strokeLinejoin="round"
-              strokeDasharray="800"
-              strokeDashoffset={800}
+              strokeDasharray="600"
+              strokeDashoffset="600"
               animate={{ strokeDashoffset: 0 }}
-              transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             />
           </motion.g>
 
-          {/* selective labels (radial rotation for readability) */}
+          {/* selective labels (radial rotation for readability). smaller font */}
           {labelIndices.map((i) => {
             const ang = i * stepAngle;
-            const pos = polarToCartesian(cx, cy, radius + 18, ang);
+            const pos = polarToCartesian(cx, cy, radius + 14, ang);
             let rot = ang;
             if (ang > 90 && ang < 270) rot = ang + 180; // flip upside-down labels
             return (
               <text
                 key={i}
                 transform={`translate(${pos.x}, ${pos.y}) rotate(${rot})`}
-                fontSize={9}
+                fontSize={8}
                 fill="#374151"
                 textAnchor="middle"
                 alignmentBaseline="middle"
+                style={{ userSelect: 'none' }}
               >
                 {labels[i]}
               </text>
             );
           })}
         </svg>
-        {/* legend rendered below the SVG so it never overlaps */}
-        <div className="mt-3 flex items-center justify-center gap-4">
+
+        {/* legend */}
+        <div className="mt-2 flex items-center gap-3">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full" style={{ background: '#f97316' }} />
-            <span className="text-[10px] text-slate-800">Target State</span>
+            <span className="text-[9px] text-slate-800">Target</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full" style={{ background: '#059669' }} />
-            <span className="text-[10px] text-slate-800">Current State</span>
+            <span className="text-[9px] text-slate-800">Current</span>
           </div>
         </div>
       </div>
@@ -360,180 +374,117 @@ export function Frame3ClimateRadar({
   );
 }
 
+
 /**
  * Frame4RiskOverTime
  * - compact chart designed to sit inside max-w-[500px]
  * - each series animates in (path draw + points scale)
  */
 
-type Series = {
-  name: string;
-  color: string;
-  values: number[]; // mapped 0..1
-};
+
 
 export function Frame4RiskOverTime({
   width = 520,
-  height = 260,
+  height = 220,
   years = [2025, 2027, 2029, 2031, 2033, 2035, 2037, 2039, 2041, 2043, 2045],
 }: {
   width?: number;
   height?: number;
   years?: number[];
 }) {
-  // approximate normalized values (0..1) matching visual decline in the screenshot
+  type Series = { name: string; color: string; values: number[] };
+
   const series: Series[] = [
-    {
-      name: 'Flood',
-      color: '#2563eb',
-      values: [0.63, 0.57, 0.52, 0.46, 0.4, 0.34, 0.27, 0.2, 0.14, 0.1, 0.06],
-    },
-    {
-      name: 'Drought',
-      color: '#f59e0b',
-      values: [0.45, 0.39, 0.34, 0.28, 0.22, 0.17, 0.13, 0.09, 0.06, 0.04, 0.03],
-    },
-    {
-      name: 'Heatwave',
-      color: '#ef4444',
-      values: [0.68, 0.62, 0.56, 0.49, 0.43, 0.36, 0.28, 0.21, 0.15, 0.11, 0.09],
-    },
-    {
-      name: 'Cyclone',
-      color: '#7c3aed',
-      values: [0.6, 0.54, 0.49, 0.44, 0.37, 0.31, 0.24, 0.17, 0.12, 0.08, 0.05],
-    },
-    {
-      name: 'Coastal Inundation',
-      color: '#2dd4bf',
-      values: [0.78, 0.72, 0.66, 0.59, 0.51, 0.43, 0.34, 0.26, 0.2, 0.15, 0.12],
-    },
-    {
-      name: 'Water Scarcity',
-      color: '#f97316',
-      values: [0.42, 0.36, 0.3, 0.25, 0.2, 0.15, 0.12, 0.09, 0.06, 0.05, 0.03],
-    },
+    { name: 'Flood', color: '#2563eb', values: [0.63, 0.57, 0.52, 0.46, 0.4, 0.34, 0.27, 0.2, 0.14, 0.1, 0.06] },
+    { name: 'Drought', color: '#f59e0b', values: [0.45, 0.39, 0.34, 0.28, 0.22, 0.17, 0.13, 0.09, 0.06, 0.04, 0.03] },
+    { name: 'Heatwave', color: '#ef4444', values: [0.68, 0.62, 0.56, 0.49, 0.43, 0.36, 0.28, 0.21, 0.15, 0.11, 0.09] },
+    { name: 'Cyclone', color: '#7c3aed', values: [0.6, 0.54, 0.49, 0.44, 0.37, 0.31, 0.24, 0.17, 0.12, 0.08, 0.05] },
+    { name: 'Coastal Inundation', color: '#2dd4bf', values: [0.78, 0.72, 0.66, 0.59, 0.51, 0.43, 0.34, 0.26, 0.2, 0.15, 0.12] },
+    { name: 'Water Scarcity', color: '#f97316', values: [0.42, 0.36, 0.3, 0.25, 0.2, 0.15, 0.12, 0.09, 0.06, 0.05, 0.03] },
   ];
 
-  // chart margins and plotting rect
-  const margin = { top: 18, right: 12, bottom: 48, left: 36 };
+  // tighter margins so chart uses vertical space more efficiently
+  const margin = { top: 12, right: 10, bottom: 36, left: 36 };
   const plotW = width - margin.left - margin.right;
   const plotH = height - margin.top - margin.bottom;
-
   const xStep = plotW / Math.max(1, years.length - 1);
 
-  // helpers to map data -> svg coordinates
   const xFor = (i: number) => margin.left + i * xStep;
   const yFor = (v: number) => margin.top + (1 - Math.max(0, Math.min(1, v))) * plotH;
 
-  // build an SVG path string from values
-  const buildPath = (vals: number[]) => {
-    return vals
-      .map((v, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(v).toFixed(2)}`)
-      .join(' ');
-  };
+  const buildPath = (vals: number[]) =>
+    vals.map((v, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(v).toFixed(2)}`).join(' ');
 
-  // small tick lines / y labels (0 .. 1)
   const yTicks = [0, 0.25, 0.5, 0.75, 1];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-3 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.28 }}
+      className="w-full max-w-[480px] rounded-md bg-white/95 p-2 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[14px] font-semibold text-slate-900">Risk Over Time</div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-800">Risk Over Time</div>
 
       <div className="flex">
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          width="100%"
-          height={height}
-          role="img"
-          aria-label="Risk over time chart"
-        >
-          {/* y axis lines and labels */}
+        <svg viewBox={`0 0 ${width} ${height}`} width="100%" height={height} role="img" aria-label="Risk over time">
+          {/* y axis lines & labels (thinner) */}
           {yTicks.map((t, i) => {
             const y = yFor(t);
             return (
               <g key={i}>
-                <line
-                  x1={margin.left}
-                  x2={width - margin.right}
-                  y1={y}
-                  y2={y}
-                  stroke="#f1f5f9"
-                  strokeWidth={1}
-                />
-                <text x={8} y={y + 4} fontSize={10} fill="#6b7280">
+                <line x1={margin.left} x2={width - margin.right} y1={y} y2={y} stroke="#f1f5f9" strokeWidth={0.9} />
+                <text x={8} y={y + 4} fontSize={9} fill="#6b7280">
                   {t.toFixed(2)}
                 </text>
               </g>
             );
           })}
 
-          {/* x axis baseline */}
-          <line
-            x1={margin.left}
-            x2={width - margin.right}
-            y1={height - margin.bottom}
-            y2={height - margin.bottom}
-            stroke="#e6e9ed"
-          />
+          {/* x baseline */}
+          <line x1={margin.left} x2={width - margin.right} y1={height - margin.bottom} y2={height - margin.bottom} stroke="#e6e9ed" strokeWidth={1} />
 
-          {/* x labels (years) - show all but small text */}
+          {/* x labels */}
           {years.map((yr, i) => (
-            <text
-              key={yr}
-              x={xFor(i)}
-              y={height - margin.bottom + 18}
-              fontSize={10}
-              fill="#6b7280"
-              textAnchor="middle"
-            >
+            <text key={yr} x={xFor(i)} y={height - margin.bottom + 18} fontSize={9} fill="#6b7280" textAnchor="middle">
               {yr}
             </text>
           ))}
 
-          {/* series: draw filled points + animated path */}
+          {/* series */}
           {series.map((s, si) => {
             const pathD = buildPath(s.values);
-            const delay = si * 0.14; // stagger series animation
+            const delay = si * 0.12;
             return (
               <g key={s.name}>
-                {/* small circles (animated pop) */}
+                {/* smaller, subtler points */}
                 {s.values.map((v, vi) => (
                   <motion.circle
                     key={vi}
                     cx={xFor(vi)}
                     cy={yFor(v)}
-                    r={2.5}
+                    r={1.8}
                     fill="#fff"
                     stroke={s.color}
-                    strokeWidth={1}
+                    strokeWidth={0.9}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{
-                      delay: delay + 0.6 + vi * 0.02,
-                      duration: 0.28,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
+                    transition={{ delay: delay + 0.45 + vi * 0.01, duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                   />
                 ))}
 
-                {/* animated stroked path drawing (no fill) */}
+                {/* thinner path with quicker draw */}
                 <motion.path
                   d={pathD}
                   fill="none"
                   stroke={s.color}
-                  strokeWidth={2}
+                  strokeWidth={1.4}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.0, delay, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
                 />
               </g>
             );
@@ -541,18 +492,19 @@ export function Frame4RiskOverTime({
         </svg>
       </div>
 
-      {/* legend below the chart (spaced out) */}
-      <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+      {/* compact legend */}
+      <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
         {series.map((s) => (
           <div key={s.name} className="flex items-center gap-2 text-slate-800">
-            <span style={{ width: 6, height: 6, background: s.color, borderRadius: 999 }} />
-            <span className="text-[10px]">{s.name}</span>
+            <span style={{ width: 8, height: 8, background: s.color, borderRadius: 999 }} />
+            <span className="text-[9px]">{s.name}</span>
           </div>
         ))}
       </div>
     </motion.div>
   );
 }
+
 
 export default function ClimateRisk() {
   type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';
@@ -578,7 +530,7 @@ export default function ClimateRisk() {
   }, [step]);
 
   // data URL embedded directly so the component doesn't rely on external path
-  const bgUrl = '/module-animations/adverse-news-bg.png';
+  const bgUrl = '/module-animations/climate-risk-bg.png';
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg bg-white">
       <div className="absolute inset-0">

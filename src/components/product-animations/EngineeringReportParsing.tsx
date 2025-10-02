@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
+import { clsx } from 'clsx';
 
 /* ------------------------
   Types
@@ -32,38 +33,38 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.28 }}
+        transition={{ duration: 0.18 }}
       >
-        <div className="w-full max-w-[500px] space-y-4">
-          <div className="w-full rounded-lg border border-slate-200/60 bg-white/95 p-5 shadow-sm">
-            <div className="mb-3 text-center">
-              <div className="text-[17px] font-semibold text-slate-900">Upload file</div>
-              <div className="mt-1 text-[12.5px] text-slate-500">
-                Drag or drop your files here or click to upload
+        <div className="w-full max-w-[420px] space-y-2">
+          <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
+            <div className="mb-2 text-left">
+              <div className="text-[11px] font-medium text-slate-900">Upload file</div>
+              <div className="mt-0.5 text-[10px] text-slate-500">
+                Drag or drop your insurance policy here or click to upload
               </div>
             </div>
 
             <div className="flex justify-center">
-              <div className="relative flex w-full max-w-[360px] items-center justify-center">
+              <div className="relative flex w-full max-w-[320px] items-center justify-center">
                 <motion.div
                   variants={boxVariants}
                   animate={stage === 'dropping' ? 'dropActive' : 'idle'}
-                  className="flex h-36 w-52 items-center justify-center rounded-lg border-2 border-dashed border-slate-200"
-                  style={{ background: 'rgba(255,255,255,0.9)' }}
+                  className="flex h-28 w-44 items-center justify-center rounded-md border border-dashed border-slate-200"
+                  style={{ background: 'rgba(255,255,255,0.95)' }}
                 >
-                  <div className="flex h-24 w-40 items-center justify-center rounded-md bg-white shadow-[0_10px_20px_rgba(2,6,23,0.04)]">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <div className="flex h-20 w-36 items-center justify-center rounded-sm bg-white shadow-[0_6px_12px_rgba(2,6,23,0.03)]">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                       <path
                         d="M12 3v10"
                         stroke="#9ca3af"
-                        strokeWidth="1.6"
+                        strokeWidth="1.4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                       <path
                         d="M8 7l4-4 4 4"
                         stroke="#9ca3af"
-                        strokeWidth="1.6"
+                        strokeWidth="1.4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -74,7 +75,7 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                         height="6"
                         rx="1"
                         stroke="#e6e9ed"
-                        strokeWidth="1.2"
+                        strokeWidth="1.0"
                         fill="#fff"
                       />
                     </svg>
@@ -90,74 +91,68 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                         ? { opacity: 0.95 }
                         : { opacity: 0 }
                   }
-                  transition={{ duration: 0.48 }}
-                  className="absolute z-20 flex h-26 w-48 items-center gap-3 rounded-lg border bg-white px-3 shadow-[0_10px_30px_rgba(2,6,23,0.06)]"
-                  style={{ left: '5.6rem' }}
+                  transition={{ duration: 0.36 }}
+                  className="absolute z-20 flex h-20 w-44 items-center gap-2 rounded-md border bg-white px-2"
+                  style={{ left: '4.6rem' }}
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md border bg-slate-50">
-                    <svg width="18" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-sm border bg-slate-50">
+                    <svg width="14" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                       <path
                         d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
                         stroke="#374151"
-                        strokeWidth="1.2"
+                        strokeWidth="1"
                         strokeLinejoin="round"
                       />
-                      <path
-                        d="M13 2v6h6"
-                        stroke="#374151"
-                        strokeWidth="1.2"
-                        strokeLinejoin="round"
-                      />
+                      <path d="M13 2v6h6" stroke="#374151" strokeWidth="1" strokeLinejoin="round" />
                     </svg>
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[13px] font-medium text-slate-900">
+                    <div className="truncate text-[11.5px] font-medium text-slate-900">
                       engineering_report.pdf
                     </div>
-                    <div className="text-[11px] text-slate-500">1.2 MB</div>
+                    <div className="text-[10px] text-slate-500">1.2 MB</div>
                   </div>
 
-                  <div className="text-[12px] text-slate-500">
+                  <div className="text-[10.5px] text-slate-500">
                     {stage === 'uploading' ? `${uploadPct}%` : ''}
                   </div>
                 </motion.div>
               </div>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-3">
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{
                   opacity: stage === 'uploading' || stage === 'done' ? 1 : 0,
                   height: stage === 'uploading' || stage === 'done' ? 'auto' : 0,
                 }}
-                transition={{ duration: 0.24 }}
+                transition={{ duration: 0.18 }}
               >
-                <div className="mb-2 flex items-center justify-between">
-                  <div className="text-[12px] text-slate-700">
+                <div className="mb-1 flex items-center justify-between">
+                  <div className="text-[10px] text-slate-700">
                     {stage === 'uploading' ? 'Uploading' : stage === 'done' ? 'Completed' : ''}
                   </div>
-                  <div className="text-[12px] font-medium text-slate-700">
+                  <div className="text-[10px] font-medium text-slate-700">
                     {stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : ''}
                   </div>
                 </div>
 
-                <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-                  {/* reduced thickness */}
+                <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
                   <motion.div
                     style={{
                       height: '100%',
                       borderRadius: 999,
                       background: uploadGradient,
-                      boxShadow: '0 6px 16px rgba(92,124,250,0.08)',
+                      boxShadow: '0 4px 10px rgba(92,124,250,0.06)',
                     }}
                     initial={{ width: 0 }}
                     animate={{
                       width:
                         stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : 0,
                     }}
-                    transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.6 }}
+                    transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
                   />
                 </div>
               </motion.div>
@@ -166,25 +161,25 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="mt-3 flex items-center gap-3"
+                  transition={{ duration: 0.12 }}
+                  className="mt-2 flex items-center gap-2"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
                       <path
                         d="M20 6L9 17l-5-5"
                         stroke="#059669"
-                        strokeWidth="2"
+                        strokeWidth="1.6"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[13px] font-medium text-slate-900">
+                    <div className="text-[11.5px] font-medium text-slate-900">
                       Processing complete
                     </div>
-                    <div className="text-[12px] text-slate-500">
+                    <div className="text-[10px] text-slate-500">
                       Analysis finished — results are ready.
                     </div>
                   </div>
@@ -220,7 +215,7 @@ export function Frame2ProcessingMinimal({
       transition={{ duration: 0.18 }}
     >
       <div className="w-full max-w-[420px] rounded-lg border bg-white p-3 shadow-sm">
-        <div className="mb-2 text-[13px] font-medium text-slate-800">Processing pipeline</div>
+        <div className="mb-2 text-[11px] font-medium text-slate-800">Processing pipeline</div>
 
         <div className="flex flex-col gap-2">
           {labels.map((label, idx) => {
@@ -235,14 +230,14 @@ export function Frame2ProcessingMinimal({
                 key={label}
                 className="flex items-center justify-between gap-3 px-2 py-2"
               >
-                <div className="truncate text-[13px]" style={{ color: '#0f1724' }}>
+                <div className="truncate text-[10px]" style={{ color: '#0f1724' }}>
                   {label}
                 </div>
 
                 <div className="flex min-w-[56px] items-center justify-end">
                   {s === 'done' ? (
-                    <div className="inline-flex items-center gap-2 text-[12px]">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <div className="inline-flex items-center gap-2 text-[10px]">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
                         <path
                           d="M20 6L9 17l-5-5"
                           stroke={privue[700]}
@@ -254,11 +249,11 @@ export function Frame2ProcessingMinimal({
                       <span className="text-slate-500">Done</span>
                     </div>
                   ) : s === 'active' ? (
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 text-[10px]">
                       <svg
                         className="animate-spin"
-                        width="14"
-                        height="14"
+                        width="12"
+                        height="12"
                         viewBox="0 0 24 24"
                         aria-hidden
                       >
@@ -283,9 +278,9 @@ export function Frame2ProcessingMinimal({
                       <span className="text-slate-500">Running</span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 text-[12px]">
+                    <div className="flex items-center gap-2 text-[10px]">
                       <div
-                        className="h-3 w-3 rounded-full bg-slate-200"
+                        className="h-2 w-2 rounded-full bg-slate-200"
                         style={{ boxShadow: 'inset 0 0 0 4px rgba(15,23,42,0.02)' }}
                       />
                       <span className="text-slate-400">Pending</span>
@@ -316,11 +311,11 @@ export function Frame3Chat({
 
   useEffect(() => {
     const t0 = window.setTimeout(() => setPhase('userShown'), 0);
-    const t1 = window.setTimeout(() => setPhase('incomingTyping'), 120);
-    const t2 = window.setTimeout(() => setPhase('answerShown'), 120 + 120 + 180);
+    const t1 = window.setTimeout(() => setPhase('incomingTyping'), 90);
+    const t2 = window.setTimeout(() => setPhase('answerShown'), 90 + 100 + 140);
 
-    const staggerDelay = 220;
-    const revealDuration = 360;
+    const staggerDelay = 180;
+    const revealDuration = 300;
     const ANSWER_PARAGRAPHS = [
       'The Odisha Power Generation Corporation (OPGC) has four units with the following commissioning dates and ages as of 2024:',
       '• Unit 1: Commissioned on June 2, 1994 (29 years old)',
@@ -329,15 +324,15 @@ export function Frame3Chat({
       '• Unit 4: Commissioned in 2019 (approximately 5 years old)',
     ];
 
-    const estimatedRevealMs = staggerDelay * ANSWER_PARAGRAPHS.length + revealDuration + 300;
-    const autoClickDelay = Math.max(estimatedRevealMs, autoProceedDelay) + 120;
+    const estimatedRevealMs = staggerDelay * ANSWER_PARAGRAPHS.length + revealDuration + 200;
+    const autoClickDelay = Math.max(estimatedRevealMs, autoProceedDelay) + 80;
 
     const tAuto = window.setTimeout(() => {
       setButtonPressed(true);
       const tPress = window.setTimeout(() => {
         setButtonPressed(false);
         onAddToNotes();
-      }, 260);
+      }, 200);
       (window as any).__privue_temp = tPress;
     }, autoClickDelay);
 
@@ -356,11 +351,11 @@ export function Frame3Chat({
   const formattedTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   const containerVariants: Variants = {
-    visible: { transition: { staggerChildren: 0.22, delayChildren: 0.08 } },
+    visible: { transition: { staggerChildren: 0.18, delayChildren: 0.06 } },
   };
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.36, ease: 'easeOut' } },
+    hidden: { opacity: 0, y: 6 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
   };
 
   return (
@@ -368,31 +363,31 @@ export function Frame3Chat({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.28 }}
-      className="w-[500px] rounded-lg bg-white/95 p-3 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.22 }}
+      className="w-[460px] rounded-md bg-white/95 p-2.5 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
       aria-live="polite"
+      role="region"
+      aria-label="Engineering report assistant"
     >
-      <div className="mb-3 text-[13px] font-semibold text-slate-900">
-        Engineering Report Assistant
-      </div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-900">Engineering Report Assistant</div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         {(phase === 'userShown' || phase === 'incomingTyping' || phase === 'answerShown') && (
-          <div className="max-w-[86%] self-end">
-            <div className="bg-privue-700 inline-block rounded-[12px] px-3 py-2 text-[13px] text-white shadow-[0_6px_18px_rgba(76,110,245,0.08)]">
+          <div className="max-w-[80%] self-end">
+            <div className="bg-privue-700 inline-block rounded-[10px] px-2.5 py-1.5 text-[12px] text-white shadow-[0_6px_16px_rgba(76,110,245,0.06)]">
               What is the age of the plant?
             </div>
-            <div className="mt-1 text-right text-[10px] text-slate-500">{formattedTime}</div>
+            <div className="mt-0.5 text-right text-[9px] text-slate-500">{formattedTime}</div>
           </div>
         )}
 
         {phase === 'incomingTyping' && (
           <div className="self-start">
             <div
-              className="inline-flex items-center rounded-xl border bg-slate-50 px-2 py-1"
+              className="inline-flex items-center rounded-lg border bg-slate-50 px-2 py-1"
               style={{ borderColor: 'rgba(15,23,36,0.03)' }}
             >
-              <div className="text-[11px] text-slate-500">Typing…</div>
+              <div className="text-[10px] text-slate-500">Typing…</div>
             </div>
           </div>
         )}
@@ -400,34 +395,34 @@ export function Frame3Chat({
         {phase === 'answerShown' && (
           <div className="max-w-full self-start">
             <div
-              className="rounded-[12px] border bg-white p-3"
+              className="rounded-lg border bg-white p-2"
               style={{ borderColor: 'rgba(15,23,36,0.04)' }}
             >
               <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
-                className="flex flex-col gap-2 text-[12px] text-[#0f1724]"
+                className="flex flex-col gap-1.5 text-[11px] text-[#0f1724]"
               >
-                <motion.div variants={itemVariants} className="leading-[1.4]">
+                <motion.div variants={itemVariants} className="leading-[1.35]">
                   The Odisha Power Generation Corporation (OPGC) has four units with the following
                   commissioning dates and ages as of 2024:
                 </motion.div>
-                <motion.div variants={itemVariants} className="leading-[1.4]">
+                <motion.div variants={itemVariants} className="leading-[1.35]">
                   • Unit 1: Commissioned on June 2, 1994 (29 years old)
                 </motion.div>
-                <motion.div variants={itemVariants} className="leading-[1.4]">
+                <motion.div variants={itemVariants} className="leading-[1.35]">
                   • Unit 2: Commissioned on October 22, 1995 (28 years old)
                 </motion.div>
-                <motion.div variants={itemVariants} className="leading-[1.4]">
+                <motion.div variants={itemVariants} className="leading-[1.35]">
                   • Unit 3: Commissioned in 2019 (approximately 5 years old)
                 </motion.div>
-                <motion.div variants={itemVariants} className="leading-[1.4]">
+                <motion.div variants={itemVariants} className="leading-[1.35]">
                   • Unit 4: Commissioned in 2019 (approximately 5 years old)
                 </motion.div>
               </motion.div>
 
-              <div className="mt-3 flex justify-end">
+              <div className="mt-2 flex justify-end">
                 <button
                   onClick={() => {
                     setButtonPressed(true);
@@ -436,10 +431,10 @@ export function Frame3Chat({
                       onAddToNotes();
                     }, 160);
                   }}
-                  className={`rounded-md px-3 py-1.5 text-[12px] font-medium text-white transition ${buttonPressed ? 'bg-privue-800 scale-[0.98]' : 'bg-privue-700 hover:bg-privue-800'}`}
+                  className={`rounded-md px-2.5 py-1 text-[11px] font-medium text-white transition-transform ${buttonPressed ? 'bg-privue-800 scale-[0.985]' : 'bg-privue-700 hover:bg-privue-800'}`}
                   style={{ transformOrigin: 'center' }}
                 >
-                  Add to Notes
+                  Add to notes
                 </button>
               </div>
             </div>
@@ -449,6 +444,7 @@ export function Frame3Chat({
     </motion.div>
   );
 }
+
 
 /* ---------- FRAME 4: Saved Notes (minimal cards; new added on TOP with distinct bg) ---------- */
 export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
@@ -470,11 +466,11 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    // show existing notes first, then show a tiny 'Saving...' loader, then pop the new note on top
-    const timersForCleanup: number[] = [];
+    const timers: number[] = [];
 
     const tShowSaving = window.setTimeout(() => {
       setSaving(true);
+
       const tAdd = window.setTimeout(() => {
         const newNote = {
           id: `n${Date.now()}`,
@@ -487,35 +483,33 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
 
         const tClear = window.setTimeout(
           () => setNotes((prev) => prev.map((p) => ({ ...p, isNew: false }))),
-          2200,
+          1800,
         );
-        timersForCleanup.push(tClear as unknown as number);
+        timers.push(tClear as unknown as number);
 
-        // call onComplete after a short delay so top-level can advance / loop
-        const tComplete = window.setTimeout(() => onComplete && onComplete(), 1200);
-        timersForCleanup.push(tComplete as unknown as number);
-      }, 900);
-      timersForCleanup.push(tAdd as unknown as number);
-    }, 600);
+        const tComplete = window.setTimeout(() => onComplete && onComplete(), 900);
+        timers.push(tComplete as unknown as number);
+      }, 700);
+      timers.push(tAdd as unknown as number);
+    }, 480);
 
-    timersForCleanup.push(tShowSaving as unknown as number);
+    timers.push(tShowSaving as unknown as number);
 
-    return () => timersForCleanup.forEach((id) => clearTimeout(id));
+    return () => timers.forEach((id) => clearTimeout(id));
   }, [onComplete]);
-
-  // const itemVariants: Variants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.32, ease: "easeOut" } }, exit: { opacity: 0, transition: { duration: 0.22 } } };
 
   return (
     <motion.div
       key="frame4"
-      initial={false}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.001 }}
-      className="w-[460px] rounded-lg border bg-white p-3 shadow-sm"
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22 }}
+      className="w-[440px] rounded-md bg-white p-2.5 ring-1 ring-slate-100 shadow-sm"
+      aria-label="Saved notes"
     >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <svg className="h-4 w-4" fill="none" stroke={privue[700]} viewBox="0 0 24 24">
+          <svg className="h-4 w-4" fill="none" stroke={privue[700]} viewBox="0 0 24 24" aria-hidden>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -523,7 +517,7 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
               d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v12a2 2 0 01-2 2z"
             />
           </svg>
-          <span className="text-[13px] font-medium text-slate-800">Saved Notes</span>
+          <span className="text-[12px] font-medium text-slate-800">Saved Notes</span>
         </div>
       </div>
 
@@ -531,33 +525,37 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
         {notes.map((note) => (
           <div
             key={note.id}
-            className="rounded-md border p-3"
+            className={clsx(
+              'rounded-md border px-3 py-2',
+              note.isNew ? 'ring-2' : 'ring-0'
+            )}
             style={{
               background: note.isNew
-                ? `linear-gradient(180deg, ${privue[600]}20, ${privue[700]}12)`
+                ? `linear-gradient(180deg, ${privue[600]}12, ${privue[700]}08)`
                 : '#fff',
+              borderColor: note.isNew ? `${privue[600]}40` : 'rgba(15,23,36,0.06)',
+              boxShadow: note.isNew ? '0 6px 18px rgba(76,110,245,0.04)' : undefined,
             }}
           >
-            <div className="text-[13px] font-medium text-slate-800">{note.title}</div>
-            <div className="mt-1 truncate text-[12px] text-slate-600">{note.body}</div>
+            <div className="text-[12px] font-medium text-slate-800 truncate">{note.title}</div>
+            <div className="mt-0.5 text-[11px] text-slate-600 truncate">{note.body}</div>
           </div>
         ))}
 
         {saving && (
-          <div className="mt-2 flex items-center gap-2 text-[13px] text-slate-500">
-            <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" aria-hidden>
+          <div className="mt-1 flex items-center gap-2 text-[11px] text-slate-500">
+            <svg className="animate-spin" width="12" height="12" viewBox="0 0 24 24" aria-hidden>
               <circle
                 cx="12"
                 cy="12"
-                r="10"
-                stroke="rgba(76,110,245,0.18)"
+                r="9"
+                stroke="rgba(76,110,245,0.14)"
                 strokeWidth="2"
                 fill="none"
                 strokeDasharray="40"
-                strokeDashoffset="0"
               />
               <path
-                d="M22 12a10 10 0 00-4-7.9"
+                d="M21 12a9 9 0 00-3.6-6.8"
                 stroke={privue[600]}
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -571,6 +569,7 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
     </motion.div>
   );
 }
+
 
 /* ------------------------
   Top-level orchestration: step1 upload -> step2 processing (all 4 sequential) -> step3 chat -> step4 saved notes

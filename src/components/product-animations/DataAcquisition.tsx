@@ -140,7 +140,13 @@ export default function DataAcquisition({
       {/* background image */}
       <div className="absolute inset-0">
         {/* <img src={bgImage} alt="background" className="w-full h-full object-contain scale-y-125" /> */}
-        <img src={bgImage} alt="background" className="h-full w-full object-contain" />
+        <img src={bgImage} alt="background" className="h-full w-full object-cover" />
+        {/* <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, rgba(248,250,252,0) 70%, rgba(100,116,139,0.35))',
+          }}
+        /> */}
         {/* subtle overlay to keep contrast */}
         <div
           className="absolute inset-0"

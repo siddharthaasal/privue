@@ -93,7 +93,8 @@ function DbNodeInner({ data }: { data?: any }) {
 
                 <ellipse cx="110" cy="108" rx="54" ry="8" fill="rgba(6,10,20,0.06)" />
             </svg> */}
-      <img src="/final-server-stack.png" alt="server-stack" />
+      {/* <img src="/final-server-stack.png" alt="server-stack" /> */}
+      <img src="/test-stack-5.png" alt="server-stack" />
       {/* Label below the svg */}
       <div
         style={{

@@ -766,9 +766,15 @@ export default function FinancialDocumentParsing() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, rgba(237,242,255,0) 50%, rgba(219,228,255,0.4))',
+            background: 'linear-gradient(180deg, rgba(248,250,252,0) 70%, rgba(100,116,139,0.35))',
           }}
         />
+        {/* <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, rgba(237,242,255,0) 50%, rgba(219,228,255,0.4))',
+          }}
+        /> */}
       </div>
 
       <div className="absolute right-6 bottom-6">

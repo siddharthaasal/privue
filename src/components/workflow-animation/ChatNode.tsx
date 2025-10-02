@@ -132,7 +132,7 @@ export function AnimatedChatNodeInner(): any {
   })();
 
   const renderSeverityIcon = (severity: Severity) => {
-    const size = 16;
+    const size = 14;
     if (severity === 'critical')
       return <XCircle size={size} style={{ color: '#ef4444', minWidth: size }} />;
     if (severity === 'warning')
@@ -439,10 +439,10 @@ export function AnimatedChatNodeInner(): any {
                     return (
                       <li
                         key={aidx}
-                        className="acn-list-item-animate flex items-start gap-2"
+                        className="acn-list-item-animate flex items-center gap-2"
                         style={{ animationDelay: `${delayMs}ms` }}
                       >
-                        <div className="mt-[2px]">{renderSeverityIcon(it.severity)}</div>
+                        <div className="mt-[0px]">{renderSeverityIcon(it.severity)}</div>
                         <div className="flex-1">
                           <p className="m-0 text-[12px] leading-[1.35] text-[#0f1724]">{it.text}</p>
                         </div>

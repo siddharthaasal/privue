@@ -539,14 +539,15 @@ export default function RiskAssessmentTour() {
     <div className="relative h-full w-full overflow-hidden rounded-lg bg-white">
       {/* background layer */}
       <div className="absolute inset-0">
-        <img src={bgUrl} alt="background" className="h-full w-full object-contain" />
+        <img src={bgUrl} alt="background" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, rgba(237,242,255,0) 50%, rgba(219,228,255,0.4))',
+            background: 'linear-gradient(180deg, rgba(248,250,252,0) 50%, rgba(100,116,139,0.35))',
           }}
         />
       </div>
+
 
       {/* overlay frames */}
       <AnimatePresence>

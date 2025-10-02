@@ -122,7 +122,14 @@ export default function DealerOnboarding() {
     }, 700) as unknown as number;
   }
 
+  const submittingRef = useRef(false);
+
   function handleSubmitFromForm(values: { name: string; gst: string; mobile: string }) {
+    if (submittingRef.current) {
+      console.log('[Flow] submit ignored — already submitting');
+      return;
+    }
+    submittingRef.current = true;
     console.log('[Flow] form submitted', values);
     const id = `new-${Date.now()}`;
     const newDealer: Dealer = {
@@ -142,8 +149,11 @@ export default function DealerOnboarding() {
       setHighlightId(null);
       setStage('upload');
       startUploadSimulation(id);
+      // clear guard after we've moved to upload stage so future restarts can run
+      setTimeout(() => (submittingRef.current = false), 1000);
     }, UNVERIFIED_DISPLAY_MS);
   }
+
 
   // static file percents (keep per-file values as-is)
   const filePercents = [72, 45, 18];
@@ -383,10 +393,19 @@ const TypingController = (() => {
 
   function subscribe(listener: TypingListener) {
     listeners.set(listener.id, listener);
-    if (finished) listener.onFinished();
+    // If the controller already finished, call onFinished asynchronously
+    // so subscribers don't receive a synchronous immediate submission that
+    // races with other lifecycle code.
+    if (finished) {
+      window.setTimeout(() => {
+        // ensure listener still exists (wasn't unsubscribed)
+        if (listeners.has(listener.id)) listener.onFinished();
+      }, 0);
+    }
     start();
     return () => listeners.delete(listener.id);
   }
+
 
   function teardown() {
     timers.forEach((t) => clearTimeout(t));
@@ -414,21 +433,23 @@ const TypingController = (() => {
    (visual typing driven by the controller; manual fallback button kept)
    -------------------------- */
 
-function DummyFormCompactSlow({
-  onSubmit,
-}: {
-  onSubmit: (values: { name: string; gst: string; mobile: string }) => void;
-}) {
+function DummyFormCompactSlow({ onSubmit }: { onSubmit: (values: { name: string; gst: string; mobile: string }) => void }) {
   const [dealerName, setDealerName] = useState('');
   const [gstin, setGstin] = useState('');
   const [mobile, setMobile] = useState('');
   const [step, setStep] = useState(0);
 
-  // finishedTypingRef used to gate autosubmit (and manual fallback)
+  // add refs to hold current values synchronously
+  const dealerNameRef = useRef('');
+  const gstinRef = useRef('');
+  const mobileRef = useRef('');
   const finishedTypingRef = useRef(false);
-
-  // unique id per mount so we can unsubscribe safely
   const idRef = useRef(`typing-listener-${Math.random().toString(36).slice(2)}`);
+
+  // keep refs in sync whenever state changes (also use them in onUpdate)
+  useEffect(() => { dealerNameRef.current = dealerName; }, [dealerName]);
+  useEffect(() => { gstinRef.current = gstin; }, [gstin]);
+  useEffect(() => { mobileRef.current = mobile; }, [mobile]);
 
   useEffect(() => {
     console.log('[Form] subscribing to TypingController', idRef.current);
@@ -437,16 +458,24 @@ function DummyFormCompactSlow({
       id: idRef.current,
       onUpdate: (fieldIndex, text) => {
         // update the appropriate field and step
-        if (fieldIndex === 0) setDealerName(text);
-        if (fieldIndex === 1) setGstin(text);
-        if (fieldIndex === 2) setMobile(text);
+        if (fieldIndex === 0) {
+          setDealerName(text);
+          dealerNameRef.current = text;
+        }
+        if (fieldIndex === 1) {
+          setGstin(text);
+          gstinRef.current = text;
+        }
+        if (fieldIndex === 2) {
+          setMobile(text);
+          mobileRef.current = text;
+        }
 
-        // compute step progress (0..3)
-        // step = number of fields fully typed or currently typing (approx)
-        const newStep =
-          (dealerName.length > 0 ? 1 : 0) +
-          (gstin.length > 0 ? 1 : 0) +
-          (mobile.length > 0 ? 1 : 0);
+        // compute step deterministically from current values (refs are in-sync)
+        const nameFilled = dealerNameRef.current.length > 0 ? 1 : 0;
+        const gstFilled = gstinRef.current.length > 0 ? 1 : 0;
+        const mobileFilled = mobileRef.current.length > 0 ? 1 : 0;
+        const newStep = nameFilled + gstFilled + mobileFilled;
         setStep((s) => Math.max(s, newStep));
       },
       onFinished: () => {
@@ -458,9 +487,9 @@ function DummyFormCompactSlow({
           if (!finishedTypingRef.current) return;
           console.log('[Form] controller attempting autosubmit');
           onSubmit({
-            name: 'Acme Traders',
-            gst: '27AAEPM1234C1ZQ',
-            mobile: '+91 98765 43210',
+            name: dealerNameRef.current || 'Acme Traders',
+            gst: gstinRef.current || '27AAEPM1234C1ZQ',
+            mobile: mobileRef.current || '+91 98765 43210',
           });
         }, 60);
       },
@@ -470,7 +499,6 @@ function DummyFormCompactSlow({
       console.log('[Form] unsubscribing TypingController', idRef.current);
       unsubscribe();
       // NOTE: we intentionally do NOT teardown the controller here.
-      // The controller is a page-level singleton so the typing continues even across StrictMode remounts.
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -556,7 +584,7 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       return () => clearTimeout(t);
     }
     prevVerifiedRef.current = d.verified;
-     
+
   }, [d.verified]);
 
   const isHighlighted = highlightId === d.id;

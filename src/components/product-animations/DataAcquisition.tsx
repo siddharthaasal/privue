@@ -177,7 +177,7 @@ export default function DataAcquisition({
                   <div className="text-xs font-medium text-slate-800">Data acquisition</div>
                 </div>
 
-                <div className="text-xs text-slate-500">
+                <div className="text-[10px] text-slate-500">
                   {stage === 'docs'
                     ? 'Scanning documents'
                     : stage === 'table_fill'
@@ -281,38 +281,34 @@ export default function DataAcquisition({
                   {stage === 'table_fill' && (
                     <motion.div
                       key="frame-table"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="min-w-[400px]"
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.28 }}
+                      className="min-w-[380px]"
                     >
-                      {/* Larger table filling animation (row-wise) */}
-                      <div className="mb-2 text-xs font-medium text-slate-700">
+                      {/* title */}
+                      <div className="mb-1 text-[10px] font-medium text-slate-700">
                         Imported data preview
                       </div>
 
-                      <div className="overflow-hidden rounded-md border bg-white text-xs">
+                      <div className="overflow-hidden rounded-md border bg-white text-[9px]">
                         <div className="grid grid-cols-3 gap-0">
-                          <div className="border-b px-2 py-1 font-medium">Field</div>
-                          <div className="border-b px-2 py-1 font-medium">Value</div>
-                          <div className="border-b px-2 py-1 font-medium">Status</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Field</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Value</div>
+                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Status</div>
 
                           {tableRows.map((r, i) => (
                             <motion.div
                               key={i}
-                              initial={{ opacity: 0, y: 8 }}
-                              animate={
-                                tableRowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.08, y: 6 }
-                              }
-                              transition={{ duration: 0.36, delay: i * 0.06 }}
-                              className="col-span-3 grid grid-cols-[minmax(100px,140px)_1fr_minmax(60px,90px)] items-center gap-x-1 border-b px-1 py-1"
+                              initial={{ opacity: 0, y: 6 }}
+                              animate={tableRowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 4 }}
+                              transition={{ duration: 0.24, delay: i * 0.045 }}
+                              className="col-span-3 grid grid-cols-[minmax(92px,140px)_1fr_minmax(60px,84px)] items-center gap-x-1 border-b px-1.5 py-0.5"
                             >
-                              <div className="font-normal text-slate-700">{r.k}</div>
-                              <div className="text-slate-800">{tableRowsShown > i ? r.v : '—'}</div>
-                              <div
-                                className={`${tableRowsShown > i ? 'text-emerald-600' : 'text-slate-400'}`}
-                              >
+                              <div className="font-normal text-slate-700 text-[9px] truncate">{r.k}</div>
+                              <div className="text-slate-800 text-[9px] truncate">{tableRowsShown > i ? r.v : '—'}</div>
+                              <div className={`${tableRowsShown > i ? 'text-emerald-600' : 'text-slate-400'} text-[8px] font-medium text-right`}>
                                 {tableRowsShown > i ? 'Imported' : '—'}
                               </div>
                             </motion.div>
@@ -320,29 +316,36 @@ export default function DataAcquisition({
                         </div>
                       </div>
                     </motion.div>
+
                   )}
 
                   {stage === 'done' && (
                     <motion.div
                       key="frame-done"
                       className="max-w-auto"
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.28 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.22 }}
                     >
-                      <div className="text-privue-600 text-sm font-normal">All data acquired</div>
-                      {/* <div className="mt-2 text-xs text-slate-500">Insights ready — refresh view to see final changes</div> */}
+                      <div className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-medium text-emerald-700 ring-1 ring-emerald-100">
+                        <svg
+                          className="h-3 w-3 text-emerald-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        All data acquired
+                      </div>
                     </motion.div>
+
                   )}
                 </AnimatePresence>
               </div>
-
-              {/* footer timestamp */}
-              {/* <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
-                                <div>Last action</div>
-                                <div>{new Date().toLocaleTimeString()}</div>
-                            </div> */}
             </motion.div>
           )}
         </AnimatePresence>

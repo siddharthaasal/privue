@@ -216,7 +216,7 @@ export default function DealerOnboarding() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.995 }}
               transition={{ duration: 0.6 }}
-              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
+              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-md bg-white p-4 shadow-2xl"
             >
               <div className="mb-2 text-xs font-medium">Add Dealer</div>
               <DummyFormCompactSlow onSubmit={handleSubmitFromForm} />
@@ -233,7 +233,7 @@ export default function DealerOnboarding() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.55 }}
-              className="absolute -right-2 -bottom-2 w-[250px] max-w-full rounded-xl bg-white/95 p-3 shadow-lg"
+              className="absolute -right-2 -bottom-2 w-[250px] max-w-full rounded-md bg-white/95 p-3 shadow-lg"
             >
               <div className="text-[13px] font-semibold">New dealer added</div>
               <div className="text-privue-800 mt-1 text-[12px]">Waiting for documents</div>
@@ -247,7 +247,7 @@ export default function DealerOnboarding() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.995 }}
               transition={{ duration: 0.55 }}
-              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
+              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-md bg-white p-4 shadow-2xl"
             >
               <div className="mb-2 text-xs font-medium">Uploading documents</div>
 
@@ -318,7 +318,7 @@ export default function DealerOnboarding() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.5 }}
-              className="absolute -right-2 -bottom-2 w-auto max-w-full rounded-xl bg-white/95 p-3 shadow-lg"
+              className="absolute -right-2 -bottom-2 w-auto max-w-full rounded-md bg-white/95 p-3 shadow-lg"
             >
               <div className="text-right text-[12px] font-semibold text-emerald-600">
                 Dealer verified
@@ -655,12 +655,12 @@ function BackgroundDealersTable({
   highlightId: string | null;
 }) {
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border bg-white/60 backdrop-blur-sm">
+    <div className="h-full w-full overflow-hidden rounded-md border bg-white/60 backdrop-blur-sm">
       <div className="p-4">
         <div className="text-sm font-medium">Dealers</div>
       </div>
 
-      <div className="h-[calc(100%-64px)] overflow-auto">
+      <div className="h-[calc(100%-64px)] overflow-auto scrollbar-hide">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-50 text-slate-600">
             <tr>

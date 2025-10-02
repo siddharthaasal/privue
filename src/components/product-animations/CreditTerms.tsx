@@ -148,7 +148,7 @@ export default function CreditTerms({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="pointer-events-auto absolute right-3 bottom-3 w-auto max-w-[94vw] rounded-2xl border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
+              className="pointer-events-auto absolute right-3 bottom-3 w-auto max-w-[94vw] rounded-md border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
               style={{ fontSize: 12 }}
             >
               {/* header */}
@@ -158,7 +158,7 @@ export default function CreditTerms({
                   <div className="text-xs font-medium text-slate-800"> Underwriting Summary</div>
                 </div>
 
-                <div className="text-xs text-slate-500">
+                <div className="text-[10px] text-slate-500">
                   {stage === 'frame1'
                     ? 'Operational metrics'
                     : stage === 'frame2'

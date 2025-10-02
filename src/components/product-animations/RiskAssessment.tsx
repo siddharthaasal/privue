@@ -24,7 +24,7 @@ function CreditInfoCard() {
       initial={{ opacity: 0, y: 16, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } }}
       exit={{ opacity: 0, y: 12, scale: 0.98 }}
-      className="rounded-lg"
+      className="rounded-md"
     >
       <Card className="w-72 shadow-lg ring-0">
         <CardHeader className="">
@@ -220,7 +220,7 @@ function FinancialSnapshotCard() {
       initial={{ opacity: 0, y: 14, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.42, ease: 'easeOut' } }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      className="rounded-lg"
+      className="rounded-md"
     >
       <Card className="w-72 shadow-lg ring-0">
         <CardHeader className="">
@@ -275,7 +275,7 @@ function ContributoryFactorsCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="rounded-lg"
+      className="rounded-md"
       aria-live="polite"
     >
       <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
@@ -339,7 +339,7 @@ function RiskSignalsCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="rounded-lg"
+      className="rounded-md"
       aria-live="polite"
     >
       <Card className="w-[350px] max-w-[92%] shadow-lg ring-0">
@@ -408,11 +408,11 @@ export default function RiskAssessmentTourWithChart() {
   }, [step]);
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-lg bg-white">
+    <div className="relative h-full w-full overflow-hidden rounded-md bg-white">
       {/* background (unchanged) */}
       <div
         aria-hidden
-        className="absolute inset-0.5 rounded-2xl border border-gray-200 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0.5 rounded-md border border-gray-200 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('${bgUrl.replace(/'/g, "\\'")}')`,
           transform: 'scale(1.02)',

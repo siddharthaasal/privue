@@ -218,7 +218,7 @@ export default function DealerOnboarding() {
               transition={{ duration: 0.6 }}
               className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
             >
-              <div className="mb-2 text-sm font-medium">Add Dealer</div>
+              <div className="mb-2 text-xs font-medium">Add Dealer</div>
               <DummyFormCompactSlow onSubmit={handleSubmitFromForm} />
               <div className="mt-1 text-[10px] text-slate-500">
                 Status: Preparing to add dealer…
@@ -249,29 +249,29 @@ export default function DealerOnboarding() {
               transition={{ duration: 0.55 }}
               className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
             >
-              <div className="mb-2 text-sm font-medium">Uploading documents</div>
+              <div className="mb-2 text-xs font-medium">Uploading documents</div>
 
               <div className="mb-2 flex w-full flex-col gap-2">
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <FileText className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <FileText className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">balance-sheet.pdf</div>
+                    <div className="truncate text-[10px] font-medium">balance-sheet.pdf</div>
                     <div className="text-[10px] text-slate-500">1.2 MB</div>
                   </div>
 
                   {/* <div className="text-[11px] text-slate-500 ml-2">72%</div> */}
                 </div>
 
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <FileSpreadsheet className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <FileSpreadsheet className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">
+                    <div className="truncate text-[10px] font-medium">
                       profit-and-loss-account.xlsx
                     </div>
                     <div className="text-[10px] text-slate-500">840 KB</div>
@@ -280,13 +280,13 @@ export default function DealerOnboarding() {
                   {/* <div className="text-[11px] text-slate-500 ml-2">45%</div> */}
                 </div>
 
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <File className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <File className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">income-tax-detail.docx</div>
+                    <div className="truncate text-[10px] font-medium">income-tax-detail.docx</div>
                     <div className="text-[10px] text-slate-500">320 KB</div>
                   </div>
 
@@ -294,11 +294,12 @@ export default function DealerOnboarding() {
                 </div>
               </div>
 
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                 <div
                   style={{
                     width: `${progress}%`,
-                    background: 'linear-gradient(90deg,#748ffc,#4c6ef5)',
+                    // background: 'linear-gradient(90deg,#748ffc,#4c6ef5)',
+                    background: 'linear-gradient(90deg,#748ffc,#748ffc)',
                   }}
                   className="h-full transition-all duration-200"
                 />

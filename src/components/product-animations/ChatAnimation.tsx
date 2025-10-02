@@ -104,7 +104,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-     
+
   }, [currentIdx]);
 
   const runLifecycle = () => {
@@ -159,12 +159,12 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
     const maxSales = Math.max(...salesValues, 1);
 
     // dimensions
-    const w = 150; // internal drawing width
+    const w = 250; // internal drawing width
     const h = 150; // internal drawing height
     const padding = { top: 6, right: 8, bottom: 18, left: 8 };
     const chartW = w - padding.left - padding.right;
     const chartH = h - padding.top - padding.bottom;
-    const barGap = 16;
+    const barGap = 35;
     const n = data.length || 1;
     const barWidth = Math.max(8, (chartW - barGap * (n - 1)) / n);
 
@@ -184,7 +184,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
         polylineRef.current.style.strokeDasharray = String(length);
         polylineRef.current.style.strokeDashoffset = String(length);
         // trigger reflow then animate
-         
+
         polylineRef.current.getBoundingClientRect();
         polylineRef.current.style.transition = 'stroke-dashoffset 1s ease-out';
         polylineRef.current.style.strokeDashoffset = '0';
@@ -223,7 +223,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
                   width={barWidth}
                   height={barH}
                   rx={3}
-                  fill="#3b82f6"
+                  fill="#4c6ef5"
                   opacity={0.85}
                   style={{
                     transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,

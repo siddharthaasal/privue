@@ -94,7 +94,7 @@ export function AnimatedChatNodeInner(): any {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-     
+
   }, [currentIdx]);
 
   const runLifecycle = () => {
@@ -207,7 +207,7 @@ export function AnimatedChatNodeInner(): any {
                   width={barWidth}
                   height={barH}
                   rx={3}
-                  fill="#5c7cfa"
+                  fill="#4c6ef5"
                   // opacity={0.85}
                   style={{
                     transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,

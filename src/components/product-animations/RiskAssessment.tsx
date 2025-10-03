@@ -418,6 +418,13 @@ export default function RiskAssessmentTourWithChart() {
           transform: 'scale(1.02)',
         }}
       />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)',
+        }}
+      />
 
       <AnimatePresence>
         {step === 'frame1' && (

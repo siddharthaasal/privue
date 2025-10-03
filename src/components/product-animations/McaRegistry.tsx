@@ -766,7 +766,8 @@ export default function McaRegistry() {
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: 'linear-gradient(180deg, rgba(248,250,252,0) 70%, rgba(100,116,139,0.35))',
+                        background:
+                            'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)',
                     }}
                 />
                 {/* <div

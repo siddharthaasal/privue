@@ -208,6 +208,7 @@ export default function NotificationOverlayWithLeftFade({
         }}
       />
 
+
       {/* left fade overlay (no blur) */}
       <motion.div
         aria-hidden

@@ -133,7 +133,7 @@ export default function CreditTerms({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.72) 100%)',
+              'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)',
           }}
         />
       </div>

@@ -142,6 +142,13 @@ export default function LargeDataAcquisition({
       <div className="absolute inset-0">
         {/* <img src={bgImage} alt="background" className="w-full h-full object-contain scale-y-125" /> */}
         <img src={bgImage} alt="background" className="h-full w-full object-cover" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)',
+          }}
+        />
         {/* <div
           className="absolute inset-0"
           style={{

@@ -196,7 +196,8 @@ export default function IntegrationsTour() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(245,247,255,0.6))',
+            background:
+              'linear-gradient(180deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.7) 100%)',
           }}
         />
       </div>

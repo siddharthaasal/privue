@@ -396,13 +396,12 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: Payload
               {/* risk pill — very small */}
               <div className="ml-2 shrink-0">
                 <div
-                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${
-                    c.riskLevel === 'High'
+                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${c.riskLevel === 'High'
                       ? 'border border-red-100 bg-red-50 text-red-700'
                       : c.riskLevel === 'Medium'
                         ? 'border border-amber-100 bg-amber-50 text-amber-700'
                         : 'border border-slate-100 bg-slate-50 text-slate-700'
-                  }`}
+                    }`}
                   style={{ minWidth: 44, textAlign: 'center' }}
                 >
                   {c.riskLevel ?? 'Unknown'}

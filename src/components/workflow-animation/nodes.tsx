@@ -115,6 +115,30 @@ export const initialNodes: Node[] = [
       title: 'Models & Engines',
     },
   },
+  // {
+  //   id: 'agent1',
+  //   type: 'outputNode',
+  //   position: { x: 1150, y: 100 }, // tune Y so children sit below
+  //   data: {
+  //     title: 'API',
+  //   },
+  // },
+  // {
+  //   id: 'agent2',
+  //   type: 'outputNode',
+  //   position: { x: 1150, y: 200 }, // tune Y so children sit below
+  //   data: {
+  //     title: 'Workbench',
+  //   },
+  // },
+  // {
+  //   id: 'agent3',
+  //   type: 'outputNode',
+  //   position: { x: 1150, y: 300 }, // tune Y so children sit below
+  //   data: {
+  //     title: 'Application',
+  //   },
+  // },
 
   {
     id: 'tool-a',

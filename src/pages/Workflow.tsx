@@ -28,6 +28,7 @@ import { ToolNodeLeft } from '@/components/workflow-animation/ToolNodeLeft';
 
 import { initialEdges } from '@/components/workflow-animation/edges';
 import { initialNodes } from '@/components/workflow-animation/nodes';
+import { OutputNode } from '@/components/workflow-animation/OutputNode';
 // import DownloadButton from "@/components/DownloadButton";
 
 const nodeTypes = {
@@ -40,6 +41,7 @@ const nodeTypes = {
   dbNode: DbNode,
   responseNode: ResponseNode,
   agentNode: AgentNode,
+  outputNode: OutputNode,
   toolNode: ToolNode,
   toolNodeLeft: ToolNodeLeft,
   chatNode: AnimatedChatNode,
@@ -79,6 +81,8 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
   // helper passed to ReactFlow onInit
   const handleInit = (instance: ReactFlowInstance) => {
     rfRef.current = instance;
+    { console.log("Current nodes:", nodes) }
+    { console.log("Current edges:", edges) }
     // call fitView once on init
     setTimeout(() => instance.fitView({ padding: fitPadding }), 0);
   };
@@ -111,6 +115,7 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
         ...style,
       }}
     >
+
       <ReactFlow
         nodes={nodes}
         edges={edges}

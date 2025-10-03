@@ -49,7 +49,7 @@ export default function AboutSection() {
             <div className="md:absolute md:inset-x-0 md:-inset-y-12">
               <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
                 <img
-                  src="/workflow-illustration.png"
+                  src="/workflow-img.png"
                   alt="workflow illustration"
                   className="h-auto w-full rounded-[12px] object-cover shadow"
                 />

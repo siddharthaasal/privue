@@ -23,7 +23,8 @@ module.exports = {
     ],
 
     rules: {
-        'no-console': ['warn', { allow: ['warn', 'error'] }],
+        // 'no-console': ['warn', { allow: ['warn', 'error'] }],
+        'no-console': 'error',
         'no-debugger': 'warn',
 
         // relax some TS rules you explicitly wanted off

@@ -24,8 +24,10 @@ export default tseslint.config([
     // Turn off `no-explicit-any` and relax a couple of other strict rules.
     // Adjust 'warn' / 'off' as you prefer.
     rules: {
+      'no-console': ['warn', { allow: ['warn', 'error'] }], // or 'warn'
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     },
 

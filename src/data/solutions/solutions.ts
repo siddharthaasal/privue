@@ -78,6 +78,7 @@ import InsurancePolicy from '@/components/product-animations/InsurancePolicy';
 import FinancialDocumentParsing from '@/components/product-animations/FinancialDocumentParsing';
 import CourtCase from '@/components/product-animations/CourtCase';
 import McaRegistry from '@/components/product-animations/McaRegistry';
+import EventResponse from '@/components/product-animations/EventResponse';
 
 export type Problem = {
   problemHeading: string;
@@ -1135,7 +1136,7 @@ export const solutions: Solution[] = [
         description: 'Provide real-time triggers and alerts when events impact vendor stability.',
         imgSrc: '/demo-module-image.png',
         link: '#',
-        renderAnimation: NotificationOverlayWithLeftFade,
+        renderAnimation: EventResponse,
       },
     ],
     mainArticleSlug: 'enhancing-supply-chain-resilience',

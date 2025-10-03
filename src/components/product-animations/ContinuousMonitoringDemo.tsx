@@ -31,7 +31,7 @@ const demoNotifications: NotificationItem[] = [
     title:
       '1 moderate risk factors identified. Review vendor documentation and update risk assessments',
     start: { left: '50%', top: '15%' },
-    target: { left: '15%', top: '25%' },
+    target: { left: '15%', top: '22%' },
     variant: 'warning',
     landOnLeft: true,
   },
@@ -39,7 +39,7 @@ const demoNotifications: NotificationItem[] = [
     id: 'n3',
     title: '2 new updates to review including policy changes and vendor performance metrics.',
     start: { left: '50%', top: '15%' },
-    target: { left: '15%', top: '35%' },
+    target: { left: '15%', top: '29%' },
     variant: 'info',
     landOnLeft: true,
   },

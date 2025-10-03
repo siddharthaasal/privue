@@ -753,7 +753,7 @@ export default function FinancialDocumentParsing() {
     // and the branch above will schedule the short buffer advance and clear fallback.
     return () => clearTimeout(fallbackId);
   }, [carouselStep, stage]);
-  const bgUrl = '/module-animations/financial-risk-bg.png';
+  const bgUrl = '/module-animations/financial-stability-bg.png';
 
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg bg-white">
@@ -761,7 +761,7 @@ export default function FinancialDocumentParsing() {
         <img
           src={bgUrl}
           alt="background"
-          className="h-full w-full object-contain backdrop-opacity-95"
+          className="h-full w-full object-cover backdrop-opacity-95"
         />
         <div
           className="absolute inset-0"

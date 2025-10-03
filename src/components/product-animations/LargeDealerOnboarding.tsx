@@ -39,6 +39,7 @@ export default function LargeDealerOnboarding() {
       })) as Dealer[],
   );
 
+
   const [highlightId, setHighlightId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -120,7 +121,14 @@ export default function LargeDealerOnboarding() {
     }, 700) as unknown as number;
   }
 
+  const submittingRef = useRef(false);
+
   function handleSubmitFromForm(values: { name: string; gst: string; cin: string }) {
+    if (submittingRef.current) {
+      console.log('[Flow] submit ignored — already submitting');
+      return;
+    }
+    submittingRef.current = true;
     console.log('[Flow] form submitted', values);
     const id = `new-${Date.now()}`;
     const newDealer: Dealer = {
@@ -131,6 +139,7 @@ export default function LargeDealerOnboarding() {
       verified: false,
     };
 
+
     setDealers((prev) => [newDealer, ...prev]);
     setStage('table_unverified');
     setHighlightId(id);
@@ -139,8 +148,11 @@ export default function LargeDealerOnboarding() {
       setHighlightId(null);
       setStage('upload');
       startUploadSimulation(id);
+      // clear guard after we've moved to upload stage so future restarts can run
+      setTimeout(() => (submittingRef.current = false), 1000);
     }, UNVERIFIED_DISPLAY_MS);
   }
+
 
   // static file percents (keep per-file values as-is)
   const filePercents = [72, 45, 18];
@@ -203,12 +215,12 @@ export default function LargeDealerOnboarding() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.995 }}
               transition={{ duration: 0.6 }}
-              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
+              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-md bg-white p-4 shadow-2xl"
             >
-              <div className="mb-2 text-sm font-medium">Add Dealer</div>
+              <div className="mb-2 text-xs font-medium">Add Customer</div>
               <DummyFormCompactSlow onSubmit={handleSubmitFromForm} />
               <div className="mt-1 text-[10px] text-slate-500">
-                Status: Preparing to add dealer…
+                Status: Preparing to add customer
               </div>
             </motion.div>
           )}
@@ -220,9 +232,9 @@ export default function LargeDealerOnboarding() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.55 }}
-              className="absolute -right-2 -bottom-2 w-[250px] max-w-full rounded-xl bg-white/95 p-3 shadow-lg"
+              className="absolute -right-2 -bottom-2 w-[250px] max-w-full rounded-md bg-white/95 p-3 shadow-lg"
             >
-              <div className="text-[13px] font-semibold">New dealer added</div>
+              <div className="text-[13px] font-semibold">New customer added</div>
               <div className="text-privue-800 mt-1 text-[12px]">Waiting for documents</div>
             </motion.div>
           )}
@@ -234,52 +246,59 @@ export default function LargeDealerOnboarding() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.995 }}
               transition={{ duration: 0.55 }}
-              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-xl bg-white p-4 shadow-2xl"
+              className="absolute -right-2 -bottom-2 w-[350px] max-w-full rounded-md bg-white p-4 shadow-2xl"
             >
-              <div className="mb-2 text-sm font-medium">Uploading documents</div>
+              <div className="mb-2 text-xs font-medium">Uploading documents</div>
 
               <div className="mb-2 flex w-full flex-col gap-2">
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <FileText className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <FileText className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">balance-sheet.pdf</div>
+                    <div className="truncate text-[10px] font-medium">balance-sheet.pdf</div>
                     <div className="text-[10px] text-slate-500">1.2 MB</div>
                   </div>
+
+                  {/* <div className="text-[11px] text-slate-500 ml-2">72%</div> */}
                 </div>
 
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <FileSpreadsheet className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <FileSpreadsheet className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">
+                    <div className="truncate text-[10px] font-medium">
                       profit-and-loss-account.xlsx
                     </div>
                     <div className="text-[10px] text-slate-500">840 KB</div>
                   </div>
+
+                  {/* <div className="text-[11px] text-slate-500 ml-2">45%</div> */}
                 </div>
 
-                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-2 shadow-sm">
-                  <div className="flex h-8 w-8 items-center justify-center rounded bg-slate-200 text-slate-600">
-                    <File className="h-4 w-4" />
+                <div className="flex items-center gap-3 rounded-md border bg-slate-50 p-1.5 shadow-sm">
+                  <div className="flex h-6 w-6 items-center justify-center rounded bg-slate-200 text-slate-600">
+                    <File className="h-3 w-3" />
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[12px] font-medium">income-tax-detail.docx</div>
+                    <div className="truncate text-[10px] font-medium">income-tax-detail.docx</div>
                     <div className="text-[10px] text-slate-500">320 KB</div>
                   </div>
+
+                  {/* <div className="text-[11px] text-slate-500 ml-2">18%</div> */}
                 </div>
               </div>
 
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                 <div
                   style={{
                     width: `${progress}%`,
-                    background: 'linear-gradient(90deg,#748ffc,#4c6ef5)',
+                    // background: 'linear-gradient(90deg,#748ffc,#4c6ef5)',
+                    background: 'linear-gradient(90deg,#748ffc,#748ffc)',
                   }}
                   className="h-full transition-all duration-200"
                 />
@@ -298,11 +317,12 @@ export default function LargeDealerOnboarding() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.5 }}
-              className="absolute -right-2 -bottom-2 w-auto max-w-full rounded-xl bg-white/95 p-3 shadow-lg"
+              className="absolute -right-2 -bottom-2 w-auto max-w-full rounded-md bg-white/95 p-3 shadow-lg"
             >
               <div className="text-right text-[12px] font-semibold text-emerald-600">
-                Dealer verified
+                Customer verified
               </div>
+              {/* <div className="text-xs text-slate-500 mt-1">Table updated in the background.</div> */}
             </motion.div>
           )}
         </AnimatePresence>
@@ -313,6 +333,11 @@ export default function LargeDealerOnboarding() {
 
 /* --------------------------
    Compact slow form + manual fallback
+   -------------------------- */
+/* --------------------------
+   Module-level typing controller (singleton)
+   - runs once, emits incremental updates to subscribers
+   - survives React StrictMode remounts
    -------------------------- */
 
 type TypingListener = {
@@ -338,8 +363,7 @@ const TypingController = (() => {
   async function start() {
     if (started) return;
     started = true;
-    // sequence: [Company Name, GSTIN, CIN]
-    const sequences = ['Acme Traders', '27AAEPM1234C1ZQ', 'U12345DL2020PTC000001'];
+    const sequences = ['Acme Traders', '27AAEPM1234C1ZQ', 'U12345DL2011PTC000001'];
 
     function typeString(fieldIndex: number, text: string, charDelay = 95) {
       return new Promise<void>((resolve) => {
@@ -369,10 +393,19 @@ const TypingController = (() => {
 
   function subscribe(listener: TypingListener) {
     listeners.set(listener.id, listener);
-    if (finished) listener.onFinished();
+    // If the controller already finished, call onFinished asynchronously
+    // so subscribers don't receive a synchronous immediate submission that
+    // races with other lifecycle code.
+    if (finished) {
+      window.setTimeout(() => {
+        // ensure listener still exists (wasn't unsubscribed)
+        if (listeners.has(listener.id)) listener.onFinished();
+      }, 0);
+    }
     start();
     return () => listeners.delete(listener.id);
   }
+
 
   function teardown() {
     timers.forEach((t) => clearTimeout(t));
@@ -395,6 +428,11 @@ const TypingController = (() => {
   };
 })();
 
+/* --------------------------
+   Replace DummyFormCompactSlow with this subscriber-based version
+   (visual typing driven by the controller; manual fallback button kept)
+   -------------------------- */
+
 function DummyFormCompactSlow({
   onSubmit,
 }: {
@@ -405,11 +443,17 @@ function DummyFormCompactSlow({
   const [cin, setCin] = useState('');
   const [step, setStep] = useState(0);
 
-  // finishedTypingRef used to gate autosubmit (and manual fallback)
+  // add refs to hold current values synchronously
+  const dealerNameRef = useRef('');
+  const gstinRef = useRef('');
+  const cinRef = useRef('');
   const finishedTypingRef = useRef(false);
-
-  // unique id per mount so we can unsubscribe safely
   const idRef = useRef(`typing-listener-${Math.random().toString(36).slice(2)}`);
+
+  // keep refs in sync whenever state changes (also use them in onUpdate)
+  useEffect(() => { dealerNameRef.current = dealerName; }, [dealerName]);
+  useEffect(() => { gstinRef.current = gstin; }, [gstin]);
+  useEffect(() => { cinRef.current = cin; }, [cin]);
 
   useEffect(() => {
     console.log('[Form] subscribing to TypingController', idRef.current);
@@ -418,13 +462,24 @@ function DummyFormCompactSlow({
       id: idRef.current,
       onUpdate: (fieldIndex, text) => {
         // update the appropriate field and step
-        if (fieldIndex === 0) setDealerName(text);
-        if (fieldIndex === 1) setGstin(text);
-        if (fieldIndex === 2) setCin(text);
+        if (fieldIndex === 0) {
+          setDealerName(text);
+          dealerNameRef.current = text;
+        }
+        if (fieldIndex === 1) {
+          setGstin(text);
+          gstinRef.current = text;
+        }
+        if (fieldIndex === 2) {
+          setCin(text);
+          cinRef.current = text;
+        }
 
-        // compute step progress (0..3)
-        const newStep =
-          (dealerName.length > 0 ? 1 : 0) + (gstin.length > 0 ? 1 : 0) + (cin.length > 0 ? 1 : 0);
+        // compute step deterministically from current values (refs are in-sync)
+        const nameFilled = dealerNameRef.current.length > 0 ? 1 : 0;
+        const gstFilled = gstinRef.current.length > 0 ? 1 : 0;
+        const cinFilled = cinRef.current.length > 0 ? 1 : 0;
+        const newStep = nameFilled + gstFilled + cinFilled;
         setStep((s) => Math.max(s, newStep));
       },
       onFinished: () => {
@@ -436,9 +491,9 @@ function DummyFormCompactSlow({
           if (!finishedTypingRef.current) return;
           console.log('[Form] controller attempting autosubmit');
           onSubmit({
-            name: 'Acme Traders',
-            gst: '27AAEPM1234C1ZQ',
-            cin: 'U12345DL2020PTC000001',
+            name: dealerNameRef.current || 'Acme Traders',
+            gst: gstinRef.current || '27AAEPM1234C1ZQ',
+            cin: cinRef.current || '+91 98765 43210',
           });
         }, 60);
       },
@@ -448,7 +503,6 @@ function DummyFormCompactSlow({
       console.log('[Form] unsubscribing TypingController', idRef.current);
       unsubscribe();
       // NOTE: we intentionally do NOT teardown the controller here.
-      // The controller is a page-level singleton so the typing continues even across StrictMode remounts.
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -484,6 +538,8 @@ function DummyFormCompactSlow({
       />
 
       <div className="flex items-center justify-end pt-1">
+        {/* <div className="text-xs text-slate-400">Tip: wait for typing or force submit</div> */}
+
         <div className="flex items-center gap-1">
           <motion.button
             type="submit"
@@ -496,6 +552,20 @@ function DummyFormCompactSlow({
           >
             Submit
           </motion.button>
+
+          {/* {step >= 3 && (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                console.log("[Form] Force submit clicked (controller fallback)");
+                                finishedTypingRef.current = true;
+                                onSubmit({ name: dealerName || "Acme Traders", gst: gstin || "27AAEPM1234C1ZQ", mobile: mobile || "+91 98765 43210" });
+                            }}
+                            className="px-3 py-2 text-sm rounded-md border border-slate-200 bg-white"
+                        >
+                            Force submit now
+                        </button>
+                    )} */}
         </div>
       </div>
     </form>
@@ -505,7 +575,7 @@ function DummyFormCompactSlow({
 /* --------------------------
    BackgroundDealersTable (explicit RGBA animation targets)
    -------------------------- */
-
+// Insert this DealerRow component above BackgroundDealersTable (or inside same file scope)
 function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: string | null }) {
   const [flash, setFlash] = useState(false);
   const prevVerifiedRef = useRef<boolean>(d.verified);
@@ -518,7 +588,7 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       return () => clearTimeout(t);
     }
     prevVerifiedRef.current = d.verified;
-     
+
   }, [d.verified]);
 
   const isHighlighted = highlightId === d.id;
@@ -588,12 +658,12 @@ function BackgroundDealersTable({
   highlightId: string | null;
 }) {
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border bg-white/60 backdrop-blur-sm">
+    <div className="h-full w-full overflow-hidden rounded-md border bg-white/60 backdrop-blur-sm">
       <div className="p-4">
-        <div className="text-sm font-medium">Dealers</div>
+        <div className="text-sm font-medium">Customers</div>
       </div>
 
-      <div className="h-[calc(100%-64px)] overflow-auto">
+      <div className="h-[calc(100%-64px)] overflow-auto scrollbar-hide">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-50 text-slate-600">
             <tr>
@@ -614,7 +684,7 @@ function BackgroundDealersTable({
   );
 }
 
-/* initial seed WITHOUT Acme Traders — now with dummy CINs */
+/* initial seed WITHOUT Acme Traders */
 const dealerRowsInitial = [
   { name: 'Green Lines', gst: '07GGLNM5555F1AB', cin: 'U12345DL2011PTC000002' },
   { name: 'Metro Supplies', gst: '29MTRPL9999F2CD', cin: 'U12345KA2012PTC000003' },
@@ -631,3 +701,4 @@ const dealerRowsInitial = [
   { name: 'Crest Technologies', gst: '23CRSTT1111K9KK', cin: 'U12345MP2023PTC000014' },
   { name: 'Pioneer Goods', gst: '21PIONR2222L0LL', cin: 'U12345OD2024PTC000015' },
 ];
+

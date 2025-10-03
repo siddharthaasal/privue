@@ -1,6 +1,12 @@
 import React from 'react';
 import { Cpu, GitPullRequestCreateArrow, GitCompare, Landmark, Server } from 'lucide-react';
 
+type IconType =
+  | string // image url
+  | React.ReactElement // already instantiated <Icon />
+  | React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; // component
+
+
 export default function FeaturedCapabilities() {
   const coreCapabilities = [
     {
@@ -61,13 +67,13 @@ export default function FeaturedCapabilities() {
 }
 
 type FeatureCapabilityCardProps = {
-  icon?: string | React.ComponentType<any> | React.ReactNode;
+  icon?: IconType
   title: string;
   description: string;
 };
 
 function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
-  const renderIcon = (icon?: string | React.ComponentType<any> | React.ReactNode) => {
+  const renderIcon = (icon?: IconType) => {
     if (!icon) return null;
 
     // string -> <img>

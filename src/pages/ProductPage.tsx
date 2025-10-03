@@ -69,9 +69,9 @@ function SectionAPIs() {
             <div className="md:absolute md:inset-x-0 md:-inset-y-12">
               <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_100%,transparent)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
                 <img
-                  src="/workflow-illustration.png"
+                  src="/workflow-img.png"
                   alt="workflow illustration"
-                  className="h-auto w-full rounded-[12px] object-cover shadow"
+                  className="h-auto w-full rounded-[12px] object-cover shadow mt-12 scale-110"
                 />
               </div>
             </div>
@@ -295,9 +295,8 @@ export function ImageCarousel({
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-opacity ${
-                i === index ? 'opacity-100' : 'opacity-60'
-              } bg-white`}
+              className={`h-2 w-2 rounded-full transition-opacity ${i === index ? 'opacity-100' : 'opacity-60'
+                } bg-white`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

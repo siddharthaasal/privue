@@ -95,38 +95,51 @@ function StatCard({
   big,
   subtitle,
   percent,
-  accent = '#111827',
+  accent = "#111827",
 }: {
   title: string;
   big: React.ReactNode;
   subtitle?: React.ReactNode;
-  percent?: number; // 0-100 for ring
+  percent?: number;
   accent?: string;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.995 }}
+      initial={{ opacity: 0, y: 6, scale: 0.995 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.28 }}
-      className="flex w-full items-center gap-3 rounded-xl bg-white/95 p-4 shadow-sm"
+      transition={{ duration: 0.24 }}
+      className="flex w-full items-center gap-2.5 rounded-lg bg-white/95 p-3 shadow-sm"
       aria-live="polite"
     >
       <div className="min-w-0 flex-1">
-        <div className="text-[13px] font-medium text-slate-800">{title}</div>
-        <div className="mt-2 truncate text-[22px] leading-none font-normal text-slate-900">
+        {/* Title */}
+        <div className="text-[11px] font-medium text-slate-700 leading-tight">
+          {title}
+        </div>
+
+        {/* Big Number */}
+        <div className="mt-1 truncate text-[18px] leading-tight font-semibold text-slate-900">
           {big}
         </div>
-        {subtitle && <div className="text-muted-foreground mt-1 text-[12px]">{subtitle}</div>}
+
+        {/* Subtitle */}
+        {subtitle && (
+          <div className="mt-0.5 text-[10px] text-muted-foreground leading-snug">
+            {subtitle}
+          </div>
+        )}
       </div>
 
-      {typeof percent === 'number' && (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center">
-          <CircularRing percent={percent} size={36} stroke={3} color={accent} />
+      {/* Ring (optional) */}
+      {typeof percent === "number" && (
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+          <CircularRing percent={percent} size={28} stroke={2} color={accent} />
         </div>
       )}
     </motion.div>
   );
 }
+
 
 // Frame 1: compact layout with max width 500px
 function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) {
@@ -146,18 +159,23 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.998 }}
+      initial={{ opacity: 0, y: 10, scale: 0.998 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.995 }}
-      transition={{ duration: 0.32 }}
-      className="flex w-full max-w-[500px] flex-col gap-3 rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 6, scale: 0.995 }}
+      transition={{ duration: 0.28 }}
+      className="flex w-full max-w-[440px] flex-col gap-2.5 rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         {/* Card 1: Total Articles */}
         <StatCard
           title="Total Articles"
-          big={<AnimatedNumber value={aArticles} format={(v) => String(Math.round(v))} />}
+          big={
+            <AnimatedNumber
+              value={aArticles}
+              format={(v) => String(Math.round(v))}
+            />
+          }
           subtitle="Last 30 days"
           accent="#111827"
         />
@@ -165,17 +183,28 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
         {/* Card 2: Negative Sentiment */}
         <StatCard
           title="Negative Sentiment"
-          big={<AnimatedNumber value={aNegative} format={(v) => String(Math.round(v))} />}
+          big={
+            <AnimatedNumber
+              value={aNegative}
+              format={(v) => String(Math.round(v))}
+            />
+          }
           subtitle={`${targets.negativePct}% of total`}
           percent={targets.negativePct}
           accent="#ef4444"
         />
       </div>
+
       {/* Card 3: High Risk */}
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         <StatCard
           title="High Risk"
-          big={<AnimatedNumber value={aHighRisk} format={(v) => String(Math.round(v))} />}
+          big={
+            <AnimatedNumber
+              value={aHighRisk}
+              format={(v) => String(Math.round(v))}
+            />
+          }
           subtitle="Immediate attention"
           accent="#f97316"
         />
@@ -183,10 +212,17 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
         {/* Card 4: Media Coverage */}
         <StatCard
           title="Media Coverage"
-          big={<AnimatedNumber value={aMediaPct} format={(v) => `${Math.round(Number(v))}%`} />}
+          big={
+            <AnimatedNumber
+              value={aMediaPct}
+              format={(v) => `${Math.round(Number(v))}%`}
+            />
+          }
           subtitle={
-            <span className="text-[12px] text-red-600">
-              <span className="inline-block align-middle">↑ {targets.mediaDelta}%</span>{' '}
+            <span className="text-[10px] text-red-600 leading-tight">
+              <span className="inline-block align-middle">
+                ↑ {targets.mediaDelta}%
+              </span>{' '}
               <span className="text-muted-foreground">vs last month</span>
             </span>
           }
@@ -198,6 +234,7 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
   );
 }
 
+
 /* -------------------------
   Frame 2: Minimal Recent News
   (based on provided screenshot, simplified)
@@ -205,76 +242,157 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
 
 function NewsCard({
   title,
+  source,
+  date,
+  summary,
+  tags,
   sentiment,
   risk,
 }: {
   title: string;
-  sentiment: 'positive' | 'negative';
-  risk: 'low' | 'medium' | 'high';
+  source: string;
+  date: string;
+  summary: string;
+  tags: string[];
+  sentiment: "positive" | "negative";
+  risk: "low" | "medium" | "high";
 }) {
   const sentimentColor =
-    sentiment === 'positive' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+    sentiment === "positive"
+      ? "bg-green-50 text-green-600"
+      : "bg-red-50 text-red-600";
 
   const riskColor =
-    risk === 'low'
-      ? 'bg-green-50 text-green-700'
-      : risk === 'medium'
-        ? 'bg-yellow-50 text-yellow-700'
-        : 'bg-red-50 text-red-700';
+    risk === "low"
+      ? "bg-green-50 text-green-600"
+      : risk === "medium"
+        ? "bg-yellow-50 text-yellow-600"
+        : "bg-red-50 text-red-600";
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="flex flex-col gap-2 rounded-md bg-white/95 p-3 shadow-sm"
+      transition={{ duration: 0.2 }}
+      className="flex flex-col gap-1.5 rounded border border-slate-200 bg-white p-2.5"
     >
-      <div className="text-[13px] leading-snug font-medium text-slate-900">{title}</div>
-      <div className="flex gap-2 text-[11px]">
-        <span className={`rounded-full px-2 py-0.5 font-normal ${sentimentColor}`}>
-          {sentiment}
+      {/* Header */}
+      <div className="flex items-start justify-between gap-1.5">
+        <div className="text-[11px] font-medium text-slate-900 leading-snug">
+          {title}
+        </div>
+        <div className="flex shrink-0 gap-1 text-[9px]">
+          <span className={`rounded-full px-1.5 py-0.5 ${sentimentColor}`}>
+            {sentiment}
+          </span>
+          <span className={`rounded-full px-1.5 py-0.5 ${riskColor}`}>
+            {risk} risk
+          </span>
+        </div>
+      </div>
+
+      {/* Source + Date */}
+      <div className="flex flex-wrap items-center gap-1 text-[9px] text-slate-500">
+        <span className="rounded-full border border-slate-200 bg-slate-50 px-1.5 py-0.5">
+          {source}
         </span>
-        <span className={`rounded-full px-2 py-0.5 font-normal ${riskColor}`}>{risk} risk</span>
+        <span>{date}</span>
+      </div>
+
+      {/* Summary */}
+      <div className="text-[10px] text-slate-700 leading-snug">{summary}</div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1 text-[9px]">
+        {tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-slate-200 bg-slate-50 px-1.5 py-0.5"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </motion.div>
   );
 }
 
+
+
 function Frame2NewsOverview() {
   const news = [
+    // {
+    //   title: "Company Faces Labor Dispute Over Working Conditions",
+    //   sentiment: "negative" as const,
+    //   risk: "high" as const,
+    //   source: "Business Herald",
+    //   date: "Jan 15, 2024",
+    //   summary:
+    //     "Workers union raises concerns about workplace safety and overtime compensation policies affecting 200+ employees.",
+    //   tags: ["Labor Relations", "Workplace Safety"],
+    // },
     {
-      title: 'Company Faces Labor Dispute Over Working Conditions',
-      sentiment: 'negative' as const,
-      risk: 'high' as const,
+      title: "Environmental Compliance Issues Under Investigation",
+      sentiment: "negative" as const,
+      risk: "medium" as const,
+      source: "Industry Times",
+      date: "Jan 12, 2024",
+      summary:
+        "Regulatory authorities investigating potential violations of environmental standards at manufacturing facility.",
+      tags: ["Environmental", "Regulatory"],
     },
+    // {
+    //   title: "Company Announces New Sustainability Initiative",
+    //   sentiment: "positive" as const,
+    //   risk: "low" as const,
+    //   source: "Green Business Today",
+    //   date: "Jan 10, 2024",
+    //   summary:
+    //     "Launch of comprehensive carbon reduction program targeting 30% emissions decrease by 2025.",
+    //   tags: ["Sustainability", "ESG"],
+    // },
     {
-      title: 'Environmental Compliance Issues Under Investigation',
-      sentiment: 'negative' as const,
-      risk: 'medium' as const,
+      title: "Financial Irregularities Prompt Internal Audit",
+      sentiment: "negative" as const,
+      risk: "high" as const,
+      source: "Financial Express",
+      date: "Jan 8, 2024",
+      summary:
+        "Board initiates comprehensive internal audit following discrepancies in quarterly financial reporting.",
+      tags: ["Financial", "Governance"],
     },
-    {
-      title: 'Company Announces New Sustainability Initiative',
-      sentiment: 'positive' as const,
-      risk: 'low' as const,
-    },
+    // {
+    //   title: "Tax Assessment Dispute Escalates to Tribunal",
+    //   sentiment: "negative" as const,
+    //   risk: "medium" as const,
+    //   source: "Tax & Legal News",
+    //   date: "Jan 5, 2024",
+    //   summary:
+    //     "Company challenges INR 2.5 crore tax demand in appellate tribunal, citing procedural violations.",
+    //   tags: ["Tax", "Legal"],
+    // },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.996 }}
+      initial={{ opacity: 0, y: 8, scale: 0.996 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.995 }}
-      transition={{ duration: 0.35 }}
-      className="flex w-full max-w-[500px] flex-col gap-3 rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 5, scale: 0.995 }}
+      transition={{ duration: 0.25 }}
+      className="flex w-full max-w-[450px] flex-col gap-2 rounded-md bg-white/95 p-2.5 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-1 text-[11px] font-medium text-slate-700">Recent News</div>
+      <div className="mb-0.5 text-[9px] font-medium text-slate-600">
+        Recent News
+      </div>
       {news.map((n, i) => (
         <NewsCard key={i} {...n} />
       ))}
     </motion.div>
   );
 }
+
+
 
 /* -------------------------
   Frame 3: Potential Impact Assessment (minimal)
@@ -298,44 +416,51 @@ function AlertIcon({ className = 'w-4 h-4 flex-shrink-0' }: { className?: string
 
 function Frame3ImpactOverview() {
   const items = [
-    'Regulatory scrutiny and potential penalties',
-    'Reputational damage affecting customer trust',
-    'Operational disruptions from labor disputes',
+    "Regulatory scrutiny and potential penalties",
+    "Reputational damage affecting customer trust",
+    "Operational disruptions from labor disputes",
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.996 }}
+      initial={{ opacity: 0, y: 8, scale: 0.996 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 5 }}
+      transition={{ duration: 0.25 }}
+      className="w-full max-w-[450px] rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[12px] font-normal text-slate-900">Potential Impact Assessment</div>
+      {/* Section Title */}
+      <div className="mb-2 text-[10px] font-medium text-slate-600">
+        Potential Impact Assessment
+      </div>
 
-      <div className="mb-2 text-[13px] font-medium text-slate-800">Immediate Risks</div>
+      {/* Subheading */}
+      <div className="mb-1.5 text-[11px] font-semibold text-slate-800">
+        Immediate Risks
+      </div>
 
+      {/* List */}
       <motion.ul
         initial="hidden"
         animate="visible"
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.06 } },
+          visible: { transition: { staggerChildren: 0.05 } },
         }}
-        className="m-0 flex list-none flex-col gap-3 p-0"
+        className="m-0 flex list-none flex-col gap-1.5 p-0"
       >
         {items.map((t, i) => (
           <motion.li
             key={i}
             variants={{
-              hidden: { opacity: 0, y: 6 },
+              hidden: { opacity: 0, y: 5 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="flex items-start gap-3 text-[13px] text-slate-800"
+            className="flex items-start gap-2 text-[10px] text-slate-700"
           >
-            <div className="mt-0.5">
-              <AlertIcon />
+            <div className="mt-0.5 shrink-0">
+              <AlertIcon className="h-3 w-3 text-red-500" />
             </div>
             <div className="leading-snug">{t}</div>
           </motion.li>
@@ -344,6 +469,7 @@ function Frame3ImpactOverview() {
     </motion.div>
   );
 }
+
 
 /* -------------------------
   Frame 4: Mitigation Strategies (minimal)
@@ -367,42 +493,46 @@ function InfoIcon({ className = 'w-4 h-4 flex-shrink-0' }: { className?: string 
 
 function Frame4MitigationOverview() {
   const strategies = [
-    'Proactive stakeholder engagement and communication',
-    'Enhanced compliance monitoring and reporting',
-    'Crisis communication and reputation management',
+    "Proactive stakeholder engagement and communication",
+    "Enhanced compliance monitoring and reporting",
+    "Crisis communication and reputation management",
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.996 }}
+      initial={{ opacity: 0, y: 8, scale: 0.996 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 5 }}
+      transition={{ duration: 0.25 }}
+      className="w-full max-w-[450px] rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[14px] font-semibold text-slate-900">Mitigation Strategies</div>
+      {/* Title */}
+      <div className="mb-2 text-[11px] font-semibold text-slate-800">
+        Mitigation Strategies
+      </div>
 
+      {/* List */}
       <motion.ul
         initial="hidden"
         animate="visible"
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.06 } },
+          visible: { transition: { staggerChildren: 0.05 } },
         }}
-        className="m-0 flex list-none flex-col gap-3 p-0"
+        className="m-0 flex list-none flex-col gap-1.5 p-0"
       >
         {strategies.map((s, i) => (
           <motion.li
             key={i}
             variants={{
-              hidden: { opacity: 0, y: 6 },
+              hidden: { opacity: 0, y: 5 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="flex items-start gap-3 text-[13px] text-slate-800"
+            className="flex items-start gap-2 text-[10px] text-slate-700"
           >
-            <div className="mt-0.5">
-              <InfoIcon />
+            <div className="mt-0.5 shrink-0">
+              <InfoIcon className="h-3 w-3 text-blue-500" />
             </div>
             <div className="leading-snug">{s}</div>
           </motion.li>
@@ -411,6 +541,7 @@ function Frame4MitigationOverview() {
     </motion.div>
   );
 }
+
 
 export default function AdverseNews() {
   type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';
@@ -444,7 +575,7 @@ export default function AdverseNews() {
         <img
           src={bgUrl}
           alt="background"
-          className="h-full w-full object-contain backdrop-opacity-90"
+          className="h-full w-full object-cover backdrop-opacity-90"
         />
         <div
           className="absolute inset-0"

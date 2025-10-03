@@ -2,15 +2,19 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, type Variants } from 'framer-motion';
 
-function Pill({ text, color }: { text: string; color: 'red' | 'green' | 'gray' }) {
+function Pill({ text, color }: { text: string; color: "red" | "green" | "gray" }) {
   const colors =
-    color === 'red'
-      ? 'bg-red-100 text-red-700'
-      : color === 'green'
-        ? 'bg-green-100 text-green-700'
-        : 'bg-gray-100 text-slate-600';
+    color === "red"
+      ? "bg-red-50 text-red-600"
+      : color === "green"
+        ? "bg-green-50 text-green-600"
+        : "bg-gray-50 text-slate-600";
   return (
-    <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${colors}`}>{text}</span>
+    <span
+      className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${colors}`}
+    >
+      {text}
+    </span>
   );
 }
 
@@ -24,10 +28,10 @@ function StatRow({
   badge?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between py-1 text-[11px]">
-      <div className="text-slate-700">{label}</div>
+    <div className="flex items-center justify-between py-1 text-[10px] leading-tight">
+      <div className="text-slate-600">{label}</div>
       <div className="flex items-center gap-2">
-        <span className="font-normal text-slate-900">{value}</span>
+        <span className="font-medium text-slate-900">{value}</span>
         {badge}
       </div>
     </div>
@@ -44,12 +48,12 @@ function SectionCard({
   rows: { label: string; value: string | number; badge?: React.ReactNode }[];
 }) {
   return (
-    <div className="min-w-[200px] flex-1 rounded-lg border border-slate-200 bg-white/95 shadow-sm">
+    <div className="flex-1 rounded-md border border-slate-200 bg-white/95">
       <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2">
-        <div className="text-[13px] font-semibold text-slate-900">{title}</div>
+        <div className="text-[11px] font-semibold text-slate-800">{title}</div>
         {pill}
       </div>
-      <div className="px-3 py-2">
+      <div className="px-3 py-1.5">
         {rows.map((r, i) => (
           <StatRow key={i} {...r} />
         ))}
@@ -59,47 +63,52 @@ function SectionCard({
 }
 
 function Frame1AttackSurface() {
-  // typed variant objects
   const container: Variants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.15, when: 'beforeChildren' },
+      transition: { staggerChildren: 0.1, when: "beforeChildren" },
     },
   };
 
   const item: Variants = {
-    hidden: { opacity: 0, y: 12, scale: 0.98 },
+    hidden: { opacity: 0, y: 10, scale: 0.985 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.996 }}
+      initial={{ opacity: 0, y: 10, scale: 0.99 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.32 }}
-      className="flex w-full max-w-[500px] flex-col gap-3 rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 6, scale: 0.99 }}
+      transition={{ duration: 0.25 }}
+      className="flex w-full max-w-[480px] flex-col gap-3 rounded-md bg-white/95 p-3.5 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-1 text-[14px] font-semibold text-slate-900">Attack Surface Analysis</div>
+      <div className="mb-1 text-[11px] font-medium text-slate-700">
+        Attack Surface Analysis
+      </div>
 
-      {/* parent that controls staggering */}
-      <motion.div variants={container} initial="hidden" animate="visible" className="flex gap-2">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        className="flex gap-2.5"
+      >
         {/* Infrastructure */}
         <motion.div variants={item} className="flex-1">
           <SectionCard
             title="Infrastructure"
-            pill={<Pill text="17 services" color="red" />}
+            pill={<Pill text="17" color="red" />}
             rows={[
-              { label: 'Active IPs', value: 23 },
-              { label: 'Open Ports', value: 17 },
-              { label: 'Known Services', value: 10 },
-              { label: 'Hosting Services', value: '17 detected' },
+              { label: "Active IPs", value: 23 },
+              { label: "Open Ports", value: 17 },
+              { label: "Known Services", value: 10 },
+              { label: "Hosting Services", value: "17" },
             ]}
           />
         </motion.div>
@@ -108,12 +117,12 @@ function Frame1AttackSurface() {
         <motion.div variants={item} className="flex-1">
           <SectionCard
             title="Certificates"
-            pill={<Pill text="All Valid" color="green" />}
+            pill={<Pill text="Valid" color="green" />}
             rows={[
-              { label: 'Active Certificates', value: 14 },
-              { label: 'Expiring Soon', value: 0 },
-              { label: 'Expired', value: 0 },
-              { label: 'SHA-1 (Insecure)', value: 0 },
+              { label: "Active Certificates", value: 14 },
+              { label: "Expiring Soon", value: 0 },
+              { label: "Expired", value: 0 },
+              { label: "SHA-1 (Insecure)", value: 0 },
             ]}
           />
         </motion.div>
@@ -121,6 +130,8 @@ function Frame1AttackSurface() {
     </motion.div>
   );
 }
+
+
 
 /**
  * Frame2: Security Maturity Radar (compact, animated fill)
@@ -153,28 +164,28 @@ function valuesToPolygonPath(
 }
 
 export function Frame2SecurityMaturity({
-  size = 260,
+  size = 240,
   maxValue = 4,
 }: {
   size?: number;
   maxValue?: number;
 }) {
   const labels = [
-    'Network Security Controls',
-    'Data Protection & Privacy',
-    'Secure Communications',
-    'Regulatory Compliance',
-    'Encryption Standards',
-    'Security Awareness Training',
-    'Disaster Recovery & BCP',
-    'Incident Response Readiness',
-    'Security Governance',
-    'Security Operations',
-    'Security Architecture',
-    'Physical Security Controls',
-    'Threat Risk Assessment',
-    'Third-Party Security',
-    'Secure Development Lifecycle',
+    "Network Security Controls",
+    "Data Protection & Privacy",
+    "Secure Communications",
+    "Regulatory Compliance",
+    "Encryption Standards",
+    "Security Awareness Training",
+    "Disaster Recovery & BCP",
+    "Incident Response Readiness",
+    "Security Governance",
+    "Security Operations",
+    "Security Architecture",
+    "Physical Security Controls",
+    "Threat Risk Assessment",
+    "Third-Party Security",
+    "Secure Development Lifecycle",
   ];
 
   const targetValues = new Array(labels.length).fill(4);
@@ -184,7 +195,7 @@ export function Frame2SecurityMaturity({
   const height = size;
   const cx = width / 2;
   const cy = height / 2;
-  const radius = Math.min(width, height) / 2 - 28; // padding
+  const radius = Math.min(width, height) / 2 - 22;
 
   const steps = labels.length;
   const stepAngle = 360 / steps;
@@ -192,32 +203,31 @@ export function Frame2SecurityMaturity({
   const targetPoints = valuesToPolygonPath(targetValues, maxValue, cx, cy, radius);
   const currentPoints = valuesToPolygonPath(currentValues, maxValue, cx, cy, radius);
 
-  function polygonDFromPoints(pointsStr: string) {
-    const pts = pointsStr.split(' ').map((p) => p.split(',').map(Number));
-    if (pts.length === 0) return '';
-    const d = ['M ' + pts[0][0] + ' ' + pts[0][1]];
-    for (let i = 1; i < pts.length; i++) d.push('L ' + pts[i][0] + ' ' + pts[i][1]);
-    d.push('Z');
-    return d.join(' ');
-  }
+  const polygonDFromPoints = (pointsStr: string) => {
+    const pts = pointsStr.split(" ").map((p) => p.split(",").map(Number));
+    if (!pts.length) return "";
+    return (
+      "M " +
+      pts[0][0] +
+      " " +
+      pts[0][1] +
+      pts.slice(1).map((p) => " L " + p[0] + " " + p[1]).join("") +
+      " Z"
+    );
+  };
+
   const targetD = polygonDFromPoints(targetPoints);
   const currentD = polygonDFromPoints(currentPoints);
 
-  // label position slightly outside radius
-  // const labelPos = (i: number, offset = 18) => {
-  //     const { x, y } = polarToCartesian(cx, cy, radius + offset, i * stepAngle);
-  //     return { x, y };
-  // };
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.36 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.3 }}
+      className="w-full max-w-[450px] rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[14px] font-semibold text-slate-900">
+      <div className="mb-2 text-[11px] font-semibold text-slate-800">
         Security Maturity Assessment
       </div>
 
@@ -237,90 +247,72 @@ export function Frame2SecurityMaturity({
               cy={cy}
               r={(level / maxValue) * radius}
               fill="none"
-              stroke="#eef2f7"
-              strokeWidth={1}
+              stroke="#f1f5f9"
+              strokeWidth={0.8}
             />
           ))}
 
           {/* radial axes */}
           {labels.map((_, i) => {
             const { x, y } = polarToCartesian(cx, cy, radius, i * stepAngle);
-            return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="#f1f5f9" strokeWidth={1} />;
+            return (
+              <line
+                key={i}
+                x1={cx}
+                y1={cy}
+                x2={x}
+                y2={y}
+                stroke="#f1f5f9"
+                strokeWidth={0.8}
+              />
+            );
           })}
 
           {/* Target polygon */}
           <path
             d={targetD}
-            fill="#f9731650"
+            fill="#f9731625"
             stroke="#f97316"
-            strokeWidth={1.6}
+            strokeWidth={1.2}
             strokeLinejoin="round"
-            strokeLinecap="round"
           />
 
-          {/* Current polygon (animated) */}
+          {/* Current polygon */}
           <motion.g
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: `${cx}px ${cy}px` }}
-            className="mb-5"
           >
             <path
               d={currentD}
-              fill="#05966966"
+              fill="#05966933"
               stroke="#059669"
-              strokeWidth={1.4}
+              strokeWidth={1.2}
               strokeLinejoin="round"
-              strokeLinecap="round"
               opacity={0.95}
             />
             <motion.path
               d={currentD}
               fill="none"
               stroke="#047857"
-              strokeWidth={1.6}
-              strokeLinejoin="round"
+              strokeWidth={1.2}
               strokeDasharray="1000"
               strokeDashoffset={1000}
               animate={{ strokeDashoffset: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             />
           </motion.g>
 
-          {/* radially rotated labels */}
-          {/* {labels.map((lab, i) => {
-                        const ang = i * stepAngle; // degrees
-                        const pos = labelPos(i, 18);
-
-                        // rotate label along the spoke. If label would be upside-down (between 90..270), flip 180 so it's readable.
-                        let rotateDeg = ang;
-                        if (ang > 90 && ang < 270) rotateDeg = ang + 180;
-
-                        return (
-                            <text
-                                key={i}
-                                transform={`translate(${pos.x}, ${pos.y}) rotate(${rotateDeg})`}
-                                fontSize={9}
-                                fill="#374151"
-                                textAnchor="middle"
-                                alignmentBaseline="middle"
-                            >
-                                {lab}
-                            </text>
-                        );
-                    })} */}
-
           {/* legend */}
-          <g transform={`translate(${12}, ${height - 10})`}>
-            <rect x={0} y={-10} width={10} height={6} fill="#f97316" rx={2} />
-            <text x={14} y={-4} fontSize={10} fill="#111827">
-              Target State
+          <g transform={`translate(${10}, ${height - 8})`}>
+            <rect x={0} y={-8} width={9} height={6} fill="#f97316" rx={1.5} />
+            <text x={13} y={-3} fontSize={9} fill="#374151">
+              Target
             </text>
-
-            <rect x={120} y={-10} width={10} height={6} fill="#059669" rx={2} />
-            <text x={136} y={-4} fontSize={10} fill="#111827">
-              Current State
+            <rect x={70} y={-8} width={9} height={6} fill="#059669" rx={1.5} />
+            <text x={84} y={-3} fontSize={9} fill="#374151">
+              Current
             </text>
           </g>
         </svg>
@@ -330,64 +322,71 @@ export function Frame2SecurityMaturity({
 }
 
 function Frame3ThreatVector() {
-  // explicitly type the variants
   const container: Variants = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.08, when: 'beforeChildren' } },
+    visible: { transition: { staggerChildren: 0.05, when: "beforeChildren" } },
   };
 
   const item: Variants = {
-    hidden: { opacity: 0, y: 8 },
+    hidden: { opacity: 0, y: 5 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.36, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   const paragraphs: React.ReactNode[] = [
     <>
-      <span className="text-[11px]">
-        A closer analysis of <strong>threat vectors</strong> shows{' '}
-        <strong className="underline">critical and high-risk exposures</strong> across various
-        categories, including <u>malware</u>, <u>email security</u>, <u>identity</u>, <u>cloud</u>,{' '}
-        <u>applications</u>, and <u>brand risk</u>.
+      <span className="text-[10px] leading-[1.25] text-slate-700">
+        A closer analysis of <strong>threat vectors</strong> shows{" "}
+        <strong className="underline">
+          critical and high-risk exposures
+        </strong>{" "}
+        across categories like <u>malware</u>, <u>email security</u>,{" "}
+        <u>identity</u>, <u>cloud</u>, <u>applications</u>, and{" "}
+        <u>brand risk</u>.
       </span>
     </>,
     <>
-      <span className="text-[11px]">
-        <strong>Notably, brand risk exposure is the highest (4 critical threats identified)</strong>
-        , which is particularly concerning given the potential for intellectual property theft or
-        brand impersonation.
+      <span className="text-[10px] leading-[1.25] text-slate-700">
+        <strong>
+          Notably, brand risk exposure is the highest (4 critical threats
+          identified)
+        </strong>
+        , raising concern for intellectual property theft or brand
+        impersonation.
       </span>
     </>,
     <>
-      <span className="text-[11px]">
-        Additionally, <u>email and identity risks remain significant</u>, which could lead to
-        phishing attacks or credential theft — common attack vectors for organizations with manual
-        processes or legacy systems.
+      <span className="text-[10px] leading-[1.25] text-slate-700">
+        Additionally, <u>email and identity risks remain significant</u>,
+        potentially leading to phishing attacks or credential theft —
+        common vectors for orgs with manual processes or legacy systems.
       </span>
     </>,
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      transition={{ duration: 0.25 }}
+      className="w-full max-w-[440px] rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[14px] font-semibold text-slate-900">Threat Vector Analysis</div>
+      <div className="mb-1.5 text-[10px] font-medium text-slate-800">
+        Threat Vector Analysis
+      </div>
 
       <motion.div
         variants={container}
         initial="hidden"
         animate="visible"
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-1.5"
       >
         {paragraphs.map((p, i) => (
-          <motion.div key={i} variants={item} className="text-slate-700">
+          <motion.div key={i} variants={item}>
             {p}
           </motion.div>
         ))}
@@ -395,6 +394,8 @@ function Frame3ThreatVector() {
     </motion.div>
   );
 }
+
+
 
 export default function CyberRisk() {
   type Step = 'frame1' | 'frame2' | 'frame3';

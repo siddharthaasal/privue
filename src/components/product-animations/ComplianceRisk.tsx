@@ -32,9 +32,9 @@ function useAnimatedNumber(target: number, duration = 700) {
 import { motion as m } from 'framer-motion';
 function CircularRing({
   percent = 0,
-  size = 40,
-  stroke = 3,
-  color = '#10b981',
+  size = 32,
+  stroke = 2,
+  color = "#10b981",
 }: {
   percent: number;
   size?: number;
@@ -43,7 +43,8 @@ function CircularRing({
 }) {
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference * (1 - Math.max(0, Math.min(100, percent)) / 100);
+  const offset =
+    circumference * (1 - Math.max(0, Math.min(100, percent)) / 100);
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
@@ -55,7 +56,14 @@ function CircularRing({
       </defs>
 
       <g transform={`translate(${size / 2}, ${size / 2})`}>
-        <circle r={radius} cx={0} cy={0} fill="none" stroke="#eef2f7" strokeWidth={stroke} />
+        <circle
+          r={radius}
+          cx={0}
+          cy={0}
+          fill="none"
+          stroke="#eef2f7"
+          strokeWidth={stroke}
+        />
         <m.circle
           r={radius}
           cx={0}
@@ -64,10 +72,10 @@ function CircularRing({
           stroke="url(#cg2)"
           strokeWidth={stroke}
           strokeLinecap="round"
-          style={{ rotate: -90, transformOrigin: 'center' }}
+          style={{ rotate: -90, transformOrigin: "center" }}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
         />
@@ -76,10 +84,6 @@ function CircularRing({
   );
 }
 
-/* -------------------------
-  Frame 1 - MinimalCreditOverview
-  (keeps same as your minimal merged card)
---------------------------*/
 function StatTile({
   title,
   value,
@@ -93,19 +97,25 @@ function StatTile({
   percent?: number;
   color?: string;
 }) {
-  const display = typeof value === 'number' ? Math.round(value) : value;
+  const display = typeof value === "number" ? Math.round(value) : value;
   return (
-    <div className="flex min-w-[105px] flex-1 items-center justify-between gap-2 rounded-md bg-white/0 p-2">
+    <div className="flex min-w-[95px] flex-1 items-center justify-between gap-1.5 rounded bg-white/0 p-2">
       <div className="flex flex-col">
-        <div className="text-[11px] font-medium text-slate-800">{title}</div>
-        <div className="mt-1 text-[15px] leading-none font-medium text-slate-900">{display}</div>
-        {sub && <div className="text-muted-foreground mt-0.5 text-[10px]">{sub}</div>}
-      </div>
-
-      <div className="flex items-center">
-        <div className="h-[40px] w-[40px]">
-          <CircularRing percent={percent ?? 0} size={40} stroke={3} color={color ?? '#10b981'} />
+        <div className="text-[9px] font-medium text-slate-700">{title}</div>
+        <div className="mt-0.5 text-[13px] leading-none font-semibold text-slate-900">
+          {display}
         </div>
+        {sub && (
+          <div className="mt-0.5 text-[8px] text-muted-foreground">{sub}</div>
+        )}
+      </div>
+      <div className="flex items-center">
+        <CircularRing
+          percent={percent ?? 0}
+          size={32}
+          stroke={2}
+          color={color ?? "#10b981"}
+        />
       </div>
     </div>
   );
@@ -113,23 +123,23 @@ function StatTile({
 
 function BarRow({ label, score, color }: { label: string; score: number; color?: string }) {
   const animated = useAnimatedNumber(score, 700);
-  const pct = Math.min(100, Math.max(0, animated)); // directly 0–100
+  const pct = Math.min(100, Math.max(0, animated));
 
   return (
-    <div className="flex w-full items-center gap-3">
-      <div className="w-20 text-[11px] font-medium text-slate-800">{label}</div>
+    <div className="flex w-full items-center gap-2">
+      <div className="w-20 text-[9px] font-medium text-slate-700">{label}</div>
 
-      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#f3f4f6]">
+      <div className="h-1 flex-1 overflow-hidden rounded-full bg-[#f3f4f6]">
         <motion.div
-          initial={{ width: '0%' }}
+          initial={{ width: "0%" }}
           animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="h-full rounded-full"
-          style={{ background: color ?? '#111827' }}
+          style={{ background: color ?? "#111827" }}
         />
       </div>
 
-      <div className="w-12 text-right text-[11px] font-medium text-slate-800">
+      <div className="w-10 text-right text-[9px] font-medium text-slate-700">
         {Math.round(animated)}
       </div>
     </div>
@@ -143,33 +153,35 @@ function MinimalComplianceOverview({ autoAnimate = true }: { autoAnimate?: boole
     violations: 0,
     training: 98,
     framework: [
-      { label: 'Regulatory Compliance', score: 95, color: '#10b981' },
-      { label: 'Risk Assessment', score: 88, color: '#111827' },
-      { label: 'Policy Management', score: 92, color: '#111827' },
-      { label: 'Documentation', score: 94, color: '#111827' },
+      { label: "Regulatory Compliance", score: 95, color: "#10b981" },
+      { label: "Risk Assessment", score: 88, color: "#111827" },
+      { label: "Policy Management", score: 92, color: "#111827" },
+      { label: "Documentation", score: 94, color: "#111827" },
     ],
   };
 
-  const animOverall = useAnimatedNumber(autoAnimate ? targets.overall : 0, 800);
-  const animAudit = useAnimatedNumber(autoAnimate ? targets.audit : 0, 800);
-  const animViolations = useAnimatedNumber(autoAnimate ? targets.violations : 0, 800);
-  const animTraining = useAnimatedNumber(autoAnimate ? targets.training : 0, 800);
+  const animOverall = useAnimatedNumber(autoAnimate ? targets.overall : 0, 700);
+  const animAudit = useAnimatedNumber(autoAnimate ? targets.audit : 0, 700);
+  const animViolations = useAnimatedNumber(autoAnimate ? targets.violations : 0, 700);
+  const animTraining = useAnimatedNumber(autoAnimate ? targets.training : 0, 700);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.995 }}
+      initial={{ opacity: 0, y: 8, scale: 0.995 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.32 }}
-      className="w-full max-w-[500px] rounded-lg bg-white/95 p-3 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 5 }}
+      transition={{ duration: 0.25 }}
+      className="w-full max-w-[450px] rounded-md bg-white/95 p-2.5 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 flex items-center justify-between">
-        <div className="text-[11px] font-medium text-slate-800">Compliance Overview</div>
+      <div className="mb-1 flex items-center justify-between">
+        <div className="text-[10px] font-medium text-slate-700">
+          Compliance Overview
+        </div>
       </div>
 
-      {/* top stats */}
-      <div className="mb-3 grid grid-cols-2 gap-2">
+      {/* Top stats */}
+      <div className="mb-2 grid grid-cols-2 gap-1.5">
         <StatTile
           title="Overall Compliance"
           value={`${Math.round(animOverall)}%`}
@@ -200,12 +212,12 @@ function MinimalComplianceOverview({ autoAnimate = true }: { autoAnimate?: boole
         />
       </div>
 
-      {/* framework bars */}
+      {/* Framework bars */}
       <div>
-        <div className="mb-2 text-[11px] font-medium text-slate-800">
+        <div className="mb-1 text-[10px] font-medium text-slate-700">
           Compliance Framework Overview
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5">
           {targets.framework.map((f) => (
             <BarRow key={f.label} label={f.label} score={f.score} color={f.color} />
           ))}
@@ -215,45 +227,46 @@ function MinimalComplianceOverview({ autoAnimate = true }: { autoAnimate?: boole
   );
 }
 
-/* -------------------------
-  Frame 2: View Credit Analysis (from your screenshot text)
-  Keep styling like Analysis card — clean paragraphs
---------------------------*/
+
+
 function ComplianceAnalysisCard() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[260px] w-[440px] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 6, scale: 0.985 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="max-h-[220px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[10px] font-medium">View Compliance Analysis</div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">
+        View Compliance Analysis
+      </div>
 
-      <div className="text-[12px]">
-        <div className="mb-2">
-          <span className="font-semibold">Regulatory Compliance:</span>{' '}
-          <span className="text-muted-foreground">
-            Maintains high compliance with all applicable regulations. Regular updates to policies
-            and procedures ensure alignment with changing requirements.
-          </span>
+      <div className="space-y-1.5 text-[10px] leading-snug text-slate-700">
+        <div>
+          <span className="font-semibold text-slate-800">
+            Regulatory Compliance:
+          </span>{" "}
+          Maintains high compliance with all applicable regulations. Regular
+          updates to policies and procedures ensure alignment with changing
+          requirements.
         </div>
 
-        <div className="mb-2">
-          <span className="font-semibold">Audit Performance:</span>{' '}
-          <span className="text-muted-foreground">
-            Clean audit reports with minor recommendations. All previous audit findings have been
-            addressed and closed.
-          </span>
+        <div>
+          <span className="font-semibold text-slate-800">
+            Audit Performance:
+          </span>{" "}
+          Clean audit reports with minor recommendations. All previous audit
+          findings have been addressed and closed.
         </div>
 
-        <div className="mb-2">
-          <span className="font-semibold">Risk Management:</span>{' '}
-          <span className="text-muted-foreground">
-            Proactive risk assessment and mitigation strategies in place. Regular reviews and
-            updates to risk management framework.{' '}
-          </span>
+        <div>
+          <span className="font-semibold text-slate-800">
+            Risk Management:
+          </span>{" "}
+          Proactive risk assessment and mitigation strategies in place. Regular
+          reviews and updates to risk management framework.
         </div>
       </div>
     </motion.div>
@@ -261,28 +274,30 @@ function ComplianceAnalysisCard() {
 }
 
 /* -------------------------
-  Frame 3: Risk Factors (bulleted)
+  Recent Updates (bulleted)
 --------------------------*/
 function RecentUpdates() {
   const factors = [
-    'Updated environmental compliance policies',
-    'Enhanced data protection measures implemented',
-    'New staff training modules on regulatory changes',
-    'Quarterly compliance review completed',
+    "Updated environmental compliance policies",
+    "Enhanced data protection measures implemented",
+    "New staff training modules on regulatory changes",
+    "Quarterly compliance review completed",
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[220px] w-[440px] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 6, scale: 0.985 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[10px] font-medium">Recent Updates</div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">
+        Recent Updates
+      </div>
 
-      <ul className="text-muted-foreground list-disc space-y-2 pl-4 text-[13px]">
+      <ul className="list-disc space-y-1.5 pl-4 text-[10px] leading-snug text-slate-700">
         {factors.map((f, i) => (
           <li key={i}>{f}</li>
         ))}
@@ -292,28 +307,30 @@ function RecentUpdates() {
 }
 
 /* -------------------------
-  Frame 4: Recommendations (bulleted)
+  Recommendations (bulleted)
 --------------------------*/
 function RecommendationsCard() {
   const recs = [
-    'Enhance monitoring of emerging regulatory requirements',
-    'Strengthen documentation processes for policy updates',
-    'Increase frequency of internal compliance audits',
-    'Develop additional training modules for specific departments',
+    "Enhance monitoring of emerging regulatory requirements",
+    "Strengthen documentation processes for policy updates",
+    "Increase frequency of internal compliance audits",
+    "Develop additional training modules for specific departments",
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[220px] w-[440px] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm"
+      exit={{ opacity: 0, y: 6, scale: 0.985 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-3 text-[10px] font-medium">Recommendations</div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">
+        Recommendations
+      </div>
 
-      <ul className="text-muted-foreground list-disc space-y-2 pl-4 text-[13px]">
+      <ul className="list-disc space-y-1.5 pl-4 text-[10px] leading-snug text-slate-700">
         {recs.map((r, i) => (
           <li key={i}>{r}</li>
         ))}
@@ -321,6 +338,7 @@ function RecommendationsCard() {
     </motion.div>
   );
 }
+
 
 /* -------------------------
   Main component — only frames 1..4

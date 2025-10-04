@@ -66,7 +66,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          // className="text-lg text-foreground font-medium max-w-2xl"
+        // className="text-lg text-foreground font-medium max-w-2xl"
         >
           <p className="mt-4 max-w-lg text-lg text-gray-700 dark:text-gray-400">
             Discover data-backed signals for smarter decisions. Mitigate risk and unlock high-value

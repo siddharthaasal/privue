@@ -38,9 +38,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Header />
       </div>
 
-      <main className="bg-background relative z-1 mx-auto mt-[3rem] mb-[35rem] max-w-[1200px] border-r border-l border-gray-200">
+      <main
+        className="
+    bg-background relative z-1 mx-auto 
+    mt-[3rem] 
+    mb-[12rem] sm:mb-[35rem]     /* smaller gap on mobile */
+    w-full max-w-full sm:max-w-[1200px]  /* full width on mobile, 1200px cap on sm+ */
+    border-0 sm:border-l sm:border-r sm:border-gray-200  /* remove side borders on mobile */
+  "
+      >
         {children}
       </main>
+
       <Toaster />
       <Footer />
     </div>

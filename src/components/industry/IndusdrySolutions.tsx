@@ -243,7 +243,7 @@ export default function IndustryModules() {
 
   // Render
   return (
-    <section className="py-12" id="industries-section">
+    <section id="industries-section">
       {/* background / decorative element copied from your original component */}
       <div className="absolute inset-0 -z-10 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 

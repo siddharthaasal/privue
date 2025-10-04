@@ -1,11 +1,11 @@
 // App.tsx
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // small UI fallback while chunks load
-function PageFallback() {
-  return <div style={{ padding: 40, textAlign: 'center' }}>Loading…</div>;
-}
+// function PageFallback() {
+//   return <div style={{ padding: 40, textAlign: 'center' }}>Loading…</div>;
+// }
 
 /**
  * Lazy-load every route so Vite creates separate chunks for each page.
@@ -35,32 +35,32 @@ const DataSecurity = lazy(() => import('./pages/legal/DataSecurity'));
 export default function App() {
   return (
     // Outer Suspense catches route chunk loads; use nested Suspense for more granular fallbacks if desired
-    <Suspense fallback={<PageFallback />}>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/articles" element={<ArticleListing />} />
-        <Route path="/dummy-articles" element={<DummyArticleListing />} />
-        <Route path="/show" element={<ShowcasePage />} />
-        <Route path="/test" element={<TestBlogPage />} />
-        <Route path="/workflow" element={<Workflow />} />
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/article" element={<ArticlePage />} />
-        <Route path="/articles/:slug" element={<ArticlePage />} />
-        <Route path="/articles-0" element={<OldArticleListing />} />
-        <Route path="/styles" element={<TestStyles />} />
-        <Route path="/solutions-final" element={<SolutionsPage />} />
-        <Route path="/solution1" element={<DPM />} />
-        <Route path="/solution2" element={<Sustainability />} />
-        <Route path="/contact" element={<ContactPage />} />
-        {/* legal */}
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
-        <Route path="/california-notice" element={<CaliforniaNotice />} />
-        <Route path="/data-security" element={<DataSecurity />} />
-        <Route path="/solutions/:slug" element={<SolutionsPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+    // <Suspense fallback={<PageFallback />}>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/articles" element={<ArticleListing />} />
+      <Route path="/dummy-articles" element={<DummyArticleListing />} />
+      <Route path="/show" element={<ShowcasePage />} />
+      <Route path="/test" element={<TestBlogPage />} />
+      <Route path="/workflow" element={<Workflow />} />
+      <Route path="/products" element={<ProductPage />} />
+      <Route path="/article" element={<ArticlePage />} />
+      <Route path="/articles/:slug" element={<ArticlePage />} />
+      <Route path="/articles-0" element={<OldArticleListing />} />
+      <Route path="/styles" element={<TestStyles />} />
+      <Route path="/solutions-final" element={<SolutionsPage />} />
+      <Route path="/solution1" element={<DPM />} />
+      <Route path="/solution2" element={<Sustainability />} />
+      <Route path="/contact" element={<ContactPage />} />
+      {/* legal */}
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/cookie-policy" element={<CookiePolicy />} />
+      <Route path="/california-notice" element={<CaliforniaNotice />} />
+      <Route path="/data-security" element={<DataSecurity />} />
+      <Route path="/solutions/:slug" element={<SolutionsPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+    // </Suspense>
   );
 }

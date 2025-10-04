@@ -42,8 +42,8 @@
     "url": "/articles/redefining-commercial-lines-underwriting"
   },
   {
-    "slug": "optimising-distributor-credit-risk-management",
-    "title": "Optimising Distributor Credit Risk Management",
+    "slug": "optimising-distributor-credit-management",
+    "title": "Optimising Distributor Credit Management",
     "date": "2025-05-20",
     "author": "Saurabh Verma",
     "summary": "Optimizing Financial Performance Through Data-Driven Credit Decisions",
@@ -55,12 +55,12 @@
       "B2B"
     ],
     "articleType": "Case Study",
-    "solutionName": "Distributor Credit Risk Management",
+    "solutionName": "Distributor Credit Management",
     "solutionLink": "solutions/distributor-performance-management",
     "coverImage": "/articles-test-images/distributor-credit-risk.jpg",
     "readTime": "2 min",
     "file": "src/data/articles/optimising-distributor-credit-risk-management.mdx",
-    "url": "/articles/optimising-distributor-credit-risk-management"
+    "url": "/articles/optimising-distributor-credit-management"
   },
   {
     "slug": "mitigating-risk-in-global-supplier-selection",

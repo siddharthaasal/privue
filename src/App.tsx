@@ -1,35 +1,47 @@
+// App.tsx
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import NotFound from './pages/NotFound';
-import ArticleListing from './pages/articles/ArticleListing';
-import TestBlogPlage from './pages/TestBlogPage.tsx';
-import ShowcasePage from './pages/test/ShowcasePage.tsx';
-import Workflow from './pages/Workflow.tsx';
-import ArticlePage from './pages/articles/ArticlePage';
-import OldArticleListing from './pages/articles/OldArticleListing';
-import TestStyles from './pages/TestStyles';
-import ContactPage from './pages/contact/ContactPage';
-import ProductPage from './pages/ProductPage.tsx';
-// legal
-import Terms from './pages/legal/Terms';
-import PrivacyPolicy from './pages/legal/PrivacyPolicy';
-import SolutionsPage from './pages/solutions/SolutionsPage';
-import DPM from './pages/solutions/DPM';
-import Sustainability from './pages/solutions/Sustainability';
-import DummyArticleListing from './pages/test/DummyArticles.tsx';
-import CookiePolicy from './pages/legal/CookiePolicy.tsx';
-import CaliforniaNotice from './pages/legal/CaliforniaNotice.tsx';
-import DataSecurity from './pages/legal/DataSecurity.tsx';
 
-function App() {
+// small UI fallback while chunks load
+function PageFallback() {
+  return <div style={{ padding: 40, textAlign: 'center' }}>Loading…</div>;
+}
+
+/**
+ * Lazy-load every route so Vite creates separate chunks for each page.
+ * This will drastically reduce initial bundle size (index-*.js).
+ */
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const ArticleListing = lazy(() => import('./pages/articles/ArticleListing'));
+const TestBlogPage = lazy(() => import('./pages/TestBlogPage'));
+const ShowcasePage = lazy(() => import('./pages/test/ShowcasePage'));
+const Workflow = lazy(() => import('./pages/Workflow'));
+const ArticlePage = lazy(() => import('./pages/articles/ArticlePage'));
+const OldArticleListing = lazy(() => import('./pages/articles/OldArticleListing'));
+const TestStyles = lazy(() => import('./pages/TestStyles'));
+const ContactPage = lazy(() => import('./pages/contact/ContactPage'));
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const Terms = lazy(() => import('./pages/legal/Terms'));
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'));
+const SolutionsPage = lazy(() => import('./pages/solutions/SolutionsPage'));
+const DPM = lazy(() => import('./pages/solutions/DPM'));
+const Sustainability = lazy(() => import('./pages/solutions/Sustainability'));
+const DummyArticleListing = lazy(() => import('./pages/test/DummyArticles'));
+const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'));
+const CaliforniaNotice = lazy(() => import('./pages/legal/CaliforniaNotice'));
+const DataSecurity = lazy(() => import('./pages/legal/DataSecurity'));
+
+export default function App() {
   return (
-    <>
+    // Outer Suspense catches route chunk loads; use nested Suspense for more granular fallbacks if desired
+    <Suspense fallback={<PageFallback />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/articles" element={<ArticleListing />} />
         <Route path="/dummy-articles" element={<DummyArticleListing />} />
         <Route path="/show" element={<ShowcasePage />} />
-        <Route path="/test" element={<TestBlogPlage />} />
+        <Route path="/test" element={<TestBlogPage />} />
         <Route path="/workflow" element={<Workflow />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/article" element={<ArticlePage />} />
@@ -49,8 +61,6 @@ function App() {
         <Route path="/solutions/:slug" element={<SolutionsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </Suspense>
   );
 }
-
-export default App;

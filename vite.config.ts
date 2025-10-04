@@ -39,19 +39,42 @@ export default defineConfig({
     include: ['react', 'react-dom'],
   },
   build: {
+    // vite.config.js (manualChunks replacement)
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            // if (id.includes('react-dom')) return 'react-dom';
-            // if (id.includes('react')) return 'react';
-            if (id.includes('react') || id.includes('react-dom')) return 'react-vendor';
-            if (id.includes('framer-motion')) return 'framer';
-            if (id.includes('react-icons')) return 'icons';
-            if (id.includes('recharts')) return 'recharts';
-            if (id.includes('reactflow')) return 'reactflow';
+        // vite.config.ts (or .js) — replace your manualChunks with this
+        manualChunks(id: string) {
+          if (!id || !id.includes('node_modules')) return;
+
+          // find the *last* occurrence so pnpm's ".pnpm/..." doesn't confuse us
+          const nmPrefix = 'node_modules/';
+          const last = id.lastIndexOf(nmPrefix);
+          if (last === -1) return;
+
+          const nmPath = id.slice(last + nmPrefix.length); // e.g. react-dom/index.js or @scope/pkg/...
+          const segments = nmPath.split('/');
+          if (segments.length === 0) return;
+
+          // scoped packages: @scope/name
+          const pkgName = segments[0].startsWith('@') && segments.length > 1
+            ? `${segments[0]}/${segments[1]}`
+            : segments[0];
+
+          const safeName = pkgName.replace('@', '').replace('/', '-');
+
+          // explicit named buckets for very large libs (optional)
+          if (pkgName === 'react' || pkgName === 'react-dom') {
+            return 'vendor-react'; // both react and react-dom -> vendor-react
           }
-        },
+          if (pkgName.includes('recharts')) return 'vendor-recharts';
+          if (pkgName.includes('framer-motion')) return 'vendor-framer-motion';
+          if (pkgName.includes('reactflow')) return 'vendor-reactflow';
+          if (pkgName.includes('zod')) return 'vendor-zod';
+
+          // default: per-package vendor chunk
+          return `vendor-${safeName}`;
+        }
+
       },
     },
   },

@@ -369,7 +369,9 @@ export function Frame3Chat({
       role="region"
       aria-label="Engineering report assistant"
     >
-      <div className="mb-2 text-[12px] font-semibold text-slate-900">Engineering Report Assistant</div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-900">
+        Engineering Report Assistant
+      </div>
 
       <div className="flex flex-col gap-2">
         {(phase === 'userShown' || phase === 'incomingTyping' || phase === 'answerShown') && (
@@ -445,7 +447,6 @@ export function Frame3Chat({
   );
 }
 
-
 /* ---------- FRAME 4: Saved Notes (minimal cards; new added on TOP with distinct bg) ---------- */
 export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
   const [notes, setNotes] = useState<
@@ -504,7 +505,7 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="w-[440px] rounded-md bg-white p-2.5 ring-1 ring-slate-100 shadow-sm"
+      className="w-[440px] rounded-md bg-white p-2.5 shadow-sm ring-1 ring-slate-100"
       aria-label="Saved notes"
     >
       <div className="mb-2 flex items-center justify-between">
@@ -525,10 +526,7 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
         {notes.map((note) => (
           <div
             key={note.id}
-            className={clsx(
-              'rounded-md border px-3 py-2',
-              note.isNew ? 'ring-2' : 'ring-0'
-            )}
+            className={clsx('rounded-md border px-3 py-2', note.isNew ? 'ring-2' : 'ring-0')}
             style={{
               background: note.isNew
                 ? `linear-gradient(180deg, ${privue[600]}12, ${privue[700]}08)`
@@ -537,8 +535,8 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
               boxShadow: note.isNew ? '0 6px 18px rgba(76,110,245,0.04)' : undefined,
             }}
           >
-            <div className="text-[12px] font-medium text-slate-800 truncate">{note.title}</div>
-            <div className="mt-0.5 text-[11px] text-slate-600 truncate">{note.body}</div>
+            <div className="truncate text-[12px] font-medium text-slate-800">{note.title}</div>
+            <div className="mt-0.5 truncate text-[11px] text-slate-600">{note.body}</div>
           </div>
         ))}
 
@@ -569,7 +567,6 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
     </motion.div>
   );
 }
-
 
 /* ------------------------
   Top-level orchestration: step1 upload -> step2 processing (all 4 sequential) -> step3 chat -> step4 saved notes

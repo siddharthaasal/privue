@@ -113,9 +113,7 @@ export default function VerticalModules({ items }: Props) {
 
           {/* Right: Animation or Image */}
           <div className="relative col-span-2 flex overflow-hidden rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset">
-            <div
-              className="relative flex max-h-[600px] min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset"
-            >
+            <div className="relative flex max-h-[600px] min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active?.id}

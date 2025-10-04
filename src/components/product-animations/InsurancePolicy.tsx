@@ -364,8 +364,9 @@ export function PolicyOverviewCompact() {
             <motion.div
               key={r.key}
               variants={rowVariants}
-              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${isSectionHeader ? 'bg-transparent' : ''
-                }`}
+              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${
+                isSectionHeader ? 'bg-transparent' : ''
+              }`}
             >
               <div
                 className={`text-[10px] ${isSectionHeader ? 'font-medium text-slate-700' : 'text-[10px] text-slate-800'}`}
@@ -376,8 +377,9 @@ export function PolicyOverviewCompact() {
               <div className="text-right">
                 {r.value ? (
                   <div
-                    className={`text-[10px] ${r.highlight ? 'font-medium' : 'font-normal'} ${r.highlight ? '' : 'text-slate-800'
-                      }`}
+                    className={`text-[10px] ${r.highlight ? 'font-medium' : 'font-normal'} ${
+                      r.highlight ? '' : 'text-slate-800'
+                    }`}
                     style={r.highlight ? { color: '#4c6ef5' } : {}}
                   >
                     {r.value}

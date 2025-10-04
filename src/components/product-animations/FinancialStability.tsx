@@ -549,7 +549,6 @@ export default function RiskAssessmentTour() {
         />
       </div>
 
-
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (

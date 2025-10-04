@@ -42,7 +42,6 @@ export const CardStack = ({
     return () => {
       if (intervalRef.current) window.clearInterval(intervalRef.current);
     };
-     
   }, []);
 
   const startFlipping = () => {

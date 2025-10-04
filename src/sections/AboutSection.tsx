@@ -52,7 +52,7 @@ export default function AboutSection() {
                   // src="/workflow-illustration.png"
                   src="/workflow-img.png"
                   alt="workflow illustration"
-                  className="h-auto w-full rounded-[12px] object-cover shadow mt-12 scale-110"
+                  className="mt-12 h-auto w-full scale-110 rounded-[12px] object-cover shadow"
                 />
               </div>
             </div>

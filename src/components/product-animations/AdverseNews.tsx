@@ -95,7 +95,7 @@ function StatCard({
   big,
   subtitle,
   percent,
-  accent = "#111827",
+  accent = '#111827',
 }: {
   title: string;
   big: React.ReactNode;
@@ -113,9 +113,7 @@ function StatCard({
     >
       <div className="min-w-0 flex-1">
         {/* Title */}
-        <div className="text-[11px] font-medium text-slate-700 leading-tight">
-          {title}
-        </div>
+        <div className="text-[11px] leading-tight font-medium text-slate-700">{title}</div>
 
         {/* Big Number */}
         <div className="mt-1 truncate text-[18px] leading-tight font-semibold text-slate-900">
@@ -124,14 +122,12 @@ function StatCard({
 
         {/* Subtitle */}
         {subtitle && (
-          <div className="mt-0.5 text-[10px] text-muted-foreground leading-snug">
-            {subtitle}
-          </div>
+          <div className="text-muted-foreground mt-0.5 text-[10px] leading-snug">{subtitle}</div>
         )}
       </div>
 
       {/* Ring (optional) */}
-      {typeof percent === "number" && (
+      {typeof percent === 'number' && (
         <div className="flex h-8 w-8 shrink-0 items-center justify-center">
           <CircularRing percent={percent} size={28} stroke={2} color={accent} />
         </div>
@@ -139,7 +135,6 @@ function StatCard({
     </motion.div>
   );
 }
-
 
 // Frame 1: compact layout with max width 500px
 function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) {
@@ -170,12 +165,7 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
         {/* Card 1: Total Articles */}
         <StatCard
           title="Total Articles"
-          big={
-            <AnimatedNumber
-              value={aArticles}
-              format={(v) => String(Math.round(v))}
-            />
-          }
+          big={<AnimatedNumber value={aArticles} format={(v) => String(Math.round(v))} />}
           subtitle="Last 30 days"
           accent="#111827"
         />
@@ -183,12 +173,7 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
         {/* Card 2: Negative Sentiment */}
         <StatCard
           title="Negative Sentiment"
-          big={
-            <AnimatedNumber
-              value={aNegative}
-              format={(v) => String(Math.round(v))}
-            />
-          }
+          big={<AnimatedNumber value={aNegative} format={(v) => String(Math.round(v))} />}
           subtitle={`${targets.negativePct}% of total`}
           percent={targets.negativePct}
           accent="#ef4444"
@@ -199,12 +184,7 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
       <div className="flex gap-1.5">
         <StatCard
           title="High Risk"
-          big={
-            <AnimatedNumber
-              value={aHighRisk}
-              format={(v) => String(Math.round(v))}
-            />
-          }
+          big={<AnimatedNumber value={aHighRisk} format={(v) => String(Math.round(v))} />}
           subtitle="Immediate attention"
           accent="#f97316"
         />
@@ -212,17 +192,10 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
         {/* Card 4: Media Coverage */}
         <StatCard
           title="Media Coverage"
-          big={
-            <AnimatedNumber
-              value={aMediaPct}
-              format={(v) => `${Math.round(Number(v))}%`}
-            />
-          }
+          big={<AnimatedNumber value={aMediaPct} format={(v) => `${Math.round(Number(v))}%`} />}
           subtitle={
-            <span className="text-[10px] text-red-600 leading-tight">
-              <span className="inline-block align-middle">
-                ↑ {targets.mediaDelta}%
-              </span>{' '}
+            <span className="text-[10px] leading-tight text-red-600">
+              <span className="inline-block align-middle">↑ {targets.mediaDelta}%</span>{' '}
               <span className="text-muted-foreground">vs last month</span>
             </span>
           }
@@ -233,7 +206,6 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
     </motion.div>
   );
 }
-
 
 /* -------------------------
   Frame 2: Minimal Recent News
@@ -254,20 +226,18 @@ function NewsCard({
   date: string;
   summary: string;
   tags: string[];
-  sentiment: "positive" | "negative";
-  risk: "low" | "medium" | "high";
+  sentiment: 'positive' | 'negative';
+  risk: 'low' | 'medium' | 'high';
 }) {
   const sentimentColor =
-    sentiment === "positive"
-      ? "bg-green-50 text-green-600"
-      : "bg-red-50 text-red-600";
+    sentiment === 'positive' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600';
 
   const riskColor =
-    risk === "low"
-      ? "bg-green-50 text-green-600"
-      : risk === "medium"
-        ? "bg-yellow-50 text-yellow-600"
-        : "bg-red-50 text-red-600";
+    risk === 'low'
+      ? 'bg-green-50 text-green-600'
+      : risk === 'medium'
+        ? 'bg-yellow-50 text-yellow-600'
+        : 'bg-red-50 text-red-600';
 
   return (
     <motion.div
@@ -278,16 +248,10 @@ function NewsCard({
     >
       {/* Header */}
       <div className="flex items-start justify-between gap-1.5">
-        <div className="text-[11px] font-medium text-slate-900 leading-snug">
-          {title}
-        </div>
+        <div className="text-[11px] leading-snug font-medium text-slate-900">{title}</div>
         <div className="flex shrink-0 gap-1 text-[9px]">
-          <span className={`rounded-full px-1.5 py-0.5 ${sentimentColor}`}>
-            {sentiment}
-          </span>
-          <span className={`rounded-full px-1.5 py-0.5 ${riskColor}`}>
-            {risk} risk
-          </span>
+          <span className={`rounded-full px-1.5 py-0.5 ${sentimentColor}`}>{sentiment}</span>
+          <span className={`rounded-full px-1.5 py-0.5 ${riskColor}`}>{risk} risk</span>
         </div>
       </div>
 
@@ -300,7 +264,7 @@ function NewsCard({
       </div>
 
       {/* Summary */}
-      <div className="text-[10px] text-slate-700 leading-snug">{summary}</div>
+      <div className="text-[10px] leading-snug text-slate-700">{summary}</div>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1 text-[9px]">
@@ -317,8 +281,6 @@ function NewsCard({
   );
 }
 
-
-
 function Frame2NewsOverview() {
   const news = [
     // {
@@ -332,14 +294,14 @@ function Frame2NewsOverview() {
     //   tags: ["Labor Relations", "Workplace Safety"],
     // },
     {
-      title: "Environmental Compliance Issues Under Investigation",
-      sentiment: "negative" as const,
-      risk: "medium" as const,
-      source: "Industry Times",
-      date: "Jan 12, 2024",
+      title: 'Environmental Compliance Issues Under Investigation',
+      sentiment: 'negative' as const,
+      risk: 'medium' as const,
+      source: 'Industry Times',
+      date: 'Jan 12, 2024',
       summary:
-        "Regulatory authorities investigating potential violations of environmental standards at manufacturing facility.",
-      tags: ["Environmental", "Regulatory"],
+        'Regulatory authorities investigating potential violations of environmental standards at manufacturing facility.',
+      tags: ['Environmental', 'Regulatory'],
     },
     // {
     //   title: "Company Announces New Sustainability Initiative",
@@ -352,14 +314,14 @@ function Frame2NewsOverview() {
     //   tags: ["Sustainability", "ESG"],
     // },
     {
-      title: "Financial Irregularities Prompt Internal Audit",
-      sentiment: "negative" as const,
-      risk: "high" as const,
-      source: "Financial Express",
-      date: "Jan 8, 2024",
+      title: 'Financial Irregularities Prompt Internal Audit',
+      sentiment: 'negative' as const,
+      risk: 'high' as const,
+      source: 'Financial Express',
+      date: 'Jan 8, 2024',
       summary:
-        "Board initiates comprehensive internal audit following discrepancies in quarterly financial reporting.",
-      tags: ["Financial", "Governance"],
+        'Board initiates comprehensive internal audit following discrepancies in quarterly financial reporting.',
+      tags: ['Financial', 'Governance'],
     },
     // {
     //   title: "Tax Assessment Dispute Escalates to Tribunal",
@@ -382,17 +344,13 @@ function Frame2NewsOverview() {
       className="flex w-full max-w-[450px] flex-col gap-2 rounded-md bg-white/95 p-2.5 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-0.5 text-[9px] font-medium text-slate-600">
-        Recent News
-      </div>
+      <div className="mb-0.5 text-[9px] font-medium text-slate-600">Recent News</div>
       {news.map((n, i) => (
         <NewsCard key={i} {...n} />
       ))}
     </motion.div>
   );
 }
-
-
 
 /* -------------------------
   Frame 3: Potential Impact Assessment (minimal)
@@ -416,9 +374,9 @@ function AlertIcon({ className = 'w-4 h-4 flex-shrink-0' }: { className?: string
 
 function Frame3ImpactOverview() {
   const items = [
-    "Regulatory scrutiny and potential penalties",
-    "Reputational damage affecting customer trust",
-    "Operational disruptions from labor disputes",
+    'Regulatory scrutiny and potential penalties',
+    'Reputational damage affecting customer trust',
+    'Operational disruptions from labor disputes',
   ];
 
   return (
@@ -431,14 +389,10 @@ function Frame3ImpactOverview() {
       aria-live="polite"
     >
       {/* Section Title */}
-      <div className="mb-2 text-[10px] font-medium text-slate-600">
-        Potential Impact Assessment
-      </div>
+      <div className="mb-2 text-[10px] font-medium text-slate-600">Potential Impact Assessment</div>
 
       {/* Subheading */}
-      <div className="mb-1.5 text-[11px] font-semibold text-slate-800">
-        Immediate Risks
-      </div>
+      <div className="mb-1.5 text-[11px] font-semibold text-slate-800">Immediate Risks</div>
 
       {/* List */}
       <motion.ul
@@ -470,7 +424,6 @@ function Frame3ImpactOverview() {
   );
 }
 
-
 /* -------------------------
   Frame 4: Mitigation Strategies (minimal)
 --------------------------*/
@@ -493,9 +446,9 @@ function InfoIcon({ className = 'w-4 h-4 flex-shrink-0' }: { className?: string 
 
 function Frame4MitigationOverview() {
   const strategies = [
-    "Proactive stakeholder engagement and communication",
-    "Enhanced compliance monitoring and reporting",
-    "Crisis communication and reputation management",
+    'Proactive stakeholder engagement and communication',
+    'Enhanced compliance monitoring and reporting',
+    'Crisis communication and reputation management',
   ];
 
   return (
@@ -508,9 +461,7 @@ function Frame4MitigationOverview() {
       aria-live="polite"
     >
       {/* Title */}
-      <div className="mb-2 text-[11px] font-semibold text-slate-800">
-        Mitigation Strategies
-      </div>
+      <div className="mb-2 text-[11px] font-semibold text-slate-800">Mitigation Strategies</div>
 
       {/* List */}
       <motion.ul
@@ -541,7 +492,6 @@ function Frame4MitigationOverview() {
     </motion.div>
   );
 }
-
 
 export default function AdverseNews() {
   type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';

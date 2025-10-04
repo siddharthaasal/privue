@@ -34,7 +34,7 @@ function CircularRing({
   percent = 0,
   size = 32,
   stroke = 2,
-  color = "#10b981",
+  color = '#10b981',
 }: {
   percent: number;
   size?: number;
@@ -43,8 +43,7 @@ function CircularRing({
 }) {
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
-  const offset =
-    circumference * (1 - Math.max(0, Math.min(100, percent)) / 100);
+  const offset = circumference * (1 - Math.max(0, Math.min(100, percent)) / 100);
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
@@ -55,14 +54,7 @@ function CircularRing({
         </linearGradient>
       </defs>
       <g transform={`translate(${size / 2}, ${size / 2})`}>
-        <circle
-          r={radius}
-          cx={0}
-          cy={0}
-          fill="none"
-          stroke="#eef2f7"
-          strokeWidth={stroke}
-        />
+        <circle r={radius} cx={0} cy={0} fill="none" stroke="#eef2f7" strokeWidth={stroke} />
         <m.circle
           r={radius}
           cx={0}
@@ -71,7 +63,7 @@ function CircularRing({
           stroke="url(#cg2)"
           strokeWidth={stroke}
           strokeLinecap="round"
-          style={{ rotate: -90, transformOrigin: "center" }}
+          style={{ rotate: -90, transformOrigin: 'center' }}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -96,7 +88,7 @@ function StatTile({
   percent?: number;
   color?: string;
 }) {
-  const display = typeof value === "number" ? Math.round(value) : value;
+  const display = typeof value === 'number' ? Math.round(value) : value;
   return (
     <div className="flex min-w-[95px] flex-1 items-center justify-between gap-1.5 rounded bg-white/0 p-2">
       <div className="flex flex-col">
@@ -104,17 +96,10 @@ function StatTile({
         <div className="mt-0.5 text-[13px] leading-none font-semibold text-slate-900">
           {display}
         </div>
-        {sub && (
-          <div className="mt-0.5 text-[9px] text-muted-foreground">{sub}</div>
-        )}
+        {sub && <div className="text-muted-foreground mt-0.5 text-[9px]">{sub}</div>}
       </div>
       <div className="flex items-center">
-        <CircularRing
-          percent={percent ?? 0}
-          size={32}
-          stroke={2}
-          color={color ?? "#10b981"}
-        />
+        <CircularRing percent={percent ?? 0} size={32} stroke={2} color={color ?? '#10b981'} />
       </div>
     </div>
   );
@@ -129,11 +114,11 @@ function BarRow({ label, score, color }: { label: string; score: number; color?:
       <div className="w-20 text-[9px] font-medium text-slate-700">{label}</div>
       <div className="h-1 flex-1 overflow-hidden rounded-full bg-[#f3f4f6]">
         <motion.div
-          initial={{ width: "0%" }}
+          initial={{ width: '0%' }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="h-full rounded-full"
-          style={{ background: color ?? "#111827" }}
+          style={{ background: color ?? '#111827' }}
         />
       </div>
       <div className="w-10 text-right text-[9px] font-medium text-slate-700">
@@ -150,10 +135,10 @@ function MinimalCreditOverview({ autoAnimate = true }: { autoAnimate?: boolean }
     utilization: 65,
     defaultProb: 2.5,
     bureau: [
-      { label: "CIBIL", score: 750, color: "#10b981" },
-      { label: "Experian", score: 725, color: "#111827" },
-      { label: "Equifax", score: 738, color: "#111827" },
-      { label: "CRIF", score: 710, color: "#111827" },
+      { label: 'CIBIL', score: 750, color: '#10b981' },
+      { label: 'Experian', score: 725, color: '#111827' },
+      { label: 'Equifax', score: 738, color: '#111827' },
+      { label: 'CRIF', score: 710, color: '#111827' },
     ],
   };
 
@@ -221,7 +206,6 @@ function MinimalCreditOverview({ autoAnimate = true }: { autoAnimate?: boolean }
   );
 }
 
-
 /* -------------------------
   Frame 2: View Credit Analysis (from your screenshot text)
   Keep styling like Analysis card — clean paragraphs
@@ -232,38 +216,29 @@ function CreditAnalysisCard() {
       initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       className="max-h-[220px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 text-[9px] font-medium text-slate-700">
-        View Credit Analysis
-      </div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">View Credit Analysis</div>
 
       <div className="space-y-1.5 text-[10px] leading-snug text-slate-700">
         <div>
-          <span className="font-semibold text-slate-800">
-            Payment History:
-          </span>{" "}
-          Excellent track record with 98% on-time payments over the past 24
-          months. Only 2 late payments, both less than 30 days overdue.
+          <span className="font-semibold text-slate-800">Payment History:</span> Excellent track
+          record with 98% on-time payments over the past 24 months. Only 2 late payments, both less
+          than 30 days overdue.
         </div>
 
         <div>
-          <span className="font-semibold text-slate-800">
-            Credit Utilization:
-          </span>{" "}
-          Currently at 65% of available credit limits. While this is higher than
-          ideal, it reflects the company's growth phase and working capital
-          needs.
+          <span className="font-semibold text-slate-800">Credit Utilization:</span> Currently at 65%
+          of available credit limits. While this is higher than ideal, it reflects the company's
+          growth phase and working capital needs.
         </div>
 
         <div>
-          <span className="font-semibold text-slate-800">
-            Default Risk Assessment:
-          </span>{" "}
-          Low probability of default (2.5%) based on strong cash flows,
-          diversified revenue streams, and consistent profitability growth.
+          <span className="font-semibold text-slate-800">Default Risk Assessment:</span> Low
+          probability of default (2.5%) based on strong cash flows, diversified revenue streams, and
+          consistent profitability growth.
         </div>
       </div>
     </motion.div>
@@ -275,10 +250,10 @@ function CreditAnalysisCard() {
 --------------------------*/
 function RiskFactorsCard() {
   const factors = [
-    "High credit utilization rate (65%)",
-    "Working capital constraints indicated by low current ratio",
-    "Significant revenue decline in recent year (-50% YoY)",
-    "High reliance on debt financing",
+    'High credit utilization rate (65%)',
+    'Working capital constraints indicated by low current ratio',
+    'Significant revenue decline in recent year (-50% YoY)',
+    'High reliance on debt financing',
   ];
 
   return (
@@ -286,13 +261,11 @@ function RiskFactorsCard() {
       initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 text-[9px] font-medium text-slate-700">
-        Risk Factors
-      </div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">Risk Factors</div>
 
       <ul className="list-disc space-y-1.5 pl-4 text-[10px] leading-snug text-slate-700">
         {factors.map((f, i) => (
@@ -308,10 +281,10 @@ function RiskFactorsCard() {
 --------------------------*/
 function RecommendationsCard() {
   const recs = [
-    "Reduce credit utilization to below 50% through better working capital management",
-    "Maintain strong payment history to preserve excellent credit scores",
-    "Consider additional equity financing to reduce reliance on debt",
-    "Implement revenue growth strategies to improve cash flows",
+    'Reduce credit utilization to below 50% through better working capital management',
+    'Maintain strong payment history to preserve excellent credit scores',
+    'Consider additional equity financing to reduce reliance on debt',
+    'Implement revenue growth strategies to improve cash flows',
   ];
 
   return (
@@ -319,13 +292,11 @@ function RecommendationsCard() {
       initial={{ opacity: 0, y: 10, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 text-[9px] font-medium text-slate-700">
-        Recommendations
-      </div>
+      <div className="mb-2 text-[9px] font-medium text-slate-700">Recommendations</div>
 
       <ul className="list-disc space-y-1.5 pl-4 text-[10px] leading-snug text-slate-700">
         {recs.map((r, i) => (
@@ -335,7 +306,6 @@ function RecommendationsCard() {
     </motion.div>
   );
 }
-
 
 /* -------------------------
   Main component — only frames 1..4

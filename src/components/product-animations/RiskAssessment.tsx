@@ -135,30 +135,30 @@ function ProbabilityOfDefaultCard({
       role="group"
     >
       <Card className="w-[260px] shadow-sm ring-0">
-        <CardHeader className="pt-2 pb-1 px-3">
+        <CardHeader className="px-3 pt-2 pb-1">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <CardTitle className="text-[9px] font-semibold leading-tight">
+              <CardTitle className="text-[9px] leading-tight font-semibold">
                 Probability of Default
               </CardTitle>
               <Info className="text-muted-foreground h-3 w-3" />
             </div>
 
             <div className="text-right">
-              <div className="text-[11px] font-semibold leading-none">{percent}</div>
-              <div className="text-[8px] text-slate-500 -mt-0.5">{level}</div>
+              <div className="text-[11px] leading-none font-semibold">{percent}</div>
+              <div className="-mt-0.5 text-[8px] text-slate-500">{level}</div>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent className="px-3 pb-3 pt-1">
+        <CardContent className="px-3 pt-1 pb-3">
           {/* segmented bar */}
           <div className="mb-2 flex items-end gap-2" aria-hidden>
             {levels.map((l) => {
               const isActive = l.key === level;
               const inactiveBg = `${l.color}22`; // ~13% alpha hex suffix
               return (
-                <div key={l.key} className="flex-1 min-w-0">
+                <div key={l.key} className="min-w-0 flex-1">
                   <motion.div
                     layout
                     initial={false}
@@ -171,8 +171,9 @@ function ProbabilityOfDefaultCard({
                     className="w-full"
                   />
                   <div
-                    className={`mt-1 text-[8px] text-center ${isActive ? 'font-medium text-slate-800' : 'text-slate-500'
-                      }`}
+                    className={`mt-1 text-center text-[8px] ${
+                      isActive ? 'font-medium text-slate-800' : 'text-slate-500'
+                    }`}
                     style={{ lineHeight: '10px' }}
                   >
                     {l.key}
@@ -191,7 +192,6 @@ function ProbabilityOfDefaultCard({
     </motion.div>
   );
 }
-
 
 function FinancialSnapshotCard() {
   // extracted from the screenshot:

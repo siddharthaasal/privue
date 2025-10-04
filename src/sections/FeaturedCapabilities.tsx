@@ -4,8 +4,7 @@ import { Cpu, GitPullRequestCreateArrow, GitCompare, Landmark, Server } from 'lu
 type IconType =
   | string // image url
   | React.ReactElement // already instantiated <Icon />
-  | React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>; // component
-
+  | React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>; // component
 
 export default function FeaturedCapabilities() {
   const coreCapabilities = [
@@ -67,7 +66,7 @@ export default function FeaturedCapabilities() {
 }
 
 type FeatureCapabilityCardProps = {
-  icon?: IconType
+  icon?: IconType;
   title: string;
   description: string;
 };

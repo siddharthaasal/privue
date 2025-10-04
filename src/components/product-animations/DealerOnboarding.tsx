@@ -154,7 +154,6 @@ export default function DealerOnboarding() {
     }, UNVERIFIED_DISPLAY_MS);
   }
 
-
   // static file percents (keep per-file values as-is)
   const filePercents = [72, 45, 18];
   // target is the average (rounded)
@@ -407,7 +406,6 @@ const TypingController = (() => {
     return () => listeners.delete(listener.id);
   }
 
-
   function teardown() {
     timers.forEach((t) => clearTimeout(t));
     timers = [];
@@ -434,7 +432,11 @@ const TypingController = (() => {
    (visual typing driven by the controller; manual fallback button kept)
    -------------------------- */
 
-function DummyFormCompactSlow({ onSubmit }: { onSubmit: (values: { name: string; gst: string; mobile: string }) => void }) {
+function DummyFormCompactSlow({
+  onSubmit,
+}: {
+  onSubmit: (values: { name: string; gst: string; mobile: string }) => void;
+}) {
   const [dealerName, setDealerName] = useState('');
   const [gstin, setGstin] = useState('');
   const [mobile, setMobile] = useState('');
@@ -448,9 +450,15 @@ function DummyFormCompactSlow({ onSubmit }: { onSubmit: (values: { name: string;
   const idRef = useRef(`typing-listener-${Math.random().toString(36).slice(2)}`);
 
   // keep refs in sync whenever state changes (also use them in onUpdate)
-  useEffect(() => { dealerNameRef.current = dealerName; }, [dealerName]);
-  useEffect(() => { gstinRef.current = gstin; }, [gstin]);
-  useEffect(() => { mobileRef.current = mobile; }, [mobile]);
+  useEffect(() => {
+    dealerNameRef.current = dealerName;
+  }, [dealerName]);
+  useEffect(() => {
+    gstinRef.current = gstin;
+  }, [gstin]);
+  useEffect(() => {
+    mobileRef.current = mobile;
+  }, [mobile]);
 
   useEffect(() => {
     console.log('[Form] subscribing to TypingController', idRef.current);
@@ -585,7 +593,6 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       return () => clearTimeout(t);
     }
     prevVerifiedRef.current = d.verified;
-
   }, [d.verified]);
 
   const isHighlighted = highlightId === d.id;
@@ -660,7 +667,7 @@ function BackgroundDealersTable({
         <div className="text-sm font-medium">Dealers</div>
       </div>
 
-      <div className="h-[calc(100%-64px)] overflow-auto scrollbar-hide">
+      <div className="scrollbar-hide h-[calc(100%-64px)] overflow-auto">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-50 text-slate-600">
             <tr>

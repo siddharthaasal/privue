@@ -104,7 +104,6 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-
   }, [currentIdx]);
 
   const runLifecycle = () => {

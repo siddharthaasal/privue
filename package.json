@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite",
     "type-check": "tsc --noEmit",
     "build": "tsc -b && vite build",
@@ -75,6 +76,7 @@
     "zod": "^4.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.37.0",
     "@stylelint/prettier-config": "^4.0.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^24.1.0",

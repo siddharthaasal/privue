@@ -71,7 +71,7 @@ function SectionAPIs() {
                 <img
                   src="/workflow-img.png"
                   alt="workflow illustration"
-                  className="h-auto w-full rounded-[12px] object-cover shadow mt-12 scale-110"
+                  className="mt-12 h-auto w-full scale-110 rounded-[12px] object-cover shadow"
                 />
               </div>
             </div>
@@ -295,8 +295,9 @@ export function ImageCarousel({
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-opacity ${i === index ? 'opacity-100' : 'opacity-60'
-                } bg-white`}
+              className={`h-2 w-2 rounded-full transition-opacity ${
+                i === index ? 'opacity-100' : 'opacity-60'
+              } bg-white`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

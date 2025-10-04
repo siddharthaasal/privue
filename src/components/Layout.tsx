@@ -38,15 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Header />
       </div>
 
-      <main
-        className="
-    bg-background relative z-1 mx-auto 
-    mt-[3rem] 
-    mb-[20rem] sm:mb-[30rem]     /* smaller gap on mobile */
-    w-full max-w-full sm:max-w-[1200px]  /* full width on mobile, 1200px cap on sm+ */
-    border-0 sm:border-l sm:border-r sm:border-gray-200  /* remove side borders on mobile */
-  "
-      >
+      <main className="bg-background /* smaller gap on mobile */ /* full width on mobile, 1200px cap on sm+ */ /* remove side borders on mobile */ relative z-1 mx-auto mt-[3rem] mb-[20rem] w-full max-w-full border-0 sm:mb-[30rem] sm:max-w-[1200px] sm:border-r sm:border-l sm:border-gray-200">
         {children}
       </main>
 

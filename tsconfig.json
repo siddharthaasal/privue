@@ -11,10 +11,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*",
-        "/*.mdx"
-      ]
+      "@/*": ["./src/*", "/*.mdx"]
     },
     "strict": true,
     "noImplicitAny": true,

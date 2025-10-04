@@ -75,7 +75,6 @@ export function SustainabilityChatNodeInner(): any {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-     
   }, [currentIdx]);
 
   const runLifecycle = () => {

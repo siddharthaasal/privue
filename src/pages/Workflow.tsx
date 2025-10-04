@@ -81,8 +81,12 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
   // helper passed to ReactFlow onInit
   const handleInit = (instance: ReactFlowInstance) => {
     rfRef.current = instance;
-    { console.log("Current nodes:", nodes) }
-    { console.log("Current edges:", edges) }
+    {
+      console.log('Current nodes:', nodes);
+    }
+    {
+      console.log('Current edges:', edges);
+    }
     // call fitView once on init
     setTimeout(() => instance.fitView({ padding: fitPadding }), 0);
   };
@@ -115,7 +119,6 @@ export default function FlowNodesExample({ className, style, fitPadding = 0.06 }
         ...style,
       }}
     >
-
       <ReactFlow
         nodes={nodes}
         edges={edges}

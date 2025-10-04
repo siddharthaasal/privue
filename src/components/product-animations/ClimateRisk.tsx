@@ -53,13 +53,12 @@ function Frame1ClimateRisk() {
       className="w-full max-w-[440px] rounded-md bg-white/95 p-3 shadow-sm ring-1 ring-slate-200/60 backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 text-[12px] font-semibold text-slate-800">
-        Climate Risk Assessment
-      </div>
+      <div className="mb-2 text-[12px] font-semibold text-slate-800">Climate Risk Assessment</div>
 
       <p className="mb-3 text-[10px] leading-snug text-slate-600">
-        The assessment shows resilience score <span className="font-medium text-slate-800">72/100</span>.
-        Most sites have manageable risk levels and adaptation plans, though coastal areas show higher exposure.
+        The assessment shows resilience score{' '}
+        <span className="font-medium text-slate-800">72/100</span>. Most sites have manageable risk
+        levels and adaptation plans, though coastal areas show higher exposure.
       </p>
 
       <motion.div
@@ -75,7 +74,6 @@ function Frame1ClimateRisk() {
     </motion.div>
   );
 }
-
 
 /**
  * Frame2: Locations of Interest (row-wise stagger fill)
@@ -129,7 +127,6 @@ function riskTextClass(level: LocationRow['riskScore']) {
   if (level === 'Moderate') return 'text-amber-600 font-medium text-[10px]';
   return 'text-emerald-600 font-medium text-[10px]';
 }
-
 
 /* Minimalized Frame 2: Locations of Interest (no overflow, colored text risk) */
 export function Frame2LocationsOfInterestMinimal() {
@@ -294,7 +291,9 @@ export function Frame3ClimateRadar({
           {/* radial axes - subtle */}
           {labels.map((_, i) => {
             const { x, y } = polarToCartesian(cx, cy, radius, i * stepAngle);
-            return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="#f1f5f9" strokeWidth={0.8} />;
+            return (
+              <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="#f1f5f9" strokeWidth={0.8} />
+            );
           })}
 
           {/* target polygon (muted orange) */}
@@ -374,14 +373,11 @@ export function Frame3ClimateRadar({
   );
 }
 
-
 /**
  * Frame4RiskOverTime
  * - compact chart designed to sit inside max-w-[500px]
  * - each series animates in (path draw + points scale)
  */
-
-
 
 export function Frame4RiskOverTime({
   width = 520,
@@ -395,12 +391,36 @@ export function Frame4RiskOverTime({
   type Series = { name: string; color: string; values: number[] };
 
   const series: Series[] = [
-    { name: 'Flood', color: '#2563eb', values: [0.63, 0.57, 0.52, 0.46, 0.4, 0.34, 0.27, 0.2, 0.14, 0.1, 0.06] },
-    { name: 'Drought', color: '#f59e0b', values: [0.45, 0.39, 0.34, 0.28, 0.22, 0.17, 0.13, 0.09, 0.06, 0.04, 0.03] },
-    { name: 'Heatwave', color: '#ef4444', values: [0.68, 0.62, 0.56, 0.49, 0.43, 0.36, 0.28, 0.21, 0.15, 0.11, 0.09] },
-    { name: 'Cyclone', color: '#7c3aed', values: [0.6, 0.54, 0.49, 0.44, 0.37, 0.31, 0.24, 0.17, 0.12, 0.08, 0.05] },
-    { name: 'Coastal Inundation', color: '#2dd4bf', values: [0.78, 0.72, 0.66, 0.59, 0.51, 0.43, 0.34, 0.26, 0.2, 0.15, 0.12] },
-    { name: 'Water Scarcity', color: '#f97316', values: [0.42, 0.36, 0.3, 0.25, 0.2, 0.15, 0.12, 0.09, 0.06, 0.05, 0.03] },
+    {
+      name: 'Flood',
+      color: '#2563eb',
+      values: [0.63, 0.57, 0.52, 0.46, 0.4, 0.34, 0.27, 0.2, 0.14, 0.1, 0.06],
+    },
+    {
+      name: 'Drought',
+      color: '#f59e0b',
+      values: [0.45, 0.39, 0.34, 0.28, 0.22, 0.17, 0.13, 0.09, 0.06, 0.04, 0.03],
+    },
+    {
+      name: 'Heatwave',
+      color: '#ef4444',
+      values: [0.68, 0.62, 0.56, 0.49, 0.43, 0.36, 0.28, 0.21, 0.15, 0.11, 0.09],
+    },
+    {
+      name: 'Cyclone',
+      color: '#7c3aed',
+      values: [0.6, 0.54, 0.49, 0.44, 0.37, 0.31, 0.24, 0.17, 0.12, 0.08, 0.05],
+    },
+    {
+      name: 'Coastal Inundation',
+      color: '#2dd4bf',
+      values: [0.78, 0.72, 0.66, 0.59, 0.51, 0.43, 0.34, 0.26, 0.2, 0.15, 0.12],
+    },
+    {
+      name: 'Water Scarcity',
+      color: '#f97316',
+      values: [0.42, 0.36, 0.3, 0.25, 0.2, 0.15, 0.12, 0.09, 0.06, 0.05, 0.03],
+    },
   ];
 
   // tighter margins so chart uses vertical space more efficiently
@@ -413,7 +433,9 @@ export function Frame4RiskOverTime({
   const yFor = (v: number) => margin.top + (1 - Math.max(0, Math.min(1, v))) * plotH;
 
   const buildPath = (vals: number[]) =>
-    vals.map((v, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(v).toFixed(2)}`).join(' ');
+    vals
+      .map((v, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(v).toFixed(2)}`)
+      .join(' ');
 
   const yTicks = [0, 0.25, 0.5, 0.75, 1];
 
@@ -428,13 +450,26 @@ export function Frame4RiskOverTime({
       <div className="mb-2 text-[12px] font-semibold text-slate-800">Risk Over Time</div>
 
       <div className="flex">
-        <svg viewBox={`0 0 ${width} ${height}`} width="100%" height={height} role="img" aria-label="Risk over time">
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          width="100%"
+          height={height}
+          role="img"
+          aria-label="Risk over time"
+        >
           {/* y axis lines & labels (thinner) */}
           {yTicks.map((t, i) => {
             const y = yFor(t);
             return (
               <g key={i}>
-                <line x1={margin.left} x2={width - margin.right} y1={y} y2={y} stroke="#f1f5f9" strokeWidth={0.9} />
+                <line
+                  x1={margin.left}
+                  x2={width - margin.right}
+                  y1={y}
+                  y2={y}
+                  stroke="#f1f5f9"
+                  strokeWidth={0.9}
+                />
                 <text x={8} y={y + 4} fontSize={9} fill="#6b7280">
                   {t.toFixed(2)}
                 </text>
@@ -443,11 +478,25 @@ export function Frame4RiskOverTime({
           })}
 
           {/* x baseline */}
-          <line x1={margin.left} x2={width - margin.right} y1={height - margin.bottom} y2={height - margin.bottom} stroke="#e6e9ed" strokeWidth={1} />
+          <line
+            x1={margin.left}
+            x2={width - margin.right}
+            y1={height - margin.bottom}
+            y2={height - margin.bottom}
+            stroke="#e6e9ed"
+            strokeWidth={1}
+          />
 
           {/* x labels */}
           {years.map((yr, i) => (
-            <text key={yr} x={xFor(i)} y={height - margin.bottom + 18} fontSize={9} fill="#6b7280" textAnchor="middle">
+            <text
+              key={yr}
+              x={xFor(i)}
+              y={height - margin.bottom + 18}
+              fontSize={9}
+              fill="#6b7280"
+              textAnchor="middle"
+            >
               {yr}
             </text>
           ))}
@@ -470,7 +519,11 @@ export function Frame4RiskOverTime({
                     strokeWidth={0.9}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: delay + 0.45 + vi * 0.01, duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{
+                      delay: delay + 0.45 + vi * 0.01,
+                      duration: 0.22,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   />
                 ))}
 
@@ -504,7 +557,6 @@ export function Frame4RiskOverTime({
     </motion.div>
   );
 }
-
 
 export default function ClimateRisk() {
   type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';

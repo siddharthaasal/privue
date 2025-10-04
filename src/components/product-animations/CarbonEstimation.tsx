@@ -50,11 +50,14 @@ function BusinessSiteFrame() {
           }
           // finish typing: clear caret slightly after final char
           timers.push(
-            window.setTimeout(() => {
-              setTyping((s) => ({ ...s, [id]: false }));
-              // ensure final value is the full target
-              setValues((prev) => ({ ...prev, [id]: target }));
-            }, target.length * speed + 120),
+            window.setTimeout(
+              () => {
+                setTyping((s) => ({ ...s, [id]: false }));
+                // ensure final value is the full target
+                setValues((prev) => ({ ...prev, [id]: target }));
+              },
+              target.length * speed + 120,
+            ),
           );
         }, delay),
       );
@@ -98,9 +101,7 @@ function BusinessSiteFrame() {
           return (
             <div key={r.id} className="grid grid-cols-[84px_1fr_76px] items-center gap-2">
               {/* label */}
-              <div className="text-[10px] font-medium text-slate-700">
-                {r.label.toUpperCase()}
-              </div>
+              <div className="text-[10px] font-medium text-slate-700">{r.label.toUpperCase()}</div>
 
               {/* input + unit */}
               <div className="relative flex items-center gap-2">
@@ -139,7 +140,6 @@ function BusinessSiteFrame() {
     </motion.div>
   );
 }
-
 
 // EmissionsFrame.tsx
 
@@ -183,7 +183,7 @@ function EmissionsFrame() {
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="w-[380px] max-w-[500px] rounded-md bg-white p-2 ring-1 ring-slate-100 shadow-sm"
+      className="w-[380px] max-w-[500px] rounded-md bg-white p-2 shadow-sm ring-1 ring-slate-100"
     >
       <div className="mb-1 text-[11px] font-semibold text-slate-900">
         Total emission per category
@@ -213,7 +213,7 @@ function EmissionsFrame() {
                   variants={rowVariants}
                   className="grid grid-cols-[1fr_64px_64px_44px] items-center py-[4px] text-[10px]"
                 >
-                  <div className="text-slate-700 truncate">{r.label}</div>
+                  <div className="truncate text-slate-700">{r.label}</div>
                   <div className="text-right text-slate-800">{r.fy19}</div>
                   <div className="text-right text-slate-800">{r.fy20}</div>
                   <div className="text-right text-slate-600">{r.vs}</div>
@@ -246,7 +246,6 @@ function EmissionsFrame() {
     </motion.div>
   );
 }
-
 
 /**
  * Waterfall chart implemented with Recharts (stacked bars).
@@ -324,7 +323,6 @@ function prepareWaterfall(data: typeof RAW) {
   return out;
 }
 
-
 function EmissionsWaterfallFrame() {
   const data = useMemo(() => prepareWaterfall(RAW), []);
 
@@ -337,7 +335,7 @@ function EmissionsWaterfallFrame() {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28 }}
-      className="w-[460px] max-w-[100%] rounded-md bg-white p-2 ring-1 ring-slate-100 shadow-sm"
+      className="w-[460px] max-w-[100%] rounded-md bg-white p-2 shadow-sm ring-1 ring-slate-100"
       aria-label="Emissions waterfall frame"
     >
       <div className="mb-1 text-[11px] font-semibold text-slate-900">

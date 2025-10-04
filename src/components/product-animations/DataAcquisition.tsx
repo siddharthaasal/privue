@@ -200,7 +200,9 @@ export default function DataAcquisition({
                       {/* Top: two progress bars (crisper) */}
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <div className="text-[10px] font-medium text-slate-700">Overall Progress</div>
+                          <div className="text-[10px] font-medium text-slate-700">
+                            Overall Progress
+                          </div>
                           <div className="text-[10px] text-slate-500">
                             {Math.min(100, Math.round(progress))}/100
                           </div>
@@ -243,18 +245,35 @@ export default function DataAcquisition({
                         ].map((f) => {
                           const st = discStatus(f.idx);
                           return (
-                            <div key={f.idx} className="flex flex-1 flex-col items-center text-center">
+                            <div
+                              key={f.idx}
+                              className="flex flex-1 flex-col items-center text-center"
+                            >
                               <div
                                 className="flex h-8 w-8 items-center justify-center rounded-full border"
                                 style={{
                                   borderColor:
-                                    st === 'done' ? 'rgba(34,197,94,0.12)' : 'rgba(148,163,184,0.08)',
+                                    st === 'done'
+                                      ? 'rgba(34,197,94,0.12)'
+                                      : 'rgba(148,163,184,0.08)',
                                   background: st === 'done' ? 'rgba(34,197,94,0.06)' : undefined,
                                 }}
                               >
                                 {st === 'done' ? (
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M20 6L9 17L4 12" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                  <svg
+                                    width="12"
+                                    height="12"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M20 6L9 17L4 12"
+                                      stroke="#16a34a"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
                                   </svg>
                                 ) : (
                                   <div
@@ -275,7 +294,6 @@ export default function DataAcquisition({
                         })}
                       </div>
                     </motion.div>
-
                   )}
 
                   {stage === 'table_fill' && (
@@ -294,21 +312,35 @@ export default function DataAcquisition({
 
                       <div className="overflow-hidden rounded-md border bg-white text-[9px]">
                         <div className="grid grid-cols-3 gap-0">
-                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Field</div>
-                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Value</div>
-                          <div className="border-b px-1.5 py-0.5 font-medium text-[10px]">Status</div>
+                          <div className="border-b px-1.5 py-0.5 text-[10px] font-medium">
+                            Field
+                          </div>
+                          <div className="border-b px-1.5 py-0.5 text-[10px] font-medium">
+                            Value
+                          </div>
+                          <div className="border-b px-1.5 py-0.5 text-[10px] font-medium">
+                            Status
+                          </div>
 
                           {tableRows.map((r, i) => (
                             <motion.div
                               key={i}
                               initial={{ opacity: 0, y: 6 }}
-                              animate={tableRowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 4 }}
+                              animate={
+                                tableRowsShown > i ? { opacity: 1, y: 0 } : { opacity: 0.06, y: 4 }
+                              }
                               transition={{ duration: 0.24, delay: i * 0.045 }}
                               className="col-span-3 grid grid-cols-[minmax(92px,140px)_1fr_minmax(60px,84px)] items-center gap-x-1 border-b px-1.5 py-0.5"
                             >
-                              <div className="font-normal text-slate-700 text-[9px] truncate">{r.k}</div>
-                              <div className="text-slate-800 text-[9px] truncate">{tableRowsShown > i ? r.v : '—'}</div>
-                              <div className={`${tableRowsShown > i ? 'text-emerald-600' : 'text-slate-400'} text-[8px] font-medium text-right`}>
+                              <div className="truncate text-[9px] font-normal text-slate-700">
+                                {r.k}
+                              </div>
+                              <div className="truncate text-[9px] text-slate-800">
+                                {tableRowsShown > i ? r.v : '—'}
+                              </div>
+                              <div
+                                className={`${tableRowsShown > i ? 'text-emerald-600' : 'text-slate-400'} text-right text-[8px] font-medium`}
+                              >
                                 {tableRowsShown > i ? 'Imported' : '—'}
                               </div>
                             </motion.div>
@@ -316,7 +348,6 @@ export default function DataAcquisition({
                         </div>
                       </div>
                     </motion.div>
-
                   )}
 
                   {stage === 'done' && (
@@ -342,7 +373,6 @@ export default function DataAcquisition({
                         All data acquired
                       </div>
                     </motion.div>
-
                   )}
                 </AnimatePresence>
               </div>

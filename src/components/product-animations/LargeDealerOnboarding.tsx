@@ -39,7 +39,6 @@ export default function LargeDealerOnboarding() {
       })) as Dealer[],
   );
 
-
   const [highlightId, setHighlightId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -139,7 +138,6 @@ export default function LargeDealerOnboarding() {
       verified: false,
     };
 
-
     setDealers((prev) => [newDealer, ...prev]);
     setStage('table_unverified');
     setHighlightId(id);
@@ -152,7 +150,6 @@ export default function LargeDealerOnboarding() {
       setTimeout(() => (submittingRef.current = false), 1000);
     }, UNVERIFIED_DISPLAY_MS);
   }
-
 
   // static file percents (keep per-file values as-is)
   const filePercents = [72, 45, 18];
@@ -406,7 +403,6 @@ const TypingController = (() => {
     return () => listeners.delete(listener.id);
   }
 
-
   function teardown() {
     timers.forEach((t) => clearTimeout(t));
     timers = [];
@@ -451,9 +447,15 @@ function DummyFormCompactSlow({
   const idRef = useRef(`typing-listener-${Math.random().toString(36).slice(2)}`);
 
   // keep refs in sync whenever state changes (also use them in onUpdate)
-  useEffect(() => { dealerNameRef.current = dealerName; }, [dealerName]);
-  useEffect(() => { gstinRef.current = gstin; }, [gstin]);
-  useEffect(() => { cinRef.current = cin; }, [cin]);
+  useEffect(() => {
+    dealerNameRef.current = dealerName;
+  }, [dealerName]);
+  useEffect(() => {
+    gstinRef.current = gstin;
+  }, [gstin]);
+  useEffect(() => {
+    cinRef.current = cin;
+  }, [cin]);
 
   useEffect(() => {
     console.log('[Form] subscribing to TypingController', idRef.current);
@@ -588,7 +590,6 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       return () => clearTimeout(t);
     }
     prevVerifiedRef.current = d.verified;
-
   }, [d.verified]);
 
   const isHighlighted = highlightId === d.id;
@@ -663,7 +664,7 @@ function BackgroundDealersTable({
         <div className="text-sm font-medium">Customers</div>
       </div>
 
-      <div className="h-[calc(100%-64px)] overflow-auto scrollbar-hide">
+      <div className="scrollbar-hide h-[calc(100%-64px)] overflow-auto">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-50 text-slate-600">
             <tr>
@@ -701,4 +702,3 @@ const dealerRowsInitial = [
   { name: 'Crest Technologies', gst: '23CRSTT1111K9KK', cin: 'U12345MP2023PTC000014' },
   { name: 'Pioneer Goods', gst: '21PIONR2222L0LL', cin: 'U12345OD2024PTC000015' },
 ];
-

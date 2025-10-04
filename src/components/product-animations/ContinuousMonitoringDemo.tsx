@@ -208,7 +208,6 @@ export default function NotificationOverlayWithLeftFade({
         }}
       />
 
-
       {/* left fade overlay (no blur) */}
       <motion.div
         aria-hidden
@@ -275,64 +274,68 @@ export default function NotificationOverlayWithLeftFade({
         {/* MOVING card (only one moves at a time in this logic) */}
         {movingId
           ? (() => {
-            const it = items.find((x) => x.id === movingId)!;
-            const targetScale = it.landOnLeft ? targetScaleLeft : targetScaleOther;
-            return (
-              <motion.div
-                key={`moving-${it.id}`}
-                initial={
-                  reduce
-                    ? {
-                      opacity: 1,
-                      scale: targetScale,
-                      left: it.target.left,
-                      top: it.target.top,
-                      position: 'absolute',
-                    }
-                    : {
-                      opacity: 1,
-                      scale: 1,
-                      left: '50%',
-                      top: '6%',
-                      position: 'absolute',
-                    }
-                }
-                animate={
-                  reduce
-                    ? {}
-                    : {
-                      opacity: 1,
-                      scale: targetScale,
-                      left: it.target.left,
-                      top: it.target.top,
-                      position: 'absolute',
-                    }
-                }
-                transition={movementTransition}
-                onAnimationComplete={() => {
-                  // finalize landing for moving card
-                  onMoveComplete(it.id);
-                }}
-                className="absolute -translate-x-1/2"
-                style={{ willChange: 'left, top, transform, opacity', zIndex: 40 }}
-              >
-                <div className={cardClassFixed(it.variant) + ' w-[320px] md:w-[360px]'}>
-                  <div className="flex items-start gap-1">
-                    <div className="mt-1 flex-shrink-0">
-                      {it.variant === 'danger' && <AlertTriangle className="h-4 w-4 text-red-400" />}
-                      {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
-                      {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
-                    </div>
+              const it = items.find((x) => x.id === movingId)!;
+              const targetScale = it.landOnLeft ? targetScaleLeft : targetScaleOther;
+              return (
+                <motion.div
+                  key={`moving-${it.id}`}
+                  initial={
+                    reduce
+                      ? {
+                          opacity: 1,
+                          scale: targetScale,
+                          left: it.target.left,
+                          top: it.target.top,
+                          position: 'absolute',
+                        }
+                      : {
+                          opacity: 1,
+                          scale: 1,
+                          left: '50%',
+                          top: '6%',
+                          position: 'absolute',
+                        }
+                  }
+                  animate={
+                    reduce
+                      ? {}
+                      : {
+                          opacity: 1,
+                          scale: targetScale,
+                          left: it.target.left,
+                          top: it.target.top,
+                          position: 'absolute',
+                        }
+                  }
+                  transition={movementTransition}
+                  onAnimationComplete={() => {
+                    // finalize landing for moving card
+                    onMoveComplete(it.id);
+                  }}
+                  className="absolute -translate-x-1/2"
+                  style={{ willChange: 'left, top, transform, opacity', zIndex: 40 }}
+                >
+                  <div className={cardClassFixed(it.variant) + ' w-[320px] md:w-[360px]'}>
+                    <div className="flex items-start gap-1">
+                      <div className="mt-1 flex-shrink-0">
+                        {it.variant === 'danger' && (
+                          <AlertTriangle className="h-4 w-4 text-red-400" />
+                        )}
+                        {it.variant === 'warning' && (
+                          <AlertCircle className="h-4 w-4 text-yellow-400" />
+                        )}
+                        {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
+                      </div>
 
-                    <div className="flex-1 text-left">
-                      <div className="text-sm font-medium text-gray-600">{it.title}</div>
-                      {it.body && <div className="mt-1 text-xs text-white/80">{it.body}</div>}
+                      <div className="flex-1 text-left">
+                        <div className="text-sm font-medium text-gray-600">{it.title}</div>
+                        {it.body && <div className="mt-1 text-xs text-white/80">{it.body}</div>}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })()
+                </motion.div>
+              );
+            })()
           : null}
 
         {/* LANDED LEFT (stay permanently at shrunken scale) */}
@@ -344,20 +347,20 @@ export default function NotificationOverlayWithLeftFade({
               key={`landed-left-${id}`}
               initial={{
                 opacity: 0,
-                scale: targetScaleLeft,           // start already shrunken
-                left: it.target.left,             // keep same unit as target (e.g. "15%")
+                scale: targetScaleLeft, // start already shrunken
+                left: it.target.left, // keep same unit as target (e.g. "15%")
                 top: it.target.top,
                 position: 'absolute',
-                x: 100,                           // offset via transform, avoids unit mix
+                x: 100, // offset via transform, avoids unit mix
                 y: 30,
               }}
               animate={{
                 opacity: 1,
-                scale: targetScaleLeft,           // stay shrunken
+                scale: targetScaleLeft, // stay shrunken
                 left: it.target.left,
                 top: it.target.top,
                 position: 'absolute',
-                x: 100,                             // animate translate back to 0 so it "lands" at left/top
+                x: 100, // animate translate back to 0 so it "lands" at left/top
                 y: 30,
               }}
               transition={{ duration: 0.36, type: 'tween' }}
@@ -375,7 +378,9 @@ export default function NotificationOverlayWithLeftFade({
                 <div className="flex items-start gap-1">
                   <div className="mt-1 flex-shrink-0">
                     {it.variant === 'danger' && <AlertTriangle className="h-6 w-6 text-red-400" />}
-                    {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
+                    {it.variant === 'warning' && (
+                      <AlertCircle className="h-4 w-4 text-yellow-400" />
+                    )}
                     {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
                   </div>
 
@@ -387,7 +392,6 @@ export default function NotificationOverlayWithLeftFade({
             </motion.div>
           );
         })}
-
 
         {/* LANDED (non-left) — gentle pop */}
         {landedIds.map((id) => {
@@ -422,7 +426,9 @@ export default function NotificationOverlayWithLeftFade({
                 <div className="flex items-start gap-1">
                   <div className="mt-1 flex-shrink-0">
                     {it.variant === 'danger' && <AlertTriangle className="h-6 w-6 text-red-400" />}
-                    {it.variant === 'warning' && <AlertCircle className="h-4 w-4 text-yellow-400" />}
+                    {it.variant === 'warning' && (
+                      <AlertCircle className="h-4 w-4 text-yellow-400" />
+                    )}
                     {it.variant === 'info' && <InfoIcon className="h-4 w-4 text-green-400" />}
                   </div>
 

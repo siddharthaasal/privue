@@ -1,8 +1,14 @@
+// src/types/mdx.d.ts
 declare module '*.mdx' {
   import { ComponentType } from 'react';
-  import { ArticleMetadata } from './ArticleMetadata';
+
+  // adjust ArticleMetadata import path to where your type lives
+  import type { ArticleMetadata } from '@/lib/ArticleMetadata';
 
   export const metadata: ArticleMetadata;
-  const MDXComponent: ComponentType;
+
+  // MDX components prop can be any object mapping names to React components
+  const MDXComponent: ComponentType<{ components?: Record<string, any> }>;
+
   export default MDXComponent;
 }

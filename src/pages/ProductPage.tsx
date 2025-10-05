@@ -12,7 +12,7 @@ export default function ProductPage() {
         <section id="api" className="scroll-m-20">
           <SectionAPIs />
         </section>
-        <section id="workbench" className="scroll-m-20">
+        <section id="workspace" className="scroll-m-20">
           <SectionWorkspace />
         </section>
         <section id="application" className="scroll-m-20">
@@ -88,7 +88,7 @@ function SectionWorkspace() {
     <section className="font-open-sans bg-muted/30 relative mx-auto px-8">
       <div className="w-full space-y-8 px-6 md:space-y-12">
         <h2 className="max-w-3xl text-3xl leading-tight font-medium lg:text-3xl">
-          <span className="text-privue-900">Workbench— </span>
+          <span className="text-privue-900">Workspace— </span>
           conversation workspace to ask, explore, and publish in one place
         </h2>
 
@@ -295,9 +295,8 @@ export function ImageCarousel({
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-opacity ${
-                i === index ? 'opacity-100' : 'opacity-60'
-              } bg-white`}
+              className={`h-2 w-2 rounded-full transition-opacity ${i === index ? 'opacity-100' : 'opacity-60'
+                } bg-white`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

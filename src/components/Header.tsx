@@ -61,10 +61,9 @@ export default function Header() {
       icon: FolderGit2,
     },
     {
-      name: 'Workbench',
-      href: '/products#workbench',
+      name: 'Workspace',
+      href: '/products#workspace',
       description: 'lorem ipsum',
-      // icon: "/icons/products/workbench.png",
       icon: LayoutPanelLeft,
     },
     {
@@ -202,11 +201,10 @@ export default function Header() {
       <div className="w-100% relative py-1">
         {/* Blur layer / border on scroll */}
         <div
-          className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${
-            isScrolled
+          className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${isScrolled
               ? 'bg-background shadow-md backdrop-blur-md transition-all duration-300'
               : 'bg-background backdrop-blur-sm'
-          }`}
+            }`}
         />
 
         {/* Actual navbar content */}

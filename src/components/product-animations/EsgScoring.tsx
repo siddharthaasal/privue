@@ -120,33 +120,36 @@ function ScoreCounter({ target }: { target: number }) {
 const environmentData: TableData = {
   title: 'Environment Score',
   rows: [
-    { id: 'bm', label: 'Business Model and Innovation', companyScore: 68, industryAvg: 6 },
-    { id: 'env', label: 'Environment', companyScore: 72, industryAvg: 7 },
-    { id: 'lg', label: 'Leadership and Governance', companyScore: 65, industryAvg: 6 },
-    { id: 'hc', label: 'Human Capital', companyScore: 61, industryAvg: 5 },
-    { id: 'sc', label: 'Social Capital', companyScore: 66, industryAvg: 6 },
+    { id: 'bm', label: 'GHG Emissions & Carbon Footprint', companyScore: 68, industryAvg: 6 },
+    { id: 'env', label: 'Energy Management', companyScore: 72, industryAvg: 7 },
+    { id: 'lg', label: 'Water Management', companyScore: 65, industryAvg: 6 },
+    { id: 'hc', label: 'Waste & Pollution Management', companyScore: 61, industryAvg: 5 },
+    { id: 'sc', label: 'Biodiversity & Land Use', companyScore: 66, industryAvg: 6 },
+    { id: 'sc', label: 'Product Lifecycle & Circular Economy', companyScore: 86, industryAvg: 6 },
   ],
 };
 
 const socialData: TableData = {
   title: 'Social Score',
   rows: [
-    { id: 'bm', label: 'Business Model and Innovation', companyScore: 70, industryAvg: 7 },
-    { id: 'env', label: 'Environment', companyScore: 60, industryAvg: 6 },
-    { id: 'lg', label: 'Leadership and Governance', companyScore: 68, industryAvg: 6 },
-    { id: 'hc', label: 'Human Capital', companyScore: 75, industryAvg: 8 },
-    { id: 'sc', label: 'Social Capital', companyScore: 72, industryAvg: 7 },
+    { id: 'bm', label: 'Labor Practices', companyScore: 70, industryAvg: 7 },
+    { id: 'env', label: 'Diversity, Equity & Inclusion (DEI)', companyScore: 60, industryAvg: 6 },
+    { id: 'lg', label: 'Employee Engagement & Training', companyScore: 68, industryAvg: 6 },
+    { id: 'hc', label: 'Human Rights in Supply Chain', companyScore: 75, industryAvg: 8 },
+    { id: 'sc', label: 'Customer Welfare & Product Safety', companyScore: 72, industryAvg: 7 },
+    { id: 'sc', label: 'Community Engagement', companyScore: 82, industryAvg: 7 },
   ],
 };
 
 const governanceData: TableData = {
   title: 'Governance Score',
   rows: [
-    { id: 'bm', label: 'Business Model and Innovation', companyScore: 64, industryAvg: 5 },
-    { id: 'env', label: 'Environment', companyScore: 58, industryAvg: 5 },
-    { id: 'lg', label: 'Leadership and Governance', companyScore: 74, industryAvg: 7 },
-    { id: 'hc', label: 'Human Capital', companyScore: 62, industryAvg: 5 },
-    { id: 'sc', label: 'Social Capital', companyScore: 66, industryAvg: 6 },
+    { id: 'bm', label: 'Board Structure & Independence', companyScore: 64, industryAvg: 5 },
+    { id: 'env', label: 'Executive Compensation & ESG Alignment', companyScore: 58, industryAvg: 5 },
+    { id: 'lg', label: 'Shareholder Rights & Transparency', companyScore: 74, industryAvg: 7 },
+    { id: 'hc', label: 'Ethics & Anti-Corruption', companyScore: 62, industryAvg: 5 },
+    { id: 'sc', label: 'Risk Management & Internal Controls', companyScore: 66, industryAvg: 6 },
+    { id: 'sc', label: 'Innovation & Business Model Resilience', companyScore: 86, industryAvg: 6 },
   ],
 };
 

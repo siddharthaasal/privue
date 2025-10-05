@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# placeholder sitemap — update after launch
+Sitemap: https://example.com/sitemap.xml

@@ -10,8 +10,8 @@ export type MenuItem = {
   name: string;
   href?: string;
   description?: string;
-  // only allow string (image src) or a component constructor (lucide)
   icon?: string | React.ComponentType<any>;
+  id?: string;
 };
 
 type LinkType = {
@@ -24,16 +24,16 @@ type LinkType = {
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null); // desktop dropdowns
+  const [mobileOpenIndex, setMobileOpenIndex] = useState<number | null>(null); // mobile collapsible sections
   const navRef = useRef<HTMLElement | null>(null);
   const timeoutRef = useRef<number | null>(null);
 
   const renderIcon = (
     icon?: string | React.ComponentType<any>,
-    className = 'w-9 h-9', // same default sizing used in CapabilitiesCard image
+    className = 'w-9 h-9'
   ): any | null => {
     if (!icon) return null;
-
     if (typeof icon === 'string') {
       return (
         <img
@@ -45,12 +45,8 @@ export default function Header() {
         />
       );
     }
-
-    // treat as component constructor (lucide icon)
     const IconComp = icon as React.ComponentType<any>;
-    // Pass className so lucide picks up size via Tailwind, and let it inherit currentColor.
     return <IconComp size={20} aria-hidden="true" color={'#374151'} />;
-    // note: in CapabilitiesCard you used w-7 for component icons; adjust as you like.
   };
 
   const products: MenuItem[] = [
@@ -74,27 +70,16 @@ export default function Header() {
     },
   ];
 
-  const productMenuItems: MenuItem[] = products.map((s) => {
-    return {
-      name: s.name,
-      href: s.href,
-      icon: s.icon,
-    };
-  });
+  const productMenuItems: MenuItem[] = products.map((s) => ({
+    name: s.name,
+    href: s.href,
+    icon: s.icon,
+  }));
 
-  const solutionMenuItems: MenuItem[] = solutions.map((s) => {
-    // const IconComp = s.icon as React.ComponentType<any> | string | undefined;
-
-    // Keep icon as either a string/component/element — we'll render later with renderIcon()
-    // const icon = IconComp ?? null;
-
-    return {
-      name: s.heading,
-      href: `/solutions/${s.slug}`,
-      // description: s.subHeading ?? s.mainSolnDesc ?? undefined,
-      // icon,
-    };
-  });
+  const solutionMenuItems: MenuItem[] = solutions.map((s) => ({
+    name: s.heading,
+    href: `/solutions/${s.slug}`,
+  }));
 
   const industries = [
     { id: 'ind-1', name: 'Corporate', href: '#' },
@@ -105,13 +90,11 @@ export default function Header() {
     { id: 'ind-6', name: 'Government', href: '#' },
   ];
 
-  const industryMenuItems = industries.map((s, idx) => {
-    return {
-      id: (s as any).id ?? `ind-${idx + 1}`,
-      name: s.name,
-      href: `#industry-${(s as any).id ?? idx + 1}`,
-    } as any;
-  });
+  const industryMenuItems: MenuItem[] = industries.map((s, idx) => ({
+    id: (s as any).id ?? `ind-${idx + 1}`,
+    name: s.name,
+    href: `#industry-${(s as any).id ?? idx + 1}`,
+  }));
 
   const desktopLinks: LinkType[] = [
     { name: 'Solutions', items: solutionMenuItems },
@@ -120,15 +103,7 @@ export default function Header() {
     { name: 'Articles', href: '/articles', variant: 'link' },
   ];
 
-  const mobileLinks: LinkType[] = [
-    { name: 'Modules', href: '/modules', variant: 'link' },
-    { name: 'Solutions', href: '/solutions', variant: 'link' },
-    { name: 'API', href: '/api', variant: 'link' },
-    { name: 'Integrations', href: '/integrations', variant: 'link' },
-    { name: 'Demo', href: '/demo', variant: 'outline' },
-    { name: 'Book a Demo', href: '/book-a-call', variant: 'default' },
-  ];
-
+  // --- Effects (scroll, body overflow, click-away) ---
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
@@ -137,9 +112,12 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (!isMenuOpen) {
+      // reset mobile collapses when closing menu
+      setMobileOpenIndex(null);
+    }
   }, [isMenuOpen]);
 
-  // click-away close dropdowns
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       if (!navRef.current) return;
@@ -151,7 +129,6 @@ export default function Header() {
     return () => document.removeEventListener('click', onDocClick);
   }, []);
 
-  // small hover delay helpers to prevent flicker
   const openMenu = (index: number) => {
     if (timeoutRef.current) {
       window.clearTimeout(timeoutRef.current);
@@ -183,6 +160,7 @@ export default function Header() {
       window.dispatchEvent(new CustomEvent('openIndustry', { detail: { id: industryId } }));
 
       setOpenIndex(null);
+      setIsMenuOpen(false);
       return;
     }
 
@@ -194,6 +172,11 @@ export default function Header() {
         : normalizedBase;
 
     window.location.href = `${origin}${baseNoTrailing}${targetHash}`;
+  };
+
+  // Mobile collapsible toggle
+  const toggleMobileSection = (i: number) => {
+    setMobileOpenIndex((prev) => (prev === i ? null : i));
   };
 
   return (
@@ -227,6 +210,7 @@ export default function Header() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-privue-700 hover:bg-privue-100 inline-flex items-center justify-center rounded-md p-2 focus:outline-none"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -252,19 +236,84 @@ export default function Header() {
 
           {/* mobile menu */}
           {isMenuOpen && (
-            <div className="border-privue-200 absolute top-full left-0 z-40 flex w-full flex-col space-y-3 border-t bg-white/90 px-6 py-4 shadow-lg backdrop-blur-xl">
-              {mobileLinks.map((link, idx) => (
-                <Button
-                  asChild
-                  key={idx}
-                  variant={link.variant || 'link'}
-                  className="text-md font-semibold"
-                >
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    {link.name}
-                  </a>
-                </Button>
-              ))}
+            <div className="border-privue-200 absolute top-full left-0 z-40 flex w-full flex-col space-y-3 border-t bg-white/95 px-4 py-4 shadow-lg backdrop-blur-xl">
+              {/* Map desktop links to mobile layout */}
+              {desktopLinks.map((link, idx) => {
+                const hasChildren = Array.isArray(link.items) && link.items!.length > 0;
+                return (
+                  <div key={link.name} className="w-full">
+                    {hasChildren ? (
+                      <>
+                        <button
+                          className="flex w-full items-center justify-between rounded-md px-2 py-3 text-left text-sm font-semibold"
+                          onClick={() => toggleMobileSection(idx)}
+                          aria-expanded={mobileOpenIndex === idx}
+                        >
+                          <span>{link.name}</span>
+                          <svg
+                            className={`h-4 w-4 transform transition-transform ${mobileOpenIndex === idx ? 'rotate-180' : ''
+                              }`}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </button>
+
+                        {mobileOpenIndex === idx && (
+                          <div className="mt-1 space-y-1 border-l-0 pl-4">
+                            {link.items!.map((sub) => {
+                              const isIndustryLink = link.name === 'Industries' && (sub as any).id;
+                              const defaultHref = sub.href ?? '#';
+                              return isIndustryLink ? (
+                                <button
+                                  key={(sub as any).id}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsMenuOpen(false);
+                                    handleIndustryClick((sub as any).id);
+                                  }}
+                                  className="block w-full text-left rounded-sm px-2 py-2 text-sm font-normal"
+                                >
+                                  {sub.name}
+                                </button>
+                              ) : (
+                                <a
+                                  key={sub.name}
+                                  href={defaultHref}
+                                  onClick={() => setIsMenuOpen(false)}
+                                  className="block rounded-sm px-2 py-2 text-sm no-underline"
+                                >
+                                  {sub.name}
+                                </a>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block rounded-md px-2 py-3 text-sm font-medium no-underline"
+                      >
+                        {link.name}
+                      </a>
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* Keep CTA visible on mobile at bottom */}
+              <div className="mt-2 flex w-full gap-2">
+                <a href="/contact" className="w-full">
+                  <Button variant="default" size="sm" className="w-full cursor-pointer text-[#FAFAFA]">
+                    Book a Demo
+                  </Button>
+                </a>
+              </div>
             </div>
           )}
 
@@ -325,7 +374,6 @@ export default function Header() {
 
                             const itemContent = (
                               <>
-                                {/* render icon container only when icon exists */}
                                 {hasIcon ? (
                                   <div className="text-foreground flex h-7 w-7 flex-shrink-0 items-center justify-center">
                                     {renderIcon(sub.icon, 'w-6 h-6')}

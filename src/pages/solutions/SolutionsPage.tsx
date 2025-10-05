@@ -12,8 +12,10 @@ import SolutionSection from '@/sections/solutions/SolutionSection';
 import RelatedArticles from '@/sections/solutions/RelatedArticles';
 // import VerticalModulesListing from "@/components/modules/VerticalModulesListing";
 import VerticalModules from '@/components/VerticalModules';
+import useHashScroll from '@/hooks/useHashScroll';
 
 export default function SolutionsPage() {
+  useHashScroll();
   const { slug = '' } = useParams();
 
   // memoized lookup keeps renders cheap
@@ -57,7 +59,9 @@ export default function SolutionsPage() {
 
         {/* <ModulesSection modules={soln.modules} /> */}
         {/* <VerticalModulesListing /> */}
-        <VerticalModules items={soln.modules} />
+        <section id='modules'>
+          <VerticalModules items={soln.modules} />
+        </section>
         <RelatedArticles mainArticleSlug={soln.mainArticleSlug} />
       </main>
     </Layout>

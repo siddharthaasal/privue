@@ -34,24 +34,29 @@ export default function Footer({
     src: privueLogo,
     alt: 'logo for privue',
     title: 'privue',
-    url: 'https://privue-sage.vercel.app/',
+    url: 'https://privue.ai/',
   },
   address = ['alt.f, JMD Empire Square,', 'Mehrauli-Gurgaon Road,', 'Gurugram, Haryana 122001'],
   menuItems = [
     {
       title: 'Modules',
       links: [
-        { text: 'Dealer Onboarding', url: '#' },
-        { text: 'Data Acquisition', url: '#' },
-        { text: 'Risk Assessment', url: '#' },
-        { text: 'Credit Terms', url: '#' },
-        { text: 'Continuous Monitoring', url: '#' },
-        { text: 'Climate Risk', url: '#' },
-        { text: 'Cyber Risk', url: '#' },
-        { text: 'Financial Data Parsing', url: '#' },
-        { text: 'Carbon Estimation', url: '#' },
-        { text: 'ESG', url: '#' },
-        { text: 'Compliance Review', url: '#' },
+        { text: 'Registry Data ', url: '/solutions/entity-due-diligence#modules' },
+        { text: 'Credit Assessment', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Financial Analysis', url: '/entity-due-diligence#modules' },
+        { text: 'Compliance Checks', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Legal Due Diligence', url: '/solutions/third-party-risk-management#modules' },
+      ],
+    },
+    {
+      title: 'Modules',
+      links: [
+        { text: 'Adverse News', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Cyber Risk', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Climate Risk', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Carbon Estimation', url: '/solutions/third-party-risk-management#modules' },
+        { text: 'Carbon Emissions', url: '/solutions/sustainability-assessment#modules' },
+        { text: 'ESG Scoring', url: '/solutions/third-party-risk-management#modules' },
       ],
     },
     {
@@ -125,7 +130,11 @@ export default function Footer({
             ))}
 
             <div className="mt-3 flex items-center gap-2">
-              <a href="https://www.linkedin.com/company/privue/posts/?feedView=all">
+              <a
+                href="https://www.linkedin.com/company/privue/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaLinkedin className="text-lg text-[#707070] hover:text-[#525252]" />
               </a>
               <a href="mailto:query@privue.ai" aria-label="Send us an email">
@@ -136,7 +145,7 @@ export default function Footer({
         </div>
 
         {/* Right Section */}
-        <div className="grid w-full flex-[2] grid-cols-2 gap-8 md:grid-cols-3">
+        <div className="grid w-full flex-[2] grid-cols-2 gap-8 md:grid-cols-4">
           {menuItems.map((section, idx) => (
             <div key={idx} className="max-w-[200px]">
               <h4 className="text-foreground mb-2 text-sm font-medium">{section.title}</h4>
@@ -160,7 +169,7 @@ export default function Footer({
       {/* Bottom Section */}
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs font-medium md:flex-row">
         <p>{copyright}</p>
-        <ul className="flex gap-4 underline underline-offset-4">
+        <ul className="flex gap-4">
           {bottomLinks.map((link, idx) => (
             <li key={idx}>
               <a href="mailto:query@privue.ai" aria-label="Send us an email">

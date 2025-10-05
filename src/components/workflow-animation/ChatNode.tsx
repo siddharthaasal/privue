@@ -144,6 +144,16 @@ export function AnimatedChatNodeInner(): any {
   }: {
     data: { year: string; sales: number; grossMargin: number }[];
   }) {
+    // muted / grayish palette — tweak here if you want slightly warmer or cooler tones
+    const COLORS = {
+      bar: '#9ca3af',       // ← neutral medium-dark gray (gray-600 from Tailwind)
+      line: '#1f2937',      // ← deeper gray-black (gray-800)
+      dotFill: '#1f2937',   // same as line
+      axis: 'rgba(31,41,55,0.15)', // faint gray baseline
+      text: '#6b7280',      // subtle gray labels
+      dotStroke: '#ffffff', // keeps dots visible
+    };
+
     const salesValues = data.map((r) => r.sales);
     const maxSales = Math.max(...salesValues, 1);
 
@@ -177,19 +187,19 @@ export function AnimatedChatNodeInner(): any {
         polylineRef.current.style.transition = 'stroke-dashoffset 1s ease-out';
         polylineRef.current.style.strokeDashoffset = '0';
       }
-    }, []);
+    }, [data]);
 
     return (
       <div className="w-3/4">
         <div className="rounded-md px-1 py-1">
-          <svg width={w} height={h}>
+          <svg width={w} height={h} role="img" aria-label="Sales and gross margin chart">
             {/* baseline axis */}
             <line
               x1={padding.left}
               x2={w - padding.right}
               y1={h - padding.bottom}
               y2={h - padding.bottom}
-              stroke="rgba(15,23,36,0.1)"
+              stroke={COLORS.axis}
               strokeWidth={1}
             />
 
@@ -206,8 +216,7 @@ export function AnimatedChatNodeInner(): any {
                   width={barWidth}
                   height={barH}
                   rx={3}
-                  fill="#4c6ef5"
-                  // opacity={0.85}
+                  fill={COLORS.bar}
                   style={{
                     transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
                     transformBox: 'fill-box',
@@ -223,8 +232,11 @@ export function AnimatedChatNodeInner(): any {
               ref={polylineRef}
               points={points.join(' ')}
               fill="none"
-              stroke="#ef4444"
+              stroke={COLORS.line}
               strokeWidth={1.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ opacity: 0.98 }}
             />
 
             {/* gross margin circles */}
@@ -236,9 +248,9 @@ export function AnimatedChatNodeInner(): any {
                   key={`pt-${i}`}
                   cx={x}
                   cy={y}
-                  r={2.5}
-                  fill="#ef4444"
-                  stroke="#fff"
+                  r={2.75}
+                  fill={COLORS.dotFill}
+                  stroke={COLORS.dotStroke}
                   strokeWidth={0.8}
                   style={{
                     opacity: 0,
@@ -258,7 +270,8 @@ export function AnimatedChatNodeInner(): any {
                   y={h - 4}
                   textAnchor="middle"
                   fontSize={10}
-                  fill="#64748b"
+                  fill={COLORS.text}
+                  style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
                 >
                   {r.year.replace('FY ', '')}
                 </text>
@@ -404,7 +417,7 @@ export function AnimatedChatNodeInner(): any {
           {(phase === 2 || phase === 3 || phase === 4) && (
             <article className="self-end rounded-[14px] border border-gray-50 px-1 py-2 shadow-[0_8px_20px_rgba(2,6,23,0.06)]">
               <div className="flex items-end gap-2 pr-2 pl-2">
-                <p className="m-0 flex-1 text-right text-[12px] leading-[1.42] text-[#0f1724]">
+                <p className="m-0 flex-1 text-left text-[12px] leading-[1.42] text-[#0f1724]">
                   {qna.question}
                 </p>
               </div>

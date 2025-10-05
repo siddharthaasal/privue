@@ -249,7 +249,7 @@ export const solutions: Solution[] = [
       { desc: 'Integrate risk alerts into ERP or CRM workflows', icon: Airplay },
       // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
     ],
-    mainArticleSlug: 'optimising-distributor-credit-risk-management',
+    mainArticleSlug: 'optimising-distributor-credit-management',
   },
   {
     id: 2,
@@ -370,7 +370,7 @@ export const solutions: Solution[] = [
       },
     ],
 
-    mainArticleSlug: 'optimising-distributor-credit-risk-management',
+    mainArticleSlug: 'optimising-distributor-credit-management',
   },
   {
     id: 3,
@@ -714,7 +714,7 @@ export const solutions: Solution[] = [
         renderAnimation: Integrations,
       },
     ],
-    mainArticleSlug: 'redefining-commercial-lines-underwriting',
+    mainArticleSlug: 'mitigating-risk-in-global-supplier-selection',
   },
   {
     id: 5,
@@ -922,7 +922,7 @@ export const solutions: Solution[] = [
     //         link: "#",
     //     },
     // ],
-    mainArticleSlug: 'redefining-commercial-lines-underwriting',
+    mainArticleSlug: 'enhancing-supply-chain-resilience',
   },
   {
     id: 6,
@@ -1139,7 +1139,7 @@ export const solutions: Solution[] = [
         renderAnimation: EventResponse,
       },
     ],
-    mainArticleSlug: 'enhancing-supply-chain-resilience',
+    mainArticleSlug: 'transforming-credit-risk-assessment',
   },
 ];
 

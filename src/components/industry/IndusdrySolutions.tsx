@@ -94,7 +94,7 @@ export default function IndustryModules() {
     ],
     'ind-2': [
       {
-        heading: 'Insurance Underwriting and Pricing',
+        heading: 'Commercial Insurance Underwriting',
         subHeading: 'Sharper insights. Smarter underwriting. Stronger outcomes.',
         icon: <ShieldCheck />,
         slug: 'commercial-insurance-underwriting',

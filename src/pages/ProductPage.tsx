@@ -92,26 +92,30 @@ function SectionWorkspace() {
           conversation workspace to ask, explore, and publish in one place
         </h2>
 
-        {/* note: md:items-stretch so columns equalize height on md+; mobile keeps centered layout */}
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-stretch">
-          {/* Img Left - this column will stretch to match the text column on md+ */}
+          {/* Img Left */}
           <div className="order-2 flex justify-center md:order-1 md:w-1/2">
             <div className="flex h-full w-full items-center">
-              <ChatAnimation className="h-full w-full" />
+              {/* force a stable aspect and equal height */}
+              <div className="flex h-full w-full items-center justify-center bg-transparent">
+                <div className="aspect-[4/3] h-full max-h-[400px] w-full">
+                  <ChatAnimation className="h-full w-full object-contain" />
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Text Right */}
-          <div className="order-1 space-y-4 md:order-2 md:w-1/2">
+          <div className="order-1 flex flex-col justify-center space-y-4 md:order-2 md:w-1/2">
             <p className="text-base">
-              Use a natural-language interface to query your data, model outputs, and portfolio
-              insights on demand. Ask a question, refine with follow-ups, and compare scenarios
-              without writing SQL or waiting on a dashboard refresh.
+              Use a natural-language interface to query your data, model outputs, and portfolio insights on
+              demand. Ask a question, refine with follow-ups, and compare scenarios without writing SQL or
+              waiting on a dashboard refresh.
             </p>
             <p className="text-base">
-              Right-click any response to drop narratives, tables, or charts straight into a live
-              report. Turn ad-hoc analysis into shareable updates in seconds, keeping audit trails
-              of prompts, filters, and sources for governance.
+              Right-click any response to drop narratives, tables, or charts straight into a live report.
+              Turn ad-hoc analysis into shareable updates in seconds, keeping audit trails of prompts,
+              filters, and sources for governance.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-6">
@@ -128,6 +132,7 @@ function SectionWorkspace() {
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

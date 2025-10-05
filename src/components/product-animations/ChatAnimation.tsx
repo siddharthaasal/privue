@@ -429,7 +429,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
           {(phase === 2 || phase === 3 || phase === 4) && (
             <article className="self-end rounded-[14px] border border-gray-50 px-1 py-2 shadow-[0_8px_20px_rgba(2,6,23,0.06)]">
               <div className="flex items-end gap-2 pr-2 pl-2">
-                <p className="m-0 flex-1 text-right text-[12px] leading-[1.42] text-[#0f1724]">
+                <p className="m-0 flex-1 text-left text-[12px] leading-[1.42] text-[#0f1724]">
                   {qna.question}
                 </p>
               </div>

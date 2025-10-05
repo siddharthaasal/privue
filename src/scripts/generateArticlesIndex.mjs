@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import fg from 'fast-glob';
 import matter from 'gray-matter';
-import { generateReadingTime } from '../lib/helpers.ts';
+// import { generateReadingTime } from '../lib/helpers.ts';
 import readingTime from 'reading-time';
 
 /** Directory containing your MDX articles */
@@ -118,8 +118,8 @@ export const articles: ArticleMeta[] = ${JSON.stringify(sortedEntries, null, 2)}
 /** Dynamic import map to get the MDX component on demand */
 export const loaders: Record<string, () => Promise<any>> = {
 ${sortedEntries
-  .map((e) => `  "${e.slug}": () => import(${JSON.stringify('/' + e.file)})`)
-  .join(',\n')}
+      .map((e) => `  "${e.slug}": () => import(${JSON.stringify('/' + e.file)})`)
+      .join(',\n')}
 };
 `;
   fs.writeFileSync(OUT_TS, ts, 'utf8');

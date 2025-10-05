@@ -227,7 +227,7 @@ export function Frame3ClimateRadar({
     'Carbon Mgmt',
     'Supply Resilience',
     'Extreme Weather',
-    'Governance',
+    'Business Impact',
     'Scenario Planning',
   ];
 

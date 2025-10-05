@@ -29,7 +29,7 @@ export default function IndustryModules() {
   const industries: Industry[] = [
     {
       id: 'ind-1',
-      name: 'Corporations',
+      name: 'Corporate',
       description:
         'Transform supply chains from vulnerable to resilient. Monitor distributors in real-time, predict sustainability risks, and make decisions backed by AI-powered intelligence.',
     },
@@ -53,7 +53,7 @@ export default function IndustryModules() {
     },
     {
       id: 'ind-5',
-      name: 'Consulting',
+      name: 'Consultancy',
       description:
         "Deliver client insights at the speed of business. Cut due diligence time by half, automate audit workflows, and amplify your firm's value with AI-driven analytics that turn data into competitive advantage.",
     },
@@ -227,16 +227,53 @@ export default function IndustryModules() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, [industries]);
 
-  // Active industry id state. Default to first industry.
-  const [activeIndustryId, setActiveIndustryId] = useState<string>(industries[0].id!);
-  const currentSolutions = solutionsByIndustry[activeIndustryId] ?? solutionsByIndustry.default;
+  // --- state (keep string | undefined) ---
+  const [activeIndustryId, setActiveIndustryId] = useState<string | undefined>(industries[0].id);
 
-  // When activeIndustryId changes, we could do side effects (analytics, fetch, etc.)
-  // For this demo we simply log (you can remove this).
+  // --- safe solutions lookup ---
+  const currentSolutions: Solution[] = solutionsByIndustry[activeIndustryId ?? ''] ?? [];
+
+  // --- update: keep hash <-> state in sync and avoid loops ---
   useEffect(() => {
-    // Example side-effect: fetch industry-specific solutions here if needed.
-    // console.log('Active industry changed to', activeIndustryId)
-  }, [activeIndustryId]);
+    // On mount: if URL hash like #industry-ind-2, open it
+    const initialHash = location.hash?.replace('#', '');
+    if (initialHash && initialHash.startsWith('industry-')) {
+      const idFromHash = initialHash.replace('industry-', '');
+      const found = industries.find((x) => x.id === idFromHash);
+      if (found) {
+        setActiveIndustryId(idFromHash);
+        setTimeout(() => {
+          const el = document.getElementById('industries-section');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 40);
+      }
+    }
+
+    function onHashChange() {
+      const newHash = location.hash?.replace('#', '');
+      if (!newHash) return;
+
+      if (!newHash.startsWith('industry-')) return;
+
+      const idFromHash = newHash.replace('industry-', '');
+      // GUARD: don't re-set state if it's already the same (avoids re-opening)
+      if (idFromHash === activeIndustryId) return;
+
+      const found = industries.find((x) => x.id === idFromHash);
+      if (found) {
+        setActiveIndustryId(idFromHash);
+        // optionally scroll
+        const el = document.getElementById('industries-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+    // NOTE: include activeIndustryId in deps so the guard uses up-to-date value
+  }, [industries, activeIndustryId]);
+
+
 
   // --- optional: keep a ref to the RHS scroll container so we can manage focus/scroll if desired ---
   const rhsScrollRef = useRef<HTMLDivElement | null>(null);
@@ -258,9 +295,20 @@ export default function IndustryModules() {
           <Accordion
             type="single"
             value={activeIndustryId}
-            onValueChange={(value) => value && setActiveIndustryId(value)}
+            // when user clicks an industry, update state AND update the hash (replaceState to avoid polluting history)
+            onValueChange={(value) => {
+              setActiveIndustryId(value);
+              if (value) {
+                // keep the URL in sync — use replaceState so Back button behavior is not noisy
+                history.replaceState(null, '', `#industry-${value}`);
+              } else {
+                // collapsed
+                history.replaceState(null, '', location.pathname + location.search);
+              }
+            }}
             className="w-full"
           >
+
             {industries.map((ind) => (
               <AccordionItem key={ind.id} value={ind.id}>
                 <AccordionTrigger>

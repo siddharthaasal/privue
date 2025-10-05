@@ -97,11 +97,11 @@ export default function Header() {
   });
 
   const industries = [
-    { id: 'ind-1', name: 'Corporation', href: '#' },
+    { id: 'ind-1', name: 'Corporate', href: '#' },
     { id: 'ind-2', name: 'Insurance', href: '#' },
     { id: 'ind-3', name: 'Banking', href: '#' },
     { id: 'ind-4', name: 'Asset Management', href: '#' },
-    { id: 'ind-5', name: 'Consulting', href: '#' },
+    { id: 'ind-5', name: 'Consultancy', href: '#' },
     { id: 'ind-6', name: 'Government', href: '#' },
   ];
 
@@ -202,8 +202,8 @@ export default function Header() {
         {/* Blur layer / border on scroll */}
         <div
           className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${isScrolled
-              ? 'bg-background shadow-md backdrop-blur-md transition-all duration-300'
-              : 'bg-background backdrop-blur-sm'
+            ? 'bg-background shadow-md backdrop-blur-md transition-all duration-300'
+            : 'bg-background backdrop-blur-sm'
             }`}
         />
 

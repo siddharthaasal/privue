@@ -1,7 +1,6 @@
 import privueLogo from '/privue-logo.png';
 import { Mail } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
-// import { IoIosMail } from "react-icons/io";
 import { useEffect, useRef } from 'react';
 
 interface MenuItem {
@@ -100,85 +99,108 @@ export default function Footer({
 
       if (footerRef.current) {
         const translateY = remaining > 0 ? remaining / 2 : 0;
-        // const translateY = remaining > 30 ? remaining / 2 : 0;
         footerRef.current.style.transform = `translateY(${translateY}px)`;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section
       ref={footerRef}
-      className="bg-background text-muted-foreground fixed right-0 bottom-0 left-0 z-0 mx-auto w-full max-w-[1150px] border-t border-gray-200 py-8 text-sm"
+      /* Fixed on lg+ (desktop), normal flow on smaller screens */
+      className="bg-background text-muted-foreground lg:fixed lg:right-0 lg:bottom-0 lg:left-0 z-0 mx-auto w-full lg:mx-auto lg:max-w-[1150px] border-t border-gray-200 py-8 text-sm"
+      aria-labelledby="site-footer"
     >
-      <footer className="flex flex-col gap-16 lg:flex-row lg:justify-between">
-        {/* Left Section */}
-        <div className="max-w-md flex-1">
-          <a href={logo.url} className="mb-2 flex items-center">
-            <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10" />
-            <span className="text-foreground text-lg font-medium">{logo.title}</span>
-          </a>
-          {/* <p className="mb-3 text-base text-foreground">{tagline}</p> */}
-          <div className="pl-1">
-            {address.map((line, idx) => (
-              <p key={idx} className="text-foreground-lighter text-sm">
-                {line}
-              </p>
-            ))}
+      <footer id="site-footer" className="px-4 lg:px-6">
+        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+          {/* Left Section */}
+          <div className="flex-1 max-w-md">
+            <a href={logo.url} className="mb-3 inline-flex items-center gap-3">
+              <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10 w-auto" />
+              <span className="text-foreground text-lg font-medium">{logo.title}</span>
+            </a>
 
-            <div className="mt-3 flex items-center gap-2">
-              <a
-                href="https://www.linkedin.com/company/privue/posts/?feedView=all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin className="text-lg text-[#707070] hover:text-[#525252]" />
-              </a>
-              <a href="mailto:query@privue.ai" aria-label="Send us an email">
-                <Mail size={20} className="text-[#707070] hover:text-[#525252]" />
-              </a>{' '}
+            <div className="mt-2 space-y-2">
+              {/* Address (stacked on mobile) */}
+              <div className="text-foreground-lighter text-sm">
+                {address.map((line, idx) => (
+                  <p key={idx} className="leading-snug">
+                    {line}
+                  </p>
+                ))}
+              </div>
+
+              {/* Socials */}
+              <div className="mt-3 flex items-center gap-4">
+                <a
+                  href="https://www.linkedin.com/company/privue/posts/?feedView=all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Privue on LinkedIn"
+                >
+                  <FaLinkedin className="text-lg text-[#707070] hover:text-[#525252]" />
+                </a>
+                <a href="mailto:query@privue.ai" aria-label="Send us an email">
+                  <Mail size={20} className="text-[#707070] hover:text-[#525252]" />
+                </a>
+              </div>
             </div>
+          </div>
+
+          {/* Right Section */}
+          {/* Responsive grid: 1 col on small, 2 on sm, 4 on md+ */}
+          <div className="mt-6 w-full flex-[2] grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:mt-0">
+            {menuItems.map((section, idx) => (
+              <div key={idx} className="max-w-[220px]">
+                <h4 className="text-foreground mb-2 text-sm font-medium">{section.title}</h4>
+                <ul className="space-y-2">
+                  {section.links.map((link, linkIdx) => (
+                    <li key={linkIdx}>
+                      <a
+                        href={link.url}
+                        className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors break-words"
+                      >
+                        {link.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Right Section */}
-        <div className="grid w-full flex-[2] grid-cols-2 gap-8 md:grid-cols-4">
-          {menuItems.map((section, idx) => (
-            <div key={idx} className="max-w-[200px]">
-              <h4 className="text-foreground mb-2 text-sm font-medium">{section.title}</h4>
-              <ul className="space-y-2">
-                {section.links.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    <a
-                      href={link.url}
-                      className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors"
-                    >
+        {/* Bottom Section */}
+        <div className="mt-8 border-t pt-6 text-xs font-medium">
+          <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
+            <p className="text-foreground-lighter">{copyright}</p>
+
+            <ul className="flex flex-wrap gap-4">
+              {bottomLinks.map((link, idx) => (
+                <li key={idx}>
+                  {link.url?.startsWith('mailto:') ? (
+                    <a href={link.url} aria-label={link.text} className="text-sm">
                       {link.text}
                     </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                  ) : link.url ? (
+                    <a href={link.url} className="text-sm">
+                      {link.text}
+                    </a>
+                  ) : (
+                    // fallback: mailto if no url provided
+                    <a href="mailto:query@privue.ai" aria-label={link.text} className="text-sm">
+                      {link.text}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </footer>
-
-      {/* Bottom Section */}
-      <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs font-medium md:flex-row">
-        <p>{copyright}</p>
-        <ul className="flex gap-4">
-          {bottomLinks.map((link, idx) => (
-            <li key={idx}>
-              <a href="mailto:query@privue.ai" aria-label="Send us an email">
-                {link.text}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
     </section>
   );
 }

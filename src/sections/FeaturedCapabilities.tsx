@@ -119,9 +119,9 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
         </div>
       ) : null}
 
-      <h3 className="group-hover:text-privue-800 mb-2 text-lg font-medium tracking-tight transition-colors duration-300">
+      <h2 className="group-hover:text-privue-800 mb-2 text-lg font-medium tracking-tight transition-colors duration-300">
         {title}
-      </h3>
+      </h2>
       <p className="text-muted-foreground group-hover:text-foreground/80 text-sm transition-colors duration-300">
         {description}
       </p>

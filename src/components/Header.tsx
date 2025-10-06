@@ -425,7 +425,7 @@ export default function Header() {
           {/* CTA Buttons (right) */}
           <div className="hidden flex-1 justify-end gap-2 lg:flex">
             <a href="/contact">
-              <Button variant="default" size="sm" className="cursor-pointer text-[#FAFAFA]">
+              <Button variant="default" size="sm" className="cursor-pointer text-[#FFF]">
                 <p>Book a Demo</p>
               </Button>
             </a>

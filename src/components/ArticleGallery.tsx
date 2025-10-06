@@ -56,6 +56,7 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
               <Button
                 size="icon"
                 variant="outline"
+                aria-label="Previous articles"
                 onClick={() => carouselApi?.scrollPrev()}
                 disabled={!canScrollPrev}
                 className="disabled:pointer-events-auto"
@@ -65,6 +66,7 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
               <Button
                 size="icon"
                 variant="outline"
+                aria-label="Next articles"
                 onClick={() => carouselApi?.scrollNext()}
                 disabled={!canScrollNext}
                 className="disabled:pointer-events-auto"

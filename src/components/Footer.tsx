@@ -107,6 +107,33 @@ export default function Footer({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Merge duplicate "Modules" sections into one
+  const mergedMenuItems: MenuItem[] = (() => {
+    const modulesLinks: MenuItem['links'] = [];
+    const otherSections: MenuItem[] = [];
+
+    (menuItems || []).forEach((sec) => {
+      if (sec.title?.trim().toLowerCase() === 'modules') {
+        modulesLinks.push(...sec.links);
+      } else {
+        otherSections.push(sec);
+      }
+    });
+
+    // Optional: remove exact-duplicate links (by text+url)
+    const dedupedModules = modulesLinks.filter(
+      (link, idx, arr) =>
+        idx === arr.findIndex((l) => l.text === link.text && l.url === link.url)
+    );
+
+    const result: MenuItem[] = [];
+    if (dedupedModules.length > 0) {
+      result.push({ title: 'Modules', links: dedupedModules });
+    }
+    result.push(...otherSections);
+    return result;
+  })();
+
   return (
     <section
       ref={footerRef}
@@ -114,11 +141,11 @@ export default function Footer({
       className="bg-background text-muted-foreground lg:fixed lg:right-0 lg:bottom-0 lg:left-0 z-0 mx-auto w-full lg:mx-auto lg:max-w-[1150px] border-t border-gray-200 py-8 text-sm"
       aria-labelledby="site-footer"
     >
-      <footer id="site-footer" className="px-4 lg:px-6">
-        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+      <footer id="site-footer" className="px-4 lg:px-6 grid-cols-5">
+        <div className="flex flex-col lg:flex-row lg:justify-between">
           {/* Left Section */}
-          <div className="flex-1 max-w-md">
-            <a href={logo.url} className="mb-3 inline-flex items-center gap-3">
+          <div className="flex-col col-span-2 min-w-max">
+            <a href={logo.url} className="inline-flex items-center gap-3">
               <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10 w-auto" />
               <span className="text-foreground text-lg font-medium">{logo.title}</span>
             </a>
@@ -151,25 +178,129 @@ export default function Footer({
           </div>
 
           {/* Right Section */}
-          {/* Responsive grid: 1 col on small, 2 on sm, 4 on md+ */}
-          <div className="mt-6 w-full flex-[2] grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:mt-0">
-            {menuItems.map((section, idx) => (
-              <div key={idx} className="max-w-[220px]">
-                <h4 className="text-foreground mb-2 text-sm font-medium">{section.title}</h4>
-                <ul className="space-y-2">
-                  {section.links.map((link, linkIdx) => (
-                    <li key={linkIdx}>
-                      <a
-                        href={link.url}
-                        className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors break-words"
-                      >
-                        {link.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Right Section — static columns (map only rows) */}
+          <div className="col-span-4 mt-6 w-full lg:mt-0 lg:pl-10">
+            {/*
+    derive the specific columns once so we can render them statically.
+    keeps logic separate from render so spacing control is straightforward
+  */}
+            {(() => {
+              const modulesSection = mergedMenuItems.find(
+                (s) => s.title?.trim().toLowerCase() === 'modules'
+              );
+              const otherSections = mergedMenuItems.filter(
+                (s) => s.title?.trim().toLowerCase() !== 'modules'
+              );
+
+              // attempt to find Solutions and Company by title (fallback to first two other sections)
+              const solutionsSection =
+                otherSections.find((s) => s.title?.trim().toLowerCase() === 'solutions') ||
+                otherSections[0];
+              const companySection =
+                otherSections.find((s) => s.title?.trim().toLowerCase() === 'company') ||
+                otherSections[1] ||
+                otherSections[0];
+
+              // split modules into two roughly equal columns
+              const splitIntoTwo = <T,>(arr: T[]) => {
+                const mid = Math.ceil(arr.length / 2);
+                return [arr.slice(0, mid), arr.slice(mid)];
+              };
+
+              const [modulesColA, modulesColB] = modulesSection
+                ? splitIntoTwo(modulesSection.links)
+                : [[], []];
+
+              return (
+                <div className="flex gap-12 items-end justify-end">
+                  {/* Modules column (left) */}
+                  <div className="min-w-0 max-w-max flex-1">
+                    <h4 className="text-foreground mb-3 text-sm font-medium">Modules</h4>
+
+                    {/* inner wrapper keeps modules grouped; capped so it cannot blow out layout */}
+                    <div className="min-w-max max-w-max">
+                      <div className="grid grid-cols-2 gap-x-12">
+                        <ul className="space-y-2">
+                          {modulesColA.map((link, i) => (
+                            <li key={i}>
+                              <a
+                                href={link.url}
+                                className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                                title={link.text}
+                              >
+                                {link.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <ul className="space-y-2">
+                          {modulesColB.map((link, i) => (
+                            <li key={i}>
+                              <a
+                                href={link.url}
+                                className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                                title={link.text}
+                              >
+                                {link.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Solutions column (center) */}
+                  <div className="min-w-0 max-w-max flex-1">
+                    <h4 className="text-foreground mb-3 text-sm font-medium">
+                      {solutionsSection?.title || 'Solutions'}
+                    </h4>
+
+                    {/* use min-w-max so internal items keep spacing, but cap with max-w and truncate.
+              If you want single-line guaranteed, keep whitespace-nowrap instead of truncate. */}
+                    <div className="min-w-max max-w-[18rem]">
+                      <ul className="space-y-2">
+                        {solutionsSection?.links.map((link, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={link.url}
+                              className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors whitespace-nowrap block"
+                              title={link.text}
+                            >
+                              {link.text}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Company column (right) */}
+                  <div className="min-w-0 max-w-max flex-1">
+                    <h4 className="text-foreground mb-3 text-sm font-medium">
+                      {companySection?.title || 'Company'}
+                    </h4>
+
+                    <div className="min-w-max max-w-[16rem]">
+                      <ul className="space-y-2">
+                        {companySection?.links.map((link, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={link.url}
+                              className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                              title={link.text}
+                            >
+                              {link.text}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </div>
 

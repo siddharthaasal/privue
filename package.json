@@ -14,7 +14,7 @@
     "lint:css": "stylelint \"**/*.{css,scss}\"",
     "lint:css:fix": "stylelint \"**/*.{css,scss}\" --fix",
     "preview": "vite preview",
-    "build:articles": "node src/scripts/generateArticlesIndex.mjs",
+    "build:articles": "node src/scripts/generateArticlesIndex.mjs && node src/scripts/generate-article-list.mjs",
     "prettier": "prettier --check .",
     "prettier:write": "prettier --write ."
   },

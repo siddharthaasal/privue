@@ -7,26 +7,65 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkFrontmatter from 'remark-frontmatter';
 import { visualizer } from 'rollup-plugin-visualizer';
+import Sitemap from 'vite-plugin-sitemap'
+import { fileURLToPath } from 'url';
+import routes from './src/data/articles/list.ts';
+
+const BASE_URL = 'https://privue.ai';
+// Static routes
+const staticRoutes = [
+  '/',
+  '/solutions',
+  '/solutions/entity-due-diligence',
+  '/solutions/third-party-risk-management',
+  '/solutions/sustainability-assessment',
+  '/solutions/distributor-performance-management',
+  '/solutions/large-customer-risk-assessment',
+  '/solutions/commercial-insurance-underwriting',
+  '/data-security',
+  '/cookie-policy',
+  '/privacy-policy',
+  '/terms',
+  '/california-notice',
+  '/contact',
+  '/articles',
+];
+const articleRoutes = routes;
+
+// Dynamic article URLs from data file
+// const articleRoutes = articles.map((a) => a.url);
+
+// const allRoutes = [...staticRoutes, ...articleRoutes];
+const allRoutes = [...staticRoutes, ...articleRoutes];
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    mdx({
+      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+      remarkPlugins: [remarkFrontmatter],
+      include: /\.mdx?$/,
+    }),
+
+    Sitemap({
+      hostname: BASE_URL,
+      dynamicRoutes: allRoutes,
+      changefreq: 'weekly',
+      priority: 1.0,
+      generateRobotsTxt: true,
+    }),
     visualizer({
       filename: 'stats.html',
       open: false,
       gzipSize: true,
       brotliSize: true,
     }),
-    mdx({
-      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
-      remarkPlugins: [remarkFrontmatter],
-      include: /\.mdx?$/,
-    }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '/src': fileURLToPath(new URL('./src', import.meta.url)),
       // force both to the top-level node_modules
       react: path.resolve(__dirname, 'node_modules/react'),
       'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
@@ -79,6 +118,9 @@ export default defineConfig({
     },
   },
   esbuild: {
+    loader: 'tsx',
+    include: /\.tsx?$/,
     drop: ['console', 'debugger'],
   },
 });
+

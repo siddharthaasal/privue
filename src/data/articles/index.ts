@@ -76,7 +76,7 @@ export const articles: ArticleMeta[] = [
     "solutionLink": "solutions/distributor-performance-management",
     "coverImage": "/articles-test-images/distributor-credit-risk.jpg",
     "readTime": "2 min",
-    "file": "src/data/articles/optimising-distributor-credit-risk-management.mdx",
+    "file": "src/data/articles/optimising-distributor-credit-management.mdx",
     "url": "/articles/optimising-distributor-credit-management"
   },
   {
@@ -142,12 +142,13 @@ export const articles: ArticleMeta[] = [
   }
 ];
 
+
 /** Dynamic import map to get the MDX component on demand */
 export const loaders: Record<string, () => Promise<any>> = {
-  "strengthening-insolvency-investigations": () => import("/src/data/articles/strengthening-insolvency-investigations.mdx"),
-  "redefining-commercial-lines-underwriting": () => import("/src/data/articles/redefining-commercial-lines-underwriting.mdx"),
-  "optimising-distributor-credit-management": () => import("/src/data/articles/optimising-distributor-credit-risk-management.mdx"),
-  "mitigating-risk-in-global-supplier-selection": () => import("/src/data/articles/mitigating-risk in-global-supplier-selection.mdx"),
-  "transforming-credit-risk-assessment": () => import("/src/data/articles/transforming-credit-risk-assessment.mdx"),
-  "enhancing-supply-chain-resilience": () => import("/src/data/articles/enhancing-supply-chain-resilience.mdx")
+  "strengthening-insolvency-investigations": () => import("./strengthening-insolvency-investigations.mdx"),
+  "redefining-commercial-lines-underwriting": () => import("./redefining-commercial-lines-underwriting.mdx"),
+  "optimising-distributor-credit-management": () => import("./optimising-distributor-credit-management.mdx"),
+  "mitigating-risk-in-global-supplier-selection": () => import("./mitigating-risk in-global-supplier-selection.mdx"),
+  "transforming-credit-risk-assessment": () => import("./transforming-credit-risk-assessment.mdx"),
+  "enhancing-supply-chain-resilience": () => import("./enhancing-supply-chain-resilience.mdx")
 };

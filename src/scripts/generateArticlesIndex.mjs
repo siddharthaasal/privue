@@ -115,10 +115,15 @@ export type ArticleMeta = {
 
 export const articles: ArticleMeta[] = ${JSON.stringify(sortedEntries, null, 2)};
 
+
 /** Dynamic import map to get the MDX component on demand */
 export const loaders: Record<string, () => Promise<any>> = {
 ${sortedEntries
-      .map((e) => `  "${e.slug}": () => import(${JSON.stringify('/' + e.file)})`)
+      // FIX: compute relative path from index.ts to article file
+      .map((e) => {
+        const relativeImportPath = './' + path.basename(e.file); // each .mdx is in same folder
+        return `  "${e.slug}": () => import(${JSON.stringify(relativeImportPath)})`;
+      })
       .join(',\n')}
 };
 `;

@@ -104,7 +104,7 @@ export default function VerticalModules({ items }: Props) {
             {processed.map((it) => (
               <AccordionItem key={it.id} value={it.id}>
                 <AccordionTrigger>
-                  <div className="flex items-center gap-2 text-base">{it.title}</div>
+                  <h3 className="flex items-center gap-2 text-base">{it.title}</h3>
                 </AccordionTrigger>
                 <AccordionContent>{it.description}</AccordionContent>
               </AccordionItem>

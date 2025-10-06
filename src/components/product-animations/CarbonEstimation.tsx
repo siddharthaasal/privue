@@ -488,7 +488,7 @@ export default function CarbonEstimation() {
       </AnimatePresence>
 
       {/* Optional tiny controls for testing — remove if you want purely automatic cycling */}
-      <div className="absolute top-4 right-4 z-20 flex gap-2">
+      {/* <div className="absolute top-4 right-4 z-20 flex gap-2">
         <button
           onClick={() =>
             setStep((s) => (s === 'frame1' ? 'frame3' : s === 'frame2' ? 'frame1' : 'frame2'))
@@ -507,7 +507,7 @@ export default function CarbonEstimation() {
         >
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -54,6 +54,7 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 1.0,
       generateRobotsTxt: true,
+      outDir: 'public',
     }),
     visualizer({
       filename: 'stats.html',

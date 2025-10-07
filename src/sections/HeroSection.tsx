@@ -135,9 +135,8 @@ export default function HeroSection() {
           </div>
         </section>
 
-        {/* Master Workflow Animation / Static Image */}
-        <div className="mt-20 w-full">
-          {/* Desktop & Laptop (show animation) */}
+        {/* Master Workflow Animation — hidden on mobile/tablet, visible on lg+ */}
+        <div className="w-full lg:mt-20">
           <div
             className="animate-slide-up-fade relative mx-auto hidden h-fit w-full max-w-7xl px-4 lg:block"
             style={{ animationDuration: '1400ms' }}
@@ -150,17 +149,8 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
-
-          {/* Mobile & Tablet (show image) */}
-          <div className="block lg:hidden">
-            <img
-              src="/workflow-img.png"
-              alt="Workflow preview"
-              className="mx-auto h-auto w-full max-w-md rounded-2xl object-contain shadow-lg dark:shadow-indigo-600/10"
-              loading="lazy"
-            />
-          </div>
         </div>
+
 
       </div>
     </section>

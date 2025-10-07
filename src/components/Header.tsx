@@ -181,7 +181,7 @@ export default function Header() {
 
   return (
     <header className="font-open-sans fixed inset-x-0 top-0 z-50">
-      <div className="w-100% relative py-1">
+      <div className="w-full relative py-1">
         {/* Blur layer / border on scroll */}
         <div
           className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${isScrolled
@@ -193,14 +193,14 @@ export default function Header() {
         {/* Actual navbar content */}
         <nav
           ref={navRef}
-          className="relative mx-auto flex max-w-[1200px] items-center justify-between px-4 py-0"
+          className="relative mx-auto flex w-full max-w-[1200px] items-center justify-between px-4 py-0"
           aria-label="Global"
         >
           {/* Logo (left) */}
-          <div className="flex flex-1">
+          <div className="flex flex-1 min-w-0 items-center">
             <a href="/" className="flex items-center">
               <img src={privueLogo} alt="Privue Logo" className="h-12 w-auto" loading="eager" />
-              <span className="text-foreground -mt-1 ml-0 text-[20px] font-semibold">privue</span>
+              <span className="text-foreground -mt-1 ml-0 text-[20px] font-semibold truncate">privue</span>
             </a>
           </div>
 

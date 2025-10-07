@@ -73,7 +73,7 @@ type FeatureCapabilityCardProps = {
 };
 
 function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
-  const renderIcon = (icon?: IconType) => {
+  const renderIcon = (icon?: FeatureCapabilityCardProps['icon']) => {
     if (!icon) return null;
 
     // string -> <img>
@@ -82,7 +82,7 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
         <img
           src={icon}
           alt=""
-          className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-110"
+          className="h-6 w-6 md:h-8 md:w-8 object-contain transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
           aria-hidden
         />
@@ -91,10 +91,10 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
 
     // already a JSX element (e.g. <Icon /> instance)
     if (React.isValidElement(icon)) {
-      // Tell TS that this is a ReactElement with unknown props so cloneElement accepts our props.
       const elem = icon as React.ReactElement<any, any>;
       return React.cloneElement(elem, {
-        className: `w-6 h-6 ${elem.props?.className ?? ''}`.trim(),
+        // small/mobile size + restore original on md+
+        className: `${elem.props?.className ?? ''} h-5 w-5 md:h-6 md:w-6`.trim(),
         'aria-hidden': true,
       });
     }
@@ -102,7 +102,7 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
     // function / component constructor (e.g. Zap)
     if (typeof icon === 'function') {
       const IconComp = icon as React.ComponentType<any>;
-      return <IconComp className="h-6 w-6" aria-hidden />;
+      return <IconComp className="h-5 w-5 md:h-6 md:w-6" aria-hidden />;
     }
 
     return null;
@@ -110,17 +110,17 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
 
   return (
     <div
-      className={`group hover:shadow-privue-200/60 block rounded-xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl`}
+      className="group hover:shadow-privue-200/60 block rounded-xl border border-gray-100 bg-white p-4 md:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
     >
       {icon ? (
-        <div className="bg-privue-100 group-hover:bg-privue-200 mb-4 flex h-15 w-15 items-center justify-center overflow-hidden rounded-full transition-colors duration-300">
+        <div className="bg-privue-100 group-hover:bg-privue-200 mb-4 flex h-10 w-10 md:h-15 md:w-15 items-center justify-center overflow-hidden rounded-full transition-colors duration-300">
           <div className="text-privue-700 transform transition-transform duration-300 group-hover:scale-110">
             {renderIcon(icon)}
           </div>
         </div>
       ) : null}
 
-      <h2 className="group-hover:text-privue-800 mb-2 text-lg font-medium tracking-tight transition-colors duration-300">
+      <h2 className="group-hover:text-privue-800 mb-2 text-base md:text-lg font-medium tracking-tight transition-colors duration-300">
         {title}
       </h2>
       <p className="text-muted-foreground group-hover:text-foreground/80 text-sm transition-colors duration-300">

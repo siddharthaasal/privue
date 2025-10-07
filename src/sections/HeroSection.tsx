@@ -50,8 +50,7 @@ export default function HeroSection() {
           className=""
         >
           <div className="text-center">
-            {/* <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight text-foreground leading-tight"> */}
-            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text p-2 text-4xl leading-tight font-semibold tracking-tighter text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
+            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text px-2 text-4xl leading-tight font-semibold tracking-tighter text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
               Empowering business
               <br />
               <span className="from-privue-900 to-privue-900 via-privue-700 bg-gradient-to-b bg-clip-text text-transparent">
@@ -66,9 +65,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-        // className="text-lg text-foreground font-medium max-w-2xl"
         >
-          <p className="mt-4 max-w-lg text-lg text-gray-700 dark:text-gray-400">
+          <p className="mt-3 max-w-xs text-base text-gray-700 dark:text-gray-400 sm:mt-4 sm:max-w-lg sm:text-lg">
             Discover data-backed signals for smarter decisions. Mitigate risk and unlock high-value
             relationships.
           </p>
@@ -79,23 +77,30 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-2 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-4 flex w-full flex-row flex-wrap items-center justify-center gap-3 sm:mt-2 sm:gap-4"
         >
           <a href="#industries-section">
             <Button
               variant="default"
               size="default"
-              className="cursor-pointer text-sm text-[#FFF]"
+              className="min-w-[140px] cursor-pointer text-sm text-[#FFF]"
             >
               <p>Browse Solutions</p>
             </Button>
           </a>
+
           <a href="/articles">
-            <Button variant="outline" size="default" className="cursor-pointer">
+            <Button
+              variant="outline"
+              size="default"
+              className="min-w-[140px] cursor-pointer"
+            >
               <p>Case Studies</p>
             </Button>
           </a>
         </motion.div>
+
+
 
         <section className="pt-20">
           {/* Layout container */}

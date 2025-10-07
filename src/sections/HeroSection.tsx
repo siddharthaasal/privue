@@ -111,14 +111,25 @@ export default function HeroSection() {
                 autoFill // duplicate logos to avoid empty gaps
               >
                 {logos.map((src, i) => (
-                  <div key={i} className="mx-10 flex h-14 w-40 items-center justify-center">
-                    <img src={src} alt="integration logo" className="h-10 w-full object-contain" />
+                  <div
+                    key={i}
+                    /* mobile: smaller gap & narrower items; sm+: keep original spacing */
+                    className="mx-6 flex h-14 w-[120px] min-w-[64px] items-center justify-center sm:mx-10 sm:w-40"
+                  >
+                    {/* ensure image never overflows its container on small screens */}
+                    <img
+                      src={src}
+                      alt="integration logo"
+                      className="h-10 max-w-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </Marquee>
             </div>
           </div>
         </section>
+
         {/* Master Workflow Animation */}
         <div
           className="animate-slide-up-fade relative mx-auto mt-20 ml-3 h-fit w-full max-w-7xl sm:ml-auto sm:w-full sm:px-2"

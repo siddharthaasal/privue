@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center text-center">
       {/* content -> (anouncement, heading+subtext, cta) */}
-      <div className="relative mt-24 mb-16 sm:mb-24 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
+      <div className="relative mt-24 mb-20 sm:mb-24 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
         {/* Banner */}
         {/* <motion.div
                     initial={{ opacity: 0, y: -10 }}

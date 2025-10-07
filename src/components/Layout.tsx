@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import FooterMobile from './FooterMobile';
 import { Toaster } from '@/components/ui/sonner';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -47,7 +48,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       <Toaster />
-      <Footer />
+      <>
+        <div className="hidden lg:block">
+          <Footer />
+        </div>
+        <div className="block lg:hidden">
+          <FooterMobile />
+        </div>
+      </>
     </div>
   );
 }

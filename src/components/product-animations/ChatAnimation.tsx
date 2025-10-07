@@ -154,16 +154,24 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
   }: {
     data: { year: string; sales: number; grossMargin: number }[];
   }) {
+    const COLORS = {
+      bar: '#9ca3af',
+      line: '#1f2937',
+      dotFill: '#1f2937',
+      axis: 'rgba(31,41,55,0.15)',
+      text: '#6b7280',
+      dotStroke: '#ffffff',
+    };
+
     const salesValues = data.map((r) => r.sales);
     const maxSales = Math.max(...salesValues, 1);
 
-    // dimensions
-    const w = 250; // internal drawing width
-    const h = 150; // internal drawing height
+    const w = 150;
+    const h = 150;
     const padding = { top: 6, right: 8, bottom: 18, left: 8 };
     const chartW = w - padding.left - padding.right;
     const chartH = h - padding.top - padding.bottom;
-    const barGap = 35;
+    const barGap = 16;
     const n = data.length || 1;
     const barWidth = Math.max(8, (chartW - barGap * (n - 1)) / n);
 
@@ -178,35 +186,45 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
     const polylineRef = useRef<SVGPolylineElement | null>(null);
 
     useEffect(() => {
-      if (polylineRef.current) {
-        const length = polylineRef.current.getTotalLength();
-        polylineRef.current.style.strokeDasharray = String(length);
-        polylineRef.current.style.strokeDashoffset = String(length);
-        // trigger reflow then animate
+      const el = polylineRef.current;
+      if (!el) return;
 
-        polylineRef.current.getBoundingClientRect();
-        polylineRef.current.style.transition = 'stroke-dashoffset 1s ease-out';
-        polylineRef.current.style.strokeDashoffset = '0';
+      // Defensive: only animate if the polyline has at least one rendered point
+      // and guard with try/catch because getTotalLength can throw if element is not ready.
+      try {
+        // SVGPointList availability check (some browsers)
+        const pts = (el as any).points;
+        const hasPoints = pts ? pts.length > 0 : (el.getAttribute('points') || '').trim() !== '';
+
+        if (!hasPoints) return;
+
+        const length = el.getTotalLength();
+        el.style.strokeDasharray = String(length);
+        el.style.strokeDashoffset = String(length);
+        // force layout reflow to ensure transition kicks in
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        el.getBoundingClientRect();
+        el.style.transition = 'stroke-dashoffset 1s ease-out';
+        el.style.strokeDashoffset = '0';
+      } catch (err) {
+        // If browser reports element as non-rendered, skip animation silently (but log in dev).
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.warn('Polyline animation skipped — element not ready or no points:', err);
+        }
       }
     }, [data]);
 
     return (
-      <div className="w-full">
-        <div className="rounded-md bg-[rgba(15,23,36,0.02)] px-1 py-1">
-          <svg
-            width="100%"
-            height={h}
-            viewBox={`0 0 ${w} ${h}`}
-            preserveAspectRatio="xMidYMid meet"
-            role="img"
-            aria-hidden="true"
-          >
+      <div className="w-3/4">
+        <div className="rounded-md px-1 py-1">
+          <svg width={w} height={h} role="img" aria-label="Sales and gross margin chart">
             <line
               x1={padding.left}
               x2={w - padding.right}
               y1={h - padding.bottom}
               y2={h - padding.bottom}
-              stroke="rgba(15,23,36,0.1)"
+              stroke={COLORS.axis}
               strokeWidth={1}
             />
 
@@ -222,8 +240,7 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
                   width={barWidth}
                   height={barH}
                   rx={3}
-                  fill="#4c6ef5"
-                  opacity={0.85}
+                  fill={COLORS.bar}
                   style={{
                     transformOrigin: `${x + barWidth / 2}px ${h - padding.bottom}px`,
                     transformBox: 'fill-box',
@@ -234,13 +251,19 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
               );
             })}
 
-            <polyline
-              ref={polylineRef}
-              points={points.join(' ')}
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth={1.5}
-            />
+            {/* only render polyline if we have points */}
+            {points.length > 0 && (
+              <polyline
+                ref={polylineRef}
+                points={points.join(' ')}
+                fill="none"
+                stroke={COLORS.line}
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ opacity: 0.98 }}
+              />
+            )}
 
             {data.map((r, i) => {
               const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
@@ -250,9 +273,9 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
                   key={`pt-${i}`}
                   cx={x}
                   cy={y}
-                  r={2.5}
-                  fill="#ef4444"
-                  stroke="#fff"
+                  r={2.75}
+                  fill={COLORS.dotFill}
+                  stroke={COLORS.dotStroke}
                   strokeWidth={0.8}
                   style={{
                     opacity: 0,
@@ -271,7 +294,11 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
                   y={h - 4}
                   textAnchor="middle"
                   fontSize={10}
-                  fill="#64748b"
+                  fill={COLORS.text}
+                  style={{
+                    fontFamily:
+                      'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
+                  }}
                 >
                   {r.year.replace('FY ', '')}
                 </text>
@@ -281,15 +308,15 @@ export function AnimatedChatInner({ className = '' }: ChatAnimationProps) {
         </div>
 
         <style>{`
-          @keyframes growBar {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
-          }
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-        `}</style>
+        @keyframes growBar {
+          from { transform: scaleY(0); }
+          to { transform: scaleY(1); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
       </div>
     );
   }

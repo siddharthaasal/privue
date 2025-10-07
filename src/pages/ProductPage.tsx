@@ -3,12 +3,14 @@ import { Cpu, Zap } from 'lucide-react';
 // import TwoOrbit from "@/components/about/TwoOrbit";
 import ChatAnimation from '@/components/product-animations/ChatAnimation';
 import useHashScroll from '@/hooks/useHashScroll';
+import React, { useEffect, useState, useRef } from 'react';
 
 export default function ProductPage() {
   useHashScroll({ offset: 80 });
   return (
     <Layout>
-      <div className="space-y-28 py-28">
+      {/* lighter vertical spacing on mobile; original spacing restored at md+ */}
+      <div className="space-y-12 py-14 md:space-y-28 md:py-28">
         <section id="api" className="scroll-m-20">
           <SectionAPIs />
         </section>
@@ -26,16 +28,16 @@ export default function ProductPage() {
 /* -------------------- Section 1 -------------------- */
 function SectionAPIs() {
   return (
-    <section className="font-open-sans relative mx-auto flex items-center px-8">
-      <div className="w-full space-y-8 px-6 md:space-y-12">
-        <h2 className="max-w-3xl text-3xl leading-tight font-medium lg:text-3xl">
+    <section className="font-open-sans relative mx-auto flex items-center px-6 md:px-8">
+      <div className="w-full space-y-6 px-0 md:space-y-8 md:px-6">
+        <h2 className="max-w-3xl text-2xl leading-tight font-medium lg:text-3xl">
           <span className="text-privue-900">APIs— </span>modular building blocks for risk &amp; data
           workflows
         </h2>
 
-        <div className="relative flex flex-col items-start gap-8 md:flex-row">
+        <div className="relative flex flex-col items-start gap-6 md:flex-row md:gap-8">
           {/* Left: Text */}
-          <div className="relative z-10 space-y-4 md:w-2/3">
+          <div className="relative z-10 space-y-3 md:w-2/3">
             <p className="text-base">
               Our APIs let you pick the exact capabilities you need and plug them into your existing
               systems. Ingest data from multiple public and premium sources (including government
@@ -50,7 +52,7 @@ function SectionAPIs() {
               securely, and maintain full control of your customer experience.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="grid grid-cols-2 gap-4 pt-4">
               <Feature
                 icon={<Cpu className="h-4 w-4" />}
                 title="Plug-and-play modules"
@@ -64,14 +66,16 @@ function SectionAPIs() {
             </div>
           </div>
 
-          {/* Right: Image (AboutSection style) */}
-          <div className="relative mt-8 w-full md:mt-6 md:w-1/2">
+          {/* Right: Image (AboutSection style) — HIDDEN ON MOBILE */}
+          <div className="relative mt-6 w-full md:mt-6 md:w-1/2">
             <div className="md:absolute md:inset-x-0 md:-inset-y-12">
               <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_100%,transparent)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent,var(--color-privue-900)_10%,var(--color-privue-900)_90%,transparent)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
+                {/* hidden on mobile; visible md+ */}
                 <img
                   src="/workflow-img.png"
                   alt="workflow illustration"
-                  className="mt-12 h-auto w-full scale-110 rounded-[12px] object-cover shadow"
+                  className="hidden md:block mt-12 h-auto w-full scale-110 rounded-[12px] object-cover shadow"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -85,20 +89,21 @@ function SectionAPIs() {
 /* -------------------- Section 2 -------------------- */
 function SectionWorkspace() {
   return (
-    <section className="font-open-sans bg-muted/30 relative mx-auto px-8">
-      <div className="w-full space-y-8 px-6 md:space-y-12">
-        <h2 className="max-w-3xl text-3xl leading-tight font-medium lg:text-3xl">
+    <section className="font-open-sans bg-muted/30 relative mx-auto px-6 md:px-8">
+      <div className="w-full space-y-6 px-0 md:space-y-8 md:px-6">
+        <h2 className="max-w-3xl text-2xl leading-tight font-medium lg:text-3xl">
           <span className="text-privue-900">Workspace— </span>
           conversation workspace to ask, explore, and publish in one place
         </h2>
 
-        <div className="flex flex-col items-center gap-8 md:flex-row md:items-stretch">
-          {/* Img Left */}
+        <div className="flex flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-8">
+          {/* Img Left — hidden on mobile */}
           <div className="order-2 flex justify-center md:order-1 md:w-1/2">
             <div className="flex h-full w-full items-center">
               {/* force a stable aspect and equal height */}
               <div className="flex h-full w-full items-center justify-center bg-transparent">
-                <div className="aspect-[4/3] h-full max-h-[400px] w-full">
+                {/* ChatAnimation removed on mobile: hidden md:block */}
+                <div className="aspect-[4/3] h-full max-h-[400px] w-full hidden md:block">
                   <ChatAnimation className="h-full w-full object-contain" />
                 </div>
               </div>
@@ -106,7 +111,7 @@ function SectionWorkspace() {
           </div>
 
           {/* Text Right */}
-          <div className="order-1 flex flex-col justify-center space-y-4 md:order-2 md:w-1/2">
+          <div className="order-1 flex flex-col justify-center space-y-3 md:order-2 md:w-1/2">
             <p className="text-base">
               Use a natural-language interface to query your data, model outputs, and portfolio insights on
               demand. Ask a question, refine with follow-ups, and compare scenarios without writing SQL or
@@ -118,7 +123,7 @@ function SectionWorkspace() {
               filters, and sources for governance.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="grid grid-cols-2 gap-4 pt-4">
               <Feature
                 icon={<Cpu className="h-4 w-4" />}
                 title="Natural-language analysis"
@@ -132,7 +137,6 @@ function SectionWorkspace() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
@@ -141,17 +145,17 @@ function SectionWorkspace() {
 /* -------------------- Section 3 -------------------- */
 function SectionPlatform() {
   return (
-    <section className="font-open-sans relative mx-auto px-8">
-      <div className="w-full space-y-8 px-6 md:space-y-12">
-        <h2 className="max-w-3xl text-3xl leading-tight font-medium lg:text-3xl">
+    <section className="font-open-sans relative mx-auto px-6 md:px-8">
+      <div className="w-full space-y-6 px-0 md:space-y-8 md:px-6">
+        <h2 className="max-w-3xl text-2xl leading-tight font-medium lg:text-3xl">
           <span className="text-privue-900">Application— </span>platform to manage data, dashboards,
           and reporting
         </h2>
 
         {/* Use items-stretch so both columns match height */}
-        <div className="flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
           {/* Text Left */}
-          <div className="space-y-4 md:w-1/2">
+          <div className="space-y-3 md:w-1/2">
             <p className="text-base">
               The Platform is your control center when you do not have (or do not want to maintain)
               internal systems. Centralize data onboarding, quality checks, model configurations,
@@ -163,7 +167,7 @@ function SectionPlatform() {
               with the latest data, while exception workflows route items to the right teams.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="grid grid-cols-2 gap-4 pt-4">
               <Feature
                 icon={<Cpu className="h-4 w-4" />}
                 title="All-in-one workspace"
@@ -177,13 +181,11 @@ function SectionPlatform() {
             </div>
           </div>
 
-          {/* Img Right -> ImageCarousel (fills left column height) */}
+          {/* Img Right -> ImageCarousel (fills left column height). HIDDEN ON MOBILE */}
           <div className="flex items-start md:w-1/2">
-            {/* Make this wrapper fill the height of the left column */}
             <div className="relative h-full w-full">
-              {/* Give the carousel a fixed min-height for very short content (optional).
-                  Remove the inline style if you want purely auto height from left column. */}
-              <div className="relative h-full w-full">
+              {/* only show carousel md+ */}
+              <div className="relative h-full w-full hidden md:block">
                 <ImageCarousel
                   images={[
                     '/module-animations/ss1.png',
@@ -217,23 +219,7 @@ function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; 
   );
 }
 
-// function IconImg({ src, alt = "" }: { src: string; alt?: string }) {
-//     return (
-//         <img
-//             src={src}
-//             alt={alt}
-//             style={{
-//                 width: "100%",
-//                 height: "100%",
-//                 objectFit: "contain",
-//                 borderRadius: 6,
-//             }}
-//         />
-//     );
-// }
-
-import React, { useEffect, useState, useRef } from 'react';
-
+/* -------------------- ImageCarousel component (unchanged behavior, desktop-only via usage) -------------------- */
 type ImageCarouselProps = {
   images: string[]; // array of image srcs
   interval?: number; // ms between slides
@@ -288,7 +274,6 @@ export function ImageCarousel({
           className={`absolute inset-0 h-full w-full items-start object-contain transition-opacity duration-700 ease-in-out ${i === index ? 'z-10 opacity-100' : 'z-0 opacity-0'} ${imgClass}`}
           loading="lazy"
           aria-hidden="true"
-          // prevent drag (optional)
           draggable={false}
         />
       ))}

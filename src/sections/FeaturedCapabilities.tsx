@@ -43,17 +43,18 @@ export default function FeaturedCapabilities() {
   return (
     <section className="font-open-sans relative mx-auto">
       <div className="mx-auto max-w-7xl px-4 py-10">
-        <div className="mx-auto py-12 text-center">
-          <h1 className="mb-4 text-3xl font-semibold text-[#171717] md:text-4xl">
+        <div className="mx-auto py-8 px-4 text-center md:py-12">
+          <h1 className="mb-3 text-2xl font-semibold text-[#171717] md:text-4xl leading-tight">
             Core{' '}
             <span className="from-privue-950 to-privue-900 via-privue-800 bg-gradient-to-r bg-clip-text font-semibold text-transparent">
               Capabilities
             </span>
           </h1>
-          <p className="mt-2 mb-4 text-base text-[#525252] md:text-lg dark:text-gray-400">
+          <p className="mt-2 mb-4 mx-auto text-sm text-[#525252] md:text-lg dark:text-gray-400 leading-relaxed">
             Harness AI to streamline decisions, manage risk, and unlock growth opportunities.
           </p>
         </div>
+
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {coreCapabilities.map((s, i) => (

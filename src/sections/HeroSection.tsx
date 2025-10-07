@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center text-center">
       {/* content -> (anouncement, heading+subtext, cta) */}
-      <div className="relative my-24 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
+      <div className="relative mt-24 mb-16 sm:mb-24 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
         {/* Banner */}
         {/* <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -119,13 +119,13 @@ export default function HeroSection() {
                   <div
                     key={i}
                     /* mobile: smaller gap & narrower items; sm+: keep original spacing */
-                    className="mx-6 flex h-14 w-[120px] min-w-[64px] items-center justify-center sm:mx-10 sm:w-40"
+                    className="mx-8 flex h-10 w-[80px] min-w-[56px] items-center justify-center sm:mx-10 sm:h-14 sm:w-40"
                   >
                     {/* ensure image never overflows its container on small screens */}
                     <img
                       src={src}
                       alt="integration logo"
-                      className="h-10 max-w-full object-contain"
+                      className="h-8 sm:h-10 max-w-full object-contain"
                       loading="lazy"
                     />
                   </div>
@@ -134,6 +134,7 @@ export default function HeroSection() {
             </div>
           </div>
         </section>
+
 
         {/* Master Workflow Animation — hidden on mobile/tablet, visible on lg+ */}
         <div className="w-full lg:mt-20">

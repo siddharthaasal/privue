@@ -51,31 +51,33 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
       <div className="py-4">
         <div className="container">
           {/* Header with arrows aligned right */}
-          <div className="mb-8 flex flex-col justify-between md:flex-row md:items-end">
-            <div className="mt-4 flex w-full items-center justify-end gap-2">
+          <div className="mb-6 flex flex-col justify-between md:flex-row md:items-end">
+            <div className="mt-3 flex w-full items-center justify-end gap-2 md:mt-4">
               <Button
                 size="icon"
                 variant="outline"
                 aria-label="Previous articles"
                 onClick={() => carouselApi?.scrollPrev()}
                 disabled={!canScrollPrev}
-                className="disabled:pointer-events-auto"
+                className="h-8 w-8 p-1 disabled:pointer-events-auto md:h-10 md:w-10 md:p-2"
               >
-                <ArrowLeft className="size-5" />
+                <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
+
               <Button
                 size="icon"
                 variant="outline"
                 aria-label="Next articles"
                 onClick={() => carouselApi?.scrollNext()}
                 disabled={!canScrollNext}
-                className="disabled:pointer-events-auto"
+                className="h-8 w-8 p-1 disabled:pointer-events-auto md:h-10 md:w-10 md:p-2"
               >
-                <ArrowRight className="size-5" />
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
           </div>
         </div>
+
 
         {/* Carousel starting from left */}
         <div className="w-full max-w-full">

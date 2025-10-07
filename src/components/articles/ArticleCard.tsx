@@ -23,20 +23,20 @@ export function BlogCard({
     <div className="h-full w-full">
       <a
         href={href}
-        className="group inline-block h-full min-w-full rounded-xl border border-transparent p-4 transition-all hover:bg-gray-100"
+        className="group inline-block h-full min-w-full rounded-xl border border-transparent p-3 md:p-4 transition-all hover:bg-gray-100"
       >
         <div className="flex flex-col space-y-5">
           {/* Thumbnail */}
-          <div className="relative mb-3 aspect-[2/1] w-full overflow-hidden rounded-lg border shadow-sm lg:aspect-[5/3]">
+          <div className="relative mb-3 aspect-[3/2] md:aspect-[2/1] lg:aspect-[5/3] w-full overflow-hidden rounded-lg border shadow-sm">
             <img
               src={image}
               alt={title + ' thumbnail'}
-              loading="lazy"
+              // loading="lazy"
               className="absolute inset-0 h-full w-full scale-100 object-cover"
             />
 
             {articleType && (
-              <Badge className="absolute top-2 right-2 rounded-lg bg-black/40 px-2 py-1 text-xs font-normal text-white shadow-sm backdrop-blur-xs">
+              <Badge className="absolute top-2 right-2 rounded-lg bg-black/40 px-2 py-0.5 text-[11px] font-normal text-white shadow-sm backdrop-blur-xs md:px-2 md:py-1 md:text-xs">
                 {articleType}
               </Badge>
             )}
@@ -46,13 +46,11 @@ export function BlogCard({
           <div className="flex flex-col space-x-1.5 text-sm text-gray-500">
             <div className="flex flex-row items-center justify-between gap-1 space-x-1.5 px-1 text-xs">
               <div className="flex items-center gap-0.5">
-                {/* <CalendarDays size={12} color="#707070" /> */}
                 <p>
                   <span className="font-normal text-[#525252]">{date}</span>
                 </p>
               </div>
               <div className="flex items-center gap-0.5">
-                {/* <Clock size={12} color="#707070" /> */}
                 <p className="font-normal text-[#525252]">{readTime} read</p>
               </div>
             </div>
@@ -60,13 +58,18 @@ export function BlogCard({
 
           <div>
             {/* Title */}
-            <h3 className="mb-2 max-w-sm text-lg font-normal text-[#171717]">{title}</h3>
+            <h3 className="mb-2 max-w-full md:max-w-sm text-base md:text-lg font-normal text-[#171717]">
+              {title}
+            </h3>
 
             {/* Description */}
-            <p className="line-clamp-3 max-w-sm text-sm text-[#525252]">{description}</p>
+            <p className="line-clamp-3 max-w-full md:max-w-sm text-sm text-[#525252]">
+              {description}
+            </p>
           </div>
         </div>
       </a>
     </div>
   );
 }
+

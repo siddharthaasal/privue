@@ -4,7 +4,7 @@ import ArticleGallery from '@/components/ArticleGallery';
 export default function FeaturedArticles() {
   return (
     <section className="font-open-sans relative px-4 sm:px-6">
-      <div className="mx-auto py-8 px-4 text-center md:py-12">
+      <div className="mx-auto pt-8 px-4 text-center md:pt-12">
         <h1 className="mb-3 text-2xl font-semibold text-[#171717] md:text-4xl leading-tight">
           Featured{' '}
           <span className="from-privue-950 to-privue-900 via-privue-800 bg-gradient-to-r bg-clip-text font-semibold text-transparent">

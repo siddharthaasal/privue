@@ -130,19 +130,33 @@ export default function HeroSection() {
           </div>
         </section>
 
-        {/* Master Workflow Animation */}
-        <div
-          className="animate-slide-up-fade relative mx-auto mt-20 ml-3 h-fit w-full max-w-7xl sm:ml-auto sm:w-full sm:px-2"
-          style={{ animationDuration: '1400ms' }}
-        >
-          <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset dark:bg-gray-900/70 dark:ring-white/10">
-            <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
-              <div className="h-[30rem] w-full rounded-xl p-4 shadow-2xl dark:shadow-indigo-600/10">
-                <FlowNodesExample />
+        {/* Master Workflow Animation / Static Image */}
+        <div className="mt-20 w-full">
+          {/* Desktop & Laptop (show animation) */}
+          <div
+            className="animate-slide-up-fade relative mx-auto hidden h-fit w-full max-w-7xl px-4 lg:block"
+            style={{ animationDuration: '1400ms' }}
+          >
+            <div className="rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset dark:bg-gray-900/70 dark:ring-white/10">
+              <div className="rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
+                <div className="h-[30rem] w-full max-w-full rounded-xl p-4 shadow-2xl dark:shadow-indigo-600/10">
+                  <FlowNodesExample />
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Mobile & Tablet (show image) */}
+          <div className="block lg:hidden">
+            <img
+              src="/workflow-img.png"
+              alt="Workflow preview"
+              className="mx-auto h-auto w-full max-w-md rounded-2xl object-contain shadow-lg dark:shadow-indigo-600/10"
+              loading="lazy"
+            />
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { motion, AnimatePresence } from 'motion/react';
 import IndustrySolutionCard from './IndustrySolutionCard';
-import { Building, Factory, Warehouse, HousePlug, ShieldCheck, Building2 } from 'lucide-react';
+import { Building, Factory, Warehouse, HousePlug, ShieldCheck, Building2, FileCheck } from 'lucide-react';
 
 // Types
 type Industry = {
@@ -111,8 +111,20 @@ export default function IndustryModules() {
         icon: <HousePlug />,
         slug: 'sustainability-assessment',
       },
+      {
+        heading: 'Internal Audit',
+        subHeading: 'Make your internal audit faster, sharper and continuous.',
+        icon: <FileCheck />,
+        slug: 'internal-audit',
+      },
     ],
     'ind-3': [
+      {
+        heading: 'Internal Audit',
+        subHeading: 'Make your internal audit faster, sharper and continuous.',
+        icon: <FileCheck />,
+        slug: 'internal-audit',
+      },
       {
         heading: 'Sustainability Assessment',
         subHeading: 'Climate Risk. Emissions Estimation. ESG Score.',
@@ -140,6 +152,12 @@ export default function IndustryModules() {
         slug: 'sustainability-assessment',
       },
       {
+        heading: 'Internal Audit',
+        subHeading: 'Make your internal audit faster, sharper and continuous.',
+        icon: <FileCheck />,
+        slug: 'internal-audit',
+      },
+      {
         heading: 'Third Party Risk Assessment',
         subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
         icon: <Factory />,
@@ -153,6 +171,12 @@ export default function IndustryModules() {
         icon: <Building2 />,
         slug: 'entity-due-diligence',
       },
+      {
+        heading: 'Internal Audit',
+        subHeading: 'Make your internal audit faster, sharper and continuous.',
+        icon: <FileCheck />,
+        slug: 'internal-audit',
+      },
     ],
     'ind-6': [
       {
@@ -160,6 +184,12 @@ export default function IndustryModules() {
         subHeading: 'Reduce disruptions. Safeguard reputation. Build resilient partnerships.',
         icon: <Factory />,
         slug: 'third-party-risk-management',
+      },
+      {
+        heading: 'Internal Audit',
+        subHeading: 'Make your internal audit faster, sharper and continuous.',
+        icon: <FileCheck />,
+        slug: 'internal-audit',
       },
       {
         heading: 'Sustainability Assessment',

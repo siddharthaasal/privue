@@ -116,7 +116,7 @@ export const articles: ArticleMeta[] = [
     "articleType": "Case Study",
     "solutionName": "Credit Risk Assessment",
     "solutionLink": "solutions/third-party-risk-management",
-    "coverImage": "/articles-test-images/credit-risk-2.jpg",
+    "coverImage": "/articles-test-images/credit-risk.png",
     "readTime": "4 min",
     "file": "src/data/articles/transforming-credit-risk-assessment.mdx",
     "url": "/articles/transforming-credit-risk-assessment"

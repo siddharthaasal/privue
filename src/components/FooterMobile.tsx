@@ -66,6 +66,8 @@ export default function FooterMobile({
                 },
                 { text: 'Entity Due Diligence', url: '/solutions/entity-due-diligence' },
                 { text: 'Third Party Risk Management', url: '/solutions/third-party-risk-management' },
+                { text: 'Internal Audit', url: '/solutions/internal-audit' },
+
             ],
         },
         {

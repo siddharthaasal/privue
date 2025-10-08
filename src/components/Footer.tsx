@@ -70,6 +70,7 @@ export default function Footer({
         },
         { text: 'Entity Due Diligence', url: '/solutions/entity-due-diligence' },
         { text: 'Third Party Risk Management', url: '/solutions/third-party-risk-management' },
+        { text: 'Internal Audit', url: '/solutions/internal-audit' },
       ],
     },
 
@@ -212,7 +213,7 @@ export default function Footer({
                 : [[], []];
 
               return (
-                <div className="flex gap-12 items-end justify-end">
+                <div className="flex gap-12 items-start justify-end">
                   {/* Modules column (left) */}
                   <div className="min-w-0 max-w-max flex-1">
                     <h4 className="text-foreground mb-3 text-sm font-medium">Modules</h4>

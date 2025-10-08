@@ -11,20 +11,20 @@ export default function AboutSection() {
         <div className="relative flex flex-col items-start gap-8 md:flex-row">
           {/* Left: Text */}
           <div className="relative z-10 space-y-4 md:w-1/2">
-            <p className="text-base text-justify">
+            <p className="text-base">
               Privue helps financial institutions and corporates make smarter decisions by combining
               advanced AI with curated data intelligence. It integrates multiple data sources,
               applying machine learning and predictive modeling to deliver accurate, real-time
               insights via API or custom applications.
             </p>
-            <p className="text-base text-justify">
+            <p className="text-base">
               From credit and vendor risk to compliance and climate, we empower organizations to
               assess counterparties, mitigate risks, and act with confidence.
             </p>
 
             {/* --- MOBILE: show image here (visible only on small screens) --- */}
             <div className="block md:hidden">
-              <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_100%)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
+              <div className="relative overflow-hidden rounded-2xl">
                 <img
                   src="/workflow-img.png"
                   alt="workflow illustration"

@@ -56,7 +56,7 @@ export default function FeaturedCapabilities() {
         </div>
 
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {coreCapabilities.map((s, i) => (
             <FeatureCapabilityCard key={i} title={s.heading} description={s.desc} icon={s.icon} />
           ))}
@@ -71,6 +71,8 @@ type FeatureCapabilityCardProps = {
   title: string;
   description: string;
 };
+
+
 
 function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCardProps) {
   const renderIcon = (icon?: FeatureCapabilityCardProps['icon']) => {
@@ -89,20 +91,19 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
       );
     }
 
-    // already a JSX element (e.g. <Icon /> instance)
+    // JSX element
     if (React.isValidElement(icon)) {
       const elem = icon as React.ReactElement<any, any>;
       return React.cloneElement(elem, {
-        // small/mobile size + restore original on md+
         className: `${elem.props?.className ?? ''} h-5 w-5 md:h-6 md:w-6`.trim(),
         'aria-hidden': true,
       });
     }
 
-    // function / component constructor (e.g. Zap)
+    // Icon component
     if (typeof icon === 'function') {
       const IconComp = icon as React.ComponentType<any>;
-      return <IconComp className="h-5 w-5 md:h-6 md:w-6" aria-hidden />;
+      return <IconComp className="h-5 w-5 md:h-6 md:w-6 mb-4" aria-hidden />;
     }
 
     return null;
@@ -110,22 +111,30 @@ function FeatureCapabilityCard({ icon, title, description }: FeatureCapabilityCa
 
   return (
     <div
-      className="group hover:shadow-privue-200/60 block rounded-xl border border-gray-100 bg-white p-4 md:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+      className="group hover:shadow-privue-200/60 block rounded-xl border border-gray-100 bg-white 
+                 p-3 md:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
     >
-      {icon ? (
-        <div className="bg-privue-100 group-hover:bg-privue-200 mb-4 flex h-10 w-10 md:h-15 md:w-15 items-center justify-center overflow-hidden rounded-full transition-colors duration-300">
-          <div className="text-privue-700 transform transition-transform duration-300 group-hover:scale-110">
-            {renderIcon(icon)}
+      {/* Mobile: flex row | Desktop: normal */}
+      <div className="flex md:block items-start gap-3 md:gap-0 md:mb-4">
+        {icon ? (
+          <div className="bg-privue-100 group-hover:bg-privue-200 flex-shrink-0 
+                          flex h-10 w-10 md:h-15 md:w-15 items-center justify-center 
+                          overflow-hidden rounded-full transition-colors duration-300 mb-4">
+            <div className="text-privue-700 transform transition-transform duration-300 group-hover:scale-110">
+              {renderIcon(icon)}
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
 
-      <h2 className="group-hover:text-privue-800 mb-2 text-base md:text-lg font-medium tracking-tight transition-colors duration-300">
-        {title}
-      </h2>
-      <p className="text-muted-foreground group-hover:text-foreground/80 text-sm transition-colors duration-300">
-        {description}
-      </p>
+        <div className="flex-1">
+          <h2 className="group-hover:text-privue-800 mb-1 md:mb-2 text-sm md:text-lg font-medium tracking-tight transition-colors duration-300">
+            {title}
+          </h2>
+          <p className="text-muted-foreground group-hover:text-foreground/80 text-xs md:text-sm transition-colors duration-300 leading-snug md:leading-normal">
+            {description}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

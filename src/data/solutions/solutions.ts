@@ -59,6 +59,18 @@ import {
   ShieldAlert,
   CloudRainWind,
   MonitorDot,
+  Search,
+  Clock,
+  Database,
+  Shuffle,
+  Eye,
+  AlertTriangle,
+  AlertCircle,
+  ClipboardCheck,
+  FileDiff,
+  Settings,
+  ShieldCheck,
+  FileCheck,
 } from 'lucide-react';
 
 import DistributorPerformanceWorkflow from '@/components/solutions/header-workflows/DistributorPerformanceWorkflow';
@@ -1141,6 +1153,156 @@ export const solutions: Solution[] = [
     ],
     mainArticleSlug: 'transforming-credit-risk-assessment',
   },
+  {
+    id: 6,
+    slug: "internal-audit",
+    icon: "/icons/solutions/distributor-performance-management.png",
+    workflow: DistributorPerformanceWorkflow,
+    coverImg: "/solutions/demo-image.png",
+    heading: "Internal Audit",
+    subHeading: "Make your internal audit faster, sharper and continuous",
+    featurePoints: [
+      ""
+    ],
+    mainSolnDesc:
+      "PRIVUE brings AI-powered document intelligence, evidence validation and risk prioritisation to internal audit. Compare claims against source documents, surface anomalies and sample the right records in seconds — so your team can focus on judgement, not manual checks.",
+    problems: [
+      {
+        icon: FileText,
+        problemHeading: "Manual Checks to Validate Claims",
+        problemDesc:
+          "Auditors spend hours verifying management assertions, policy adherence and control evidence across emails, PDFs, contracts and spreadsheets."
+      },
+      {
+        icon: Search,
+        problemHeading: "Hunting through Large Documents",
+        problemDesc:
+          "Critical details are buried in lengthy policies, contracts, logs and financial statements, increasing the risk of oversight."
+      },
+      {
+        icon: Clock,
+        problemHeading: "Seasonality and Surge Periods",
+        problemDesc:
+          "Quarter and year-end audits strain capacity; onboarding additional temporary staff is expensive and inconsistent."
+      },
+      {
+        icon: Database,
+        problemHeading: "Fragmented Evidence",
+        problemDesc:
+          "Data sits across ERPs, ticketing tools, DMS/VDRs and shared drives; stitching it together is slow and error-prone."
+      },
+      {
+        icon: Shuffle,
+        problemHeading: "Inconsistent Sampling",
+        problemDesc:
+          "Ad hoc sampling and judgement calls create variability in coverage and defensibility."
+      },
+      {
+        icon: Eye,
+        problemHeading: "Limited Visibility",
+        problemDesc:
+          "Limited visibility into emerging risk areas reduces audit effectiveness."
+      }
+    ],
+    solnPoints: [
+      {
+        solutionHeading: "Automate Document Validation",
+        solutionDescription:
+          "Compare reported figures, policies and disclosures against uploaded evidence such as financial statements, contracts and operational data.",
+        icon: FileCheck
+      },
+      {
+        solutionHeading: "Identify high-risk Areas",
+        solutionDescription:
+          "Flag inconsistencies, missing information and anomalies across datasets or time periods.",
+        icon: AlertTriangle
+      },
+      {
+        solutionHeading: "Streamline Sampling",
+        solutionDescription:
+          "Generate smart samples based on data patterns and risk indicators instead of random selection.",
+        icon: Layers
+      },
+      {
+        solutionHeading: "Enhance Audit Quality",
+        solutionDescription:
+          "Reduce manual effort and increase audit coverage with traceable, data-backed insights.",
+        icon: ShieldCheck
+      }
+    ],
+    coreCapabilities: [
+      {
+        heading: "Document Comparison",
+        desc: "Automatically compare data across multiple reports, disclosures and supporting documents to identify inconsistencies and deviations.",
+        icon: FileDiff
+      },
+      {
+        heading: "Automated Sampling",
+        desc: "Generate intelligent samples based on data trends, anomalies and risk levels rather than random selection.",
+        icon: Shuffle
+      },
+      {
+        heading: "Risk Flagging",
+        desc: "Highlight high-risk areas, unusual transactions or policy deviations through AI-driven anomaly detection.",
+        icon: AlertCircle
+      },
+      {
+        heading: "Evidence Validation",
+        desc: "Verify audit claims by matching data points with underlying documentation such as contracts, invoices and statements.",
+        icon: ClipboardCheck
+      },
+      {
+        heading: "Text Extraction & Search",
+        desc: "Instantly locate key data and references within lengthy documents using context-based search and AI summarisation.",
+        icon: Search
+      },
+      {
+        heading: "Custom Rule Configuration",
+        desc: "Set up audit-specific logic to automatically check for compliance with internal policies or regulatory standards.",
+        icon: Settings
+      }
+    ],
+    modules: [
+      {
+        title: "Data Extraction",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      },
+      {
+        title: "Document Comparison",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      },
+      {
+        title: "Audit Sampling",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      },
+      {
+        title: "Policy Compliance",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      },
+      {
+        title: "Conversational AI",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      },
+      {
+        title: "Report Generation",
+        description: "",
+        imgSrc: "/demo-module-image.png",
+        link: "#",
+      }
+    ],
+    mainArticleSlug: "transforming-credit-risk-assessment"
+  }
+
 ];
 
 /*

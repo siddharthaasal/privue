@@ -342,17 +342,45 @@ export default function IndustryModules() {
             {industries.map((ind) => (
               <AccordionItem key={ind.id} value={ind.id}>
                 <AccordionTrigger>
-                  {/* Each trigger shows industry name */}
                   <div className="flex items-center gap-2 text-base">{ind.name}</div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  {/* The description could be longer; keep it concise */}
-                  <div className="text-muted-foreground text-sm">
+                  <div className="text-muted-foreground text-sm mb-3">
                     {ind.description || 'Explore tailored solutions for this industry.'}
+                  </div>
+
+                  {/* ✅ Show solutions inline for mobile */}
+                  <div className="block md:hidden">
+                    <AnimatePresence mode="wait" initial={false}>
+                      {activeIndustryId === ind.id && (
+                        <motion.div
+                          key={ind.id}
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          transition={{
+                            opacity: { duration: 0.16 },
+                            y: { type: 'spring', stiffness: 300, damping: 28, duration: 0.24 },
+                          }}
+                          className="grid gap-2"
+                        >
+                          {(solutionsByIndustry[ind.id] || []).map((s) => (
+                            <IndustrySolutionCard
+                              key={s.slug}
+                              title={s.heading}
+                              description={s.subHeading}
+                              icon={s.icon}
+                              href={`/solutions/${s.slug}`}
+                            />
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </AccordionContent>
               </AccordionItem>
             ))}
+
           </Accordion>
 
           {/* -----------------------
@@ -360,15 +388,15 @@ export default function IndustryModules() {
               - col-span-2 to occupy remaining grid columns
               - maps dummySolutions exactly using the snippet you provided
               ------------------------ */}
-          <div className="bg-background relative col-span-2 flex overflow-hidden p-0">
+          {/* Desktop RHS */}
+          <div className="bg-background relative col-span-2 hidden md:flex overflow-hidden p-0">
             <div
               ref={rhsScrollRef}
               className="scrollbar-none relative grid h-[450px] w-full auto-rows-min content-start gap-2 overflow-y-auto rounded-2xl p-4"
             >
-              {/* Animate the whole list as one panel keyed by activeIndustryId */}
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={activeIndustryId} // <--- switching industry replaces this panel
+                  key={activeIndustryId}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
@@ -377,12 +405,10 @@ export default function IndustryModules() {
                     y: { type: 'spring', stiffness: 300, damping: 28, duration: 0.24 },
                   }}
                   className="grid gap-2"
-                  // Keep the same 1-card-per-row layout: each card will fill available width
                   style={{ gridTemplateColumns: '1fr' }}
                 >
                   {currentSolutions.map((s) => (
                     <div key={s.slug} className="w-full">
-                      {/* keep your original IndustrySolutionCard usage so cards remain full-width */}
                       <IndustrySolutionCard
                         title={s.heading}
                         description={s.subHeading}
@@ -395,6 +421,7 @@ export default function IndustryModules() {
               </AnimatePresence>
             </div>
           </div>
+
         </div>
       </div>
     </section>

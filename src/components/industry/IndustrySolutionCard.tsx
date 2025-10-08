@@ -15,14 +15,13 @@ export default function IndustrySolutionCard({
   description,
   href,
 }: IndustrySolutionCardProps) {
-  // helper to normalize/render icon (sizeClass like "w-5 h-5" or "w-6 h-6")
+  // helper to normalize/render icon
   const renderIconNode = (
     iconVal: string | React.ComponentType<any> | React.ReactNode,
     sizeClass = 'w-5 h-5',
   ) => {
     if (!iconVal) return null;
 
-    // string -> <img />
     if (typeof iconVal === 'string') {
       return (
         <img
@@ -35,9 +34,7 @@ export default function IndustrySolutionCard({
       );
     }
 
-    // already a JSX element instance
     if (React.isValidElement(iconVal)) {
-      // assure TypeScript that this is a ReactElement with any props so cloneElement accepts className
       const elem = iconVal as React.ReactElement<any, any>;
       return React.cloneElement(elem, {
         className: `${sizeClass} ${elem.props?.className ?? ''}`.trim(),
@@ -45,7 +42,6 @@ export default function IndustrySolutionCard({
       });
     }
 
-    // component constructor/function
     if (typeof iconVal === 'function') {
       const IconComp = iconVal as React.ComponentType<any>;
       return <IconComp className={sizeClass} aria-hidden />;
@@ -53,32 +49,71 @@ export default function IndustrySolutionCard({
 
     return null;
   };
+
   const hasIcon = !!icon;
+
   return (
     <a
       href={href}
-      className={`group hover:shadow-privue-200/60 block rounded-xl border border-gray-100 bg-white p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-xs`}
+      className={`
+        group block rounded-md border border-gray-100 bg-white p-3 transition-all duration-300 
+        hover:-translate-y-1 hover:shadow-sm
+        sm:p-4
+      `}
     >
-      <div className="flex items-start gap-4">
-        {hasIcon ? (
-          <div className="bg-privue-100 group-hover:bg-privue-200 mb-4 flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300">
-            <div className="text-privue-700 transition-transform duration-300 group-hover:scale-110">
-              {renderIconNode(icon!, 'w-6 h-6')}
+      <div className="flex items-center sm:items-start gap-3 sm:gap-4">
+        {hasIcon && (
+          <div
+            className={`
+              bg-privue-100 group-hover:bg-privue-200 flex items-center justify-center rounded-full 
+              transition-colors duration-300
+              h-9 w-9 sm:h-11 sm:w-11
+            `}
+          >
+            <div
+              className={`
+                text-privue-700 transition-transform duration-300 group-hover:scale-110
+              `}
+            >
+              {renderIconNode(icon!, 'w-4 h-4 sm:w-6 sm:h-6')}
             </div>
           </div>
-        ) : null}
+        )}
 
-        <div>
-          <h3 className="group-hover:text-privue-800 mb-1 text-base font-medium tracking-tight transition-colors duration-300">
+        <div className="flex-1">
+          <h3
+            className={`
+              text-sm font-medium tracking-tight text-foreground 
+              group-hover:text-privue-800 transition-colors duration-300
+              sm:text-base
+            `}
+          >
             {title}
           </h3>
-          <p className="text-muted-foreground group-hover:text-foreground/80 text-sm transition-colors duration-300">
+
+          {/* Hidden on mobile, visible on tablet+ */}
+          <p
+            className={`
+              hidden sm:block text-muted-foreground text-sm 
+              group-hover:text-foreground/80 transition-colors duration-300
+            `}
+          >
             {description}
           </p>
         </div>
 
-        <div className="text-muted-foreground group-hover:text-privue-700 my-auto ml-auto hidden items-center align-middle transition-colors md:flex">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <div
+          className={`
+    flex text-muted-foreground group-hover:text-privue-700
+    my-auto ml-auto items-center transition-colors
+  `}
+        >
+          <svg
+            className="w-4 h-4 md:w-[18px] md:h-[18px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden
+          >
             <path
               d="M9 6l6 6-6 6"
               stroke="currentColor"
@@ -88,6 +123,7 @@ export default function IndustrySolutionCard({
             />
           </svg>
         </div>
+
       </div>
     </a>
   );

@@ -22,6 +22,18 @@ export default function AboutSection() {
               assess counterparties, mitigate risks, and act with confidence.
             </p>
 
+            {/* --- MOBILE: show image here (visible only on small screens) --- */}
+            <div className="block md:hidden">
+              <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_100%)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
+                <img
+                  src="/workflow-img.png"
+                  alt="workflow illustration"
+                  className="mt-6 sm:mt-12 h-auto w-full scale-100 sm:scale-110 rounded-[12px] object-cover shadow"
+                />
+              </div>
+            </div>
+            {/* --- end mobile image --- */}
+
             <div className="grid grid-cols-1 gap-3 pt-6 sm:grid-cols-2 sm:gap-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -38,14 +50,14 @@ export default function AboutSection() {
                   <h3 className="text-sm font-medium">Actionable Insights</h3>
                 </div>
                 <p className="text-muted-foreground text-sm">
-                  Turning complex data into clear intelligence
+                  Turning complex data into clear intelligence.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right: Image */}
-          <div className="relative mt-6 w-full md:mt-6 md:w-1/2">
+          {/* Right: Image (hidden on mobile, visible from md+) */}
+          <div className="relative mt-6 w-full md:mt-6 md:w-1/2 hidden md:block">
             <div className="md:absolute md:inset-x-0 md:-inset-y-12">
               <div className="relative overflow-hidden rounded-2xl [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_100%)] [mask-size:100%_100%] [mask-repeat:no-repeat] [--webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_100%)] [--webkit-mask-repeat:no-repeat] [--webkit-mask-size:100%_100%]">
                 <img

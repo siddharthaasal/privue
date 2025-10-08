@@ -120,8 +120,8 @@ export default function FooterMobile({
     return (
         <footer className="bg-background text-muted-foreground border-t border-gray-200 py-10 px-6 text-sm flex flex-col gap-10">
             {/* Logo + Address */}
-            <div className="flex flex-col items-start gap-3">
-                <a href={logo.url} className="inline-flex items-center gap-3">
+            <div className="flex flex-row items-start justify-between">
+                <a href={logo.url} className="inline-flex items-center gap-1">
                     <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10 w-auto" />
                     <span className="text-foreground text-lg font-medium">{logo.title}</span>
                 </a>
@@ -130,20 +130,6 @@ export default function FooterMobile({
                     {address.map((line, idx) => (
                         <p key={idx}>{line}</p>
                     ))}
-                </div>
-
-                <div className="mt-4 flex items-center gap-5">
-                    <a
-                        href="https://www.linkedin.com/company/privue/posts/?feedView=all"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Privue LinkedIn"
-                    >
-                        <FaLinkedin className="text-lg text-[#707070] hover:text-[#525252]" />
-                    </a>
-                    <a href="mailto:query@privue.ai" aria-label="Send us an email">
-                        <Mail size={20} className="text-[#707070] hover:text-[#525252]" />
-                    </a>
                 </div>
             </div>
 
@@ -174,27 +160,41 @@ export default function FooterMobile({
 
             {/* Bottom Section */}
             <div className="border-t border-gray-200 pt-6 text-xs font-medium">
-                <p className="text-foreground-lighter mb-4">{copyright}</p>
-
-                <ul className="flex flex-wrap gap-4">
-                    {bottomLinks.map((link, idx) => (
-                        <li key={idx}>
-                            {link.url?.startsWith('mailto:') ? (
-                                <a href={link.url} className="text-sm">
-                                    {link.text}
-                                </a>
-                            ) : link.url ? (
-                                <a href={link.url} className="text-sm">
-                                    {link.text}
-                                </a>
-                            ) : (
-                                <a href="mailto:query@privue.ai" className="text-sm">
-                                    {link.text}
-                                </a>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+                <div className="flex items-center justify-between">
+                    <ul className="flex flex-wrap gap-4">
+                        {bottomLinks.map((link, idx) => (
+                            <li key={idx}>
+                                {link.url?.startsWith('mailto:') ? (
+                                    <a href={link.url} className="text-sm">
+                                        {link.text}
+                                    </a>
+                                ) : link.url ? (
+                                    <a href={link.url} className="text-sm">
+                                        {link.text}
+                                    </a>
+                                ) : (
+                                    <a href="mailto:query@privue.ai" className="text-sm">
+                                        {link.text}
+                                    </a>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="flex items-center gap-5">
+                        <a
+                            href="https://www.linkedin.com/company/privue/posts/?feedView=all"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Privue LinkedIn"
+                        >
+                            <FaLinkedin className="text-lg text-[#707070] hover:text-[#525252]" />
+                        </a>
+                        <a href="mailto:query@privue.ai" aria-label="Send us an email">
+                            <Mail size={20} className="text-[#707070] hover:text-[#525252]" />
+                        </a>
+                    </div>
+                </div>
+                <p className="text-foreground-lighter my-4 text-justify">{copyright}</p>
             </div>
         </footer>
     );

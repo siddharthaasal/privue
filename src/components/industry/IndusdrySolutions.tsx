@@ -203,6 +203,15 @@ export default function IndustryModules() {
     // default: dummySolutions,
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // initial check
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   useEffect(() => {
     function handleOpenIndustry(e: Event) {
       const detail = (e as CustomEvent).detail;
@@ -258,7 +267,15 @@ export default function IndustryModules() {
   }, [industries]);
 
   // --- state (keep string | undefined) ---
-  const [activeIndustryId, setActiveIndustryId] = useState<string | undefined>(industries[0].id);
+  const [activeIndustryId, setActiveIndustryId] = useState<string | undefined>(() => {
+    // Detect mobile via window or userAgent fallback
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      return isMobile ? undefined : industries[0].id;
+    }
+    // SSR-safe fallback: assume desktop
+    return industries[0].id;
+  });
 
   // --- safe solutions lookup ---
   const currentSolutions: Solution[] = solutionsByIndustry[activeIndustryId ?? ''] ?? [];
@@ -314,9 +331,9 @@ export default function IndustryModules() {
       {/* background / decorative element copied from your original component */}
       <div className="absolute inset-0 -z-10 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 
-      <div className="mx-auto space-y-8 rounded-2xl border border-gray-200 p-4 md:space-y-16 lg:space-y-20">
+      <div className="mx-auto space-y-4 md:space-y-16 lg:space-y-20 rounded-lg md:rounded-xl border border-gray-200 p-3 md:p-4">
         {/* Two-column layout: LHS (accordion), RHS (cards) */}
-        <div className="grid gap-12 sm:px-12 md:grid-cols-3 lg:gap-20 lg:px-8">
+        <div className="grid gap-6 sm:px-12 md:grid-cols-3 md:gap-12 lg:gap-20 lg:px-8">
           {/* -----------------------
               LEFT: Industries (Accordion)
               - type="single" with value controlled by activeIndustryId
@@ -324,32 +341,36 @@ export default function IndustryModules() {
               ------------------------ */}
           <Accordion
             type="single"
+            {...(isMobile ? { collapsible: true } : {})}
             value={activeIndustryId}
-            // when user clicks an industry, update state AND update the hash (replaceState to avoid polluting history)
             onValueChange={(value) => {
               setActiveIndustryId(value);
               if (value) {
-                // keep the URL in sync — use replaceState so Back button behavior is not noisy
                 history.replaceState(null, '', `#industry-${value}`);
               } else {
-                // collapsed
                 history.replaceState(null, '', location.pathname + location.search);
               }
             }}
-            className="w-full"
+            className="w-full space-y-0"
           >
+
 
             {industries.map((ind) => (
               <AccordionItem key={ind.id} value={ind.id}>
                 <AccordionTrigger>
-                  <div className="flex items-center gap-2 text-base">{ind.name}</div>
+                  {/* tighter mobile spacing & font, keep desktop the same */}
+                  <div className="flex items-center gap-1 md:gap-2 text-sm md:text-base py-0 md:py-0">
+                    {ind.name}
+                  </div>
                 </AccordionTrigger>
+
                 <AccordionContent>
-                  <div className="text-muted-foreground text-sm mb-3">
+                  {/* description: more compact on mobile, unchanged from md+ */}
+                  <div className="text-muted-foreground text-xs md:text-sm mb-2 md:mb-3">
                     {ind.description || 'Explore tailored solutions for this industry.'}
                   </div>
 
-                  {/* ✅ Show solutions inline for mobile */}
+                  {/* ✅ Show solutions inline for mobile (compact spacing) */}
                   <div className="block md:hidden">
                     <AnimatePresence mode="wait" initial={false}>
                       {activeIndustryId === ind.id && (
@@ -362,16 +383,18 @@ export default function IndustryModules() {
                             opacity: { duration: 0.16 },
                             y: { type: 'spring', stiffness: 300, damping: 28, duration: 0.24 },
                           }}
-                          className="grid gap-2"
+                          className="grid gap-2 md:gap-3 px-1 md:px-0"
                         >
                           {(solutionsByIndustry[ind.id] || []).map((s) => (
-                            <IndustrySolutionCard
-                              key={s.slug}
-                              title={s.heading}
-                              description={s.subHeading}
-                              icon={s.icon}
-                              href={`/solutions/${s.slug}`}
-                            />
+                            // compact wrapper for mobile; keeps the card internals unchanged for md+
+                            <div key={s.slug} className="p-1 md:p-0 text-xs md:text-base">
+                              <IndustrySolutionCard
+                                title={s.heading}
+                                description={s.subHeading}
+                                icon={s.icon}
+                                href={`/solutions/${s.slug}`}
+                              />
+                            </div>
                           ))}
                         </motion.div>
                       )}
@@ -380,6 +403,7 @@ export default function IndustryModules() {
                 </AccordionContent>
               </AccordionItem>
             ))}
+
 
           </Accordion>
 

@@ -128,7 +128,7 @@ export type Solution = {
   id: number;
   icon: React.ComponentType<any> | string;
   slug: string;
-  img?: string;
+  img: string;
   workflow?: React.ComponentType<any> | React.ReactNode;
   coverImg: string;
   heading: string;
@@ -151,7 +151,7 @@ export const solutions: Solution[] = [
     slug: 'distributor-performance-management',
     // icon: AlignVerticalJustifyCenter,
     icon: '/icons/solutions/distributor-performance-management.png',
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/distributor-workflow.png",
     workflow: DistributorPerformanceWorkflow,
     coverImg:
       'https://plus.unsplash.com/premium_photo-1682148458133-cf5a01a50cce?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGlzdHJpYnV0b3J8ZW58MHx8MHx8fDA%3D',
@@ -268,7 +268,7 @@ export const solutions: Solution[] = [
     slug: 'sustainability-assessment',
     icon: '/icons/solutions/sustainability-assessment.png',
     // icon: Recycle,
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/sustainability-workflow.png",
     workflow: SustainabilityWorkflow,
     coverImg:
       'https://images.unsplash.com/photo-1569227997603-33b9f12af927?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -389,7 +389,7 @@ export const solutions: Solution[] = [
     slug: 'commercial-insurance-underwriting',
     icon: '/icons/solutions/insurance-underwriting.png',
     // icon: Landmark,
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/insurance-workflow.jpg",
     workflow: InsuranceUnderwritingWorkflow,
     coverImg:
       'https://images.unsplash.com/photo-1647348815424-8e8206ea7c83?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -563,7 +563,7 @@ export const solutions: Solution[] = [
     slug: 'large-customer-risk-assessment',
     icon: '/icons/solutions/large-customer-risk-assessment.png',
     // icon: BookAlert,
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/entity-workflow.png",
     workflow: LargeCustomerWorkflow,
     coverImg:
       'https://images.unsplash.com/photo-1581091877018-dac6a371d50f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -733,7 +733,7 @@ export const solutions: Solution[] = [
     slug: 'entity-due-diligence',
     icon: '/icons/solutions/entity-due-diligence.png',
     // icon: Workflow,
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/entity-workflow.png",
     workflow: EntityDueDiligenceWorkflow,
     coverImg:
       'https://plus.unsplash.com/premium_photo-1681681061613-8540c8d67f0d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVlJTIwZGlsaWdlbmNlfGVufDB8fDB8fHww',
@@ -941,7 +941,7 @@ export const solutions: Solution[] = [
     slug: 'third-party-risk-management',
     icon: '/icons/solutions/third-party-risk-management.png',
     // icon: TriangleAlert,
-    // img: "/solutions/demo-image.png",
+    img: "/workflow/third-party-workflow.jpg",
     workflow: ThirdPartyWorkflow,
     coverImg: '/solutions/demo-image.png',
     heading: 'Third Party Risk Management',

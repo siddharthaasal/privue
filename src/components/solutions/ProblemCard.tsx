@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ProblemCardProps {
   icon: React.ComponentType<any> | string;
@@ -32,30 +32,84 @@ function ProblemCardMobile({
   heading,
   description,
 }: ProblemCardProps) {
-  const isString = typeof icon === 'string';
+  const isString = typeof icon === 'string' || icon === undefined;
+  const defaultIconPath = '/solutions/lock.svg';
+  const iconSrc = isString ? (icon as string) || defaultIconPath : undefined;
   const IconComponent = !isString ? (icon as React.ComponentType<any>) : null;
+  const [open, setOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [maxHeight, setMaxHeight] = useState<string>('0px');
+
+  useEffect(() => {
+    if (open && contentRef.current) {
+      setMaxHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setMaxHeight('0px');
+    }
+  }, [open, description]);
+
+  const contentId = `problem-desc-${heading.replace(/\s+/g, '-').toLowerCase()}`;
 
   return (
-    <div className="flex flex-col items-start gap-3 px-6 py-4 text-left">
-      {/* Top row — icon + heading */}
-      <div className="flex items-center gap-2">
-        {isString ? (
-          <img
-            src={icon as string}
-            alt={`${heading} icon`}
-            className="h-6 w-6 object-contain"
-          />
-        ) : IconComponent ? (
-          <IconComponent className="text-privue-700 h-5 w-5" aria-hidden="true" />
-        ) : null}
+    <div
+      className="
+        w-full flex flex-col items-start gap-4 px-4 py-4 text-left
+        md:mx-auto md:flex md:flex-col md:items-start md:gap-12 md:px-6 md:py-12 md:text-left
+      "
+    >      <div className="w-full">
+        <button
+          type="button"
+          onClick={() => setOpen(v => !v)}
+          aria-expanded={open}
+          aria-controls={contentId}
+          className="w-full flex items-center gap-3 px-1 py-0 "
+        >
+          {isString ? (
+            <img
+              src={iconSrc}
+              alt={`${heading} icon`}
+              className="h-8 w-8 object-contain"
+            />
+          ) : IconComponent ? (
+            <IconComponent className="h-6 w-6 md:h-8 md:w-8 text-privue-700" aria-hidden="true" />
+          ) : null}
 
-        <p className="text-base font-medium text-gray-800">{heading}</p>
+          <span className="text-base font-medium text-gray-900 text-left flex-1">
+            {heading}
+          </span>
+
+          {/* chevron */}
+          <svg
+            className={`w-4 h-4 transform transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        {/* animated collapsible content */}
+        <div
+          id={contentId}
+          ref={contentRef}
+          style={{
+            maxHeight,
+            transition: 'max-height 220ms ease',
+            overflow: 'hidden',
+          }}
+          className="mt-2"
+        >
+          <div className="pt-1">
+            <p className="text-[15px] font-normal text-gray-700">
+              {description}
+            </p>
+          </div>
+        </div>
       </div>
-
-      {/* Description */}
-      <p className="text-[15px] font-normal">{description}</p>
     </div>
   );
 }
+
 
 export { ProblemCard, ProblemCardMobile }

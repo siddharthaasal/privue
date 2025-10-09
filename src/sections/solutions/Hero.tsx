@@ -14,12 +14,15 @@ export default function Hero({ heading, subHeading, image, workflow }: HeroProps
   return (
     <div className="relative flex flex-col gap-10 overflow-hidden border-x border-gray-200 px-6 sm:px-12 lg:px-20">
       {/* Heading */}
-      <div className="mx-auto flex max-w-2xl flex-col gap-4 pt-20 text-center">
-        <h1 className="text-5xl font-semibold text-gray-800 2xl:text-5xl">{heading}</h1>
-        <p className="max-w-[750px] text-center text-base font-medium text-gray-600 2xl:text-lg">
+      <div className="mx-auto flex max-w-3xl flex-col gap-3 pt-16 text-center sm:gap-4 sm:pt-20">
+        <h1 className="text-2xl font-semibold text-gray-800 sm:text-2xl lg:text-5xl 2xl:text-5xl">
+          {heading}
+        </h1>
+        <p className="mx-auto max-w-[90%] text-sm font-medium text-gray-600 sm:max-w-[850px] sm:text-base 2xl:text-lg">
           {subHeading}
         </p>
       </div>
+
 
       {/* Hero Content */}
       <>

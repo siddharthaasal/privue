@@ -175,13 +175,13 @@ export function SustainabilityChatNodeInner(): any {
               return (
                 <div
                   key={row.location}
-                  className="grid grid-cols-4 items-center gap-1 bg-white px-1 py-1 text-[10px]"
+                  className="grid grid-cols-4 items-center gap-0.5 bg-white px-1 py-1 text-[9px]"
                   style={{
                     animation: `rowFade 360ms cubic-bezier(.2,.9,.2,1) ${delay}ms both`,
                     borderBottom: '1px solid rgba(15,23,36,0.03)',
                   }}
                 >
-                  <div className="font-medium text-slate-800">{row.location}</div>
+                  <div className="text-slate-800">{row.location}</div>
                   <div className="text-slate-600">{row.primaryRisk}</div>
                   <div>
                     <span
@@ -189,13 +189,8 @@ export function SustainabilityChatNodeInner(): any {
                         display: 'inline-block',
                         padding: '4px 8px',
                         borderRadius: 999,
-                        fontSize: 11,
-                        background:
-                          row.riskScore === 'High'
-                            ? 'rgba(239,68,68,0.08)'
-                            : row.riskScore === 'Moderate'
-                              ? 'rgba(245,158,11,0.08)'
-                              : 'rgba(16,185,129,0.06)',
+                        fontSize: 9,
+
                         color:
                           row.riskScore === 'High'
                             ? '#ef4444'

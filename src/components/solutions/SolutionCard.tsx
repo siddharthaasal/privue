@@ -72,7 +72,7 @@ export default function SolutionCard({ heading, description, icon }: SolutionCar
             onClick={() => setOpen(v => !v)}
             aria-expanded={open}
             aria-controls={contentId}
-            className="w-full flex items-center gap-3 px-1 py-0 focus:outline-none focus:ring-2 focus:ring-privue-300 rounded"
+            className="w-full flex items-center gap-3 px-1 py-0 "
           >
             {isString ? (
               <img

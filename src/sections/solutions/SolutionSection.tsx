@@ -13,29 +13,27 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
 
   return (
     <>
-      <div className="p-12">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <h3 className="text-center text-4xl font-semibold">
+      <div className="p-6 sm:p-8 md:p-12">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center md:text-center">
+          <h1 className="text-2xl text-center font-semibold leading-snug tracking-tight sm:pt-10 sm:pb-6 sm:text-3xl md:text-4xl md:leading-tight">
             Our <span className="text-privue-800">Solution</span>
-          </h3>
-
+          </h1>
           <h2
-            className="text-md md:text-md pt-12 font-normal text-gray-900 lg:text-2xl"
-            style={{ textAlign: 'justify', textAlignLast: 'center' }}
+            className="pt-6 text-sm font-normal text-gray-900 sm:pt-8 sm:text-base md:pt-12 md:text-md lg:text-2xl text-justify [text-align-last:center]"
           >
             {mainDesc}
           </h2>
         </div>
       </div>
+
       <div
-        className={`mt-12 grid grid-cols-1 divide-x-1 divide-y-1 divide-gray-200 ${gridColsClass} gap-0`}
+        className={` mt-8 md:mt-12 grid grid-cols-1 divide-x-1 divide-y-1 divide-gray-200 ${gridColsClass} gap-0`}
       >
         {solnPoints.map((sol, idx) => (
           <div
             key={idx}
-            className={`flex-1 border-b border-gray-200 ${
-              idx === solnPoints.length - 1 ? 'border-b' : ''
-            }`}
+            className={`flex-1 border-b border-gray-200 ${idx === solnPoints.length - 1 ? 'border-b' : ''
+              }`}
           >
             <SolutionCard
               heading={sol.solutionHeading}

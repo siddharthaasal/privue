@@ -15,10 +15,24 @@ export default function UseCasesSection({ useCases = [] }: UseCasesSectionProps)
       </div>
 
       <div
-        className={`grid gap-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${useCases.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
+        className={`grid grid-cols-2 gap-y-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${useCases.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
       >
         {useCases.map((c, idx) => (
-          <UseCasesCard key={idx} icon={c.icon} heading={c.heading || undefined} desc={c.desc} />
+          <div
+            key={idx}
+            className={`${
+              // Make the last item span full width if odd count
+              useCases.length % 2 !== 0 && idx === useCases.length - 1
+                ? 'col-span-2 sm:col-span-1'
+                : ''
+              }`}
+          >
+            <UseCasesCard
+              icon={c.icon}
+              heading={c.heading || undefined}
+              desc={c.desc}
+            />
+          </div>
         ))}
       </div>
     </div>

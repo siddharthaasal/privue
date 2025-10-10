@@ -21,7 +21,7 @@ export default function UseCaseCard({ icon, heading, desc }: UseCaseCardProps) {
     >
       {/* MOBILE (icon + heading inline) */}
       <div className=" w-full md:hidden space-y-2">
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-3">
           {isString ? (
             iconSrc ? (
               <img
@@ -31,16 +31,16 @@ export default function UseCaseCard({ icon, heading, desc }: UseCaseCardProps) {
               />
             ) : null
           ) : IconComponent ? (
-            <IconComponent className="h-5 w-5 text-privue-700" aria-hidden="true" />
+            <IconComponent className="h-5 w-5 text-privue-700 mt-1" aria-hidden="true" />
           ) : null}
 
           {heading && (
             <p className="text-base font-medium tracking-normal">{heading}</p>
           )}
         </div>
-        <div className="text-sm font-normal tracking-normal text-gray-700">
+        {/* <div className="text-sm font-normal tracking-normal text-gray-700">
           {desc}
-        </div>
+        </div> */}
       </div>
 
       {/* DESKTOP / LAPTOP (icon above, show description) */}

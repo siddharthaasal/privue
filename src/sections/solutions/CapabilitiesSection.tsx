@@ -18,15 +18,24 @@ export default function CapabilitiesSection({
       </div>
 
       <div
-        className={`grid gap-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${capabilities.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
+        className={`grid grid-cols-2 gap-y-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${capabilities.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
       >
         {capabilities.map((c, idx) => (
-          <CapabilitiesCard
+          <div
             key={idx}
-            icon={c.icon}
-            heading={c.heading || undefined}
-            desc={c.desc}
-          />
+            className={`${
+              // Make the last item span full width if odd count
+              capabilities.length % 2 !== 0 && idx === capabilities.length - 1
+                ? 'col-span-2 sm:col-span-1'
+                : ''
+              }`}
+          >
+            <CapabilitiesCard
+              icon={c.icon}
+              heading={c.heading || undefined}
+              desc={c.desc}
+            />
+          </div>
         ))}
       </div>
     </div>

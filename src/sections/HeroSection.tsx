@@ -50,7 +50,7 @@ export default function HeroSection() {
           className=""
         >
           <div className="text-center">
-            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text px-2 text-4xl leading-tight font-semibold tracking-tighter text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
+            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text px-2 text-3xl leading-tight font-semibold md:tracking-tighter text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
               Empowering business
               <br />
               <span className="from-privue-900 to-privue-900 via-privue-700 bg-gradient-to-b bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p className="mt-3 max-w-xs text-base text-gray-700 dark:text-gray-400 sm:mt-4 sm:max-w-lg sm:text-lg">
+          <p className="mt-1 max-w-xs text-[15px] text-gray-700 dark:text-gray-400 sm:mt-4 sm:max-w-lg sm:text-lg">
             Discover data-backed signals for smarter decisions. Mitigate risk and unlock high-value
             relationships.
           </p>
@@ -83,7 +83,7 @@ export default function HeroSection() {
             <Button
               variant="default"
               size="default"
-              className="min-w-[140px] cursor-pointer text-sm text-[#FFF]"
+              className="min-w-[100px] cursor-pointer text-sm text-[#FFF]"
             >
               <p>Browse Solutions</p>
             </Button>

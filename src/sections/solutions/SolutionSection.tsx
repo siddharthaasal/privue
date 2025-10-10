@@ -19,7 +19,7 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
             Our <span className="text-privue-800">Solution</span>
           </h1>
           <h2
-            className="pt-6 text-sm font-normal text-gray-900 sm:pt-8 sm:text-base md:pt-12 md:text-md lg:text-2xl text-justify [text-align-last:center]"
+            className="pt-6 text-sm font-normal text-gray-900 sm:pt-8 sm:text-base md:pt-12 md:text-md lg:text-2xl text-center [text-align-last:center]"
           >
             {mainDesc}
           </h2>

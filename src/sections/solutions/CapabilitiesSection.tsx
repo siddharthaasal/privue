@@ -27,7 +27,7 @@ export default function CapabilitiesSection({
               // Make the last item span full width if odd count
               capabilities.length % 2 !== 0 && idx === capabilities.length - 1
                 ? 'col-span-2 sm:col-span-1'
-                : ''
+                : 'col-span-1'
               }`}
           >
             <CapabilitiesCard

@@ -250,15 +250,25 @@ export const solutions: Solution[] = [
     ],
     coreCapabilities: [
       {
+        heading: 'Smart Distributor Onboarding',
         desc: 'Implement systematic, data driven distributor onboarding',
         icon: GitPullRequestArrow,
       },
-      { desc: 'Regularly monitor behavioural and external data feeds', icon: MonitorSpeaker },
       {
+        heading: 'Data-Driven Monitoring',
+        desc: 'Regularly monitor behavioural and external data feeds',
+        icon: MonitorSpeaker
+      },
+      {
+        heading: 'Dynamic Credit Limits',
         desc: 'Dynamically recalibrate credit limits using predictive risk scores',
         icon: GitPullRequestCreateArrow,
       },
-      { desc: 'Integrate risk alerts into ERP or CRM workflows', icon: Airplay },
+      {
+        heading: 'Integrated Risk Alerts',
+        desc: 'Integrate risk alerts into ERP or CRM workflows',
+        icon: Airplay
+      },
       // { desc: "Maintain audit trails for governance and compliance", icon: "/solutions/context-driven.svg" },
     ],
     mainArticleSlug: 'optimising-distributor-credit-management',

@@ -11,7 +11,7 @@ export default function CapabilitiesSection({
   if (!capabilities.length) return null;
   return (
     <div>
-      <div className="pt-20">
+      <div className="pt-10">
         <h3 className="text-2xl text-center font-semibold leading-snug tracking-tight  sm:text-3xl md:text-4xl md:leading-tight">
           Core <span className="text-privue-800">Capabilities</span>
         </h3>

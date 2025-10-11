@@ -98,7 +98,7 @@ function ProblemCardMobile({
             transition: 'max-height 220ms ease',
             overflow: 'hidden',
           }}
-          className="mt-2"
+          className=""
         >
           <div className="pt-1">
             <p className="text-[15px] font-normal text-gray-700">

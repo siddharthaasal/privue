@@ -48,10 +48,13 @@ export default function RelatedArticles({ mainArticleSlug }: RelatedArticlesProp
 
   return (
     <>
-      <div className="py-12">
-        <h2 className="mb-8 text-center text-4xl font-semibold">
-          Related <span className="text-privue-800">Articles</span>
-        </h2>
+      <div className="py-10">
+        <h1 className="mb-4 text-center text-2xl font-semibold text-[#171717] md:text-4xl">
+          Related{' '}
+          <span className="from-privue-950 to-privue-900 via-privue-800 bg-gradient-to-r bg-clip-text font-semibold text-transparent">
+            Articles
+          </span>
+        </h1>
         <div className="p-4">
           <div className="container">
             {/* Header with arrows aligned right */}

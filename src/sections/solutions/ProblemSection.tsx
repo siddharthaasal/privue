@@ -13,12 +13,12 @@ export default function ProblemSection({ problems }: ProblemSectionProps) {
 
   return (
     <section className="relative pt-0">
-      <h3 className="pt-8 pb-4 text-center text-2xl font-semibold leading-snug tracking-tight sm:pt-10 sm:pb-6 sm:text-3xl md:text-4xl md:leading-tight">
+      <h3 className="pt-8 pb-0 text-center text-2xl font-semibold leading-snug tracking-tight sm:pt-10 sm:pb-6 sm:text-3xl md:text-4xl md:leading-tight">
         The <span className="text-privue-800">Problem</span>
       </h3>
 
 
-      <div className="mt-6 md:mt-12 border-t">
+      <div className="mt-6 md:mt-12 md:border-t">
         <div
           className={`grid grid-cols-1 divide-x-1 divide-y-1 divide-gray-200 ${gridColsClass} gap-0`}
         >

@@ -71,7 +71,7 @@ export default function VerticalModules({ items }: Props) {
   if (!processed || processed.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-10 md:py-16">
       <div className="absolute inset-0 -z-10 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]"></div>
 
       <div className="mx-auto space-y-8 px-4 sm:px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)] max-w-7xl">
@@ -100,9 +100,9 @@ export default function VerticalModules({ items }: Props) {
             {processed.map((it) => (
               <AccordionItem key={it.id} value={it.id}>
                 <AccordionTrigger>
-                  <h3 className="flex items-center gap-2 text-sm md:text-base">{it.title}</h3>
+                  <h3 className="flex items-center gap-2 text-base md:text-base">{it.title}</h3>
                 </AccordionTrigger>
-                <AccordionContent>{it.description}</AccordionContent>
+                <AccordionContent><p className='text-[15px]'>{it.description}</p></AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

@@ -48,20 +48,41 @@ export default function VerticalModules({ items }: Props) {
     }));
   }, [items]);
 
-  const [activeId, setActiveId] = useState<string>(processed[0]?.id ?? '');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!activeId && processed.length > 0) {
-      setActiveId(processed[0].id);
-    } else if (processed.length === 0) {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // start closed so mobile can have everything collapsed
+  const [activeId, setActiveId] = useState<string>('');
+
+  // Only auto-open a panel when NOT on mobile. On mobile we keep everything closed.
+  useEffect(() => {
+    if (processed.length === 0) {
       setActiveId('');
-    } else {
-      const exists = processed.some((p) => p.id === activeId);
-      if (!exists && processed.length > 0) {
-        setActiveId(processed[0].id);
-      }
+      return;
     }
-  }, [processed, activeId]);
+
+    if (isMobile) {
+      // keep whatever user has (likely closed). do not auto-open.
+      return;
+    }
+
+    // desktop behavior: if nothing selected or current id not present, open first
+    if (!activeId) {
+      setActiveId(processed[0].id);
+      return;
+    }
+
+    const exists = processed.some((p) => p.id === activeId);
+    if (!exists) {
+      setActiveId(processed[0].id);
+    }
+  }, [processed, isMobile, activeId]);
 
   const active = useMemo(
     () => processed.find((p) => p.id === activeId) ?? processed[0],
@@ -91,57 +112,97 @@ export default function VerticalModules({ items }: Props) {
         {/* Grid */}
         <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:px-6 md:grid-cols-3 lg:gap-20 lg:px-8">
           {/* Left: Accordion */}
-          <Accordion
-            type="single"
-            value={activeId}
-            onValueChange={(value) => value && setActiveId(value)}
-            className="w-full"
-          >
-            {processed.map((it) => (
-              <AccordionItem key={it.id} value={it.id}>
-                <AccordionTrigger>
-                  <h3 className="flex items-center gap-2 text-base md:text-base">{it.title}</h3>
-                </AccordionTrigger>
-                <AccordionContent><p className='text-[15px]'>{it.description}</p></AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="md:col-span-1">
+            <Accordion
+              type="single"
+              {...(isMobile ? { collapsible: true } : {})}
+              value={activeId} // '' means none open
+              onValueChange={(value: string) => setActiveId(value)}
+              className="w-full"
+            >
+              {processed.map((it) => (
+                <AccordionItem key={it.id} value={it.id}>
+                  <AccordionTrigger>
+                    <h3 className="flex items-center gap-2 text-base md:text-base">{it.title}</h3>
+                  </AccordionTrigger>
 
-          {/* Right: Animation or Image */}
-          <div className="relative col-span-2 flex overflow-hidden rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset">
-            <div className="relative flex max-h-[700px] min-h-[260px] sm:min-h-[320px] md:max-h-[600px] md:min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active?.id}
-                  initial={{ opacity: 0, y: 6, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex h-full w-full items-center justify-center"
-                >
-                  {active?.renderAnimation ? (
-                    (() => {
-                      const Anim = active.renderAnimation!;
-                      return (
-                        <div className="mx-auto h-full w-full">
-                          <Anim />
+                  <AccordionContent>
+                    <div className="space-y-4">
+                      <p className="text-[15px]">{it.description}</p>
+
+                      {/* Mobile: render the media inline inside the accordion content */}
+                      {isMobile && (
+                        <div className="mx-auto overflow-hidden rounded-lg">
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={it.id}
+                              initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                              transition={{ duration: 0.22 }}
+                              className="w-full"
+                            >
+                              {it.renderAnimation ? (
+                                (() => {
+                                  const Anim = it.renderAnimation!;
+                                  return <div className="h-[220px] w-full sm:h-[260px]"><Anim /></div>;
+                                })()
+                              ) : it.imgSrc ? (
+                                <img
+                                  src={it.imgSrc}
+                                  alt={it.alt}
+                                  className="w-full object-cover object-center"
+                                  style={{ display: 'block' }}
+                                />
+                              ) : null}
+                            </motion.div>
+                          </AnimatePresence>
                         </div>
-                      );
-                    })()
-                  ) : active?.imgSrc ? (
-                    <img
-                      src={active.imgSrc}
-                      alt={active.alt}
-                      className="h-full w-full object-cover object-center md:object-left-top"
-                      style={{ display: 'block' }}
-                      width={1207}
-                      height={929}
-                    />
-                  ) : null}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                      )}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
+
+          {/* Desktop: Right preview */}
+          {!isMobile && (
+            <div className="relative col-span-2 flex overflow-hidden rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset">
+              <div className="relative flex max-h-[700px] min-h-[260px] sm:min-h-[320px] md:max-h-[600px] md:min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active?.id}
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex h-full w-full items-center justify-center"
+                  >
+                    {active?.renderAnimation ? (
+                      (() => {
+                        const Anim = active.renderAnimation!;
+                        return (
+                          <div className="mx-auto h-full w-full">
+                            <Anim />
+                          </div>
+                        );
+                      })()
+                    ) : active?.imgSrc ? (
+                      <img
+                        src={active.imgSrc}
+                        alt={active.alt}
+                        className="h-full w-full object-cover object-center md:object-left-top"
+                        style={{ display: 'block' }}
+                        width={1207}
+                        height={929}
+                      />
+                    ) : null}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

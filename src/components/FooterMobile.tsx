@@ -31,7 +31,7 @@ export default function FooterMobile({
         title: 'privue',
         url: 'https://privue.ai/',
     },
-    address = ['alt.f, JMD Empire Square,', 'Mehrauli-Gurgaon Road,', 'Gurugram, Haryana 122001'],
+    address = ['Alt.F, JMD Empire Square,', 'Mehrauli-Gurgaon Road,', 'Gurugram, Haryana 122001'],
     menuItems = [
         {
             title: 'Modules',

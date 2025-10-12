@@ -359,7 +359,7 @@ export default function IndustryModules() {
               <AccordionItem key={ind.id} value={ind.id}>
                 <AccordionTrigger>
                   {/* tighter mobile spacing & font, keep desktop the same */}
-                  <div className="flex items-center gap-1 md:gap-2 text-sm md:text-base py-0 md:py-0">
+                  <div className="text-foreground flex items-center gap-1 md:gap-2 text-sm md:text-base py-0 md:py-0">
                     {ind.name}
                   </div>
                 </AccordionTrigger>
@@ -387,7 +387,7 @@ export default function IndustryModules() {
                         >
                           {(solutionsByIndustry[ind.id] || []).map((s) => (
                             // compact wrapper for mobile; keeps the card internals unchanged for md+
-                            <div key={s.slug} className="p-1 md:p-0 text-xs md:text-base">
+                            <div key={s.slug} className="p-0 text-xs md:text-base">
                               <IndustrySolutionCard
                                 title={s.heading}
                                 description={s.subHeading}

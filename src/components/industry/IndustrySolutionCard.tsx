@@ -56,23 +56,23 @@ export default function IndustrySolutionCard({
     <a
       href={href}
       className={`
-        group block rounded-md border border-gray-100 bg-white p-3 transition-all duration-300 
+        group block w-full -ml-2.5 md:-ml-0 md:rounded-md md:border border-gray-100 md:bg-white  py-1 md:py-3 md:p-3 transition-all duration-300 
         hover:-translate-y-1 hover:shadow-sm
         sm:p-4
       `}
     >
-      <div className="flex items-center sm:items-start gap-3 sm:gap-4">
+      <div className="flex items-center sm:items-start gap-0 sm:gap-4">
         {hasIcon && (
           <div
             className={`
-              bg-privue-100 group-hover:bg-privue-200 flex items-center justify-center rounded-full 
+              md:bg-privue-100 group-hover:bg-privue-200 flex items-center justify-center rounded-full 
               transition-colors duration-300
               h-9 w-9 sm:h-11 sm:w-11
             `}
           >
             <div
               className={`
-                text-privue-700 transition-transform duration-300 group-hover:scale-110
+                text-privue-700 md:text-privue-700 transition-transform duration-300 group-hover:scale-110
               `}
             >
               {renderIconNode(icon!, 'w-4 h-4 sm:w-6 sm:h-6')}
@@ -83,7 +83,7 @@ export default function IndustrySolutionCard({
         <div className="flex-1">
           <h3
             className={`
-              text-sm font-medium tracking-tight text-foreground 
+              text-sm md:font-medium md:text-foreground 
               group-hover:text-privue-800 transition-colors duration-300
               sm:text-base
             `}

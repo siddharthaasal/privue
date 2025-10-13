@@ -152,7 +152,7 @@ export default function ContactForm() {
                         >
                           <div className="w-full min-w-0 text-left">
                             {selected.length === 0 ? (
-                              <span className="text-muted-foreground text-sm">
+                              <span className="text-muted-foreground text-xs">
                                 Selected Solution
                               </span>
                             ) : (
@@ -241,7 +241,7 @@ export default function ContactForm() {
                 <FormItem>
                   <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Name</FormLabel>
                   <FormControl>
-                    <Input className="h-9 rounded-sm text-xs text-muted-foreground" placeholder="Name" {...field} />
+                    <Input className="h-9 rounded-sm text-xs text-foreground" placeholder="Name" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -257,7 +257,7 @@ export default function ContactForm() {
                     <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Work Email</FormLabel>
                     <FormControl>
                       <Input
-                        className="h-9 rounded-sm text-xs text-muted-foreground"
+                        className="h-9 rounded-sm text-xs text-foreground"
                         type="email"
                         placeholder="Work Email"
                         {...field}
@@ -273,7 +273,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Company</FormLabel>
                     <FormControl>
-                      <Input className="h-9 rounded-sm text-xs text-muted-foreground" placeholder="Company" {...field} />
+                      <Input className="h-9 rounded-sm text-xs text-foreground" placeholder="Company" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -289,7 +289,7 @@ export default function ContactForm() {
                   <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Message</FormLabel>
                   <FormControl>
                     <Textarea
-                      className="min-h-[70px] rounded-sm text-xs text-muted-foreground"
+                      className="min-h-[70px] rounded-sm text-xs text-foreground"
                       placeholder="Let us know how we can help"
                       {...field}
                     />
@@ -307,7 +307,7 @@ export default function ContactForm() {
               autoComplete="off"
             />
 
-            <p className="text-xs leading-relaxed text-gray-500">
+            <p className="text-xs leading-relaxed text-muted-foreground">
               By submitting this form, you agree to our{' '}
               <a href="/privacy-policy" className="underline">
                 Privacy Policy

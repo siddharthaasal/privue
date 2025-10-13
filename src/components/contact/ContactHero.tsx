@@ -24,10 +24,14 @@ export default function ContactHero({
         </span>
       </h2>
 
-      <p className="mt-4 text-base text-gray-600 sm:mt-6 sm:text-lg">{subtitle}</p>
-
+      <p className="hidden md:block mt-4 text-base text-gray-600 sm:mt-6 sm:text-lg">{subtitle}</p>
+      <div className="mt-3 md:hidden">
+        <p className="text-sm text-gray-700">
+          Reach out to explore how we can support you with company insights, risk modeling, financial analytics, and sustainability scoring.
+        </p>
+      </div>
       {/* tighter spacing on mobile */}
-      <ul className="mt-3 space-y-1 sm:mt-4 sm:space-y-2">
+      <ul className="hidden md:block mt-3 space-y-1 sm:mt-4 sm:space-y-2">
         {bullets.map((item, idx) => (
           <li key={idx} className="flex items-center gap-2">
             <span className="text-privue-900 w-4">

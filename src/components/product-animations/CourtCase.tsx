@@ -79,7 +79,8 @@ function SearchFrame() {
   };
 
   return (
-    <div className="w-[400px] max-w-[500px] rounded-md bg-gray-50 p-3">
+    <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+    >
       <div className="mb-3 text-[11px] font-medium text-slate-800">Court Case API</div>
 
       <div className="flex items-center gap-3">
@@ -214,7 +215,7 @@ export function JsonCompactFrame({
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-w-[480px] min-w-[360px] rounded-md border border-slate-100 bg-white/96 p-2 shadow-sm"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-label="JSON compact frame"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -356,7 +357,7 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: Payload
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-w-[450px] min-w-[360px] rounded-md border bg-white/90 p-4"
+      className="max-h-[280px] md:max-h-[320px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-label="Cases cards frame"
     >
       <div className="mb-2 flex items-center justify-between">
@@ -396,13 +397,12 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: Payload
               {/* risk pill — very small */}
               <div className="ml-2 shrink-0">
                 <div
-                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${
-                    c.riskLevel === 'High'
-                      ? 'border border-red-100 bg-red-50 text-red-700'
-                      : c.riskLevel === 'Medium'
-                        ? 'border border-amber-100 bg-amber-50 text-amber-700'
-                        : 'border border-slate-100 bg-slate-50 text-slate-700'
-                  }`}
+                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${c.riskLevel === 'High'
+                    ? 'border border-red-100 bg-red-50 text-red-700'
+                    : c.riskLevel === 'Medium'
+                      ? 'border border-amber-100 bg-amber-50 text-amber-700'
+                      : 'border border-slate-100 bg-slate-50 text-slate-700'
+                    }`}
                   style={{ minWidth: 44, textAlign: 'center' }}
                 >
                   {c.riskLevel ?? 'Unknown'}
@@ -521,7 +521,7 @@ export default function CourtCase() {
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-6 bottom-6">
+          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <SearchFrame />
           </motion.div>
         )}
@@ -529,7 +529,8 @@ export default function CourtCase() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-6 bottom-6">
+          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+
             <JsonCompactFrame />
           </motion.div>
         )}
@@ -537,7 +538,8 @@ export default function CourtCase() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-6 bottom-6">
+          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+
             <JsonCardsFrame />
           </motion.div>
         )}

@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 export default function ContactPage() {
   return (
     <Layout>
-      <main className="mx-auto min-h-screen px-4 sm:px-6 lg:px-8">
+      <main className="mx-auto md:min-h-screen px-4 sm:px-6 lg:px-8">
         {/* Mobile-first: single column; preserve 2-col layout on md+ (laptop and up) */}
         <div className="grid grid-cols-1 gap-y-8 gap-x-6 px-4 pt-12 md:grid-cols-2 md:gap-x-24 md:px-12 md:pt-24">
           <div>

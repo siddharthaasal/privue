@@ -61,7 +61,9 @@ function EsgTable({ title, rows }: TableData) {
   const maxScore = 100;
 
   return (
-    <div className="w-full max-w-[420px] rounded-md bg-white/98 p-2 shadow-sm">
+    <div
+      className="max-h-[280px] max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+    >
       <div className="mb-1">
         <h4 className="text-[12px] font-medium text-slate-900">{title}</h4>
       </div>
@@ -187,7 +189,8 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
   const centerValue = useCountUp(avg, 700);
 
   return (
-    <div className="max-w-[420px] rounded-md bg-white/99 p-2 shadow-sm">
+    <div className="max-h-[280px] max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+    >
       <div className="flex gap-2">
         {/* donut area */}
         <div className="relative flex h-[150px] w-[150px] flex-shrink-0 items-center justify-center">
@@ -341,7 +344,7 @@ function EsgHistoricalStaggered() {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28 }}
-      className="w-[420px] max-w-[420px] rounded-md bg-white p-2 shadow-sm"
+      className="max-h-[280px] w-[350px] sm:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
     >
       <div className="mb-1 text-[11px] font-medium text-slate-900">Historical ESG Performance</div>
 
@@ -482,7 +485,7 @@ export default function EsgScoring() {
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-6 bottom-6">
+          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <EsgTable {...environmentData} />
           </motion.div>
         )}
@@ -490,7 +493,7 @@ export default function EsgScoring() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-6 bottom-6">
+          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <EsgTable {...socialData} />
           </motion.div>
         )}
@@ -498,7 +501,7 @@ export default function EsgScoring() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-6 bottom-6">
+          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <EsgTable {...governanceData} />
           </motion.div>
         )}
@@ -506,7 +509,7 @@ export default function EsgScoring() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="frame4" className="absolute right-6 bottom-6">
+          <motion.div key="frame4" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <EsgOverviewRecharts />
           </motion.div>
         )}
@@ -514,7 +517,7 @@ export default function EsgScoring() {
 
       <AnimatePresence>
         {step === 'frame5' && (
-          <motion.div key="frame5" className="absolute right-6 bottom-6">
+          <motion.div key="frame5" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <EsgHistoricalStaggered />
           </motion.div>
         )}

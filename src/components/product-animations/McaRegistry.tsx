@@ -33,8 +33,9 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.18 }}
+        className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       >
-        <div className="w-full max-w-[420px] space-y-2">
+        <div className="space-y-2">
           <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
             <div className="mb-2 text-left">
               <div className="text-[11px] font-medium text-slate-900">Upload file</div>
@@ -212,8 +213,10 @@ export function Frame2ProcessingMinimal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
+      className="max-h-[280px] md:max-h-[280px]  md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+
     >
-      <div className="w-full max-w-[420px] rounded-lg border bg-white p-3 shadow-sm">
+      <div className="">
         <div className="mb-2 text-[11px] font-medium text-slate-800">Processing pipeline</div>
 
         <div className="flex flex-col gap-2">
@@ -364,7 +367,7 @@ export function JsonCompactFrame({
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-w-[480px] min-w-[360px] rounded-md border border-slate-100 bg-white/96 p-2 shadow-sm"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-label="JSON compact frame"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -523,7 +526,7 @@ export function BalanceSheetFrameMinimal() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="w-[400px] max-w-[500px] rounded-md border border-slate-100 bg-white/96 p-2"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
       aria-label="Balance Sheet"
     >
@@ -574,7 +577,7 @@ export function BalanceSheetFrameMinimal() {
 }
 
 type Stage = 'idle' | 'dropping' | 'uploading' | 'processing' | 'done';
-type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5';
+type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';
 type Status = 'pending' | 'active' | 'done';
 
 export default function McaRegistry() {
@@ -697,14 +700,13 @@ export default function McaRegistry() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stage]);
 
-  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4', 'frame5'];
+  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4'];
 
   const durations: Record<Step, number> = {
     frame1: 4500,
     frame2: 3000, // short timer here is OK because we handle frame2 separately below
     frame3: 4000,
     frame4: 5000,
-    frame5: 4500,
   };
 
   // Advance helper
@@ -778,14 +780,13 @@ export default function McaRegistry() {
         /> */}
       </div>
 
-      <div className="absolute right-6 bottom-6">
+      <div className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
         {carouselStep === 'frame1' && <Frame1Upload key="f1" stage={stage} uploadPct={uploadPct} />}
         {carouselStep === 'frame2' && (
           <Frame2ProcessingMinimal key="f2" statuses={statuses} labels={labels} />
         )}
         {carouselStep === 'frame3' && <JsonCompactFrame key="f3" />}
         {carouselStep === 'frame4' && <BalanceSheetFrameMinimal key="f4" />}
-        {carouselStep === 'frame5' && <JsonCompactFrame key="f5" />}
       </div>
     </div>
   );

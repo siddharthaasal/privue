@@ -156,8 +156,7 @@ function MinimalComplianceOverview({ autoAnimate = true }: { autoAnimate?: boole
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 5 }}
       transition={{ duration: 0.25 }}
-      className="w-full max-w-[450px] rounded-md bg-white/95 p-2.5 shadow-sm backdrop-blur-sm"
-      aria-live="polite"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 md:p-6 overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm" aria-live="polite"
     >
       <div className="mb-1 flex items-center justify-between">
         <div className="text-[10px] font-medium text-slate-700">Compliance Overview</div>
@@ -217,8 +216,7 @@ function ComplianceAnalysisCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[220px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
-      aria-live="polite"
+      className="max-h-[200px] md:max-h-[220px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">View Compliance Analysis</div>
 
@@ -262,8 +260,7 @@ function RecentUpdates() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
-      aria-live="polite"
+      className="max-h-[200px] md:max-h-[220px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">Recent Updates</div>
 
@@ -293,8 +290,7 @@ function RecommendationsCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[200px] w-full max-w-[420px] overflow-y-auto rounded-md bg-white/95 p-3 shadow-sm backdrop-blur-sm"
-      aria-live="polite"
+      className="max-h-[200px] md:max-h-[220px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">Recommendations</div>
 
@@ -342,7 +338,7 @@ export default function ComplianceRisk() {
         <img
           src={bgUrl}
           alt="background"
-          className="h-full w-full object-contain backdrop-opacity-90"
+          className="h-full w-full object-cover backdrop-opacity-90"
         />
         <div
           className="absolute inset-0"
@@ -355,7 +351,7 @@ export default function ComplianceRisk() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-6 bottom-6">
+          <motion.div key="frame1" className="absolute right-1 bottom-1 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <MinimalComplianceOverview />
           </motion.div>
         )}
@@ -363,7 +359,7 @@ export default function ComplianceRisk() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-6 bottom-6">
+          <motion.div key="frame2" className="absolute right-1 bottom-1 md:right-6 md:bottom-4 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <ComplianceAnalysisCard />
           </motion.div>
         )}
@@ -371,7 +367,7 @@ export default function ComplianceRisk() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-6 bottom-6">
+          <motion.div key="frame3" className="absolute right-1 bottom-1 md:right-6 md:bottom-2 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <RecentUpdates />
           </motion.div>
         )}
@@ -379,7 +375,7 @@ export default function ComplianceRisk() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="frame4" className="absolute right-6 bottom-6">
+          <motion.div key="frame4" className="absolute right-1 bottom-1 md:right-6 md:bottom-4 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
             <RecommendationsCard />
           </motion.div>
         )}

@@ -110,12 +110,12 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-      {/* Reduced container padding */}
-      <div className="p-3 sm:p-4 lg:p-5">
+    <div className="rounded-md md:rounded-lg border border-gray-200 bg-white shadow-sm">
+      {/* Reduced container padding on mobile, preserve larger paddings on sm/lg */}
+      <div className="p-3 sm:p-3 lg:p-5">
         <Form {...form}>
           {/* tighter vertical spacing */}
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             {/* Topic */}
             <FormField
               control={form.control}
@@ -137,12 +137,12 @@ export default function ContactForm() {
                   <div ref={rootRef}>
                     <FormItem>
                       {/* slightly smaller label */}
-                      <FormLabel className="px-1 text-sm text-gray-700 dark:text-slate-200">
+                      <FormLabel className="px-1 text-xs sm:text-sm text-gray-700 dark:text-slate-200">
                         Select Solution
                       </FormLabel>
 
                       <div className="relative">
-                        {/* Trigger: reduced height */}
+                        {/* Trigger: reduced height on mobile, preserve on larger screens */}
                         <button
                           type="button"
                           aria-haspopup="listbox"
@@ -239,9 +239,9 @@ export default function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="px-1 text-sm text-gray-700">Name</FormLabel>
+                  <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Name</FormLabel>
                   <FormControl>
-                    <Input className="h-9 rounded-md" placeholder="Name" {...field} />
+                    <Input className="h-9 rounded-sm text-xs text-muted-foreground" placeholder="Name" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -254,10 +254,10 @@ export default function ContactForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="px-1 text-sm text-gray-700">Work Email</FormLabel>
+                    <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Work Email</FormLabel>
                     <FormControl>
                       <Input
-                        className="h-9 rounded-md"
+                        className="h-9 rounded-sm text-xs text-muted-foreground"
                         type="email"
                         placeholder="Work Email"
                         {...field}
@@ -271,9 +271,9 @@ export default function ContactForm() {
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="px-1 text-sm text-gray-700">Company</FormLabel>
+                    <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Company</FormLabel>
                     <FormControl>
-                      <Input className="h-9 rounded-md" placeholder="Company" {...field} />
+                      <Input className="h-9 rounded-sm text-xs text-muted-foreground" placeholder="Company" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -286,10 +286,10 @@ export default function ContactForm() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="px-1 text-sm text-gray-700">Message</FormLabel>
+                  <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Message</FormLabel>
                   <FormControl>
                     <Textarea
-                      className="min-h-[70px] rounded-md"
+                      className="min-h-[70px] rounded-sm text-xs text-muted-foreground"
                       placeholder="Let us know how we can help"
                       {...field}
                     />
@@ -317,7 +317,7 @@ export default function ContactForm() {
 
             <Button
               type="submit"
-              className="h-10 w-full cursor-pointer rounded-md text-sm font-semibold text-white"
+              className="h-9 w-full cursor-pointer rounded-md text-sm font-semibold text-white sm:h-10"
               disabled={spreeState.submitting}
             >
               {spreeState.submitting ? 'Sending...' : 'Send message'}

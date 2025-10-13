@@ -50,7 +50,7 @@ function Frame1ClimateRisk() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="w-full max-w-[440px] rounded-md bg-white/95 p-3 shadow-sm ring-1 ring-slate-200/60 backdrop-blur-sm"
+      className="max-h-[280px] w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
       <div className="mb-2 text-[12px] font-semibold text-slate-800">Climate Risk Assessment</div>
@@ -132,7 +132,7 @@ function riskTextClass(level: LocationRow['riskScore']) {
 export function Frame2LocationsOfInterestMinimal() {
   return (
     <motion.div
-      className="w-full max-w-[500px] min-w-[400px] rounded-lg bg-white/95 p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.32 }}
@@ -260,7 +260,7 @@ export function Frame3ClimateRadar({
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="w-full max-w-[420px] rounded-md bg-white/95 p-3 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
+      className="max-h-[280px] max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
       role="region"
       aria-label="Risk Assessment Profile"
@@ -444,10 +444,10 @@ export function Frame4RiskOverTime({
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28 }}
-      className="w-full max-w-[480px] rounded-md bg-white/95 p-2 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
+      className="max-h-[280px] w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
     >
-      <div className="mb-2 text-[12px] font-semibold text-slate-800">Risk Over Time</div>
+      <div className="md:mb-2 text-[12px] font-semibold text-slate-800">Risk Over Time</div>
 
       <div className="flex">
         <svg
@@ -603,7 +603,9 @@ export default function ClimateRisk() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-6 bottom-6">
+          <motion.div key="frame1"
+            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame1ClimateRisk />
           </motion.div>
         )}
@@ -611,7 +613,9 @@ export default function ClimateRisk() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-6 bottom-6">
+          <motion.div key="frame2"
+            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame2LocationsOfInterestMinimal />
           </motion.div>
         )}
@@ -619,7 +623,9 @@ export default function ClimateRisk() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-6 bottom-6">
+          <motion.div key="frame3"
+            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame3ClimateRadar />
           </motion.div>
         )}
@@ -627,7 +633,9 @@ export default function ClimateRisk() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="frame4" className="absolute right-6 bottom-6">
+          <motion.div key="frame4"
+            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame4RiskOverTime />
           </motion.div>
         )}

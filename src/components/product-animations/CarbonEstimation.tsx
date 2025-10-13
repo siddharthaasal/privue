@@ -79,7 +79,7 @@ function BusinessSiteFrame() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28, ease: 'easeOut' }}
-      className="max-w-[440px] rounded-md bg-white p-3 shadow-sm ring-1 ring-slate-100"
+      className="max-h-[280px] max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
     >
       <div className="flex items-baseline justify-between">
         <div className="text-[11px] font-semibold tracking-tight text-slate-800">
@@ -183,7 +183,7 @@ function EmissionsFrame() {
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="w-[380px] max-w-[500px] rounded-md bg-white p-2 shadow-sm ring-1 ring-slate-100"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
     >
       <div className="mb-1 text-[11px] font-semibold text-slate-900">
         Total emission per category
@@ -335,7 +335,7 @@ function EmissionsWaterfallFrame() {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28 }}
-      className="w-[460px] max-w-[100%] rounded-md bg-white p-2 shadow-sm ring-1 ring-slate-100"
+      className="max-h-[280px] w-[300px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-label="Emissions waterfall frame"
     >
       <div className="mb-1 text-[11px] font-semibold text-slate-900">
@@ -465,7 +465,8 @@ export default function CarbonEstimation() {
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-6 bottom-6">
+          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <BusinessSiteFrame />
           </motion.div>
         )}
@@ -473,7 +474,8 @@ export default function CarbonEstimation() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-6 bottom-6">
+          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <EmissionsFrame />
           </motion.div>
         )}
@@ -481,7 +483,8 @@ export default function CarbonEstimation() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-6 bottom-6">
+          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+          >
             <EmissionsWaterfallFrame />
           </motion.div>
         )}

@@ -34,8 +34,10 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.18 }}
+        className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+
       >
-        <div className="w-full max-w-[420px] space-y-2">
+        <div className=" space-y-2">
           <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
             <div className="mb-2 text-left">
               <div className="text-[11px] font-medium text-slate-900">Upload file</div>
@@ -213,8 +215,9 @@ export function Frame2ProcessingMinimal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
     >
-      <div className="w-full max-w-[420px] rounded-lg border bg-white p-3 shadow-sm">
+      <div className="">
         <div className="mb-2 text-[11px] font-medium text-slate-800">Processing pipeline</div>
 
         <div className="flex flex-col gap-2">
@@ -364,7 +367,7 @@ export function Frame3Chat({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.22 }}
-      className="w-[460px] rounded-md bg-white/95 p-2.5 shadow-sm ring-1 ring-slate-100 backdrop-blur-sm"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-live="polite"
       role="region"
       aria-label="Engineering report assistant"
@@ -505,7 +508,7 @@ export function Frame4SavedNotes({ onComplete }: { onComplete?: () => void }) {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className="w-[440px] rounded-md bg-white p-2.5 shadow-sm ring-1 ring-slate-100"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       aria-label="Saved notes"
     >
       <div className="mb-2 flex items-center justify-between">
@@ -725,7 +728,7 @@ export default function EngineeringReportParsing() {
         />
       </div>
 
-      <div className="absolute right-6 bottom-6">
+      <div className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
         {/* immediate swap: simple conditional rendering without AnimatePresence */}
         {step === 'frame1' && <Frame1Upload key="f1" stage={stage} uploadPct={uploadPct} />}
 

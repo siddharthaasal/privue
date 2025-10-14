@@ -13,12 +13,12 @@ import FlowNodesExample from '@/pages/Workflow';
 export default function HeroSection() {
   const logos = [
     '/integration-logos/ikanoon.png',
-    '/integration-logos/SAP-Logo.png',
-    '/integration-logos/logo-dnb.svg',
-    '/integration-logos/myGate_cr.png',
-    '/integration-logos/salesforce.png',
-    '/integration-logos/myPaisa.svg',
     '/integration-logos/zoho.png',
+    '/integration-logos/logo-dnb.svg',
+    '/integration-logos/salesforce.png',
+    '/integration-logos/SAP-Logo.png',
+    '/integration-logos/myGate_cr.png',
+    '/integration-logos/myPaisa.svg',
   ];
 
   return (
@@ -103,9 +103,7 @@ export default function HeroSection() {
 
 
         <section className="pt-20">
-          {/* Layout container */}
           <div className="mx-auto max-w-6xl px-4">
-            {/* Clip the moving track so it doesn't overflow your layout */}
             <div className="relative overflow-hidden rounded-xl">
               <Marquee
                 className="w-full"
@@ -113,27 +111,35 @@ export default function HeroSection() {
                 pauseOnHover
                 gradient
                 gradientWidth={48}
-                autoFill // duplicate logos to avoid empty gaps
+                autoFill
               >
-                {logos.map((src, i) => (
-                  <div
-                    key={i}
-                    /* mobile: smaller gap & narrower items; sm+: keep original spacing */
-                    className="mx-8 flex h-10 w-[80px] min-w-[56px] items-center justify-center sm:mx-10 sm:h-14 sm:w-40"
-                  >
-                    {/* ensure image never overflows its container on small screens */}
-                    <img
-                      src={src}
-                      alt="integration logo"
-                      className="h-8 sm:h-10 max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
+                {logos.map((src, i) => {
+                  const isDnbLogo = src.includes('logo-dnb'); // detect DnB
+
+                  return (
+                    <div
+                      key={i}
+                      className={`mx-8 flex h-10 w-[80px] min-w-[56px] items-center justify-center sm:mx-10 sm:h-14 sm:w-40`}
+                    >
+                      <img
+                        src={src}
+                        alt="integration logo"
+                        loading="lazy"
+                        className={`
+                  max-w-full object-contain
+                  ${isDnbLogo
+                            ? 'scale-145 sm:scale-100' // mobile: slightly larger (10 instead of 8)
+                            : 'h-8 sm:h-10'}
+                `}
+                      />
+                    </div>
+                  );
+                })}
               </Marquee>
             </div>
           </div>
         </section>
+
 
 
         {/* Master Workflow Animation — hidden on mobile/tablet, visible on lg+ */}

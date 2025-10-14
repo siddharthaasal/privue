@@ -1,7 +1,7 @@
 // CreditTerms.tsx
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DatabaseZap } from 'lucide-react';
+// import { DatabaseZap } from 'lucide-react';
 
 type Stage = 'idle' | 'frame1' | 'frame2' | 'frame3' | 'done';
 

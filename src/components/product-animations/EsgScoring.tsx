@@ -163,9 +163,9 @@ type Scores = {
 };
 
 const DEFAULT: Scores = {
-  environment: 54,
-  social: 68,
-  governance: 54,
+  environment: 67,
+  social: 72,
+  governance: 65,
   industryPercentile: '46th',
 };
 
@@ -314,19 +314,26 @@ function EsgOverviewRecharts({ scores = DEFAULT }: { scores?: Scores }) {
  * - dashed vertical marker at 'Jul' with a red point
  */
 
+// const spikierData = [
+//   { month: 'Jan', env: 52, soc: 65, gov: 58 },
+//   { month: 'Feb', env: 58, soc: 72, gov: 72 },
+//   { month: 'Mar', env: 49, soc: 60, gov: 68 },
+//   { month: 'Apr', env: 32, soc: 39, gov: 52 },
+//   { month: 'May', env: 28, soc: 36, gov: 42 },
+//   { month: 'Jun', env: 48, soc: 41, gov: 44 },
+//   { month: 'Jul', env: 74, soc: 66, gov: 60 },
+//   { month: 'Aug', env: 72, soc: 66, gov: 60 },
+//   { month: 'Sep', env: 66, soc: 62, gov: 64 },
+//   { month: 'Oct', env: 54, soc: 48, gov: 58 },
+//   { month: 'Nov', env: 40, soc: 36, gov: 44 },
+//   { month: 'Dec', env: 28, soc: 30, gov: 32 },
+// ];
 const spikierData = [
-  { month: 'Jan', env: 52, soc: 65, gov: 58 },
-  { month: 'Feb', env: 58, soc: 72, gov: 72 },
-  { month: 'Mar', env: 49, soc: 60, gov: 68 },
-  { month: 'Apr', env: 32, soc: 39, gov: 52 },
-  { month: 'May', env: 28, soc: 36, gov: 42 },
-  { month: 'Jun', env: 48, soc: 41, gov: 44 },
-  { month: 'Jul', env: 74, soc: 66, gov: 60 },
-  { month: 'Aug', env: 72, soc: 66, gov: 60 },
-  { month: 'Sep', env: 66, soc: 62, gov: 64 },
-  { month: 'Oct', env: 54, soc: 48, gov: 58 },
-  { month: 'Nov', env: 40, soc: 36, gov: 44 },
-  { month: 'Dec', env: 28, soc: 30, gov: 32 },
+  { month: 2020, env: 42, soc: 50, gov: 47 },
+  { month: 2021, env: 45, soc: 53, gov: 49 },
+  { month: 2022, env: 48, soc: 55, gov: 52 },
+  { month: 2023, env: 51, soc: 57, gov: 54 },
+  { month: 2024, env: 54, soc: 60, gov: 57 },
 ];
 
 const COLORS = {
@@ -380,7 +387,7 @@ function EsgHistoricalStaggered() {
               dataKey="gov"
               stroke={COLORS.gov}
               strokeWidth={1.6}
-              dot={false}
+              dot={true}
               activeDot={{ r: 3.5 }}
               isAnimationActive={true}
               animationDuration={800}
@@ -393,7 +400,7 @@ function EsgHistoricalStaggered() {
               dataKey="soc"
               stroke={COLORS.soc}
               strokeWidth={1.6}
-              dot={false}
+              dot={true}
               activeDot={{ r: 3.5 }}
               isAnimationActive={true}
               animationDuration={800}
@@ -406,7 +413,7 @@ function EsgHistoricalStaggered() {
               dataKey="env"
               stroke={COLORS.env}
               strokeWidth={1.6}
-              dot={false}
+              dot={true}
               activeDot={{ r: 3.5 }}
               isAnimationActive={true}
               animationDuration={800}

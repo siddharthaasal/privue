@@ -130,7 +130,7 @@ export default function LargeDataAcquisition({
     { k: 'CIN', v: 'U12345DL2011PTC000002' },
     { k: 'GSTIN', v: '27AAEPM1234C1ZQ' },
     // Large customer "in sync" dummy values:
-    { k: 'Revenue (₹)', v: '28,45,35,000' }, // ~28.45 crore net revenue
+    { k: 'Total Assets (₹)', v: '120,41,89,000' }, // ~28.45 crore net revenue
     { k: 'ROE %', v: '23.7%' }, // similar ratio to SME case
     { k: 'GST Turnover (₹)', v: '36,84,53,000' }, // ~36.84 crore gross turnover
   ];
@@ -247,7 +247,7 @@ export default function LargeDataAcquisition({
                       <div className="mt-2 flex items-center justify-between gap-2">
                         {[
                           { label: 'Registry', idx: 0 },
-                          { label: 'Data Acquisition', idx: 1 },
+                          { label: 'GST Returns', idx: 1 },
                           { label: 'Financials', idx: 2 },
                         ].map((f) => {
                           const st = discStatus(f.idx);

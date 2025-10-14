@@ -1130,7 +1130,7 @@ export const solutions: Solution[] = [
         description: 'Review corporate filings, litigations, and adverse media.',
         imgSrc: '/demo-module-image.png',
         link: '#',
-        renderAnimation: AdverseNews,
+        renderAnimation: CourtCase,
       },
       {
         title: 'Cyber Risk Assessment',

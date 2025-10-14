@@ -314,9 +314,9 @@ const defaultPayload: Payload = {
     {
       caseNumber: 'WP/3619/2021',
       title:
-        'M/S Flipkart Internet Private Limited vs The Deputy Commissioner Of Income Tax on 24 June, 2022',
+        'M/S Delta Resources Internet Private Limited vs The Deputy Commissioner Of Income Tax on 24 June, 2022',
       description:
-        "The petitioner, M/s Flipkart Internet Private Limited, made payments to M/s. Walmart Inc., USA, as reimbursement for the salaries of employees seconded from Walmart Inc. to work for Flipkart. The petitioner applied for a 'Nil Tax Deduction at Source (TDS) Certificate' under Section 195(2) of the Income Tax Act, 1961, contending that these reimbursements were not income chargeable to tax in India for Walmart Inc. The Deputy Commissioner of Income Tax rejected this application, directing Flipkart to deduct tax at source, treating the payments as consideration for technical services.",
+        "The petitioner, M/s Delta Resources Internet Private Limited, made payments to M/s. Walmart Inc., USA, as reimbursement for the salaries of employees seconded from Walmart Inc. to work for Delta Resources. The petitioner applied for a 'Nil Tax Deduction at Source (TDS) Certificate' under Section 195(2) of the Income Tax Act, 1961, contending that these reimbursements were not income chargeable to tax in India for Walmart Inc. The Deputy Commissioner of Income Tax rejected this application, directing Delta Resources to deduct tax at source, treating the payments as consideration for technical services.",
       court: 'Karnataka High Court',
       caseType: 'DIRECT TAXATION',
       filingDate: '2025-10-01T12:09:10.372Z',
@@ -326,9 +326,9 @@ const defaultPayload: Payload = {
     },
     {
       caseNumber: 'W.P.(CRL) 162/2022',
-      title: 'Flipkart Internet Private Limited vs State Of Nct Of Delhi & Anr on 25 January, 2022',
+      title: 'Delta Resources Internet Private Limited vs State Of Nct Of Delhi & Anr on 25 January, 2022',
       description:
-        "The petitioner, Flipkart Internet Private Limited, filed a criminal writ petition seeking the records of an FIR registered against it. The petitioner's primary argument is that it is an 'intermediary' under the Information Technology Act, 2000, and is thus protected by Section 79 of the Act from liability for offences committed by third-party sellers on its platform. The petitioner also contended that two FIRs had been lodged against it on the same allegations, which is legally impermissible.",
+        "The petitioner, Delta Resources Internet Private Limited, filed a criminal writ petition seeking the records of an FIR registered against it. The petitioner's primary argument is that it is an 'intermediary' under the Information Technology Act, 2000, and is thus protected by Section 79 of the Act from liability for offences committed by third-party sellers on its platform. The petitioner also contended that two FIRs had been lodged against it on the same allegations, which is legally impermissible.",
       court: 'Delhi High Court - Orders',
       caseType: 'CRIMINAL LAW',
       filingDate: '2025-10-01T12:09:10.372Z',

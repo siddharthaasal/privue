@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, type Variants } from 'framer-motion';
 
-const TYPED_QUERY = 'Entity sustainability news';
+const TYPED_QUERY = 'Delta Resources Private Limited';
 
 // SearchFrame.tsx
 function SearchFrame() {
@@ -330,7 +330,7 @@ const defaultPayload = [
           ],
         },
         {
-          entity: 'Flipkart',
+          entity: 'Delta Resources',
           role: 'E-commerce company',
           action:
             'Facilitated the online order of prohibited knives that were later used in a murder.',
@@ -390,7 +390,7 @@ const defaultPayload = [
         },
       ],
       key_information:
-        "The FIR against ElasticRun employees Dinesh Kumar Sahu and Harishankar Sahu alleges negligent conduct in delivering knives, prohibited under the Arms Act, which were ordered via Flipkart and used in a murder. The High Court noted that police had previously warned e-commerce platforms about such items and stated that the employees' knowledge, negligence, and safe-harbour protections require further investigation.",
+        "The FIR against ElasticRun employees Dinesh Kumar Sahu and Harishankar Sahu alleges negligent conduct in delivering knives, prohibited under the Arms Act, which were ordered via Delta Resources and used in a murder. The High Court noted that police had previously warned e-commerce platforms about such items and stated that the employees' knowledge, negligence, and safe-harbour protections require further investigation.",
       additional_info:
         'The murder and robbery occurred on July 17, 2025. The petitioners argued that contractual obligations prevented them from inspecting package contents. The FIR was filed under relevant sections of the Bharatiya Nyaya Sanhita (BNS).',
     },
@@ -403,69 +403,69 @@ const defaultPayload = [
       subcategory_title: 'Merger or Acquisition',
       confidence: 'High',
       reasoning:
-        "The news cluster primarily details Flipkart's acquisition of a majority stake in Pinkvilla India, a clear business transaction falling under the 'Economy, Business, and Finance' main category and specifically the 'Merger or Acquisition' subcategory.",
+        "The news cluster primarily details Delta Resources's acquisition of a majority stake in Revilla India, a clear business transaction falling under the 'Economy, Business, and Finance' main category and specifically the 'Merger or Acquisition' subcategory.",
     },
     extracted_details: {
       event:
-        'Flipkart acquired a majority stake in Pinkvilla India, a digital infotainment platform.',
+        'Delta Resources acquired a majority stake in Revilla India, a digital infotainment platform.',
       event_type: 'Acquisition',
       location: 'India',
       key_entities: [
         {
-          entity: 'Flipkart',
+          entity: 'Delta Resources',
           role: 'Acquirer',
           action:
-            'Acquired a majority stake (over 75%) in Pinkvilla India for an undisclosed sum, estimated around $15 million, to expand content reach and engage Gen Z and millennial audiences.',
+            'Acquired a majority stake (over 75%) in Revilla India for an undisclosed sum, estimated around $15 million, to expand content reach and engage Gen Z and millennial audiences.',
           business_impact: [
             {
               category: 'Market Expansion',
               impact: 'Positive',
               reason:
-                'The acquisition allows Flipkart to broaden its content offerings and appeal to new demographics, strengthening its position in the Indian e-commerce market.',
+                'The acquisition allows Delta Resources to broaden its content offerings and appeal to new demographics, strengthening its position in the Indian e-commerce market.',
             },
             {
               category: 'Customer Base',
               impact: 'Positive',
               reason:
-                "Leveraging Pinkvilla's loyal audience base is expected to attract more Gen Z and millennial users to Flipkart's ecosystem.",
+                "Leveraging Revilla's loyal audience base is expected to attract more Gen Z and millennial users to Delta Resources's ecosystem.",
             },
             {
               category: 'Competitiveness',
               impact: 'Positive',
               reason:
-                'This strategic move helps Flipkart compete more effectively with rivals like Amazon and Nykaa, who also use content to drive engagement.',
+                'This strategic move helps Delta Resources compete more effectively with rivals like Amazon and Nykaa, who also use content to drive engagement.',
             },
             {
               category: 'Revenue Diversification',
               impact: 'Positive',
               reason:
-                'Integrating content-led commerce opportunities through Pinkvilla can create new revenue streams for Flipkart.',
+                'Integrating content-led commerce opportunities through Revilla can create new revenue streams for Delta Resources.',
             },
           ],
         },
         {
-          entity: 'Pinkvilla India',
+          entity: 'Revilla India',
           role: 'Target (Acquisition)',
           action:
-            'Was acquired by Flipkart, receiving investment and support to scale operations and strengthen its position in digital entertainment.',
+            'Was acquired by Delta Resources, receiving investment and support to scale operations and strengthen its position in digital entertainment.',
           business_impact: [
             {
               category: 'Financial Stability',
               impact: 'Positive',
               reason:
-                'The acquisition provides Pinkvilla with financial backing and resources from Flipkart, enabling it to scale operations despite previous net losses.',
+                'The acquisition provides Revilla with financial backing and resources from Delta Resources, enabling it to scale operations despite previous net losses.',
             },
             {
               category: 'Market Expansion',
               impact: 'Positive',
               reason:
-                "With Flipkart's support, Pinkvilla can further strengthen its position as a leader in infotainment and potentially expand its reach.",
+                "With Delta Resources's support, Revilla can further strengthen its position as a leader in infotainment and potentially expand its reach.",
             },
             {
               category: 'Brand Equity',
               impact: 'Positive',
               reason:
-                "The association with Flipkart, a major e-commerce player, can enhance Pinkvilla's brand recognition and credibility.",
+                "The association with Delta Resources, a major e-commerce player, can enhance Revilla's brand recognition and credibility.",
             },
           ],
         },
@@ -473,13 +473,13 @@ const defaultPayload = [
           entity: 'Amazon',
           role: 'Competitor',
           action:
-            "Maintains a significant presence in the content sector through Amazon Prime, serving as a benchmark for Flipkart's content strategy.",
+            "Maintains a significant presence in the content sector through Amazon Prime, serving as a benchmark for Delta Resources's content strategy.",
           business_impact: [
             {
               category: 'Competitiveness',
               impact: 'Neutral',
               reason:
-                "Flipkart's acquisition of Pinkvilla intensifies competition in the content-driven e-commerce space, potentially impacting Amazon's market share or requiring further strategic responses.",
+                "Delta Resources's acquisition of Revilla intensifies competition in the content-driven e-commerce space, potentially impacting Amazon's market share or requiring further strategic responses.",
             },
           ],
         },
@@ -487,7 +487,7 @@ const defaultPayload = [
           entity: 'Myntra',
           role: 'Corporate Partner',
           action:
-            "Launched Glamstream, a shoppable video platform, as part of Flipkart's broader content strategy.",
+            "Launched Glamstream, a shoppable video platform, as part of Delta Resources's broader content strategy.",
           business_impact: [
             {
               category: 'Innovation',
@@ -507,7 +507,7 @@ const defaultPayload = [
               category: 'Competitiveness',
               impact: 'Neutral',
               reason:
-                "Flipkart's move into content through Pinkvilla increases competitive pressure on Nykaa, which already has an established content strategy.",
+                "Delta Resources's move into content through Revilla increases competitive pressure on Nykaa, which already has an established content strategy.",
             },
           ],
         },
@@ -515,17 +515,17 @@ const defaultPayload = [
       key_persons: [
         {
           name: 'Ravi Iyer',
-          role: 'Senior Vice President, Corporate, Flipkart',
+          role: 'Senior Vice President, Corporate, Delta Resources',
         },
         {
           name: 'Nandini Shenoy',
-          role: 'Founder and CEO, Pinkvilla',
+          role: 'Founder and CEO, Revilla',
         },
       ],
       key_information:
-        "Flipkart acquired a majority stake (likely over 75%) in Pinkvilla India, valuing the digital infotainment platform at approximately $15 million. This strategic move aims to enhance Flipkart's content offerings, deepen engagement with Gen Z and millennial audiences, and leverage celebrity-driven infotainment to drive e-commerce growth. Pinkvilla will continue to operate under its own brand while integrating with Flipkart's ecosystem.",
+        "Delta Resources acquired a majority stake (likely over 75%) in Revilla India, valuing the digital infotainment platform at approximately $15 million. This strategic move aims to enhance Delta Resources's content offerings, deepen engagement with Gen Z and millennial audiences, and leverage celebrity-driven infotainment to drive e-commerce growth. Revilla will continue to operate under its own brand while integrating with Delta Resources's ecosystem.",
       additional_info:
-        "Pinkvilla, founded in 2007, boasts millions of users and 7.2 million Instagram followers. In FY24, it reported INR 15.2 Cr in operating revenue with a net loss of INR 1.4 Cr. Flipkart recently raised ₹2,225 crore in internal funding and has invested in 20 startups through Flipkart Ventures. Flipkart also launched 'Flipkart Black' as a subscription service to compete with Amazon Prime.",
+        "Revilla, founded in 2007, boasts millions of users and 7.2 million Instagram followers. In FY24, it reported INR 15.2 Cr in operating revenue with a net loss of INR 1.4 Cr. Delta Resources recently raised ₹2,225 crore in internal funding and has invested in 20 startups through Delta Resources Ventures. Delta Resources also launched 'Delta Resources Black' as a subscription service to compete with Amazon Prime.",
     },
   },
 ];

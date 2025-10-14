@@ -621,9 +621,9 @@ export default function InsurancePolicy() {
   // statuses for 4-step pipeline (start all pending)
   const [statuses, setStatuses] = useState<Status[]>(['pending', 'pending', 'pending', 'pending']);
   const labels = [
-    'Analyzing engineering structure',
-    'Extracting technical specifications',
-    'Processing engineering data',
+    'Analyzing Policy Structure',
+    'Extracting Coverage Information',
+    'Processing Exclusions and Clauses',
     'Generating analysis output',
   ];
 

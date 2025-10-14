@@ -1,7 +1,7 @@
 // CreditTerms.tsx
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// import { DatabaseZap } from 'lucide-react';
+import { DatabaseZap } from 'lucide-react';
 
 type Stage = 'idle' | 'frame1' | 'frame2' | 'frame3' | 'done';
 
@@ -37,13 +37,12 @@ export default function CreditTerms({
   // split parameter data into two smaller tables
   const tableFrame1 = [
     { k: 'Profit Before Tax', v: '₹ 1,24,000' },
-    { k: 'Turnover (Annual)', v: '₹ 12,40,000' },
+    { k: 'GST Turnover', v: '₹ 12,40,000' },
     { k: 'Total Financial Liabilities (Debt)', v: '₹ 4,50,000' },
   ];
 
   const tableFrame2 = [
-    { k: 'Total Income (ITR)', v: '₹ 13,00,000' },
-    { k: 'Estimated GST Turnover', v: '₹ 11,50,000' },
+    { k: 'Credit Score (Poor)', v: '₹ 13,00,000' },
     { k: 'Outstanding Banking Debt', v: '₹ 3,20,000' },
     { k: 'Credit Score (bureau)', v: '740' },
     { k: 'Total Loans Active', v: '2' },
@@ -180,6 +179,22 @@ export default function CreditTerms({
                       transition={{ duration: 0.28 }}
                       className=" w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-2 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
+                      <div className="flex items-center justify-between gap-3 mb-1">
+                        <div className="flex items-center gap-2">
+                          <DatabaseZap size={11} />
+                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                        </div>
+
+                        <div className="text-[10px] text-slate-500">
+                          {stage === 'frame1'
+                            ? 'Financial Profile'
+                            : stage === 'frame2'
+                              ? 'Credit profile'
+                              : stage === 'frame3'
+                                ? 'Proposes terms'
+                                : 'Completed'}
+                        </div>
+                      </div>
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
                       </div>
@@ -221,6 +236,16 @@ export default function CreditTerms({
                       transition={{ duration: 0.28 }}
                       className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
+                      <div className="flex items-center justify-between gap-3 mb-1">
+                        <div className="flex items-center gap-2">
+                          <DatabaseZap size={11} />
+                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                        </div>
+
+                        <div className="text-[10px] text-slate-500">
+                          Credit profile
+                        </div>
+                      </div>
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
                       </div>
@@ -262,8 +287,18 @@ export default function CreditTerms({
                       transition={{ duration: 0.28 }}
                       className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
+                      <div className="flex items-center justify-between gap-3 mb-1">
+                        <div className="flex items-center gap-2">
+                          <DatabaseZap size={11} />
+                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                        </div>
+
+                        <div className="text-[10px] text-slate-500">
+                          Proposed Terms
+                        </div>
+                      </div>
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
-                        Underwriting Conclusions
+                        Credit Terms
                       </div>
 
                       <div className="overflow-hidden rounded-md border bg-white text-[9px]">
@@ -303,10 +338,21 @@ export default function CreditTerms({
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.22 }}
                     >
+
                       <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                       >
+                        <div className="flex items-center justify-between gap-3 mb-1">
+                          <div className="flex items-center gap-2">
+                            <DatabaseZap size={11} />
+                            <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                          </div>
+
+                          <div className="text-[10px] text-slate-500">
+                            Completed
+                          </div>
+                        </div>
                         {/* optional check icon — replace with your imported icon if different */}
-                        <svg
+                        {/* <svg
                           width="14"
                           height="14"
                           viewBox="0 0 24 24"
@@ -322,7 +368,7 @@ export default function CreditTerms({
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
-                        </svg>
+                        </svg> */}
 
                         <div className="flex flex-col">
                           <div className="text-[11px] leading-tight font-semibold text-emerald-700">

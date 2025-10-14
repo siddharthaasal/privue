@@ -84,14 +84,14 @@ function CreditInfoCard() {
               <span className="text-muted-foreground text-[10px] uppercase">
                 Months Delinquent (36 months)
               </span>
-              <span className="text-[11px] font-medium">36</span>
+              <span className="text-[11px] font-medium">8</span>
             </motion.div>
 
             <motion.div className="flex flex-col" variants={item}>
               <span className="text-muted-foreground text-[10px] uppercase">
                 Max Delinquency (6 months)
               </span>
-              <span className="text-[11px] font-medium">900</span>
+              <span className="text-[11px] font-medium">5</span>
             </motion.div>
 
             {/* <motion.div className="col-span-2 mt-1 border-t pt-1.5 border-gray-100" variants={item} /> */}
@@ -100,7 +100,7 @@ function CreditInfoCard() {
               <span className="text-muted-foreground text-[10px] uppercase">
                 Age of Oldest Account
               </span>
-              <span className="text-[11px] font-medium">2 months</span>
+              <span className="text-[11px] font-medium">79 months</span>
             </motion.div>
           </motion.div>
         </CardContent>
@@ -110,7 +110,7 @@ function CreditInfoCard() {
 }
 
 function ProbabilityOfDefaultCard({
-  level = 'Low',
+  level = 'High',
   percent = '5%',
 }: {
   level?: 'Very Low' | 'Low' | 'Medium' | 'High' | 'Unknown';
@@ -198,7 +198,7 @@ function FinancialSnapshotCard() {
     { label: 'Return on Equity', value: '22%' },
     { label: 'Gross Profit Margin', value: '25%' },
     { label: 'Net Profit Margin', value: '3%' },
-    { label: 'Working Capital Turnover Ratio', value: '18.78' },
+    { label: 'Working Capital Turnover Ratio', value: '7.86' },
     { label: 'Estimated GST filed for PAN', value: '₹ 8,75,49,958' },
   ];
 
@@ -253,10 +253,9 @@ function FinancialSnapshotCard() {
 /** ContributoryFactorsCard — reveals items one-by-one like your table */
 function ContributoryFactorsCard() {
   const leftItems = [
-    'High exposure to credit compared to earnings.',
+    'High exposure to credit compared to earnings',
     'Balance sheet is highly leveraged',
     '5 months delinquent in last 36 Months',
-    '2 delayed contributions in last 6 months',
   ];
 
   const [itemsShown, setItemsShown] = useState(0);

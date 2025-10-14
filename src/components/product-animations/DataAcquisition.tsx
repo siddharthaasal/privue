@@ -185,7 +185,7 @@ export default function DataAcquisition({
                 </div>
               </div> */}
 
-              <div className="mt-3">
+              <div className="mt-0">
                 <AnimatePresence mode="wait">
                   {stage === 'docs' && (
                     <motion.div

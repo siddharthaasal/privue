@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DatabaseZap } from 'lucide-react';
+// import { DatabaseZap } from 'lucide-react';
 
 /**
  * DataAcquisition.tsx
@@ -167,11 +167,10 @@ export default function DataAcquisition({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="pointer-events-auto absolute right-2 bottom-2 w-auto max-w-[94vw] rounded-lg border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
               style={{ fontSize: 12 }}
-            >
+              className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"            >
               {/* header */}
-              <div className="flex items-center justify-between gap-3">
+              {/* <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <DatabaseZap size={12} />
                   <div className="text-xs font-medium text-slate-800">Data acquisition</div>
@@ -184,7 +183,7 @@ export default function DataAcquisition({
                       ? 'Populating table'
                       : 'Ready'}
                 </div>
-              </div>
+              </div> */}
 
               <div className="mt-3">
                 <AnimatePresence mode="wait">
@@ -195,7 +194,7 @@ export default function DataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.28 }}
-                      className="min-w-[310px] p-2"
+                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
                       {/* Top: two progress bars (crisper) */}
                       <div className="space-y-2">
@@ -303,7 +302,7 @@ export default function DataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="min-w-[380px]"
+                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
                       {/* title */}
                       <div className="mb-1 text-[10px] font-medium text-slate-700">
@@ -353,7 +352,7 @@ export default function DataAcquisition({
                   {stage === 'done' && (
                     <motion.div
                       key="frame-done"
-                      className="max-w-auto"
+                      className="max-h-[280px] md:max-h-[280px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
@@ -380,6 +379,6 @@ export default function DataAcquisition({
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </div >
   );
 }

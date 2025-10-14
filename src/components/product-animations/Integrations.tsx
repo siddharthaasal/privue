@@ -39,7 +39,7 @@ export function SmallIntegrationsFrame() {
 
   return (
     <div
-      className="w-[420px] rounded-md border border-slate-100 bg-white/95 p-2 shadow-lg"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       style={{ fontSize: 10 }}
     >
       <div className="mb-1 flex items-center justify-between">
@@ -128,7 +128,7 @@ export function SmallIntegrationsFrame() {
 function IntegrationsDetailFrame() {
   return (
     <div
-      className="w-[360px] rounded-md border border-slate-100 bg-white/95 p-3 shadow-lg"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       style={{ fontSize: 10 }}
     >
       <div className="mb-1 text-[11px] font-semibold">Connectors</div>
@@ -145,7 +145,7 @@ function IntegrationsDetailFrame() {
 function IntegrationsSyncFrame() {
   return (
     <div
-      className="w-[320px] rounded-md border border-slate-100 bg-white/95 p-2 shadow-lg"
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       style={{ fontSize: 10 }}
     >
       <div className="text-[11px] font-semibold">Sync Status</div>
@@ -216,7 +216,7 @@ export default function IntegrationsTour() {
       </div>
 
       {/* bottom-right frames (AnimatePresence) */}
-      <div className="absolute right-6 bottom-6 z-30">
+      <div className="absolute right-1.5 bottom-1.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl z-30">
         <AnimatePresence mode="wait">
           {step === 'one' && (
             <motion.div

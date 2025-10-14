@@ -148,11 +148,11 @@ export default function CreditTerms({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="pointer-events-auto absolute right-3 bottom-3 w-auto max-w-[94vw] rounded-md border bg-white/95 p-3 shadow-2xl backdrop-blur-sm"
+              className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
               style={{ fontSize: 12 }}
             >
               {/* header */}
-              <div className="flex items-center justify-between gap-3">
+              {/* <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <DatabaseZap size={12} />
                   <div className="text-xs font-medium text-slate-800"> Underwriting Summary</div>
@@ -167,9 +167,9 @@ export default function CreditTerms({
                         ? 'Concluded terms'
                         : 'Completed'}
                 </div>
-              </div>
+              </div> */}
 
-              <div className="mt-3">
+              <div className="">
                 <AnimatePresence mode="wait">
                   {stage === 'frame1' && (
                     <motion.div
@@ -178,7 +178,7 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="min-w-[300px]"
+                      className=" w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-2 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
@@ -219,7 +219,7 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="min-w-[320px]"
+                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
@@ -260,7 +260,7 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="min-w-[300px]"
+                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
                     >
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Underwriting Conclusions
@@ -303,7 +303,8 @@ export default function CreditTerms({
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.22 }}
                     >
-                      <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50/80 px-3 py-1 shadow-sm ring-1 ring-emerald-100">
+                      <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      >
                         {/* optional check icon — replace with your imported icon if different */}
                         <svg
                           width="14"

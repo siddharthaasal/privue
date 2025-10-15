@@ -1,6 +1,7 @@
 // App.tsx
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import ProductDataLifecycle from './pages/legal/ProductDataLifecycle';
 
 // small UI fallback while chunks load
 // function PageFallback() {
@@ -58,6 +59,7 @@ export default function App() {
       <Route path="/cookie-policy" element={<CookiePolicy />} />
       <Route path="/california-notice" element={<CaliforniaNotice />} />
       <Route path="/data-security" element={<DataSecurity />} />
+      <Route path="/product-data-lifecycle" element={<ProductDataLifecycle />} />
       <Route path="/solutions/:slug" element={<SolutionsPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

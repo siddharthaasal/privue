@@ -325,19 +325,20 @@ const rowVariants: Variants = {
 const rows = [
   { key: 'policy-period', label: 'Policy Period', value: '23 August 2023 - 22 August 2024' },
   { key: 'proposal-date', label: 'Proposal Date', value: '23 August 2023' },
+  { key: 'gross-prem', label: 'Gross Premium (Excl. GST)', value: '₹ 7,98,939' },
+  { key: 'gst-amt', label: 'GST Amount', value: '₹ 1,43,809' },
+  { key: 'total-prem', label: 'Total Premium', value: '₹ 9,42,748', highlight: true },
+];
 
+const rows2 = [
   {
     key: 'super-structure',
-    label: 'Super Structure Building Plinth and Foundation',
+    label: 'Sums Insured',
     value: '₹ 61,07,48,892',
   },
   { key: 'furniture', label: 'Furniture, Fitting and Fixtures', value: '₹ 4,27,626' },
   { key: 'plant', label: 'Plant and Machinery', value: '₹ 10,36,02,561' },
   { key: 'electrical', label: 'Electrical Installations', value: '₹ 15,15,977' },
-
-  { key: 'gross-prem', label: 'Gross Premium (Excl. GST)', value: '₹ 7,98,939' },
-  { key: 'gst-amt', label: 'GST Amount', value: '₹ 1,43,809' },
-  { key: 'total-prem', label: 'Total Premium', value: '₹ 9,42,748', highlight: true },
 ];
 
 export function PolicyOverviewCompact() {
@@ -383,6 +384,63 @@ export function PolicyOverviewCompact() {
                     className={`text-[10px] ${r.highlight ? 'font-medium' : 'font-normal'} ${r.highlight ? '' : 'text-slate-800'
                       }`}
                     style={r.highlight ? { color: '#4c6ef5' } : {}}
+                  >
+                    {r.value}
+                  </div>
+                ) : (
+                  <div className="text-[9.5px] text-slate-400">—</div>
+                )}
+              </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export function PolicyOverviewCompact2() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8, scale: 0.995 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ duration: 0.28 }}
+      className="max-h-[320px] md:max-h-[320px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      aria-label="Policy overview"
+    >
+      <div className="mb-1 flex items-center justify-between px-1">
+        <div className="text-[11px] font-medium text-slate-900">Assets Covered</div>
+        <button className="text-[10px] text-slate-500">▾</button>
+      </div>
+
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={containerVariants}
+        className="divide-y divide-slate-100"
+      >
+        {rows2.map((r) => {
+          const isSectionHeader =
+            r.value === '' && (r.label.endsWith('Breakdown') || r.label.endsWith('Information'));
+          return (
+            <motion.div
+              key={r.key}
+              variants={rowVariants}
+              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${isSectionHeader ? 'bg-transparent' : ''
+                }`}
+            >
+              <div
+                className={`text-[10px] ${isSectionHeader ? 'font-medium text-slate-700' : 'text-[10px] text-slate-800'}`}
+              >
+                {r.label}
+              </div>
+
+              <div className="text-right">
+                {r.value ? (
+                  <div
+                    className={`text-[10px] text-slate-800'
+                      }`}
                   >
                     {r.value}
                   </div>
@@ -608,7 +666,7 @@ export function ExclusionsCompact() {
 }
 
 type Stage = 'idle' | 'dropping' | 'uploading' | 'processing' | 'done';
-type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5';
+type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5' | 'frame6';
 type Status = 'pending' | 'active' | 'done';
 
 export default function InsurancePolicy() {
@@ -731,14 +789,15 @@ export default function InsurancePolicy() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stage]);
 
-  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4', 'frame5'];
+  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4', 'frame5', 'frame6'];
 
   const durations: Record<Step, number> = {
     frame1: 4500,
     frame2: 3000, // short timer here is OK because we handle frame2 separately below
     frame3: 4000,
-    frame4: 3000,
-    frame5: 4500,
+    frame4: 4000,
+    frame5: 3000,
+    frame6: 4500,
   };
 
   // Advance helper
@@ -812,8 +871,9 @@ export default function InsurancePolicy() {
           <Frame2ProcessingMinimal key="f2" statuses={statuses} labels={labels} />
         )}
         {carouselStep === 'frame3' && <PolicyOverviewCompact key="f3" />}
-        {carouselStep === 'frame4' && <DeductiblesCompactStaggered key="f4" />}
-        {carouselStep === 'frame5' && <ExclusionsCompact key="f5" />}
+        {carouselStep === 'frame4' && <PolicyOverviewCompact2 key="f4" />}
+        {carouselStep === 'frame5' && <DeductiblesCompactStaggered key="f5" />}
+        {carouselStep === 'frame6' && <ExclusionsCompact key="f6" />}
       </div>
     </div>
   );

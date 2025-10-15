@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function CalMeetingInline() {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: '15min' });
+      const cal = await getCalApi({ namespace: 'request-meeting' });
       cal('ui', {
         theme: 'light',
         cssVarsPerTheme: { light: { 'cal-brand': '#364fc7' }, dark: { 'cal-brand': '#364fc7' } },
@@ -15,9 +15,8 @@ export default function CalMeetingInline() {
     })();
   }, []);
   return (
-    <Cal
-      namespace="15min"
-      calLink="siddharth-aasal-test/15min"
+    <Cal namespace="request-meeting"
+      calLink="saurabh.verma/request-meeting"
       className="flex"
       style={{ width: '100%', overflow: 'clip' }}
       config={{ layout: 'month_view', theme: 'light' }}

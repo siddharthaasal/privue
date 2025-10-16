@@ -92,6 +92,7 @@ import CourtCase from '@/components/product-animations/CourtCase';
 import McaRegistry from '@/components/product-animations/McaRegistry';
 import EventResponse from '@/components/product-animations/EventResponse';
 import LargeRiskAssessment from '@/components/product-animations/LargeRiskAssessment';
+import LargeCreditTerms from '@/components/product-animations/LargeCreditTerms';
 
 export type Problem = {
   problemHeading: string;
@@ -720,7 +721,7 @@ export const solutions: Solution[] = [
         description: 'Use the score to decide on exposure limits and payment terms',
         imgSrc: '/demo-module-image.png',
         link: '#',
-        renderAnimation: CreditTerms,
+        renderAnimation: LargeCreditTerms,
       },
       {
         title: 'Continuous Monitoring',

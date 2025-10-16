@@ -93,6 +93,7 @@ import McaRegistry from '@/components/product-animations/McaRegistry';
 import EventResponse from '@/components/product-animations/EventResponse';
 import LargeRiskAssessment from '@/components/product-animations/LargeRiskAssessment';
 import LargeCreditTerms from '@/components/product-animations/LargeCreditTerms';
+import ConversationalAI from '@/components/product-animations/ConversationalAI';
 
 export type Problem = {
   problemHeading: string;
@@ -906,7 +907,7 @@ export const solutions: Solution[] = [
           'Interact with the data, ask questions, and generate notes to include directly in reports or memos.​​',
         imgSrc: '/demo-module-image.png',
         link: '#',
-        renderAnimation: EngineeringReportParsing,
+        renderAnimation: ConversationalAI,
       },
     ],
     // modules: [

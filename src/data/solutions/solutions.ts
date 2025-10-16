@@ -91,6 +91,7 @@ import FinancialDocumentParsing from '@/components/product-animations/FinancialD
 import CourtCase from '@/components/product-animations/CourtCase';
 import McaRegistry from '@/components/product-animations/McaRegistry';
 import EventResponse from '@/components/product-animations/EventResponse';
+import LargeRiskAssessment from '@/components/product-animations/LargeRiskAssessment';
 
 export type Problem = {
   problemHeading: string;
@@ -712,7 +713,7 @@ export const solutions: Solution[] = [
         description: 'Generate a comprehensive risk score for each customer',
         imgSrc: '/demo-module-image.png',
         link: '#',
-        renderAnimation: RiskAssessment,
+        renderAnimation: LargeRiskAssessment,
       },
       {
         title: 'Contract & Credit Terms',

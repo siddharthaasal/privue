@@ -17,14 +17,18 @@ const privue = {
   700: '#4c6ef5',
 };
 
-const boxVariants: Variants = {
-  idle: { opacity: 1, scale: 1 },
-  dropActive: { scale: 1.005, transition: { duration: 0.24, ease: [0.22, 1, 0.36, 1] } },
-};
+
 
 /* ---------- FRAME 1: Upload (reduced bar thickness, privue colors) ---------- */
 export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: number }) {
   const uploadGradient = `linear-gradient(90deg, ${privue[600]}, ${privue[700]})`;
+
+  const files = [
+    { id: 'f1', name: 'AOC-4.pdf', size: '1.04 MB' },
+    { id: 'f2', name: 'MGT-7.pdf', size: '840 KB' },
+    { id: 'f3', name: 'CHG-1.pdf', size: '320 KB' },
+  ];
+
   return (
     <>
       <motion.div
@@ -33,12 +37,12 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.18 }}
-        className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+        className="max-h-[280px] md:max-h-[380px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.60] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
       >
         <div className="space-y-2">
           <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
             <div className="mb-2 text-left">
-              <div className="text-[11px] font-medium text-slate-900">Upload file</div>
+              <div className="text-[11px] font-medium text-slate-900">Upload files</div>
               <div className="mt-0.5 text-[10px] text-slate-500">
                 Drag or drop your financial documents here or click to upload
               </div>
@@ -46,78 +50,48 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
 
             <div className="flex justify-center">
               <div className="relative flex w-full max-w-[320px] items-center justify-center">
-                <motion.div
-                  variants={boxVariants}
-                  animate={stage === 'dropping' ? 'dropActive' : 'idle'}
-                  className="flex h-28 w-44 items-center justify-center rounded-md border border-dashed border-slate-200"
-                  style={{ background: 'rgba(255,255,255,0.95)' }}
-                >
-                  <div className="flex h-20 w-36 items-center justify-center rounded-sm bg-white shadow-[0_6px_12px_rgba(2,6,23,0.03)]">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                      <path
-                        d="M12 3v10"
-                        stroke="#9ca3af"
-                        strokeWidth="1.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M8 7l4-4 4 4"
-                        stroke="#9ca3af"
-                        strokeWidth="1.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <rect
-                        x="4"
-                        y="13"
-                        width="16"
-                        height="6"
-                        rx="1"
-                        stroke="#e6e9ed"
-                        strokeWidth="1.0"
-                        fill="#fff"
-                      />
-                    </svg>
-                  </div>
-                </motion.div>
+                {/* Minimal three file cards: stack vertically on small screens, row on sm+ */}
+                <div className="flex w-full gap-2 items-stretch justify-center flex-col">
+                  {files.map((f, i) => (
+                    <motion.div
+                      key={f.id}
+                      initial={{ opacity: 0, y: 6, scale: 0.995 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: i * 0.05, duration: 0.22 }}
+                      className="flex w-full items-center gap-2 rounded-md border bg-white p-2"
+                      style={{ borderColor: 'rgba(15,23,36,0.06)' }}
+                    >
+                      {/* compact icon */}
+                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm bg-slate-50 text-slate-600 border" style={{ borderColor: 'rgba(15,23,36,0.04)' }}>
+                        <svg width="14" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                          <path
+                            d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
+                            stroke="#374151"
+                            strokeWidth="1"
+                            strokeLinejoin="round"
+                          />
+                          <path d="M13 2v6h6" stroke="#374151" strokeWidth="1" strokeLinejoin="round" />
+                        </svg>
+                      </div>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    stage === 'dropping' || stage === 'uploading'
-                      ? { opacity: 1 }
-                      : stage === 'done'
-                        ? { opacity: 0.95 }
-                        : { opacity: 0 }
-                  }
-                  transition={{ duration: 0.36 }}
-                  className="absolute z-20 flex h-20 w-44 items-center gap-2 rounded-md border bg-white px-2"
-                  style={{ left: '4.6rem' }}
-                >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-sm border bg-slate-50">
-                    <svg width="14" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                      <path
-                        d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
-                        stroke="#374151"
-                        strokeWidth="1"
-                        strokeLinejoin="round"
-                      />
-                      <path d="M13 2v6h6" stroke="#374151" strokeWidth="1" strokeLinejoin="round" />
-                    </svg>
-                  </div>
+                      <div className="min-w-0 flex items-center justify-between">
+                        <div>
+                          <div className="truncate text-[11px] font-medium text-slate-900">
+                            {f.name}
+                          </div>
+                          <div className="text-[9px] text-slate-500">{f.size}</div>
+                        </div>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-[11.5px] font-medium text-slate-900">
-                      AOC-4_financial-statements.pdf
-                    </div>
-                    <div className="text-[10px] text-slate-500">1.04 MB</div>
-                  </div>
+                      </div>
 
-                  <div className="text-[10.5px] text-slate-500">
-                    {stage === 'uploading' ? `${uploadPct}%` : ''}
-                  </div>
-                </motion.div>
+
+                    </motion.div>
+                  ))}
+                </div>
+
+
+
+
               </div>
             </div>
 
@@ -149,8 +123,7 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                     }}
                     initial={{ width: 0 }}
                     animate={{
-                      width:
-                        stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : 0,
+                      width: stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : 0,
                     }}
                     transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
                   />
@@ -192,6 +165,8 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
     </>
   );
 }
+
+
 
 /* ---------- FRAME 2: Minimal processing stages (show all 4 being checked one-by-one) ---------- */
 export function Frame2ProcessingMinimal({
@@ -576,8 +551,181 @@ export function BalanceSheetFrameMinimal() {
   );
 }
 
+export function DirectorsFrameMinimal() {
+  const rows = [
+    {
+      name: 'RAHUL VASANT MEHTA',
+      din: '08451239',
+      designation: 'Director',
+      equity: '₹ 25,000',
+      status: 'Active',
+    },
+    {
+      name: 'PRIYA SANJAY DESAI',
+      din: '09348721',
+      designation: 'CFO',
+      equity: '₹ 18,000',
+      status: 'Active',
+    },
+  ];
+
+  return (
+    <motion.div
+      key="directors-frame"
+      initial={{ opacity: 0, y: 8, scale: 0.996 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ duration: 0.28 }}
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right 
+                 scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto 
+                 rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      aria-label="Directors and key management personnel"
+      role="region"
+    >
+      <div className="mb-2 px-1">
+        <div className="text-[9px] font-semibold text-slate-900">
+          Directors &amp; Key Management Personnel
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-[9px] text-slate-800">
+          <thead>
+            <tr className="border-b border-slate-100 text-slate-600">
+              <th className="px-2 py-2 text-left font-medium">Name</th>
+              <th className="px-2 py-2 text-left font-medium">DIN / PAN</th>
+              <th className="px-2 py-2 text-left font-medium">Designation</th>
+              <th className="px-2 py-2 text-left font-medium">Equity Shares Held</th>
+              <th className="px-2 py-2 text-left font-medium">Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {rows.map((r, i) => (
+              <motion.tr
+                key={r.din}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08, duration: 0.25 }}
+                className="border-b border-slate-100 last:border-0"
+              >
+                <td className="px-2 py-2">{r.name}</td>
+                <td className="px-2 py-2 text-slate-700">{r.din}</td>
+                <td className="px-2 py-2 text-slate-700">{r.designation}</td>
+                <td className="px-2 py-2 text-slate-700">{r.equity}</td>
+                <td className="px-2 py-2">
+                  <span className="inline-flex items-center rounded-md bg-emerald-50 px-1.5 py-[1px] 
+                                   text-[8px] font-medium text-emerald-700 border border-emerald-100">
+                    {r.status}
+                  </span>
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.div>
+  );
+}
+
+
+/**
+ * LoanTermsFrameMinimal
+ * - Sized to match your other frames:
+ *   max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right
+ *   scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm
+ *
+ * - Dummy data only.
+ */
+
+
+export function LoanSummaryFrameMinimal() {
+  const lender = {
+    name: 'Axis Bank Ltd',
+    pan: 'AAACA1234Q',
+    category: 'NATB',
+    disbursementDate: '2023-06-18',
+  };
+
+  const quick = {
+    consortiumFinance: 'No',
+    jointCharge: 'No',
+    numberOfChargeHolders: '2',
+    modifiedInFavourOfARC: 'No',
+  };
+
+  return (
+    <motion.div
+      key="loan-summary-frame"
+      initial={{ opacity: 0, y: 8, scale: 0.996 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ duration: 0.28 }}
+      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px]
+                 origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 
+                 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      role="region"
+      aria-label="Loan Summary"
+    >
+      {/* Header */}
+      <div className="mb-2 px-1 flex items-center justify-between">
+        <div className="text-[10px] font-semibold text-slate-900">Loan / Charge Summary</div>
+        <div className="text-[10px] text-slate-500">Ref: LN-2023-000</div>
+      </div>
+
+      {/* Quick Info Grid */}
+      <div className="grid grid-cols-2 gap-2 text-[10px] text-slate-700">
+        {/* Left column */}
+        <div className="rounded-sm border border-slate-100 bg-white/50 p-2">
+          <div className="text-[9px] text-slate-500">Consortium Finance</div>
+          <div className="mt-1 font-medium text-slate-800">{quick.consortiumFinance}</div>
+
+          <div className="mt-2 text-[9px] text-slate-500">Number of Charge Holders</div>
+          <div className="mt-1 font-medium text-slate-800">{quick.numberOfChargeHolders}</div>
+        </div>
+
+        {/* Right column */}
+        <div className="rounded-sm border border-slate-100 bg-white/50 p-2">
+          <div className="text-[9px] text-slate-500">Joint Charge</div>
+          <div className="mt-1 font-medium text-slate-800">{quick.jointCharge}</div>
+
+          <div className="mt-2 text-[9px] text-slate-500">Modified in Favour of ARC</div>
+          <div className="mt-1 font-medium text-slate-800">{quick.modifiedInFavourOfARC}</div>
+        </div>
+      </div>
+
+      {/* Lender Info */}
+      <div className="mt-2 rounded-sm border border-slate-100 bg-white/50 p-2">
+        <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[9px]">
+          <div>
+            <div className="text-[9px] text-slate-500">Name</div>
+            <div className="font-medium text-slate-800">{lender.name}</div>
+          </div>
+
+          <div>
+            <div className="text-[9px] text-slate-500">Category</div>
+            <div className="font-medium text-slate-800">{lender.category}</div>
+          </div>
+
+          <div>
+            <div className="text-[9px] text-slate-500">PAN</div>
+            <div className="font-medium text-slate-800">{lender.pan}</div>
+          </div>
+
+          <div>
+            <div className="text-[9px] text-slate-500">Date of Disbursement</div>
+            <div className="font-medium text-slate-800">{lender.disbursementDate}</div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+
+
 type Stage = 'idle' | 'dropping' | 'uploading' | 'processing' | 'done';
-type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4';
+type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5' | 'frame6';
 type Status = 'pending' | 'active' | 'done';
 
 export default function McaRegistry() {
@@ -592,7 +740,7 @@ export default function McaRegistry() {
   const labels = [
     'Analyzing structure',
     'Extracting text',
-    'Processing financial data',
+    'Processing data',
     'Generating output',
   ];
 
@@ -700,13 +848,15 @@ export default function McaRegistry() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stage]);
 
-  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4'];
+  const stepsArr: Step[] = ['frame1', 'frame2', 'frame3', 'frame4', 'frame5', 'frame6'];
 
   const durations: Record<Step, number> = {
     frame1: 4500,
     frame2: 3000, // short timer here is OK because we handle frame2 separately below
     frame3: 4000,
     frame4: 5000,
+    frame5: 5000,
+    frame6: 5000,
   };
 
   // Advance helper
@@ -787,6 +937,8 @@ export default function McaRegistry() {
         )}
         {carouselStep === 'frame3' && <JsonCompactFrame key="f3" />}
         {carouselStep === 'frame4' && <BalanceSheetFrameMinimal key="f4" />}
+        {carouselStep === 'frame5' && <DirectorsFrameMinimal key="f5" />}
+        {carouselStep === 'frame6' && <LoanSummaryFrameMinimal key="f6" />}
       </div>
     </div>
   );

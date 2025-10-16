@@ -17,19 +17,6 @@ type Dealer = {
   verified: boolean;
 };
 
-// helper (place near the top of the file)
-function maskLastNDigits(s: string, n = 5) {
-  if (!s) return s;
-  let remaining = n;
-  const arr = s.split('');
-  for (let i = arr.length - 1; i >= 0 && remaining > 0; i--) {
-    if (/\d/.test(arr[i])) {
-      arr[i] = '•'; // or '*' if you prefer
-      remaining--;
-    }
-  }
-  return arr.join('');
-}
 
 
 /**

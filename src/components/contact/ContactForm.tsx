@@ -150,7 +150,7 @@ export default function ContactForm() {
                         >
                           <div className="w-full min-w-0 text-left">
                             {selected.length === 0 ? (
-                              <span className="text-muted-foreground text-xs">
+                              <span className="text-foreground text-xs">
                                 Selected Solution
                               </span>
                             ) : (

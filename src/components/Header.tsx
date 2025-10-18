@@ -31,7 +31,7 @@ export default function Header() {
 
   const renderIcon = (
     icon?: string | React.ComponentType<any>,
-    className = 'w-9 h-9'
+    className = 'w-9 h-9',
   ): any | null => {
     if (!icon) return null;
     if (typeof icon === 'string') {
@@ -181,13 +181,14 @@ export default function Header() {
 
   return (
     <header className="font-open-sans fixed inset-x-0 top-0 z-50">
-      <div className="w-full relative py-1">
+      <div className="relative w-full py-1">
         {/* Blur layer / border on scroll */}
         <div
-          className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${isScrolled
-            ? 'bg-background shadow-md backdrop-blur-md transition-all duration-300'
-            : 'bg-background backdrop-blur-sm'
-            }`}
+          className={`pointer-events-none absolute inset-0 border border-r-0 border-b-[0.5] border-l-0 ${
+            isScrolled
+              ? 'bg-background shadow-md backdrop-blur-md transition-all duration-300'
+              : 'bg-background backdrop-blur-sm'
+          }`}
         />
 
         {/* Actual navbar content */}
@@ -197,10 +198,12 @@ export default function Header() {
           aria-label="Global"
         >
           {/* Logo (left) */}
-          <div className="flex flex-1 min-w-0 items-center">
+          <div className="flex min-w-0 flex-1 items-center">
             <a href="/" className="flex items-center">
               <img src={privueLogo} alt="Privue Logo" className="h-12 w-auto" loading="eager" />
-              <span className="text-foreground -mt-1 ml-0 text-[20px] font-semibold truncate">privue</span>
+              <span className="text-foreground -mt-1 ml-0 truncate text-[20px] font-semibold">
+                privue
+              </span>
             </a>
           </div>
 
@@ -251,8 +254,9 @@ export default function Header() {
                         >
                           <span>{link.name}</span>
                           <svg
-                            className={`h-4 w-4 transform transition-transform ${mobileOpenIndex === idx ? 'rotate-180' : ''
-                              }`}
+                            className={`h-4 w-4 transform transition-transform ${
+                              mobileOpenIndex === idx ? 'rotate-180' : ''
+                            }`}
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -275,7 +279,7 @@ export default function Header() {
                                     setIsMenuOpen(false);
                                     handleIndustryClick((sub as any).id);
                                   }}
-                                  className="block w-full text-left rounded-sm px-2 py-2 text-sm font-normal"
+                                  className="block w-full rounded-sm px-2 py-2 text-left text-sm font-normal"
                                 >
                                   {sub.name}
                                 </button>
@@ -309,7 +313,11 @@ export default function Header() {
               {/* Keep CTA visible on mobile at bottom */}
               <div className="mt-2 flex w-full gap-2">
                 <a href="/contact" className="w-full">
-                  <Button variant="default" size="sm" className="w-full cursor-pointer text-[#FAFAFA]">
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full cursor-pointer text-[#FAFAFA]"
+                  >
                     Book a Demo
                   </Button>
                 </a>

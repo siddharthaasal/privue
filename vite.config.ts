@@ -7,7 +7,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkFrontmatter from 'remark-frontmatter';
 import { visualizer } from 'rollup-plugin-visualizer';
-import Sitemap from 'vite-plugin-sitemap'
+import Sitemap from 'vite-plugin-sitemap';
 import { fileURLToPath } from 'url';
 import routes from './src/data/articles/list.ts';
 
@@ -96,9 +96,10 @@ export default defineConfig({
           if (segments.length === 0) return;
 
           // scoped packages: @scope/name
-          const pkgName = segments[0].startsWith('@') && segments.length > 1
-            ? `${segments[0]}/${segments[1]}`
-            : segments[0];
+          const pkgName =
+            segments[0].startsWith('@') && segments.length > 1
+              ? `${segments[0]}/${segments[1]}`
+              : segments[0];
 
           const safeName = pkgName.replace('@', '').replace('/', '-');
 
@@ -113,8 +114,7 @@ export default defineConfig({
 
           // default: per-package vendor chunk
           return `vendor-${safeName}`;
-        }
-
+        },
       },
     },
   },
@@ -124,4 +124,3 @@ export default defineConfig({
     drop: ['console', 'debugger'],
   },
 });
-

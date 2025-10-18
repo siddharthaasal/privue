@@ -17,8 +17,6 @@ const privue = {
   700: '#4c6ef5',
 };
 
-
-
 /* ---------- FRAME 1: Upload (reduced bar thickness, privue colors) ---------- */
 export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: number }) {
   const uploadGradient = `linear-gradient(90deg, ${privue[600]}, ${privue[700]})`;
@@ -37,7 +35,7 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.18 }}
-        className="max-h-[280px] md:max-h-[380px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.60] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+        className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.60] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[380px] md:max-w-[440px] md:scale-100 md:p-3"
       >
         <div className="space-y-2">
           <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
@@ -51,7 +49,7 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
             <div className="flex justify-center">
               <div className="relative flex w-full max-w-[320px] items-center justify-center">
                 {/* Minimal three file cards: stack vertically on small screens, row on sm+ */}
-                <div className="flex w-full gap-2 items-stretch justify-center flex-col">
+                <div className="flex w-full flex-col items-stretch justify-center gap-2">
                   {files.map((f, i) => (
                     <motion.div
                       key={f.id}
@@ -62,7 +60,10 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                       style={{ borderColor: 'rgba(15,23,36,0.06)' }}
                     >
                       {/* compact icon */}
-                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm bg-slate-50 text-slate-600 border" style={{ borderColor: 'rgba(15,23,36,0.04)' }}>
+                      <div
+                        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm border bg-slate-50 text-slate-600"
+                        style={{ borderColor: 'rgba(15,23,36,0.04)' }}
+                      >
                         <svg width="14" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                           <path
                             d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"
@@ -70,28 +71,26 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                             strokeWidth="1"
                             strokeLinejoin="round"
                           />
-                          <path d="M13 2v6h6" stroke="#374151" strokeWidth="1" strokeLinejoin="round" />
+                          <path
+                            d="M13 2v6h6"
+                            stroke="#374151"
+                            strokeWidth="1"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
 
-                      <div className="min-w-0 flex items-center justify-between">
+                      <div className="flex min-w-0 items-center justify-between">
                         <div>
                           <div className="truncate text-[11px] font-medium text-slate-900">
                             {f.name}
                           </div>
                           <div className="text-[9px] text-slate-500">{f.size}</div>
                         </div>
-
                       </div>
-
-
                     </motion.div>
                   ))}
                 </div>
-
-
-
-
               </div>
             </div>
 
@@ -123,7 +122,8 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
                     }}
                     initial={{ width: 0 }}
                     animate={{
-                      width: stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : 0,
+                      width:
+                        stage === 'uploading' ? `${uploadPct}%` : stage === 'done' ? '100%' : 0,
                     }}
                     transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
                   />
@@ -166,8 +166,6 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
   );
 }
 
-
-
 /* ---------- FRAME 2: Minimal processing stages (show all 4 being checked one-by-one) ---------- */
 export function Frame2ProcessingMinimal({
   statuses,
@@ -188,8 +186,7 @@ export function Frame2ProcessingMinimal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
-      className="max-h-[280px] md:max-h-[280px]  md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-
+      className="max-h-[280px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
     >
       <div className="">
         <div className="mb-2 text-[11px] font-medium text-slate-800">Processing pipeline</div>
@@ -342,7 +339,7 @@ export function JsonCompactFrame({
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="JSON compact frame"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -501,7 +498,7 @@ export function BalanceSheetFrameMinimal() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
       aria-label="Balance Sheet"
     >
@@ -576,9 +573,7 @@ export function DirectorsFrameMinimal() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right 
-                 scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto 
-                 rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Directors and key management personnel"
       role="region"
     >
@@ -614,8 +609,7 @@ export function DirectorsFrameMinimal() {
                 <td className="px-2 py-2 text-slate-700">{r.designation}</td>
                 <td className="px-2 py-2 text-slate-700">{r.equity}</td>
                 <td className="px-2 py-2">
-                  <span className="inline-flex items-center rounded-md bg-emerald-50 px-1.5 py-[1px] 
-                                   text-[8px] font-medium text-emerald-700 border border-emerald-100">
+                  <span className="inline-flex items-center rounded-md border border-emerald-100 bg-emerald-50 px-1.5 py-[1px] text-[8px] font-medium text-emerald-700">
                     {r.status}
                   </span>
                 </td>
@@ -628,7 +622,6 @@ export function DirectorsFrameMinimal() {
   );
 }
 
-
 /**
  * LoanTermsFrameMinimal
  * - Sized to match your other frames:
@@ -637,7 +630,6 @@ export function DirectorsFrameMinimal() {
  *
  * - Dummy data only.
  */
-
 
 export function LoanSummaryFrameMinimal() {
   const lender = {
@@ -661,14 +653,12 @@ export function LoanSummaryFrameMinimal() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px]
-                 origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 
-                 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       role="region"
       aria-label="Loan Summary"
     >
       {/* Header */}
-      <div className="mb-2 px-1 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between px-1">
         <div className="text-[10px] font-semibold text-slate-900">Loan / Charge Summary</div>
         <div className="text-[10px] text-slate-500">Ref: LN-2023-000</div>
       </div>
@@ -722,8 +712,6 @@ export function LoanSummaryFrameMinimal() {
   );
 }
 
-
-
 type Stage = 'idle' | 'dropping' | 'uploading' | 'processing' | 'done';
 type Step = 'frame1' | 'frame2' | 'frame3' | 'frame4' | 'frame5' | 'frame6';
 type Status = 'pending' | 'active' | 'done';
@@ -737,12 +725,7 @@ export default function McaRegistry() {
 
   // statuses for 4-step pipeline (start all pending)
   const [statuses, setStatuses] = useState<Status[]>(['pending', 'pending', 'pending', 'pending']);
-  const labels = [
-    'Analyzing structure',
-    'Extracting text',
-    'Processing data',
-    'Generating output',
-  ];
+  const labels = ['Analyzing structure', 'Extracting text', 'Processing data', 'Generating output'];
 
   const timers = useRef<number[]>([]);
 
@@ -930,7 +913,7 @@ export default function McaRegistry() {
         /> */}
       </div>
 
-      <div className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+      <div className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl">
         {carouselStep === 'frame1' && <Frame1Upload key="f1" stage={stage} uploadPct={uploadPct} />}
         {carouselStep === 'frame2' && (
           <Frame2ProcessingMinimal key="f2" statuses={statuses} labels={labels} />

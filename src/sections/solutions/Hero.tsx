@@ -23,7 +23,6 @@ export default function Hero({ heading, subHeading, image, workflow }: HeroProps
         </p>
       </div>
 
-
       {/* Hero Content */}
       <>
         {/* Mobile: Show image */}

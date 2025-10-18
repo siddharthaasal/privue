@@ -4,17 +4,17 @@ import Content from '../../data/legal/product-data-lifecycle.mdx';
 import { useRef } from 'react';
 
 export default function ProductDataLifecycle() {
-    const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <Layout>
-            <div className="relative mx-auto w-4/5 px-6 py-16 sm:py-18 md:py-24 lg:px-16 lg:py-24 xl:px-20">
-                <div ref={contentRef}>
-                    <article className="prose prose-docs max-w-none">
-                        <Content components={mdxComponents} />
-                    </article>
-                </div>
-            </div>
-        </Layout>
-    );
+  return (
+    <Layout>
+      <div className="relative mx-auto w-4/5 px-6 py-16 sm:py-18 md:py-24 lg:px-16 lg:py-24 xl:px-20">
+        <div ref={contentRef}>
+          <article className="prose prose-docs max-w-none">
+            <Content components={mdxComponents} />
+          </article>
+        </div>
+      </div>
+    </Layout>
+  );
 }

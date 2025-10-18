@@ -168,7 +168,8 @@ export default function DataAcquisition({
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
               style={{ fontSize: 12 }}
-              className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"            >
+              className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+            >
               {/* header */}
               {/* <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
@@ -194,7 +195,7 @@ export default function DataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
                       {/* Top: two progress bars (crisper) */}
                       <div className="space-y-2">
@@ -302,7 +303,7 @@ export default function DataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
                       {/* title */}
                       <div className="mb-1 text-[10px] font-medium text-slate-700">
@@ -352,7 +353,7 @@ export default function DataAcquisition({
                   {stage === 'done' && (
                     <motion.div
                       key="frame-done"
-                      className="max-h-[280px] md:max-h-[280px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
@@ -379,6 +380,6 @@ export default function DataAcquisition({
           )}
         </AnimatePresence>
       </div>
-    </div >
+    </div>
   );
 }

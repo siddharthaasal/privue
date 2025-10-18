@@ -158,7 +158,8 @@ function Frame1StatsOverview({ autoAnimate = true }: { autoAnimate?: boolean }) 
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.995 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
+      aria-live="polite"
     >
       <div className="flex gap-1.5">
         {/* Card 1: Total Articles */}
@@ -340,7 +341,8 @@ function Frame2NewsOverview() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 5, scale: 0.995 }}
       transition={{ duration: 0.25 }}
-      className="max-h-[280px] md:max-h-[340px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
+      aria-live="polite"
     >
       <div className="mb-0.5 text-[9px] font-medium text-slate-600">Recent News</div>
       {news.map((n, i) => (
@@ -383,7 +385,8 @@ function Frame3ImpactOverview() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 5 }}
       transition={{ duration: 0.25 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
+      aria-live="polite"
     >
       {/* Section Title */}
       <div className="mb-2 text-[10px] font-medium text-slate-600">Potential Impact Assessment</div>
@@ -454,7 +457,8 @@ function Frame4MitigationOverview() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 5 }}
       transition={{ duration: 0.25 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm" aria-live="polite"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
+      aria-live="polite"
     >
       {/* Title */}
       <div className="mb-2 text-[11px] font-semibold text-slate-800">Mitigation Strategies</div>
@@ -534,7 +538,10 @@ export default function AdverseNews() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame1"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame1StatsOverview />
           </motion.div>
         )}
@@ -542,7 +549,10 @@ export default function AdverseNews() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame2"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame2NewsOverview />
           </motion.div>
         )}
@@ -550,7 +560,10 @@ export default function AdverseNews() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame3"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame3ImpactOverview />
           </motion.div>
         )}
@@ -558,7 +571,10 @@ export default function AdverseNews() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="frame4" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame4"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame4MitigationOverview />
           </motion.div>
         )}

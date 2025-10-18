@@ -15,7 +15,8 @@ export default function CalMeetingInline() {
     })();
   }, []);
   return (
-    <Cal namespace="request-meeting"
+    <Cal
+      namespace="request-meeting"
       calLink="saurabh.verma/request-meeting"
       className="flex"
       style={{ width: '100%', overflow: 'clip' }}

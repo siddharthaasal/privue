@@ -12,13 +12,13 @@ export default function CapabilitiesSection({
   return (
     <div>
       <div className="pt-10">
-        <h3 className="text-2xl text-center font-semibold leading-snug tracking-tight  sm:text-3xl md:text-4xl md:leading-tight">
+        <h3 className="text-center text-2xl leading-snug font-semibold tracking-tight sm:text-3xl md:text-4xl md:leading-tight">
           Core <span className="text-privue-800">Capabilities</span>
         </h3>
       </div>
 
       <div
-        className={`grid grid-cols-2 gap-y-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${capabilities.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
+        className={`grid grid-cols-2 gap-y-8 border-b border-gray-200 px-4 py-8 md:gap-12 md:px-12 md:py-20 ${capabilities.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
       >
         {capabilities.map((c, idx) => (
           <div
@@ -28,13 +28,9 @@ export default function CapabilitiesSection({
               capabilities.length % 2 !== 0 && idx === capabilities.length - 1
                 ? 'col-span-2 sm:col-span-1'
                 : 'col-span-1'
-              }`}
+            }`}
           >
-            <CapabilitiesCard
-              icon={c.icon}
-              heading={c.heading || undefined}
-              desc={c.desc}
-            />
+            <CapabilitiesCard icon={c.icon} heading={c.heading || undefined} desc={c.desc} />
           </div>
         ))}
       </div>

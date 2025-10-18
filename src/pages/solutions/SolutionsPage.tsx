@@ -59,7 +59,7 @@ export default function SolutionsPage() {
 
         {/* <ModulesSection modules={soln.modules} /> */}
         {/* <VerticalModulesListing /> */}
-        <section id='modules'>
+        <section id="modules">
           <VerticalModules items={soln.modules} />
         </section>
         <RelatedArticles mainArticleSlug={soln.mainArticleSlug} />

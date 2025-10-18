@@ -13,14 +13,9 @@ export default function CapabilitiesCard({ icon, heading, desc }: CapabilitiesCa
   const IconComponent = !isString ? (icon as React.ComponentType<any>) : null;
 
   return (
-    <div
-      className="
-        flex flex-col items-start gap-6 px-2 text-left
-        md:flex-col md:items-start md:gap-6
-      "
-    >
+    <div className="flex flex-col items-start gap-6 px-2 text-left md:flex-col md:items-start md:gap-6">
       {/* MOBILE (icon + heading inline) */}
-      <div className=" w-full md:hidden space-y-2">
+      <div className="w-full space-y-2 md:hidden">
         <div className="flex items-start gap-3">
           {isString ? (
             iconSrc ? (
@@ -31,12 +26,10 @@ export default function CapabilitiesCard({ icon, heading, desc }: CapabilitiesCa
               />
             ) : null
           ) : IconComponent ? (
-            <IconComponent className="h-5 w-5 text-privue-700 mt-1" aria-hidden="true" />
+            <IconComponent className="text-privue-700 mt-1 h-5 w-5" aria-hidden="true" />
           ) : null}
 
-          {heading && (
-            <p className="text-base font-medium tracking-normal">{heading}</p>
-          )}
+          {heading && <p className="text-base font-medium tracking-normal">{heading}</p>}
         </div>
         {/* <div className="text-sm font-normal tracking-normal text-gray-700">
           {desc}
@@ -54,16 +47,12 @@ export default function CapabilitiesCard({ icon, heading, desc }: CapabilitiesCa
             />
           ) : null
         ) : IconComponent ? (
-          <IconComponent className="h-7 w-7 text-privue-700" aria-hidden="true" />
+          <IconComponent className="text-privue-700 h-7 w-7" aria-hidden="true" />
         ) : null}
 
         <div>
-          {heading && (
-            <p className="text-base font-medium tracking-normal">{heading}</p>
-          )}
-          <p className="text-base font-normal tracking-normal text-gray-700">
-            {desc}
-          </p>
+          {heading && <p className="text-base font-medium tracking-normal">{heading}</p>}
+          <p className="text-base font-normal tracking-normal text-gray-700">{desc}</p>
         </div>
       </div>
     </div>

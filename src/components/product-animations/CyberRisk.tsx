@@ -82,7 +82,7 @@ function Frame1AttackSurface() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.99 }}
       transition={{ duration: 0.25 }}
-      className="gap-3 max-h-[280px] md:max-h-[340px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] gap-3 overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-1 text-[11px] font-medium text-slate-700">Attack Surface Analysis</div>
@@ -214,7 +214,7 @@ export function Frame2SecurityMaturity({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="max-h-[280px] md:max-h-[340px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[11px] font-semibold text-slate-800">
@@ -347,7 +347,7 @@ function Frame3ThreatVector() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="max-h-[280px] md:max-h-[340px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-1.5 text-[10px] font-medium text-slate-800">Threat Vector Analysis</div>
@@ -411,7 +411,10 @@ export default function CyberRisk() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame1"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame1AttackSurface />
           </motion.div>
         )}
@@ -419,7 +422,10 @@ export default function CyberRisk() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame2"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame2SecurityMaturity />
           </motion.div>
         )}
@@ -427,7 +433,10 @@ export default function CyberRisk() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame3"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <Frame3ThreatVector />
           </motion.div>
         )}

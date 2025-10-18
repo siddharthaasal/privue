@@ -153,7 +153,7 @@ function MinimalCreditOverview({ autoAnimate = true }: { autoAnimate?: boolean }
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 5 }}
       transition={{ duration: 0.25 }}
-      className="max-h-[280px] md:max-h-[340px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-1.5 flex items-center justify-between">
@@ -217,7 +217,7 @@ function CreditAnalysisCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[200px] md:max-h-[230px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[200px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[230px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">View Credit Analysis</div>
@@ -262,7 +262,7 @@ function RiskFactorsCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[180px] md:max-h-[220px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[180px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[220px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">Risk Factors</div>
@@ -293,7 +293,7 @@ function RecommendationsCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6, scale: 0.985 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="max-h-[180px] md:max-h-[220px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[180px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[220px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[9px] font-medium text-slate-700">Recommendations</div>
@@ -355,7 +355,10 @@ export default function CreditAssessment() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame1"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <MinimalCreditOverview />
           </motion.div>
         )}
@@ -363,7 +366,10 @@ export default function CreditAssessment() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame2"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <CreditAnalysisCard />
           </motion.div>
         )}
@@ -371,7 +377,10 @@ export default function CreditAssessment() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame3"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <RiskFactorsCard />
           </motion.div>
         )}
@@ -379,7 +388,10 @@ export default function CreditAssessment() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="frame4" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame4"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <RecommendationsCard />
           </motion.div>
         )}

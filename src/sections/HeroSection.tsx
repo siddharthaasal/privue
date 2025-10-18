@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section className="flex flex-col items-center justify-center text-center">
       {/* content -> (anouncement, heading+subtext, cta) */}
-      <div className="relative mt-24 mb-20 sm:mb-24 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
+      <div className="relative mt-24 mb-20 flex h-full max-w-[1280px] flex-col items-center justify-center gap-4 px-4 py-0 text-center sm:mb-24 sm:px-6 lg:px-36 xl:px-24 2xl:px-6">
         {/* Banner */}
         {/* <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -50,7 +50,7 @@ export default function HeroSection() {
           className=""
         >
           <div className="text-center">
-            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text px-2 text-3xl leading-tight font-semibold md:tracking-tighter text-transparent sm:text-6xl md:text-7xl dark:from-gray-50 dark:to-gray-300">
+            <h1 className="inline-block bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text px-2 text-3xl leading-tight font-semibold text-transparent sm:text-6xl md:text-7xl md:tracking-tighter dark:from-gray-50 dark:to-gray-300">
               Empowering business
               <br />
               <span className="from-privue-900 to-privue-900 via-privue-700 bg-gradient-to-b bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p className="mt-1 max-w-xs text-[15px] text-gray-700 dark:text-gray-400 sm:mt-4 sm:max-w-lg sm:text-lg">
+          <p className="mt-1 max-w-xs text-[15px] text-gray-700 sm:mt-4 sm:max-w-lg sm:text-lg dark:text-gray-400">
             Discover data-backed signals for smarter decisions. Mitigate risk and unlock high-value
             relationships.
           </p>
@@ -90,17 +90,11 @@ export default function HeroSection() {
           </a>
 
           <a href="/articles">
-            <Button
-              variant="outline"
-              size="default"
-              className="min-w-[140px] cursor-pointer"
-            >
+            <Button variant="outline" size="default" className="min-w-[140px] cursor-pointer">
               <p>Case Studies</p>
             </Button>
           </a>
         </motion.div>
-
-
 
         <section className="pt-20">
           <div className="mx-auto max-w-6xl px-4">
@@ -125,12 +119,11 @@ export default function HeroSection() {
                         src={src}
                         alt="integration logo"
                         loading="lazy"
-                        className={`
-                  max-w-full object-contain
-                  ${isDnbLogo
+                        className={`max-w-full object-contain ${
+                          isDnbLogo
                             ? 'scale-145 sm:scale-100' // mobile: slightly larger (10 instead of 8)
-                            : 'h-8 sm:h-10'}
-                `}
+                            : 'h-8 sm:h-10'
+                        } `}
                       />
                     </div>
                   );
@@ -139,8 +132,6 @@ export default function HeroSection() {
             </div>
           </div>
         </section>
-
-
 
         {/* Master Workflow Animation — hidden on mobile/tablet, visible on lg+ */}
         <div className="w-full lg:mt-20">
@@ -157,8 +148,6 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );

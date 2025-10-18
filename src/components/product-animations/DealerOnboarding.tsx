@@ -32,7 +32,6 @@ function maskLastNDigits(s: string, n = 5) {
   return arr.join('');
 }
 
-
 /**
  * UPDATED:
  * - Component now accepts optional props:
@@ -245,7 +244,7 @@ export default function DealerOnboarding({
       </div>
 
       {/* OVERLAY (SCALED) */}
-      <div className="relative z-10 h-full w-full pointer-events-none">
+      <div className="pointer-events-none relative z-10 h-full w-full">
         {/* scaledInner only wraps overlays so the table remains at 1:1 */}
         <div
           className="pointer-events-auto"
@@ -351,7 +350,9 @@ export default function DealerOnboarding({
                     className="h-full transition-all duration-200"
                   />
                 </div>
-                <div className="mt-2 text-[10px] text-slate-500">Status: Uploading... {progress}%</div>
+                <div className="mt-2 text-[10px] text-slate-500">
+                  Status: Uploading... {progress}%
+                </div>
               </motion.div>
             )}
 
@@ -374,7 +375,6 @@ export default function DealerOnboarding({
       </div>
     </div>
   );
-
 }
 
 /* --------------------------
@@ -383,7 +383,6 @@ export default function DealerOnboarding({
    dealerRowsInitial etc. exactly as before below this point in the file.
    For brevity I didn't duplicate them again in this snippet.
 */
-
 
 /* --------------------------
    Compact slow form + manual fallback
@@ -670,11 +669,11 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
       style={{ backgroundColor: undefined }}
     >
       {/* NOTE: mobile-first styles are small, md: overrides restore desktop sizes */}
-      <td className="px-2 md:px-3 py-2 md:py-3 text-[10px] md:text-[12px]">{d.name}</td>
-      <td className="px-2 md:px-3 py-2 md:py-3 text-[10px] md:text-[12px]">{d.gst}</td>
-      <td className="px-2 md:px-3 py-2 md:py-3 text-[10px] md:text-[12px]">{d.state}</td>
+      <td className="px-2 py-2 text-[10px] md:px-3 md:py-3 md:text-[12px]">{d.name}</td>
+      <td className="px-2 py-2 text-[10px] md:px-3 md:py-3 md:text-[12px]">{d.gst}</td>
+      <td className="px-2 py-2 text-[10px] md:px-3 md:py-3 md:text-[12px]">{d.state}</td>
 
-      <td className="px-2 md:px-3 py-2 md:py-3">
+      <td className="px-2 py-2 md:px-3 md:py-3">
         <AnimatePresence mode="sync">
           {d.verified ? (
             <motion.span
@@ -683,9 +682,11 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -4, scale: 0.98 }}
               transition={{ duration: 0.35 }}
-              className="inline-flex items-center gap-2 text-[10px] md:text-[12px] font-medium text-emerald-600"
+              className="inline-flex items-center gap-2 text-[10px] font-medium text-emerald-600 md:text-[12px]"
             >
-              <span aria-hidden style={{ fontSize: '12px', lineHeight: 1 }}>✓</span>
+              <span aria-hidden style={{ fontSize: '12px', lineHeight: 1 }}>
+                ✓
+              </span>
               <span className="">Verified</span>
             </motion.span>
           ) : (
@@ -695,7 +696,7 @@ function DealerRow({ d, highlightId }: { d: Dealer; index: number; highlightId: 
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -4, scale: 0.98 }}
               transition={{ duration: 0.35 }}
-              className="text-[10px] md:text-[12px] font-medium text-amber-600"
+              className="text-[10px] font-medium text-amber-600 md:text-[12px]"
             >
               <span className="">Unverified</span>
             </motion.span>
@@ -716,17 +717,25 @@ function BackgroundDealersTable({
   return (
     <div className="h-full w-full overflow-hidden rounded-md border bg-white/60 backdrop-blur-sm">
       <div className="p-2 md:p-4">
-        <div className=" text-[9px] md:text-sm md:font-medium">Dealers</div>
+        <div className="text-[9px] md:text-sm md:font-medium">Dealers</div>
       </div>
 
       <div className="scrollbar-hide h-[calc(100%-64px)] overflow-auto">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-50 text-slate-600">
             <tr>
-              <th className="px-2 md:px-3 py-2 md:py-3 text-left text-[9px] md:text-[11px]">Company Name</th>
-              <th className="px-2 md:px-3 py-2 md:py-3 text-left text-[9px] md:text-[11px]">GSTIN</th>
-              <th className="px-2 md:px-3 py-2 md:py-3 text-left text-[9px] md:text-[11px]">State</th>
-              <th className="px-2 md:px-3 py-2 md:py-3 text-left text-[9px] md:text-[11px]">Status</th>
+              <th className="px-2 py-2 text-left text-[9px] md:px-3 md:py-3 md:text-[11px]">
+                Company Name
+              </th>
+              <th className="px-2 py-2 text-left text-[9px] md:px-3 md:py-3 md:text-[11px]">
+                GSTIN
+              </th>
+              <th className="px-2 py-2 text-left text-[9px] md:px-3 md:py-3 md:text-[11px]">
+                State
+              </th>
+              <th className="px-2 py-2 text-left text-[9px] md:px-3 md:py-3 md:text-[11px]">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -739,7 +748,6 @@ function BackgroundDealersTable({
     </div>
   );
 }
-
 
 /* initial seed WITHOUT Acme Traders */
 const dealerRowsInitial = [

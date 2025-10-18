@@ -74,7 +74,7 @@ function SectionAPIs() {
                 <img
                   src="/workflow-img.png"
                   alt="workflow illustration"
-                  className="hidden md:block mt-12 h-auto w-full scale-110 rounded-[12px] object-cover shadow"
+                  className="mt-12 hidden h-auto w-full scale-110 rounded-[12px] object-cover shadow md:block"
                   loading="lazy"
                 />
               </div>
@@ -103,7 +103,7 @@ function SectionWorkspace() {
               {/* force a stable aspect and equal height */}
               <div className="flex h-full w-full items-center justify-center bg-transparent">
                 {/* ChatAnimation removed on mobile: hidden md:block */}
-                <div className="aspect-[4/3] h-full max-h-[400px] w-full hidden md:block">
+                <div className="hidden aspect-[4/3] h-full max-h-[400px] w-full md:block">
                   <ChatAnimation className="h-full w-full object-contain" />
                 </div>
               </div>
@@ -113,14 +113,14 @@ function SectionWorkspace() {
           {/* Text Right */}
           <div className="order-1 flex flex-col justify-center space-y-3 md:order-2 md:w-1/2">
             <p className="text-base">
-              Use a natural-language interface to query your data, model outputs, and portfolio insights on
-              demand. Ask a question, refine with follow-ups, and compare scenarios without writing SQL or
-              waiting on a dashboard refresh.
+              Use a natural-language interface to query your data, model outputs, and portfolio
+              insights on demand. Ask a question, refine with follow-ups, and compare scenarios
+              without writing SQL or waiting on a dashboard refresh.
             </p>
             <p className="text-base">
-              Right-click any response to drop narratives, tables, or charts straight into a live report.
-              Turn ad-hoc analysis into shareable updates in seconds, keeping audit trails of prompts,
-              filters, and sources for governance.
+              Right-click any response to drop narratives, tables, or charts straight into a live
+              report. Turn ad-hoc analysis into shareable updates in seconds, keeping audit trails
+              of prompts, filters, and sources for governance.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
@@ -185,7 +185,7 @@ function SectionPlatform() {
           <div className="flex items-start md:w-1/2">
             <div className="relative h-full w-full">
               {/* only show carousel md+ */}
-              <div className="relative h-full w-full hidden md:block">
+              <div className="relative hidden h-full w-full md:block">
                 <ImageCarousel
                   images={[
                     '/module-animations/ss1.png',
@@ -285,8 +285,9 @@ export function ImageCarousel({
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-opacity ${i === index ? 'opacity-100' : 'opacity-60'
-                } bg-white`}
+              className={`h-2 w-2 rounded-full transition-opacity ${
+                i === index ? 'opacity-100' : 'opacity-60'
+              } bg-white`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

@@ -24,7 +24,7 @@ function CreditInfoCard() {
       initial={{ opacity: 0, y: 16, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } }}
       exit={{ opacity: 0, y: 12, scale: 0.98 }}
-      className="max-h-[330px] md:max-h-[400px] md:max-w-[490px] origin-bottom-right scale-[0.55] sm:scale-[0.9] md:scale-100 p-0 overflow-y-hidden rounded-lg bg-white/95 md:p-0 shadow-sm backdrop-blur-sm"
+      className="max-h-[330px] origin-bottom-right scale-[0.55] overflow-y-hidden rounded-lg bg-white/95 p-0 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[400px] md:max-w-[490px] md:scale-100 md:p-0"
     >
       <Card className="w-72 shadow-lg ring-0">
         <CardHeader className="">
@@ -130,7 +130,7 @@ function ProbabilityOfDefaultCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 4 }}
       transition={{ duration: 0.18 }}
-      className="origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100  overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm"
+      className="origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100"
       aria-label={`Probability of Default: ${percent}, ${level}`}
       role="group"
     >
@@ -171,8 +171,9 @@ function ProbabilityOfDefaultCard({
                     className="w-full"
                   />
                   <div
-                    className={`mt-1 text-center text-[8px] ${isActive ? 'font-medium text-slate-800' : 'text-slate-500'
-                      }`}
+                    className={`mt-1 text-center text-[8px] ${
+                      isActive ? 'font-medium text-slate-800' : 'text-slate-500'
+                    }`}
                     style={{ lineHeight: '10px' }}
                   >
                     {l.key}
@@ -219,7 +220,7 @@ function FinancialSnapshotCard() {
       initial={{ opacity: 0, y: 14, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.42, ease: 'easeOut' } }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      className="origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm"
+      className="origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100"
     >
       <Card className="w-72 shadow-lg ring-0">
         <CardHeader className="">
@@ -273,7 +274,7 @@ function ContributoryFactorsCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm"
+      className="origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100"
       aria-live="polite"
     >
       <Card className="w-[300px] shadow-lg ring-0">
@@ -337,7 +338,7 @@ function RiskSignalsCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm"
+      className="origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100"
       aria-live="polite"
     >
       <Card className="w-[350px] shadow-lg ring-0">
@@ -426,7 +427,10 @@ export default function RiskAssessmentTourWithChart() {
 
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="card-frame" className="absolute right-1.5 bottom-1.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="card-frame"
+            className="absolute right-1.5 bottom-1.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <CreditInfoCard />
           </motion.div>
         )}
@@ -434,7 +438,10 @@ export default function RiskAssessmentTourWithChart() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="financial-frame" className="absolute right-1.5 bottom-1.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="financial-frame"
+            className="absolute right-1.5 bottom-1.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <FinancialSnapshotCard />
           </motion.div>
         )}
@@ -442,7 +449,10 @@ export default function RiskAssessmentTourWithChart() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="contrib-frame" className="absolute right-1.5 bottom-1.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="contrib-frame"
+            className="absolute right-1.5 bottom-1.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <ProbabilityOfDefaultCard />
           </motion.div>
         )}
@@ -450,7 +460,10 @@ export default function RiskAssessmentTourWithChart() {
 
       <AnimatePresence>
         {step === 'frame4' && (
-          <motion.div key="risk-frame" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="risk-frame"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <ContributoryFactorsCard />
           </motion.div>
         )}
@@ -458,7 +471,10 @@ export default function RiskAssessmentTourWithChart() {
 
       <AnimatePresence>
         {step === 'frame5' && (
-          <motion.div key="risk-frame" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="risk-frame"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <RiskSignalsCard />
           </motion.div>
         )}

@@ -36,7 +36,7 @@ function DataNodeInner({ data }: DataNodeProps) {
       return (
         <img
           src={ic}
-          alt={""}
+          alt={''}
           aria-hidden={true}
           style={{
             width: 50,

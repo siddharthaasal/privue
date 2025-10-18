@@ -147,7 +147,7 @@ export default function CreditTerms({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+              className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
               style={{ fontSize: 12 }}
             >
               {/* header */}
@@ -177,12 +177,14 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className=" w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-2 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-2 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-w-[440px] md:scale-100 md:p-3"
                     >
-                      <div className="flex items-center justify-between gap-3 mb-1">
+                      <div className="mb-1 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                           <DatabaseZap size={11} />
-                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                          <div className="text-[11px] font-medium text-slate-800">
+                            Credit Review
+                          </div>
                         </div>
 
                         <div className="text-[10px] text-slate-500">
@@ -234,17 +236,17 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
-                      <div className="flex items-center justify-between gap-3 mb-1">
+                      <div className="mb-1 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                           <DatabaseZap size={11} />
-                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                          <div className="text-[11px] font-medium text-slate-800">
+                            Credit Review
+                          </div>
                         </div>
 
-                        <div className="text-[10px] text-slate-500">
-                          Credit profile
-                        </div>
+                        <div className="text-[10px] text-slate-500">Credit profile</div>
                       </div>
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Financial Metrics
@@ -285,17 +287,17 @@ export default function CreditTerms({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
-                      <div className="flex items-center justify-between gap-3 mb-1">
+                      <div className="mb-1 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                           <DatabaseZap size={11} />
-                          <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                          <div className="text-[11px] font-medium text-slate-800">
+                            Credit Review
+                          </div>
                         </div>
 
-                        <div className="text-[10px] text-slate-500">
-                          Proposed Terms
-                        </div>
+                        <div className="text-[10px] text-slate-500">Proposed Terms</div>
                       </div>
                       <div className="mb-1 text-[10px] font-semibold text-slate-700">
                         Credit Terms
@@ -338,18 +340,16 @@ export default function CreditTerms({
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.22 }}
                     >
-
-                      <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-                      >
-                        <div className="flex items-center justify-between gap-3 mb-1">
+                      <div className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3">
+                        <div className="mb-1 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-2">
                             <DatabaseZap size={11} />
-                            <div className="text-[11px] font-medium text-slate-800">Credit Review</div>
+                            <div className="text-[11px] font-medium text-slate-800">
+                              Credit Review
+                            </div>
                           </div>
 
-                          <div className="text-[10px] text-slate-500">
-                            Completed
-                          </div>
+                          <div className="text-[10px] text-slate-500">Completed</div>
                         </div>
                         {/* optional check icon — replace with your imported icon if different */}
                         {/* <svg

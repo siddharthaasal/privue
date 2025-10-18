@@ -78,7 +78,6 @@ export default function ArticleGallery({ mainArticleSlug }: RelatedArticlesProps
           </div>
         </div>
 
-
         {/* Carousel starting from left */}
         <div className="w-full max-w-full">
           <Carousel

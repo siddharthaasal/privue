@@ -32,7 +32,7 @@ function FinancialMetricsCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
       transition={{ duration: 0.36, ease: 'easeOut' }}
-      className="h-[240px] w-[460px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1 rounded-lg bg-white/95 md:p-2 shadow-sm backdrop-blur-sm"
+      className="h-[240px] w-[460px] origin-bottom-right scale-[0.75] rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-2"
     >
       <div className="mb-1 text-[10px] font-medium">Key Financial Metrics</div>
 
@@ -161,7 +161,7 @@ function FinancialChartCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 12, scale: 0.98 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="h-[240px] w-[420px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1 rounded-lg bg-white/95 md:p-2 shadow-sm backdrop-blur-sm"
+      className="h-[240px] w-[420px] origin-bottom-right scale-[0.75] rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-2"
     >
       <div className="mb-1 text-[10px] font-medium">Financial Performance</div>
       <ResponsiveContainer width="100%" height="92%">
@@ -270,7 +270,7 @@ function DetailedAnalysisCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[260px] w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[260px] w-[440px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-3"
     >
       <div className="mb-2 text-[10px] font-medium">Detailed Analysis</div>
       <div className="flex flex-col gap-2">
@@ -319,7 +319,7 @@ function MetricsAnalysisCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[300px] w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1  overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[300px] w-[440px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[10px] font-medium">View Metrics Analysis</div>
@@ -418,7 +418,7 @@ function MetricsTableCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="max-h-[340px] w-[480px]  origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1 overflow-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[340px] w-[480px] origin-bottom-right scale-[0.75] overflow-auto rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-3"
     >
       <div className="mb-2 text-[10px] font-medium">Detailed Financial Analysis</div>
 
@@ -487,7 +487,7 @@ function InsightsAnalysisCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.98 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="max-h-[280px] w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-1 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[440px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-1 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:scale-100 md:p-3"
       aria-live="polite"
     >
       <div className="mb-2 text-[10px] font-medium">View Financial Analysis</div>
@@ -554,7 +554,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame1' && (
           <motion.div
             key="frame1"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <FinancialChartCard />
           </motion.div>
@@ -565,7 +565,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame2' && (
           <motion.div
             key="frame2"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <DetailedAnalysisCard />
           </motion.div>
@@ -576,7 +576,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame3' && (
           <motion.div
             key="frame3"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <FinancialMetricsCard />
           </motion.div>
@@ -587,7 +587,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame4' && (
           <motion.div
             key="frame4"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <MetricsAnalysisCard />
           </motion.div>
@@ -598,7 +598,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame5' && (
           <motion.div
             key="frame5"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <MetricsTableCard />
           </motion.div>
@@ -609,7 +609,7 @@ export default function RiskAssessmentTour() {
         {step === 'frame6' && (
           <motion.div
             key="frame6"
-            className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
           >
             <InsightsAnalysisCard />
           </motion.div>

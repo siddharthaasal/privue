@@ -23,11 +23,11 @@ export function BlogCard({
     <div className="h-full w-full">
       <a
         href={href}
-        className="group inline-block h-full min-w-full rounded-xl border border-transparent p-3 md:p-4 transition-all hover:bg-gray-100"
+        className="group inline-block h-full min-w-full rounded-xl border border-transparent p-3 transition-all hover:bg-gray-100 md:p-4"
       >
         <div className="flex flex-col space-y-5">
           {/* Thumbnail */}
-          <div className="relative mb-3 aspect-[3/2] md:aspect-[2/1] lg:aspect-[5/3] w-full overflow-hidden rounded-lg border shadow-sm">
+          <div className="relative mb-3 aspect-[3/2] w-full overflow-hidden rounded-lg border shadow-sm md:aspect-[2/1] lg:aspect-[5/3]">
             <img
               src={image}
               alt={title + ' thumbnail'}
@@ -58,12 +58,12 @@ export function BlogCard({
 
           <div>
             {/* Title */}
-            <h3 className="mb-2 max-w-full md:max-w-sm text-base md:text-lg font-normal text-[#171717]">
+            <h3 className="mb-2 max-w-full text-base font-normal text-[#171717] md:max-w-sm md:text-lg">
               {title}
             </h3>
 
             {/* Description */}
-            <p className="line-clamp-3 max-w-full md:max-w-sm text-sm text-[#525252]">
+            <p className="line-clamp-3 max-w-full text-sm text-[#525252] md:max-w-sm">
               {description}
             </p>
           </div>
@@ -72,4 +72,3 @@ export function BlogCard({
     </div>
   );
 }
-

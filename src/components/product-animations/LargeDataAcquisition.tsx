@@ -165,7 +165,7 @@ export default function LargeDataAcquisition({
       </div>
 
       {/* bottom-right overlay */}
-      <div className="absolute inset-0" >
+      <div className="absolute inset-0">
         <AnimatePresence>
           {(stage === 'docs' || stage === 'table_fill' || stage === 'done') && (
             <motion.div
@@ -174,7 +174,7 @@ export default function LargeDataAcquisition({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.995 }}
               transition={{ duration: 0.45 }}
-              className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl"
+              className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
               style={{ fontSize: 12 }}
             >
               {/* header */}
@@ -202,7 +202,7 @@ export default function LargeDataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
                       {/* Top: two progress bars (crisper) */}
                       <div className="space-y-2">
@@ -310,7 +310,7 @@ export default function LargeDataAcquisition({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.28 }}
-                      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                     >
                       {/* title */}
                       <div className="mb-1 text-[10px] font-medium text-slate-700">
@@ -360,7 +360,7 @@ export default function LargeDataAcquisition({
                   {stage === 'done' && (
                     <motion.div
                       key="frame-done"
-                      className="max-h-[280px] md:max-h-[280px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+                      className="max-h-[280px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}

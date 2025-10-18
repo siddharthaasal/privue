@@ -55,25 +55,15 @@ export default function IndustrySolutionCard({
   return (
     <a
       href={href}
-      className={`
-        group block w-full -ml-2.5 md:-ml-0 md:rounded-md md:border border-gray-100 md:bg-white  py-1 md:py-3 md:p-3 transition-all duration-300 
-        hover:-translate-y-1 hover:shadow-sm
-        sm:p-4
-      `}
+      className={`group -ml-2.5 block w-full border-gray-100 py-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm sm:p-4 md:-ml-0 md:rounded-md md:border md:bg-white md:p-3 md:py-3`}
     >
-      <div className="flex items-center sm:items-start gap-0 sm:gap-4">
+      <div className="flex items-center gap-0 sm:items-start sm:gap-4">
         {hasIcon && (
           <div
-            className={`
-              md:bg-privue-100 group-hover:bg-privue-200 flex items-center justify-center rounded-full 
-              transition-colors duration-300
-              h-9 w-9 sm:h-11 sm:w-11
-            `}
+            className={`md:bg-privue-100 group-hover:bg-privue-200 flex h-9 w-9 items-center justify-center rounded-full transition-colors duration-300 sm:h-11 sm:w-11`}
           >
             <div
-              className={`
-                text-privue-700 md:text-privue-700 transition-transform duration-300 group-hover:scale-110
-              `}
+              className={`text-privue-700 md:text-privue-700 transition-transform duration-300 group-hover:scale-110`}
             >
               {renderIconNode(icon!, 'w-4 h-4 sm:w-6 sm:h-6')}
             </div>
@@ -82,34 +72,24 @@ export default function IndustrySolutionCard({
 
         <div className="flex-1">
           <h3
-            className={`
-              text-sm md:font-medium md:text-foreground 
-              group-hover:text-privue-800 transition-colors duration-300
-              sm:text-base
-            `}
+            className={`md:text-foreground group-hover:text-privue-800 text-sm transition-colors duration-300 sm:text-base md:font-medium`}
           >
             {title}
           </h3>
 
           {/* Hidden on mobile, visible on tablet+ */}
           <p
-            className={`
-              hidden sm:block text-muted-foreground text-sm 
-              group-hover:text-foreground/80 transition-colors duration-300
-            `}
+            className={`text-muted-foreground group-hover:text-foreground/80 hidden text-sm transition-colors duration-300 sm:block`}
           >
             {description}
           </p>
         </div>
 
         <div
-          className={`
-    flex text-muted-foreground group-hover:text-privue-700
-    my-auto ml-auto items-center transition-colors
-  `}
+          className={`text-muted-foreground group-hover:text-privue-700 my-auto ml-auto flex items-center transition-colors`}
         >
           <svg
-            className="w-4 h-4 md:w-[18px] md:h-[18px]"
+            className="h-4 w-4 md:h-[18px] md:w-[18px]"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden
@@ -123,7 +103,6 @@ export default function IndustrySolutionCard({
             />
           </svg>
         </div>
-
       </div>
     </a>
   );

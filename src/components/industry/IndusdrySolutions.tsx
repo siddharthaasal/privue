@@ -320,8 +320,6 @@ export default function IndustryModules() {
     // NOTE: include activeIndustryId in deps so the guard uses up-to-date value
   }, [industries, activeIndustryId]);
 
-
-
   // --- optional: keep a ref to the RHS scroll container so we can manage focus/scroll if desired ---
   const rhsScrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -331,7 +329,7 @@ export default function IndustryModules() {
       {/* background / decorative element copied from your original component */}
       <div className="absolute inset-0 -z-10 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
 
-      <div className="mx-auto space-y-4 md:space-y-16 lg:space-y-20 rounded-lg md:rounded-xl border border-gray-200 p-3 md:p-4">
+      <div className="mx-auto space-y-4 rounded-lg border border-gray-200 p-3 md:space-y-16 md:rounded-xl md:p-4 lg:space-y-20">
         {/* Two-column layout: LHS (accordion), RHS (cards) */}
         <div className="grid gap-6 sm:px-12 md:grid-cols-3 md:gap-12 lg:gap-20 lg:px-8">
           {/* -----------------------
@@ -353,20 +351,18 @@ export default function IndustryModules() {
             }}
             className="w-full space-y-0"
           >
-
-
             {industries.map((ind) => (
               <AccordionItem key={ind.id} value={ind.id}>
                 <AccordionTrigger>
                   {/* tighter mobile spacing & font, keep desktop the same */}
-                  <div className="text-foreground flex items-center gap-1 md:gap-2 text-sm md:text-base py-0 md:py-0">
+                  <div className="text-foreground flex items-center gap-1 py-0 text-sm md:gap-2 md:py-0 md:text-base">
                     {ind.name}
                   </div>
                 </AccordionTrigger>
 
                 <AccordionContent>
                   {/* description: more compact on mobile, unchanged from md+ */}
-                  <div className="text-muted-foreground text-xs md:text-sm mb-2 md:mb-3">
+                  <div className="text-muted-foreground mb-2 text-xs md:mb-3 md:text-sm">
                     {ind.description || 'Explore tailored solutions for this industry.'}
                   </div>
 
@@ -383,7 +379,7 @@ export default function IndustryModules() {
                             opacity: { duration: 0.16 },
                             y: { type: 'spring', stiffness: 300, damping: 28, duration: 0.24 },
                           }}
-                          className="grid gap-2 md:gap-3 px-1 md:px-0"
+                          className="grid gap-2 px-1 md:gap-3 md:px-0"
                         >
                           {(solutionsByIndustry[ind.id] || []).map((s) => (
                             // compact wrapper for mobile; keeps the card internals unchanged for md+
@@ -403,8 +399,6 @@ export default function IndustryModules() {
                 </AccordionContent>
               </AccordionItem>
             ))}
-
-
           </Accordion>
 
           {/* -----------------------
@@ -413,7 +407,7 @@ export default function IndustryModules() {
               - maps dummySolutions exactly using the snippet you provided
               ------------------------ */}
           {/* Desktop RHS */}
-          <div className="bg-background relative col-span-2 hidden md:flex overflow-hidden p-0">
+          <div className="bg-background relative col-span-2 hidden overflow-hidden p-0 md:flex">
             <div
               ref={rhsScrollRef}
               className="scrollbar-none relative grid h-[450px] w-full auto-rows-min content-start gap-2 overflow-y-auto rounded-2xl p-4"
@@ -445,7 +439,6 @@ export default function IndustryModules() {
               </AnimatePresence>
             </div>
           </div>
-
         </div>
       </div>
     </section>

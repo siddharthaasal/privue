@@ -311,7 +311,6 @@ export function AnimatedChatNodeInner(): any {
     );
   }
 
-
   const TypingIndicator: React.FC = () => (
     <>
       <style>{`

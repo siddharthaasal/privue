@@ -79,8 +79,7 @@ function SearchFrame() {
   };
 
   return (
-    <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-    >
+    <div className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3">
       <div className="mb-3 text-[11px] font-medium text-slate-800">News API</div>
 
       <div className="flex items-center gap-3">
@@ -237,7 +236,7 @@ function JsonNewsFrame({ payload = rawPayload }: { payload?: unknown }) {
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-h-[280px] md:max-h-[370px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[370px] md:max-w-[440px] md:scale-100 md:p-3"
     >
       <div className="mb-1 text-[11px] font-semibold text-slate-800">Raw News Payload</div>
 
@@ -552,7 +551,7 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: any }) 
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-h-[280px] md:max-h-[340px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-hidden rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-hidden rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[340px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Minimal cases frame"
     >
       <div className="mb-2 flex items-center justify-between">
@@ -722,7 +721,10 @@ export default function News() {
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame1"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <SearchFrame />
           </motion.div>
         )}
@@ -730,7 +732,10 @@ export default function News() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame2"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <JsonNewsFrame />
           </motion.div>
         )}
@@ -738,7 +743,10 @@ export default function News() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame3"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <JsonCardsFrame />
           </motion.div>
         )}

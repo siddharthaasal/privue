@@ -33,10 +33,9 @@ export function Frame1Upload({ stage, uploadPct }: { stage: Stage; uploadPct: nu
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.18 }}
-        className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-
+        className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       >
-        <div className=" space-y-2">
+        <div className="space-y-2">
           <div className="w-full rounded-md border border-slate-200/50 bg-white/98 p-3">
             <div className="mb-2 text-left">
               <div className="text-[11px] font-medium text-slate-900">Upload file</div>
@@ -214,8 +213,7 @@ export function Frame2ProcessingMinimal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
     >
       <div className="">
         <div className="mb-2 text-[11px] font-medium text-slate-800">Processing pipeline</div>
@@ -348,7 +346,7 @@ export function PolicyOverviewCompact() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[320px] md:max-h-[320px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[320px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[320px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Policy overview"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -369,8 +367,9 @@ export function PolicyOverviewCompact() {
             <motion.div
               key={r.key}
               variants={rowVariants}
-              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${isSectionHeader ? 'bg-transparent' : ''
-                }`}
+              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${
+                isSectionHeader ? 'bg-transparent' : ''
+              }`}
             >
               <div
                 className={`text-[10px] ${isSectionHeader ? 'font-medium text-slate-700' : 'text-[10px] text-slate-800'}`}
@@ -381,8 +380,9 @@ export function PolicyOverviewCompact() {
               <div className="text-right">
                 {r.value ? (
                   <div
-                    className={`text-[10px] ${r.highlight ? 'font-medium' : 'font-normal'} ${r.highlight ? '' : 'text-slate-800'
-                      }`}
+                    className={`text-[10px] ${r.highlight ? 'font-medium' : 'font-normal'} ${
+                      r.highlight ? '' : 'text-slate-800'
+                    }`}
                     style={r.highlight ? { color: '#4c6ef5' } : {}}
                   >
                     {r.value}
@@ -406,7 +406,7 @@ export function PolicyOverviewCompact2() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28 }}
-      className="max-h-[320px] md:max-h-[320px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[320px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[320px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Policy overview"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -427,8 +427,9 @@ export function PolicyOverviewCompact2() {
             <motion.div
               key={r.key}
               variants={rowVariants}
-              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${isSectionHeader ? 'bg-transparent' : ''
-                }`}
+              className={`grid grid-cols-[1fr_120px] items-center gap-2 px-2 py-1 ${
+                isSectionHeader ? 'bg-transparent' : ''
+              }`}
             >
               <div
                 className={`text-[10px] ${isSectionHeader ? 'font-medium text-slate-700' : 'text-[10px] text-slate-800'}`}
@@ -438,12 +439,7 @@ export function PolicyOverviewCompact2() {
 
               <div className="text-right">
                 {r.value ? (
-                  <div
-                    className={`text-[10px] text-slate-800'
-                      }`}
-                  >
-                    {r.value}
-                  </div>
+                  <div className={`text-slate-800' } text-[10px]`}>{r.value}</div>
                 ) : (
                   <div className="text-[9.5px] text-slate-400">—</div>
                 )}
@@ -499,7 +495,7 @@ export function DeductiblesCompactStaggered() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Deductibles"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -621,7 +617,7 @@ export function ExclusionsCompact() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.32 }}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.75] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.75] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-live="polite"
       aria-label="Exclusions"
     >
@@ -865,7 +861,7 @@ export default function InsurancePolicy() {
         />
       </div>
 
-      <div className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+      <div className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl">
         {carouselStep === 'frame1' && <Frame1Upload key="f1" stage={stage} uploadPct={uploadPct} />}
         {carouselStep === 'frame2' && (
           <Frame2ProcessingMinimal key="f2" statuses={statuses} labels={labels} />

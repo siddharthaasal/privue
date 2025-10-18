@@ -79,8 +79,7 @@ function SearchFrame() {
   };
 
   return (
-    <div className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
-    >
+    <div className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3">
       <div className="mb-3 text-[11px] font-medium text-slate-800">Court Case API</div>
 
       <div className="flex items-center gap-3">
@@ -215,7 +214,7 @@ export function JsonCompactFrame({
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-h-[280px] md:max-h-[280px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[280px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="JSON compact frame"
     >
       <div className="mb-1 flex items-center justify-between px-1">
@@ -326,7 +325,8 @@ const defaultPayload: Payload = {
     },
     {
       caseNumber: 'W.P.(CRL) 162/2022',
-      title: 'Delta Resources Internet Private Limited vs State Of Nct Of Delhi & Anr on 25 January, 2022',
+      title:
+        'Delta Resources Internet Private Limited vs State Of Nct Of Delhi & Anr on 25 January, 2022',
       description:
         "The petitioner, Delta Resources Internet Private Limited, filed a criminal writ petition seeking the records of an FIR registered against it. The petitioner's primary argument is that it is an 'intermediary' under the Information Technology Act, 2000, and is thus protected by Section 79 of the Act from liability for offences committed by third-party sellers on its platform. The petitioner also contended that two FIRs had been lodged against it on the same allegations, which is legally impermissible.",
       court: 'Delhi High Court - Orders',
@@ -357,7 +357,7 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: Payload
       initial="hidden"
       animate="show"
       variants={containerVariants}
-      className="max-h-[280px] md:max-h-[320px] w-[350px] md:max-w-[440px] origin-bottom-right scale-[0.65] sm:scale-[0.9] md:scale-100 p-4 overflow-y-auto rounded-lg bg-white/95 md:p-3 shadow-sm backdrop-blur-sm"
+      className="max-h-[280px] w-[350px] origin-bottom-right scale-[0.65] overflow-y-auto rounded-lg bg-white/95 p-4 shadow-sm backdrop-blur-sm sm:scale-[0.9] md:max-h-[320px] md:max-w-[440px] md:scale-100 md:p-3"
       aria-label="Cases cards frame"
     >
       <div className="mb-2 flex items-center justify-between">
@@ -397,12 +397,13 @@ export function JsonCardsFrame({ payload = defaultPayload }: { payload?: Payload
               {/* risk pill — very small */}
               <div className="ml-2 shrink-0">
                 <div
-                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${c.riskLevel === 'High'
-                    ? 'border border-red-100 bg-red-50 text-red-700'
-                    : c.riskLevel === 'Medium'
-                      ? 'border border-amber-100 bg-amber-50 text-amber-700'
-                      : 'border border-slate-100 bg-slate-50 text-slate-700'
-                    }`}
+                  className={`rounded-full px-1 py-[3px] text-[8px] font-normal tracking-wide ${
+                    c.riskLevel === 'High'
+                      ? 'border border-red-100 bg-red-50 text-red-700'
+                      : c.riskLevel === 'Medium'
+                        ? 'border border-amber-100 bg-amber-50 text-amber-700'
+                        : 'border border-slate-100 bg-slate-50 text-slate-700'
+                  }`}
                   style={{ minWidth: 44, textAlign: 'center' }}
                 >
                   {c.riskLevel ?? 'Unknown'}
@@ -521,7 +522,10 @@ export default function CourtCase() {
       {/* overlay frames */}
       <AnimatePresence>
         {step === 'frame1' && (
-          <motion.div key="frame1" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
+          <motion.div
+            key="frame1"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <SearchFrame />
           </motion.div>
         )}
@@ -529,8 +533,10 @@ export default function CourtCase() {
 
       <AnimatePresence>
         {step === 'frame2' && (
-          <motion.div key="frame2" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
-
+          <motion.div
+            key="frame2"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <JsonCompactFrame />
           </motion.div>
         )}
@@ -538,8 +544,10 @@ export default function CourtCase() {
 
       <AnimatePresence>
         {step === 'frame3' && (
-          <motion.div key="frame3" className="absolute right-0.5 bottom-0.5 md:right-6 md:bottom-6 rounded-md  shadow-xs md:shadow-xl md:backdrop-blur-3xl">
-
+          <motion.div
+            key="frame3"
+            className="absolute right-0.5 bottom-0.5 rounded-md shadow-xs md:right-6 md:bottom-6 md:shadow-xl md:backdrop-blur-3xl"
+          >
             <JsonCardsFrame />
           </motion.div>
         )}

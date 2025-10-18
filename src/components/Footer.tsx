@@ -123,8 +123,7 @@ export default function Footer({
 
     // Optional: remove exact-duplicate links (by text+url)
     const dedupedModules = modulesLinks.filter(
-      (link, idx, arr) =>
-        idx === arr.findIndex((l) => l.text === link.text && l.url === link.url)
+      (link, idx, arr) => idx === arr.findIndex((l) => l.text === link.text && l.url === link.url),
     );
 
     const result: MenuItem[] = [];
@@ -139,13 +138,13 @@ export default function Footer({
     <section
       ref={footerRef}
       /* Fixed on lg+ (desktop), normal flow on smaller screens */
-      className="bg-background text-muted-foreground lg:fixed lg:right-0 lg:bottom-0 lg:left-0 z-0 mx-auto w-full lg:mx-auto lg:max-w-[1150px] border-t border-gray-200 py-8 text-sm"
+      className="bg-background text-muted-foreground z-0 mx-auto w-full border-t border-gray-200 py-8 text-sm lg:fixed lg:right-0 lg:bottom-0 lg:left-0 lg:mx-auto lg:max-w-[1150px]"
       aria-labelledby="site-footer"
     >
-      <footer id="site-footer" className="px-4 lg:px-6 grid-cols-5">
+      <footer id="site-footer" className="grid-cols-5 px-4 lg:px-6">
         <div className="flex flex-col lg:flex-row lg:justify-between">
           {/* Left Section */}
-          <div className="flex-col col-span-2 min-w-max">
+          <div className="col-span-2 min-w-max flex-col">
             <a href={logo.url} className="inline-flex items-center gap-3">
               <img src={logo.src} alt={logo.alt} title={logo.title} className="h-10 w-auto" />
               <span className="text-foreground text-lg font-medium">{logo.title}</span>
@@ -187,10 +186,10 @@ export default function Footer({
   */}
             {(() => {
               const modulesSection = mergedMenuItems.find(
-                (s) => s.title?.trim().toLowerCase() === 'modules'
+                (s) => s.title?.trim().toLowerCase() === 'modules',
               );
               const otherSections = mergedMenuItems.filter(
-                (s) => s.title?.trim().toLowerCase() !== 'modules'
+                (s) => s.title?.trim().toLowerCase() !== 'modules',
               );
 
               // attempt to find Solutions and Company by title (fallback to first two other sections)
@@ -213,20 +212,20 @@ export default function Footer({
                 : [[], []];
 
               return (
-                <div className="flex gap-12 items-start justify-end">
+                <div className="flex items-start justify-end gap-12">
                   {/* Modules column (left) */}
-                  <div className="min-w-0 max-w-max flex-1">
+                  <div className="max-w-max min-w-0 flex-1">
                     <h4 className="text-foreground mb-3 text-sm font-medium">Modules</h4>
 
                     {/* inner wrapper keeps modules grouped; capped so it cannot blow out layout */}
-                    <div className="min-w-max max-w-max">
+                    <div className="max-w-max min-w-max">
                       <div className="grid grid-cols-2 gap-x-12">
                         <ul className="space-y-2">
                           {modulesColA.map((link, i) => (
                             <li key={i}>
                               <a
                                 href={link.url}
-                                className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                                className="text-foreground-lighter hover:text-foreground block truncate text-sm font-normal transition-colors"
                                 title={link.text}
                               >
                                 {link.text}
@@ -240,7 +239,7 @@ export default function Footer({
                             <li key={i}>
                               <a
                                 href={link.url}
-                                className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                                className="text-foreground-lighter hover:text-foreground block truncate text-sm font-normal transition-colors"
                                 title={link.text}
                               >
                                 {link.text}
@@ -253,20 +252,20 @@ export default function Footer({
                   </div>
 
                   {/* Solutions column (center) */}
-                  <div className="min-w-0 max-w-max flex-1">
+                  <div className="max-w-max min-w-0 flex-1">
                     <h4 className="text-foreground mb-3 text-sm font-medium">
                       {solutionsSection?.title || 'Solutions'}
                     </h4>
 
                     {/* use min-w-max so internal items keep spacing, but cap with max-w and truncate.
               If you want single-line guaranteed, keep whitespace-nowrap instead of truncate. */}
-                    <div className="min-w-max max-w-[18rem]">
+                    <div className="max-w-[18rem] min-w-max">
                       <ul className="space-y-2">
                         {solutionsSection?.links.map((link, idx) => (
                           <li key={idx}>
                             <a
                               href={link.url}
-                              className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors whitespace-nowrap block"
+                              className="text-foreground-lighter hover:text-foreground block text-sm font-normal whitespace-nowrap transition-colors"
                               title={link.text}
                             >
                               {link.text}
@@ -278,18 +277,18 @@ export default function Footer({
                   </div>
 
                   {/* Company column (right) */}
-                  <div className="min-w-0 max-w-max flex-1">
+                  <div className="max-w-max min-w-0 flex-1">
                     <h4 className="text-foreground mb-3 text-sm font-medium">
                       {companySection?.title || 'Company'}
                     </h4>
 
-                    <div className="min-w-max max-w-[16rem]">
+                    <div className="max-w-[16rem] min-w-max">
                       <ul className="space-y-2">
                         {companySection?.links.map((link, idx) => (
                           <li key={idx}>
                             <a
                               href={link.url}
-                              className="text-foreground-lighter hover:text-foreground text-sm font-normal transition-colors truncate block"
+                              className="text-foreground-lighter hover:text-foreground block truncate text-sm font-normal transition-colors"
                               title={link.text}
                             >
                               {link.text}

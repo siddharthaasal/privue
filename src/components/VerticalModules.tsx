@@ -95,7 +95,7 @@ export default function VerticalModules({ items }: Props) {
     <section className="py-10 md:py-16">
       <div className="absolute inset-0 -z-10 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]"></div>
 
-      <div className="mx-auto space-y-8 px-4 sm:px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)] max-w-7xl">
+      <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
         {/* Heading */}
         <div className="relative z-10 mx-auto max-w-4xl space-y-6 text-center">
           <h1 className="mb-4 text-2xl font-semibold text-[#171717] md:text-4xl">
@@ -145,7 +145,11 @@ export default function VerticalModules({ items }: Props) {
                               {it.renderAnimation ? (
                                 (() => {
                                   const Anim = it.renderAnimation!;
-                                  return <div className="h-[220px] w-full sm:h-[260px]"><Anim /></div>;
+                                  return (
+                                    <div className="h-[220px] w-full sm:h-[260px]">
+                                      <Anim />
+                                    </div>
+                                  );
                                 })()
                               ) : it.imgSrc ? (
                                 <img
@@ -169,7 +173,7 @@ export default function VerticalModules({ items }: Props) {
           {/* Desktop: Right preview */}
           {!isMobile && (
             <div className="relative col-span-2 flex overflow-hidden rounded-2xl bg-slate-50/40 p-2 ring-1 ring-slate-200/50 ring-inset">
-              <div className="relative flex max-h-[700px] min-h-[260px] sm:min-h-[320px] md:max-h-[600px] md:min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset">
+              <div className="relative flex max-h-[700px] min-h-[260px] w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-50/40 ring-1 ring-slate-200/50 ring-inset sm:min-h-[320px] md:max-h-[600px] md:min-h-[400px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active?.id}

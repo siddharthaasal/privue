@@ -108,7 +108,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-md md:rounded-lg border border-gray-200 bg-white shadow-sm">
+    <div className="rounded-md border border-gray-200 bg-white shadow-sm md:rounded-lg">
       {/* Reduced container padding on mobile, preserve larger paddings on sm/lg */}
       <div className="p-3 sm:p-3 lg:p-5">
         <Form {...form}>
@@ -135,7 +135,7 @@ export default function ContactForm() {
                   <div ref={rootRef}>
                     <FormItem>
                       {/* slightly smaller label */}
-                      <FormLabel className="px-1 text-xs sm:text-sm text-gray-700 dark:text-slate-200">
+                      <FormLabel className="px-1 text-xs text-gray-700 sm:text-sm dark:text-slate-200">
                         Select Solution
                       </FormLabel>
 
@@ -150,9 +150,7 @@ export default function ContactForm() {
                         >
                           <div className="w-full min-w-0 text-left">
                             {selected.length === 0 ? (
-                              <span className="text-foreground text-xs">
-                                Selected Solution
-                              </span>
+                              <span className="text-foreground text-xs">Selected Solution</span>
                             ) : (
                               <div className="flex min-h-[1rem] items-center gap-2 overflow-hidden">
                                 {shown.map((s) => (
@@ -237,9 +235,13 @@ export default function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Name</FormLabel>
+                  <FormLabel className="px-1 text-xs text-gray-700 sm:text-sm">Name</FormLabel>
                   <FormControl>
-                    <Input className="h-9 rounded-sm text-xs text-foreground" placeholder="Name" {...field} />
+                    <Input
+                      className="text-foreground h-9 rounded-sm text-xs"
+                      placeholder="Name"
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -252,10 +254,12 @@ export default function ContactForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Work Email</FormLabel>
+                    <FormLabel className="px-1 text-xs text-gray-700 sm:text-sm">
+                      Work Email
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        className="h-9 rounded-sm text-xs text-foreground"
+                        className="text-foreground h-9 rounded-sm text-xs"
                         type="email"
                         placeholder="Work Email"
                         {...field}
@@ -269,9 +273,13 @@ export default function ContactForm() {
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Company</FormLabel>
+                    <FormLabel className="px-1 text-xs text-gray-700 sm:text-sm">Company</FormLabel>
                     <FormControl>
-                      <Input className="h-9 rounded-sm text-xs text-foreground" placeholder="Company" {...field} />
+                      <Input
+                        className="text-foreground h-9 rounded-sm text-xs"
+                        placeholder="Company"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -284,10 +292,10 @@ export default function ContactForm() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="px-1 text-xs sm:text-sm text-gray-700">Message</FormLabel>
+                  <FormLabel className="px-1 text-xs text-gray-700 sm:text-sm">Message</FormLabel>
                   <FormControl>
                     <Textarea
-                      className="min-h-[70px] rounded-sm text-xs text-foreground"
+                      className="text-foreground min-h-[70px] rounded-sm text-xs"
                       placeholder="Let us know how we can help"
                       {...field}
                     />
@@ -305,7 +313,7 @@ export default function ContactForm() {
               autoComplete="off"
             />
 
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground text-xs leading-relaxed">
               By submitting this form, you agree to our{' '}
               <a href="/privacy-policy" className="underline">
                 Privacy Policy

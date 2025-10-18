@@ -15,7 +15,7 @@ export default function UseCasesSection({ useCases = [] }: UseCasesSectionProps)
       </div>
 
       <div
-        className={`grid grid-cols-2 gap-y-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${useCases.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
+        className={`grid grid-cols-1 sm:grid-cols-2 gap-y-8 md:gap-12 border-b border-gray-200 px-4 py-8 md:px-12 md:py-20 ${useCases.length % 3 == 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'} `}
       >
         {useCases.map((c, idx) => (
           <div
@@ -29,7 +29,7 @@ export default function UseCasesSection({ useCases = [] }: UseCasesSectionProps)
           >
             <UseCasesCard
               icon={c.icon}
-              heading={c.heading || undefined}
+              heading={c.heading}
               desc={c.desc}
             />
           </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+// need to add shorthands for mobile
 interface ProblemCardProps {
   icon: React.ComponentType<any> | string;
   heading: string;

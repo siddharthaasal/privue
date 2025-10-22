@@ -30,12 +30,12 @@ export default function SolutionSection({ mainDesc, solnPoints }: SolutionSectio
         {solnPoints.map((sol, idx) => (
           <div
             key={idx}
-            className={`flex-1 border-b border-gray-200 ${
-              idx === solnPoints.length - 1 ? 'border-b' : ''
-            }`}
+            className={`flex-1 border-b border-gray-200 ${idx === solnPoints.length - 1 ? 'border-b' : ''
+              }`}
           >
             <SolutionCard
               heading={sol.solutionHeading}
+              shortHeading={sol.shortHeading}
               description={sol.solutionDescription}
               icon={sol.icon}
             />

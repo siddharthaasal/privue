@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface SolutionCardProps {
   heading: string;
+  shortHeading?: string;
   description: string;
   icon?: React.ComponentType<any> | string;
 }
 
-export default function SolutionCard({ heading, description, icon }: SolutionCardProps) {
+export default function SolutionCard({ heading, shortHeading, description, icon }: SolutionCardProps) {
   const isString = typeof icon === 'string' || icon === undefined;
   const defaultIconPath = '/solutions/lock.svg';
   const iconSrc = isString ? (icon as string) || defaultIconPath : undefined;
@@ -77,7 +78,7 @@ export default function SolutionCard({ heading, description, icon }: SolutionCar
               <IconComponent className="text-privue-700 h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
             ) : null}
 
-            <span className="flex-1 text-left text-base font-medium text-gray-900">{heading}</span>
+            <span className="flex-1 text-left text-base font-medium text-gray-900">{shortHeading || heading}</span>
 
             {/* chevron */}
             <svg

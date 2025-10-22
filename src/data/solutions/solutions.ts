@@ -124,6 +124,7 @@ export type UseCase = {
 
 export type SolutionPoints = {
   solutionHeading: string;
+  shortHeading?: string;
   solutionDescription: string;
   icon: React.ComponentType<any> | string;
 };
@@ -644,11 +645,13 @@ export const solutions: Solution[] = [
       },
       {
         solutionHeading: 'Recalibrate Credit Terms Dynamically',
+        shortHeading: 'Dynamic Credit Terms',
         solutionDescription: 'Use predictive risk scores to adjust terms in real time.',
         icon: GitPullRequestCreateArrow,
       },
       {
         solutionHeading: 'Integrate Risk into Daily Workflows',
+        shortHeading: 'Integrated Risk Alerts',
         solutionDescription: 'Embed proactive risk alerts within ERP or CRM systems.',
         icon: FolderGit2,
       },
@@ -1030,6 +1033,7 @@ export const solutions: Solution[] = [
       },
       {
         solutionHeading: 'Strengthened Vendor Governance',
+        shortHeading: 'Vendor Governance',
         solutionDescription:
           'Strengthen vendor governance with objective, data-backed assessments.',
         icon: BookUp2,

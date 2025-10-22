@@ -97,6 +97,7 @@ import ConversationalAI from '@/components/product-animations/ConversationalAI';
 
 export type Problem = {
   problemHeading: string;
+  shortHeading?: string;
   problemDesc: string;
   icon: React.ComponentType<any> | string;
 };
@@ -186,6 +187,7 @@ export const solutions: Solution[] = [
       {
         icon: SquareLibrary,
         problemHeading: 'Insufficient information to evaluate distributors',
+        shortHeading: 'Limited Distributor Data',
         problemDesc: 'Distributor limit and credit period decisions based on relationships and gut',
       },
       {
@@ -197,11 +199,12 @@ export const solutions: Solution[] = [
       {
         icon: FileDigit,
         problemHeading: 'Limited visibility into distributor financial health',
+        shortHeading: 'Low Financial Visibility',
         problemDesc: 'Problems surface only when payments are missed',
       },
       {
         icon: BetweenHorizonalEnd,
-        problemHeading: 'Fragmented data across sources',
+        problemHeading: 'Fragmented Data across Sources',
         problemDesc:
           'Manual work across excel, documents submitted by distributor creates errors and delays.',
       },

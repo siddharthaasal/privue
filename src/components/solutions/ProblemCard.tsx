@@ -4,6 +4,7 @@ interface ProblemCardProps {
   icon: React.ComponentType<any> | string;
   heading: string;
   description: string;
+  shortHeading?: string;
 }
 
 function ProblemCard({ icon, heading, description }: ProblemCardProps) {
@@ -27,7 +28,7 @@ function ProblemCard({ icon, heading, description }: ProblemCardProps) {
   );
 }
 
-function ProblemCardMobile({ icon, heading, description }: ProblemCardProps) {
+function ProblemCardMobile({ icon, heading, description, shortHeading }: ProblemCardProps) {
   const isString = typeof icon === 'string' || icon === undefined;
   const defaultIconPath = '/solutions/lock.svg';
   const iconSrc = isString ? (icon as string) || defaultIconPath : undefined;
@@ -63,7 +64,7 @@ function ProblemCardMobile({ icon, heading, description }: ProblemCardProps) {
             <IconComponent className="text-privue-700 h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
           ) : null}
 
-          <span className="flex-1 text-left text-base font-medium text-gray-900">{heading}</span>
+          <span className="flex-1 text-left text-base font-medium text-gray-900">{shortHeading || heading}</span>
 
           {/* chevron */}
           <svg

@@ -297,6 +297,7 @@ export const solutions: Solution[] = [
       {
         icon: SquareLibrary,
         problemHeading: 'Over-Reliance on Self-Reported Information',
+        shortHeading: 'Self-Reported Bias',
         problemDesc:
           'Assessments today are heavily dependent on inputs provided by vendors or borrowers, which may be incomplete, inconsistent, or biased.',
       },
@@ -309,6 +310,7 @@ export const solutions: Solution[] = [
       {
         icon: BookCopy,
         problemHeading: 'Lack of Standardised Assessment Framework',
+        shortHeading: 'No Standard Framework',
         problemDesc:
           'Without a consistent methodology, sustainability evaluations vary across counterparties and geographies, reducing comparability.',
       },

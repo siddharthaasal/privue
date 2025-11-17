@@ -119,10 +119,11 @@ export default function HeroSection() {
                         src={src}
                         alt="integration logo"
                         loading="lazy"
-                        className={`max-w-full object-contain ${isDnbLogo
-                          ? 'scale-145 sm:scale-100' // mobile: slightly larger (10 instead of 8)
-                          : 'h-8 sm:h-10'
-                          } `}
+                        className={`max-w-full object-contain ${
+                          isDnbLogo
+                            ? 'scale-145 sm:scale-100' // mobile: slightly larger (10 instead of 8)
+                            : 'h-8 sm:h-10'
+                        } `}
                       />
                     </div>
                   );

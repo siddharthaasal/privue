@@ -197,14 +197,14 @@ export function InsuranceUnderwritingChatNodeInner(): any {
         el.style.strokeDasharray = String(length);
         el.style.strokeDashoffset = String(length);
         // force layout reflow to ensure transition kicks in
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+         
         el.getBoundingClientRect();
         el.style.transition = 'stroke-dashoffset 1s ease-out';
         el.style.strokeDashoffset = '0';
       } catch (err) {
         // If browser reports element as non-rendered, skip animation silently (but log in dev).
         if (process.env.NODE_ENV !== 'production') {
-          // eslint-disable-next-line no-console
+           
           console.warn('Polyline animation skipped — element not ready or no points:', err);
         }
       }

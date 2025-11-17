@@ -24,8 +24,9 @@ export default function ProblemSection({ problems }: ProblemSectionProps) {
           {problems.map((p, idx) => (
             <div
               key={idx}
-              className={`flex-1 border-b border-gray-200 ${idx === problems.length - 1 ? 'border-b' : ''
-                }`}
+              className={`flex-1 border-b border-gray-200 ${
+                idx === problems.length - 1 ? 'border-b' : ''
+              }`}
             >
               {/* Mobile view */}
               <div className="block md:hidden">

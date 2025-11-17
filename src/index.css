@@ -123,13 +123,11 @@
 
   @keyframes orbit {
     0% {
-      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px))
-        rotate(calc(var(--angle) * -1deg));
+      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
     }
 
     100% {
-      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px))
-        rotate(calc((var(--angle) * -1deg) - 360deg));
+      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
     }
   }
 }
@@ -284,6 +282,14 @@
   border: 0 !important;
   box-shadow: none !important;
   outline: none !important;
+}
+
+.react-flow__renderer,
+.react-flow__pane,
+.react-flow__node,
+.react-flow__edge,
+.react-flow__background {
+  cursor: default !important;
 }
 
 /* integrations reactflow */

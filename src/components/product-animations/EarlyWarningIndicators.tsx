@@ -764,7 +764,7 @@ export default function EarlyWarningIndicatorsDemo() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [carouselStep]);
 
-    const bgUrl = '/module-animations/credit-memo-review-bg.png';
+    const bgUrl = '/module-animations/early-warning-indicators-bg.png';
 
     return (
         <div className="relative h-full w-full overflow-hidden rounded-lg bg-white">
@@ -772,7 +772,7 @@ export default function EarlyWarningIndicatorsDemo() {
                 <img
                     src={bgUrl}
                     alt="background"
-                    className="h-full w-full object-contain backdrop-opacity-95"
+                    className="h-full w-full object-cover backdrop-opacity-95"
                 />
                 <div
                     className="absolute inset-0"

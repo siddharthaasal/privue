@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, type Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 /* ------------------------
   Types
@@ -626,7 +626,8 @@ export default function EarlyWarningIndicatorsDemo() {
     const [carouselStep, setCarouselStep] = useState<Step>('frame1');
 
     // statuses for 4-step pipeline (start all pending)
-    const [statuses, setStatuses] = useState<Status[]>(['pending', 'pending', 'pending', 'pending']);
+    const [
+        _statuses, setStatuses] = useState<Status[]>(['pending', 'pending', 'pending', 'pending']);
     const labels = ['Analyzing document', 'Extracting credit info', 'Preloading Regulations, Guidelines and Policy '];
 
     const timers = useRef<number[]>([]);

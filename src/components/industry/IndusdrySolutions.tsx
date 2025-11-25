@@ -9,7 +9,15 @@ import {
 } from '@/components/ui/accordion';
 import { motion, AnimatePresence } from 'motion/react';
 import IndustrySolutionCard from './IndustrySolutionCard';
-import { Building, Factory, Warehouse, HousePlug, ShieldCheck, Building2, FileCheck } from 'lucide-react';
+import {
+  Building,
+  Factory,
+  Warehouse,
+  HousePlug,
+  ShieldCheck,
+  Building2,
+  FileCheck,
+} from 'lucide-react';
 
 // Types
 type Industry = {

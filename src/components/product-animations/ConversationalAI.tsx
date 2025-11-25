@@ -87,7 +87,6 @@ export function AnimatedChatSmall({ className = '' }: ChatAnimationProps) {
       timeouts.current.forEach((t) => clearTimeout(t));
       timeouts.current = [];
     };
-     
   }, [currentIdx]);
 
   const runLifecycle = () => {
@@ -180,13 +179,12 @@ export function AnimatedChatSmall({ className = '' }: ChatAnimationProps) {
         el.style.strokeDasharray = String(length);
         el.style.strokeDashoffset = String(length);
         // force layout reflow
-         
+
         el.getBoundingClientRect();
         el.style.transition = 'stroke-dashoffset 800ms ease-out';
         el.style.strokeDashoffset = '0';
       } catch (err) {
         if (process.env.NODE_ENV !== 'production') {
-           
           console.warn('Polyline animation skipped — element not ready or no points:', err);
         }
       }

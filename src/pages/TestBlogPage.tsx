@@ -45,7 +45,6 @@ type Props = {
   fitPadding?: number; // padding used for fitView (0..1)
 };
 
-
 export default function FlowNodesExample({ className, style, fitPadding = 0.06 }: Props) {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);

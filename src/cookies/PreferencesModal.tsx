@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import PreferencesPanel from './PreferencesPanel';
 import { useConsent } from './useConsent';
 import { CircleCheck } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function PreferencesModal({

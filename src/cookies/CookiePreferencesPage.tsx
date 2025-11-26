@@ -1,5 +1,5 @@
 import PreferencesPanel from '../cookies/PreferencesPanel';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { CircleCheck } from 'lucide-react';
 import { useConsent } from '../cookies/useConsent';

@@ -13,7 +13,7 @@ export function useConsent() {
   useEffect(() => {
     if (consent === null) return;
     if (consent.analytics) {
-      loadGA(import.meta.env.VITE_GA_ID);
+      loadGA(import.meta.env.VITE_GA_ID || 'G-2YBVF9ZPFS');
       loadClarity(import.meta.env.VITE_CLARITY_ID);
     }
   }, [consent]); // run once

@@ -11,11 +11,12 @@ export function useConsent() {
   });
 
   useEffect(() => {
+    if (consent === null) return;
     if (consent.analytics) {
       loadGA(import.meta.env.VITE_GA_ID);
       loadClarity(import.meta.env.VITE_CLARITY_ID);
     }
-  }, []); // run once
+  }, [consent]); // run once
 
   const updateConsent = (next: ConsentState) => {
     const wasEnabled = consent.analytics;
